@@ -1,0 +1,56 @@
+{
+  "common": {
+    "name": "vis-2-widgets-weather",
+    "version": "0.1.0",
+    "news": {
+
+      "0.1.0": {
+        "en": "initial"
+      }
+    },
+    "title": "vis-2-widgets-weather.org",
+    "titleLang": {
+      "en": "vis-2-widgets-weather"
+    },
+    "desc": {
+      "en": "vis-2-widgets-weather"
+    },
+    "authors": [
+      "rg-engineering <info@rg-engineering.eu>"
+    ],
+    "keywords": [
+      "weather"
+    ],
+    "license": "MIT",
+    "platform": "Javascript/Node.js",
+    "icon": "vis-2-test.png",
+    "extIcon": "https://raw.githubusercontent.com/rg-engineering/ioBroker.vis-2-widgets-weather/master/admin/vis-2-widgets-weather.png",
+    "enabled": true,
+    "readme": "https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather/blob/master/README.md",
+    "loglevel": "info",
+    "mode": "once",
+    "adminUI": {
+      "config": "none"
+    },
+    "onlyWWW": true,
+    "type": "visualization-widgets",
+    "connectionType": "cloud",
+    "dataSource": "poll",
+    "visWidgets": {
+      "vis2Weather": {
+        "i18n": "component",
+        "name": "vis2Weather",
+        "url": "vis-2-widgets-weather/customWidgets.js",
+        "components": [
+          "WeatherWidget"
+        ]
+      }
+    },
+    "restartAdapters": [
+      "vis-2"
+    ]
+  },
+  "native": {},
+  "objects": [],
+  "instanceObjects": []
+}

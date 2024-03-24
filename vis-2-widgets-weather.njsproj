@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{34ef2d86-40ec-4b0f-b8b0-9f4bee6af812}</ProjectGuid>
+    <ProjectHome>
+    </ProjectHome>
+    <ProjectView>ShowAllFiles</ProjectView>
+    <StartupFile>daswetter.js</StartupFile>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <EnableTypeScript>true</EnableTypeScript>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <ItemGroup>
+    <Content Include=".eslintrc.js" />
+    <Content Include=".gitignore" />
+    <Content Include=".releaseconfig.json" />
+    <Content Include="gulpfile.js" />
+    <Content Include="io-package.json" />
+    <Content Include="LICENSE" />
+    <Content Include="package-lock.json" />
+    <Content Include="package.json" />
+    <Content Include="README.md" />
+    <Content Include="src-widgets\.eslintrc.js" />
+    <Content Include="src-widgets\craco.config.js" />
+    <Content Include="src-widgets\modulefederation.config.js" />
+    <Content Include="src-widgets\package-lock.json" />
+    <Content Include="src-widgets\package.json" />
+    <Content Include="src-widgets\public\img\vis-widget-demo.png" />
+    <Content Include="src-widgets\public\index.html" />
+    <Content Include="src-widgets\src\App.jsx" />
+    <Content Include="src-widgets\src\bootstrap.js" />
+    <Content Include="src-widgets\src\WeatherWidget.jsx" />
+    <Content Include="src-widgets\src\i18n\de.json" />
+    <Content Include="src-widgets\src\i18n\en.json" />
+    <Content Include="src-widgets\src\i18n\es.json" />
+    <Content Include="src-widgets\src\i18n\fr.json" />
+    <Content Include="src-widgets\src\i18n\it.json" />
+    <Content Include="src-widgets\src\i18n\nl.json" />
+    <Content Include="src-widgets\src\i18n\pl.json" />
+    <Content Include="src-widgets\src\i18n\pt.json" />
+    <Content Include="src-widgets\src\i18n\ru.json" />
+    <Content Include="src-widgets\src\i18n\zh-cn.json" />
+    <Content Include="src-widgets\src\index.jsx" />
+    <Content Include="src-widgets\src\translations.js" />
+    <Content Include="test\widgets.test.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include=".github\" />
+    <Folder Include="admin\" />
+    <Folder Include="src-widgets\" />
+    <Folder Include="src-widgets\public\" />
+    <Folder Include="src-widgets\public\img\" />
+    <Folder Include="src-widgets\src\" />
+    <Folder Include="src-widgets\src\i18n\" />
+    <Folder Include="test\" />
+    <Folder Include="widgets\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

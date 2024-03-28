@@ -4,6 +4,7 @@ import {
 } from '@mui/material';
 
 import ReactEchartsCore from 'echarts-for-react';
+import moment from 'moment';
 
 import { I18n } from '@iobroker/adapter-react-v5';
 import { VisRxWidget } from '@iobroker/vis-2-widgets-react-dev';
@@ -11,44 +12,101 @@ import { VisRxWidget } from '@iobroker/vis-2-widgets-react-dev';
 class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
     static getWidgetInfo() {
         return {
-            id: 'tplWeatherWidget',
-            visSet: 'vis-2-widgets-weather',
-            visSetLabel: 'vis-2-widgets-weather', // Widget set translated label (should be defined only in one widget of set)
-            visSetColor: '#cf00ff',                // Color of widget set. it is enough to set color only in one widget of set
-            visName: 'weather',                 // Name of widget
+            id: 'tplWeatherWidget',                 // Unique widget type ID. Should start with `tpl` followed
+            visSet: 'vis-2-widgets-weather',        // Unique ID of widget set 
+            visSetLabel: 'vis-2-widgets-weather',   // Widget set translated label (should be defined only in one widget of set)
+            visSetColor: '#cf00ff',                 // Color of widget set. it is enough to set color only in one widget of set
+            visName: 'weather',                     // Name of widget
+            visWidgetLabel: 'vis_2_widgets-weather', // Label of widget
+            visWidgetColor: '#005cc4',               // Optional widget color. If not set, default color of widget set will be used.
+            visResizeLocked: true,                   // require, that width is always equal to height
+            visResizable: false,                     // widget is not resizable 
+            visDraggable: false,                     // widget is not draggable 
             visAttrs: [
                 {
+                    // check here all possible types https://github.com/ioBroker/ioBroker.vis/blob/react/src/src/Attributes/Widget/SCHEMA.md
                     name: 'common', // group name
                     fields: [
                         {
-                            name: 'type',    // name in data structure
-                            label: 'vis_2_widgets_template_type', // translated field label
-                            type: 'select',
-                            options: ['all', 'current', 'days'],
-                            default: 'all',
+                            name: 'instance',    // name in data structure
+                            label: 'widgets_weather_label_instance', // translated field label
+                            type: 'instance',
+                            
+                            default: 'daswetter.0',
                         },
                         {
-                            name: 'test input',    // name in data structure
-                            label: 'vis_2_test', // translated field label
-                            type: 'text',
-                            default: 'just test',
+                            name: 'datastructure',    // name in data structure
+                            label: 'widgets_weather_label_datastructure', // translated field label
+                            type: 'select',
+                            options: [
+                                {
+                                    value: 'NextDaysDetailed',
+                                    label: 'widgets_weather_label_datastructure_nextdaysdetailed'
+                                },
+                                {
+                                    value: 'NextHours',
+                                    label: 'widgets_weather_label_datastructure_nexthours'
+                                },
+                                {
+                                    value: 'NextHours2',
+                                    label: 'widgets_weather_label_datastructure_nexthours2'
+                                }
+                            ],
+                            default: 'NextDaysDetailed',
                         },
                     ],
                 },
                 {
-                    name: 'private', // group name
-                    label: 'vis_2_widgets_template_private', // translated group label
+                    name: 'rain', // group name
                     fields: [
                         {
-                            name: 'oid',     // name in data structure
-                            type: 'id',
-                            label: 'vis_2_widgets_template_oid', // translated field label
+                            name: 'rain_visible',    // name in data structure
+                            label: 'widgets_weather_label_rain_visible', // translated field label
+                            type: 'checkbox ',
+
+                            default: false,
                         },
-                    ],
+                    ]
                 },
-                // check here all possible types https://github.com/ioBroker/ioBroker.vis/blob/react/src/src/Attributes/Widget/SCHEMA.md
+                {
+                    name: 'temperature', // group name
+                    fields: [
+                        {
+                            name: 'temperature_visible',    // name in data structure
+                            label: 'widgets_weather_label_temperature_visible', // translated field label
+                            type: 'checkbox ',
+
+                            default: false,
+                        },
+                    ]
+                },
+                {
+                    name: 'clouds', // group name
+                    fields: [
+                        {
+                            name: 'clouds_visible',    // name in data structure
+                            label: 'widgets_weather_label_clouds_visible', // translated field label
+                            type: 'checkbox ',
+
+                            default: false,
+                        },
+                    ]
+                },
+                {
+                    name: 'chanceofraining', // group name
+                    fields: [
+                        {
+                            name: 'chanceofraining_visible',    // name in data structure
+                            label: 'widgets_weather_label_chanceofraining_visible', // translated field label
+                            type: 'checkbox ',
+
+                            default: false,
+                        },
+                    ]
+                }
+                
             ],
-            visPrev: 'widgets/vis-2-test/img/vis-widget-demo.png',
+            visPrev: 'widgets/vis-2-test/img/vis-widget-weather.png',
         };
     }
 
@@ -98,74 +156,208 @@ class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
      * @returns {echarts.EChartsOption}
      */
     getOption() {
-        const data = [];
-        for (let i = 1; i <= this.state.rxData.devicesCount; i++) {
-            data.push({
-                name: this.state.rxData[`name${i}`] || '',
-                value: this.state.values[`${this.state.rxData[`oid${i}`]}.val`] || '',
-                values: this.state[`history${i}`] || [],
-                color: this.state.rxData[`color${i}`] || '',
-            });
-        }
-
-        const timeTypes = {
-            year: 'MMM',
-            month: 'DD.MM',
-            week: 'ddd',
-            day: 'HH:00',
-        };
-
-        const textStyle = {
-            color: this.props.context.themeType === 'dark' ? '#ddd' : '#222',
-        };
+       
+        
 
         return {
             backgroundColor: 'transparent',
+            title: {
+                text: 'Test'
+            },
             tooltip: {},
             legend: {
-                data: data.map(item => ({
-                    name: item.name,
-                    textStyle,
-                })),
+                data: ['rain']
             },
-            toolbox: {
-                feature: {
-                    magicType: {
-                        type: ['stack'],
-                    },
-                    dataView: {},
-                },
-            },
-            grid: {
-                containLabel: true,
-                left: 10,
-                top: 40,
-                right: 10,
-                bottom: 10,
+            xAxis: {
+                type: "time",
+
+                axisLabel: {
+
+                    rotate: 45,
+                    formatter: '{dd}.{MM}.{yy} {mm}:{hh}'
+                }
+
             },
             yAxis: {},
-            xAxis: {
-                type: 'category',
-                data: data?.[0]?.values?.map(dateValue => moment(dateValue.ts).format(
-                    timeTypes[this.getTimeInterval()],
-                )),
-            },
-            series: data.map(item => (
+            series: [
                 {
+                    name: 'rain',
                     type: 'bar',
-                    name: item.name,
-                    itemStyle: {
-                        color: item.color,
-                    },
-                    data: item.values?.map(dateValue => dateValue.val),
-                    stack: 'one',
+                    data: //[5, 20, 36, 10, 10, 20]
+                        [
+                            ['2024-3-27 02:00', 4.5],
+                            ['2024-3-27 05:00', 2.3],
+                            ['2024-3-27 08:00', 9.5],
+                            ['2024-3-27 11:00', 8.8],
+                            ['2024-3-27 14:00', 5.8],
+                            ['2024-3-27 17:00', 6.8],
+                            ['2024-3-27 20:00', 6.8],
+                            ['2024-3-27 23:00', 8.8],
+
+                            ['2024-3-28 02:00', 4.5],
+                            ['2024-3-28 05:00', 2.3],
+                            ['2024-3-28 08:00', 9.5],
+                            ['2024-3-28 11:00', 8.8],
+                            ['2024-3-28 14:00', 5.8],
+                            ['2024-3-28 17:00', 6.8],
+                            ['2024-3-28 20:00', 6.8],
+                            ['2024-3-28 23:00', 8.8],
+
+                            ['2024-3-29 02:00', 4.5],
+                            ['2024-3-29 05:00', 2.3],
+                            ['2024-3-29 08:00', 9.5],
+                            ['2024-3-29 11:00', 8.8],
+                            ['2024-3-29 14:00', 5.8],
+                            ['2024-3-29 17:00', 6.8],
+                            ['2024-3-29 20:00', 6.8],
+                            ['2024-3-29 23:00', 8.8],
+
+                            ['2024-3-30 02:00', 4.5],
+                            ['2024-3-30 05:00', 2.3],
+                            ['2024-3-30 08:00', 9.5],
+                            ['2024-3-30 11:00', 8.8],
+                            ['2024-3-30 14:00', 5.8],
+                            ['2024-3-30 17:00', 6.8],
+                            ['2024-3-30 20:00', 6.8],
+                            ['2024-3-30 23:00', 8.8]
+                        ]
                 }
-            )),
+            ]
         };
+    }
+
+
+
+
+    async getWeatherData() {
+
+        console.log("getWeatherData " + this.state.rxData['datastructure']);
+
+        let weatherData = {};
+        if (this.state.rxData['datastructure'] == "NextDaysDetailed") {
+            weatherData = await this.getWeatherDataNextDaysDetailed();
+        }
+        else if (this.state.rxData['datastructure'] == "NextHours") {
+            weatherData = await this.getWeatherDataNextHours();
+        }
+        else if (this.state.rxData['datastructure'] == "NextHours2") {
+            weatherData = await this.getWeatherDataNextHours2();
+        }
+        else {
+            console.log("getWeatherData: inknown data structure");
+        }
+
+        console.log("got data " + JSON.stringify(weatherData));
+            
+
+
+
+
+    }
+
+    async getWeatherDataNextDaysDetailed() {
+
+        //const ids = [];
+        const weatherData = [];
+        let cnt = 0;
+        let max_days = 5;
+        let max_periods = 8;
+        let instanceID = this.state.rxData['instance']
+
+        for (var d = 1; d <= max_days; d++) {
+            for (var p = 1; p <= max_periods; p++) {
+                //get rain oid
+                const rainData = await this.props.context.socket.getState(instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".rain_value");
+                //get temperature oid
+                const tempData = await this.props.context.socket.getState(instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".temp_value");
+                //get cloud oid
+                const cloudData = await this.props.context.socket.getState(instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".clouds_value");
+                // get time oid
+                const timeData = await this.props.context.socket.getState(instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".hour_value");
+
+                console.log("got data " + JSON.stringify(rainData.val) + " " + JSON.stringify(tempData.val) + " " + JSON.stringify(cloudData.val) + " " + JSON.stringify(timeData.val));
+
+                weatherData.push(
+                    [
+                        rainData.val,
+                        tempData.val,
+                        cloudData.val,
+                        timeData.val
+                    ]
+                );
+            }
+        }
+
+        //console.log("get data from " + JSON.stringify(rainData));
+
+        //const weatherData = ids.length ? (await this.props.context.socket.getStates(ids)) : {};
+
+        return weatherData;
+    }
+
+
+    async getWeatherDataNextHours() {
+
+        const ids = [];
+        let cnt = 0;
+        let max_days = 5;
+        let max_periods = 24;
+        let instanceID = this.state.rxData['instance']
+
+        for (var d = 1; d <= max_days; d++) {
+            for (var p = 1; p <= max_periods; p++) {
+
+                //get rain oid
+                ids.push(instanceID + ".NextHours.Location_1.Day_" + d + ".Hour_" + p + ".rain_value");
+                //get temperature oid
+                ids.push(instanceID + ".NextHours.Location_1.Day_" + d + ".Hour_" + p + ".temp_value");
+                //get cloud oid
+                ids.push(instanceID + ".NextHours.Location_1.Day_" + d + ".Hour_" + p + ".clouds_value");
+                // get time oid
+                ids.push(instanceID + ".NextHours.Location_1.Day_" + d + ".Hour_" + p + ".hour_value");
+            }
+        }
+
+        console.log("get data from " + JSON.stringify(ids));
+
+        const weatherData = ids.length ? (await this.props.context.socket.getStates(ids)) : {};
+
+        return weatherData;
+    }
+
+    async getWeatherDataNextHours2() {
+        const ids = [];
+        let cnt = 0;
+        let max_days = 5;
+        let max_periods = 8;
+        let instanceID = this.state.rxData['instance']
+
+        for (var d = 1; d <= max_days; d++) {
+            for (var p = 1; p <= max_periods; p++) {
+
+                //get rain oid
+                ids.push(instanceID + ".NextHours2.Location_1.Day_" + d + ".Hour_" + p + ".rain");
+                //get temperature oid
+                ids.push(instanceID + ".NextHours2.Location_1.Day_" + d + ".Hour_" + p + ".temp");
+                //get cloud oid
+                ids.push(instanceID + ".NextHours2.Location_1.Day_" + d + ".Hour_" + p + ".clouds");
+                // get time oid
+                ids.push(instanceID + ".NextHours2.Location_1.Day_" + d + ".Hour_" + p + ".hour");
+            }
+        }
+
+        console.log("get data from " + JSON.stringify(ids));
+
+        const weatherData = ids.length ? (await this.props.context.socket.getStates(ids)) : {};
+
+        return weatherData;
     }
 
     renderWidgetBody(props) {
         super.renderWidgetBody(props);
+
+        //just for testing
+        this.getWeatherData();
 
         return <Card style={{ width: '100%', height: '100%' }}>
             <CardContent>

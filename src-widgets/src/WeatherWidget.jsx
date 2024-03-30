@@ -1,13 +1,14 @@
 import React from 'react';
+
 import {
     Card, CardContent,
 } from '@mui/material';
 
 import ReactEchartsCore from 'echarts-for-react';
-import moment from 'moment';
 
 import { I18n } from '@iobroker/adapter-react-v5';
-import { VisRxWidget } from '@iobroker/vis-2-widgets-react-dev';
+
+import Generic from './Generic'; 
 
 
 const loadStates = async (field, data, changeData, socket) => {
@@ -40,8 +41,69 @@ const datachange = async (field, data, changeData, socket) => {
 
 
 
-class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
+class WeatherWidget extends (Generic) {
     static getWidgetInfo() {
+
+        let oid_rain_fields = [];
+        let oid_temp_fields = [];
+        let oid_cloud_fields = [];
+        let oid_time_fields = [];
+        let oid_general_fields = [];
+        let cnt = 1;
+
+        let max_days = 5;
+        let max_periods = 8;
+
+        for (var d = 1; d <= max_days; d++) {
+
+            oid_general_fields.push(
+                {
+                    name: 'oid_general_day_' + d,    // name in data structure
+                    label: 'widgets_weather_label_oid_general_day_' + d, // translated field label
+                    type: 'id',
+                    default: "daswetter.0.NextDaysDetailed.Location_1.Day_" + d + ".day_value",
+                }
+            )
+
+            for (var p = 1; p <= max_periods; p++) {
+
+                oid_rain_fields.push(
+                    {
+                        name: 'oid_rain_' + cnt,    // name in data structure
+                        label: 'widgets_weather_label_oid_rain_' + cnt, // translated field label
+                        type: 'id',
+                        default: "daswetter.0.NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".rain_value",
+                    }
+                );
+                oid_temp_fields.push(
+                    {
+                        name: 'oid_temp_' + cnt,    // name in data structure
+                        label: 'widgets_weather_label_oid_temp_' + cnt, // translated field label
+                        type: 'id',
+                        default: "daswetter.0.NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".temp_value",
+                    }
+                );
+                oid_cloud_fields.push(
+                    {
+                        name: 'oid_cloud_' + cnt,    // name in data structure
+                        label: 'widgets_weather_label_oid_cloud_' + cnt, // translated field label
+                        type: 'id',
+                        default: "daswetter.0.NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".clouds_value",
+                    }
+                );
+                oid_time_fields.push(
+                    {
+                        name: 'oid_time_' + cnt,    // name in data structure
+                        label: 'widgets_weather_label_oid_time_' + cnt, // translated field label
+                        type: 'id',
+                        default: "daswetter.0.NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".hour_value",
+                    }
+                );
+                cnt++;
+            }
+        }
+
+
         return {
             id: 'tplWeatherWidget',                 // Unique widget type ID. Should start with `tpl` followed
             visSet: 'vis-2-widgets-weather',        // Unique ID of widget set 
@@ -62,8 +124,15 @@ class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
                             name: 'instance',    // name in data structure
                             label: 'widgets_weather_label_instance', // translated field label
                             type: 'instance',
-                            
+
                             default: 'daswetter.0',
+                        },
+                        {
+                            name: 'oid_location',    // name in data structure
+                            label: 'widgets_weather_label_oidlocation', // translated field label
+                            type: 'id',
+
+                            default: 'daswetter.0.NextDaysDetailed.Location_1.Location',
                         },
                         {
                             name: 'datastructure',    // name in data structure
@@ -97,7 +166,7 @@ class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
                             type: 'checkbox ',
 
                             default: false,
-                            onChange: datachange ,
+                            onChange: datachange,
                         },
                     ]
                 },
@@ -110,7 +179,7 @@ class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
                             type: 'checkbox ',
 
                             default: false,
-                            onChange: datachange ,
+                            onChange: datachange,
                         },
                     ]
                 },
@@ -123,7 +192,25 @@ class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
                             type: 'checkbox ',
 
                             default: false,
-                            onChange: datachange ,
+                            onChange: datachange,
+                        },
+                        {
+                            name: 'sun_or_cloud',    // name in data structure
+                            label: 'widgets_weather_label_sunorcloud', // translated field label
+                            type: 'select',
+                            options: [
+                                {
+                                    value: 'sun',
+                                    label: 'widgets_weather_label_sunorcloud_sun'
+                                },
+                                {
+                                    value: 'cloud',
+                                    label: 'widgets_weather_label_sunorcloud_cloud'
+                                },
+
+                            ],
+                            default: 'sun',
+                            onChange: datachange,
                         },
                     ]
                 },
@@ -136,11 +223,31 @@ class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
                             type: 'checkbox ',
 
                             default: false,
-                            onChange: datachange ,
+                            onChange: datachange,
                         },
                     ]
-                }
-                
+                },
+                {
+                    name: 'OIDS_general', // group name
+                    fields: oid_general_fields
+                },
+                {
+                    name: 'OIDS_rain', // group name
+                    fields: oid_rain_fields
+                },
+                {
+                    name: 'OIDS_temp', // group name
+                    fields: oid_temp_fields
+                },
+                {
+                    name: 'OIDS_cloud', // group name
+                    fields: oid_cloud_fields
+                },
+                {
+                    name: 'OIDS_time', // group name
+                    fields: oid_time_fields
+                },
+
             ],
             visPrev: 'widgets/vis-2-test/img/vis-widget-weather.png',
         };
@@ -157,11 +264,10 @@ class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
         //                        then this.state.rxData.type will have state value of `javascript.0.width` + 'px
     }
 
+
+
     async componentDidMount() {
         super.componentDidMount();
-
-        
-        await this.getWeatherData();
 
         // Update data
         this.propertiesUpdate();
@@ -175,8 +281,6 @@ class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
 
     // This function is called every time when rxData is changed
     async onRxDataChanged() {
-
-        await this.getWeatherData();
 
         this.propertiesUpdate();
     }
@@ -198,7 +302,11 @@ class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
      * @returns {echarts.EChartsOption}
      */
     getOption() {
- 
+
+        let weatherData = this.getWeatherData();
+
+        console.log("##got " + JSON.stringify(weatherData));
+
         return {
             backgroundColor: 'transparent',
             title: {
@@ -206,7 +314,7 @@ class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
             },
             tooltip: {},
             legend: {
-                data: ['rain']
+                data: ['rain', 'temperature', 'cloud']
             },
             xAxis: {
                 type: "time",
@@ -223,7 +331,7 @@ class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
                 {
                     name: 'rain',
                     type: 'bar',
-                    data: [],
+                    data: weatherData[0].rainData,
 
                     //[5, 20, 36, 10, 10, 20]
                     /*
@@ -269,12 +377,12 @@ class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
                 {
                     name: 'temperature',
                     type: 'line',
-                    data: [],
+                    data: weatherData[0].tempData,
                 },
                 {
                     name: 'cloud',
                     type: 'bar',
-                    data: [],
+                    data: weatherData[0].cloudData,
                 }
             ]
         };
@@ -283,41 +391,37 @@ class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
 
 
 
-    async getWeatherData() {
+    getWeatherData() {
 
         console.log("getWeatherData " + this.state.rxData['datastructure']);
 
-        let weatherData = {};
+        let weatherData = [];
         if (this.state.rxData['datastructure'] == "NextDaysDetailed") {
-            weatherData = await this.getWeatherDataNextDaysDetailed();
+            weatherData = this.getWeatherDataNextDaysDetailed();
         }
         else if (this.state.rxData['datastructure'] == "NextHours") {
-            weatherData = await this.getWeatherDataNextHours();
+            weatherData = this.getWeatherDataNextHours();
         }
         else if (this.state.rxData['datastructure'] == "NextHours2") {
-            weatherData = await this.getWeatherDataNextHours2();
+            weatherData = this.getWeatherDataNextHours2();
         }
         else {
             console.log("getWeatherData: inknown data structure");
         }
 
-        console.log("got data " + JSON.stringify(weatherData));
-            
+        console.log("getWeatherData got " + JSON.stringify(weatherData));
+
         /*
         got data [[0,2,36,"02:00"],[0,2,69,"05:00"],[0,3,64,"08:00"],[0,6,97,"11:00"],[0,9,16,"14:00"],[0,8,60,"17:00"],[0,4,83,"20:00"],[0,2,55,"23:00"],[0,1,34,"02:00"],[0,0,58,"05:00"],[0,4,53,"08:00"],[0,9,91,"11:00"],[0,9,100,"14:00"],[0.1,8,100,"17:00"],[0.1,5,100,"20:00"],[0,5,51,"23:00"],[0,1,10,"02:00"],[0,0,38,"05:00"],[0,5,8,"08:00"],[0,10,53,"11:00"],[0,12,64,"14:00"],[0,11,74,"17:00"],[0,5,56,"20:00"],[0,6,49,"23:00"],[0,5,17,"01:00"],[0,4,24,"04:00"],[0,5,45,"07:00"],[0,12,42,"10:00"],[0,14,46,"13:00"],[0,14,50,"16:00"],[0,10,50,"19:00"],[0,8,49,"22:00"],[0,8,50,"01:00"],[0,8,28,"04:00"],[0,8,55,"07:00"],[0,13,72,"10:00"],[0,15,68,"13:00"],[0,16,30,"16:00"],[0,13,93,"19:00"],[0,11,100,"22:00"]]
         */
 
-
-
-
-        return;
+        return weatherData;
     }
 
-    async getWeatherDataNextDaysDetailed() {
+    getWeatherDataNextDaysDetailed() {
 
         //const ids = [];
         const weatherData = [];
-        let cnt = 0;
         let max_days = 5;
         let max_periods = 8;
         let instanceID = this.state.rxData['instance']
@@ -326,58 +430,93 @@ class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
         const tempData = [];
         const cloudData = [];
 
+        console.log("getWeatherDataNextDaysDetailed " + instanceID);
+
+
         for (var d = 1; d <= max_days; d++) {
 
+            console.log("day " + d);
+
             //daswetter.0.NextDaysDetailed.Location_1.Day_1.day_value
-            const dayData = await this.props.context.socket.getState(instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".day_value");
-            const year = dayData.val.substring(0, 4);
-            const month = dayData.val.substring(4, 6);
-            const day = dayData.val.substring(6, 8);
+            const dayData = this.state.values[instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".day_value"];
+            let year = 0;
+            let month = 0;
+            let day = 0;
+            let hour = 0;
+            let minute = 0;
 
+            console.log("dayData " + JSON.stringify(dayData));
+
+            if (dayData != null) {
+                year = Number(dayData.val.substring(0, 4));
+                month = Number(dayData.val.substring(4, 6));
+                day = Number(dayData.val.substring(6, 8));
+            }
             for (var p = 1; p <= max_periods; p++) {
+
+                console.log("period " + p);
+
                 //get rain oid
-                const rain_val = await this.props.context.socket.getState(instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".rain_value");
+                //const rain_val = await this.props.context.socket.getState(instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".rain_value");
+                const rain_val = this.state.values[instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".rain_value"];
+
                 //get temperature oid
-                const temp_val = await this.props.context.socket.getState(instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".temp_value");
+                //const temp_val = await this.props.context.socket.getState(instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".temp_value");
+                const temp_val = this.state.values[instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".temp_value"];
                 //get cloud oid
-                const cloud_val = await this.props.context.socket.getState(instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".clouds_value");
+                //const cloud_val = await this.props.context.socket.getState(instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".clouds_value");
+                const cloud_val = this.state.values[instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".clouds_value"];
                 // get time oid
-                const time_val = await this.props.context.socket.getState(instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".hour_value");
+                //const time_val = await this.props.context.socket.getState(instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".hour_value");
+                const time_val = this.state.values[instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".hour_value"];
 
-                //console.log("got data " + JSON.stringify(rain_val.val) + " " + JSON.stringify(temp_val.val) + " " + JSON.stringify(cloud_val.val) + " " + JSON.stringify(time_val.val));
+                console.log("got data " + JSON.stringify(rain_val) + " " + JSON.stringify(temp_val) + " " + JSON.stringify(cloud_val) + " " + JSON.stringify(time_val));
 
-                //calc data 
-                let timeData = time_val.val.split(":");
-                let hour = timeData[0];
-                let minute = timeData[1];
+                //calc date
+                let oDate = null;
 
-                let oDate = new Date(year, month, day, hour, minute, 0, 0);
+                if (time_val != null && year > 0 && month > 0 && day > 0) {
+                    let timeData = time_val.val.split(":");
+                    hour = timeData[0];
+                    minute = timeData[1];
 
-                rainData.push(
-                    [
-                        oDate,
-                        rain_val.val
-                    ]
-                );
-                tempData.push(
-                    [
-                        oDate,
-                        temp_val
-                    ]
-                );
-                cloudData.push(
-                    [
-                        oDate,
-                        cloud_val
-                    ]
-                )
+                    oDate = new Date(year, month, day, hour, minute, 0, 0);
+                }
 
-                //console.log("date " + JSON.stringify(oDate) + " " + year + "." + month + "." + day + " " + hour + ":" + minute);
+                if (this.state.rxData['rain_visible'] == true && oDate != null && rain_val != null) {
+                    rainData.push(
+                        [
+                            oDate,
+                            rain_val.val
+                        ]
+                    );
+                }
+
+                if (this.state.rxData['temperature_visible'] == true && oDate != null && temp_val != null) {
+                    tempData.push(
+                        [
+                            oDate,
+                            temp_val
+                        ]
+                    );
+                }
+                if (this.state.rxData['clouds_visible'] == true && oDate != null && cloud_val != null) {
+
+                    cloudData.push(
+                        [
+                            oDate,
+                            cloud_val
+                        ]
+                    );
+                }
+                console.log("date " + JSON.stringify(oDate) + " " + year + "." + month + "." + day + " " + hour + ":" + minute);
 
             }
         }
 
-        //console.log("get data from " + JSON.stringify(rainData));
+        console.log("rainData " + JSON.stringify(rainData));
+        console.log("tempData " + JSON.stringify(tempData));
+        console.log("cloudData " + JSON.stringify(cloudData));
 
         //const weatherData = ids.length ? (await this.props.context.socket.getStates(ids)) : {};
 
@@ -393,11 +532,10 @@ class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
     }
 
 
-    async getWeatherDataNextHours() {
+    getWeatherDataNextHours() {
 
         //const ids = [];
         const weatherData = [];
-        let cnt = 0;
         let max_days = 5;
         let max_periods = 24;
         let instanceID = this.state.rxData['instance']
@@ -409,7 +547,7 @@ class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
         for (var d = 1; d <= max_days; d++) {
 
             //daswetter.0.NextHours.Location_1.Day_1.day_value
-            const dayData = await this.props.context.socket.getState(instanceID + ".NextHours.Location_1.Day_" + d + ".day_value");
+            const dayData = this.state.values[instanceID + ".NextHours.Location_1.Day_" + d + ".day_value"];
             const year = dayData.val.substring(0, 4);
             const month = dayData.val.substring(4, 6);
             const day = dayData.val.substring(6, 8);
@@ -417,13 +555,13 @@ class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
             for (var p = 1; p <= max_periods; p++) {
 
                 //get rain oid
-                const rain_val = await this.props.context.socket.getState(instanceID + ".NextHours.Location_1.Day_" + d + ".Hour_" + p + ".rain_value");
+                const rain_val = this.state.values[instanceID + ".NextHours.Location_1.Day_" + d + ".Hour_" + p + ".rain_value"];
                 //get temperature oid
-                const temp_val = await this.props.context.socket.getState(instanceID + ".NextHours.Location_1.Day_" + d + ".Hour_" + p + ".temp_value");
+                const temp_val = this.state.values[instanceID + ".NextHours.Location_1.Day_" + d + ".Hour_" + p + ".temp_value"];
                 //get cloud oid
-                const cloud_val = await this.props.context.socket.getState(instanceID + ".NextHours.Location_1.Day_" + d + ".Hour_" + p + ".clouds_value");
+                const cloud_val = this.state.values[instanceID + ".NextHours.Location_1.Day_" + d + ".Hour_" + p + ".clouds_value"];
                 // get time oid
-                const time_val = await this.props.context.socket.getState(instanceID + ".NextHours.Location_1.Day_" + d + ".Hour_" + p + ".hour_value");
+                const time_val = this.state.values[instanceID + ".NextHours.Location_1.Day_" + d + ".Hour_" + p + ".hour_value"];
 
                 //console.log("got data " + JSON.stringify(rain_val.val) + " " + JSON.stringify(temp_val.val) + " " + JSON.stringify(cloud_val.val) + " " + JSON.stringify(time_val.val));
 
@@ -472,10 +610,9 @@ class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
         return weatherData;
     }
 
-    async getWeatherDataNextHours2() {
+    getWeatherDataNextHours2() {
         //const ids = [];
         const weatherData = [];
-        let cnt = 0;
         let max_days = 5;
         let max_periods = 8;
         let instanceID = this.state.rxData['instance']
@@ -487,7 +624,7 @@ class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
         for (var d = 1; d <= max_days; d++) {
 
             //daswetter.0.NextHours2.Location_1.Day_1.date
-            const dayData = await this.props.context.socket.getState(instanceID + ".NextHours2.Location_1.Day_" + d + ".date");
+            const dayData = this.state.values[instanceID + ".NextHours2.Location_1.Day_" + d + ".date"];
             const year = dayData.val.substring(0, 4);
             const month = dayData.val.substring(4, 6);
             const day = dayData.val.substring(6, 8);
@@ -495,13 +632,13 @@ class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
             for (var p = 1; p <= max_periods; p++) {
 
                 //get rain oid
-                const rain_val = await this.props.context.socket.getState(instanceID + ".NextHours2.Location_1.Day_" + d + ".Hour_" + p + ".rain");
+                const rain_val = this.state.values[instanceID + ".NextHours2.Location_1.Day_" + d + ".Hour_" + p + ".rain"];
                 //get temperature oid
-                const temp_val = await this.props.context.socket.getState(instanceID + ".NextHours2.Location_1.Day_" + d + ".Hour_" + p + ".temp");
+                const temp_val = this.state.values[instanceID + ".NextHours2.Location_1.Day_" + d + ".Hour_" + p + ".temp"];
                 //get cloud oid
-                const cloud_val = await this.props.context.socket.getState(instanceID + ".NextHours2.Location_1.Day_" + d + ".Hour_" + p + ".clouds");
+                const cloud_val = this.state.values[instanceID + ".NextHours2.Location_1.Day_" + d + ".Hour_" + p + ".clouds"];
                 // get time oid
-                const time_val = await this.props.context.socket.getState(instanceID + ".NextHours2.Location_1.Day_" + d + ".Hour_" + p + ".hour");
+                const time_val = this.state.values[instanceID + ".NextHours2.Location_1.Day_" + d + ".Hour_" + p + ".hour"];
 
                 //console.log("got data " + JSON.stringify(rain_val.val) + " " + JSON.stringify(temp_val.val) + " " + JSON.stringify(cloud_val.val) + " " + JSON.stringify(time_val.val));
 
@@ -553,9 +690,8 @@ class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
     renderWidgetBody(props) {
         super.renderWidgetBody(props);
 
-        
-
-        console.log("got data " + JSON.stringify(weatherdata));
+        console.log("values" + JSON.stringify(this.state.values));
+        console.log("rxData " + JSON.stringify(this.state.rxData));
 
         return <Card style={{ width: '100%', height: '100%' }}>
             <CardContent>
@@ -564,7 +700,7 @@ class WeatherWidget extends (window.visRxWidget || VisRxWidget) {
                 {
                     <ReactEchartsCore
                         option={this.getOption()}
-                        theme={ 'dark' }
+                        theme={'dark'}
                         style={{ height: `100%`, width: '100%' }}
                         opts={{ renderer: 'svg' }}
                     />

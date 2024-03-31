@@ -1,9 +1,11 @@
 import React from 'react';
+import { withStyles } from '@mui/styles';
 
 import WidgetDemoApp from '@iobroker/vis-2-widgets-react-dev/widgetDemoApp';
 import { i18n as I18n } from '@iobroker/adapter-react-v5';
 
 import WeatherWidget from './WeatherWidget';
+import GeneralEChartWidget from './GeneralEChartWidget';
 import translations from './translations';
 
 class App extends WidgetDemoApp {
@@ -15,16 +17,35 @@ class App extends WidgetDemoApp {
     }
 
     renderWidget() {
-        return <WeatherWidget
-            socket={this.socket}
-            style={{
-                width: 600,
-                height: 200,
-            }}
-            data={{
-                type: 'all',
-            }}
-        />;
+        return <div
+            //className={this.props.classes.app}
+        >
+
+            <WeatherWidget
+                socket={this.socket}
+                themeType={this.state.themeType}
+                style={{
+                    width: 600,
+                    height: 200,
+                }}
+                data={{
+                    type: 'all',
+                }}
+            />;
+
+            <GeneralEChartWidget
+                socket={this.socket}
+                themeType={this.state.themeType}
+                style={{
+                    width: 600,
+                    height: 200,
+                }}
+                data={{
+                    type: 'all',
+                }}
+            />;
+
+        </div>;
     }
 }
 

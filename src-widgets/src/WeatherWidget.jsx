@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles, withTheme } from '@mui/styles';
 
-import {
-    Card, CardContent,
-} from '@mui/material';
+import { Card, CardContent} from '@mui/material';
 
 import ReactEchartsCore from 'echarts-for-react';
 
@@ -10,38 +10,30 @@ import { I18n } from '@iobroker/adapter-react-v5';
 
 import Generic from './Generic'; 
 
+const styles = () => ({
+    cardContent: {
+        flex: 1,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        overflow: 'hidden',
+    },
+});
 
-const loadStates = async (field, data, changeData, socket) => {
-    if (data[field.name]) {
-        const object = await socket.getObject(data[field.name]);
-        if (object && object.common) {
-            const id = data[field.name].split('.');
-            id.pop();
-            const states = await socket.getObjectView(`${id.join('.')}.`, `${id.join('.')}.\u9999`, 'state');
-            if (states) {
-                const currentMediaTypes = [...mediaTypes];
-                Object.values(states).forEach(state => {
-                    const role = state?.common?.role?.match(/^(media\.mode|media|button|level)\.(.*)$/)?.[2];
-                    if (role && currentMediaTypes.includes(role) && (!data[role] || data[role] === 'nothing_selected') && field !== role) {
-                        currentMediaTypes.splice(currentMediaTypes.indexOf(role), 1);
-                        data[role] = state._id;
-                    }
-                });
-                changeData(data);
-            }
-        }
-    }
-};
 
-const datachange = async (field, data, changeData, socket) => {
-
-    console.log("datachange");
-
-};
 
 
 
 class WeatherWidget extends (Generic) {
+
+    constructor(props) {
+        super(props);
+        this.refCardContent = React.createRef();
+        this.timeSelectorRegistered = false;
+        this.timeSelectorRegisterInterval = null;
+    }
+
     static getWidgetInfo() {
 
         let oid_rain_fields = [];
@@ -112,14 +104,26 @@ class WeatherWidget extends (Generic) {
             visName: 'weather',                     // Name of widget
             visWidgetLabel: 'vis_2_widgets-weather', // Label of widget
             visWidgetColor: '#005cc4',               // Optional widget color. If not set, default color of widget set will be used.
-            visResizeLocked: true,                   // require, that width is always equal to height
-            visResizable: false,                     // widget is not resizable 
-            visDraggable: false,                     // widget is not draggable 
+            visResizeLocked: false,                   // require, that width is always equal to height
+            visResizable: true,                     // widget is not resizable 
+            visDraggable: true,                     // widget is not draggable 
             visAttrs: [
                 {
                     // check here all possible types https://github.com/ioBroker/ioBroker.vis/blob/react/src/src/Attributes/Widget/SCHEMA.md
                     name: 'common', // group name
                     fields: [
+                        {
+                            name: 'noCard',
+                            label: 'without_card',
+                            type: 'checkbox',
+                        },
+
+                        //todo nur als Beispiel zum ausblenden
+                        {
+                            name: 'widgetTitle',
+                            label: 'name',
+                            hidden: '!!data.noCard',
+                        },
                         {
                             name: 'instance',    // name in data structure
                             label: 'widgets_weather_label_instance', // translated field label
@@ -153,7 +157,7 @@ class WeatherWidget extends (Generic) {
                                 }
                             ],
                             default: 'NextDaysDetailed',
-                            onChange: datachange,
+                            
                         },
                     ],
                 },
@@ -166,7 +170,7 @@ class WeatherWidget extends (Generic) {
                             type: 'checkbox',
 
                             default: false,
-                            onChange: datachange,
+                            
                         },
                     ]
                 },
@@ -179,7 +183,7 @@ class WeatherWidget extends (Generic) {
                             type: 'checkbox',
 
                             default: false,
-                            onChange: datachange,
+                            
                         },
                     ]
                 },
@@ -192,7 +196,7 @@ class WeatherWidget extends (Generic) {
                             type: 'checkbox',
 
                             default: false,
-                            onChange: datachange,
+                           
                         },
                         {
                             name: 'sun_or_cloud',    // name in data structure
@@ -210,7 +214,7 @@ class WeatherWidget extends (Generic) {
 
                             ],
                             default: 'sun',
-                            onChange: datachange,
+                            
                         },
                     ]
                 },
@@ -223,7 +227,7 @@ class WeatherWidget extends (Generic) {
                             type: 'checkbox ',
 
                             default: false,
-                            onChange: datachange,
+                            
                         },
                     ]
                 },
@@ -247,8 +251,13 @@ class WeatherWidget extends (Generic) {
                     name: 'OIDS_time', // group name
                     fields: oid_time_fields
                 },
-
+                
             ],
+            visDefaultStyle: {
+                width: 320,
+                height: 182,
+                position: 'relative',
+            },
             visPrev: 'widgets/vis-2-test/img/vis-widget-weather.png',
         };
     }
@@ -307,16 +316,34 @@ class WeatherWidget extends (Generic) {
 
         //console.log("##got " + JSON.stringify(weatherData));
 
-        console.log("##got " + JSON.stringify(weatherData[0][0]));
+        //console.log("##got " + JSON.stringify(weatherData[0][0]));
+
+        let location = this.state.values[`${this.state.rxData['oid_location']}.val`];
+        console.log("##got " + location);
+        //let headline = I18n.t("Weather at ") + location;
+        let headline = location;
+
+        let legend = [];
+        if (weatherData[0][0].length>1) {
+            legend.push(I18n.t('rain'));
+        }
+        if (weatherData[0][1].length > 1) {
+            legend.push(I18n.t('temperature'));
+        }
+        if (weatherData[0][2].length > 1) {
+            legend.push(I18n.t('cloud'));
+        }
+
+        //todo Farbe der Graphen einstellbar
 
         return {
             backgroundColor: 'transparent',
             title: {
-                text: 'Test'
+                text: headline
             },
             tooltip: {},
             legend: {
-                data: ['rain', 'temperature', 'cloud']
+                data: legend
             },
             xAxis: {
                 type: "time",
@@ -324,67 +351,75 @@ class WeatherWidget extends (Generic) {
                 axisLabel: {
 
                     rotate: 45,
-                    formatter: '{dd}.{MM}.{yy} {mm}:{hh}'
+                    //todo format einstellbar
+                    formatter: '{ee} {hh}:{mm}'
                 }
 
             },
-            yAxis: {},
+            yAxis: [
+                {
+                    position: "left",
+                    type: "value",
+                    //todo: min max berechnen
+                    min: -20,
+                    max: 30,
+                    axisLabel: {
+                        formatter: '{value} °C'
+                    }
+                },
+                {
+                    position: "right",
+                    type: "value",
+                    min: 0,
+                    max: 10,
+                    axisLabel: {
+                        formatter: '{value} mm'
+                    }
+                }
+                ,
+                {
+                    position: "right",
+                    type: "value",
+                    min: 0,
+                    max: 100,
+                    axisLabel: {
+                        formatter: '{value} %'
+                    }
+                }
+            ],
             series: [
                 {
                     name: 'rain',
                     type: 'bar',
                     data: weatherData[0][0],
-
-                    //[5, 20, 36, 10, 10, 20]
-                    /*
-                        [
-                            ['2024-3-27 02:00', 4.5],
-                            ['2024-3-27 05:00', 2.3],
-                            ['2024-3-27 08:00', 9.5],
-                            ['2024-3-27 11:00', 8.8],
-                            ['2024-3-27 14:00', 5.8],
-                            ['2024-3-27 17:00', 6.8],
-                            ['2024-3-27 20:00', 6.8],
-                            ['2024-3-27 23:00', 8.8],
-
-                            ['2024-3-28 02:00', 4.5],
-                            ['2024-3-28 05:00', 2.3],
-                            ['2024-3-28 08:00', 9.5],
-                            ['2024-3-28 11:00', 8.8],
-                            ['2024-3-28 14:00', 5.8],
-                            ['2024-3-28 17:00', 6.8],
-                            ['2024-3-28 20:00', 6.8],
-                            ['2024-3-28 23:00', 8.8],
-
-                            ['2024-3-29 02:00', 4.5],
-                            ['2024-3-29 05:00', 2.3],
-                            ['2024-3-29 08:00', 9.5],
-                            ['2024-3-29 11:00', 8.8],
-                            ['2024-3-29 14:00', 5.8],
-                            ['2024-3-29 17:00', 6.8],
-                            ['2024-3-29 20:00', 6.8],
-                            ['2024-3-29 23:00', 8.8],
-
-                            ['2024-3-30 02:00', 4.5],
-                            ['2024-3-30 05:00', 2.3],
-                            ['2024-3-30 08:00', 9.5],
-                            ['2024-3-30 11:00', 8.8],
-                            ['2024-3-30 14:00', 5.8],
-                            ['2024-3-30 17:00', 6.8],
-                            ['2024-3-30 20:00', 6.8],
-                            ['2024-3-30 23:00', 8.8]
-                        ]
-                        */
+                    yAxisIndex: 1,
+                    tooltip: {
+                        valueFormatter: function (value) {
+                            return value + ' mm';
+                        }
+                    },
                 },
                 {
                     name: 'temperature',
                     type: 'line',
                     data: weatherData[0][1],
+                    yAxisIndex: 0,
+                    tooltip: {
+                        valueFormatter: function (value) {
+                            return value + ' °C';
+                        }
+                    },
                 },
                 {
                     name: 'cloud',
                     type: 'bar',
                     data: weatherData[0][2],
+                    yAxisIndex: 2,
+                    tooltip: {
+                        valueFormatter: function (value) {
+                            return value + ' %';
+                        }
+                    },
                 }
             ]
         };
@@ -434,13 +469,14 @@ class WeatherWidget extends (Generic) {
 
         console.log("getWeatherDataNextDaysDetailed " + instanceID);
 
-
+        let cnt = 1;
         for (var d = 1; d <= max_days; d++) {
 
-            console.log("day " + d);
+            //console.log("day " + d);
 
             //daswetter.0.NextDaysDetailed.Location_1.Day_1.day_value
-            const dayData = this.state.values[instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".day_value.val"];
+            //const dayData = this.state.values[instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".day_value.val"];
+            const dayData = this.state.values[`${this.state.rxData['oid_general_day_' + d]}.val`];
             let year = 0;
             let month = 0;
             let day = 0;
@@ -452,26 +488,32 @@ class WeatherWidget extends (Generic) {
             if (dayData != null) {
                 year = Number(dayData.substring(0, 4));
                 month = Number(dayData.substring(4, 6));
+                month = month - 1;
                 day = Number(dayData.substring(6, 8));
             }
             for (var p = 1; p <= max_periods; p++) {
 
+                
                 //console.log("period " + p);
 
                 //get rain oid
                 //const rain_val = await this.props.context.socket.getState(instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".rain_value");
-                const rain_val = this.state.values[instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".rain_value.val"];
-
+                //const rain_val = this.state.values[instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".rain_value.val"];
+                const rain_val = this.state.values[`${this.state.rxData['oid_rain_' + cnt]}.val`];
                 //get temperature oid
                 //const temp_val = await this.props.context.socket.getState(instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".temp_value");
-                const temp_val = this.state.values[instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".temp_value.val"];
+                //const temp_val = this.state.values[instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".temp_value.val"];
+                const temp_val = this.state.values[`${this.state.rxData['oid_temp_' + cnt]}.val`];
                 //get cloud oid
                 //const cloud_val = await this.props.context.socket.getState(instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".clouds_value");
-                const cloud_val = this.state.values[instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".clouds_value.val"];
+                //const cloud_val = this.state.values[instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".clouds_value.val"];
+                const cloud_val = this.state.values[`${this.state.rxData['oid_cloud_' + cnt]}.val`];
                 // get time oid
                 //const time_val = await this.props.context.socket.getState(instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".hour_value");
-                const time_val = this.state.values[instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".hour_value.val"];
+                //const time_val = this.state.values[instanceID + ".NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".hour_value.val"];
+                const time_val = this.state.values[`${this.state.rxData['oid_time_' + cnt]}.val`];
 
+                cnt++;
                 //console.log("got data " + JSON.stringify(rain_val) + " " + JSON.stringify(temp_val) + " " + JSON.stringify(cloud_val) + " " + JSON.stringify(time_val));
 
                 //calc date
@@ -507,6 +549,8 @@ class WeatherWidget extends (Generic) {
                     cloudData.push(
                         [
                             oDate,
+
+                            //todo: bei Sonne 100-cloud_val
                             cloud_val
                         ]
                     );
@@ -695,21 +739,44 @@ class WeatherWidget extends (Generic) {
         console.log("values" + JSON.stringify(this.state.values));
         console.log("rxData " + JSON.stringify(this.state.rxData));
 
-        return <Card style={{ width: '100%', height: '100%' }}>
-            <CardContent>
-                {I18n.t('Weather widget: ')}
-                {this.state.values[`${this.state.rxData.oid}.val`]}
-                {
-                    <ReactEchartsCore
-                        option={this.getOption()}
-                        theme={'dark'}
-                        style={{ height: `100%`, width: '100%' }}
-                        opts={{ renderer: 'svg' }}
-                    />
-                }
-            </CardContent>
-        </Card>;
+        let size;
+        if (!this.refCardContent.current) {
+            setTimeout(() => this.forceUpdate(), 50);
+        } else {
+            size = this.refCardContent.current.offsetHeight;
+        }
+
+        console.log("size " + size);
+
+
+        const content = <div
+                    ref={this.refCardContent}
+                    className={this.props.classes.cardContent}
+                    >
+            {size && <ReactEchartsCore
+                option={this.getOption()}
+                theme={this.props.themeType === 'dark' ? 'dark' : ''}
+                style={{ height: `${size}px`, width: '100%' }}
+                opts={{ renderer: 'svg' }}
+            />}
+        </div>;
+
+        if (this.state.rxData.noCard || props.widget.usedInWidget) {
+            console.log("nur content");
+            return content;
+        }
+
+        console.log("wrap content");
+
+        return this.wrapContent(content, null, { textAlign: 'center' });
     }
 }
 
-export default WeatherWidget;
+WeatherWidget.propTypes = {
+    socket: PropTypes.object,
+    themeType: PropTypes.string,
+    style: PropTypes.object,
+    data: PropTypes.object,
+};
+
+export default withStyles(styles)(withTheme(WeatherWidget));

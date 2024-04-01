@@ -1,22 +1,37 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles, withTheme } from '@mui/styles';
 
-import {
-    Card, CardContent,
-} from '@mui/material';
+import { Card, CardContent } from '@mui/material';
 
 import ReactEchartsCore from 'echarts-for-react';
 
 import { I18n } from '@iobroker/adapter-react-v5';
 
-import Generic from './Generic'; 
+import Generic from './Generic';
 
-
-
-
-
+const styles = () => ({
+    cardContent: {
+        flex: 1,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        overflow: 'hidden',
+    },
+});
 
 
 class GeneralEChartWidget extends (Generic) {
+
+    constructor(props) {
+        super(props);
+        this.refCardContent = React.createRef();
+        this.timeSelectorRegistered = false;
+        this.timeSelectorRegisterInterval = null;
+    }
+
+
     static getWidgetInfo() {
 
        
@@ -24,9 +39,11 @@ class GeneralEChartWidget extends (Generic) {
 
         return {
             id: 'tplGeneralEChartWidget',                 // Unique widget type ID. Should start with `tpl` followed
-            visSet: 'vis-2-widgets-generalechart',        // Unique ID of widget set 
-            visSetLabel: 'vis-2-widgets-generalechart',   // Widget set translated label (should be defined only in one widget of set)
-            visSetColor: '#cf00ff',                 // Color of widget set. it is enough to set color only in one widget of set
+            visSet: 'vis-2-widgets-weather',        // Unique ID of widget set
+
+            //visset -> see WeatherWidget
+            //visSetLabel: 'vis-2-widgets-weather',   // Widget set translated label (should be defined only in one widget of set)
+            //visSetColor: '#cf00ff',                 // Color of widget set. it is enough to set color only in one widget of set
             visName: 'GeneralEChart',                     // Name of widget
             visWidgetLabel: 'vis_2_widgets-generalechart', // Label of widget
             visWidgetColor: '#005cc4',               // Optional widget color. If not set, default color of widget set will be used.
@@ -172,22 +189,45 @@ class GeneralEChartWidget extends (Generic) {
         super.renderWidgetBody(props);
 
 
+        let size;
+        if (!this.refCardContent.current) {
+            setTimeout(() => this.forceUpdate(), 50);
+        } else {
+            size = this.refCardContent.current.offsetHeight;
+        }
+
+        console.log("size " + size);
 
 
-        return <Card style={{ width: '100%', height: '100%' }}>
-            <CardContent>
-                {I18n.t('EChart widget: ')}
-                {
-                    <ReactEchartsCore
-                        option={this.getOption()}
-                        theme={'dark'}
-                        style={{ height: `100%`, width: '100%' }}
-                        opts={{ renderer: 'svg' }}
-                    />
-                }
-            </CardContent>
-        </Card>;
+        const content = <div
+            ref={this.refCardContent}
+            className={this.props.classes.cardContent}
+        >
+            {size && <ReactEchartsCore
+                option={this.getOption()}
+                theme={this.props.themeType === 'dark' ? 'dark' : ''}
+                style={{ height: `${size}px`, width: '100%' }}
+                opts={{ renderer: 'svg' }}
+            />}
+        </div>;
+
+        if (this.state.rxData.noCard || props.widget.usedInWidget) {
+            console.log("nur content");
+            return content;
+        }
+
+        console.log("wrap content");
+
+        return this.wrapContent(content, null, { textAlign: 'center' });
     }
 }
 
-export default GeneralEChartWidget;
+GeneralEChartWidget.propTypes = {
+    socket: PropTypes.object,
+    themeType: PropTypes.string,
+    style: PropTypes.object,
+    data: PropTypes.object,
+};
+
+export default withStyles(styles)(withTheme(GeneralEChartWidget));
+

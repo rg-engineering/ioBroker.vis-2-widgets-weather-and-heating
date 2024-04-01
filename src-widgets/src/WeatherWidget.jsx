@@ -336,6 +336,26 @@ class WeatherWidget extends (Generic) {
 
         //todo Farbe der Graphen einstellbar
 
+        //min / max Temperatur
+        let TempMin = 0;
+        let TempMax = 20;
+        for (let i = 0; i < weatherData[0][1].length; i++) {
+            const temp = weatherData[0][1][i];
+            if (temp > TempMax) { TempMax = temp; }
+            if (temp < TempMin) { TempMin = temp; }
+        }
+
+
+        //min / max Rain
+        let RainMin = 0;
+        let RainMax = 1;
+        for (let i = 0; i < weatherData[0][0].length; i++) {
+            const rain = weatherData[0][0][i];
+            if (rain > RainMax) { RainMax = rain; }
+        }
+
+
+
         return {
             backgroundColor: 'transparent',
             title: {
@@ -360,9 +380,9 @@ class WeatherWidget extends (Generic) {
                 {
                     position: "left",
                     type: "value",
-                    //todo: min max berechnen
-                    min: -20,
-                    max: 30,
+                    // min max berechnen
+                    min: TempMin,
+                    max: TempMax,
                     axisLabel: {
                         formatter: '{value} °C'
                     }
@@ -370,13 +390,13 @@ class WeatherWidget extends (Generic) {
                 {
                     position: "right",
                     type: "value",
-                    min: 0,
-                    max: 10,
+                    min: RainMin,
+                    max: RainMax,
                     axisLabel: {
                         formatter: '{value} mm'
                     }
-                }
-                ,
+                },
+                //todo yAxis nur wenn auch Serie dazu da ist
                 {
                     position: "right",
                     type: "value",

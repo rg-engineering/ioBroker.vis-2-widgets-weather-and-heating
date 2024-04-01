@@ -22,6 +22,12 @@ const styles = () => ({
 });
 
 
+//todo Anpassunge aus Wetter widget übernehmen
+//todo readme anpassen -> Beschreibung Widget und JSON Input
+//todo JSON Input als Datenquelle
+//todo mehrere Inputs unterstützen
+//todo Übersetzungen
+
 class GeneralEChartWidget extends (Generic) {
 
     constructor(props) {

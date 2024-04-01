@@ -22,6 +22,15 @@ const styles = () => ({
 });
 
 
+//todo für WU anpassen
+//todo OID's neu anlegen, wenn Datenstruktur umgeschaltet wird
+//todo Übersetzungen
+//todo Images
+//todo readme anpassen
+//todo tooltip mit Zeitangabe
+//todo 2. X-Achse verschoben
+//todo Format-String für Zeitanzeige X Achse (bug)
+
 class WeatherWidget extends (Generic) {
 
     constructor(props) {
@@ -176,6 +185,12 @@ class WeatherWidget extends (Generic) {
                             type: 'checkbox',
                             default: false,
                         },
+                        {
+                            name: 'rain_color',    // name in data structure
+                            label: 'widgets_weather_label_rain_color', // translated field label
+                            type: 'color',
+                            default: "blue",
+                        },
                     ]
                 },
                 {
@@ -187,6 +202,12 @@ class WeatherWidget extends (Generic) {
                             type: 'checkbox',
                             default: false,
                         },
+                        {
+                            name: 'temperature_color',    // name in data structure
+                            label: 'widgets_weather_label_temperature_color', // translated field label
+                            type: 'color',
+                            default: "red",
+                        },
                     ]
                 },
                 {
@@ -197,6 +218,12 @@ class WeatherWidget extends (Generic) {
                             label: 'widgets_weather_label_clouds_visible', // translated field label
                             type: 'checkbox',
                             default: false,
+                        },
+                        {
+                            name: 'clouds_color',    // name in data structure
+                            label: 'widgets_weather_label_clouds_color', // translated field label
+                            type: 'color',
+                            default: "yellow",
                         },
                         {
                             name: 'sun_or_cloud',    // name in data structure
@@ -315,7 +342,7 @@ class WeatherWidget extends (Generic) {
         //console.log("##got " + JSON.stringify(weatherData[0][0]));
 
         let location = this.state.values[`${this.state.rxData['oid_location']}.val`];
-        //let axisLabel_formatstring = "'" + this.state.rxData['xaxis_axisLabel_formatstring'] + "'";
+        let axisLabel_formatstring = "'" + this.state.rxData['xaxis_axisLabel_formatstring'] + "'";
         console.log("##got " + location );
         //let headline = I18n.t("Weather at ") + location;
         let headline = location;
@@ -362,7 +389,7 @@ class WeatherWidget extends (Generic) {
                 name: 'rain',
                 type: 'bar',
                 data: weatherData[0][0],
-
+                color: this.state.rxData['rain_color'] || "blue", 
                 yAxisIndex: cnt,
                 tooltip: {
                     valueFormatter: function (value) {
@@ -390,6 +417,7 @@ class WeatherWidget extends (Generic) {
                 name: 'temperature',
                 type: 'line',
                 data: weatherData[0][1],
+                color: this.state.rxData['temperature_color'] || "red", 
                 yAxisIndex: cnt,
                 tooltip: {
                     valueFormatter: function (value) {
@@ -421,6 +449,7 @@ class WeatherWidget extends (Generic) {
                 name: this.state.rxData['sun_or_cloud'] == "sun" ? 'sun' : 'cloud',
                 type: 'bar',
                 data: weatherData[0][2],
+                color: this.state.rxData['clouds_color'] || "yellow", 
                 yAxisIndex: cnt,
                 tooltip: {
                     valueFormatter: function (value) {
@@ -472,7 +501,7 @@ class WeatherWidget extends (Generic) {
 
         //console.log("legend: " + JSON.stringify(legend) + " yaxis: " + JSON.stringify(yaxis));
 
-        //todo Farbe der Graphen einstellbar
+        
 
 
         let content = {
@@ -490,9 +519,9 @@ class WeatherWidget extends (Generic) {
                 axisLabel: {
 
                     rotate: 45,
-                    //todo format einstellbar
-                    formatter: '{ee} {hh}:{mm}',
-                    //formatter: axisLabel_formatstring,
+                    //format einstellbar
+                    //formatter: '{ee} {hh}:{mm}',
+                    formatter: axisLabel_formatstring,
                 }
 
             },
@@ -666,6 +695,9 @@ class WeatherWidget extends (Generic) {
 
     getWeatherDataNextHours() {
 
+
+        //todo getWeatherDataNextHours anpassen
+
         //const ids = [];
         const weatherData = [];
         let max_days = 5;
@@ -743,6 +775,10 @@ class WeatherWidget extends (Generic) {
     }
 
     getWeatherDataNextHours2() {
+
+        //todo getWeatherDataNextHours2 anpassen
+
+
         //const ids = [];
         const weatherData = [];
         let max_days = 5;

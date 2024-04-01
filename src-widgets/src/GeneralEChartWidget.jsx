@@ -58,18 +58,38 @@ class GeneralEChartWidget extends (Generic) {
                         
                         {
                             name: 'oid_data',    // name in data structure
-                            label: 'widgets_weather_label_oiddata', // translated field label
+                            label: 'widgets_echart_label_oiddata', // translated field label
                             type: 'id',
 
                             default: '',
                         },
+                        {
+                            name: 'headline',    // name in data structure
+                            label: 'widgets_echart_label_headline', // translated field label
+                            type: 'text',
+
+                            default: 'headline',
+                        },
                         
                     ],
+                },
+                {
+                    name: 'X_axis', // group name
+                    fields: [
+                        {
+                            name: 'xaxis_axisLabel_formatstring',    // name in data structure
+                            label: 'widgets_weather_label_xaxis_axisLabel_formatstring', // translated field label
+                            type: 'text',
+
+                            default: "{ee} {hh}:{mm}",
+
+                        },
+                    ]
                 },
                
 
             ],
-            visPrev: 'widgets/vis-2-test/img/vis-widget-weather.png',
+            visPrev: 'widgets/vis-2-test/img/vis-widget-echart.png',
         };
     }
 
@@ -124,17 +144,20 @@ class GeneralEChartWidget extends (Generic) {
     getOption() {
 
         
+        //todo legende von den einstellungen
 
         //todo Farbe der Graphen einstellbar
 
+        //todo serien einstellbar
+        //todo XAchse einstellbar
         return {
             backgroundColor: 'transparent',
             title: {
-                text: headline
+                text: 'Wetter'
             },
             tooltip: {},
             legend: {
-                data: legend
+                data: ['rain', 'temperature', 'cloud']
             },
             xAxis: {
                 type: "time",
@@ -142,7 +165,7 @@ class GeneralEChartWidget extends (Generic) {
                 axisLabel: {
 
                     rotate: 45,
-                    //todo format einstellbar
+                    //formatter:'{dd}.{MM} {hh}:{mm}'
                     formatter: '{ee} {hh}:{mm}'
                 }
 
@@ -151,31 +174,47 @@ class GeneralEChartWidget extends (Generic) {
                 {
                     position: "left",
                     type: "value",
-                    //todo: min max berechnen
-                    min: -20,
+                    min: 0,
                     max: 30,
                     axisLabel: {
-                        formatter: '{value} �C'
+                        formatter: '{value} °C'
                     }
                 },
-                
+                {
+                    position: "right",
+                    type: "value",
+                    min: 0,
+                    max: 10,
+                    axisLabel: {
+                        formatter: '{value} mm'
+                    }
+                }
             ],
             series: [
                 {
                     name: 'rain',
                     type: 'bar',
-                    data: [
-                        [0, 0],
-                        [0,1]
-                    ],
                     yAxisIndex: 1,
                     tooltip: {
                         valueFormatter: function (value) {
                             return value + ' mm';
                         }
                     },
+                    data: //[5, 20, 36, 10, 10, 20]
+                        [["2024-04-30T00:00:00.000Z", 0], ["2024-04-30T03:00:00.000Z", 0], ["2024-04-30T06:00:00.000Z", 0], ["2024-04-30T09:00:00.000Z", 0], ["2024-04-30T12:00:00.000Z", 0], ["2024-04-30T15:00:00.000Z", 0], ["2024-04-30T18:00:00.000Z", 0], ["2024-04-30T21:00:00.000Z", 0], ["2024-04-30T23:00:00.000Z", 0], ["2024-05-01T01:00:00.000Z", 0], ["2024-05-01T02:00:00.000Z", 0], ["2024-05-01T03:00:00.000Z", 0], ["2024-05-01T04:00:00.000Z", 0], ["2024-05-01T05:00:00.000Z", 0], ["2024-05-01T06:00:00.000Z", 0], ["2024-05-01T07:00:00.000Z", 0], ["2024-05-01T00:00:00.000Z", 0], ["2024-05-01T03:00:00.000Z", 0], ["2024-05-01T06:00:00.000Z", 0.2], ["2024-05-01T09:00:00.000Z", 0], ["2024-05-01T12:00:00.000Z", 0], ["2024-05-01T15:00:00.000Z", 0], ["2024-05-01T18:00:00.000Z", 0], ["2024-05-01T21:00:00.000Z", 0], ["2024-05-02T00:00:00.000Z", 0], ["2024-05-02T03:00:00.000Z", 0], ["2024-05-02T06:00:00.000Z", 0], ["2024-05-02T09:00:00.000Z", 0.3], ["2024-05-02T12:00:00.000Z", 0.7], ["2024-05-02T15:00:00.000Z", 0.3], ["2024-05-02T18:00:00.000Z", 0], ["2024-05-02T21:00:00.000Z", 0], ["2024-05-03T00:00:00.000Z", 0.4], ["2024-05-03T03:00:00.000Z", 0], ["2024-05-03T06:00:00.000Z", 0], ["2024-05-03T09:00:00.000Z", 0], ["2024-05-03T12:00:00.000Z", 0], ["2024-05-03T15:00:00.000Z", 0.5], ["2024-05-03T18:00:00.000Z", 0], ["2024-05-03T21:00:00.000Z", 0.8]]
                 },
-                
+                {
+                    name: 'temperature',
+                    type: 'line',
+                    yAxisIndex: 0,
+                    tooltip: {
+                        valueFormatter: function (value) {
+                            return value + ' °C';
+                        }
+                    },
+                    data:
+                        [["2024-04-30T00:00:00.000Z", 13], ["2024-04-30T03:00:00.000Z", 14], ["2024-04-30T06:00:00.000Z", 15], ["2024-04-30T09:00:00.000Z", 18], ["2024-04-30T12:00:00.000Z", 21], ["2024-04-30T15:00:00.000Z", 18], ["2024-04-30T18:00:00.000Z", 15], ["2024-04-30T21:00:00.000Z", 14], ["2024-04-30T23:00:00.000Z", 13], ["2024-05-01T01:00:00.000Z", 12], ["2024-05-01T02:00:00.000Z", 12], ["2024-05-01T03:00:00.000Z", 11], ["2024-05-01T04:00:00.000Z", 10], ["2024-05-01T05:00:00.000Z", 10], ["2024-05-01T06:00:00.000Z", 10], ["2024-05-01T07:00:00.000Z", 12], ["2024-05-01T00:00:00.000Z", 12], ["2024-05-01T03:00:00.000Z", 12], ["2024-05-01T06:00:00.000Z", 11], ["2024-05-01T09:00:00.000Z", 12], ["2024-05-01T12:00:00.000Z", 10], ["2024-05-01T15:00:00.000Z", 11], ["2024-05-01T18:00:00.000Z", 9], ["2024-05-01T21:00:00.000Z", 7], ["2024-05-02T00:00:00.000Z", 6], ["2024-05-02T03:00:00.000Z", 5], ["2024-05-02T06:00:00.000Z", 6], ["2024-05-02T09:00:00.000Z", 9], ["2024-05-02T12:00:00.000Z", 10], ["2024-05-02T15:00:00.000Z", 11], ["2024-05-02T18:00:00.000Z", 8], ["2024-05-02T21:00:00.000Z", 6], ["2024-05-03T00:00:00.000Z", 6], ["2024-05-03T03:00:00.000Z", 5], ["2024-05-03T06:00:00.000Z", 6], ["2024-05-03T09:00:00.000Z", 11], ["2024-05-03T12:00:00.000Z", 12], ["2024-05-03T15:00:00.000Z", 10], ["2024-05-03T18:00:00.000Z", 8], ["2024-05-03T21:00:00.000Z", 8]]
+                }
             ]
         };
     }
@@ -196,7 +235,7 @@ class GeneralEChartWidget extends (Generic) {
             size = this.refCardContent.current.offsetHeight;
         }
 
-        console.log("size " + size);
+        console.log("echart: size " + size);
 
 
         const content = <div
@@ -216,7 +255,7 @@ class GeneralEChartWidget extends (Generic) {
             return content;
         }
 
-        console.log("wrap content");
+        console.log("echart: wrap content");
 
         return this.wrapContent(content, null, { textAlign: 'center' });
     }

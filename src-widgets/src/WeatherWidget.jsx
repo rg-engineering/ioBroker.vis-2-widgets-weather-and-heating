@@ -22,9 +22,6 @@ const styles = () => ({
 });
 
 
-
-
-
 class WeatherWidget extends (Generic) {
 
     constructor(props) {
@@ -128,14 +125,12 @@ class WeatherWidget extends (Generic) {
                             name: 'instance',    // name in data structure
                             label: 'widgets_weather_label_instance', // translated field label
                             type: 'instance',
-
                             default: 'daswetter.0',
                         },
                         {
                             name: 'oid_location',    // name in data structure
                             label: 'widgets_weather_label_oidlocation', // translated field label
                             type: 'id',
-
                             default: 'daswetter.0.NextDaysDetailed.Location_1.Location',
                         },
                         {
@@ -162,15 +157,24 @@ class WeatherWidget extends (Generic) {
                     ],
                 },
                 {
+                    name: 'X_axis', // group name
+                    fields: [
+                        {
+                            name: 'xaxis_axisLabel_formatstring',    // name in data structure
+                            label: 'widgets_weather_label_xaxis_axisLabel_formatstring', // translated field label
+                            type: 'text',
+                            default: "{ee} {hh}:{mm}",
+                        },
+                    ]
+                },
+                {
                     name: 'rain', // group name
                     fields: [
                         {
                             name: 'rain_visible',    // name in data structure
                             label: 'widgets_weather_label_rain_visible', // translated field label
                             type: 'checkbox',
-
                             default: false,
-                            
                         },
                     ]
                 },
@@ -181,9 +185,7 @@ class WeatherWidget extends (Generic) {
                             name: 'temperature_visible',    // name in data structure
                             label: 'widgets_weather_label_temperature_visible', // translated field label
                             type: 'checkbox',
-
                             default: false,
-                            
                         },
                     ]
                 },
@@ -194,9 +196,7 @@ class WeatherWidget extends (Generic) {
                             name: 'clouds_visible',    // name in data structure
                             label: 'widgets_weather_label_clouds_visible', // translated field label
                             type: 'checkbox',
-
                             default: false,
-                           
                         },
                         {
                             name: 'sun_or_cloud',    // name in data structure
@@ -211,10 +211,8 @@ class WeatherWidget extends (Generic) {
                                     value: 'cloud',
                                     label: 'widgets_weather_label_sunorcloud_cloud'
                                 },
-
                             ],
                             default: 'sun',
-                            
                         },
                     ]
                 },
@@ -225,9 +223,7 @@ class WeatherWidget extends (Generic) {
                             name: 'chanceofraining_visible',    // name in data structure
                             label: 'widgets_weather_label_chanceofraining_visible', // translated field label
                             type: 'checkbox ',
-
                             default: false,
-                            
                         },
                     ]
                 },
@@ -319,22 +315,11 @@ class WeatherWidget extends (Generic) {
         //console.log("##got " + JSON.stringify(weatherData[0][0]));
 
         let location = this.state.values[`${this.state.rxData['oid_location']}.val`];
-        console.log("##got " + location);
+        //let axisLabel_formatstring = "'" + this.state.rxData['xaxis_axisLabel_formatstring'] + "'";
+        console.log("##got " + location );
         //let headline = I18n.t("Weather at ") + location;
         let headline = location;
 
-        let legend = [];
-        if (weatherData[0][0].length>1) {
-            legend.push(I18n.t('rain'));
-        }
-        if (weatherData[0][1].length > 1) {
-            legend.push(I18n.t('temperature'));
-        }
-        if (weatherData[0][2].length > 1) {
-            legend.push(I18n.t('cloud'));
-        }
-
-        //todo Farbe der Graphen einstellbar
 
         //min / max Temperatur
         let TempMin = 0;
@@ -354,16 +339,150 @@ class WeatherWidget extends (Generic) {
             if (rain > RainMax) { RainMax = rain; }
         }
 
+        let legend = [];
+        let yaxis = [];
+        let series = []
+
+        let cnt = 0;
+
+        if (this.state.rxData['rain_visible'] == true && weatherData[0][0].length>1) {
+            legend.push(I18n.t('rain'));
+
+            yaxis.push({
+                position: "right",
+                type: "value",
+                min: RainMin,
+                max: RainMax,
+                axisLabel: {
+                    formatter: '{value} mm'
+                }
+            });
+
+            series.push({
+                name: 'rain',
+                type: 'bar',
+                data: weatherData[0][0],
+
+                yAxisIndex: cnt,
+                tooltip: {
+                    valueFormatter: function (value) {
+                        return value + ' mm';
+                    }
+                },
+            },);
+            cnt++;
+        }
+        if (this.state.rxData['temperature_visible'] == true && weatherData[0][1].length > 1) {
+            legend.push(I18n.t('temperature'));
+
+            yaxis.push({
+                position: "left",
+                type: "value",
+                // min max berechnen
+                min: TempMin,
+                max: TempMax,
+                axisLabel: {
+                    formatter: '{value} Â°C'
+                }
+            });
+
+            series.push({
+                name: 'temperature',
+                type: 'line',
+                data: weatherData[0][1],
+                yAxisIndex: cnt,
+                tooltip: {
+                    valueFormatter: function (value) {
+                        return value + ' Â°C';
+                    }
+                },
+            });
+            cnt++
+
+        }
+        if (this.state.rxData['clouds_visible'] == true && weatherData[0][2].length > 1) {
+
+            if (this.state.rxData['sun_or_cloud'] == "sun") {
+                legend.push(I18n.t('sun'));
+            }
+            else {
+                legend.push(I18n.t('cloud'));
+            }
+            yaxis.push({
+                position: "right",
+                type: "value",
+                min: 0,
+                max: 100,
+                axisLabel: {
+                    formatter: '{value} %'
+                }
+            });
+            series.push({
+                name: this.state.rxData['sun_or_cloud'] == "sun" ? 'sun' : 'cloud',
+                type: 'bar',
+                data: weatherData[0][2],
+                yAxisIndex: cnt,
+                tooltip: {
+                    valueFormatter: function (value) {
+                        return value + ' %';
+                    }
+                },
+            });
+            cnt++;
+        }
+
+        if (cnt == 0) {
+            //add dummy data to show anything on screen
+
+            console.log("add dummy data");
+
+            legend.push(I18n.t('dummy'));
+            yaxis.push({
+                position: "left",
+                type: "value",
+                min: 0,
+                max: 100,
+                axisLabel: {
+                    formatter: '{value} %'
+                }
+            });
+            series.push({
+                name: 'cloud',
+                type: 'bar',
+                data: [
+                    ["2024-04-30T00:00:00.000Z", 10],
+                    ["2024-04-30T03:00:00.000Z", 20],
+                    ["2024-04-30T06:00:00.000Z", 20],
+                    ["2024-04-30T09:00:00.000Z", 60]
+
+                ],
+                
+                tooltip: {
+                    valueFormatter: function (value) {
+                        return value + ' %';
+                    }
+                },
+            });
 
 
-        return {
+
+        }
+
+
+
+        //console.log("legend: " + JSON.stringify(legend) + " yaxis: " + JSON.stringify(yaxis));
+
+        //todo Farbe der Graphen einstellbar
+
+
+        let content = {
             backgroundColor: 'transparent',
             title: {
-                text: headline
+                text: headline,
             },
             tooltip: {},
             legend: {
-                data: legend
+                data: legend,
             },
             xAxis: {
                 type: "time",
@@ -372,77 +491,20 @@ class WeatherWidget extends (Generic) {
 
                     rotate: 45,
                     //todo format einstellbar
-                    formatter: '{ee} {hh}:{mm}'
+                    formatter: '{ee} {hh}:{mm}',
+                    //formatter: axisLabel_formatstring,
                 }
 
             },
-            yAxis: [
-                {
-                    position: "left",
-                    type: "value",
-                    // min max berechnen
-                    min: TempMin,
-                    max: TempMax,
-                    axisLabel: {
-                        formatter: '{value} °C'
-                    }
-                },
-                {
-                    position: "right",
-                    type: "value",
-                    min: RainMin,
-                    max: RainMax,
-                    axisLabel: {
-                        formatter: '{value} mm'
-                    }
-                },
-                //todo yAxis nur wenn auch Serie dazu da ist
-                {
-                    position: "right",
-                    type: "value",
-                    min: 0,
-                    max: 100,
-                    axisLabel: {
-                        formatter: '{value} %'
-                    }
-                }
-            ],
-            series: [
-                {
-                    name: 'rain',
-                    type: 'bar',
-                    data: weatherData[0][0],
-                    yAxisIndex: 1,
-                    tooltip: {
-                        valueFormatter: function (value) {
-                            return value + ' mm';
-                        }
-                    },
-                },
-                {
-                    name: 'temperature',
-                    type: 'line',
-                    data: weatherData[0][1],
-                    yAxisIndex: 0,
-                    tooltip: {
-                        valueFormatter: function (value) {
-                            return value + ' °C';
-                        }
-                    },
-                },
-                {
-                    name: 'cloud',
-                    type: 'bar',
-                    data: weatherData[0][2],
-                    yAxisIndex: 2,
-                    tooltip: {
-                        valueFormatter: function (value) {
-                            return value + ' %';
-                        }
-                    },
-                }
-            ]
+
+            yAxis: yaxis,
+
+            series: series,
         };
+
+        console.log("options: " + JSON.stringify(content));
+
+        return content; 
     }
 
 
@@ -566,12 +628,16 @@ class WeatherWidget extends (Generic) {
                 }
                 if (this.state.rxData['clouds_visible'] == true && oDate != null && cloud_val != null) {
 
+                    let value = cloud_val;
+                    if (this.state.rxData['sun_or_cloud'] == "sun") { 
+                        value = 100 - cloud_val;
+                    }
+
                     cloudData.push(
                         [
                             oDate,
-
-                            //todo: bei Sonne 100-cloud_val
-                            cloud_val
+                            //bei Sonne 100-cloud_val
+                            value
                         ]
                     );
                 }
@@ -767,7 +833,6 @@ class WeatherWidget extends (Generic) {
         }
 
         console.log("size " + size);
-
 
         const content = <div
                     ref={this.refCardContent}

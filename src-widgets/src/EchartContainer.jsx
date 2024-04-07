@@ -6,9 +6,9 @@ class EchartContainer extends (ReactECharts) {
     constructor(props) {
         console.log("EchartContainer constructor " + JSON.stringify(props));
 
-        let groupToConnect = "Weather";
+  
 
-        props.onChartReady = (instance, groupToConnect) => {
+        props.onChartReady = (instance) => {
 
             let group = "Weather";
 
@@ -24,7 +24,7 @@ class EchartContainer extends (ReactECharts) {
         }
 
         super(props);
-        this.groupToConnect = groupToConnect; 
+
     }
 }
 

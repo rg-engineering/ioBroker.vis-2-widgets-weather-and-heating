@@ -15,7 +15,7 @@ import Generic from './Generic';
 const styles = () => ({
     cardContent: {
         flex: 1,
-        display: 'flex',
+        display: 'block',
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
@@ -25,18 +25,14 @@ const styles = () => ({
 
 
 //todo für WU anpassen
-//todo OID's neu anlegen, wenn Datenstruktur umgeschaltet wird   -> okay
-//todo Daten von NextHours und NextHours2 darstellen -> okay
 //todo Übersetzungen
 //todo Images
 //todo readme anpassen
-//todo tooltip mit Zeitangabe -> okay
 //todo Format-String für Zeitanzeige X Achse (bug)
 //todo min max berechnen (bereits bei Holen der Daten)
 //todo zwei diagramme: ausblenden, wenn nur eine benötigt
-//todo zwei diagramme: connect funktioniert noch nicht -> okay
 //todo zwei diagramme: anzeige untereinander anstatt nebeneinander
-//todo zwei diagramme: obere X-Achse ausblenden
+//todo zwei diagramme: obere X-Achse ausblenden, eiblenden, wenn nur ein Diagramm
 //todo widget für Tag mit Icon, Temperatur usw..
 //todo zwei diagramme: GetOptions anpassen, für richtigen Graph
 
@@ -248,7 +244,7 @@ class WeatherWidget extends (Generic) {
                             ],
                             default: 'NextHours',
                             onChange: setDataStructures,
-                            
+
                         },
                     ],
                 },
@@ -378,7 +374,7 @@ class WeatherWidget extends (Generic) {
                     name: 'OIDS_time', // group name
                     fields: oid_time_fields
                 },
-                
+
             ],
             visDefaultStyle: {
                 width: 320,
@@ -434,7 +430,7 @@ class WeatherWidget extends (Generic) {
     }
 
 
-    
+
 
 
     /**
@@ -455,19 +451,19 @@ class WeatherWidget extends (Generic) {
             || (this.state.rxData['clouds_visible'] && this.state.rxData['clouds_show_separate'])) {
             useSecondDiagram = true;
 
-            }
+        }
 
         console.log("show second diagram " + useSecondDiagram);
 
         let location = this.state.values[`${this.state.rxData['oid_location']}.val`];
         let axisLabel_formatstring = "'" + this.state.rxData['xaxis_axisLabel_formatstring'] + "'";
-        console.log("##got " + location );
+        console.log("##got " + location);
         //let headline = I18n.t("Weather at ") + location;
         let headline = location;
 
 
         //todo min / max Temperatur
-        
+
 
         //todo min / max Rain
 
@@ -479,14 +475,15 @@ class WeatherWidget extends (Generic) {
 
         let cnt = 0;
 
-        if (this.state.rxData['rain_visible'] == true && this.state.rxData['rain_show_separate'] == false && weatherData[0][0].length>1) {
+        if (this.state.rxData['rain_visible'] == true && this.state.rxData['rain_show_separate'] == false && weatherData[0][0].length > 1) {
             legend.push(I18n.t('rain'));
 
             yaxis.push({
                 position: "right",
                 type: "value",
-                min: RainMin,
-                max: RainMax,
+                // min max berechnen
+                //min: RainMin,
+                //max: RainMax,
                 axisLabel: {
                     formatter: '{value} mm'
                 }
@@ -496,7 +493,7 @@ class WeatherWidget extends (Generic) {
                 name: 'rain',
                 type: 'bar',
                 data: weatherData[0][0],
-                color: this.state.rxData['rain_color'] || "blue", 
+                color: this.state.rxData['rain_color'] || "blue",
                 yAxisIndex: cnt,
                 tooltip: {
                     valueFormatter: function (value) {
@@ -524,7 +521,7 @@ class WeatherWidget extends (Generic) {
                 name: 'temperature',
                 type: 'line',
                 data: weatherData[0][1],
-                color: this.state.rxData['temperature_color'] || "red", 
+                color: this.state.rxData['temperature_color'] || "red",
                 yAxisIndex: cnt,
                 tooltip: {
                     valueFormatter: function (value) {
@@ -556,7 +553,7 @@ class WeatherWidget extends (Generic) {
                 name: this.state.rxData['sun_or_cloud'] == "sun" ? 'sun' : 'cloud',
                 type: 'bar',
                 data: weatherData[0][2],
-                color: this.state.rxData['clouds_color'] || "yellow", 
+                color: this.state.rxData['clouds_color'] || "yellow",
                 yAxisIndex: cnt,
                 tooltip: {
                     valueFormatter: function (value) {
@@ -592,7 +589,7 @@ class WeatherWidget extends (Generic) {
                     ["2024-04-30T09:00:00.000Z", 60]
 
                 ],
-                
+
                 tooltip: {
                     valueFormatter: function (value) {
                         return value + ' %';
@@ -608,7 +605,7 @@ class WeatherWidget extends (Generic) {
 
         //console.log("legend: " + JSON.stringify(legend) + " yaxis: " + JSON.stringify(yaxis));
 
-        
+
 
 
         let content = {
@@ -621,6 +618,9 @@ class WeatherWidget extends (Generic) {
             },
             legend: {
                 data: legend,
+                orient: 'vertical',
+                right: 10,
+                top: 'center',
             },
             xAxis: {
                 type: "time",
@@ -642,7 +642,7 @@ class WeatherWidget extends (Generic) {
 
         console.log("options: " + JSON.stringify(content));
 
-        return content; 
+        return content;
     }
 
     /**
@@ -655,18 +655,12 @@ class WeatherWidget extends (Generic) {
 
         let weatherData = this.getWeatherData();
 
-       console.log("##got " + JSON.stringify(weatherData[0]));
+        console.log("##got " + JSON.stringify(weatherData[0]));
 
         let axisLabel_formatstring = "'" + this.state.rxData['xaxis_axisLabel_formatstring'] + "'";
 
-        //min / max Rain
-        let RainMin = 0;
-        let RainMax = 1;
-        for (let i = 0; i < weatherData[0][0].length; i++) {
-            const rain = weatherData[0][0][i];
-            if (rain > RainMax) { RainMax = rain; }
-        }
-        console.log("rain min " + RainMin + " max " + RainMax);
+        //todo min / max Rain
+
 
         let legend = [];
         let yaxis = [];
@@ -680,8 +674,9 @@ class WeatherWidget extends (Generic) {
             yaxis.push({
                 position: "right",
                 type: "value",
-                min: RainMin,
-                max: RainMax,
+                //todo rain min / max berechnen
+                //min: RainMin,
+                //max: RainMax,
                 axisLabel: {
                     formatter: '{value} mm'
                 }
@@ -701,8 +696,8 @@ class WeatherWidget extends (Generic) {
             },);
             cnt++;
         }
-        
-        if (this.state.rxData['clouds_visible'] == true && this.state.rxData['clouds_show_separate'] == true  && weatherData[0][2].length > 1) {
+
+        if (this.state.rxData['clouds_visible'] == true && this.state.rxData['clouds_show_separate'] == true && weatherData[0][2].length > 1) {
 
             if (this.state.rxData['sun_or_cloud'] == "sun") {
                 legend.push(I18n.t('sun'));
@@ -780,10 +775,13 @@ class WeatherWidget extends (Generic) {
             },
             legend: {
                 data: legend,
+                orient: 'vertical',
+                right: 10,
+                top: 'center',
             },
             xAxis: {
                 type: "time",
-                
+
                 axisLabel: {
 
                     rotate: 45,
@@ -846,7 +844,7 @@ class WeatherWidget extends (Generic) {
             }
 
             if (this.state.rxData['datastructure'] == "NextDaysDetailed") {
-                 max_periods = 8; 
+                max_periods = 8;
             }
             else if (this.state.rxData['datastructure'] == "NextHours") {
                 if (d > 3) {
@@ -857,7 +855,7 @@ class WeatherWidget extends (Generic) {
                 }
             }
             else if (this.state.rxData['datastructure'] == "NextHours2") {
-                 max_periods = 8; 
+                max_periods = 8;
             }
             else {
                 console.log("getWeatherData: unknown data structure");
@@ -912,7 +910,7 @@ class WeatherWidget extends (Generic) {
                 if (this.state.rxData['clouds_visible'] == true && oDate != null && cloud_val != null) {
 
                     let value = cloud_val;
-                    if (this.state.rxData['sun_or_cloud'] == "sun") { 
+                    if (this.state.rxData['sun_or_cloud'] == "sun") {
                         value = 100 - cloud_val;
                     }
 
@@ -947,13 +945,13 @@ class WeatherWidget extends (Generic) {
     }
 
 
-   
+
 
     renderWidgetBody(props) {
         super.renderWidgetBody(props);
 
-        console.log("values" + JSON.stringify(this.state.values));
-        console.log("rxData " + JSON.stringify(this.state.rxData));
+        //console.log("values" + JSON.stringify(this.state.values));
+        //console.log("rxData " + JSON.stringify(this.state.rxData));
 
         let size;
         if (!this.refCardContent.current) {
@@ -967,9 +965,12 @@ class WeatherWidget extends (Generic) {
 
         //todo zweites diagramm nur wenn notwendig
         const content = <div
-                    ref={this.refCardContent}
-                    className={this.props.classes.cardContent}
-                    >
+            ref={this.refCardContent}
+            className={this.props.classes.cardContent}
+        >
+
+
+
             {size && <EchartContainer
                 option={this.getOption1()}
                 theme={this.props.themeType === 'dark' ? 'dark' : ''}
@@ -977,23 +978,22 @@ class WeatherWidget extends (Generic) {
                 opts={{ renderer: 'svg' }}
             />}
 
-           
-
             {size && <EchartContainer
                 option={this.getOption2()}
                 theme={this.props.themeType === 'dark' ? 'dark' : ''}
                 style={{ height: `${size}px`, width: '100%' }}
                 opts={{ renderer: 'svg' }}
             />}
+
         </div>;
 
         if (this.state.rxData.noCard || props.widget.usedInWidget) {
-            console.log("nur content " );
+            console.log("content only ");
             return content;
         }
 
         const wrapcontent = this.wrapContent(content, null, { textAlign: 'center' });
-        console.log("wrap content" );
+        console.log("wrap content ");
 
         return wrapcontent;
     }

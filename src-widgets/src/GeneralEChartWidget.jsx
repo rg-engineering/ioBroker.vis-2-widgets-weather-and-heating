@@ -33,8 +33,6 @@ class GeneralEChartWidget extends (Generic) {
     constructor(props) {
         super(props);
         this.refCardContent = React.createRef();
-        this.timeSelectorRegistered = false;
-        this.timeSelectorRegisterInterval = null;
     }
 
 

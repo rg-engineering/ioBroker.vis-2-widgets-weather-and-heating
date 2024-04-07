@@ -31,7 +31,6 @@ const styles = () => ({
 //todo Format-String für Zeitanzeige X Achse (bug)
 //todo min max berechnen (bereits bei Holen der Daten)
 //todo zwei diagramme: ausblenden, wenn nur eine benötigt
-//todo zwei diagramme: anzeige untereinander anstatt nebeneinander
 //todo zwei diagramme: obere X-Achse ausblenden, eiblenden, wenn nur ein Diagramm
 //todo widget für Tag mit Icon, Temperatur usw..
 //todo zwei diagramme: GetOptions anpassen, für richtigen Graph
@@ -613,6 +612,12 @@ class WeatherWidget extends (Generic) {
             title: {
                 text: headline,
             },
+            grid: {
+                show: true,
+                top: 30,
+                bottom: 30,
+                backgroundColor: '#F5F5F5',
+            },
             tooltip: {
                 trigger: 'axis'
             },
@@ -620,7 +625,7 @@ class WeatherWidget extends (Generic) {
                 data: legend,
                 orient: 'vertical',
                 right: 10,
-                top: 'center',
+                //top: 'center',
             },
             xAxis: {
                 type: "time",
@@ -767,9 +772,15 @@ class WeatherWidget extends (Generic) {
 
         let content = {
             backgroundColor: 'transparent',
-            //title: {
-            //    text: "",
-            //},
+            title: {
+                text: "",
+            },
+            grid: {
+                show: true,
+                top: 30,
+                bottom: 60,
+                backgroundColor: '#F5F5F5',
+            },
             tooltip: {
                 trigger: 'axis'
             },
@@ -777,7 +788,7 @@ class WeatherWidget extends (Generic) {
                 data: legend,
                 orient: 'vertical',
                 right: 10,
-                top: 'center',
+                //top: 'center',
             },
             xAxis: {
                 type: "time",

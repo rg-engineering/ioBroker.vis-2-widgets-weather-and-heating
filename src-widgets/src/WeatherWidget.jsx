@@ -29,11 +29,8 @@ const styles = () => ({
 //todo Images
 //todo readme anpassen
 //todo Format-String für Zeitanzeige X Achse (bug)
-//todo min max berechnen (bereits bei Holen der Daten)
-//todo zwei diagramme: ausblenden, wenn nur eine benötigt
-//todo zwei diagramme: obere X-Achse ausblenden, eiblenden, wenn nur ein Diagramm
 //todo widget für Tag mit Icon, Temperatur usw..
-//todo zwei diagramme: GetOptions anpassen, für richtigen Graph
+
 
 const setDataStructures = async (field, data, changeData, socket) => {
 
@@ -460,13 +457,16 @@ class WeatherWidget extends (Generic) {
         //let headline = I18n.t("Weather at ") + location;
         let headline = location;
 
+        // min / max 
+        const MinMax = weatherData[0][3];
+        console.log("min max " + JSON.stringify(MinMax));
 
-        //todo min / max Temperatur
-
-
-        //todo min / max Rain
-
-
+        const RainMin = MinMax["RainMin"];
+        const RainMax = MinMax["RainMax"];
+        const TempMin = MinMax["TempMin"];
+        const TempMax = MinMax["TempMax"];
+        const CloudMin = MinMax["CloudMin"];
+        const CloudMax = MinMax["CloudMax"];
 
         let legend = [];
         let yaxis = [];
@@ -481,8 +481,8 @@ class WeatherWidget extends (Generic) {
                 position: "right",
                 type: "value",
                 // min max berechnen
-                //min: RainMin,
-                //max: RainMax,
+                min: RainMin,
+                max: RainMax,
                 axisLabel: {
                     formatter: '{value} mm'
                 }
@@ -509,8 +509,8 @@ class WeatherWidget extends (Generic) {
                 position: "left",
                 type: "value",
                 // min max berechnen
-                //min: TempMin,
-                //max: TempMax,
+                min: TempMin,
+                max: TempMax,
                 axisLabel: {
                     formatter: '{value} °C'
                 }
@@ -542,8 +542,8 @@ class WeatherWidget extends (Generic) {
             yaxis.push({
                 position: "right",
                 type: "value",
-                min: 0,
-                max: 100,
+                min: CloudMin,
+                max: CloudMax,
                 axisLabel: {
                     formatter: '{value} %'
                 }
@@ -615,15 +615,15 @@ class WeatherWidget extends (Generic) {
             grid: {
                 show: true,
                 top: 30,
-                bottom: 30,
-                backgroundColor: '#F5F5F5',
+                bottom: useSecondDiagram ? 30 : 60,
+                //backgroundColor: '#F5F5F5',
             },
             tooltip: {
                 trigger: 'axis'
             },
             legend: {
                 data: legend,
-                orient: 'vertical',
+                orient: 'horizontal',
                 right: 10,
                 //top: 'center',
             },
@@ -664,7 +664,16 @@ class WeatherWidget extends (Generic) {
 
         let axisLabel_formatstring = "'" + this.state.rxData['xaxis_axisLabel_formatstring'] + "'";
 
-        //todo min / max Rain
+        // min / max 
+        const MinMax = weatherData[0][3];
+        console.log("min max " + JSON.stringify(MinMax));
+
+        const RainMin = MinMax["RainMin"];
+        const RainMax = MinMax["RainMax"];
+        const TempMin = MinMax["TempMin"];
+        const TempMax = MinMax["TempMax"];
+        const CloudMin = MinMax["CloudMin"];
+        const CloudMax = MinMax["CloudMax"];
 
 
         let legend = [];
@@ -679,9 +688,9 @@ class WeatherWidget extends (Generic) {
             yaxis.push({
                 position: "right",
                 type: "value",
-                //todo rain min / max berechnen
-                //min: RainMin,
-                //max: RainMax,
+                //rain min / max berechnen
+                min: RainMin,
+                max: RainMax,
                 axisLabel: {
                     formatter: '{value} mm'
                 }
@@ -713,8 +722,8 @@ class WeatherWidget extends (Generic) {
             yaxis.push({
                 position: "right",
                 type: "value",
-                min: 0,
-                max: 100,
+                min: CloudMin,
+                max: CloudMax,
                 axisLabel: {
                     formatter: '{value} %'
                 }
@@ -779,14 +788,14 @@ class WeatherWidget extends (Generic) {
                 show: true,
                 top: 30,
                 bottom: 60,
-                backgroundColor: '#F5F5F5',
+                //backgroundColor: '#F5F5F5',
             },
             tooltip: {
                 trigger: 'axis'
             },
             legend: {
                 data: legend,
-                orient: 'vertical',
+                orient: 'horizontal',
                 right: 10,
                 //top: 'center',
             },
@@ -938,6 +947,15 @@ class WeatherWidget extends (Generic) {
             }
         }
 
+        let MinMax = {
+            "RainMin": RainMin,
+            "RainMax": RainMax,
+            "TempMin": TempMin,
+            "TempMax": TempMax,
+            "CloudMin": 0,
+            "CloudMax": 100
+        }
+
         console.log("rainData " + JSON.stringify(rainData));
         console.log("tempData " + JSON.stringify(tempData));
         console.log("cloudData " + JSON.stringify(cloudData));
@@ -948,7 +966,8 @@ class WeatherWidget extends (Generic) {
             [
                 rainData,
                 tempData,
-                cloudData
+                cloudData,
+                MinMax
             ]
         );
 
@@ -971,7 +990,14 @@ class WeatherWidget extends (Generic) {
             size = this.refCardContent.current.offsetHeight/2;
         }
 
-        console.log("size " + size);
+        let useSecondDiagram;
+        if ((this.state.rxData['rain_visible'] && this.state.rxData['rain_show_separate'])
+            || (this.state.rxData['clouds_visible'] && this.state.rxData['clouds_show_separate'])) {
+            useSecondDiagram = true;
+
+        }
+
+        console.log("size " + size + " " + useSecondDiagram);
 
 
         //todo zweites diagramm nur wenn notwendig
@@ -989,7 +1015,7 @@ class WeatherWidget extends (Generic) {
                 opts={{ renderer: 'svg' }}
             />}
 
-            {size && <EchartContainer
+            {useSecondDiagram && size && <EchartContainer
                 option={this.getOption2()}
                 theme={this.props.themeType === 'dark' ? 'dark' : ''}
                 style={{ height: `${size}px`, width: '100%' }}

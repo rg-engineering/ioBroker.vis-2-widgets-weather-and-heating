@@ -53,6 +53,7 @@
     <Content Include="src-widgets\public\index.html" />
     <Content Include="src-widgets\src\App.jsx" />
     <Content Include="src-widgets\src\bootstrap.js" />
+    <Content Include="src-widgets\src\WeatherDayWidget.jsx" />
     <Content Include="src-widgets\src\GeneralEChartWidget.jsx" />
     <Content Include="src-widgets\src\Generic.jsx" />
     <Content Include="src-widgets\src\WeatherWidget.jsx" />

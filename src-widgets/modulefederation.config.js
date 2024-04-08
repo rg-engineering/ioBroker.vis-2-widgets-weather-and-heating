@@ -5,6 +5,7 @@ module.exports = makeFederation(
     {
         "./WeatherWidget": "./src/WeatherWidget", // List of all widgets in this package
         "./GeneralEChartWidget": "./src/GeneralEChartWidget", 
+        "./WeatherDayWidget": "./src/WeatherDayWidget", 
         "./translations": "./src/translations",
     },
 );

@@ -43,7 +43,8 @@
         "url": "vis-2-widgets-weather/customWidgets.js",
         "components": [
           "WeatherWidget",
-          "GeneralEChartWidget"
+          "GeneralEChartWidget",
+          "WeatherDayWidget"
         ]
       }
     },

@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, withTheme } from '@mui/styles';
 
+
+
 import { Card, CardContent } from '@mui/material';
 
 import { I18n } from '@iobroker/adapter-react-v5';
@@ -56,23 +58,69 @@ class WeatherDayWidget extends (Generic) {
                     fields: [
                         
                         {
-                            name: 'oid_data',    // name in data structure
-                            label: 'widgets_echart_label_oiddata', // translated field label
-                            type: 'id',
-
-                            default: '',
+                            name: 'noCard',
+                            label: 'without_card',
+                            type: 'checkbox',
                         },
-                        {
-                            name: 'headline',    // name in data structure
-                            label: 'widgets_echart_label_headline', // translated field label
-                            type: 'text',
-
-                            default: 'headline',
-                        },
+                        
                         
                     ],
                 },
-                
+                {
+                    name: 'OIDS', // group name
+                    fields: [
+
+                        {
+                            name: 'oid_date',    // name in data structure
+                            label: 'widgets_weather_label_oiddate', // translated field label
+                            type: 'id',
+                            default: 'daswetter.0.NextHours.Location_1.Day_1.day_name',
+                        },
+                        {
+                            name: 'oid_temp_max',    // name in data structure
+                            label: 'widgets_weather_label_oidtempmax', // translated field label
+                            type: 'id',
+                            default: 'daswetter.0.NextHours.Location_1.Day_1.tempmax_value',
+                        },
+                        {
+                            name: 'oid_temp_min',    // name in data structure
+                            label: 'widgets_weather_label_oidtempmin', // translated field label
+                            type: 'id',
+                            default: 'daswetter.0.NextHours.Location_1.Day_1.tempmin_value',
+                        },
+                        {
+                            name: 'oid_symbol_description',    // name in data structure
+                            label: 'widgets_weather_label_oidsymboldescription', // translated field label
+                            type: 'id',
+                            default: 'daswetter.0.NextHours.Location_1.Day_1.symbol_desc',
+                        },
+                        {
+                            name: 'oid_iconURL',    // name in data structure
+                            label: 'widgets_weather_label_oidiconurl', // translated field label
+                            type: 'id',
+                            default: 'daswetter.0.NextHours.Location_1.Day_1.iconURL',
+                        },
+                        {
+                            name: 'oid_windiconURL',    // name in data structure
+                            label: 'widgets_weather_label_oidwindiconurl', // translated field label
+                            type: 'id',
+                            default: 'daswetter.0.NextHours.Location_1.Day_1.windIconURL',
+                        },
+                        {
+                            name: 'oid_wind_value',    // name in data structure
+                            label: 'widgets_weather_label_oidwindvalue', // translated field label
+                            type: 'id',
+                            default: 'daswetter.0.NextHours.Location_1.Day_1.wind_value',
+                        },
+                        {
+                            name: 'oid_sunshine_duration',    // name in data structure
+                            label: 'widgets_weather_label_oidsunshineduration', // translated field label
+                            type: 'id',
+                            default: 'daswetter.0.NextHours.Location_1.Day_1.sunshineDuration',
+                        },
+
+                    ],
+                },
                
 
             ],
@@ -145,7 +193,24 @@ class WeatherDayWidget extends (Generic) {
             ref={this.refCardContent}
             className={this.props.classes.cardContent}
         >
-
+            <div>
+                <h2>{this.state.rxData['oid_date']}</h2>
+                <h3>8. Apr.</h3>
+            </div>
+            <div>
+                
+                <li>min {this.state.rxData['oid_temp_min']}</li>
+                <li>max {this.state.rxData['oid_temp_max']}</li>
+            </div>
+            <div>
+                <p>{this.state.rxData['oid_symbol_description']}</p>
+            </div>
+            <div>
+                <li>{I18n.t("Böen")} {this.state.rxData['oid_wind_value']}</li>
+            </div>
+            <div>
+                <p>{I18n.t("sun")} {this.state.rxData['oid_sunshine_duration']}</p>
+            </div>
         
 
         </div>;

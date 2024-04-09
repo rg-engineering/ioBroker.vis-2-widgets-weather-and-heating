@@ -30,6 +30,9 @@ const styles = () => ({
 //todo readme anpassen
 //todo Format-String für Zeitanzeige X Achse (bug)
 //todo widget für Tag mit Icon, Temperatur usw..
+//todo rerender verzögern, wenn Daten aktualisiert werden
+//todo Farbe für Background einstellbar
+//todo MinMax Temperatur auf ganze 5er runden
 
 
 const setDataStructures = async (field, data, changeData, socket) => {
@@ -40,61 +43,92 @@ const setDataStructures = async (field, data, changeData, socket) => {
     let max_periods = 8;
     let cnt = 1;
 
-    if (data['datastructure'] == "NextDaysDetailed") {
-        max_periods = 8;
-        max_days = 5;
-        for (var d = 1; d <= max_days; d++) {
 
-            data['oid_general_day_' + d] = "daswetter.0.NextDaysDetailed.Location_1.Day_" + d + ".day_value";
+    //if DasWettter
 
-            for (var p = 1; p <= max_periods; p++) {
+    if (data['instance'].indexOf("daswetter") > -1) {
 
-                data['oid_rain_' + cnt] = "daswetter.0.NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".rain_value";
-                data['oid_temp_' + cnt] = "daswetter.0.NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".temp_value";
-                data['oid_cloud_' + cnt] = "daswetter.0.NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".clouds_value";
-                data['oid_time_' + cnt] = "daswetter.0.NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".hour_value";
-                cnt++;
+        if (data['datastructure'] == "NextDaysDetailed") {
+            max_periods = 8;
+            max_days = 5;
+            for (var d = 1; d <= max_days; d++) {
+
+                data['oid_general_day_' + d] = "daswetter.0.NextDaysDetailed.Location_1.Day_" + d + ".day_value";
+
+                for (var p = 1; p <= max_periods; p++) {
+
+                    data['oid_rain_' + cnt] = "daswetter.0.NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".rain_value";
+                    data['oid_temp_' + cnt] = "daswetter.0.NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".temp_value";
+                    data['oid_cloud_' + cnt] = "daswetter.0.NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".clouds_value";
+                    data['oid_time_' + cnt] = "daswetter.0.NextDaysDetailed.Location_1.Day_" + d + ".Hour_" + p + ".hour_value";
+                    cnt++;
+                }
             }
+        }
+        else if (data['datastructure'] == "NextHours") {
+            max_periods = 23;
+            max_days = 5;
+            for (var d = 1; d <= max_days; d++) {
+
+                data['oid_general_day_' + d] = "daswetter.0.NextHours.Location_1.Day_" + d + ".day_value";
+
+                if (d > 3) { max_periods = 8; }
+
+                for (var p = 1; p <= max_periods; p++) {
+
+                    data['oid_rain_' + cnt] = "daswetter.0.NextHours.Location_1.Day_" + d + ".Hour_" + p + ".rain_value";
+                    data['oid_temp_' + cnt] = "daswetter.0.NextHours.Location_1.Day_" + d + ".Hour_" + p + ".temp_value";
+                    data['oid_cloud_' + cnt] = "daswetter.0.NextHours.Location_1.Day_" + d + ".Hour_" + p + ".clouds_value";
+                    data['oid_time_' + cnt] = "daswetter.0.NextHours.Location_1.Day_" + d + ".Hour_" + p + ".hour_value";
+                    cnt++;
+                }
+            }
+        }
+        else if (data['datastructure'] == "NextHours2") {
+            max_periods = 8;
+            max_days = 5;
+            for (var d = 1; d <= max_days; d++) {
+
+                data['oid_general_day_' + d] = "daswetter.0.NextHours2.Location_1.Day_" + d + ".date";
+
+                for (var p = 1; p <= max_periods; p++) {
+
+                    data['oid_rain_' + cnt] = "daswetter.0.NextHours2.Location_1.Day_" + d + ".Hour_" + p + ".rain";
+                    data['oid_temp_' + cnt] = "daswetter.0.NextHours2.Location_1.Day_" + d + ".Hour_" + p + ".temp";
+                    data['oid_cloud_' + cnt] = "daswetter.0.NextHours2.Location_1.Day_" + d + ".Hour_" + p + ".clouds";
+                    data['oid_time_' + cnt] = "daswetter.0.NextHours2.Location_1.Day_" + d + ".Hour_" + p + ".hour";
+                    cnt++;
+                }
+            }
+        }
+        else {
+            console.log("setdatastructures: unknown data structure");
         }
     }
-    else if (data['datastructure'] == "NextHours") {
-        max_periods = 23;
-        max_days = 5;
-        for (var d = 1; d <= max_days; d++) {
+    else if (data['instance'].indexOf("weatherunderground") > -1) {
 
-            data['oid_general_day_' + d] = "daswetter.0.NextHours.Location_1.Day_" + d + ".day_value";
 
-            if (d > 3) { max_periods = 8; }
+        for (var h = 0; h < 36; h++) {
 
-            for (var p = 1; p <= max_periods; p++) {
+            data['oid_rain_' + cnt] = "weatherunderground.0.forecastHourly." + h + "h.precipitation";
+            data['oid_temp_' + cnt] = "weatherunderground.0.forecastHourly." + h + ".h.temp";
+            data['oid_cloud_' + cnt] = "weatherunderground.0.forecastHourly." + h + ".h.sky";
+            data['oid_time_' + cnt] = "weatherunderground.0.forecastHourly." + h + ".h.time";
 
-                data['oid_rain_' + cnt] = "daswetter.0.NextHours.Location_1.Day_" + d + ".Hour_" + p + ".rain_value";
-                data['oid_temp_' + cnt] = "daswetter.0.NextHours.Location_1.Day_" + d + ".Hour_" + p + ".temp_value";
-                data['oid_cloud_' + cnt] = "daswetter.0.NextHours.Location_1.Day_" + d + ".Hour_" + p + ".clouds_value";
-                data['oid_time_' + cnt] = "daswetter.0.NextHours.Location_1.Day_" + d + ".Hour_" + p + ".hour_value";
-                cnt++;
-            }
+            //todo
+            //data['oid_chancerain_' + cnt] = "weatherunderground.0.forecastHourly." + h + ".h.precipitationChance";
+            cnt++;
+
+
+
         }
-    }
-    else if (data['datastructure'] == "NextHours2") {
-        max_periods = 8;
-        max_days = 5;
-        for (var d = 1; d <= max_days; d++) {
 
-            data['oid_general_day_' + d] = "daswetter.0.NextHours2.Location_1.Day_" + d + ".date";
 
-            for (var p = 1; p <= max_periods; p++) {
 
-                data['oid_rain_' + cnt] = "daswetter.0.NextHours2.Location_1.Day_" + d + ".Hour_" + p + ".rain";
-                data['oid_temp_' + cnt] = "daswetter.0.NextHours2.Location_1.Day_" + d + ".Hour_" + p + ".temp";
-                data['oid_cloud_' + cnt] = "daswetter.0.NextHours2.Location_1.Day_" + d + ".Hour_" + p + ".clouds";
-                data['oid_time_' + cnt] = "daswetter.0.NextHours2.Location_1.Day_" + d + ".Hour_" + p + ".hour";
-                cnt++;
-            }
-        }
+
     }
     else {
-        console.log("setdatastructures: unknown data structure");
+        //do nothing
     }
 
 
@@ -437,7 +471,13 @@ class WeatherWidget extends (Generic) {
 
         console.log("getOption1 ");
 
-        let weatherData = this.getWeatherData();
+        let weatherData;
+        if (this.state.rxData['instance'].indexOf("daswetter") > -1) {
+            weatherData = this.getWeatherDataDasWetter();
+        }
+        else if (this.state.rxData['instance'].indexOf("weatherunderground") > -1) {
+            weatherData = this.getWeatherDataWU();
+        }
 
         console.log("##got " + JSON.stringify(weatherData[0]));
 
@@ -658,7 +698,14 @@ class WeatherWidget extends (Generic) {
 
         console.log("getOption2 ");
 
-        let weatherData = this.getWeatherData();
+        let weatherData;
+        if (this.state.rxData['instance'].indexOf("daswetter") > -1) {
+            weatherData = this.getWeatherDataDasWetter();
+        }
+        else if (this.state.rxData['instance'].indexOf("weatherunderground") > -1) {
+            weatherData = this.getWeatherDataWU();
+        }
+
 
         console.log("##got " + JSON.stringify(weatherData[0]));
 
@@ -822,8 +869,106 @@ class WeatherWidget extends (Generic) {
         return content;
     }
 
+    getWeatherDataWU() {
 
-    getWeatherData() {
+        console.log("getWeatherData " + this.state.rxData['instance'] + " / " + this.state.rxData['datastructure']);
+
+        const weatherData = [];
+        let max_hours = 36;
+        let instanceID = this.state.rxData['instance']
+
+        const rainData = [];
+        const tempData = [];
+        const cloudData = [];
+
+        let TempMin = 0;
+        let TempMax = 20;
+        let RainMin = 0;
+        let RainMax = 1;
+
+
+        let cnt = 1;
+
+
+        for (var h = 0; h < max_hours; h++) {
+
+            const rain_val = this.state.values[`${this.state.rxData['oid_rain_' + cnt]}.val`];
+            const temp_val = this.state.values[`${this.state.rxData['oid_temp_' + cnt]}.val`];
+            const cloud_val = this.state.values[`${this.state.rxData['oid_cloud_' + cnt]}.val`];
+            const time_val = this.state.values[`${this.state.rxData['oid_time_' + cnt]}.val`];
+
+            cnt++;
+
+            if (rain_val > RainMax) { RainMax = rain_val; }
+            if (temp_val > TempMax) { TempMax = temp_val; }
+            if (temp_val < TempMin) { TempMin = temp_val; }
+
+            if (this.state.rxData['rain_visible'] == true && oDate != null && rain_val != null) {
+                rainData.push(
+                    [
+                        oDate,
+                        rain_val
+                    ]
+                );
+            }
+
+            if (this.state.rxData['temperature_visible'] == true && oDate != null && temp_val != null) {
+                tempData.push(
+                    [
+                        oDate,
+                        temp_val
+                    ]
+                );
+            }
+            if (this.state.rxData['clouds_visible'] == true && oDate != null && cloud_val != null) {
+
+                let value = cloud_val;
+                if (this.state.rxData['sun_or_cloud'] == "sun") {
+                    value = 100 - cloud_val;
+                }
+
+                cloudData.push(
+                    [
+                        oDate,
+                        //bei Sonne 100-cloud_val
+                        value
+                    ]
+                );
+            }
+
+        }
+
+
+
+        let MinMax = {
+            "RainMin": RainMin,
+            "RainMax": RainMax,
+            "TempMin": TempMin,
+            "TempMax": TempMax,
+            "CloudMin": 0,
+            "CloudMax": 100
+        }
+
+        console.log("rainData " + JSON.stringify(rainData));
+        console.log("tempData " + JSON.stringify(tempData));
+        console.log("cloudData " + JSON.stringify(cloudData));
+
+        //const weatherData = ids.length ? (await this.props.context.socket.getStates(ids)) : {};
+
+        weatherData.push(
+            [
+                rainData,
+                tempData,
+                cloudData,
+                MinMax
+            ]
+        );
+
+        return weatherData;
+    }
+
+
+    getWeatherDataDasWetter() {
 
         console.log("getWeatherData " + this.state.rxData['instance'] + " / " + this.state.rxData['datastructure']);
 

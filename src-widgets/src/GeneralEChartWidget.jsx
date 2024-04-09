@@ -59,14 +59,12 @@ class GeneralEChartWidget extends (Generic) {
                     // check here all possible types https://github.com/ioBroker/ioBroker.vis/blob/react/src/src/Attributes/Widget/SCHEMA.md
                     name: 'common', // group name
                     fields: [
-                        
                         {
-                            name: 'oid_data',    // name in data structure
-                            label: 'widgets_echart_label_oiddata', // translated field label
-                            type: 'id',
-
-                            default: '',
+                            name: 'noCard',
+                            label: 'without_card',
+                            type: 'checkbox',
                         },
+                       
                         {
                             name: 'headline',    // name in data structure
                             label: 'widgets_echart_label_headline', // translated field label
@@ -76,6 +74,27 @@ class GeneralEChartWidget extends (Generic) {
                         },
                         
                     ],
+                },
+                {
+                    name: 'data', // group name
+                    fields: [
+                        {
+                            name: 'oid_data',    // name in data structure
+                            label: 'widgets_echart_label_oiddata', // translated field label
+                            type: 'id',
+
+                            default: "",
+
+                        },
+                        {
+                            name: 'data_color',    // name in data structure
+                            label: 'widgets_echart_label_data_color', // translated field label
+                            type: 'color',
+
+                            default: "yellow",
+
+                        },
+                    ]
                 },
                 {
                     name: 'X_axis', // group name
@@ -154,73 +173,140 @@ class GeneralEChartWidget extends (Generic) {
 
         //todo serien einstellbar
         //todo XAchse einstellbar
-        return {
+
+
+        const data = this.state.values[`${this.state.rxData['oid_data']}.val`];
+
+        console.log("data " + JSON.stringify(data));
+
+        let dataMin = 0;
+        let dataMax = 100;
+
+        let legend = [];
+        let yaxis = [];
+        let series = []
+
+        let headline = this.state.rxData["headline"];
+
+        let cnt = 0;
+
+        if (data && data.length>1) {
+
+            legend.push("data");
+
+            yaxis.push({
+                position: "left",
+                type: "value",
+                min: dataMin,
+                max: dataMax,
+                axisLabel: {
+                    formatter: '{value} '
+                }
+            });
+            series.push({
+                name: "data",
+                type: 'bar',
+                data: data,
+                color: this.state.rxData['rain_color'] || "yellow",
+                yAxisIndex: cnt,
+                tooltip: {
+                    valueFormatter: function (value) {
+                        return value + ' ';
+                    }
+                },
+            });
+            cnt++;
+        }
+
+
+
+        let useSecondDiagram = false;
+
+        if (cnt == 0) {
+            //add dummy data to show anything on screen
+
+            console.log("add dummy data");
+
+            legend.push(I18n.t('dummy'));
+            yaxis.push({
+                position: "left",
+                type: "value",
+                min: 0,
+                max: 100,
+                axisLabel: {
+                    formatter: '{value} %'
+                }
+            });
+            series.push({
+                name: 'data',
+                type: 'bar',
+                data: [
+                    ["2024-04-30T00:00:00.000Z", 10],
+                    ["2024-04-30T03:00:00.000Z", 20],
+                    ["2024-04-30T06:00:00.000Z", 20],
+                    ["2024-04-30T09:00:00.000Z", 60]
+
+                ],
+
+                tooltip: {
+                    valueFormatter: function (value) {
+                        return value + ' %';
+                    }
+                },
+            });
+
+
+
+        }
+
+
+
+        //console.log("legend: " + JSON.stringify(legend) + " yaxis: " + JSON.stringify(yaxis));
+
+
+
+
+        let content = {
             backgroundColor: 'transparent',
             title: {
-                text: 'Wetter'
+                text: headline,
             },
-            tooltip: {},
+            grid: {
+                show: true,
+                top: 30,
+                bottom: useSecondDiagram ? 30 : 60,
+                //backgroundColor: '#F5F5F5',
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
             legend: {
-                data: ['rain', 'temperature', 'cloud']
+                data: legend,
+                orient: 'horizontal',
+                right: 10,
+                //top: 'center',
             },
             xAxis: {
                 type: "time",
-
+                show: useSecondDiagram ? false : true,
                 axisLabel: {
 
                     rotate: 45,
-                    //formatter:'{dd}.{MM} {hh}:{mm}'
-                    formatter: '{ee} {hh}:{mm}'
+                    //todo format einstellbar
+                    formatter: '{ee} {hh}:{mm}',
+                    //formatter: axisLabel_formatstring,
                 }
 
             },
-            yAxis: [
-                {
-                    position: "left",
-                    type: "value",
-                    min: 0,
-                    max: 30,
-                    axisLabel: {
-                        formatter: '{value} °C'
-                    }
-                },
-                {
-                    position: "right",
-                    type: "value",
-                    min: 0,
-                    max: 10,
-                    axisLabel: {
-                        formatter: '{value} mm'
-                    }
-                }
-            ],
-            series: [
-                {
-                    name: 'rain',
-                    type: 'bar',
-                    yAxisIndex: 1,
-                    tooltip: {
-                        valueFormatter: function (value) {
-                            return value + ' mm';
-                        }
-                    },
-                    data: //[5, 20, 36, 10, 10, 20]
-                        [["2024-04-30T00:00:00.000Z", 0], ["2024-04-30T03:00:00.000Z", 0], ["2024-04-30T06:00:00.000Z", 0], ["2024-04-30T09:00:00.000Z", 0], ["2024-04-30T12:00:00.000Z", 0], ["2024-04-30T15:00:00.000Z", 0], ["2024-04-30T18:00:00.000Z", 0], ["2024-04-30T21:00:00.000Z", 0], ["2024-04-30T23:00:00.000Z", 0], ["2024-05-01T01:00:00.000Z", 0], ["2024-05-01T02:00:00.000Z", 0], ["2024-05-01T03:00:00.000Z", 0], ["2024-05-01T04:00:00.000Z", 0], ["2024-05-01T05:00:00.000Z", 0], ["2024-05-01T06:00:00.000Z", 0], ["2024-05-01T07:00:00.000Z", 0], ["2024-05-01T00:00:00.000Z", 0], ["2024-05-01T03:00:00.000Z", 0], ["2024-05-01T06:00:00.000Z", 0.2], ["2024-05-01T09:00:00.000Z", 0], ["2024-05-01T12:00:00.000Z", 0], ["2024-05-01T15:00:00.000Z", 0], ["2024-05-01T18:00:00.000Z", 0], ["2024-05-01T21:00:00.000Z", 0], ["2024-05-02T00:00:00.000Z", 0], ["2024-05-02T03:00:00.000Z", 0], ["2024-05-02T06:00:00.000Z", 0], ["2024-05-02T09:00:00.000Z", 0.3], ["2024-05-02T12:00:00.000Z", 0.7], ["2024-05-02T15:00:00.000Z", 0.3], ["2024-05-02T18:00:00.000Z", 0], ["2024-05-02T21:00:00.000Z", 0], ["2024-05-03T00:00:00.000Z", 0.4], ["2024-05-03T03:00:00.000Z", 0], ["2024-05-03T06:00:00.000Z", 0], ["2024-05-03T09:00:00.000Z", 0], ["2024-05-03T12:00:00.000Z", 0], ["2024-05-03T15:00:00.000Z", 0.5], ["2024-05-03T18:00:00.000Z", 0], ["2024-05-03T21:00:00.000Z", 0.8]]
-                },
-                {
-                    name: 'temperature',
-                    type: 'line',
-                    yAxisIndex: 0,
-                    tooltip: {
-                        valueFormatter: function (value) {
-                            return value + ' °C';
-                        }
-                    },
-                    data:
-                        [["2024-04-30T00:00:00.000Z", 13], ["2024-04-30T03:00:00.000Z", 14], ["2024-04-30T06:00:00.000Z", 15], ["2024-04-30T09:00:00.000Z", 18], ["2024-04-30T12:00:00.000Z", 21], ["2024-04-30T15:00:00.000Z", 18], ["2024-04-30T18:00:00.000Z", 15], ["2024-04-30T21:00:00.000Z", 14], ["2024-04-30T23:00:00.000Z", 13], ["2024-05-01T01:00:00.000Z", 12], ["2024-05-01T02:00:00.000Z", 12], ["2024-05-01T03:00:00.000Z", 11], ["2024-05-01T04:00:00.000Z", 10], ["2024-05-01T05:00:00.000Z", 10], ["2024-05-01T06:00:00.000Z", 10], ["2024-05-01T07:00:00.000Z", 12], ["2024-05-01T00:00:00.000Z", 12], ["2024-05-01T03:00:00.000Z", 12], ["2024-05-01T06:00:00.000Z", 11], ["2024-05-01T09:00:00.000Z", 12], ["2024-05-01T12:00:00.000Z", 10], ["2024-05-01T15:00:00.000Z", 11], ["2024-05-01T18:00:00.000Z", 9], ["2024-05-01T21:00:00.000Z", 7], ["2024-05-02T00:00:00.000Z", 6], ["2024-05-02T03:00:00.000Z", 5], ["2024-05-02T06:00:00.000Z", 6], ["2024-05-02T09:00:00.000Z", 9], ["2024-05-02T12:00:00.000Z", 10], ["2024-05-02T15:00:00.000Z", 11], ["2024-05-02T18:00:00.000Z", 8], ["2024-05-02T21:00:00.000Z", 6], ["2024-05-03T00:00:00.000Z", 6], ["2024-05-03T03:00:00.000Z", 5], ["2024-05-03T06:00:00.000Z", 6], ["2024-05-03T09:00:00.000Z", 11], ["2024-05-03T12:00:00.000Z", 12], ["2024-05-03T15:00:00.000Z", 10], ["2024-05-03T18:00:00.000Z", 8], ["2024-05-03T21:00:00.000Z", 8]]
-                }
-            ]
+
+            yAxis: yaxis,
+
+            series: series,
         };
+
+        console.log("options: " + JSON.stringify(content));
+
+        return content;
     }
 
 

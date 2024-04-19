@@ -5,3 +5,4 @@ package-lock.json
 src-widgets/package-lock.json
 src-widgets/build
 widgets
+*.orig

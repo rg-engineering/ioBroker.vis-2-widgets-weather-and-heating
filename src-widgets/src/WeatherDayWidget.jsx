@@ -13,7 +13,7 @@ import Generic from './Generic';
 const styles = () => ({
     cardContent: {
         flex: 1,
-        display: 'flex',
+        display: 'block',
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
@@ -24,6 +24,8 @@ const styles = () => ({
 
 
 //todo Übersetzungen
+//todo icons anzeigen
+//todo Einheiten der Werte fehlen
 
 class WeatherDayWidget extends (Generic) {
 
@@ -71,10 +73,16 @@ class WeatherDayWidget extends (Generic) {
                     fields: [
 
                         {
+                            name: 'oid_dayname',    // name in data structure
+                            label: 'widgets_weather_label_oiddayname', // translated field label
+                            type: 'id',
+                            default: 'daswetter.0.NextHours.Location_1.Day_1.day_name',
+                        },
+                        {
                             name: 'oid_date',    // name in data structure
                             label: 'widgets_weather_label_oiddate', // translated field label
                             type: 'id',
-                            default: 'daswetter.0.NextHours.Location_1.Day_1.day_name',
+                            default: 'daswetter.0.NextHours.Location_1.Day_1.day_value',
                         },
                         {
                             name: 'oid_temp_max',    // name in data structure
@@ -188,28 +196,36 @@ class WeatherDayWidget extends (Generic) {
 
         console.log("chart: size " + size);
 
+        //\vis-2\widgets\vis-2-widgets-weather\img\vis-widget-demo.png
 
         const content = <div
             ref={this.refCardContent}
             className={this.props.classes.cardContent}
         >
-            <div>
-                <h2>{this.state.rxData['oid_date']}</h2>
-                <h3>8. Apr.</h3>
-            </div>
-            <div>
+            <div style={{ flex: 1 }}>
                 
-                <li>min {this.state.rxData['oid_temp_min']}</li>
-                <li>max {this.state.rxData['oid_temp_max']}</li>
+                <h2>{this.state.values[`${this.state.rxData['oid_dayname']}.val`]}</h2>
+                <h3>{this.state.values[`${this.state.rxData['oid_date']}.val`]}</h3>
             </div>
-            <div>
-                <p>{this.state.rxData['oid_symbol_description']}</p>
+            <div style={{ flex: 1 }}>
+
+
+                
+
+
+                <img src="sun.jpg" ></img>
+                <p>min {this.state.values[`${this.state.rxData['oid_temp_min']}.val`]}</p>
+                <p>max {this.state.values[`${this.state.rxData['oid_temp_max']}.val`]}</p>
             </div>
-            <div>
-                <li>{I18n.t("Böen")} {this.state.rxData['oid_wind_value']}</li>
+            <div style={{ flex: 1 }}>
+                <p>{this.state.values[`${this.state.rxData['oid_symbol_description']}.val`]}</p>
             </div>
-            <div>
-                <p>{I18n.t("sun")} {this.state.rxData['oid_sunshine_duration']}</p>
+            <div style={{ flex: 1 }}>
+                <img src="wind.jpg" ></img>
+                <p>{I18n.t("Wind")} {this.state.values[`${this.state.rxData['oid_wind_value']}.val`]}</p>
+            </div>
+            <div style={{ flex: 1 }}>
+                <p>{I18n.t("sun")} {this.state.values[`${this.state.rxData['oid_sunshine_duration']}.val`]}</p>
             </div>
         
 

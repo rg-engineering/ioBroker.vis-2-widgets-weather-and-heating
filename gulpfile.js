@@ -24,21 +24,21 @@ gulp.task('widget-2-compile', async () => gulpHelper.buildWidgets(__dirname, src
 gulp.task('widget-3-copy', () => Promise.all([
     gulp.src([`${SRC}build/*.js`]).pipe(gulp.dest(`widgets/${adapterName}`)),
     gulp.src([`${SRC}build/img/*`]).pipe(gulp.dest(`widgets/${adapterName}/img`)),
-    gulp.src([`${SRC}build/img/icons/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons`)),
-    gulp.src([`${SRC}build/img/icons/viento-wind/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/viento-wind`)),
-    gulp.src([`${SRC}build/img/icons/viento-wind/Beaufort-White/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/viento-wind/Beaufort-White`)),
-    gulp.src([`${SRC}build/img/icons/viento-wind/galeria1/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/viento-wind/galeria1`)),
-    gulp.src([`${SRC}build/img/icons/viento-wind/galeria2-Beaufort/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/viento-wind/galeria2-Beaufort`)),
+    //gulp.src([`${SRC}build/img/icons/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons`)),
+    //gulp.src([`${SRC}build/img/icons/viento-wind/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/viento-wind`)),
+    //gulp.src([`${SRC}build/img/icons/viento-wind/Beaufort-White/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/viento-wind/Beaufort-White`)),
+    //gulp.src([`${SRC}build/img/icons/viento-wind/galeria1/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/viento-wind/galeria1`)),
+    //gulp.src([`${SRC}build/img/icons/viento-wind/galeria2-Beaufort/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/viento-wind/galeria2-Beaufort`)),
 
-    gulp.src([`${SRC}build/img/icons/tiempo-weather/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/tiempo-weather`)),
-    gulp.src([`${SRC}build/img/icons/tiempo-weather/galeria1/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/tiempo-weather/galeria1`)),
-    gulp.src([`${SRC}build/img/icons/tiempo-weather/galeria2/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/tiempo-weather/galeria2`)),
-    gulp.src([`${SRC}build/img/icons/tiempo-weather/galeria3/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/tiempo-weather/galeria3`)),
-    gulp.src([`${SRC}build/img/icons/tiempo-weather/galeria4/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/tiempo-weather/galeria4`)),
-    gulp.src([`${SRC}build/img/icons/tiempo-weather/galeria5/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/tiempo-weather/galeria5`)),
-    gulp.src([`${SRC}build/img/icons/tiempo-weather/galeria6/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/tiempo-weather/galeria6`)),
+    //gulp.src([`${SRC}build/img/icons/tiempo-weather/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/tiempo-weather`)),
+    //gulp.src([`${SRC}build/img/icons/tiempo-weather/galeria1/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/tiempo-weather/galeria1`)),
+    //gulp.src([`${SRC}build/img/icons/tiempo-weather/galeria2/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/tiempo-weather/galeria2`)),
+    //gulp.src([`${SRC}build/img/icons/tiempo-weather/galeria3/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/tiempo-weather/galeria3`)),
+    //gulp.src([`${SRC}build/img/icons/tiempo-weather/galeria4/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/tiempo-weather/galeria4`)),
+    //gulp.src([`${SRC}build/img/icons/tiempo-weather/galeria5/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/tiempo-weather/galeria5`)),
+    //gulp.src([`${SRC}build/img/icons/tiempo-weather/galeria6/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/tiempo-weather/galeria6`)),
 
-    gulp.src([`${SRC}build/img/icons/luna-moon/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/luna-moon`)),
+    //gulp.src([`${SRC}build/img/icons/luna-moon/*`]).pipe(gulp.dest(`widgets/${adapterName}/img/icons/luna-moon`)),
     gulp.src([`${SRC}build/*.map`]).pipe(gulp.dest(`widgets/${adapterName}`)),
     gulp.src([
         `${SRC}build/static/**/*`,
@@ -53,6 +53,21 @@ gulp.task('widget-3-copy', () => Promise.all([
         `${src}build/static/js/*node_modules_echarts-for-react_esm_index_js.*.*`,
         `${src}build/static/js/*echarts-for-react_esm_index_js-node_modules_babel_runtime_helpers_esm*.*.*`,
         `${src}build/static/js/*echarts-for-react_esm_index_js-node_modules_react*.*.*`,
+    ]).pipe(gulp.dest(`widgets/${adapterName}/static/js`)),
+
+    gulp.src([
+        ...gulpHelper.copyFiles(SRC),
+        ...[
+            `${SRC}build/static/js/*mui_icons*.*`,
+            `${SRC}build/static/js/*mui_material_FormControl*.*`,
+            `${SRC}build/static/js/*mui_material_Avatar*.*`,
+            `${SRC}build/static/js/*mui_material_styles_styled*.*`,
+            `${SRC}build/static/js/*mui_material_Grid_Grid*.*`,
+            `${SRC}build/static/js/*mui_styled-engine_index_js-node_modules_mui_system_esm*.*`
+
+            
+        ],
+        ...[`!${SRC}build/static/js/*.map`, `!${SRC}build/static/js/*.txt`],
     ]).pipe(gulp.dest(`widgets/${adapterName}/static/js`)),
 
 

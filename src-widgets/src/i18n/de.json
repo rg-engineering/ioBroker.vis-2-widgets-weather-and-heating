@@ -1,13 +1,3 @@
 {
-  "vis-2-widgets-weather": "Wetter Widgets",
 
-  "widgets_weather_label_instance": "Instanz",
-  "widgets_weather_label_datastructure": "Datenstruktur",
-  "widgets_weather_label_datastructure_nextdaysdetailed": "NextDaysDetailed",
-  "widgets_weather_label_datastructure_nexthours": "NextHours",
-  "widgets_weather_label_datastructure_nexthours2": "NextHoursJSON",
-  "widgets_weather_label_rain_visible": "sichtbar",
-  "widgets_weather_label_temperature_visible": "sichtbar",
-  "widgets_weather_label_clouds_visible": "sichtbar",
-  "widgets_weather_label_chanceofraining_visible": "sichtbar"
 }

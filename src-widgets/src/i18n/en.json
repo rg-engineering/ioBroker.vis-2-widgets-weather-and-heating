@@ -1,7 +1,76 @@
 {
-  "vis_2_widgets_template": "Widgets template",
-  "vis_2_widgets_template_type": "Type",
-  "vis_2_widgets_template_private": "Private",
-  "vis_2_widgets_template_oid": "Object ID",
-  "My Demo widget: ": "My Demo widget: "
+
+  "widgets_weather_label_oid_general_day_": "OID day",
+  "widgets_weather_label_oid_rain_": "OID rain",
+  "widgets_weather_label_oid_temp_": "OID temperature",
+  "widgets_weather_label_oid_cloud_": "OID clouds",
+  "widgets_weather_label_oid_time_": "OID time",
+
+  "vis-2-widgets-weather": "VIS 2 weather widgets",
+  "vis_2_widgets-weathe": "weather widget",
+
+  "without_card": "without card",
+  "name": "name",
+  "widgets_weather_label_instance": "instance",
+  "widgets_weather_label_oidlocation": "OID location",
+  "widgets_weather_label_datastructure": "data structure",
+  "widgets_weather_label_datastructure_nextdaysdetailed": "next days detailed",
+  "widgets_weather_label_datastructure_nexthours": "next hours",
+  "widgets_weather_label_datastructure_nexthours2": "next hours JSON",
+  "widgets_weather_label_xaxis_axisLabel_formatstring": "X axis Label formatstring",
+  "widgets_weather_label_rain_visible": "rain to show",
+  "widgets_weather_label_rain_color": "rain color",
+  "widgets_weather_label_rain_show_separate": "rain show in second diagram",
+  "widgets_weather_label_temperature_visible": "temperature to show",
+  "widgets_weather_label_temperature_color": "temperature color",
+  "widgets_weather_label_clouds_visible": "clouds to show",
+  "widgets_weather_label_clouds_color": "clouds color",
+  "widgets_weather_label_clouds_show_separate": "clouds show in second diagram",
+  "widgets_weather_label_sunorcloud": "show sun or cloud",
+  "widgets_weather_label_sunorcloud_sun": "sun",
+  "widgets_weather_label_sunorcloud_cloud": "clouds",
+  "widgets_weather_label_chanceofraining_visible": "chance of rain to show",
+
+  "rain": "rain",
+  "temperature": "temperature",
+  "sun": "sun",
+  "cloud": "clouds",
+  "dummy": "dummy",
+
+  "vis_2_widgets-generalechart": "general chart widget",
+  "widgets_echart_label_headline": "headline",
+  "widgets_echart_label_datacount": "number of series",
+  "data": "data",
+  "widgets_echart_label_oiddata": "OID data serie",
+  "widgets_echart_data_seriestype": "series type",
+  "widgets_echart_seriestype_bar": "bar",
+  "widgets_echart_seriestype_line": "line",
+  "widgets_echart_data_unit": "unit",
+  "widgets_echart_data_color": "color",
+  "widgets_echart_data_yaxispos": "position of Y axis",
+  "widgets_echart_data_yaxispos_none": "none",
+  "widgets_echart_data_yaxispos_left": "left",
+  "widgets_echart_data_yaxispos_right": "right",
+  "widgets_echart_data_calcdiff": "difference calculation",
+
+  "vis_2_widgets-weatherday": "weather day details widget",
+  "widgets_weather_label_oiddayname": "OID day name",
+  "widgets_weather_label_oiddate": "OID date",
+  "widgets_weather_label_oidtempmax": "OID max. temperature",
+  "widgets_weather_label_oidtempmin": "OID min. temperature",
+  "widgets_weather_label_oidsymboldescription": "OID description",
+  "widgets_weather_label_oidsymbol": "OID symbol ID",
+  "widgets_weather_label_oidwindsymbol": "OID wind symbol ID",
+  "widgets_weather_label_oidwindvalue": "OID wind value",
+  "widgets_weather_label_oidwindgustsvalue": "OID wind gusts value",
+  "widgets_weather_label_oidsunshineduration": "OID sunshine duration",
+  "Wind": "wind",
+  "WindGusts": "wind gusts",
+  "min": "min",
+  "max": "max"
+
+
+
+
+
 }

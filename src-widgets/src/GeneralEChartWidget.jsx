@@ -24,10 +24,10 @@ const styles = () => ({
 
 
 //todo readme anpassen -> Beschreibung Widget und JSON Input
-//todo JSON Input als Datenquelle -> geht noch nicht
-//todo mehrere Inputs unterstützen
+
+//todo Auto-Kalkulation mit Unit k, M, m ...
 //todo Übersetzungen
-//todo Y Achse position pro serie
+
 
 
 class GeneralEChartWidget extends (Generic) {
@@ -371,7 +371,7 @@ gechart rxData { "bindings": [], "oid_data": "sbfspot.0.2000562095.history.years
 
                 const type_id = "data_seriestype" + d;
                 let type = this.state.rxData[type_id];
-                const color_id = "data_color$" + d;
+                const color_id = "data_color" + d;
                 let color = this.state.rxData[color_id];
 
                 series.push({
@@ -389,14 +389,10 @@ gechart rxData { "bindings": [], "oid_data": "sbfspot.0.2000562095.history.years
                 cnt++;
             }
 
-
-
             const unit_id = "data_unit" + d;
             let unit = this.state.rxData[unit_id];
             const yaxispos_id = "data_yaxispos" + d;
             let yaxispos = this.state.rxData[yaxispos_id];
-
-            
 
             yaxis.push({
                 position: yaxispos,

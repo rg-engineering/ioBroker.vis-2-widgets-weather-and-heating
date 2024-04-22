@@ -21,9 +21,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: ioBroker/testing-action-check@v1
+      - uses: rg-engineering/testing-action-check@V2
         with:
-          node-version: '18.x' 
+          node-version: '20.x' 
           # Uncomment the following line if your adapter cannot be installed using 'npm ci'
           # install-command: 'npm install'
           lint: true
@@ -35,11 +35,11 @@ jobs:
      runs-on: ${{ matrix.os }}
      strategy:
        matrix:
-         node-version: [16.x, 18.x, 20.x]
+         node-version: [18.x, 20.x]
          os: [ubuntu-latest, windows-latest, macos-latest]
 
      steps:
-      - uses: actions/checkout@v1
+      - uses:  rg-engineering/testing-action-adapter@V2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -72,7 +72,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: ioBroker/testing-action-deploy@v1
+      - uses: rg-engineering/testing-action-deploy@V2
         with:
           node-version: '18.x'
           # Uncomment the following line if your adapter cannot be installed using 'npm ci'
@@ -88,7 +88,7 @@ jobs:
           sentry-url: "https://sentry.io"
           sentry-org: "rg-engineering"
           sentry-token: ${{ secrets.SENTRY_AUTH_TOKEN }}
-          sentry-project: "iobroker_vis-weather"
-          sentry-version-prefix: "iobroker.^vis-weather"
+          sentry-project: "iobroker_vis2-weather"
+          sentry-version-prefix: "iobroker.vis2-weather"
           # If your sentry project is linked to a GitHub repository, you can enable the following option
           # sentry-github-integration: true

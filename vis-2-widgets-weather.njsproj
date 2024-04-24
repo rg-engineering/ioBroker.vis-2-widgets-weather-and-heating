@@ -554,6 +554,7 @@
   <ItemGroup>
     <Folder Include=".github\" />
     <Folder Include="admin\" />
+    <Folder Include="doc\" />
     <Folder Include="src-widgets\" />
     <Folder Include="src-widgets\build\" />
     <Folder Include="src-widgets\public\" />

@@ -27,13 +27,26 @@
 This vis-2-widget shows weather forecast data from DasWetter.com or weatherunderground
 You need DasWetter-Adpater or weatherunderground-Adapter running as well...
 
+## weather
+![widget_weather.PNG](./doc/widget_weather.PNG)
+
+
+## weather day
+![widget_weather_day.PNG](./doc/widget_weather_day.PNG)
+
+
+## general chart
+
+![widget_general_chart.PNG](./doc/widget_general_chart.PNG)
+
+
 <!--
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
 
 ### **WORK IN PROGRESS**
-* (Rene) 
+* (Rene) initial release
 
 
 ## License

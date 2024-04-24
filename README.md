@@ -30,18 +30,20 @@ You need DasWetter-Adpater or weatherunderground-Adapter running as well...
 ## weather
 ![widget_weather.PNG](./doc/widget_weather.PNG)
 
+* OID's are automatically set based on general settings
 
 ## weather day
 ![widget_weather_day.PNG](./doc/widget_weather_day.PNG)
 
+
 * OID's are automatically set based on general settings
+* icon set's are changeable
 
 ## general chart
 
 ![widget_general_chart.PNG](./doc/widget_general_chart.PNG)
 
-* OID's are automatically set based on general settings
-* icon set's are changeable
+
 
 ### input data for general chart
 

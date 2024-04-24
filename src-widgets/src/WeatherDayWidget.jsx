@@ -20,167 +20,106 @@ const styles = () => ({
         width: '100%',
         overflow: 'hidden',
     },
+
+    
+
 });
 
+//weather icons
 
-import Icon_weather_galeria1_1 from './assets/icons/tiempo-weather/galeria1/1.png';
-import Icon_weather_galeria1_2 from './assets/icons/tiempo-weather/galeria1/2.png';
-import Icon_weather_galeria1_3 from './assets/icons/tiempo-weather/galeria1/3.png';
-import Icon_weather_galeria1_4 from './assets/icons/tiempo-weather/galeria1/4.png';
-import Icon_weather_galeria1_5 from './assets/icons/tiempo-weather/galeria1/5.png';
-import Icon_weather_galeria1_6 from './assets/icons/tiempo-weather/galeria1/6.png';
-import Icon_weather_galeria1_7 from './assets/icons/tiempo-weather/galeria1/7.png';
-import Icon_weather_galeria1_8 from './assets/icons/tiempo-weather/galeria1/8.png';
-import Icon_weather_galeria1_9 from './assets/icons/tiempo-weather/galeria1/9.png';
-import Icon_weather_galeria1_10 from './assets/icons/tiempo-weather/galeria1/10.png';
-import Icon_weather_galeria1_11 from './assets/icons/tiempo-weather/galeria1/11.png';
-import Icon_weather_galeria1_12 from './assets/icons/tiempo-weather/galeria1/12.png';
-import Icon_weather_galeria1_13 from './assets/icons/tiempo-weather/galeria1/13.png';
-import Icon_weather_galeria1_14 from './assets/icons/tiempo-weather/galeria1/14.png';
-import Icon_weather_galeria1_15 from './assets/icons/tiempo-weather/galeria1/15.png';
-import Icon_weather_galeria1_16 from './assets/icons/tiempo-weather/galeria1/16.png';
-import Icon_weather_galeria1_17 from './assets/icons/tiempo-weather/galeria1/17.png';
-import Icon_weather_galeria1_18 from './assets/icons/tiempo-weather/galeria1/18.png';
-import Icon_weather_galeria1_19 from './assets/icons/tiempo-weather/galeria1/19.png';
-import Icon_weather_galeria1_20 from './assets/icons/tiempo-weather/galeria1/20.png';
-import Icon_weather_galeria1_21 from './assets/icons/tiempo-weather/galeria1/21.png';
-import Icon_weather_galeria1_22 from './assets/icons/tiempo-weather/galeria1/22.png';
+const images1 = require.context('./assets/icons/tiempo-weather/galeria1', false);
+const icons_weather_galeria1 = images1.keys().map(image1 => images1(image1));
 
+const images2 = require.context('./assets/icons/tiempo-weather/galeria2', false);
+const icons_weather_galeria2 = images2.keys().map(image2 => images2(image2));
 
-import Icon_weather_galeria2_1 from './assets/icons/tiempo-weather/galeria2/1.png';
-import Icon_weather_galeria2_2 from './assets/icons/tiempo-weather/galeria2/2.png';
-import Icon_weather_galeria2_3 from './assets/icons/tiempo-weather/galeria2/3.png';
-import Icon_weather_galeria2_4 from './assets/icons/tiempo-weather/galeria2/4.png';
-import Icon_weather_galeria2_5 from './assets/icons/tiempo-weather/galeria2/5.png';
-import Icon_weather_galeria2_6 from './assets/icons/tiempo-weather/galeria2/6.png';
-import Icon_weather_galeria2_7 from './assets/icons/tiempo-weather/galeria2/7.png';
-import Icon_weather_galeria2_8 from './assets/icons/tiempo-weather/galeria2/8.png';
-import Icon_weather_galeria2_9 from './assets/icons/tiempo-weather/galeria2/9.png';
-import Icon_weather_galeria2_10 from './assets/icons/tiempo-weather/galeria2/10.png';
-import Icon_weather_galeria2_11 from './assets/icons/tiempo-weather/galeria2/11.png';
-import Icon_weather_galeria2_12 from './assets/icons/tiempo-weather/galeria2/12.png';
-import Icon_weather_galeria2_13 from './assets/icons/tiempo-weather/galeria2/13.png';
-import Icon_weather_galeria2_14 from './assets/icons/tiempo-weather/galeria2/14.png';
-import Icon_weather_galeria2_15 from './assets/icons/tiempo-weather/galeria2/15.png';
-import Icon_weather_galeria2_16 from './assets/icons/tiempo-weather/galeria2/16.png';
-import Icon_weather_galeria2_17 from './assets/icons/tiempo-weather/galeria2/17.png';
-import Icon_weather_galeria2_18 from './assets/icons/tiempo-weather/galeria2/18.png';
-import Icon_weather_galeria2_19 from './assets/icons/tiempo-weather/galeria2/19.png';
+const images3 = require.context('./assets/icons/tiempo-weather/galeria3', false);
+const icons_weather_galeria3 = images3.keys().map(image3 => images3(image3));
+
+const images4 = require.context('./assets/icons/tiempo-weather/galeria4', false);
+const icons_weather_galeria4 = images4.keys().map(image4 => images4(image4));
+
+const images5_color = require.context('./assets/icons/tiempo-weather/galeria5/PNG/Color', false);
+const icons_weather_galeria5_color = images5_color.keys().map(image5_color => images5_color(image5_color));
+
+const images5_white = require.context('./assets/icons/tiempo-weather/galeria5/PNG/White', false);
+const icons_weather_galeria5_white = images5_white.keys().map(image5_white => images5_white(image5_white));
+
+const images6 = require.context('./assets/icons/tiempo-weather/galeria6', false);
+const icons_weather_galeria6 = images6.keys().map(image6 => images6(image6));
 
 
-import Icon_wind_galeria1_1 from "./assets/icons/viento-wind/galeria1/1.png"
-import Icon_wind_galeria1_2 from "./assets/icons/viento-wind/galeria1/2.png"
-import Icon_wind_galeria1_3 from "./assets/icons/viento-wind/galeria1/3.png"
-import Icon_wind_galeria1_4 from "./assets/icons/viento-wind/galeria1/4.png"
-import Icon_wind_galeria1_5 from "./assets/icons/viento-wind/galeria1/5.png"
-import Icon_wind_galeria1_6 from "./assets/icons/viento-wind/galeria1/6.png"
-import Icon_wind_galeria1_7 from "./assets/icons/viento-wind/galeria1/7.png"
-import Icon_wind_galeria1_8 from "./assets/icons/viento-wind/galeria1/8.png"
-import Icon_wind_galeria1_9 from "./assets/icons/viento-wind/galeria1/8.png"  //9 fehlt
-import Icon_wind_galeria1_10 from "./assets/icons/viento-wind/galeria1/10.png"
-import Icon_wind_galeria1_11 from "./assets/icons/viento-wind/galeria1/11.png"
-import Icon_wind_galeria1_12 from "./assets/icons/viento-wind/galeria1/12.png"
-import Icon_wind_galeria1_13 from "./assets/icons/viento-wind/galeria1/13.png"
-import Icon_wind_galeria1_14 from "./assets/icons/viento-wind/galeria1/14.png"
-import Icon_wind_galeria1_15 from "./assets/icons/viento-wind/galeria1/15.png"
-import Icon_wind_galeria1_16 from "./assets/icons/viento-wind/galeria1/16.png"
-import Icon_wind_galeria1_17 from "./assets/icons/viento-wind/galeria1/17.png"
-import Icon_wind_galeria1_18 from "./assets/icons/viento-wind/galeria1/17.png" //18 fehlt
-import Icon_wind_galeria1_19 from "./assets/icons/viento-wind/galeria1/19.png"
-import Icon_wind_galeria1_20 from "./assets/icons/viento-wind/galeria1/20.png"
-import Icon_wind_galeria1_21 from "./assets/icons/viento-wind/galeria1/21.png"
-import Icon_wind_galeria1_22 from "./assets/icons/viento-wind/galeria1/22.png"
-import Icon_wind_galeria1_23 from "./assets/icons/viento-wind/galeria1/23.png"
-import Icon_wind_galeria1_24 from "./assets/icons/viento-wind/galeria1/24.png"
-import Icon_wind_galeria1_25 from "./assets/icons/viento-wind/galeria1/25.png"
-import Icon_wind_galeria1_26 from "./assets/icons/viento-wind/galeria1/26.png"
-import Icon_wind_galeria1_27 from "./assets/icons/viento-wind/galeria1/26.png" //27 fehlt
-import Icon_wind_galeria1_28 from "./assets/icons/viento-wind/galeria1/28.png"
-import Icon_wind_galeria1_29 from "./assets/icons/viento-wind/galeria1/29.png"
-import Icon_wind_galeria1_30 from "./assets/icons/viento-wind/galeria1/30.png"
-import Icon_wind_galeria1_31 from "./assets/icons/viento-wind/galeria1/31.png"
-import Icon_wind_galeria1_32 from "./assets/icons/viento-wind/galeria1/32.png"
-import Icon_wind_galeria1_33 from "./assets/icons/viento-wind/galeria1/33.png"
+//wind icons
+const wind_images1 = require.context('./assets/icons/viento-wind/galeria1', false);
+const icons_wind_galeria1 = wind_images1.keys().map(wind_image1 => wind_images1(wind_image1));
+
+const wind_images2 = require.context('./assets/icons/viento-wind/galeria2-Beaufort', false);
+const icons_wind_galeria2 = wind_images2.keys().map(wind_image2 => wind_images2(wind_image2));
 
 
-
-const icons_weather_galeria1 = {
-    1: Icon_weather_galeria1_1,
-    2: Icon_weather_galeria1_2,
-    3: Icon_weather_galeria1_3,
-    4: Icon_weather_galeria1_4,
-    4: Icon_weather_galeria1_5,
-    6: Icon_weather_galeria1_6,
-    7: Icon_weather_galeria1_7,
-    8: Icon_weather_galeria1_8,
-    9: Icon_weather_galeria1_9,
-    10: Icon_weather_galeria1_10,
-    11: Icon_weather_galeria1_11,
-    12: Icon_weather_galeria1_12,
-    13: Icon_weather_galeria1_13,
-    14: Icon_weather_galeria1_14,
-    15: Icon_weather_galeria1_15,
-    16: Icon_weather_galeria1_16,
-    17: Icon_weather_galeria1_17,
-    18: Icon_weather_galeria1_18,
-    19: Icon_weather_galeria1_19,
-    20: Icon_weather_galeria1_20,
-    21: Icon_weather_galeria1_21,
-    22: Icon_weather_galeria1_22,
+const wind_images3 = require.context('./assets/icons/viento-wind/Beaufort-White', false);
+const icons_wind_Beaufort = wind_images3.keys().map(wind_image3 => wind_images3(wind_image3));
 
 
-}
+//moon icons
+//todo
 
-
-const icons_wind_galeria1 = {
-    1: Icon_wind_galeria1_1,
-    2: Icon_wind_galeria1_2,
-    3: Icon_wind_galeria1_3,
-    4: Icon_wind_galeria1_4,
-    5: Icon_wind_galeria1_5,
-    6: Icon_wind_galeria1_6,
-    7: Icon_wind_galeria1_7,
-    8: Icon_wind_galeria1_8,
-    9: Icon_wind_galeria1_9,
-    10: Icon_wind_galeria1_10,
-    11: Icon_wind_galeria1_11,
-    12: Icon_wind_galeria1_12,
-    13: Icon_wind_galeria1_13,
-    14: Icon_wind_galeria1_14,
-    15: Icon_wind_galeria1_15,
-    16: Icon_wind_galeria1_16,
-    17: Icon_wind_galeria1_17,
-    18: Icon_wind_galeria1_18,
-    19: Icon_wind_galeria1_19,
-    20: Icon_wind_galeria1_20,
-    21: Icon_wind_galeria1_21,
-    22: Icon_wind_galeria1_22,
-    23: Icon_wind_galeria1_23,
-    24: Icon_wind_galeria1_24,
-    25: Icon_wind_galeria1_25,
-    26: Icon_wind_galeria1_26,
-    27: Icon_wind_galeria1_27,
-    28: Icon_wind_galeria1_28,
-    29: Icon_wind_galeria1_29,
-    30: Icon_wind_galeria1_30,
-    31: Icon_wind_galeria1_31,
-    32: Icon_wind_galeria1_32,
-    33: Icon_wind_galeria1_33,
-
-
-
-}
 
 
 //todo Übersetzungen
-//todo icons nach OID anzeigen
-//todo Einheiten der Werte fehlen
-//todo temperatur und Icon in eine Zeile
-//todo Wind und Icon in eine Zeile
-//todo Auswahl des Iconsets
-//todo Datum formatieren
-//todo galeria umschlatbar
+
+//todo tag auswahl setzt OID's neu -> testen
+//todo Auswahl des Iconsets -> testen
+
+//todo galeria umschlatbar -> testn
 //todo mondphase anzeigen
+
+const setDataStructures = async (field, data, changeData, socket) => {
+
+    console.log("set new datastructure instance" + data['instance'] + " " + data['datastructure']);
+
+    const instance = data['instance'];
+    const day2show = data['day2show'];
+    const datastructure = data['datastructure'];
+    const iconlabelset = data['iconset'];
+    const windiconlabelset = data['windiconset'];
+
+
+    if (instance && instance.length > 0 && instance.includes("daswetter") && datastructure && day2show) {
+
+
+        const inctance_part = instance;
+        const datastructure_part = datastructure;
+        let day_part = "Day_1";
+        switch (day2show) {
+            case "0": day_part = "Day_1"; break;
+            case "1": day_part = "Day_2"; break;
+            case "2": day_part = "Day_3"; break;
+            case "3": day_part = "Day_4"; break;
+            case "4": day_part = "Day_5"; break;
+            default: day_part = "Day_1"; break;
+        }
+
+
+        data['oid_dayname'] = inctance_part + '.' + datastructure_part + '.Location_1.' + day_part + '.day_name';
+        data['oid_date'] = inctance_part + '.' + datastructure_part + '.Location_1.' + day_part + '.day_value';
+        data['oid_temp_max'] = inctance_part + '.' + datastructure_part + '.Location_1.' + day_part + '.tempmax_value';
+        data['oid_temp_min'] = inctance_part + '.' + datastructure_part + '.Location_1.' + day_part + '.tempmin_value';
+        data['oid_symbol_description'] = inctance_part + '.' + datastructure_part + '.Location_1.' + day_part + '.symbol_desc';
+        data['oid_symbol'] = inctance_part + '.' + datastructure_part + '.Location_1.' + day_part + '.symbol_value';
+        data['oid_wind_symbol'] = inctance_part + '.' + datastructure_part + '.Location_1.' + day_part + '.wind_symbol';
+        data['oid_wind_value'] = inctance_part + '.' + datastructure_part + '.Location_1.' + day_part + '.wind_value';
+        data['oid_windgusts_value'] = inctance_part + '.' + datastructure_part + '.Location_1.' + day_part + '.windgusts_value';
+        data['oid_sunshine_duration'] = inctance_part + '.' + datastructure_part + '.Location_1.' + day_part + '.sunshineDuration';
+
+    }
+
+
+
+
+    changeData(data);
+}
+
 
 class WeatherDayWidget extends (Generic) {
 
@@ -219,11 +158,138 @@ class WeatherDayWidget extends (Generic) {
                             label: 'without_card',
                             type: 'checkbox',
                         },
-                        
+                        {
+                            name: 'instance',    // name in data structure
+                            label: 'widgets_weather_label_instance', // translated field label
+                            type: 'instance',
+                            default: 'daswetter.0',
+                            onChange: setDataStructures,
+                        },
+                        {
+                            name: 'datastructure',    // name in data structure
+                            label: 'widgets_weather_label_datastructure', // translated field label
+                            type: 'select',
+                            options: [
+                                {
+                                    value: 'NextDaysDetailed',
+                                    label: 'widgets_weather_label_datastructure_nextdaysdetailed'
+                                },
+                                {
+                                    value: 'NextHours',
+                                    label: 'widgets_weather_label_datastructure_nexthours'
+                                },
+                                {
+                                    value: 'NextHours2',
+                                    label: 'widgets_weather_label_datastructure_nexthours2'
+                                }
+                            ],
+                            default: 'NextHours',
+                            onChange: setDataStructures,
+
+                        },
+                        {
+                            name: 'day2show',    // name in data structure
+                            label: 'widgets_weather_label_day2show', // translated field label
+                            type: 'select',
+                            options: [
+                                {
+                                    value: '0',
+                                    label: 'widgets_weather_label_day2show_today'
+                                },
+                                {
+                                    value: '1',
+                                    label: 'widgets_weather_label_day2show_today+1'
+                                },
+                                {
+                                    value: '2',
+                                    label: 'widgets_weather_label_day2show_today+2'
+                                },
+                                {
+                                    value: '3',
+                                    label: 'widgets_weather_label_day2show_today+3'
+                                },
+                                {
+                                    value: '4',
+                                    label: 'widgets_weather_label_day2show_today+4'
+                                },
+                                
+                            ],
+                            default: '0',
+                            onChange: setDataStructures,
+
+                        },
+
+                        {
+                            name: 'iconset',    // name in data structure
+                            label: 'widgets_weather_label_iconset', // translated field label
+                            type: 'select',
+                            options: [
+                                {
+                                    value: 'galeria1',
+                                    label: 'widgets_weather_label_iconset_galeria1'
+                                },
+                                {
+                                    value: 'galeria2',
+                                    label: 'widgets_weather_label_iconset_galeria2'
+                                },
+                                {
+                                    value: 'galeria3',
+                                    label: 'widgets_weather_label_iconset_galeria3'
+                                },
+                                {
+                                    value: 'galeria4',
+                                    label: 'widgets_weather_label_iconset_galeria4'
+                                },
+                                {
+                                    value: 'galeria5_white',
+                                    label: 'widgets_weather_label_iconset_galeria5_white'
+                                },
+                                {
+                                    value: 'galeria5_color',
+                                    label: 'widgets_weather_label_iconset_galeria5_color'
+                                },
+                                {
+                                    value: 'galeria6',
+                                    label: 'widgets_weather_label_iconset_galeria6'
+                                },
+                                
+                            ],
+                            default: 'galeria1',
+                            onChange: setDataStructures,
+
+                        },
+
+                        {
+                            name: 'windiconset',    // name in data structure
+                            label: 'widgets_weather_label_windiconset', // translated field label
+                            type: 'select',
+                            options: [
+                                {
+                                    value: 'galeria1',
+                                    label: 'widgets_weather_label_windiconset_galeria1'
+                                },
+                                {
+                                    value: 'galeria2',
+                                    label: 'widgets_weather_label_windiconset_galeria2'
+                                },
+                                {
+                                    value: 'Beaufort',
+                                    label: 'widgets_weather_label_windiconset_beaufort'
+                                },
+
+
+                            ],
+                            default: 'galeria1',
+                            onChange: setDataStructures,
+
+                        },
                         
                     ],
                 },
                 {
+
+
+
                     name: 'OIDS', // group name
                     fields: [
 
@@ -357,17 +423,40 @@ class WeatherDayWidget extends (Generic) {
         
         console.log("wdw chart: size " + size);
 
+        const iconlabelset = this.state.rxData['iconset'];
+        const windiconlabelset = this.state.rxData['windiconset'];
+
+
         //weather symbol
         const weather_icon = this.state.values[`${this.state.rxData['oid_symbol']}.val`]
         console.log("weather icon " + weather_icon);
-        //todo galerie umschaltbar
-        const src_icon_weather = icons_weather_galeria1[weather_icon];
+
+        let src_icon_weather = icons_weather_galeria1[weather_icon];
+
+        switch (iconlabelset) {
+            case "galeria1": src_icon_weather = icons_weather_galeria1[weather_icon]; break;
+            case "galeria2": src_icon_weather = icons_weather_galeria2[weather_icon]; break;
+            case "galeria3": src_icon_weather = icons_weather_galeria3[weather_icon]; break;
+            case "galeria4": src_icon_weather = icons_weather_galeria4[weather_icon]; break;
+            case "galeria5_white": src_icon_weather = icons_weather_galeria5_white[weather_icon]; break;
+            case "galeria5_color": src_icon_weather = icons_weather_galeria5_color[weather_icon]; break;
+            case "galeria6": src_icon_weather = icons_weather_galeria6[weather_icon]; break;
+            default: src_icon_weather = icons_weather_galeria1[weather_icon]; break;
+        }
+
 
         //wind symbol
         const wind_icon = this.state.values[`${this.state.rxData['oid_wind_symbol']}.val`]
         console.log("wind icon " + wind_icon);
         //todo galerie umschaltbar
-        const src_icon_wind = icons_wind_galeria1[wind_icon];
+        let src_icon_wind = icons_wind_galeria1[wind_icon];
+        switch (windiconlabelset) {
+            case "galeria1": src_icon_wind = icons_wind_galeria1[weather_icon]; break;
+            case "galeria2": src_icon_wind = icons_wind_galeria2[weather_icon]; break;
+            case "Beaufort": src_icon_wind = icons_wind_Beaufort[weather_icon]; break;
+            default: src_icon_wind = icons_wind_galeria1[weather_icon]; break;
+        }
+
 
         const date = this.state.values[`${this.state.rxData['oid_date']}.val`];
         let day = 1;
@@ -419,9 +508,9 @@ class WeatherDayWidget extends (Generic) {
                     </div>
                 </Grid>
                 <Grid item xs={6}>
-                    <div>
-                        <p>{I18n.t("min")} {this.state.values[`${this.state.rxData['oid_temp_min']}.val`]} °C</p>
+                    <div style={{ fontSize: 'small' }}>
                         <p>{I18n.t("max")} {this.state.values[`${this.state.rxData['oid_temp_max']}.val`]} °C</p>
+                        <p>{I18n.t("min")} {this.state.values[`${this.state.rxData['oid_temp_min']}.val`]} °C</p>
                     </div>
                 </Grid>
 
@@ -437,7 +526,7 @@ class WeatherDayWidget extends (Generic) {
                     </div>
                 </Grid>
                 <Grid item xs={6}>
-                    <div>
+                    <div style={{ fontSize: 'small' }}>
                         <p>{I18n.t("Wind")} {this.state.values[`${this.state.rxData['oid_wind_value']}.val`]} km/h</p>
                         <p>{I18n.t("WindGusts")} {this.state.values[`${this.state.rxData['oid_windgusts_value']}.val`]} km/h</p>
                     </div>

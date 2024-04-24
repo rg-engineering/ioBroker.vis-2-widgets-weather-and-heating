@@ -45,6 +45,7 @@
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="src-widgets\.eslintrc.js" />
+    <Content Include="src-widgets\build\anqejtpx.bmp" />
     <Content Include="src-widgets\craco.config.js" />
     <Content Include="src-widgets\modulefederation.config.js" />
     <Content Include="src-widgets\package-lock.json" />
@@ -554,6 +555,7 @@
     <Folder Include=".github\" />
     <Folder Include="admin\" />
     <Folder Include="src-widgets\" />
+    <Folder Include="src-widgets\build\" />
     <Folder Include="src-widgets\public\" />
     <Folder Include="src-widgets\public\img\" />
     <Folder Include="src-widgets\src\" />

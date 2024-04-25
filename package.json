@@ -46,6 +46,7 @@
     "release-minor": "release-script minor --yes",
     "release-major": "release-script major --yes",
     "test": "mocha ./test/*.test.js",
+    "test:integration": "mocha test/integration --exit",
     "update-packages": "ncu --upgrade && cd src-widgets && ncu --upgrade && cd ..",
     "npm": "npm i -f && cd src-widgets && npm i -f && cd .."
   },

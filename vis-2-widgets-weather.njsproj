@@ -36,6 +36,9 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Content Include=".eslintrc.js" />
+    <Content Include=".github\workflows\dependabot-automerge.yml" />
+    <Content Include=".github\workflows\npmpublish.yml" />
+    <Content Include=".github\workflows\test-and-release.yml" />
     <Content Include=".gitignore" />
     <Content Include=".releaseconfig.json" />
     <Content Include="gulpfile.js" />
@@ -553,6 +556,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".github\" />
+    <Folder Include=".github\workflows\" />
     <Folder Include="admin\" />
     <Folder Include="doc\" />
     <Folder Include="src-widgets\" />

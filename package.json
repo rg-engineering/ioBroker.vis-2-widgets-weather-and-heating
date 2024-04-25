@@ -38,17 +38,17 @@
     "LICENSE"
   ],
   "scripts": {
+    "check": "tsc --noEmit -p tsconfig.check.json",
     "prepublishOnly": "gulp",
-    "lint": "eslint",
+    "lint": "eslint src-widgets/src/*.jsx",
     "build": "gulp",
+    "test": "mocha ./test/*.test.js",
     "release": "release-script",
     "release-patch": "release-script patch --yes",
     "release-minor": "release-script minor --yes",
     "release-major": "release-script major --yes",
-    "test": "mocha ./test/*.test.js",
-    "test:integration": "mocha test/integration --exit",
     "update-packages": "ncu --upgrade && cd src-widgets && ncu --upgrade && cd ..",
-    "npm": "npm i -f && cd src-widgets && npm i -f && cd .."
+    "npm": "npm i && cd src-widgets && npm i -f"
   },
   "bugs": {
     "url": "https://github.com/rg-enineering/ioBroker.vis-2-widgets-weather/issues"

@@ -6,7 +6,7 @@ module.exports = {
     extends: [
         'eslint:recommended',
         'plugin:react/recommended',
-        //'airbnb',
+        'airbnb',
         // 'react-app',
         'plugin:eqeqeq-fix/recommended',
     ],
@@ -72,17 +72,5 @@ module.exports = {
         indent: ['error', 4, { SwitchCase: 1 }],
         'no-alert': 'off',
         'react/function-component-definition': 'off',
-        "quotes": [
-            "error",
-            "double",
-            {
-                "avoidEscape": true,
-                "allowTemplateLiterals": true
-            }
-        ],
-        "semi": [
-            "error",
-            "always"
-        ]
     },
 };

@@ -1,7 +1,7 @@
 const helper = require('@iobroker/vis-2-widgets-testing');
 const adapterName = require('../package.json').name.split('.').pop();
 
-describe('vis-2-widgets-react-template', () => {
+describe('vis-2-widgets-weather', () => {
     before(async function (){
         this.timeout(180000);
         // install js-controller, web and vis-2-beta

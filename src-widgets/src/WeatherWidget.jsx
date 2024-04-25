@@ -26,10 +26,8 @@ const styles = () => ({
 
 //todo für WU anpassen
 //todo Übersetzungen
-//todo Images
 //todo readme anpassen
 //todo Format-String für Zeitanzeige X Achse (bug)
-//todo widget für Tag mit Icon, Temperatur usw..
 //todo rerender verzögern, wenn Daten aktualisiert werden
 //todo Farbe für Background einstellbar
 //todo MinMax Temperatur auf ganze 5er runden

@@ -24,7 +24,6 @@ const styles = () => ({
 
 
 //todo readme anpassen -> Beschreibung Widget und JSON Input
-
 //todo Auto-Kalkulation mit Unit k, M, m ...
 //todo Übersetzungen
 //todo Dummy-Y Achse wird nicht gelöscht, wenn relae Daten kommen

@@ -6,3 +6,5 @@ src-widgets/package-lock.json
 src-widgets/build
 widgets
 *.orig
+/tmp/
+/iobroker.vis-2-widgets-weather-0.1.0.tgz

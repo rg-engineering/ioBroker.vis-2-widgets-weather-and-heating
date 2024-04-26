@@ -36,11 +36,20 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Content Include=".eslintrc.js" />
+    <Content Include=".eslintrc.json" />
+    <Content Include=".github\dependabot.yml" />
+    <Content Include=".github\FUNDING.yml" />
+    <Content Include=".github\ISSUE_TEMPLATE\BugReport.md" />
+    <Content Include=".github\ISSUE_TEMPLATE\bug_report.md" />
+    <Content Include=".github\ISSUE_TEMPLATE\Enhancement.md" />
     <Content Include=".github\workflows\dependabot-automerge.yml" />
     <Content Include=".github\workflows\npmpublish.yml" />
     <Content Include=".github\workflows\test-and-release.yml" />
     <Content Include=".gitignore" />
     <Content Include=".releaseconfig.json" />
+    <Content Include="doc\widget_general_chart.PNG" />
+    <Content Include="doc\widget_weather.PNG" />
+    <Content Include="doc\widget_weather_day.PNG" />
     <Content Include="gulpfile.js" />
     <Content Include="io-package.json" />
     <Content Include="LICENSE" />
@@ -48,7 +57,6 @@
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="src-widgets\.eslintrc.js" />
-    <Content Include="src-widgets\build\anqejtpx.bmp" />
     <Content Include="src-widgets\craco.config.js" />
     <Content Include="src-widgets\modulefederation.config.js" />
     <Content Include="src-widgets\package-lock.json" />
@@ -556,6 +564,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".github\" />
+    <Folder Include=".github\ISSUE_TEMPLATE\" />
     <Folder Include=".github\workflows\" />
     <Folder Include="admin\" />
     <Folder Include="doc\" />

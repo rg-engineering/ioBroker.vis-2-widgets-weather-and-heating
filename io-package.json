@@ -1,9 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "news": {
-
+      "0.2.0": {
+        "en": "initial release",
+        "de": "erstausstrahlung",
+        "ru": "первоначальный выпуск",
+        "pt": "lançamento inicial",
+        "nl": "eerste release",
+        "fr": "libération initiale",
+        "it": "rilascio iniziale",
+        "es": "liberación inicial",
+        "pl": "początkowe zwolnienie",
+        "uk": "початковий реліз",
+        "zh-cn": "初步释放"
+      },
       "0.1.0": {
         "en": "initial"
       }

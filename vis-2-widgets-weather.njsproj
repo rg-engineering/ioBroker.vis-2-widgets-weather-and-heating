@@ -544,6 +544,7 @@
     <Content Include="src-widgets\src\assets\icons\viento-wind\galeria2-Beaufort\98.png" />
     <Content Include="src-widgets\src\assets\icons\viento-wind\galeria2-Beaufort\99.png" />
     <Content Include="src-widgets\src\bootstrap.js" />
+    <Content Include="src-widgets\src\i18n\uk.json" />
     <Content Include="src-widgets\src\WeatherDayWidget.jsx" />
     <Content Include="src-widgets\src\GeneralEChartWidget.jsx" />
     <Content Include="src-widgets\src\Generic.jsx" />

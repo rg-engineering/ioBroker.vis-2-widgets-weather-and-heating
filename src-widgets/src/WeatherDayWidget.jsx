@@ -65,7 +65,7 @@ const icons_wind_Beaufort = wind_images3.keys().map(wind_image3 => wind_images3(
 //todo
 
 
-//todo Übersetzungen
+
 //todo tag auswahl setzt OID's neu -> testen
 //todo mondphase anzeigen
 

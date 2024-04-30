@@ -25,7 +25,7 @@ const styles = () => ({
 
 
 //todo für WU anpassen
-//todo Übersetzungen
+//todo icons für widgtes und allgemein
 //todo readme anpassen
 //todo Format-String für Zeitanzeige X Achse (bug)
 //todo rerender verzögern, wenn Daten aktualisiert werden

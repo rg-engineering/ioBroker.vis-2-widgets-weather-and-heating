@@ -20,7 +20,12 @@
         "en": "initial"
       }
     },
-    "title": "vis-2-widgets-weather.org",
+    "licenseInformation": {
+      "license": "MIT",
+      "type": "free",
+      "link": "https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather/blob/master/LICENSE"
+    },
+    "title": "vis-2-widgets-weather",
     "titleLang": {
       "en": "vis-2-widgets-weather"
     },
@@ -35,12 +40,12 @@
     ],
     "license": "MIT",
     "platform": "Javascript/Node.js",
-    "icon": "vis-2-test.png",
+    "icon": "vis-2-widgets-weather.png",
     "extIcon": "https://raw.githubusercontent.com/rg-engineering/ioBroker.vis-2-widgets-weather/master/admin/vis-2-widgets-weather.png",
     "enabled": true,
     "readme": "https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather/blob/master/README.md",
     "loglevel": "info",
-    "mode": "once",
+    "mode": "none",
     "adminUI": {
       "config": "none"
     },
@@ -62,7 +67,8 @@
     },
     "restartAdapters": [
       "vis-2"
-    ]
+    ],
+    "tier": 3
   },
   "native": {},
   "objects": [],

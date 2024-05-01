@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "news": {
+      "0.2.1": {
+        "en": "translations and icons",
+        "de": "übersetzungen und icons",
+        "ru": "переводы и иконки",
+        "pt": "traduções e ícones",
+        "nl": "vertalingen en pictogrammen",
+        "fr": "traductions et icônes",
+        "it": "traduzioni e icone",
+        "es": "traducciones e iconos",
+        "pl": "tłumaczenia i ikony",
+        "uk": "переклади та ікони",
+        "zh-cn": "翻译和图标"
+      },
       "0.2.0": {
         "en": "initial release",
         "de": "erstausstrahlung",
@@ -62,7 +75,7 @@
     "readme": "https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather/blob/master/README.md",
     "loglevel": "info",
     "mode": "none",
-    "noConfig" :  true,
+    "noConfig": true,
     "adminUI": {
       "config": "none"
     },

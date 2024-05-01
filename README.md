@@ -60,8 +60,7 @@ You need DasWetter-Adpater or weatherunderground-Adapter running as well...
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
-
-### **WORK IN PROGRESS**
+### 0.2.1 (2024-05-01)
 * (Rene) translations and icons
 
 ### 0.2.0 (2024-04-26)

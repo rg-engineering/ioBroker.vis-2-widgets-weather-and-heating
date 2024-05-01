@@ -354,7 +354,7 @@ class WeatherDayWidget extends (Generic) {
                
 
             ],
-            visPrev: 'widgets/vis-2-test/img/vis-widget-weatherday.png',
+            visPrev: 'widgets/vis-2-widgets-weather/img/vis-widget-weatherday.png',
         };
     }
 

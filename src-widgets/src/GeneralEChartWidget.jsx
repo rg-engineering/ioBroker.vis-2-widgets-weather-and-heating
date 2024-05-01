@@ -170,7 +170,7 @@ class GeneralEChartWidget extends (Generic) {
                
 
             ],
-            visPrev: 'widgets/vis-2-test/img/vis-widget-echart.png',
+            visPrev: 'widgets/vis-2-widgets-weather/img/vis-widget-echart.png',
         };
     }
 

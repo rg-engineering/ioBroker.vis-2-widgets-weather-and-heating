@@ -47,6 +47,7 @@
     <Content Include=".github\workflows\test-and-release.yml" />
     <Content Include=".gitignore" />
     <Content Include=".releaseconfig.json" />
+    <Content Include="admin\vis-2-widgets-weather.png" />
     <Content Include="doc\widget_general_chart.PNG" />
     <Content Include="doc\widget_weather.PNG" />
     <Content Include="doc\widget_weather_day.PNG" />
@@ -61,6 +62,8 @@
     <Content Include="src-widgets\modulefederation.config.js" />
     <Content Include="src-widgets\package-lock.json" />
     <Content Include="src-widgets\package.json" />
+    <Content Include="src-widgets\public\img\vis-widget-echart.png" />
+    <Content Include="src-widgets\public\img\vis-widget-weatherday.png" />
     <Content Include="src-widgets\public\img\vis-widget-weather.png" />
     <Content Include="src-widgets\public\index.html" />
     <Content Include="src-widgets\src\App.jsx" />

@@ -25,7 +25,7 @@ const styles = () => ({
 
 
 //todo für WU anpassen
-//todo icons für widgtes und allgemein
+//todo icons für widgets und allgemein 256*256
 //todo readme anpassen
 //todo Format-String für Zeitanzeige X Achse (bug)
 //todo rerender verzögern, wenn Daten aktualisiert werden
@@ -409,7 +409,7 @@ class WeatherWidget extends (Generic) {
                 height: 182,
                 position: 'relative',
             },
-            visPrev: 'widgets/vis-2-test/img/vis-widget-weather.png',
+            visPrev: 'widgets/vis-2-widgets-weather/img/vis-widget-weather.png',
         };
     }
 

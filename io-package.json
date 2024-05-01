@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "news": {
+      "0.2.2": {
+        "en": "ready for deployment",
+        "de": "bereit für den einsatz",
+        "ru": "готовый к развертыванию",
+        "pt": "pronto para implantação",
+        "nl": "gereed voor inzet",
+        "fr": "prêts à être déployés",
+        "it": "pronto per la distribuzione",
+        "es": "listos para el despliegue",
+        "pl": "gotowe do rozmieszczenia",
+        "uk": "готовий до розгортання",
+        "zh-cn": "准备部署"
+      },
       "0.2.1": {
         "en": "translations and icons",
         "de": "übersetzungen und icons",

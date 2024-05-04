@@ -1,13 +1,32 @@
 {
 
   "widgets_weather_label_oid_general_day_": "OID day",
+
   "widgets_weather_label_oid_rain_": "OID rain",
+
   "widgets_weather_label_oid_temp_": "OID temperature",
+
   "widgets_weather_label_oid_cloud_": "OID clouds",
+
   "widgets_weather_label_oid_time_": "OID time",
 
   "vis-2-widgets-weather": "weather widgets",
   "vis_2_widgets-weather": "weather widget",
+
+
+  "group_x_axis": "X Axis",
+  "group_rain": "Rain",
+  "group_temperature": "Temperature",
+  "group_clouds": "Clouds",
+  "group_chanceofrain": "Chance of Rain",
+  "group_oids_general": "OID General",
+  "group_oids_rain": "OID Rain",
+  "group_oids_temp": "OID Temperature",
+  "group_oids_cloud": "OID Clouds",
+  "group_oids_time": "OID Time",
+  "group_oids_chanceofrain": "OID Chance of Rain",
+
+
 
 
   "without_card": "without card",

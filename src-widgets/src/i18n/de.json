@@ -6,6 +6,22 @@
   "widgets_weather_label_oid_time_": "OID-Zeit",
   "vis-2-widgets-weather": "Wetter-Widgets",
   "vis_2_widgets-weather": "Wetter-Widget",
+
+
+  "group_x_axis": "X-Achse",
+  "group_rain": "Regen",
+  "group_temperature": "Temperatur",
+  "group_clouds": "Wolken",
+  "group_chanceofrain": "Niederschlagswahrscheinlichkeit",
+  "group_oids_general": "OID-General",
+  "group_oids_rain": "OID-Regen",
+  "group_oids_temp": "OID-Temperatur",
+  "group_oids_cloud": "OID-Wolken",
+  "group_oids_time": "OID-Zeit",
+  "group_oids_chanceofrain": "OID Regenwahrscheinlichkeit",
+
+
+
   "without_card": "ohne Karte",
   "name": "Name",
   "widgets_weather_label_instance": "Beispiel",

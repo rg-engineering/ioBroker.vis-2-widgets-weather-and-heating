@@ -8,7 +8,7 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/rg-engineering/ioBroker.vis-2-widgets-weather/badge.svg)](https://snyk.io/test/github/rg-engineering/ioBroker.vis-2-widgets-weather)
 ![GitHub Actions](https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather/workflows/Test%20and%20Release/badge.svg)
 
-[![NPM](https://nodei.co/npm/iobroker.vis-weather.png?downloads=true)](https://nodei.co/npm/iobroker.vis-2-widgets-weather/)
+[![NPM](https://nodei.co/npm/iobroker.vis-2-widgets-weather.png?downloads=true)](https://nodei.co/npm/iobroker.vis-2-widgets-weather/)
 
 ![node-lts](https://img.shields.io/node/v-lts/iobroker.vis-2-widgets-weather?style=flat-square)
 ![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/iobroker.vis-2-widgets-weather?label=npm%20dependencies&style=flat-square)
@@ -24,8 +24,8 @@
                                                                           
 [![paypal](https://www.paypalobjects.com/en_US/DK/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate/?hosted_button_id=34ESBMJ932QZC) 
 
-This vis-2-widget shows weather forecast data from DasWetter.com or weatherunderground
-You need DasWetter-Adpater or weatherunderground-Adapter running as well...
+This vis-2-widget shows weather forecast data from DasWetter.com or weatherunderground.
+You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
 
 ## weather
 ![widget_weather.PNG](./doc/widget_weather.PNG)
@@ -55,16 +55,11 @@ You need DasWetter-Adpater or weatherunderground-Adapter running as well...
 * it's possible to auto calculate and show differences of values. Just tick "difference calculation" in settings.
 
 
-
 <!--
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
-### 0.2.3 (2024-05-01)
-* (Rene) ready for deployment
-*
-
-### 0.2.2 (2024-05-01)
+### **WORK IN PROGRESS**
 * (Rene) ready for deployment
 
 ### 0.2.1 (2024-05-01)

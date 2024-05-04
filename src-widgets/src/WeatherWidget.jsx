@@ -154,17 +154,22 @@ class WeatherWidget extends (Generic) {
         let oid_cloud_fields = [];
         let oid_time_fields = [];
         let oid_general_fields = [];
+        let oid_chanceofrain_fields = [];
         let cnt = 1;
 
         let max_days = 5;
         let max_periods = 23;
+
+
+        //todo set to true wenn WU
+        let weatherunderground = false;
 
         for (var d = 1; d <= max_days; d++) {
 
             oid_general_fields.push(
                 {
                     name: 'oid_general_day_' + d,    // name in data structure
-                    label: 'widgets_weather_label_oid_general_day_' + d, // translated field label
+                    label: I18n.t('widgets_weather_label_oid_general_day_') + d, // translated field label
                     type: 'id',
                     default: "daswetter.0.NextHours.Location_1.Day_" + d + ".day_value",
                 }
@@ -177,7 +182,7 @@ class WeatherWidget extends (Generic) {
                 oid_rain_fields.push(
                     {
                         name: 'oid_rain_' + cnt,    // name in data structure
-                        label: 'widgets_weather_label_oid_rain_' + cnt, // translated field label
+                        label: I18n.t('widgets_weather_label_oid_rain_') + cnt, // translated field label
                         type: 'id',
                         default: "daswetter.0.NextHours.Location_1.Day_" + d + ".Hour_" + p + ".rain_value",
                     }
@@ -185,7 +190,7 @@ class WeatherWidget extends (Generic) {
                 oid_temp_fields.push(
                     {
                         name: 'oid_temp_' + cnt,    // name in data structure
-                        label: 'widgets_weather_label_oid_temp_' + cnt, // translated field label
+                        label: I18n.t('widgets_weather_label_oid_temp_') + cnt, // translated field label
                         type: 'id',
                         default: "daswetter.0.NextHours.Location_1.Day_" + d + ".Hour_" + p + ".temp_value",
                     }
@@ -193,7 +198,7 @@ class WeatherWidget extends (Generic) {
                 oid_cloud_fields.push(
                     {
                         name: 'oid_cloud_' + cnt,    // name in data structure
-                        label: 'widgets_weather_label_oid_cloud_' + cnt, // translated field label
+                        label: I18n.t('widgets_weather_label_oid_cloud_') + cnt, // translated field label
                         type: 'id',
                         default: "daswetter.0.NextHours.Location_1.Day_" + d + ".Hour_" + p + ".clouds_value",
                     }
@@ -201,7 +206,7 @@ class WeatherWidget extends (Generic) {
                 oid_time_fields.push(
                     {
                         name: 'oid_time_' + cnt,    // name in data structure
-                        label: 'widgets_weather_label_oid_time_' + cnt, // translated field label
+                        label: I18n.t('widgets_weather_label_oid_time_') + cnt, // translated field label
                         type: 'id',
                         default: "daswetter.0.NextHours.Location_1.Day_" + d + ".Hour_" + p + ".hour_value",
                     }
@@ -226,6 +231,7 @@ class WeatherWidget extends (Generic) {
                 {
                     // check here all possible types https://github.com/ioBroker/ioBroker.vis/blob/react/src/src/Attributes/Widget/SCHEMA.md
                     name: 'common', // group name
+                    //label: "common" //not required
                     fields: [
                         {
                             name: 'noCard',
@@ -278,6 +284,7 @@ class WeatherWidget extends (Generic) {
                 },
                 {
                     name: 'X_axis', // group name
+                    label: "group_x_axis",
                     fields: [
                         {
                             name: 'xaxis_axisLabel_formatstring',    // name in data structure
@@ -291,6 +298,7 @@ class WeatherWidget extends (Generic) {
 
 
                     name: 'rain', // group name
+                    label: "group_rain",
                     fields: [
                         {
                             name: 'rain_visible',    // name in data structure
@@ -314,6 +322,7 @@ class WeatherWidget extends (Generic) {
                 },
                 {
                     name: 'temperature', // group name
+                    label: "group_temperature",
                     fields: [
                         {
                             name: 'temperature_visible',    // name in data structure
@@ -331,6 +340,7 @@ class WeatherWidget extends (Generic) {
                 },
                 {
                     name: 'clouds', // group name
+                    label: "group_clouds",
                     fields: [
                         {
                             name: 'clouds_visible',    // name in data structure
@@ -369,7 +379,10 @@ class WeatherWidget extends (Generic) {
                     ]
                 },
                 {
+                    //todo ausbelnden bei instance == wetter
                     name: 'chanceofraining', // group name
+                    label: "group_chanceofrain",
+                    hidden: !weatherunderground,
                     fields: [
                         {
                             name: 'chanceofraining_visible',    // name in data structure
@@ -378,29 +391,40 @@ class WeatherWidget extends (Generic) {
                             default: false,
 
                             //todo enable for WU
-                            hidden: true,
+                            //hidden: true,
                         },
                     ]
                 },
                 {
                     name: 'OIDS_general', // group name
+                    label: "group_oids_general",
                     fields: oid_general_fields
                 },
                 {
                     name: 'OIDS_rain', // group name
+                    label: "group_oids_rain",
                     fields: oid_rain_fields
                 },
                 {
                     name: 'OIDS_temp', // group name
+                    label: "group_oids_temp",
                     fields: oid_temp_fields
                 },
                 {
                     name: 'OIDS_cloud', // group name
+                    label: "group_oids_cloud",
                     fields: oid_cloud_fields
                 },
                 {
                     name: 'OIDS_time', // group name
+                    label: "group_oids_time",
                     fields: oid_time_fields
+                },
+                {
+                    name: 'OIDS_chanceofrain', // group name
+                    label: "group_oids_chanceofrain",
+                    fields: oid_chanceofrain_fields,
+                    hidden : !weatherunderground
                 },
 
             ],

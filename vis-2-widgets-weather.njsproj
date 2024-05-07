@@ -35,8 +35,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
+    <Content Include=".eslintignore" />
     <Content Include=".eslintrc.js" />
-    <Content Include=".eslintrc.json" />
     <Content Include=".github\dependabot.yml" />
     <Content Include=".github\FUNDING.yml" />
     <Content Include=".github\ISSUE_TEMPLATE\BugReport.md" />
@@ -51,13 +51,13 @@
     <Content Include="doc\widget_general_chart.PNG" />
     <Content Include="doc\widget_weather.PNG" />
     <Content Include="doc\widget_weather_day.PNG" />
+    <Content Include="eslint.config.mjs" />
     <Content Include="gulpfile.js" />
     <Content Include="io-package.json" />
     <Content Include="LICENSE" />
     <Content Include="package-lock.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
-    <Content Include="src-widgets\.eslintrc.js" />
     <Content Include="src-widgets\craco.config.js" />
     <Content Include="src-widgets\modulefederation.config.js" />
     <Content Include="src-widgets\package-lock.json" />
@@ -547,6 +547,7 @@
     <Content Include="src-widgets\src\assets\icons\viento-wind\galeria2-Beaufort\98.png" />
     <Content Include="src-widgets\src\assets\icons\viento-wind\galeria2-Beaufort\99.png" />
     <Content Include="src-widgets\src\bootstrap.js" />
+    <Content Include="src-widgets\src\eslint.config.mjs" />
     <Content Include="src-widgets\src\i18n\uk.json" />
     <Content Include="src-widgets\src\WeatherDayWidget.jsx" />
     <Content Include="src-widgets\src\GeneralEChartWidget.jsx" />

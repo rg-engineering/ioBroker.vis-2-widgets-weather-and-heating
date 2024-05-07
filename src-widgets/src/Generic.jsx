@@ -1,14 +1,14 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 import {
     Card, CardContent,
-} from '@mui/material';
+} from "@mui/material";
 
-import { VisRxWidget } from '@iobroker/vis-2-widgets-react-dev';
+import { VisRxWidget } from "@iobroker/vis-2-widgets-react-dev";
 
 class Generic extends (window.visRxWidget || VisRxWidget) {
 
-    getPropertyValue = state => this.state.values[`${this.state.rxData[state]}.val`];
+    getPropertyValue = state => this.state.values["${this.state.rxData[state]}.val"];
 
     // eslint-disable-next-line class-methods-use-this
     wrapContent(content, addToHeader, cardContentStyle, headerStyle, onCardClick) {

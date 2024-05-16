@@ -177,10 +177,10 @@ class WeatherWidget extends (Generic) {
         //todo set to true wenn WU
         let weatherunderground = false;
 
-        if (this.state.rxData["instance"].indexOf("weatherunderground") > -1) {
-            weatherunderground = true;
-            console.log("we are in  weatherunderground ");
-        }
+        //if (this.state.rxData["instance"].indexOf("weatherunderground") > -1) {
+        //    weatherunderground = true;
+        //    console.log("we are in  weatherunderground ");
+        //}
 
 
         for (let d = 1; d <= max_days; d++) {

@@ -59,7 +59,7 @@ You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
-### 0.2.5 (2024-05-16)
+### **WORK IN PROGRESS**
 * (Rene) adaption for weatherunderground
 
 ### 0.2.4 (2024-05-04)

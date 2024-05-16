@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather",
-    "version": "0.2.5",
+    "version": "0.2.6",
     "news": {
+      "0.2.6": {
+        "en": "adaption for weatherunderground",
+        "de": "anpassung für wetteruntergrund",
+        "ru": "адаптер для weatherunderground",
+        "pt": "adaptação ao clima em terra",
+        "nl": "aanpassing voor weerondergrondse",
+        "fr": "adaptation pour la météo sous terre",
+        "it": "adattamento per le condizioni meteorologiche",
+        "es": "adaptación para el subsuelo meteorológico",
+        "pl": "adaptacja do warunków atmosferycznych pod ziemią",
+        "uk": "адаптація до погодних умов",
+        "zh-cn": "气候地下适应"
+      },
       "0.2.5": {
         "en": "adaption for weatherunderground",
         "de": "anpassung für wetteruntergrund",

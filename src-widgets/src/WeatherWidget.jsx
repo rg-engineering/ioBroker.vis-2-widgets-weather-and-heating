@@ -100,20 +100,46 @@ const setDataStructures = async (field, data, changeData, socket) => {
             }
         }
         else {
-            console.log("setdatastructures: unknown data structure");
+            console.log("datastructures: unknown data structure" + data["datastructure"]);
         }
     }
     else if (data["instance"].indexOf("weatherunderground") > -1) {
 
 
-        for (let h = 0; h < 36; h++) {
+        if (data["datastructure"] === "forecast") {
+            for (let d = 0; d < 6; d++) {
 
-            data["oid_rain_" + cnt] = "weatherunderground.0.forecastHourly." + h + "h.precipitation";
-            data["oid_temp_" + cnt] = "weatherunderground.0.forecastHourly." + h + ".h.temp";
-            data["oid_cloud_" + cnt] = "weatherunderground.0.forecastHourly." + h + ".h.sky";
-            data["oid_time_" + cnt] = "weatherunderground.0.forecastHourly." + h + ".h.time";   
-            data["oid_chancerain_" + cnt] = "weatherunderground.0.forecastHourly." + h + ".h.precipitationChance";
-            cnt++;
+                //todo
+            }
+
+
+        }
+
+        else if (data["datastructure"] === "forecastHourly") {
+            for (let h = 0; h < 36; h++) {
+
+                //weatherunderground.0.forecastHourly.1h.precipitationChance
+                data["oid_rain_" + cnt] = "weatherunderground.0.forecastHourly." + h + "h.precipitation";
+                //weatherunderground.0.forecastHourly.1h.temp
+                data["oid_temp_" + cnt] = "weatherunderground.0.forecastHourly." + h + ".h.temp";
+                //weatherunderground.0.forecastHourly.1h.sky
+                data["oid_cloud_" + cnt] = "weatherunderground.0.forecastHourly." + h + ".h.sky";
+                //weatherunderground.0.forecastHourly.1h.time
+                data["oid_time_" + cnt] = "weatherunderground.0.forecastHourly." + h + ".h.time";
+                //weatherunderground.0.forecastHourly.1h.precipitationChance
+                data["oid_chancerain_" + cnt] = "weatherunderground.0.forecastHourly." + h + ".h.precipitationChance";
+                cnt++;
+            }
+        }
+        else if (data["datastructure"] === "forecastPeriod") {
+            for (let p = 0; p < 12; p++) {
+
+                //todo
+            }
+
+        }
+        else {
+            console.log("datastructures: unknown data structure" + data["datastructure"]);
         }
     }
     else {
@@ -250,12 +276,18 @@ class WeatherWidget extends (Generic) {
                             label: "widgets_weather_label_oidlocation", // translated field label
                             type: "id",
                             default: "daswetter.0.NextHours.Location_1.Location",
+                            //only available with DasWetter
+                            hidden: weatherunderground
                         },
                         {
                             name: "datastructure",    // name in data structure
                             label: "widgets_weather_label_datastructure", // translated field label
                             type: "select",
                             options: [
+
+                                //todo labels nur für jeweilige Instanz sichtbar machen
+
+                                //daswetter
                                 {
                                     value: "NextDaysDetailed",
                                     label: "widgets_weather_label_datastructure_nextdaysdetailed"
@@ -267,7 +299,22 @@ class WeatherWidget extends (Generic) {
                                 {
                                     value: "NextHours2",
                                     label: "widgets_weather_label_datastructure_nexthours2"
-                                }
+                                },
+
+                                // WU
+                                {
+                                    value: "forecast",
+                                    label: "widgets_weather_label_datastructure_forecast"
+                                },
+                                {
+                                    value: "forecastHourly",
+                                    label: "widgets_weather_label_datastructure_forecastHourly"
+                                },
+                                {
+                                    value: "forecastPeriod",
+                                    label: "widgets_weather_label_datastructure_forecastPeriod"
+                                },
+
                             ],
                             default: "NextHours",
                             onChange: setDataStructures,
@@ -930,31 +977,26 @@ class WeatherWidget extends (Generic) {
             const cloud_val = this.state.values[`${this.state.rxData["oid_cloud_" + cnt]}.val`];
             const time_val = this.state.values[`${this.state.rxData["oid_time_" + cnt]}.val`];
 
-            //todo
-            const dayData = this.state.values[`${this.state.rxData["oid_general_day_1" ]}.val`];
-            let year = 0;
-            let month = 0;
-            let day = 0;
-            let hour = 0;
-            let minute = 0;
 
-            //console.log("dayData " + JSON.stringify(dayData));
+            //const dayData = this.state.values[`${this.state.rxData["oid_general_day_1" ]}.val`];
+            //let year = 0;
+            //let month = 0;
+            //let day = 0;
+            //let hour = 0;
+            //let minute = 0;
 
-            if (dayData !== null) {
-                year = Number(dayData.substring(0, 4));
-                month = Number(dayData.substring(4, 6));
-                month = month - 1;
-                day = Number(dayData.substring(6, 8));
-            }
+            console.log("dayData " + time_val);
+
+            
 
             let oDate = null;
 
-            if (time_val !== null && year > 0 && month > 0 && day > 0) {
-                const timeData = time_val.split(":");
-                hour = timeData[0];
-                minute = timeData[1];
+            if (time_val !== null ) {
 
-                oDate = new Date(year, month, day, hour, minute, 0, 0);
+
+                oDate = new Date(time_val);
+
+                console.log("time " + oDate.toLocaleTimeString());
             }
 
 
@@ -964,39 +1006,44 @@ class WeatherWidget extends (Generic) {
             if (temp_val > TempMax) { TempMax = temp_val; }
             if (temp_val < TempMin) { TempMin = temp_val; }
 
-            if (this.state.rxData["rain_visible"] === true && oDate !== null && rain_val !== null) {
-                rainData.push(
-                    [
-                        oDate,
-                        rain_val
-                    ]
-                );
-            }
 
-            if (this.state.rxData["temperature_visible"] === true && oDate !== null && temp_val !== null) {
-                tempData.push(
-                    [
-                        oDate,
-                        temp_val
-                    ]
-                );
-            }
-            if (this.state.rxData["clouds_visible"] === true && oDate !== null && cloud_val !== null) {
-
-                let value = cloud_val;
-                if (this.state.rxData["sun_or_cloud"] === "sun") {
-                    value = 100 - cloud_val;
+            if (oDate !== null) {
+                if (this.state.rxData["rain_visible"] === true && oDate !== null && rain_val !== null) {
+                    rainData.push(
+                        [
+                            oDate,
+                            rain_val
+                        ]
+                    );
                 }
 
-                cloudData.push(
-                    [
-                        oDate,
-                        //bei Sonne 100-cloud_val
-                        value
-                    ]
-                );
-            }
+                if (this.state.rxData["temperature_visible"] === true && oDate !== null && temp_val !== null) {
+                    tempData.push(
+                        [
+                            oDate,
+                            temp_val
+                        ]
+                    );
+                }
+                if (this.state.rxData["clouds_visible"] === true && oDate !== null && cloud_val !== null) {
 
+                    let value = cloud_val;
+                    if (this.state.rxData["sun_or_cloud"] === "sun") {
+                        value = 100 - cloud_val;
+                    }
+
+                    cloudData.push(
+                        [
+                            oDate,
+                            //bei Sonne 100-cloud_val
+                            value
+                        ]
+                    );
+                }
+            }
+            else {
+                console.log("oDate not defined ");
+            }
         }
 
 
@@ -1113,46 +1160,52 @@ class WeatherWidget extends (Generic) {
                     oDate = new Date(year, month, day, hour, minute, 0, 0);
                 }
 
-                if (rain_val > RainMax) { RainMax = rain_val; }
-                if (temp_val > TempMax) { TempMax = temp_val; }
-                if (temp_val < TempMin) { TempMin = temp_val; }
+                if (oDate !== null) {
+                    if (rain_val > RainMax) { RainMax = rain_val; }
+                    if (temp_val > TempMax) { TempMax = temp_val; }
+                    if (temp_val < TempMin) { TempMin = temp_val; }
 
 
-                if (this.state.rxData["rain_visible"] === true && oDate !== null && rain_val !== null) {
-                    rainData.push(
-                        [
-                            oDate,
-                            rain_val
-                        ]
-                    );
-                }
-
-                if (this.state.rxData["temperature_visible"] === true && oDate !== null && temp_val !== null) {
-                    tempData.push(
-                        [
-                            oDate,
-                            temp_val
-                        ]
-                    );
-                }
-                if (this.state.rxData["clouds_visible"] === true && oDate !== null && cloud_val !== null) {
-
-                    let value = cloud_val;
-                    if (this.state.rxData["sun_or_cloud"] === "sun") {
-                        value = 100 - cloud_val;
+                    if (this.state.rxData["rain_visible"] === true && oDate !== null && rain_val !== null) {
+                        rainData.push(
+                            [
+                                oDate,
+                                rain_val
+                            ]
+                        );
                     }
 
-                    cloudData.push(
-                        [
-                            oDate,
-                            //bei Sonne 100-cloud_val
-                            value
-                        ]
-                    );
-                }
-                //console.log("date " + JSON.stringify(oDate) + " " + year + "." + month + "." + day + " " + hour + ":" + minute);
+                    if (this.state.rxData["temperature_visible"] === true && oDate !== null && temp_val !== null) {
+                        tempData.push(
+                            [
+                                oDate,
+                                temp_val
+                            ]
+                        );
+                    }
+                    if (this.state.rxData["clouds_visible"] === true && oDate !== null && cloud_val !== null) {
 
+                        let value = cloud_val;
+                        if (this.state.rxData["sun_or_cloud"] === "sun") {
+                            value = 100 - cloud_val;
+                        }
+
+                        cloudData.push(
+                            [
+                                oDate,
+                                //bei Sonne 100-cloud_val
+                                value
+                            ]
+                        );
+                    }
+                    //console.log("date " + JSON.stringify(oDate) + " " + year + "." + month + "." + day + " " + hour + ":" + minute);
+
+                }
+                else {
+                    console.log("oDate not defined ");
+                }
             }
+            
         }
 
         const MinMax = {

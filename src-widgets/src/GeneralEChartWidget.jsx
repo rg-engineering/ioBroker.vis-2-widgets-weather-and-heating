@@ -288,13 +288,13 @@ class GeneralEChartWidget extends (Generic) {
 
                 for (let i = 0; i < data_org.length; i++) {
 
-                    let oVals = data_org[i];
+                    const oVals = data_org[i];
 
                     //todo keys einstellbar
-                    let year = parseInt(oVals["year"], 10);
+                    const year = parseInt(oVals["year"], 10);
                     let value = parseInt(oVals["value"], 10);
 
-                    let oDate = new Date(year, 5, 30, 12, 0, 0, 0);
+                    const oDate = new Date(year, 5, 30, 12, 0, 0, 0);
 
 
                     OID_name = "data_calcdiff" + d;
@@ -339,7 +339,7 @@ class GeneralEChartWidget extends (Generic) {
 
                 legend.push("data" + d);
 
-                let keys = Object.keys(data[0]);
+                const keys = Object.keys(data[0]);
                 console.log("keys " + keys);
 
                 const type_id = "data_seriestype" + d;

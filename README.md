@@ -61,10 +61,10 @@ You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
 ## Changelog
 
 ### **WORK IN PROGRESS**
-* (Rene) adaption for weathernderground
+* (Rene) adaption for weatherunderground
 
 ### 0.2.4 (2024-05-04)
-* (Rene) ready for deployment
+* (Rene) ready for first deployment
 
 ### 0.2.1 (2024-05-01)
 * (Rene) translations and icons

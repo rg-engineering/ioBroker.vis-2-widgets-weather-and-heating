@@ -1,6 +1,6 @@
 {
   "name": "iobroker.vis-2-widgets-weather",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "ioBroker vis-2 weather widgets",
   "author": "rg-engineering <info@rg-engineering.eu>",
   "contributors": [
@@ -17,7 +17,7 @@
     "visualization",
     "weather"
   ],
-  "dependencies": { },
+  "dependencies": {},
   "devDependencies": {
     "@alcalzone/release-script": "^3.7.0",
     "@alcalzone/release-script-plugin-iobroker": "^3.7.0",

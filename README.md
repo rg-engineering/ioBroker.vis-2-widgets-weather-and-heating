@@ -1,6 +1,8 @@
 ![Logo](admin/vis-2-widgets-weather.png)
 # ioBroker.vis-2-widgets-weather
 
+
+
 ![Number of Installations](http://iobroker.live/badges/vis-2-widgets-weather-installed.svg) ![Number of Installations](http://iobroker.live/badges/vis-2-widgets-weather-stable.svg)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.vis-2-widgets-weather.svg)](https://www.npmjs.com/package/iobroker.vis-2-widgets-weather)
 [![NPM version](http://img.shields.io/npm/v/iobroker.vis-2-widgets-weather.svg)](https://www.npmjs.com/package/iobroker.vis-2-widgets-weather)
@@ -54,23 +56,24 @@ You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
 
 * it's possible to auto calculate and show differences of values. Just tick "difference calculation" in settings.
 
+* 
 
 <!--
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
 ### **WORK IN PROGRESS**
-* (René) adaption for weatherunderground
-* (René) bug fix: show legend in graph again, was missing after translations
+* (RenÃ©) adaption for weatherunderground
+* (RenÃ©) bug fix: show legend in graph again, was missing after translations
 
 ### 0.2.4 (2024-05-04)
-* (René) ready for first deployment
+* (RenÃ©) ready for first deployment
 
 ### 0.2.1 (2024-05-01)
-* (René) translations and icons
+* (RenÃ©) translations and icons
 
 ### 0.2.0 (2024-04-26)
-* (René) initial release
+* (RenÃ©) initial release
 
 ## License
 The MIT License (MIT)

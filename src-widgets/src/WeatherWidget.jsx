@@ -31,7 +31,7 @@ const styles = () => ({
 //todo rerender verzögern, wenn Daten aktualisiert werden
 //todo Farbe für Background einstellbar
 //todo MinMax Temperatur auf ganze 5er runden
-//todo Legende wird nicht mehr angezeigt obwohl vorhanden
+
 
 
 const setDataStructures = async (field, data, changeData, socket) => {
@@ -609,7 +609,7 @@ class WeatherWidget extends (Generic) {
             });
 
             series.push({
-                name: "rain",
+                name: I18n.t("rain"),
                 type: "bar",
                 data: weatherData[0][0],
                 color: this.state.rxData["rain_color"] || "blue",
@@ -637,7 +637,7 @@ class WeatherWidget extends (Generic) {
             });
 
             series.push({
-                name: "temperature",
+                name: I18n.t("temperature"),
                 type: "line",
                 data: weatherData[0][1],
                 color: this.state.rxData["temperature_color"] || "red",
@@ -669,7 +669,7 @@ class WeatherWidget extends (Generic) {
                 }
             });
             series.push({
-                name: this.state.rxData["sun_or_cloud"] === "sun" ? "sun" : "cloud",
+                name: this.state.rxData["sun_or_cloud"] === "sun" ? I18n.t("sun") : I18n.t("cloud"),
                 type: "bar",
                 data: weatherData[0][2],
                 color: this.state.rxData["clouds_color"] || "yellow",
@@ -699,7 +699,7 @@ class WeatherWidget extends (Generic) {
                 }
             });
             series.push({
-                name: "cloud",
+                name: I18n.t("cloud"),
                 type: "bar",
                 data: [
                     ["2024-04-30T00:00:00.000Z", 10],
@@ -991,7 +991,7 @@ class WeatherWidget extends (Generic) {
 
             let oDate = null;
 
-            if (time_val !== null ) {
+            if (time_val !== null && time_val !== undefined) {
 
 
                 oDate = new Date(time_val);
@@ -1007,8 +1007,8 @@ class WeatherWidget extends (Generic) {
             if (temp_val < TempMin) { TempMin = temp_val; }
 
 
-            if (oDate !== null) {
-                if (this.state.rxData["rain_visible"] === true && oDate !== null && rain_val !== null) {
+            if (oDate !== null && oDate !== undefined) {
+                if (this.state.rxData["rain_visible"] === true &&  rain_val !== null) {
                     rainData.push(
                         [
                             oDate,
@@ -1017,7 +1017,7 @@ class WeatherWidget extends (Generic) {
                     );
                 }
 
-                if (this.state.rxData["temperature_visible"] === true && oDate !== null && temp_val !== null) {
+                if (this.state.rxData["temperature_visible"] === true &&  temp_val !== null) {
                     tempData.push(
                         [
                             oDate,
@@ -1025,7 +1025,7 @@ class WeatherWidget extends (Generic) {
                         ]
                     );
                 }
-                if (this.state.rxData["clouds_visible"] === true && oDate !== null && cloud_val !== null) {
+                if (this.state.rxData["clouds_visible"] === true &&  cloud_val !== null) {
 
                     let value = cloud_val;
                     if (this.state.rxData["sun_or_cloud"] === "sun") {
@@ -1100,7 +1100,8 @@ class WeatherWidget extends (Generic) {
         let cnt = 1;
         for (let d = 1; d <= max_days; d++) {
 
-            //console.log("day " + d);
+            
+            console.log("day " + d);
 
             const dayData = this.state.values[`${this.state.rxData["oid_general_day_" + d]}.val`];
             let year = 0;
@@ -1109,9 +1110,9 @@ class WeatherWidget extends (Generic) {
             let hour = 0;
             let minute = 0;
 
-            //console.log("dayData " + JSON.stringify(dayData));
+            console.log("dayData " + JSON.stringify(dayData));
 
-            if (dayData !== null) {
+            if (dayData !== null && dayData!== undefined) {
                 year = Number(dayData.substring(0, 4));
                 month = Number(dayData.substring(4, 6));
                 month = month - 1;
@@ -1152,7 +1153,7 @@ class WeatherWidget extends (Generic) {
                 //calc date
                 let oDate = null;
 
-                if (time_val !== null && year > 0 && month > 0 && day > 0) {
+                if (time_val !== null && time_val !== undefined && year > 0 && month > 0 && day > 0) {
                     const timeData = time_val.split(":");
                     hour = timeData[0];
                     minute = timeData[1];
@@ -1160,13 +1161,13 @@ class WeatherWidget extends (Generic) {
                     oDate = new Date(year, month, day, hour, minute, 0, 0);
                 }
 
-                if (oDate !== null) {
+                if (oDate !== null && oDate !== undefined) {
                     if (rain_val > RainMax) { RainMax = rain_val; }
                     if (temp_val > TempMax) { TempMax = temp_val; }
                     if (temp_val < TempMin) { TempMin = temp_val; }
 
 
-                    if (this.state.rxData["rain_visible"] === true && oDate !== null && rain_val !== null) {
+                    if (this.state.rxData["rain_visible"] === true && rain_val !== null) {
                         rainData.push(
                             [
                                 oDate,
@@ -1175,7 +1176,7 @@ class WeatherWidget extends (Generic) {
                         );
                     }
 
-                    if (this.state.rxData["temperature_visible"] === true && oDate !== null && temp_val !== null) {
+                    if (this.state.rxData["temperature_visible"] === true &&  temp_val !== null) {
                         tempData.push(
                             [
                                 oDate,
@@ -1183,7 +1184,7 @@ class WeatherWidget extends (Generic) {
                             ]
                         );
                     }
-                    if (this.state.rxData["clouds_visible"] === true && oDate !== null && cloud_val !== null) {
+                    if (this.state.rxData["clouds_visible"] === true &&  cloud_val !== null) {
 
                         let value = cloud_val;
                         if (this.state.rxData["sun_or_cloud"] === "sun") {

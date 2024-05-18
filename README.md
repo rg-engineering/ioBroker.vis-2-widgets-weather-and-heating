@@ -59,17 +59,18 @@ You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
-### 0.2.6 (2024-05-16)
-* (Rene) adaption for weatherunderground
+### **WORK IN PROGRESS**
+* (René) adaption for weatherunderground
+* (René) bug fix: show legend in graph again, was missing after translations
 
 ### 0.2.4 (2024-05-04)
-* (Rene) ready for first deployment
+* (René) ready for first deployment
 
 ### 0.2.1 (2024-05-01)
-* (Rene) translations and icons
+* (René) translations and icons
 
 ### 0.2.0 (2024-04-26)
-* (Rene) initial release
+* (René) initial release
 
 ## License
 The MIT License (MIT)

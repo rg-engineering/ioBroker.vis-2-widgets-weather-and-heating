@@ -1,10 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather",
-    "version": "0.2.6",
+    "version": "0.2.7",
     "news": {
-      
-      
+      "0.2.7": {
+        "en": "(René) adaption for weatherunderground\n(René) bug fix: show legend in graph again, was missing after translations\n(René) smaller bug fixes\n(René) dependencies updated",
+        "de": "(Rene) Anpassung für Wetteruntergrund\n(René) Bugfix: Show Legende in Graph wieder fehlte nach Übersetzungen\n(René) kleinere Fehlerbehebungen\n(René)",
+        "ru": "(René) адаптация для метеоподземки\n(René) исправление клопов: показать легенда в графе снова, пропал после переводов\n(René) меньшие исправления ошибок\n(René)",
+        "pt": "(René) adaptação para clima embaixo\n(René) correção de bugs: mostrar lenda no gráfico novamente, estava faltando após traduções\n(René) correções de bugs menores\n(René) dependências atualizadas",
+        "nl": "(René) aanpassing voor weerondergrondse\n(René) bug fix: weer legende tonen in grafiek, ontbrak na vertalingen\n(René) kleinere bugfixes\n(René) bijgewerkte afhankelijkheden",
+        "fr": "(René) adaptation pour la météo sous terre\n(René) correction de bug: afficher à nouveau la légende dans le graphique, était manquant après les traductions\n(René) corrections de bug plus petites\n(René) dépendances mises à jour",
+        "it": "(René) adattamento per il tempo sottoterra\n(René) bug fix: mostra la leggenda nel grafico di nuovo, mancava dopo le traduzioni\n(René) correzioni di bug più piccole\n(René) dipendenze aggiornate",
+        "es": "(René) adaption for weatherunderground\n(René) bug fix: show legend in graph again, was missing after translations\n(René) correcciones de errores más pequeñas\n(René) dependencies updated",
+        "pl": "(René) adaptacja do warunków atmosferycznych\n(René) bug fix: Pokaż legendę na wykresie ponownie, brakowało po tłumaczeniu\n(René) mniejsze poprawki błędów\nAktualizacja zależności (René)",
+        "uk": "(René) адаптація до погодних умов\n(René) Виправлення помилок: показ легенди в графі знову відсутні після перекладу\n(René) менші виправлення помилок\n(René) залежностей оновлено",
+        "zh-cn": "(René) 适应地下天气\n(René) bug fix: 再次显示图例, 翻译后丢失\n(René) 小错误修正\n(René) 更新的依赖关系"
+      },
       "0.2.4": {
         "en": "ready for deployment",
         "de": "bereit für den einsatz",
@@ -18,7 +29,6 @@
         "uk": "готовий до розгортання",
         "zh-cn": "准备部署"
       },
-      
       "0.2.1": {
         "en": "translations and icons",
         "de": "übersetzungen und icons",

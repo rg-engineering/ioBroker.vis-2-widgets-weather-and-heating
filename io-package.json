@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather",
-    "version": "0.2.7",
+    "version": "0.2.8",
     "news": {
+      "0.2.8": {
+        "en": "(René) X axis label adjustable",
+        "de": "(René) X-Achsenlabel einstellbar",
+        "ru": "(René)",
+        "pt": "(René) X eixo rótulo ajustável",
+        "nl": "(René) X-as label verstelbaar",
+        "fr": "(René) Étiquette à axe X réglable",
+        "it": "(René) Etichetta a asse X regolabile",
+        "es": "(René) etiqueta de eje X ajustable",
+        "pl": "(René) Etykieta na oś X regulowana",
+        "uk": "(René) X вісь регульований",
+        "zh-cn": "(René) X轴标签可调整"
+      },
       "0.2.7": {
         "en": "(René) adaption for weatherunderground\n(René) bug fix: show legend in graph again, was missing after translations\n(René) smaller bug fixes\n(René) dependencies updated",
         "de": "(Rene) Anpassung für Wetteruntergrund\n(René) Bugfix: Show Legende in Graph wieder fehlte nach Übersetzungen\n(René) kleinere Fehlerbehebungen\n(René)",

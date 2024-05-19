@@ -9,4 +9,6 @@
 *.tgz
 *.orig
 /tmp/
-/iobroker.vis-2-widgets-weather-0.1.0.tgz
+/*.tgz
+/admin/*_old.png
+/admin/WhatsApp*.jpeg

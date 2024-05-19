@@ -37,6 +37,12 @@
   "widgets_weather_label_datastructure_nextdaysdetailed": "next days detailed",
   "widgets_weather_label_datastructure_nexthours": "next hours",
   "widgets_weather_label_datastructure_nexthours2": "next hours JSON",
+
+  "widgets_weather_label_datastructure_forecast": "forecast",
+  "widgets_weather_label_datastructure_forecastHourly": "forecast hourly",
+  "widgets_weather_label_datastructure_forecastPeriod": "forecast period",
+
+
   "widgets_weather_label_xaxis_axisLabel_formatstring": "X axis Label formatstring",
   "widgets_weather_label_rain_visible": "rain to show",
   "widgets_weather_label_rain_color": "rain color",

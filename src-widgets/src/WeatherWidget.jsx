@@ -36,7 +36,7 @@ const styles = () => ({
 
 const setDataStructures = async (field, data, changeData, socket) => {
 
-    console.log("set new datastructure instance" + data["instance"] + " " + data["datastructure"] + " " + data.length);
+    console.log("set new datastructure instance " + data["instance"] + " " + data["datastructure"] );
 
     let max_days = 5;
     let max_periods = 8;
@@ -45,6 +45,15 @@ const setDataStructures = async (field, data, changeData, socket) => {
     //if DasWettter
 
     if (data["instance"].indexOf("daswetter") > -1) {
+
+
+        if (data["datastructure"] === "NextDaysDetailed" || data["datastructure"] === "NextHours" || data["datastructure"] === "NextHours2") {
+
+        }
+        else {
+            data["datastructure"] = "NextHours";
+        }
+
 
         if (data["datastructure"] === "NextDaysDetailed") {
             max_periods = 8;
@@ -106,10 +115,18 @@ const setDataStructures = async (field, data, changeData, socket) => {
     else if (data["instance"].indexOf("weatherunderground") > -1) {
 
 
+        if (data["datastructure"] === "forecast" || data["datastructure"] === "forecastHourly" || data["datastructure"] === "forecastPeriod") {
+
+        }
+        else {
+            data["datastructure"] = "forecastHourly";
+        }
+
         if (data["datastructure"] === "forecast") {
             for (let d = 0; d < 6; d++) {
 
                 //todo
+                console.log("data[datastructure] = forecast not yet implemented");
             }
 
 
@@ -121,13 +138,13 @@ const setDataStructures = async (field, data, changeData, socket) => {
                 //weatherunderground.0.forecastHourly.1h.precipitationChance
                 data["oid_rain_" + cnt] = "weatherunderground.0.forecastHourly." + h + "h.precipitation";
                 //weatherunderground.0.forecastHourly.1h.temp
-                data["oid_temp_" + cnt] = "weatherunderground.0.forecastHourly." + h + ".h.temp";
+                data["oid_temp_" + cnt] = "weatherunderground.0.forecastHourly." + h + "h.temp";
                 //weatherunderground.0.forecastHourly.1h.sky
-                data["oid_cloud_" + cnt] = "weatherunderground.0.forecastHourly." + h + ".h.sky";
+                data["oid_cloud_" + cnt] = "weatherunderground.0.forecastHourly." + h + "h.sky";
                 //weatherunderground.0.forecastHourly.1h.time
-                data["oid_time_" + cnt] = "weatherunderground.0.forecastHourly." + h + ".h.time";
+                data["oid_time_" + cnt] = "weatherunderground.0.forecastHourly." + h + "h.time";
                 //weatherunderground.0.forecastHourly.1h.precipitationChance
-                data["oid_chancerain_" + cnt] = "weatherunderground.0.forecastHourly." + h + ".h.precipitationChance";
+                data["oid_chancerain_" + cnt] = "weatherunderground.0.forecastHourly." + h + "h.precipitationChance";
                 cnt++;
             }
         }
@@ -135,6 +152,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
             for (let p = 0; p < 12; p++) {
 
                 //todo
+                console.log("data[datastructure] = forecastPeriod not yet implemented");
             }
 
         }
@@ -147,6 +165,9 @@ const setDataStructures = async (field, data, changeData, socket) => {
     }
 
     //todo überflüssige OID"s löschen
+
+    console.log("!!! OID to delete, used " + cnt + " length (todo) !!!" );
+
 
     changeData(data);
 
@@ -168,6 +189,9 @@ class WeatherWidget extends (Generic) {
         const oid_time_fields = [];
         const oid_general_fields = [];
         const oid_chanceofrain_fields = [];
+
+        const datastructure_options = [];
+
         let cnt = 1;
 
         const max_days = 5;
@@ -175,12 +199,48 @@ class WeatherWidget extends (Generic) {
 
 
         //todo set to true wenn WU
-        let weatherunderground = false;
+        //let weatherunderground = false;
+
+        //console.log("#### values " + data["instance"]  );
+
 
         //if (this.state.rxData["instance"].indexOf("weatherunderground") > -1) {
         //    weatherunderground = true;
         //    console.log("we are in  weatherunderground ");
         //}
+
+
+        if (data => data.instance.indexOf("weatherunderground")>-1) {
+            //labels nur für jeweilige Instanz sichtbar machen
+            datastructure_options.push({
+                value: "forecast",
+                label: "widgets_weather_label_datastructure_forecast"
+            });
+            datastructure_options.push({
+                value: "forecastHourly",
+                label: "widgets_weather_label_datastructure_forecastHourly"
+            });
+            datastructure_options.push({
+                value: "forecastPeriod",
+                label: "widgets_weather_label_datastructure_forecastPeriod"
+            });
+        }
+        else {
+            //daswetter
+            datastructure_options.push({
+                value: "NextDaysDetailed",
+                label: "widgets_weather_label_datastructure_nextdaysdetailed"
+            });
+            datastructure_options.push({
+                value: "NextHours",
+                label: "widgets_weather_label_datastructure_nexthours"
+            });
+            datastructure_options.push({
+                value: "NextHours2",
+                label: "widgets_weather_label_datastructure_nexthours2"
+            });
+
+        }
 
 
         for (let d = 1; d <= max_days; d++) {
@@ -277,46 +337,14 @@ class WeatherWidget extends (Generic) {
                             type: "id",
                             default: "daswetter.0.NextHours.Location_1.Location",
                             //only available with DasWetter
-                            hidden: weatherunderground
+                            hidden: data => data.instance.indexOf("weatherunderground") > -1
                         },
                         {
                             name: "datastructure",    // name in data structure
                             label: "widgets_weather_label_datastructure", // translated field label
                             type: "select",
-                            options: [
-
-                                //todo labels nur für jeweilige Instanz sichtbar machen
-
-                                //daswetter
-                                {
-                                    value: "NextDaysDetailed",
-                                    label: "widgets_weather_label_datastructure_nextdaysdetailed"
-                                },
-                                {
-                                    value: "NextHours",
-                                    label: "widgets_weather_label_datastructure_nexthours"
-                                },
-                                {
-                                    value: "NextHours2",
-                                    label: "widgets_weather_label_datastructure_nexthours2"
-                                },
-
-                                // WU
-                                {
-                                    value: "forecast",
-                                    label: "widgets_weather_label_datastructure_forecast"
-                                },
-                                {
-                                    value: "forecastHourly",
-                                    label: "widgets_weather_label_datastructure_forecastHourly"
-                                },
-                                {
-                                    value: "forecastPeriod",
-                                    label: "widgets_weather_label_datastructure_forecastPeriod"
-                                },
-
-                            ],
-                            default: "NextHours",
+                            options: datastructure_options,
+                            //default: weatherunderground ? "forecastHourly" : "NextHours",
                             onChange: setDataStructures,
 
                         },
@@ -422,16 +450,16 @@ class WeatherWidget extends (Generic) {
                     //ausbelnden bei instance == wetter
                     name: "chanceofraining", // group name
                     label: "group_chanceofrain",
-                    hidden: !weatherunderground,
+                    hidden: data => data.instance.indexOf("daswetter") > -1,
                     fields: [
                         {
                             name: "chanceofraining_visible",    // name in data structure
                             label: "widgets_weather_label_chanceofraining_visible", // translated field label
-                            type: "checkbox ",
+                            type: "checkbox",
                             default: false,
 
                             //enable for WU only
-                            hidden: !weatherunderground,
+                            hidden: data => data.instance.indexOf("daswetter") > -1,
                         },
                         {
                             name: "chanceofraining_color",    // name in data structure
@@ -440,7 +468,7 @@ class WeatherWidget extends (Generic) {
                             default: "blue",
 
                             //enable for WU only
-                            hidden: !weatherunderground,
+                            hidden: data => data.instance.indexOf("daswetter") > -1,
                         },
                         {
                             name: "chanceofraining_show_separate",    // name in data structure
@@ -449,14 +477,15 @@ class WeatherWidget extends (Generic) {
                             default: false,
 
                             //enable for WU only
-                            hidden: !weatherunderground,
+                            hidden: data => data.instance.indexOf("daswetter") > -1,
                         },
                     ]
                 },
                 {
                     name: "OIDS_general", // group name
                     label: "group_oids_general",
-                    fields: oid_general_fields
+                    fields: oid_general_fields,
+                    hidden: data => data.instance.indexOf("daswetter") > -1
                 },
                 {
                     name: "OIDS_rain", // group name
@@ -482,7 +511,7 @@ class WeatherWidget extends (Generic) {
                     name: "OIDS_chanceofrain", // group name
                     label: "group_oids_chanceofrain",
                     fields: oid_chanceofrain_fields,
-                    hidden : !weatherunderground
+                    hidden: data => data.instance.indexOf("daswetter") > -1
                 },
 
             ],
@@ -699,7 +728,7 @@ class WeatherWidget extends (Generic) {
                 }
             });
             series.push({
-                name: I18n.t("cloud"),
+                name: I18n.t("dummy"),
                 type: "bar",
                 data: [
                     ["2024-04-30T00:00:00.000Z", 10],
@@ -824,7 +853,7 @@ class WeatherWidget extends (Generic) {
             });
 
             series.push({
-                name: "rain",
+                name: I18n.t("rain"),
                 type: "bar",
                 data: weatherData[0][0],
                 color: this.state.rxData["rain_color"] || "blue",
@@ -886,7 +915,7 @@ class WeatherWidget extends (Generic) {
                 }
             });
             series.push({
-                name: "cloud",
+                name: I18n.t("dummy"),
                 type: "bar",
                 data: [
                     ["2024-04-30T00:00:00.000Z", 10],
@@ -985,7 +1014,7 @@ class WeatherWidget extends (Generic) {
             //let hour = 0;
             //let minute = 0;
 
-            console.log("dayData " + time_val);
+            //console.log("dayData " + time_val);
 
             
 
@@ -996,7 +1025,7 @@ class WeatherWidget extends (Generic) {
 
                 oDate = new Date(time_val);
 
-                console.log("time " + oDate.toLocaleTimeString());
+                //console.log("time " + oDate.toLocaleTimeString());
             }
 
 
@@ -1242,8 +1271,8 @@ class WeatherWidget extends (Generic) {
     renderWidgetBody(props) {
         super.renderWidgetBody(props);
 
-        //console.log("values" + JSON.stringify(this.state.values));
-        //console.log("rxData " + JSON.stringify(this.state.rxData));
+        console.log("values" + JSON.stringify(this.state.values));
+        console.log("rxData " + JSON.stringify(this.state.rxData));
 
         let size;
         if (!this.refCardContent.current) {

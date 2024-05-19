@@ -3,32 +3,8 @@
     "name": "vis-2-widgets-weather",
     "version": "0.2.6",
     "news": {
-      "0.2.6": {
-        "en": "adaption for weatherunderground",
-        "de": "anpassung für wetteruntergrund",
-        "ru": "адаптер для weatherunderground",
-        "pt": "adaptação ao clima em terra",
-        "nl": "aanpassing voor weerondergrondse",
-        "fr": "adaptation pour la météo sous terre",
-        "it": "adattamento per le condizioni meteorologiche",
-        "es": "adaptación para el subsuelo meteorológico",
-        "pl": "adaptacja do warunków atmosferycznych pod ziemią",
-        "uk": "адаптація до погодних умов",
-        "zh-cn": "气候地下适应"
-      },
-      "0.2.5": {
-        "en": "adaption for weatherunderground",
-        "de": "anpassung für wetteruntergrund",
-        "ru": "адаптер для weatherunderground",
-        "pt": "adaptação ao clima em terra",
-        "nl": "aanpassing voor weerondergrondse",
-        "fr": "adaptation pour la météo sous terre",
-        "it": "adattamento per le condizioni meteorologiche",
-        "es": "adaptación para el subsuelo meteorológico",
-        "pl": "adaptacja do warunków atmosferycznych pod ziemią",
-        "uk": "адаптація до погодних умов",
-        "zh-cn": "气候地下适应"
-      },
+      
+      
       "0.2.4": {
         "en": "ready for deployment",
         "de": "bereit für den einsatz",
@@ -42,32 +18,7 @@
         "uk": "готовий до розгортання",
         "zh-cn": "准备部署"
       },
-      "0.2.3": {
-        "en": "ready for deployment\n",
-        "de": "bereit für den einsatz\n",
-        "ru": "готовый к развертыванию\n",
-        "pt": "pronto para implantação\n",
-        "nl": "gereed voor inzet\n",
-        "fr": "prêts à être déployés\n",
-        "it": "pronto per la distribuzione\n",
-        "es": "listos para el despliegue\n",
-        "pl": "gotowe do rozmieszczenia\n",
-        "uk": "готовий до розгортання\n",
-        "zh-cn": "准备部署\n"
-      },
-      "0.2.2": {
-        "en": "ready for deployment",
-        "de": "bereit für den einsatz",
-        "ru": "готовый к развертыванию",
-        "pt": "pronto para implantação",
-        "nl": "gereed voor inzet",
-        "fr": "prêts à être déployés",
-        "it": "pronto per la distribuzione",
-        "es": "listos para el despliegue",
-        "pl": "gotowe do rozmieszczenia",
-        "uk": "готовий до розгортання",
-        "zh-cn": "准备部署"
-      },
+      
       "0.2.1": {
         "en": "translations and icons",
         "de": "übersetzungen und icons",

@@ -65,6 +65,8 @@ You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
 ### **WORK IN PROGRESS**
 * (René) adaption for weatherunderground
 * (René) bug fix: show legend in graph again, was missing after translations
+* (René) smaller bug fixes
+* (René) dependencies updated
 
 ### 0.2.4 (2024-05-04)
 * (René) ready for first deployment

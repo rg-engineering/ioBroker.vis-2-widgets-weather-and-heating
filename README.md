@@ -33,6 +33,7 @@ You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
 ![widget_weather.PNG](./doc/widget_weather.PNG)
 
 * OID's are automatically set based on general settings
+* x axis labels can be configured according [momentjs docu](http://momentjs.com/docs/#/displaying/format/) 
 
 ## weather day
 ![widget_weather_day.PNG](./doc/widget_weather_day.PNG)
@@ -62,6 +63,10 @@ You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
+
+### **WORK IN PROGRESS**
+* (René) X axis label adjustable
+
 ### 0.2.7 (2024-05-19)
 * (René) adaption for weatherunderground
 * (René) bug fix: show legend in graph again, was missing after translations

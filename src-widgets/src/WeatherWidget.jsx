@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles, withTheme } from "@mui/styles";
 
+import moment from 'moment';
+
 //import { Card, CardContent} from "@mui/material";
 
 //import ReactEchartsCore from "echarts-for-react";
@@ -24,13 +26,14 @@ const styles = () => ({
 });
 
 
-//todo für WU anpassen
-//todo icons für widgets und allgemein 256*256
+
+
 //todo readme anpassen
 //todo Format-String für Zeitanzeige X Achse (bug)
 //todo rerender verzögern, wenn Daten aktualisiert werden
 //todo Farbe für Background einstellbar
 //todo MinMax Temperatur auf ganze 5er runden
+//todo Legende im zweiten Diagramm wird nicht angezeigt
 
 
 
@@ -197,19 +200,6 @@ class WeatherWidget extends (Generic) {
         const max_days = 5;
         let max_periods = 23;
 
-
-        //todo set to true wenn WU
-        //let weatherunderground = false;
-
-        //console.log("#### values " + data["instance"]  );
-
-
-        //if (this.state.rxData["instance"].indexOf("weatherunderground") > -1) {
-        //    weatherunderground = true;
-        //    console.log("we are in  weatherunderground ");
-        //}
-
-
         if (data => data.instance.indexOf("weatherunderground")>-1) {
             //labels nur für jeweilige Instanz sichtbar machen
             datastructure_options.push({
@@ -317,8 +307,6 @@ class WeatherWidget extends (Generic) {
                             label: "without_card",
                             type: "checkbox",
                         },
-
-                        //todo nur als Beispiel zum ausblenden
                         {
                             name: "widgetTitle",
                             label: "name",
@@ -358,7 +346,7 @@ class WeatherWidget extends (Generic) {
                             name: "xaxis_axisLabel_formatstring",    // name in data structure
                             label: "widgets_weather_label_xaxis_axisLabel_formatstring", // translated field label
                             type: "text",
-                            default: "{ee} {hh}:{mm}",
+                            default: "ddd HH:mm",
                         },
                     ]
                 },
@@ -601,7 +589,7 @@ class WeatherWidget extends (Generic) {
         console.log("show second diagram " + useSecondDiagram);
 
         const location = this.state.values[`${this.state.rxData["oid_location"]}.val`];
-        //let axisLabel_formatstring = "'" + this.state.rxData["xaxis_axisLabel_formatstring"] + "'";
+        let axisLabel_formatstring = "'" + this.state.rxData["xaxis_axisLabel_formatstring"] + "'";
         console.log("##got " + location);
         //let headline = I18n.t("Weather at ") + location;
         const headline = location;
@@ -783,8 +771,24 @@ class WeatherWidget extends (Generic) {
 
                     rotate: 45,
                     //todo format einstellbar
-                    formatter: "{ee} {hh}:{mm}",
-                    //formatter: axisLabel_formatstring,
+                    //formatter: "{ee} {hh}:{mm}",
+
+                    formatter: function (value, index) {
+
+                        //http://momentjs.com/docs/#/displaying/format/
+
+                        let formatstring = "ddd HH:mm";
+                        if (axisLabel_formatstring !== null && axisLabel_formatstring !== undefined && axisLabel_formatstring.length>2) {
+                            formatstring = axisLabel_formatstring;
+                        }
+
+                        let date = moment(value).format(formatstring);
+
+                        return date;
+                    }
+
+
+
                 }
 
             },
@@ -794,7 +798,7 @@ class WeatherWidget extends (Generic) {
             series: series,
         };
 
-        console.log("options: " + JSON.stringify(content));
+        console.log("options1: " + JSON.stringify(content));
 
         return content;
     }
@@ -818,7 +822,7 @@ class WeatherWidget extends (Generic) {
 
         console.log("##got " + JSON.stringify(weatherData[0]));
 
-        //let axisLabel_formatstring = "'" + this.state.rxData["xaxis_axisLabel_formatstring"] + "'";
+        let axisLabel_formatstring =  this.state.rxData["xaxis_axisLabel_formatstring"];
 
         // min / max 
         const MinMax = weatherData[0][3];
@@ -885,7 +889,7 @@ class WeatherWidget extends (Generic) {
                 }
             });
             series.push({
-                name: this.state.rxData["sun_or_cloud"] === "sun" ? "sun" : "cloud",
+                name: this.state.rxData["sun_or_cloud"] === "sun" ? I18n.t("sun") : I18n.t("cloud"),
                 type: "bar",
                 data: weatherData[0][2],
                 color: this.state.rxData["clouds_color"] || "yellow",
@@ -962,8 +966,24 @@ class WeatherWidget extends (Generic) {
 
                     rotate: 45,
                     //todo format einstellbar
-                    formatter: "{ee} {hh}:{mm}",
+                    //formatter: "{ee} {hh}:{mm}",
                     //formatter: axisLabel_formatstring,
+
+                    formatter: function (value, index) {
+
+
+                        //http://momentjs.com/docs/#/displaying/format/
+
+                        let formatstring = "ddd HH:mm";
+                        if (axisLabel_formatstring !== null && axisLabel_formatstring !== undefined && axisLabel_formatstring.length > 2) {
+                            formatstring = axisLabel_formatstring;
+                        }
+
+                        let date = moment(value).format(formatstring);
+
+                        return date;
+                    }
+
                 }
 
             },
@@ -973,7 +993,7 @@ class WeatherWidget extends (Generic) {
             series: series,
         };
 
-        console.log("options: " + JSON.stringify(content));
+        console.log("options2: " + JSON.stringify(content));
 
         return content;
     }

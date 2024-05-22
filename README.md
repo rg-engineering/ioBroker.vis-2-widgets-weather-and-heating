@@ -57,14 +57,20 @@ You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
 
 * it's possible to auto calculate and show differences of values. Just tick "difference calculation" in settings.
 
-* 
+* it supports adapter sbfspot and ebus: just select instance and basic adjustments are done automitcally
 
 <!--
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
+
+ ### **WORK IN PROGRESS**
+ * (René) general diagram widget: x axis label format adjustable
+ * (René) general diagram widget: support of ebus and sbfspot
+
+
 ### 0.2.8 (2024-05-19)
-* (René) X axis label adjustable
+* (René) X axis label format adjustable
 
 ### 0.2.7 (2024-05-19)
 * (René) adaption for weatherunderground

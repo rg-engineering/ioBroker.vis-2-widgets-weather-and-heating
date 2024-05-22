@@ -57,6 +57,21 @@
   "widgets_weather_label_sunorcloud_cloud": "clouds",
   "widgets_weather_label_chanceofraining_visible": "chance of rain to show",
 
+
+  "widgets_echart_datastructure_ebus": "ebus data",
+  "widgets_echart_datastructure_sbfspot": "sbfspot data",
+  "widgets_echart_datastructure_sbfspot_serialnumber": "sbfspot serialnumber",
+  "widgets_echart_datastructure_ebus_value1": "ebus value 1",
+  "widgets_echart_datastructure_ebus_value2": "ebus value 2",
+  "widgets_echart_datastructure_ebus_value3": "ebus value 3",
+  "widgets_echart_datastructure_ebus_value4": "ebus value 4",
+  "widgets_echart_datastructure_ebus_value5": "ebus value 5",
+
+  "widgets_echart_datastructure_sbfspot_today": "today",
+  "widgets_echart_datastructure_sbfspot_last30days": "last 30 days",
+  "widgets_echart_datastructure_sbfspot_last12months": "last 12 months",
+  "widgets_echart_datastructure_sbfspot_years": "years",
+
   "rain": "rain",
   "temperature": "temperature",
   "sun": "sun",

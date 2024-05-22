@@ -24,7 +24,7 @@
 
   "without_card": "ohne Karte",
   "name": "Name",
-  "widgets_weather_label_instance": "Beispiel",
+  "widgets_weather_label_instance": "Instanz",
   "widgets_weather_label_oidlocation": "OID-Standort",
   "widgets_weather_label_datastructure": "Datenstruktur",
   "widgets_weather_label_datastructure_nextdaysdetailed": "Nächste Tage im Detail",
@@ -49,6 +49,22 @@
   "widgets_weather_label_sunorcloud_sun": "Sonne",
   "widgets_weather_label_sunorcloud_cloud": "Wolken",
   "widgets_weather_label_chanceofraining_visible": "Niederschlagswahrscheinlichkeit anzeigen",
+
+
+  "widgets_echart_datastructure_ebus": "ebus Daten",
+  "widgets_echart_datastructure_sbfspot": "sbfspot Daten",
+  "widgets_echart_datastructure_sbfspot_serialnumber": "sbfspot Seriennummer",
+  "widgets_echart_datastructure_ebus_value1": "ebus Wert 1",
+  "widgets_echart_datastructure_ebus_value2": "ebus Wert 2",
+  "widgets_echart_datastructure_ebus_value3": "ebus Wert 3",
+  "widgets_echart_datastructure_ebus_value4": "ebus Wert 4",
+  "widgets_echart_datastructure_ebus_value5": "ebus Wert 5",
+
+  "widgets_echart_datastructure_sbfspot_today": "heut",
+  "widgets_echart_datastructure_sbfspot_last30days": "letzte 30 Tage",
+  "widgets_echart_datastructure_sbfspot_last12months": "letzte 12 Monate",
+  "widgets_echart_datastructure_sbfspot_years": "Jahre",
+
   "rain": "Regen",
   "temperature": "Temperatur",
   "sun": "Sonne",

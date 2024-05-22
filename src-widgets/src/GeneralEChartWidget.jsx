@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles, withTheme } from "@mui/styles";
 
+import moment from "moment";
+
 //import { Card, CardContent } from "@mui/material";
 
 import ReactEchartsCore from "echarts-for-react";
@@ -24,7 +26,124 @@ const styles = () => ({
 //todo Auto-Kalkulation mit Unit k, M, m ...
 //todo Dummy-Y Achse wird nicht gelöscht, wenn relae Daten kommen
 
+//todo wenn keine Eineit angegeben, wird "null" angezeigt
+
 //todo für sbfspot und ebus anpassen
+
+const setDataStructures = async (field, data, changeData, socket) => {
+
+    console.log("set new datastructure " + data["dataCount"] + " " + JSON.stringify(field) + " " + JSON.stringify(data));
+
+    for (let d = 1; d <= data["dataCount"]; d++) {
+
+        const instance_name = "instance" + d;
+        const instance = data[instance_name];
+
+
+        if (instance.indexOf("sbfspot") > -1) {
+
+            console.log("we are in sbfspot " + instance);
+
+            //todo OID setzen, X Achse Format setzen
+
+
+            let formatstring = "";
+
+            const datastructure_sbfspot_name = "datastructure_sbfspot" + d;
+            const datastructure_sbfspot = data[datastructure_sbfspot_name];
+
+            const datastructure_sbfspot_serial_name = "datastructure_sbfspot_serialnumber" + d;
+            const datastructure_sbfspot_serial = data[datastructure_sbfspot_serial_name];
+
+
+            let oid_data = instance + "." + datastructure_sbfspot_serial + ".history.";
+
+            console.log("we are in sbfspot " + instance + " " + datastructure_sbfspot);
+
+            if (datastructure_sbfspot === "today") {
+                oid_data = oid_data + "today";
+                formatstring = "HH:mm";
+            }
+            else if (datastructure_sbfspot === "last30Days") {
+                oid_data = oid_data + "last30Days";
+                formatstring = "DD.MM";
+            }
+            else if (datastructure_sbfspot === "last12Months") {
+                oid_data = oid_data + "last12Months";
+                formatstring = "DD.MM";
+            }
+            else if (datastructure_sbfspot === "years") {
+                oid_data = oid_data + "years";
+                formatstring = "YYYY";
+            }
+
+            //sbfspot.0.2000562095.history.today
+            //sbfspot.0.2000562095.history.last30Days
+            //sbfspot.0.2000562095.history.last12Months
+            //sbfspot.0.2000562095.history.years
+
+
+            console.log("new " + oid_data + " " + formatstring);
+
+            data["oid_data" + d] = oid_data;
+
+            data["xaxis_axisLabel_formatstring"] = formatstring;
+
+
+        }
+        else if (instance.indexOf("ebus") > -1) {
+
+
+
+            //todo OID setzen, X Achse Format setzen
+
+            let oid_data = instance + ".history.";
+            let formatstring = "";
+
+            const datastructure_ebus_name = "datastructure_ebus" + d;
+            const datastructure_ebus = data[datastructure_ebus_name];
+
+            console.log("we are in ebus " + instance + " " + datastructure_ebus);
+
+            if (datastructure_ebus === "value1") {
+                oid_data = oid_data + "value1";
+                formatstring = "ddd HH:mm";
+            }
+            else if (datastructure_ebus === "value2") {
+                oid_data = oid_data + "value2";
+                formatstring = "ddd HH:mm";
+            }
+            else if (datastructure_ebus === "value3") {
+                oid_data = oid_data + "value3";
+                formatstring = "ddd HH:mm";
+            }
+            else if (datastructure_ebus === "value4") {
+                oid_data = oid_data + "value4";
+                formatstring = "ddd HH:mm";
+            }
+            //ebus.0.history.value1
+            //ebus.0.history.value2
+            //ebus.0.history.value3
+            //ebus.0.history.value4
+            //ebus.0.history.value5
+
+            console.log("new " + oid_data + " " + formatstring);
+
+            data["oid_data" + d] = oid_data;
+
+            data["xaxis_axisLabel_formatstring"] = formatstring;
+
+        }
+        else {
+            //do nothing
+            console.log("do nothing for " + instance);
+        }
+    }
+
+
+    changeData(data);
+};
+
 
 class GeneralEChartWidget extends (Generic) {
 
@@ -58,7 +177,7 @@ class GeneralEChartWidget extends (Generic) {
                             label: "without_card",
                             type: "checkbox",
                         },
-                       
+
                         {
                             name: "headline",    // name in data structure
                             label: "widgets_echart_label_headline", // translated field label
@@ -72,7 +191,7 @@ class GeneralEChartWidget extends (Generic) {
                             label: "widgets_echart_label_datacount",
                             default: 1,
                         },
-                        
+
                     ],
                 },
                 {
@@ -81,6 +200,92 @@ class GeneralEChartWidget extends (Generic) {
                     indexFrom: 1,
                     indexTo: "dataCount",
                     fields: [
+
+                        {
+                            name: "name",    // name in data structure
+                            label: "widgets_weather_label_name", // translated field label
+                            type: "text",
+                            default: "serie",
+                        },
+
+                        {
+                            name: "instance",    // name in data structure
+                            label: "widgets_weather_label_instance", // translated field label
+                            type: "instance",
+                            default: "",
+                            onChange: setDataStructures,
+                        },
+
+                        {
+                            name: "datastructure_ebus",    // name in data structure
+                            label: "widgets_echart_datastructure_ebus", // translated field label
+                            type: "select",
+                            options: [
+                                {
+                                    value: "value1",
+                                    label: "widgets_echart_datastructure_ebus_value1"
+                                },
+                                {
+                                    value: "value2",
+                                    label: "widgets_echart_datastructure_ebus_value2"
+                                },
+                                {
+                                    value: "value3",
+                                    label: "widgets_echart_datastructure_ebus_value3"
+                                },
+                                {
+                                    value: "value4",
+                                    label: "widgets_echart_datastructure_ebus_value4"
+                                }],
+                            default: "value1",
+                            onChange: setDataStructures,
+                            hidden: (data, index) => {
+                                console.log("???? " + JSON.stringify(data) + " " + JSON.stringify(index));
+                                return data[`instance${index}`].indexOf("ebus") < 0;
+                            }
+                        },
+
+                        {
+                            name: "datastructure_sbfspot",    // name in data structure
+                            label: "widgets_echart_datastructure_sbfspot", // translated field label
+                            type: "select",
+                            options: [
+                                {
+                                    value: "today",
+                                    label: "widgets_echart_datastructure_sbfspot_today"
+                                },
+                                {
+                                    value: "last30Days",
+                                    label: "widgets_echart_datastructure_sbfspot_last30days"
+                                },
+                                {
+                                    value: "last12Months",
+                                    label: "widgets_echart_datastructure_sbfspot_last12months"
+                                },
+                                {
+                                    value: "years",
+                                    label: "widgets_echart_datastructure_sbfspot_years"
+                                }],
+                            default: "today",
+                            onChange: setDataStructures,
+                            hidden: (data, index) => {
+                                console.log("???? " + JSON.stringify(data) + " " + JSON.stringify(index));
+                                return data[`instance${index}`].indexOf("sbfspot") < 0;
+                            }
+                        },
+
+                        {
+                            name: "datastructure_sbfspot_serialnumber",    // name in data structure
+                            label: "widgets_echart_datastructure_sbfspot_serialnumber", // translated field label
+                            type: "text",
+                            default: "",
+                            onChange: setDataStructures,
+                            hidden: (data, index) => {
+                                console.log("???? " + JSON.stringify(data) + " " + JSON.stringify(index));
+                                return data[`instance${index}`].indexOf("sbfspot") < 0;
+                            }
+                        },
+
                         {
                             name: "oid_data",    // name in data structure
                             label: "widgets_echart_label_oiddata", // translated field label
@@ -153,12 +358,12 @@ class GeneralEChartWidget extends (Generic) {
                             label: "widgets_weather_label_xaxis_axisLabel_formatstring", // translated field label
                             type: "text",
 
-                            default: "{ee} {hh}:{mm}",
+                            default: "ddd HH:mm",
 
                         },
                     ]
                 },
-               
+
 
             ],
             visPrev: "widgets/vis-2-widgets-weather/img/vis-widget-echart.png",
@@ -218,10 +423,10 @@ class GeneralEChartWidget extends (Generic) {
         //todo Farbe der Graphen einstellbar
 
         //todo serien einstellbar
-        //todo XAchse einstellbar
+
 
         console.log("getOption 1");
-        
+
         let dataMin = 0;
         let dataMax = 100;
 
@@ -233,15 +438,12 @@ class GeneralEChartWidget extends (Generic) {
 
         let cnt = 0;
 
-        console.log("getOption 2");
-
-        /*
-        gechart values{ "sbfspot.0.2000562095.history.years.val": "[{\"year\":\"2008\",\"value\":7000},{\"year\":\"2009\",\"value\":2309000},{\"year\":\"2010\",\"value\":4445000},{\"year\":\"2011\",\"value\":7019000},{\"year\":\"2012\",\"value\":9371000},{\"year\":\"2013\",\"value\":11393000},{\"year\":\"2014\",\"value\":13666000},{\"year\":\"2015\",\"value\":16034000},{\"year\":\"2016\",\"value\":17826790}]", "sbfspot.0.2000562095.history.years.ack": true, "sbfspot.0.2000562095.history.years.ts": 1660977902396, "sbfspot.0.2000562095.history.years.q": 0, "sbfspot.0.2000562095.history.years.from": "system.adapter.sbfspot.0", "sbfspot.0.2000562095.history.years.user": "system.user.admin", "sbfspot.0.2000562095.history.years.lc": 1660725002668 } src_GeneralEChartWidget_jsx.8424614c.chunk.js: 1: 2855
-        gechart rxData { "bindings": [], "oid_data": "sbfspot.0.2000562095.history.years", "g_common": true, "headline": "head", "xaxis_axisLabel_formatstring": "undefined undefined:undefined", "g_X_axis": true, "noCard": false, "dataCount": "1", "oid_data1": "sbfspot.0.2000562095.history.years", "data_color1": "yellow", "g_data-1": true }
-        */
+        const axisLabel_formatstring = this.state.rxData["xaxis_axisLabel_formatstring"];
 
         for (let d = 1; d <= this.state.rxData["dataCount"]; d++) {
 
+            const name_name =  "name" + d;
+            let name = this.state.rxData[name_name];
             let OID_name = "oid_data" + d;
             const OID = this.state.rxData[OID_name];
             const OID_val = OID + ".val";
@@ -324,10 +526,10 @@ class GeneralEChartWidget extends (Generic) {
 
                 //todo min max berechnen -> testen
                 //todo type einstellbar -> testen
-                //todo x Achse labe format einstellbar
+
                 //todo y achse unit einstellbar -> testen
                 //todo x achse unit einstellbar
-                //todo x achse type (tome or category) einstellbar
+                //todo x achse type (time or category) einstellbar
                 //todo option: diff aus aufeinander folgenden werten berechnen -> testen
                 //todo autoumrechnung w -> kW usw. ???
                 //todo keys einstellbar
@@ -335,9 +537,18 @@ class GeneralEChartWidget extends (Generic) {
 
             }
 
+
+            
+
+
             if (data && data.length > 0) {
 
-                legend.push("data" + d);
+                if (name === null || name === undefined) {
+                    name = "serie " + d;
+                }
+
+
+                legend.push(name);
 
                 const keys = Object.keys(data[0]);
                 console.log("keys " + keys);
@@ -348,7 +559,7 @@ class GeneralEChartWidget extends (Generic) {
                 const color = this.state.rxData[color_id];
 
                 series.push({
-                    name: "data",
+                    name: name,
                     type: type,
                     data: data,
                     color: color,
@@ -363,13 +574,21 @@ class GeneralEChartWidget extends (Generic) {
             }
 
             const unit_id = "data_unit" + d;
-            const unit = this.state.rxData[unit_id];
+            let unit = this.state.rxData[unit_id];
+            if (unit === null || unit === undefined) {
+                unit = "";
+            }
+
             const yaxispos_id = "data_yaxispos" + d;
-            const yaxispos = this.state.rxData[yaxispos_id];
+            let yaxispos = this.state.rxData[yaxispos_id];
+            if (yaxispos === null || yaxispos === undefined) {
+                yaxispos = "left";
+            }
+
 
             yaxis.push({
                 position: yaxispos,
-                show: yaxispos==="none" ? false : true,
+                show: yaxispos === "none" ? false : true,
                 type: "value",
                 min: dataMin,
                 max: dataMax,
@@ -397,7 +616,7 @@ class GeneralEChartWidget extends (Generic) {
                 max: 100,
                 axisLabel: {
                     formatter: function (value) {
-                        return value ;
+                        return value;
                     }
                 }
             });
@@ -447,9 +666,17 @@ class GeneralEChartWidget extends (Generic) {
                 axisLabel: {
 
                     rotate: 45,
-                    //todo format einstellbar
-                    formatter: "{yyyy}",
-                    //formatter: axisLabel_formatstring,
+                    formatter: function (value, index) {
+                        //http://momentjs.com/docs/#/displaying/format/
+                        let formatstring = "ddd HH:mm";
+                        if (axisLabel_formatstring !== null && axisLabel_formatstring !== undefined && axisLabel_formatstring.length > 2) {
+                            formatstring = axisLabel_formatstring;
+                        }
+                        const date = moment(value).format(formatstring);
+                        return date;
+                    }
+
+
                 }
 
             },
@@ -463,10 +690,7 @@ class GeneralEChartWidget extends (Generic) {
 
         return content;
     }
-    /*
 
-    options: {"backgroundColor":"transparent","title":{"text":"head"},"grid":{"show":true,"top":30,"bottom":60},"tooltip":{"trigger":"axis"},"legend":{"data":["data1"],"orient":"horizontal","right":10},"xAxis":{"type":"time","show":true,"axisLabel":{"rotate":45,"formatter":"{yy}"}},"yAxis":[{"position":"left","type":"value","min":0,"max":17826790,"axisLabel":{"formatter":"{value} undefined"}}],"series":[{"name":"data","type":"bar","data":[["2008-06-30T10:00:00.000Z",7000],["2009-06-30T10:00:00.000Z",2309000],["2010-06-30T10:00:00.000Z",4445000],["2011-06-30T10:00:00.000Z",7019000],["2012-06-30T10:00:00.000Z",9371000],["2013-06-30T10:00:00.000Z",11393000],["2014-06-30T10:00:00.000Z",13666000],["2015-06-30T10:00:00.000Z",16034000],["2016-06-30T10:00:00.000Z",17826790]],"color":"yellow","yAxisIndex":0,"tooltip":{}}]}
-    */
 
     renderWidgetBody(props) {
         super.renderWidgetBody(props);

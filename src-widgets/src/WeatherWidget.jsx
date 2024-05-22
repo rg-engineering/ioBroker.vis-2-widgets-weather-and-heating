@@ -31,6 +31,9 @@ const styles = () => ({
 //todo Farbe für Background einstellbar
 //todo MinMax Temperatur auf ganze 5er runden
 
+
+//todo Datenstruktur Optionen schalten nicht um, wenn Instanz gewechselt wird
+
 const setDataStructures = async (field, data, changeData, socket) => {
 
     console.log("set new datastructure instance " + data["instance"] + " " + data["datastructure"] );
@@ -581,7 +584,7 @@ class WeatherWidget extends (Generic) {
         console.log("show second diagram " + useSecondDiagram);
 
         const location = this.state.values[`${this.state.rxData["oid_location"]}.val`];
-        const axisLabel_formatstring = "'" + this.state.rxData["xaxis_axisLabel_formatstring"] + "'";
+        const axisLabel_formatstring =  this.state.rxData["xaxis_axisLabel_formatstring"] ;
         console.log("##got " + location);
         //let headline = I18n.t("Weather at ") + location;
         const headline = location;

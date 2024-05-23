@@ -64,9 +64,9 @@ You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
 -->
 ## Changelog
 
- ### **WORK IN PROGRESS**
- * (René) general diagram widget: x axis label format adjustable
- * (René) general diagram widget: support sbfspot (needs sbfspot version 4.3.1)
+### **WORK IN PROGRESS**
+* (René) general diagram widget: x axis label format adjustable
+* (René) general diagram widget: support sbfspot (needs sbfspot version 4.3.1)
 
 ### 0.2.8 (2024-05-19)
 * (René) X axis label format adjustable

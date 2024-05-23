@@ -341,6 +341,13 @@ class GeneralEChartWidget extends (Generic) {
                             default: "left",
                         },
                         {
+                            name: "data_autounit",    // name in data structure
+                            label: "widgets_echart_data_autounit", // translated field label
+                            type: "checkbox",
+                            default: false,
+
+                        },
+                        {
                             name: "data_calcdiff",    // name in data structure
                             label: "widgets_echart_data_calcdiff", // translated field label
                             type: "checkbox",
@@ -447,29 +454,19 @@ class GeneralEChartWidget extends (Generic) {
             let OID_name = "oid_data" + d;
             const OID = this.state.rxData[OID_name];
             const OID_val = OID + ".val";
-            const data_org1 = this.state.values[OID_val];
+            const data_org = this.state.values[OID_val];
 
-            console.log("data" + d + " :  " + OID_name + OID + " " + OID_val + " " + JSON.stringify(data_org1));
+            console.log("data" + d + " :  " + OID_name +" "+ OID + " " + OID_val + " " + JSON.stringify(data_org));
 
             const data = [];
 
             /*
-            sbfspot.0.2000562095.history.years.val "[
-                {\"year\":\"2008\",\"value\":7000},
-                {\"year\":\"2009\",\"value\":2309000},
-                {\"year\":\"2010\",\"value\":4445000},
-                {\"year\":\"2011\",\"value\":7019000},
-                {\"year\":\"2012\",\"value\":9371000},
-                {\"year\":\"2013\",\"value\":11393000},
-                {\"year\":\"2014\",\"value\":13666000},
-                {\"year\":\"2015\",\"value\":16034000},
-                {\"year\":\"2016\",\"value\":17826790}]"
+           new sbfspot
+
+           [["2008",7000],["2009",2309000],["2010",4445000],["2011",7019000],["2012",9371000],["2013",11393000],["2014",13666000],["2015",16034000],["2016",17826790]]
 
             vs
-
-            options: {
-            
-            "series":[{"name":"sun","type":"bar",
+           
             "data":[
                 ["2024-04-13T00:00:00.000Z",42],
                 ["2024-04-13T03:00:00.000Z",34],
@@ -482,14 +479,16 @@ class GeneralEChartWidget extends (Generic) {
 
                 */
 
-            if (data_org1 && data_org1.length > 1) {
+            if (data_org !== null && data_org!==undefined && data_org.length > 1) {
 
-                const data_org = JSON.parse(data_org1);
+                const data_json = JSON.parse(data_org);
 
                 let lastval4diff = 0;
 
-                for (let i = 0; i < data_org.length; i++) {
+                for (let i = 0; i < data_json.length; i++) {
 
+
+                    /* old sbfspot version
                     const oVals = data_org[i];
 
                     //todo keys einstellbar
@@ -497,13 +496,21 @@ class GeneralEChartWidget extends (Generic) {
                     let value = parseInt(oVals["value"], 10);
 
                     const oDate = new Date(year, 5, 30, 12, 0, 0, 0);
+                    */
 
+                    let date = data_json[i][0];
+                    let value = data_json[i][1];
+
+                    console.log("got # " + JSON.stringify(data_json[i]));
+
+                    const oDate = new Date(date);
 
                     OID_name = "data_calcdiff" + d;
-
+                    let doNotPush = false;
                     if (this.state.rxData[OID_name]) {
                         if (i === 0) {
                             lastval4diff = value;
+                            doNotPush = true;
                         }
                         else {
                             const newvalue = value - lastval4diff;
@@ -512,25 +519,25 @@ class GeneralEChartWidget extends (Generic) {
                         }
                     }
 
-                    if (value < dataMin) { dataMin = value; }
-                    if (value > dataMax) { dataMax = value; }
+                    if (doNotPush === false) {
+                        if (value < dataMin) { dataMin = value; }
+                        if (value > dataMax) { dataMax = value; }
 
-                    console.log("push # " + year + " " + value);
-                    data.push(
-                        [
-                            oDate,
-                            value
-                        ]
-                    );
+                        console.log("push # " + oDate.toLocaleString() + " " + value);
+                        data.push(
+                            [
+                                oDate,
+                                value
+                            ]
+                        );
+                    }
                 }
 
-                //todo min max berechnen -> testen
-                //todo type einstellbar -> testen
 
-                //todo y achse unit einstellbar -> testen
+
                 //todo x achse unit einstellbar
                 //todo x achse type (time or category) einstellbar
-                //todo option: diff aus aufeinander folgenden werten berechnen -> testen
+
                 //todo autoumrechnung w -> kW usw. ???
                 //todo keys einstellbar
                 //todo einstellbares format (reine liste, oder object liste)
@@ -621,7 +628,7 @@ class GeneralEChartWidget extends (Generic) {
                 }
             });
             series.push({
-                name: "data",
+                name: I18n.t("dummy"),
                 type: "bar",
                 data: [
                     ["2024-04-30T00:00:00.000Z", 10],

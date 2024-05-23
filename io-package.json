@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather",
-    "version": "0.2.8",
+    "version": "0.2.9",
     "news": {
+      "0.2.9": {
+        "en": "(René) general diagram widget: x axis label format adjustable\n(René) general diagram widget: support sbfspot (needs sbfspot version 4.3.1)",
+        "de": "(René) allgemeines Diagramm Widget: x-Achsenlabel Format einstellbar\n(René) allgemeines Diagramm Widget: sbfspot (needs sbfspot version 4.3.1)",
+        "ru": "(René) виджет общей диаграммы: x ось\n(René) общая диаграмма виджет: поддержка sbfspot",
+        "pt": "(René) widget geral do diagrama: x formato da etiqueta do eixo ajustável\n(René) widget geral do diagrama: suporte sbfspot (needs sbfspot versão 4.3.1)",
+        "nl": "(René) algemeen diagram widget: x as label formaat instelbaar\n(René) algemeen diagram widget: ondersteuning sbfspot (nodige sbfspot versie 4.3.1)",
+        "fr": "Widget de diagramme général (René) : format d'étiquette x axe réglable\n(René) widget de diagramme général: support sbfspot (besoins sbfspot version 4.3.1)",
+        "it": "(René) widget diagramma generale: formato etichetta x asse regolabile\n(René) widget diagramma generale: support sbfspot (needs sbfspot versione 4.3.1)",
+        "es": "(René) widget de diagrama general: formato de etiqueta de eje x ajustable\n(René) widget de diagrama general: soporte sbfspot (necesidad sbfspot versión 4.3.1)",
+        "pl": "(René) ogólny widget diagramu: format etykiety x regulowany\n(René) ogólny widget diagramu: wsparcie sbfspot (wymaga sbfspot wersja 4.3.1)",
+        "uk": "(René) загальний віджет діаграми: x вісь формат регульований\n(René) загальний віджет діаграми: підтримка sbfspot (needs sbfspot version 4.3.1)",
+        "zh-cn": "(René) 一般图件:x轴标签格式可调整\n(René)普通图件:支持sbfspot(需要sbfspot版本4.3.1)"
+      },
       "0.2.8": {
         "en": "(René) X axis label adjustable",
         "de": "(René) X-Achsenlabel einstellbar",

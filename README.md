@@ -63,8 +63,7 @@ You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
-
-### **WORK IN PROGRESS**
+### 0.2.10 (2024-05-24)
 * (René) general diagram widget: support ebus (needs ebus version 3.3.0)
 * (René) general diagram widget: auto unit calculation as an option
 

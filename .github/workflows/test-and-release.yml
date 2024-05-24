@@ -41,7 +41,7 @@ jobs:
           node-version: 20
 
       - name: Install Dependencies
-        run: npm i
+        run: npm ci
 
       - name: Build
         run: npm run build
@@ -80,7 +80,7 @@ jobs:
           node-version: 20
 
       - name: Install Dependencies
-        run: npm i
+        run: npm ci
 
       - name: Extract the version and commit body from the tag
         id: extract_release
@@ -120,7 +120,7 @@ jobs:
 
       - name: Notify Sentry.io about the release
         run: |
-          npm i -g @sentry/cli
+          npm ci -g @sentry/cli
           export SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
           export SENTRY_URL=https://sentry.io
           export SENTRY_ORG=rg-engineering

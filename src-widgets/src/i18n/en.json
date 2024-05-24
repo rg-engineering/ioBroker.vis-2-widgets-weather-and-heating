@@ -93,6 +93,7 @@
   "widgets_echart_data_yaxispos_left": "left",
   "widgets_echart_data_yaxispos_right": "right",
   "widgets_echart_data_calcdiff": "difference calculation",
+  "widgets_echart_data_autounit": "unit auto calc",
 
   "vis_2_widgets-weatherday": "weather day details widget",
   "widgets_weather_label_oiddayname": "OID day name",

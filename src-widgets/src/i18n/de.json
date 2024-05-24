@@ -85,6 +85,9 @@
   "widgets_echart_data_yaxispos_left": "links",
   "widgets_echart_data_yaxispos_right": "rechts",
   "widgets_echart_data_calcdiff": "Differenzberechnung",
+  "widgets_echart_data_autounit": "Auto-Berechnung Einheit",
+
+
   "vis_2_widgets-weatherday": "Wetter-Tagesdetails-Widget",
   "widgets_weather_label_oiddayname": "Name des OID-Tages",
   "widgets_weather_label_oiddate": "OID-Datum",

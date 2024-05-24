@@ -23,12 +23,16 @@ const styles = () => ({
     },
 });
 
-//todo Auto-Kalkulation mit Unit k, M, m ...
-//todo Dummy-Y Achse wird nicht gelöscht, wenn relae Daten kommen
 
-//todo wenn keine Eineit angegeben, wird "null" angezeigt
+//todo Dummy-Y Achse wird nicht gelöscht, wenn reale Daten kommen
+//todo x achse unit einstellbar
+//todo x achse type (time or category) einstellbar
 
-//todo für sbfspot und ebus anpassen
+
+
+
+
+
 
 const setDataStructures = async (field, data, changeData, socket) => {
 
@@ -44,7 +48,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
 
             console.log("we are in sbfspot " + instance);
 
-            //todo OID setzen, X Achse Format setzen
+            //OID setzen, X Achse Format setzen
 
 
             let formatstring = "";
@@ -70,18 +74,12 @@ const setDataStructures = async (field, data, changeData, socket) => {
             }
             else if (datastructure_sbfspot === "last12Months") {
                 oid_data = oid_data + "last12Months";
-                formatstring = "DD.MM";
+                formatstring = "DD.MM.YY";
             }
             else if (datastructure_sbfspot === "years") {
                 oid_data = oid_data + "years";
                 formatstring = "YYYY";
             }
-
-            //sbfspot.0.2000562095.history.today
-            //sbfspot.0.2000562095.history.last30Days
-            //sbfspot.0.2000562095.history.last12Months
-            //sbfspot.0.2000562095.history.years
-
 
             console.log("new " + oid_data + " " + formatstring);
 
@@ -95,7 +93,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
 
 
 
-            //todo OID setzen, X Achse Format setzen
+            //OID setzen, X Achse Format setzen
 
             let oid_data = instance + ".history.";
             let formatstring = "";
@@ -121,12 +119,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
                 oid_data = oid_data + "value4";
                 formatstring = "ddd HH:mm";
             }
-            //ebus.0.history.value1
-            //ebus.0.history.value2
-            //ebus.0.history.value3
-            //ebus.0.history.value4
-            //ebus.0.history.value5
-
+            
             console.log("new " + oid_data + " " + formatstring);
 
             data["oid_data" + d] = oid_data;
@@ -425,13 +418,6 @@ class GeneralEChartWidget extends (Generic) {
      */
     getOption() {
 
-        //todo legende von den einstellungen
-
-        //todo Farbe der Graphen einstellbar
-
-        //todo serien einstellbar
-
-
         console.log("getOption 1");
 
         let dataMin = 0;
@@ -460,24 +446,6 @@ class GeneralEChartWidget extends (Generic) {
 
             const data = [];
 
-            /*
-           new sbfspot
-
-           [["2008",7000],["2009",2309000],["2010",4445000],["2011",7019000],["2012",9371000],["2013",11393000],["2014",13666000],["2015",16034000],["2016",17826790]]
-
-            vs
-           
-            "data":[
-                ["2024-04-13T00:00:00.000Z",42],
-                ["2024-04-13T03:00:00.000Z",34],
-                ["2024-04-13T06:00:00.000Z",63],
-                ["2024-04-13T09:00:00.000Z",45],
-                ["2024-04-13T12:00:00.000Z",51],
-                ["2024-04-13T15:00:00.000Z",50],
-                ["2024-04-13T18:00:00.000Z",50],
-                ["2024-04-13T21:00:00.000Z",50]]
-
-                */
 
             if (data_org !== null && data_org!==undefined && data_org.length > 1) {
 
@@ -486,17 +454,6 @@ class GeneralEChartWidget extends (Generic) {
                 let lastval4diff = 0;
 
                 for (let i = 0; i < data_json.length; i++) {
-
-
-                    /* old sbfspot version
-                    const oVals = data_org[i];
-
-                    //todo keys einstellbar
-                    const year = parseInt(oVals["year"], 10);
-                    let value = parseInt(oVals["value"], 10);
-
-                    const oDate = new Date(year, 5, 30, 12, 0, 0, 0);
-                    */
 
                     let date = data_json[i][0];
                     let value = data_json[i][1];
@@ -532,21 +489,9 @@ class GeneralEChartWidget extends (Generic) {
                         );
                     }
                 }
-
-
-
-                //todo x achse unit einstellbar
-                //todo x achse type (time or category) einstellbar
-
-                //todo autoumrechnung w -> kW usw. ???
-                //todo keys einstellbar
-                //todo einstellbares format (reine liste, oder object liste)
-
             }
 
-
-            
-
+            let preUnit = "";
 
             if (data && data.length > 0) {
 
@@ -565,6 +510,43 @@ class GeneralEChartWidget extends (Generic) {
                 const color_id = "data_color" + d;
                 const color = this.state.rxData[color_id];
 
+                const autounit_name = "data_autounit" + d;
+
+                
+                let factor = 1;
+                if (this.state.rxData[autounit_name]) {
+                    //G
+                    if (dataMax > 1000000000) {
+                        preUnit = "G";
+                        factor = 1000000000;
+
+                    }
+                    //M
+                    else if (dataMax > 1000000) {
+                        preUnit = "M";
+                        factor = 1000000;
+                    }
+                    //k
+                    else if (dataMax > 1000) {
+                        preUnit = "k";
+                        factor = 1000;
+                    }
+                    //m
+                    else if (dataMin < 0.001) {
+                        preUnit = "m";
+                        factor = 0.001;
+                    }
+
+                    //recalc all values
+                    if (preUnit.length > 0 && factor !== 1) {
+                        for (let i = 0; i < data.length; i++) {
+                            data[i][1] = data[i][1] / factor;
+                        }
+                        dataMin = dataMin / factor;
+                        dataMax = dataMax / factor;
+                    }
+                }
+
                 series.push({
                     name: name,
                     type: type,
@@ -581,7 +563,7 @@ class GeneralEChartWidget extends (Generic) {
             }
 
             const unit_id = "data_unit" + d;
-            let unit = this.state.rxData[unit_id];
+            let unit = preUnit + this.state.rxData[unit_id];
             if (unit === null || unit === undefined) {
                 unit = "";
             }

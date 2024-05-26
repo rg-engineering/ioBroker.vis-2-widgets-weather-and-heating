@@ -31,8 +31,9 @@ const styles = () => ({
 //todo Farbe für Background einstellbar
 //todo MinMax Temperatur auf ganze 5er runden
 
+//todo überflüssige OID"s löschen
+//todo WU weitere zwei Datenstrukturen supporten
 
-//todo Datenstruktur Optionen schalten nicht um, wenn Instanz gewechselt wird
 
 const setDataStructures = async (field, data, changeData, socket) => {
 
@@ -1284,7 +1285,7 @@ class WeatherWidget extends (Generic) {
         console.log("size " + size + " " + useSecondDiagram);
 
 
-        //todo zweites diagramm nur wenn notwendig
+        //zweites diagramm nur wenn notwendig
         const content = <div
             ref={this.refCardContent}
             className={this.props.classes.cardContent}

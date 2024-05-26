@@ -307,6 +307,13 @@ class GeneralEChartWidget extends (Generic) {
                             default: "",
                         },
                         {
+                            name: "data_autounit",    // name in data structure
+                            label: "widgets_echart_data_autounit", // translated field label
+                            type: "checkbox",
+                            default: false,
+
+                        },
+                        {
                             name: "data_color",    // name in data structure
                             label: "widgets_echart_data_color", // translated field label
                             type: "color",
@@ -333,13 +340,7 @@ class GeneralEChartWidget extends (Generic) {
                                 }],
                             default: "left",
                         },
-                        {
-                            name: "data_autounit",    // name in data structure
-                            label: "widgets_echart_data_autounit", // translated field label
-                            type: "checkbox",
-                            default: false,
-
-                        },
+                        
                         {
                             name: "data_calcdiff",    // name in data structure
                             label: "widgets_echart_data_calcdiff", // translated field label

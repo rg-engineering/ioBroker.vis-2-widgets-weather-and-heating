@@ -117,6 +117,8 @@
   "widgets_weather_label_windiconset_galeria1": "Galerie 1",
   "widgets_weather_label_windiconset_galeria2": "Galerie 2",
   "widgets_weather_label_windiconset_beaufort": "beaufort",
+  "widgets_weather_label_name": "Name",
+
   "Wind": "Wind",
   "WindGusts": "Windböen",
   "min": "Mindest",

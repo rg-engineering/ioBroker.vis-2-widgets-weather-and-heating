@@ -7,6 +7,7 @@ import { i18n as I18n } from "@iobroker/adapter-react-v5";
 import WeatherWidget from "./WeatherWidget";
 import WeatherDayWidget from "./WeatherDayWidget";
 import GeneralEChartWidget from "./GeneralEChartWidget";
+import HeatingTimescheduleWidget from "./HeatingTimescheduleWidget";
 import translations from "./translations";
 
 const styles = theme => ({
@@ -56,6 +57,18 @@ class App extends WidgetDemoApp {
             />;
 
             <WeatherDayWidget
+                socket={this.socket}
+                themeType={this.state.themeType}
+                style={{
+                    width: 300,
+                    height: 150,
+                }}
+                data={{
+                    type: "all",
+                }}
+            />;
+
+            <HeatingTimescheduleWidget
                 socket={this.socket}
                 themeType={this.state.themeType}
                 style={{

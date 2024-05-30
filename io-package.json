@@ -154,9 +154,10 @@
         "name": "vis2Weather",
         "url": "vis-2-widgets-weather/customWidgets.js",
         "components": [
-          "WeatherWidget",
           "GeneralEChartWidget",
-          "WeatherDayWidget"
+          "WeatherWidget",
+          "WeatherDayWidget",
+          "HeatingTimescheduleWidget"
         ]
       }
     },

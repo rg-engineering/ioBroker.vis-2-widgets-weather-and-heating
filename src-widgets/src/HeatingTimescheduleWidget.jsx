@@ -3,6 +3,14 @@ import PropTypes from "prop-types";
 import { withStyles, withTheme } from "@mui/styles";
 
 import Grid from "@mui/material/Grid";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+
 
 
 //import { Card, CardContent } from "@mui/material";
@@ -22,6 +30,12 @@ const styles = () => ({
     },
 });
 
+//todo OID's konfigurierbar
+//todo perioden nach Daten anzeigen
+//todo Zeit / Temperatur eingebbar
+//todo Mo - So, Mo -Fr + Sa So, jeder Tag einzeln
+
+
 const setDataStructures = async (field, data, changeData, socket) => {
 
     console.log("set new datastructure instance" + data["instance"] );
@@ -30,6 +44,37 @@ const setDataStructures = async (field, data, changeData, socket) => {
     
     if (instance && instance.length > 0 && instance.includes("heatingcontrol") ) {
 
+
+        data["oid_CurrentProfile"] = instance + ".CurrentProfile";
+        data["oid_ChoosenRoom"] = instance + ".vis.ChoosenRoom";
+        data["oid_ProfileType"] = instance + ".info.ProfileType";
+        data["oid_NumberOfPeriods"] = instance + ".info.NumberOfPeriods";
+        data["oid_profile_MoSu_1_Temperature"] = instance + ".vis.ProfileTypes.Mo-Su.Periods.1.Temperature";
+        data["oid_profile_MoSu_1_Time"] = instance + ".vis.ProfileTypes.Mo-Su.Periods.1.time";
+        data["oid_profile_MoSu_2_Temperature"] = instance + ".vis.ProfileTypes.Mo-Su.Periods.2.Temperature";
+        data["oid_profile_MoSu_2_Time"] = instance + ".vis.ProfileTypes.Mo-Su.Periods.2.time";
+        data["oid_profile_MoSu_3_Temperature"] = instance + ".vis.ProfileTypes.Mo-Su.Periods.3.Temperature";
+        data["oid_profile_MoSu_3_Time"] = instance + ".vis.ProfileTypes.Mo-Su.Periods.3.time";
+        data["oid_profile_MoSu_4_Temperature"] = instance + ".vis.ProfileTypes.Mo-Su.Periods.4.Temperature";
+        data["oid_profile_MoSu_4_Time"] = instance + ".vis.ProfileTypes.Mo-Su.Periods.4.time";
+        data["oid_profile_MoSu_5_Temperature"] = instance + ".vis.ProfileTypes.Mo-Su.Periods.5.Temperature";
+        data["oid_profile_MoSu_5_Time"] = instance + ".vis.ProfileTypes.Mo-Su.Periods.5.time";
+
+
+        /*
+        heatingcontrol.0.CurrentProfile
+        heatingcontrol.0.Profiles.1.ProfileName
+
+        heatingcontrol.0.vis.ChoosenRoom
+
+        heatingcontrol.0.info.ProfileType
+        heatingcontrol.0.info.NumberOfPeriods
+        heatingcontrol.0.info.NumberOfPeriods
+
+
+        heatingcontrol.0.vis.ProfileTypes.Mo-Su.Periods.1.Temperature
+        heatingcontrol.0.vis.ProfileTypes.Mo-Su.Periods.1.time
+        */
 
     }
     changeData(data);
@@ -91,8 +136,111 @@ class HeatingTimescheduleWidget extends (Generic) {
                     name: "OIDS", // group name
                     fields: [
 
-                        
+                        /*
+                               
+        heatingcontrol.0.Profiles.1.ProfileName
 
+
+
+        
+        
+
+
+
+        
+        heatingcontrol.0.vis.ProfileTypes.Mo-Su.Periods.1.time
+                        */
+
+
+                        {
+                            name: "oid_CurrentProfile",    // name in data structure
+                            label: "widgets_heating_label_currentprofile", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.CurrentProfile",
+                        },
+                        {
+                            name: "oid_ChoosenRoom",    // name in data structure
+                            label: "widgets_heating_label_choosenroom", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ChoosenRoom",
+                        },
+                        {
+                            name: "oid_ProfileType",    // name in data structure
+                            label: "widgets_heating_label_profiletype", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.info.ProfileType",
+                        },
+                        {
+                            name: "oid_NumberOfPeriods",    // name in data structure
+                            label: "widgets_heating_label_numberofperiods", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.info.NumberOfPeriods",
+                        },
+
+                        {
+                            name: "oid_profile_MoSu_1_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilemosu1_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mo-Su.Periods.1.Temperature",
+                        },
+                        {
+                            name: "oid_profile_MoSu_1_Time",    // name in data structure
+                            label: "widgets_heating_label_profilemosu1_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mo-Su.Periods.1.time",
+                        },
+
+                        {
+                            name: "oid_profile_MoSu_2_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilemosu2_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mo-Su.Periods.2.Temperature",
+                        },
+                        {
+                            name: "oid_profile_MoSu_2_Time",    // name in data structure
+                            label: "widgets_heating_label_profilemosu2_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mo-Su.Periods.2.time",
+                        },
+
+                        {
+                            name: "oid_profile_MoSu_3_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilemosu3_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mo-Su.Periods.3.Temperature",
+                        },
+                        {
+                            name: "oid_profile_MoSu_3_Time",    // name in data structure
+                            label: "widgets_heating_label_profilemosu3_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mo-Su.Periods.3.time",
+                        },
+
+                        {
+                            name: "oid_profile_MoSu_4_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilemosu4_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mo-Su.Periods.4.Temperature",
+                        },
+                        {
+                            name: "oid_profile_MoSu_4_Time",    // name in data structure
+                            label: "widgets_heating_label_profilemosu4_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mo-Su.Periods.4.time",
+                        },
+
+                        {
+                            name: "oid_profile_MoSu_5_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilemosu5_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mo-Su.Periods.5.Temperature",
+                        },
+                        {
+                            name: "oid_profile_MoSu_5_Time",    // name in data structure
+                            label: "widgets_heating_label_profilemosu5_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mo-Su.Periods.5.time",
+                        },
                     ],
                 },
                
@@ -146,8 +294,231 @@ class HeatingTimescheduleWidget extends (Generic) {
 
     }
 
+    createData(index, time, temperature) {
+        return { index, time, temperature };
+    }
     
-   
+
+    createTable_MoSu(noOfPeriods, room) {
+
+        console.log("createTable_MoSu called " + room);
+
+
+        const periods = [];
+
+        for (let p = 1; p <= noOfPeriods; p++) {
+
+            const oid_time = "oid_profile_MoSu_" + p + "_Time";
+            const oid_temperature = "oid_profile_MoSu_" + p + "_Temperature";
+
+            const time = this.state.values[`${this.state.rxData[oid_temperature]}.val`];
+            const temperature = this.state.values[`${this.state.rxData[oid_time]}.val`];
+
+            console.log("map " + p + " " + time + " " + temperature + " " + oid_time + " " + oid_temperature);
+
+            periods.push(this.createData(p, time, temperature));
+        }
+
+
+        const timetable = <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 250 }} size="small" aria-label="a dense table">
+                <TableHead>
+                    <TableRow>
+                        <TableCell align="right">{I18n.t("Period")}</TableCell>
+                        <TableCell align="right">{I18n.t("from")}</TableCell>
+                        <TableCell align="right" > {I18n.t("Temperature")}</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {periods.map((period) => (
+                        <TableRow
+                            key={period.index}
+                            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                        >
+                            <TableCell component="th" scope="row">
+                                {period.index}
+                            </TableCell>
+                            <TableCell align="right">{period.time}</TableCell>
+                            <TableCell align="right">{period.temperature}</TableCell>
+                        </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>;
+
+
+        const content = <div
+            ref={this.refCardContent}
+            className={this.props.classes.cardContent}
+        >
+
+            <Grid
+                container spacing={0.5}
+                alignItems="center"
+                justifyContent="center"
+            >
+
+                <Grid item xs={12}>
+                    <div>
+                        <p>{I18n.t("Zeiten / Woche")}</p>
+                        <p> {I18n.t("Profil / ")} {room}</p>
+                    </div>
+                </Grid>
+                <Grid item xs={12}>
+                    <div>
+                        <p>{I18n.t("Mo. - So.")}</p>
+                    </div>
+                </Grid>
+            </Grid>
+
+            {timetable}
+
+
+
+
+
+
+
+        </div>;
+
+
+        return content;
+    }
+
+    createTable_MoFr_SaSo(noOfPeriods, room) {
+        console.log("createTable_MoFr_SaSo called " + room);
+
+        for (let p = 1; p <= noOfPeriods; p++) {
+        }
+
+        const content = <div
+            ref={this.refCardContent}
+            className={this.props.classes.cardContent}
+        >
+
+            <Grid
+                container spacing={0.5}
+                alignItems="center"
+                justifyContent="center"
+            >
+
+                <Grid item xs={12}>
+                    <div>
+                        <p>{I18n.t("Zeiten / Woche")}</p>
+                        <p> {I18n.t("Profil / ")} {room}</p>
+                    </div>
+                </Grid>
+                <Grid item xs={12}>
+                    <div>
+                        <p>{I18n.t("Mo. - Fr. / Sa. - Su.")}</p>
+                    </div>
+                </Grid>
+                <Grid item xs={2}>
+                    <div>
+                        <p>{I18n.t("Per.")}</p>
+                    </div>
+                </Grid>
+                <Grid item xs={5}>
+                    <div>
+                        <p>{I18n.t("ab")}</p>
+                    </div>
+                </Grid>
+                <Grid item xs={5}>
+                    <div>
+                        <p>{I18n.t("°C")}</p>
+                    </div>
+                </Grid>
+
+                
+                
+
+
+
+            </Grid>
+        </div>;
+        return content;
+    }
+
+    createTable_EveryDay(noOfPeriods, room) {
+
+        console.log("createTable_EvreryDay called " + room);
+
+        for (let p = 1; p <= noOfPeriods; p++) {
+        }
+
+        const content = <div
+            ref={this.refCardContent}
+            className={this.props.classes.cardContent}
+        >
+
+            <Grid
+                container spacing={0.5}
+                alignItems="center"
+                justifyContent="center"
+            >
+
+                <Grid item xs={12}>
+                    <div>
+                        <p>{I18n.t("Zeiten / Woche")}</p>
+                        <p> {I18n.t("Profil / ")} {room}</p>
+                    </div>
+                </Grid>
+                <Grid item xs={12}>
+                    <div>
+                        <p>{I18n.t("every day")}</p>
+                    </div>
+                </Grid>
+                <Grid item xs={2}>
+                    <div>
+                        <p>{I18n.t("Per.")}</p>
+                    </div>
+                </Grid>
+                <Grid item xs={5}>
+                    <div>
+                        <p>{I18n.t("ab")}</p>
+                    </div>
+                </Grid>
+                <Grid item xs={5}>
+                    <div>
+                        <p>{I18n.t("°C")}</p>
+                    </div>
+                </Grid>
+
+
+
+
+
+
+            </Grid>
+        </div>;
+        return content;
+
+    }
+
+    CreateTable() {
+
+        const profileType = this.state.values[`${this.state.rxData["oid_ProfileType"]}.val`];
+        const noOfPeriods = this.state.values[`${this.state.rxData["oid_NumberOfPeriods"]}.val`];
+        const room = this.state.values[`${this.state.rxData["oid_ChoosenRoom"]}.val`];
+
+        if (profileType === "Mo - Su") {
+            return this.createTable_MoSu(noOfPeriods, room);
+        }
+
+        else if (profileType === "Mo - Fr / Sa - Su") {
+            return this.createTable_MoFr_SaSo(noOfPeriods, room);
+        }
+
+        else if (profileType === "every Day") {
+            return this.createTable_EveryDay(noOfPeriods, room);
+        }
+        else {
+            console.log("unknown profile type " + profileType);
+            return null;
+
+        }
+    }
+
 
     renderWidgetBody(props) {
         super.renderWidgetBody(props);
@@ -163,28 +534,8 @@ class HeatingTimescheduleWidget extends (Generic) {
         console.log("heating time schedule: size " + size);
 
         
-
-        const content = <div
-            ref={this.refCardContent}
-            className={this.props.classes.cardContent}
-        >
-
-            <Grid
-                container spacing={0.5}
-                alignItems="center"
-                justifyContent="center"
-            >
-
-                <Grid item xs={12}>
-                    <div>
-                        <p>{this.state.values[`${this.state.rxData["oid_dayname"]}.val`]}</p>    
-                        <p>{oDate.toLocaleDateString()}</p>
-                    </div>
-                </Grid>
-                
+        const content = this.CreateTable();
         
-            </Grid>
-        </div>;
 
         if (this.state.rxData.noCard || props.widget.usedInWidget) {
             console.log("nur content");

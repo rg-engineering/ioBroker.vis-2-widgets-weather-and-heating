@@ -63,7 +63,8 @@ gulp.task('widget-3-copy', () => Promise.all([
             `${SRC}build/static/js/*mui_material_Avatar*.*`,
             `${SRC}build/static/js/*mui_material_styles_styled*.*`,
             `${SRC}build/static/js/*mui_material_Grid_Grid*.*`,
-            `${SRC}build/static/js/*mui_styled-engine_index_js-node_modules_mui_system_esm*.*`
+            `${SRC}build/static/js/*mui_styled-engine_index_js-node_modules_mui_system_esm*.*`,
+            `${src}build/static/js/*mui_material_TableBody_TableBody_js-node_modules_mui_material_TableCell_*.*.*`
 
             
         ],

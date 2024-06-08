@@ -30,11 +30,11 @@ const styles = () => ({
     },
 });
 
-//todo OID's konfigurierbar
-//todo perioden nach Daten anzeigen
-//todo Zeit / Temperatur eingebbar
-//todo Mo - So, Mo -Fr + Sa So, jeder Tag einzeln
 
+//todo Zeit / Temperatur eingebbar
+//todo aktuelle Periode markieren
+//todo Breite optimieren
+//todo bei mehreren Perioden : untereinander darstellen, wenn breite zu klein
 
 const setDataStructures = async (field, data, changeData, socket) => {
 
@@ -48,6 +48,10 @@ const setDataStructures = async (field, data, changeData, socket) => {
         data["oid_CurrentProfile"] = instance + ".CurrentProfile";
         data["oid_ChoosenRoom"] = instance + ".vis.ChoosenRoom";
         data["oid_ProfileType"] = instance + ".info.ProfileType";
+        //data["oid_ProfileName"] = instance + ".info.ProfileType";
+
+
+        //Mo-Su
         data["oid_NumberOfPeriods"] = instance + ".info.NumberOfPeriods";
         data["oid_profile_MoSu_1_Temperature"] = instance + ".vis.ProfileTypes.Mo-Su.Periods.1.Temperature";
         data["oid_profile_MoSu_1_Time"] = instance + ".vis.ProfileTypes.Mo-Su.Periods.1.time";
@@ -60,6 +64,113 @@ const setDataStructures = async (field, data, changeData, socket) => {
         data["oid_profile_MoSu_5_Temperature"] = instance + ".vis.ProfileTypes.Mo-Su.Periods.5.Temperature";
         data["oid_profile_MoSu_5_Time"] = instance + ".vis.ProfileTypes.Mo-Su.Periods.5.time";
 
+        //Mo-Fr
+        data["oid_profile_MoFr_1_Temperature"] = instance + ".vis.ProfileTypes.Mo-Fr.Periods.1.Temperature";
+        data["oid_profile_MoFr_1_Time"] = instance + ".vis.ProfileTypes.Mo-Fr.Periods.1.time";
+        data["oid_profile_MoFr_2_Temperature"] = instance + ".vis.ProfileTypes.Mo-Fr.Periods.2.Temperature";
+        data["oid_profile_MoFr_2_Time"] = instance + ".vis.ProfileTypes.Mo-Fr.Periods.2.time";
+        data["oid_profile_MoFr_3_Temperature"] = instance + ".vis.ProfileTypes.Mo-Fr.Periods.3.Temperature";
+        data["oid_profile_MoFr_3_Time"] = instance + ".vis.ProfileTypes.Mo-Fr.Periods.3.time";
+        data["oid_profile_MoFr_4_Temperature"] = instance + ".vis.ProfileTypes.Mo-Fr.Periods.4.Temperature";
+        data["oid_profile_MoFr_4_Time"] = instance + ".vis.ProfileTypes.Mo-Fr.Periods.4.time";
+        data["oid_profile_MoFr_5_Temperature"] = instance + ".vis.ProfileTypes.Mo-Fr.Periods.5.Temperature";
+        data["oid_profile_MoFr_5_Time"] = instance + ".vis.ProfileTypes.Mo-Fr.Periods.5.time";
+
+        //Sa-Su
+        data["oid_profile_SaSu_1_Temperature"] = instance + ".vis.ProfileTypes.Sa-Su.Periods.1.Temperature";
+        data["oid_profile_SaSu_1_Time"] = instance + ".vis.ProfileTypes.Sa-Su.Periods.1.time";
+        data["oid_profile_SaSu_2_Temperature"] = instance + ".vis.ProfileTypes.Sa-Su.Periods.2.Temperature";
+        data["oid_profile_SaSu_2_Time"] = instance + ".vis.ProfileTypes.Sa-Su.Periods.2.time";
+        data["oid_profile_SaSu_3_Temperature"] = instance + ".vis.ProfileTypes.Sa-Su.Periods.3.Temperature";
+        data["oid_profile_SaSu_3_Time"] = instance + ".vis.ProfileTypes.Sa-Su.Periods.3.time";
+        data["oid_profile_SaSu_4_Temperature"] = instance + ".vis.ProfileTypes.Sa-Su.Periods.4.Temperature";
+        data["oid_profile_SaSu_4_Time"] = instance + ".vis.ProfileTypes.Sa-Su.Periods.4.time";
+        data["oid_profile_SaSu_5_Temperature"] = instance + ".vis.ProfileTypes.Sa-Su.Periods.5.Temperature";
+        data["oid_profile_SaSu_5_Time"] = instance + ".vis.ProfileTypes.Sa-Su.Periods.5.time";
+
+        //Mon
+        data["oid_profile_Mon_1_Temperature"] = instance + ".vis.ProfileTypes.Mon.Periods.1.Temperature";
+        data["oid_profile_Mon_1_Time"] = instance + ".vis.ProfileTypes.Mon.Periods.1.time";
+        data["oid_profile_Mon_2_Temperature"] = instance + ".vis.ProfileTypes.Mon.Periods.2.Temperature";
+        data["oid_profile_Mon_2_Time"] = instance + ".vis.ProfileTypes.Mon.Periods.2.time";
+        data["oid_profile_Mon_3_Temperature"] = instance + ".vis.ProfileTypes.Mon.Periods.3.Temperature";
+        data["oid_profile_Mon_3_Time"] = instance + ".vis.ProfileTypes.Mon.Periods.3.time";
+        data["oid_profile_Mon_4_Temperature"] = instance + ".vis.ProfileTypes.Mon.Periods.4.Temperature";
+        data["oid_profile_Mon_4_Time"] = instance + ".vis.ProfileTypes.Mon.Periods.4.time";
+        data["oid_profile_Mon_5_Temperature"] = instance + ".vis.ProfileTypes.Mon.Periods.5.Temperature";
+        data["oid_profile_Mon_5_Time"] = instance + ".vis.ProfileTypes.Mon.Periods.5.time";
+
+        //Tue
+        data["oid_profile_Tue_1_Temperature"] = instance + ".vis.ProfileTypes.Tue.Periods.1.Temperature";
+        data["oid_profile_Tue_1_Time"] = instance + ".vis.ProfileTypes.Tue.Periods.1.time";
+        data["oid_profile_Tue_2_Temperature"] = instance + ".vis.ProfileTypes.Tue.Periods.2.Temperature";
+        data["oid_profile_Tue_2_Time"] = instance + ".vis.ProfileTypes.Tue.Periods.2.time";
+        data["oid_profile_Tue_3_Temperature"] = instance + ".vis.ProfileTypes.Tue.Periods.3.Temperature";
+        data["oid_profile_Tue_3_Time"] = instance + ".vis.ProfileTypes.Tue.Periods.3.time";
+        data["oid_profile_Tue_4_Temperature"] = instance + ".vis.ProfileTypes.Tue.Periods.4.Temperature";
+        data["oid_profile_Tue_4_Time"] = instance + ".vis.ProfileTypes.Tue.Periods.4.time";
+        data["oid_profile_Tue_5_Temperature"] = instance + ".vis.ProfileTypes.Tue.Periods.5.Temperature";
+        data["oid_profile_Tue_5_Time"] = instance + ".vis.ProfileTypes.Tue.Periods.5.time";
+
+        //Wed
+        data["oid_profile_Wed_1_Temperature"] = instance + ".vis.ProfileTypes.Wed.Periods.1.Temperature";
+        data["oid_profile_Wed_1_Time"] = instance + ".vis.ProfileTypes.Wed.Periods.1.time";
+        data["oid_profile_Wed_2_Temperature"] = instance + ".vis.ProfileTypes.Wed.Periods.2.Temperature";
+        data["oid_profile_Wed_2_Time"] = instance + ".vis.ProfileTypes.Wed.Periods.2.time";
+        data["oid_profile_Wed_3_Temperature"] = instance + ".vis.ProfileTypes.Wed.Periods.3.Temperature";
+        data["oid_profile_Wed_3_Time"] = instance + ".vis.ProfileTypes.Wed.Periods.3.time";
+        data["oid_profile_Wed_4_Temperature"] = instance + ".vis.ProfileTypes.Wed.Periods.4.Temperature";
+        data["oid_profile_Wed_4_Time"] = instance + ".vis.ProfileTypes.Wed.Periods.4.time";
+        data["oid_profile_Wed_5_Temperature"] = instance + ".vis.ProfileTypes.Wed.Periods.5.Temperature";
+        data["oid_profile_Wed_5_Time"] = instance + ".vis.ProfileTypes.Wed.Periods.5.time";
+
+        //Thu
+        data["oid_profile_Thu_1_Temperature"] = instance + ".vis.ProfileTypes.Thu.Periods.1.Temperature";
+        data["oid_profile_Thu_1_Time"] = instance + ".vis.ProfileTypes.Thu.Periods.1.time";
+        data["oid_profile_Thu_2_Temperature"] = instance + ".vis.ProfileTypes.Thu.Periods.2.Temperature";
+        data["oid_profile_Thu_2_Time"] = instance + ".vis.ProfileTypes.Thu.Periods.2.time";
+        data["oid_profile_Thu_3_Temperature"] = instance + ".vis.ProfileTypes.Thu.Periods.3.Temperature";
+        data["oid_profile_Thu_3_Time"] = instance + ".vis.ProfileTypes.Thu.Periods.3.time";
+        data["oid_profile_Thu_4_Temperature"] = instance + ".vis.ProfileTypes.Thu.Periods.4.Temperature";
+        data["oid_profile_Thu_4_Time"] = instance + ".vis.ProfileTypes.Thu.Periods.4.time";
+        data["oid_profile_Thu_5_Temperature"] = instance + ".vis.ProfileTypes.Thu.Periods.5.Temperature";
+        data["oid_profile_Thu_5_Time"] = instance + ".vis.ProfileTypes.Thu.Periods.5.time";
+
+        //Fri
+        data["oid_profile_Fri_1_Temperature"] = instance + ".vis.ProfileTypes.Fri.Periods.1.Temperature";
+        data["oid_profile_Fri_1_Time"] = instance + ".vis.ProfileTypes.Fri.Periods.1.time";
+        data["oid_profile_Fri_2_Temperature"] = instance + ".vis.ProfileTypes.Fri.Periods.2.Temperature";
+        data["oid_profile_Fri_2_Time"] = instance + ".vis.ProfileTypes.Fri.Periods.2.time";
+        data["oid_profile_Fri_3_Temperature"] = instance + ".vis.ProfileTypes.Fri.Periods.3.Temperature";
+        data["oid_profile_Fri_3_Time"] = instance + ".vis.ProfileTypes.Fri.Periods.3.time";
+        data["oid_profile_Fri_4_Temperature"] = instance + ".vis.ProfileTypes.Fri.Periods.4.Temperature";
+        data["oid_profile_Fri_4_Time"] = instance + ".vis.ProfileTypes.Fri.Periods.4.time";
+        data["oid_profile_Fri_5_Temperature"] = instance + ".vis.ProfileTypes.Fri.Periods.5.Temperature";
+        data["oid_profile_Fri_5_Time"] = instance + ".vis.ProfileTypes.Fri.Periods.5.time";
+
+        //Sat
+        data["oid_profile_Sat_1_Temperature"] = instance + ".vis.ProfileTypes.Sat.Periods.1.Temperature";
+        data["oid_profile_Sat_1_Time"] = instance + ".vis.ProfileTypes.Sat.Periods.1.time";
+        data["oid_profile_Sat_2_Temperature"] = instance + ".vis.ProfileTypes.Sat.Periods.2.Temperature";
+        data["oid_profile_Sat_2_Time"] = instance + ".vis.ProfileTypes.Sat.Periods.2.time";
+        data["oid_profile_Sat_3_Temperature"] = instance + ".vis.ProfileTypes.Sat.Periods.3.Temperature";
+        data["oid_profile_Sat_3_Time"] = instance + ".vis.ProfileTypes.Sat.Periods.3.time";
+        data["oid_profile_Sat_4_Temperature"] = instance + ".vis.ProfileTypes.Sat.Periods.4.Temperature";
+        data["oid_profile_Sat_4_Time"] = instance + ".vis.ProfileTypes.Sat.Periods.4.time";
+        data["oid_profile_Sat_5_Temperature"] = instance + ".vis.ProfileTypes.Sat.Periods.5.Temperature";
+        data["oid_profile_Sat_5_Time"] = instance + ".vis.ProfileTypes.Sat.Periods.5.time";
+
+        //Sun
+        data["oid_profile_Sun_1_Temperature"] = instance + ".vis.ProfileTypes.Sun.Periods.1.Temperature";
+        data["oid_profile_Sun_1_Time"] = instance + ".vis.ProfileTypes.Sun.Periods.1.time";
+        data["oid_profile_Sun_2_Temperature"] = instance + ".vis.ProfileTypes.Sun.Periods.2.Temperature";
+        data["oid_profile_Sun_2_Time"] = instance + ".vis.ProfileTypes.Sun.Periods.2.time";
+        data["oid_profile_Sun_3_Temperature"] = instance + ".vis.ProfileTypes.Sun.Periods.3.Temperature";
+        data["oid_profile_Sun_3_Time"] = instance + ".vis.ProfileTypes.Sun.Periods.3.time";
+        data["oid_profile_Sun_4_Temperature"] = instance + ".vis.ProfileTypes.Sun.Periods.4.Temperature";
+        data["oid_profile_Sun_4_Time"] = instance + ".vis.ProfileTypes.Sun.Periods.4.time";
+        data["oid_profile_Sun_5_Temperature"] = instance + ".vis.ProfileTypes.Sun.Periods.5.Temperature";
+        data["oid_profile_Sun_5_Time"] = instance + ".vis.ProfileTypes.Sun.Periods.5.time";
 
         /*
         heatingcontrol.0.CurrentProfile
@@ -91,7 +202,7 @@ class HeatingTimescheduleWidget extends (Generic) {
 
     static getWidgetInfo() {
 
-       
+
 
 
         return {
@@ -112,7 +223,7 @@ class HeatingTimescheduleWidget extends (Generic) {
                     // check here all possible types https://github.com/ioBroker/ioBroker.vis/blob/react/src/src/Attributes/Widget/SCHEMA.md
                     name: "common", // group name
                     fields: [
-                        
+
                         {
                             name: "noCard",
                             label: "without_card",
@@ -122,36 +233,16 @@ class HeatingTimescheduleWidget extends (Generic) {
                             name: "instance",    // name in data structure
                             label: "widgets_weather_label_instance", // translated field label
                             type: "instance",
-                            default: "daswetter.0",
+                            default: "heatingcontrol.0",
                             onChange: setDataStructures,
                         },
-                        
-                        
+
+
                     ],
                 },
                 {
-
-
-
-                    name: "OIDS", // group name
+                    name: "OIDS_General", // group name
                     fields: [
-
-                        /*
-                               
-        heatingcontrol.0.Profiles.1.ProfileName
-
-
-
-        
-        
-
-
-
-        
-        heatingcontrol.0.vis.ProfileTypes.Mo-Su.Periods.1.time
-                        */
-
-
                         {
                             name: "oid_CurrentProfile",    // name in data structure
                             label: "widgets_heating_label_currentprofile", // translated field label
@@ -176,7 +267,11 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.info.NumberOfPeriods",
                         },
-
+                    ],
+                },
+                {
+                    name: "OIDS_Profile_MoSu", // group name
+                    fields: [
                         {
                             name: "oid_profile_MoSu_1_Temperature",    // name in data structure
                             label: "widgets_heating_label_profilemosu1_temperature", // translated field label
@@ -243,7 +338,622 @@ class HeatingTimescheduleWidget extends (Generic) {
                         },
                     ],
                 },
-               
+                {
+                    name: "OIDS_Profile_MoFr_SaSu", // group name
+                    fields: [
+                        {
+                            name: "oid_profile_MoFr_1_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilemofr1_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mo-Fr.Periods.1.Temperature",
+                        },
+                        {
+                            name: "oid_profile_MoFr_1_Time",    // name in data structure
+                            label: "widgets_heating_label_profilemofr1_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mo-Fr.Periods.1.time",
+                        },
+
+                        {
+                            name: "oid_profile_MoFr_2_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilemofr2_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mo-Fr.Periods.2.Temperature",
+                        },
+                        {
+                            name: "oid_profile_MoFr_2_Time",    // name in data structure
+                            label: "widgets_heating_label_profilemofr2_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mo-Fr.Periods.2.time",
+                        },
+
+                        {
+                            name: "oid_profile_MoFr_3_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilemofr3_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mo-Fr.Periods.3.Temperature",
+                        },
+                        {
+                            name: "oid_profile_MoFr_3_Time",    // name in data structure
+                            label: "widgets_heating_label_profilemofr3_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mo-Fr.Periods.3.time",
+                        },
+
+                        {
+                            name: "oid_profile_MoFr_4_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilemofr4_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mo-Fr.Periods.4.Temperature",
+                        },
+                        {
+                            name: "oid_profile_MoFr_4_Time",    // name in data structure
+                            label: "widgets_heating_label_profilemofr4_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mo-Fr.Periods.4.time",
+                        },
+
+                        {
+                            name: "oid_profile_MoFr_5_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilemofr5_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mo-Fr.Periods.5.Temperature",
+                        },
+                        {
+                            name: "oid_profile_MoFr_5_Time",    // name in data structure
+                            label: "widgets_heating_label_profilemofr5_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mo-Fr.Periods.5.time",
+                        },
+
+                        //=================
+                        {
+                            name: "oid_profile_SaSu_1_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilesasu1_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sa-Su.Periods.1.Temperature",
+                        },
+                        {
+                            name: "oid_profile_SaSu_1_Time",    // name in data structure
+                            label: "widgets_heating_label_profilesasu1_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sa-Su.Periods.1.time",
+                        },
+
+                        {
+                            name: "oid_profile_SaSu_2_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilesasu2_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sa-Su.Periods.2.Temperature",
+                        },
+                        {
+                            name: "oid_profile_SaSu_2_Time",    // name in data structure
+                            label: "widgets_heating_label_profilesasu2_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sa-Su.Periods.2.time",
+                        },
+
+                        {
+                            name: "oid_profile_SaSu_3_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilesasu3_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sa-Su.Periods.3.Temperature",
+                        },
+                        {
+                            name: "oid_profile_SaSu_3_Time",    // name in data structure
+                            label: "widgets_heating_label_profilesasu3_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sa-Su.Periods.3.time",
+                        },
+
+                        {
+                            name: "oid_profile_SaSu_4_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilesasu4_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sa-Su.Periods.4.Temperature",
+                        },
+                        {
+                            name: "oid_profile_SaSu_4_Time",    // name in data structure
+                            label: "widgets_heating_label_profilesasu4_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sa-Su.Periods.4.time",
+                        },
+
+                        {
+                            name: "oid_profile_SaSu_5_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilesasu5_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sa-Su.Periods.5.Temperature",
+                        },
+                        {
+                            name: "oid_profile_SaSu_5_Time",    // name in data structure
+                            label: "widgets_heating_label_profilesasu5_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sa-Su.Periods.5.time",
+                        },
+
+                    ]
+                },
+                {
+                    name: "OIDS_Profile_EveryDay", // group name
+                    fields: [
+                        {
+                            name: "oid_profile_MoSu_1_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilemosu1_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mo-Su.Periods.1.Temperature",
+                        },
+
+
+                        //Mon
+                        {
+                            name: "oid_profile_Mon_1_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilemom1_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.1.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Mon_1_Time",    // name in data structure
+                            label: "widgets_heating_label_profilemom1_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.1.time",
+                        },
+
+                        {
+                            name: "oid_profile_Mon_2_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilemom2_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.2.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Mon_2_Time",    // name in data structure
+                            label: "widgets_heating_label_profilemom2_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.2.time",
+                        },
+
+                        {
+                            name: "oid_profile_Mon_3_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilemom3_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.3.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Mon_3_Time",    // name in data structure
+                            label: "widgets_heating_label_profilemom3_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.3.time",
+                        },
+
+                        {
+                            name: "oid_profile_Mon_4_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilemom4_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.4.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Mon_4_Time",    // name in data structure
+                            label: "widgets_heating_label_profilemom4_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.4.time",
+                        },
+
+                        {
+                            name: "oid_profile_Mon_5_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilemom5_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.5.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Mon_5_Time",    // name in data structure
+                            label: "widgets_heating_label_profilemom5_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.5.time",
+                        },
+
+
+                        //Tue
+                        {
+                            name: "oid_profile_Tue_1_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profiletue1_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Tue.Periods.1.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Tue_1_Time",    // name in data structure
+                            label: "widgets_heating_label_profiletue1_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Tue.Periods.1.time",
+                        },
+
+                        {
+                            name: "oid_profile_Tue_2_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profiletue2_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Tue.Periods.2.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Tue_2_Time",    // name in data structure
+                            label: "widgets_heating_label_profiletue2_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Tue.Periods.2.time",
+                        },
+
+                        {
+                            name: "oid_profile_Tue_3_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profiletue3_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Tue.Periods.3.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Tue_3_Time",    // name in data structure
+                            label: "widgets_heating_label_profiletue3_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Tue.Periods.3.time",
+                        },
+
+                        {
+                            name: "oid_profile_Tue_4_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profiletue4_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Tue.Periods.4.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Tue_4_Time",    // name in data structure
+                            label: "widgets_heating_label_profiletue4_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Tue.Periods.4.time",
+                        },
+
+                        {
+                            name: "oid_profile_Tue_5_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profiletue5_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Tue.Periods.5.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Tue_5_Time",    // name in data structure
+                            label: "widgets_heating_label_profiletue5_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Tue.Periods.5.time",
+                        },
+
+
+                        //Wed
+                        {
+                            name: "oid_profile_Wed_1_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilewed1_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Wed.Periods.1.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Wed_1_Time",    // name in data structure
+                            label: "widgets_heating_label_profilewed1_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Wed.Periods.1.time",
+                        },
+
+                        {
+                            name: "oid_profile_Wed_2_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilewed2_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Wed.Periods.2.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Wed_2_Time",    // name in data structure
+                            label: "widgets_heating_label_profilewed2_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Wed.Periods.2.time",
+                        },
+
+                        {
+                            name: "oid_profile_Wed_3_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilewed3_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Wed.Periods.3.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Wed_3_Time",    // name in data structure
+                            label: "widgets_heating_label_profilewed3_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Wed.Periods.3.time",
+                        },
+
+                        {
+                            name: "oid_profile_Wed_4_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilewed4_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Wed.Periods.4.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Wed_4_Time",    // name in data structure
+                            label: "widgets_heating_label_profilewed4_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Wed.Periods.4.time",
+                        },
+
+                        {
+                            name: "oid_profile_Wed_5_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilewed5_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Wed.Periods.5.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Wed_5_Time",    // name in data structure
+                            label: "widgets_heating_label_profilewed5_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Wed.Periods.5.time",
+                        },
+
+                        //Thu
+                        {
+                            name: "oid_profile_Thu_1_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilethu1_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Thu.Periods.1.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Thu_1_Time",    // name in data structure
+                            label: "widgets_heating_label_profilethu1_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Thu.Periods.1.time",
+                        },
+
+                        {
+                            name: "oid_profile_Thu_2_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilethu2_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Thu.Periods.2.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Thu_2_Time",    // name in data structure
+                            label: "widgets_heating_label_profilethu2_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Thu.Periods.2.time",
+                        },
+
+                        {
+                            name: "oid_profile_Thu_3_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilethu3_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Thu.Periods.3.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Thu_3_Time",    // name in data structure
+                            label: "widgets_heating_label_profilethu3_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Thu.Periods.3.time",
+                        },
+
+                        {
+                            name: "oid_profile_Thu_4_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilethu4_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Thu.Periods.4.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Thu_4_Time",    // name in data structure
+                            label: "widgets_heating_label_profilethu4_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Thu.Periods.4.time",
+                        },
+
+                        {
+                            name: "oid_profile_Thu_5_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilethu5_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Thu.Periods.5.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Thu_5_Time",    // name in data structure
+                            label: "widgets_heating_label_profilethu5_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Thu.Periods.5.time",
+                        },
+
+                        //Fri
+                        {
+                            name: "oid_profile_Fri_1_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilefri1_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Fri.Periods.1.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Fri_1_Time",    // name in data structure
+                            label: "widgets_heating_label_profilefri1_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Fri.Periods.1.time",
+                        },
+
+                        {
+                            name: "oid_profile_Fri_2_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilefri2_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Fri.Periods.2.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Fri_2_Time",    // name in data structure
+                            label: "widgets_heating_label_profilefri2_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Fri.Periods.2.time",
+                        },
+
+                        {
+                            name: "oid_profile_Fri_3_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilefri3_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Fri.Periods.3.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Fri_3_Time",    // name in data structure
+                            label: "widgets_heating_label_profilefri3_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Fri.Periods.3.time",
+                        },
+
+                        {
+                            name: "oid_profile_Fri_4_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilefri4_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Fri.Periods.4.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Fri_4_Time",    // name in data structure
+                            label: "widgets_heating_label_profilefri4_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Fri.Periods.4.time",
+                        },
+
+                        {
+                            name: "oid_profile_Fri_5_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilefri5_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Fri.Periods.5.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Fri_5_Time",    // name in data structure
+                            label: "widgets_heating_label_profilefri5_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Fri.Periods.5.time",
+                        },
+
+
+                        //Sat
+                        {
+                            name: "oid_profile_Sat_1_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilesat1_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sat.Periods.1.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Sat_1_Time",    // name in data structure
+                            label: "widgets_heating_label_profilesat1_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sat.Periods.1.time",
+                        },
+
+                        {
+                            name: "oid_profile_Sat_2_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilesat2_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sat.Periods.2.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Sat_2_Time",    // name in data structure
+                            label: "widgets_heating_label_profilesat2_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sat.Periods.2.time",
+                        },
+
+                        {
+                            name: "oid_profile_Sat_3_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilesat3_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sat.Periods.3.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Sat_3_Time",    // name in data structure
+                            label: "widgets_heating_label_profilesat3_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sat.Periods.3.time",
+                        },
+
+                        {
+                            name: "oid_profile_Sat_4_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilesat4_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sat.Periods.4.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Sat_4_Time",    // name in data structure
+                            label: "widgets_heating_label_profilesat4_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sat.Periods.4.time",
+                        },
+
+                        {
+                            name: "oid_profile_Sat_5_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilesat5_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sat.Periods.5.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Sat_5_Time",    // name in data structure
+                            label: "widgets_heating_label_profilesat5_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sat.Periods.5.time",
+                        },
+
+                        //Sun
+                        {
+                            name: "oid_profile_Sun_1_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilesun1_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sun.Periods.1.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Sun_1_Time",    // name in data structure
+                            label: "widgets_heating_label_profilesun1_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sun.Periods.1.time",
+                        },
+
+                        {
+                            name: "oid_profile_Sun_2_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilesun2_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sun.Periods.2.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Sun_2_Time",    // name in data structure
+                            label: "widgets_heating_label_profilesun2_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sun.Periods.2.time",
+                        },
+
+                        {
+                            name: "oid_profile_Sun_3_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilesun3_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sun.Periods.3.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Sun_3_Time",    // name in data structure
+                            label: "widgets_heating_label_profilesun3_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sun.Periods.3.time",
+                        },
+
+                        {
+                            name: "oid_profile_Sun_4_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilesun4_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sun.Periods.4.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Sun_4_Time",    // name in data structure
+                            label: "widgets_heating_label_profilesun4_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sun.Periods.4.time",
+                        },
+
+                        {
+                            name: "oid_profile_Sun_5_Temperature",    // name in data structure
+                            label: "widgets_heating_label_profilesun5_temperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sun.Periods.5.Temperature",
+                        },
+                        {
+                            name: "oid_profile_Sun_5_Time",    // name in data structure
+                            label: "widgets_heating_label_profilesun5_time", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sun.Periods.5.time",
+                        },
+
+
+                    ]
+                }
+
 
             ],
             visPrev: "widgets/vis-2-widgets-weather/img/vis-widget-heatingtimeschedule.png",
@@ -297,31 +1007,34 @@ class HeatingTimescheduleWidget extends (Generic) {
     createData(index, time, temperature) {
         return { index, time, temperature };
     }
-    
 
-    createTable_MoSu(noOfPeriods, room) {
 
-        console.log("createTable_MoSu called " + room);
-
+    copyPeriods(noOfPeriods, part) {
 
         const periods = [];
 
         for (let p = 1; p <= noOfPeriods; p++) {
 
-            const oid_time = "oid_profile_MoSu_" + p + "_Time";
-            const oid_temperature = "oid_profile_MoSu_" + p + "_Temperature";
+            const oid_time = "oid_profile_" + part + "_" + p + "_Time";
+            const oid_temperature = "oid_profile_" + part + "_" + p + "_Temperature";
 
-            const time = this.state.values[`${this.state.rxData[oid_temperature]}.val`];
-            const temperature = this.state.values[`${this.state.rxData[oid_time]}.val`];
+            const time = this.state.values[`${this.state.rxData[oid_time]}.val`];
+            const temperature = this.state.values[`${this.state.rxData[oid_temperature]}.val`];
 
             console.log("map " + p + " " + time + " " + temperature + " " + oid_time + " " + oid_temperature);
 
             periods.push(this.createData(p, time, temperature));
         }
 
+        return periods;
+    }
+
+
+    createTimeTableDetails(periods) {
+        //https://mui.com/material-ui/react-table/
 
         const timetable = <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 250 }} size="small" aria-label="a dense table">
+            <Table sx={{ minWidth: 150 }} size="small" aria-label="a dense table">
                 <TableHead>
                     <TableRow>
                         <TableCell align="right">{I18n.t("Period")}</TableCell>
@@ -347,10 +1060,31 @@ class HeatingTimescheduleWidget extends (Generic) {
         </TableContainer>;
 
 
+        return timetable;
+
+
+    }
+
+
+    createTable_MoSu(noOfPeriods, room, profileName, currentProfile) {
+
+        console.log("createTable_MoSu called " + room);
+
+
+        const periods = this.copyPeriods(noOfPeriods, "MoSu");
+        const timetable = this.createTimeTableDetails(periods);
+
+
         const content = <div
             ref={this.refCardContent}
             className={this.props.classes.cardContent}
         >
+
+            <div>
+                <p>{I18n.t("Times in week")}</p>
+                <p> {I18n.t("Profil")}  {currentProfile}  /   {room}</p>
+            </div>
+
 
             <Grid
                 container spacing={0.5}
@@ -358,24 +1092,14 @@ class HeatingTimescheduleWidget extends (Generic) {
                 justifyContent="center"
             >
 
-                <Grid item xs={12}>
-                    <div>
-                        <p>{I18n.t("Zeiten / Woche")}</p>
-                        <p> {I18n.t("Profil / ")} {room}</p>
-                    </div>
-                </Grid>
+
                 <Grid item xs={12}>
                     <div>
                         <p>{I18n.t("Mo. - So.")}</p>
+                        {timetable}
                     </div>
                 </Grid>
             </Grid>
-
-            {timetable}
-
-
-
-
 
 
 
@@ -385,112 +1109,165 @@ class HeatingTimescheduleWidget extends (Generic) {
         return content;
     }
 
-    createTable_MoFr_SaSo(noOfPeriods, room) {
+    createTable_MoFr_SaSo(noOfPeriods, room, profileName, currentProfile) {
         console.log("createTable_MoFr_SaSo called " + room);
 
-        for (let p = 1; p <= noOfPeriods; p++) {
-        }
+        const periodsMoFr = this.copyPeriods(noOfPeriods, "MoFr");
+        const periodsSaSu = this.copyPeriods(noOfPeriods, "SaSu");
+
+        const timetableMoFr = this.createTimeTableDetails(periodsMoFr);
+        const timetableSaSu = this.createTimeTableDetails(periodsSaSu);
+
+
 
         const content = <div
             ref={this.refCardContent}
             className={this.props.classes.cardContent}
         >
 
+
+            <div>
+                <p>{I18n.t("Times in week")}</p>
+                <p> {I18n.t("Profil ")} {currentProfile}  /   {room}</p>
+            </div>
+
             <Grid
-                container spacing={0.5}
+                container
+                spacing={0.5}
                 alignItems="center"
                 justifyContent="center"
+                style={{
+                    maxHeight: "100vh",
+                    overflowY: "auto",
+                    overflowX: "hidden",
+                    height: "auto",
+                    overflow: "auto",
+                }}
             >
 
-                <Grid item xs={12}>
+
+                <Grid item xs={6}>
                     <div>
-                        <p>{I18n.t("Zeiten / Woche")}</p>
-                        <p> {I18n.t("Profil / ")} {room}</p>
-                    </div>
-                </Grid>
-                <Grid item xs={12}>
-                    <div>
-                        <p>{I18n.t("Mo. - Fr. / Sa. - Su.")}</p>
-                    </div>
-                </Grid>
-                <Grid item xs={2}>
-                    <div>
-                        <p>{I18n.t("Per.")}</p>
-                    </div>
-                </Grid>
-                <Grid item xs={5}>
-                    <div>
-                        <p>{I18n.t("ab")}</p>
-                    </div>
-                </Grid>
-                <Grid item xs={5}>
-                    <div>
-                        <p>{I18n.t("°C")}</p>
+                        <p>{I18n.t("Mo. - Fr.")}</p>
+                        {timetableMoFr}
                     </div>
                 </Grid>
 
-                
-                
+                <Grid item xs={6}>
+                    <div>
+                        <p>{I18n.t("Sa. - Su.")}</p>
+                        {timetableSaSu}
+                    </div>
+                </Grid>
+
 
 
 
             </Grid>
+
         </div>;
+
+
         return content;
     }
 
-    createTable_EveryDay(noOfPeriods, room) {
+    createTable_EveryDay(noOfPeriods, room, profileName, currentProfile) {
 
         console.log("createTable_EvreryDay called " + room);
 
-        for (let p = 1; p <= noOfPeriods; p++) {
-        }
+        const periodsMon = this.copyPeriods(noOfPeriods, "Mon");
+        const periodsTue = this.copyPeriods(noOfPeriods, "Tue");
+        const periodsWed = this.copyPeriods(noOfPeriods, "Wed");
+        const periodsThu = this.copyPeriods(noOfPeriods, "Thu");
+        const periodsFri = this.copyPeriods(noOfPeriods, "Fri");
+        const periodsSat = this.copyPeriods(noOfPeriods, "Sat");
+        const periodsSun = this.copyPeriods(noOfPeriods, "Sun");
+
+        const timetableMon = this.createTimeTableDetails(periodsMon);
+        const timetableTue = this.createTimeTableDetails(periodsTue);
+        const timetableWed = this.createTimeTableDetails(periodsWed);
+        const timetableThu = this.createTimeTableDetails(periodsThu);
+        const timetableFri = this.createTimeTableDetails(periodsFri);
+        const timetableSat = this.createTimeTableDetails(periodsSat);
+        const timetableSun = this.createTimeTableDetails(periodsSun);
+
+
 
         const content = <div
             ref={this.refCardContent}
             className={this.props.classes.cardContent}
         >
 
+
+            <div>
+                <p>{I18n.t("Times in week")}</p>
+                <p> {I18n.t("Profil ")} {currentProfile}  /   {room}</p>
+            </div>
+
             <Grid
-                container spacing={0.5}
+                container
+                spacing={0.5}
                 alignItems="center"
                 justifyContent="center"
+                style={{
+                    maxHeight: "100vh",
+                    overflowY: "auto",
+                    overflowX: "hidden",
+                    height: "auto",
+                    overflow: "auto",
+                }}
             >
 
-                <Grid item xs={12}>
+
+                <Grid item xs={12 / 7}>
                     <div>
-                        <p>{I18n.t("Zeiten / Woche")}</p>
-                        <p> {I18n.t("Profil / ")} {room}</p>
+                        <p>{I18n.t("Mon.")}</p>
+                        {timetableMon}
                     </div>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12 / 7}>
                     <div>
-                        <p>{I18n.t("every day")}</p>
+                        <p>{I18n.t("Tue.")}</p>
+                        {timetableTue}
                     </div>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={12 / 7}>
                     <div>
-                        <p>{I18n.t("Per.")}</p>
+                        <p>{I18n.t("Wed.")}</p>
+                        {timetableWed}
                     </div>
                 </Grid>
-                <Grid item xs={5}>
+                <Grid item xs={12 / 7}>
                     <div>
-                        <p>{I18n.t("ab")}</p>
+                        <p>{I18n.t("Thu.")}</p>
+                        {timetableThu}
                     </div>
                 </Grid>
-                <Grid item xs={5}>
+                <Grid item xs={12 / 7}>
                     <div>
-                        <p>{I18n.t("°C")}</p>
+                        <p>{I18n.t("Fri.")}</p>
+                        {timetableFri}
                     </div>
                 </Grid>
-
-
-
-
-
-
+                <Grid item xs={12 / 7}>
+                    <div>
+                        <p>{I18n.t("Sat.")}</p>
+                        {timetableSat}
+                    </div>
+                </Grid>
+                <Grid item xs={12 / 7}>
+                    <div>
+                        <p>{I18n.t("Sun.")}</p>
+                        {timetableSun}
+                    </div>
+                </Grid>
             </Grid>
+
+
+
         </div>;
+
+
         return content;
 
     }
@@ -500,17 +1277,20 @@ class HeatingTimescheduleWidget extends (Generic) {
         const profileType = this.state.values[`${this.state.rxData["oid_ProfileType"]}.val`];
         const noOfPeriods = this.state.values[`${this.state.rxData["oid_NumberOfPeriods"]}.val`];
         const room = this.state.values[`${this.state.rxData["oid_ChoosenRoom"]}.val`];
+        const profileName = "";
+        //const profileName = this.state.values[`${this.state.rxData["oid_ProfileName"]}.val`];
+        const currentProfile = this.state.values[`${this.state.rxData["oid_CurrentProfile"]}.val`];
 
         if (profileType === "Mo - Su") {
-            return this.createTable_MoSu(noOfPeriods, room);
+            return this.createTable_MoSu(noOfPeriods, room, profileName, currentProfile);
         }
 
         else if (profileType === "Mo - Fr / Sa - Su") {
-            return this.createTable_MoFr_SaSo(noOfPeriods, room);
+            return this.createTable_MoFr_SaSo(noOfPeriods, room, profileName, currentProfile);
         }
 
         else if (profileType === "every Day") {
-            return this.createTable_EveryDay(noOfPeriods, room);
+            return this.createTable_EveryDay(noOfPeriods, room, profileName, currentProfile);
         }
         else {
             console.log("unknown profile type " + profileType);
@@ -523,6 +1303,8 @@ class HeatingTimescheduleWidget extends (Generic) {
     renderWidgetBody(props) {
         super.renderWidgetBody(props);
 
+        console.log("values" + JSON.stringify(this.state.values));
+        console.log("rxData " + JSON.stringify(this.state.rxData));
 
         let size;
         if (!this.refCardContent.current) {
@@ -530,12 +1312,12 @@ class HeatingTimescheduleWidget extends (Generic) {
         } else {
             size = this.refCardContent.current.offsetHeight;
         }
-        
+
         console.log("heating time schedule: size " + size);
 
-        
+
         const content = this.CreateTable();
-        
+
 
         if (this.state.rxData.noCard || props.widget.usedInWidget) {
             console.log("nur content");

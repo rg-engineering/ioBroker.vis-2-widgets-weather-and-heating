@@ -65,7 +65,7 @@ You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
 ## Changelog
 
 ### **WORK IN PROGRESS**
-* (René) prepared for Heating TimeSchedule widget
+* (René) Heating TimeSchedule widget added
 
 ### 0.2.10 (2024-05-24)
 * (René) general diagram widget: support ebus (needs ebus version 3.3.0)

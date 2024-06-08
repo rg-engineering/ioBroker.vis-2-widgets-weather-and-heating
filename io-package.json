@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather",
-    "version": "0.2.10",
+    "version": "0.3.0",
     "news": {
+      "0.3.0": {
+        "en": "(René) Heating TimeSchedule widget added",
+        "de": "(René) Heizung TimeSchedule Widget hinzugefügt",
+        "ru": "(René) Добавлен виджет нагревания TimeSchedule",
+        "pt": "(René) Aquecimento TimeSchedule widget adicionado",
+        "nl": "(René) Heating TimeSchedule widget toegevoegd",
+        "fr": "(René) Temps de chauffageWidget calendrier ajouté",
+        "it": "(René) Riscaldamento TimeSchedule widget aggiunto",
+        "es": "(René) El widget de calefacción",
+        "pl": "(René) Name",
+        "uk": "(René) Heat TimeSchedule віджет",
+        "zh-cn": "(René) 加热时间表部件"
+      },
       "0.2.10": {
         "en": "(René) general diagram widget: support ebus (needs ebus version 3.3.0)\n(René) general diagram widget: auto unit calculation as an option",
         "de": "(René) allgemeines Diagramm Widget: Unterstützung ebus (needs ebus version 3.3.0)\n(René) allgemeines Diagramm Widget: Auto-Einheit Berechnung als Option",
@@ -80,19 +93,6 @@
         "pl": "tłumaczenia i ikony",
         "uk": "переклади та ікони",
         "zh-cn": "翻译和图标"
-      },
-      "0.2.0": {
-        "en": "initial release",
-        "de": "erstausstrahlung",
-        "ru": "первоначальный выпуск",
-        "pt": "lançamento inicial",
-        "nl": "eerste release",
-        "fr": "libération initiale",
-        "it": "rilascio iniziale",
-        "es": "liberación inicial",
-        "pl": "początkowe zwolnienie",
-        "uk": "початковий реліз",
-        "zh-cn": "初步释放"
       }
     },
     "licenseInformation": {

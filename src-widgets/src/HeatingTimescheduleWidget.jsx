@@ -488,65 +488,65 @@ class HeatingTimescheduleWidget extends (Generic) {
                         //Mon
                         {
                             name: "oid_profile_Mon_1_Temperature",    // name in data structure
-                            label: "widgets_heating_label_profilemom1_temperature", // translated field label
+                            label: "widgets_heating_label_profilemon1_temperature", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.1.Temperature",
                         },
                         {
                             name: "oid_profile_Mon_1_Time",    // name in data structure
-                            label: "widgets_heating_label_profilemom1_time", // translated field label
+                            label: "widgets_heating_label_profilemon1_time", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.1.time",
                         },
 
                         {
                             name: "oid_profile_Mon_2_Temperature",    // name in data structure
-                            label: "widgets_heating_label_profilemom2_temperature", // translated field label
+                            label: "widgets_heating_label_profilemon2_temperature", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.2.Temperature",
                         },
                         {
                             name: "oid_profile_Mon_2_Time",    // name in data structure
-                            label: "widgets_heating_label_profilemom2_time", // translated field label
+                            label: "widgets_heating_label_profilemon2_time", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.2.time",
                         },
 
                         {
                             name: "oid_profile_Mon_3_Temperature",    // name in data structure
-                            label: "widgets_heating_label_profilemom3_temperature", // translated field label
+                            label: "widgets_heating_label_profilemon3_temperature", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.3.Temperature",
                         },
                         {
                             name: "oid_profile_Mon_3_Time",    // name in data structure
-                            label: "widgets_heating_label_profilemom3_time", // translated field label
+                            label: "widgets_heating_label_profilemon3_time", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.3.time",
                         },
 
                         {
                             name: "oid_profile_Mon_4_Temperature",    // name in data structure
-                            label: "widgets_heating_label_profilemom4_temperature", // translated field label
+                            label: "widgets_heating_label_profilemon4_temperature", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.4.Temperature",
                         },
                         {
                             name: "oid_profile_Mon_4_Time",    // name in data structure
-                            label: "widgets_heating_label_profilemom4_time", // translated field label
+                            label: "widgets_heating_label_profilemon4_time", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.4.time",
                         },
 
                         {
                             name: "oid_profile_Mon_5_Temperature",    // name in data structure
-                            label: "widgets_heating_label_profilemom5_temperature", // translated field label
+                            label: "widgets_heating_label_profilemon5_temperature", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.5.Temperature",
                         },
                         {
                             name: "oid_profile_Mon_5_Time",    // name in data structure
-                            label: "widgets_heating_label_profilemom5_time", // translated field label
+                            label: "widgets_heating_label_profilemon5_time", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.5.time",
                         },

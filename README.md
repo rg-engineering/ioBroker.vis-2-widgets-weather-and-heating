@@ -63,6 +63,10 @@ You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
+
+### **WORK IN PROGRESS**
+* (René) translations
+
 ### 0.3.0 (2024-06-08)
 * (René) Heating TimeSchedule widget added
 

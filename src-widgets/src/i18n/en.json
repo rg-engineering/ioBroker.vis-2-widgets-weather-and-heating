@@ -26,7 +26,10 @@
   "group_oids_time": "OID Time",
   "group_oids_chanceofrain": "OID Chance of Rain",
 
-
+  "group_OIDS_General": "OID's General",
+  "group_OIDS_Profile_MoSu": "OID's Profile Mo - Su",
+  "group_OIDS_Profile_MoFr_SaSu": "OID's Profile Mo-Fr / Sa-Su",
+  "group_OIDS_Profile_EveryDay": "OID's every day",
 
 
   "without_card": "without card",

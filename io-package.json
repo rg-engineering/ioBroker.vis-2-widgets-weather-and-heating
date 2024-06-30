@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "news": {
+      "0.3.2": {
+        "en": "Heating General Params widget added\nHeating Room widget adde\nHeating Rooms Overview widget added\nHeating Room Profile Params widget added\nHeating Windows Status Overview widget added",
+        "de": "Heizung General Params Widget hinzugefügt\nHeizung Zimmer Widget hinzufügen\nHeizungsanlagen Übersicht Widget hinzugefügt\nHeizung Zimmer Profil Params Widget hinzugefügt\nHeizung Windows Status Übersicht Widget hinzugefügt",
+        "ru": "Отопление Общие Парамс виджет добавлен\nКомната для отопления\nОтопление Комнаты Добавить виджет\nКомплект для обогрева\nОбзор состояния Windows добавлен",
+        "pt": "Aquecimento Geral Params widget adicionado\nAdicionar widget do quarto de aquecimento\nQuartos de Aquecimento Visão geral widget adicionado\nPerfil de quarto de aquecimento params widget adicionado\nWidget de Visão Geral do Status do Windows de Aquecimento adicionado",
+        "nl": "Verwarming Algemeen Params widget toegevoegd\nVerwarmingsruimte widget adde\nVerwarmingsruimten Overzicht widget toegevoegd\nVerwarming kamerprofiel Params widget toegevoegd\nVerwarming van Windows Status Overzicht widget toegevoegd",
+        "fr": "Widget de chauffage général Params ajouté\nWidget de chauffage de chambre adde\nChambres de chauffage Aperçu widget ajouté\nProfil de la chambre de chauffage Params widget ajouté\nChauffage de l'état de Windows Aperçu widget ajouté",
+        "it": "Riscaldamento Generale Params widget aggiunto\nRiscaldamento Camera widget adde\nCamere per il riscaldamento Panoramica widget aggiunto\nPulsante Params profilo camera riscaldamento aggiunto\nRiscaldamento Windows Status Panoramica widget aggiunto",
+        "es": "Calefacción General Params widget añadido\nCalefacción habitación widget adde\nCalefacción Habitaciones Resúmenes añadidos\nPerfil de la habitación de calefacción\nCalefacción estado de Windows Vista general widget añadido",
+        "pl": "Ogrzewanie Ogólne Params widget dodany\nOgrzewanie Pokój widget adde\nOgrzewanie Pokoje Name\nProfil ogrzewania Params dodano\nOgrzewanie Widżet stanu systemu Windows",
+        "uk": "Нагрівальний загальний Params віджет додано\nОпалювальний номер віджет додати\nОпалення кімнат Огляд віджету додано\nОпалювальний номер профілю Params віджет додано\nОпалення Windows Status Огляд віджету",
+        "zh-cn": "添加加热常规参数部件\n加热室部件\n暖房 概览部件已添加\n加热室配置文件参数部件\n添加加热窗口状态概览部件"
+      },
       "0.3.1": {
         "en": "(René) translations",
         "de": "(René) Übersetzungen",
@@ -80,19 +93,6 @@
         "pl": "(René) adaptacja do warunków atmosferycznych\n(René) bug fix: Pokaż legendę na wykresie ponownie, brakowało po tłumaczeniu\n(René) mniejsze poprawki błędów\nAktualizacja zależności (René)",
         "uk": "(René) адаптація до погодних умов\n(René) Виправлення помилок: показ легенди в графі знову відсутні після перекладу\n(René) менші виправлення помилок\n(René) залежностей оновлено",
         "zh-cn": "(René) 适应地下天气\n(René) bug fix: 再次显示图例, 翻译后丢失\n(René) 小错误修正\n(René) 更新的依赖关系"
-      },
-      "0.2.4": {
-        "en": "ready for deployment",
-        "de": "bereit für den einsatz",
-        "ru": "готовый к развертыванию",
-        "pt": "pronto para implantação",
-        "nl": "gereed voor inzet",
-        "fr": "prêts à être déployés",
-        "it": "pronto per la distribuzione",
-        "es": "listos para el despliegue",
-        "pl": "gotowe do rozmieszczenia",
-        "uk": "готовий до розгортання",
-        "zh-cn": "准备部署"
       }
     },
     "licenseInformation": {

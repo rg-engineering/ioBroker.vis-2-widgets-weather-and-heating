@@ -50,6 +50,8 @@ const setDataStructures = async (field, data, changeData, socket) => {
         data["oid_ProfileType"] = instance + ".info.ProfileType";
         //data["oid_ProfileName"] = instance + ".info.ProfileType";
 
+        data["oid_CurrentTimePeriod"] = instance + ".vis.RoomValues.CurrentTimePeriod";
+
 
         //Mo-Su
         data["oid_NumberOfPeriods"] = instance + ".info.NumberOfPeriods";
@@ -266,7 +268,17 @@ class HeatingTimescheduleWidget extends (Generic) {
                             label: "widgets_heating_label_numberofperiods", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.info.NumberOfPeriods",
+                        },                        
+                        {
+                            name: "oid_CurrentTimePeriod",    // name in data structure
+                            label: "widgets_heating_label_currenttimeperiod", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.RoomValues.CurrentTimePeriod",
                         },
+
+
+                        
+
                     ],
                 },
                 {
@@ -477,13 +489,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                 {
                     name: "OIDS_Profile_EveryDay", // group name
                     fields: [
-                        {
-                            name: "oid_profile_MoSu_1_Temperature",    // name in data structure
-                            label: "widgets_heating_label_profilemosu1_temperature", // translated field label
-                            type: "id",
-                            default: "heatingcontrol.0.vis.ProfileTypes.Mo-Su.Periods.1.Temperature",
-                        },
-
 
                         //Mon
                         {
@@ -1030,11 +1035,13 @@ class HeatingTimescheduleWidget extends (Generic) {
     }
 
 
-    createTimeTableDetails(periods) {
+    createTimeTableDetails(periods, currentTimePeriod) {
         //https://mui.com/material-ui/react-table/
 
+        console.log("createTimeTableDetails " + currentTimePeriod);
+
         const timetable = <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 150 }} size="small" aria-label="a dense table">
+            <Table  size="small" >
                 <TableHead>
                     <TableRow>
                         <TableCell align="right">{I18n.t("Period")}</TableCell>
@@ -1047,10 +1054,9 @@ class HeatingTimescheduleWidget extends (Generic) {
                         <TableRow
                             key={period.index}
                             sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                            style={{ background: period.index === currentTimePeriod ? "red" : "" }}
                         >
-                            <TableCell component="th" scope="row">
-                                {period.index}
-                            </TableCell>
+                            <TableCell align="center">{period.index}</TableCell>
                             <TableCell align="right">{period.time}</TableCell>
                             <TableCell align="right">{period.temperature}</TableCell>
                         </TableRow>
@@ -1066,13 +1072,13 @@ class HeatingTimescheduleWidget extends (Generic) {
     }
 
 
-    createTable_MoSu(noOfPeriods, room, profileName, currentProfile) {
+    createTable_MoSu(noOfPeriods, room, profileName, currentProfile, currentTimePeriod) {
 
         console.log("createTable_MoSu called " + room);
 
 
         const periods = this.copyPeriods(noOfPeriods, "MoSu");
-        const timetable = this.createTimeTableDetails(periods);
+        const timetable = this.createTimeTableDetails(periods, currentTimePeriod);
 
 
         const content = <div
@@ -1093,7 +1099,7 @@ class HeatingTimescheduleWidget extends (Generic) {
             >
 
 
-                <Grid item xs={12}>
+                <Grid item xs={12} maxWidth="150px">
                     <div>
                         <p>{I18n.t("Mo. - So.")}</p>
                         {timetable}
@@ -1109,14 +1115,26 @@ class HeatingTimescheduleWidget extends (Generic) {
         return content;
     }
 
-    createTable_MoFr_SaSo(noOfPeriods, room, profileName, currentProfile) {
-        console.log("createTable_MoFr_SaSo called " + room);
+    createTable_MoFr_SaSo(noOfPeriods, room, profileName, currentProfile, currentTimePeriod) {
+        console.log("createTable_MoFr_SaSo called " + room + " " + noOfPeriods + " " + currentTimePeriod);
 
         const periodsMoFr = this.copyPeriods(noOfPeriods, "MoFr");
         const periodsSaSu = this.copyPeriods(noOfPeriods, "SaSu");
 
-        const timetableMoFr = this.createTimeTableDetails(periodsMoFr);
-        const timetableSaSu = this.createTimeTableDetails(periodsSaSu);
+        let curTimePeriod = -1;
+        let tempTimePeriod = currentTimePeriod;
+
+        if (tempTimePeriod <= noOfPeriods) {
+            curTimePeriod = tempTimePeriod;
+        }
+        const timetableMoFr = this.createTimeTableDetails(periodsMoFr, curTimePeriod);
+
+        tempTimePeriod = tempTimePeriod - 5;
+        if (tempTimePeriod <= noOfPeriods) {
+            curTimePeriod = tempTimePeriod;
+        }
+
+        const timetableSaSu = this.createTimeTableDetails(periodsSaSu, curTimePeriod);
 
 
 
@@ -1146,14 +1164,14 @@ class HeatingTimescheduleWidget extends (Generic) {
             >
 
 
-                <Grid item xs={6}>
+                <Grid item xs={6} maxWidth="150px">
                     <div>
                         <p>{I18n.t("Mo. - Fr.")}</p>
                         {timetableMoFr}
                     </div>
                 </Grid>
 
-                <Grid item xs={6}>
+                <Grid item xs={6} maxWidth="150px">
                     <div>
                         <p>{I18n.t("Sa. - Su.")}</p>
                         {timetableSaSu}
@@ -1171,7 +1189,7 @@ class HeatingTimescheduleWidget extends (Generic) {
         return content;
     }
 
-    createTable_EveryDay(noOfPeriods, room, profileName, currentProfile) {
+    createTable_EveryDay(noOfPeriods, room, profileName, currentProfile, currentTimePeriod) {
 
         console.log("createTable_EvreryDay called " + room);
 
@@ -1183,13 +1201,44 @@ class HeatingTimescheduleWidget extends (Generic) {
         const periodsSat = this.copyPeriods(noOfPeriods, "Sat");
         const periodsSun = this.copyPeriods(noOfPeriods, "Sun");
 
-        const timetableMon = this.createTimeTableDetails(periodsMon);
-        const timetableTue = this.createTimeTableDetails(periodsTue);
-        const timetableWed = this.createTimeTableDetails(periodsWed);
-        const timetableThu = this.createTimeTableDetails(periodsThu);
-        const timetableFri = this.createTimeTableDetails(periodsFri);
-        const timetableSat = this.createTimeTableDetails(periodsSat);
-        const timetableSun = this.createTimeTableDetails(periodsSun);
+        let curTimePeriod = -1;
+        let tempTimePeriod = currentTimePeriod;
+
+        if (tempTimePeriod <= noOfPeriods) {
+            curTimePeriod = tempTimePeriod;
+        }
+
+        const timetableMon = this.createTimeTableDetails(periodsMon, curTimePeriod);
+        tempTimePeriod = tempTimePeriod - 5;
+        if (tempTimePeriod <= noOfPeriods) {
+            curTimePeriod = tempTimePeriod;
+        }
+        const timetableTue = this.createTimeTableDetails(periodsTue, curTimePeriod);
+        tempTimePeriod = tempTimePeriod - 5;
+        if (tempTimePeriod <= noOfPeriods) {
+            curTimePeriod = tempTimePeriod;
+        }
+        const timetableWed = this.createTimeTableDetails(periodsWed, curTimePeriod);
+        tempTimePeriod = tempTimePeriod - 5;
+        if (tempTimePeriod <= noOfPeriods) {
+            curTimePeriod = tempTimePeriod;
+        }
+        const timetableThu = this.createTimeTableDetails(periodsThu, curTimePeriod);
+        tempTimePeriod = tempTimePeriod - 5;
+        if (tempTimePeriod <= noOfPeriods) {
+            curTimePeriod = tempTimePeriod;
+        }
+        const timetableFri = this.createTimeTableDetails(periodsFri, curTimePeriod);
+        tempTimePeriod = tempTimePeriod - 5;
+        if (tempTimePeriod <= noOfPeriods) {
+            curTimePeriod = tempTimePeriod;
+        }
+        const timetableSat = this.createTimeTableDetails(periodsSat, curTimePeriod);
+        tempTimePeriod = tempTimePeriod - 5;
+        if (tempTimePeriod <= noOfPeriods) {
+            curTimePeriod = tempTimePeriod;
+        }
+        const timetableSun = this.createTimeTableDetails(periodsSun, curTimePeriod);
 
 
 
@@ -1206,56 +1255,48 @@ class HeatingTimescheduleWidget extends (Generic) {
 
             <Grid
                 container
-                spacing={0.5}
-                alignItems="center"
-                justifyContent="center"
-                style={{
-                    maxHeight: "100vh",
-                    overflowY: "auto",
-                    overflowX: "hidden",
-                    height: "auto",
-                    overflow: "auto",
-                }}
+                spacing={5}
+                wrap="wrap"
             >
 
 
-                <Grid item xs={12 / 7}>
+                <Grid item xs={12 / 7} maxWidth="150px">
                     <div>
                         <p>{I18n.t("Mon.")}</p>
                         {timetableMon}
                     </div>
                 </Grid>
-                <Grid item xs={12 / 7}>
+                <Grid item xs={12 / 7} maxWidth="150px">
                     <div>
                         <p>{I18n.t("Tue.")}</p>
                         {timetableTue}
                     </div>
                 </Grid>
-                <Grid item xs={12 / 7}>
+                <Grid item xs={12 / 7} maxWidth="150px">
                     <div>
                         <p>{I18n.t("Wed.")}</p>
                         {timetableWed}
                     </div>
                 </Grid>
-                <Grid item xs={12 / 7}>
+                <Grid item xs={12 / 7} maxWidth="150px">
                     <div>
                         <p>{I18n.t("Thu.")}</p>
                         {timetableThu}
                     </div>
                 </Grid>
-                <Grid item xs={12 / 7}>
+                <Grid item xs={12 / 7} maxWidth="150px">
                     <div>
                         <p>{I18n.t("Fri.")}</p>
                         {timetableFri}
                     </div>
                 </Grid>
-                <Grid item xs={12 / 7}>
+                <Grid item xs={12 / 7} maxWidth="150px">
                     <div>
                         <p>{I18n.t("Sat.")}</p>
                         {timetableSat}
                     </div>
                 </Grid>
-                <Grid item xs={12 / 7}>
+                <Grid item xs={12 / 7} maxWidth="150px">
                     <div>
                         <p>{I18n.t("Sun.")}</p>
                         {timetableSun}
@@ -1281,16 +1322,18 @@ class HeatingTimescheduleWidget extends (Generic) {
         //const profileName = this.state.values[`${this.state.rxData["oid_ProfileName"]}.val`];
         const currentProfile = this.state.values[`${this.state.rxData["oid_CurrentProfile"]}.val`];
 
+        const currentTimePeriod = this.state.values[`${this.state.rxData["oid_CurrentTimePeriod"]}.val`];
+
         if (profileType === "Mo - Su") {
-            return this.createTable_MoSu(noOfPeriods, room, profileName, currentProfile);
+            return this.createTable_MoSu(noOfPeriods, room, profileName, currentProfile, currentTimePeriod);
         }
 
         else if (profileType === "Mo - Fr / Sa - Su") {
-            return this.createTable_MoFr_SaSo(noOfPeriods, room, profileName, currentProfile);
+            return this.createTable_MoFr_SaSo(noOfPeriods, room, profileName, currentProfile, currentTimePeriod);
         }
 
         else if (profileType === "every Day") {
-            return this.createTable_EveryDay(noOfPeriods, room, profileName, currentProfile);
+            return this.createTable_EveryDay(noOfPeriods, room, profileName, currentProfile, currentTimePeriod);
         }
         else {
             console.log("unknown profile type " + profileType);

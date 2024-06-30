@@ -157,7 +157,12 @@
           "GeneralEChartWidget",
           "WeatherWidget",
           "WeatherDayWidget",
-          "HeatingTimescheduleWidget"
+          "HeatingTimescheduleWidget",
+          "HeatingGeneralParamsWidget",
+          "HeatingRoomWidget",
+          "HeatingRoomsOverviewWidget",
+          "HeatingRomProfileParamsWidget",
+          "HeatingWindowStatusOverviewWidget"
         ]
       }
     },

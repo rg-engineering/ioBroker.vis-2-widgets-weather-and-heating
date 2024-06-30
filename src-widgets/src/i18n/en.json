@@ -248,7 +248,7 @@
   "widgets_heating_label_profilesun5_time": "OID profile Sun period 5 time",
 
 
-  "Period": "Period",
+  "Period": "Per.",
   "from": "from",
   "Temperature": "Temperature",
   "Times in week": "Times / Week",
@@ -256,19 +256,81 @@
   "Mo. - So.": "Mo. - Su",
   "Mo. - Fr.": "Mo. - Fr.",
   "Sa. - Su.": "Sa. - Su",
-  "Mon.": "Mon",
-  "Tue.": "Tue",
-  "Wed.": "Wed",
-  "Thu": "Thu",
-  "Fri": "Fri",
-  "Sat": "Sat",
-  "Sun": "Sun",
+  "Mon.": "Monday",
+  "Tue.": "Tuesday",
+  "Wed.": "Wednesday",
+  "Thu.": "Thursday",
+  "Fri.": "Friday",
+  "Sat.": "Saturday",
+  "Sun.": "Sunday",
 
 
   "Wind": "wind",
   "WindGusts": "wind gusts",
   "min": "min",
-  "max": "max"
+  "max": "max",
+
+
+
+  "vis_2_widgets-HeatingGeneralParams": "Heating General Parameter",
+
+
+  "oid_HeatingPeriodActive": "OID Heating Period Active",
+  "oid_PublicHolidyToday": "OID Public Holiday Today",
+  "oid_Present": "OID Present",
+  "oid_PartyNow": "OID Party Now",
+  "oid_GuestsPresent": "OID Guests Present",
+  "oid_HolidayPresent": "OID Holiday At Home",
+  "oid_VacationAbsent": "OID Vacation",
+  "oid_FireplaceModeActive": "OID Fireplace Mode",
+
+  "HeatingPeriodActive": "Heating Period Active",
+  "PublicHolydayToday": "Public Holiday Today",
+  "Present": "Present",
+  "PartyNow": "Party Now",
+  "GuestsPresent": "Guests Present",
+  "HolydayAtHome": "Holiday At Home",
+  "Vacation": "Vacation",
+  "FireplaceMode": "Fireplace Mode",
+
+
+  "vis_2_widgets-HeatingRoomProfileParams": "Heating Room Profile Parameter",
+
+  "oid_GuestIncrease": "OID Guest Increase",
+  "oid_PartyDecrease": "OID Party Decrease",
+  "oid_AbsentDecrease": "OID Absent Decrease",
+  "oid_VacationAbsentDecrease": "OID Vacation Absent Decrease",
+  "oid_WindowOpenDecrease": "OID Window Open Decrease",
+  "oid_FireplaceModeDecrease": "OID Fireplace Mode Decrease",
+  "oid_TemperaturOverride": "OID Temperature Override",
+  "oid_TemperaturOverrideTime": "OID Temperature Override Time",
+  "oid_MinimumTemperature": "OID Minimum Temperature",
+
+  "Time": "Time",
+
+  "GuestIncrease": "Guest Increase",
+  "PartyDecrease": "Party Decrease",
+  "AbsentDecrease": "Absent Decrease",
+  "VacationAbsentDecrease": "Vacation Absent Decrease",
+  "WindowOpenDecrease": "Window Open Decrease",
+  "FireplaceModeDecrease": "Fireplace Mode Decrease",
+  "MinimumTemperature": "Minimum Temperature",
+  "OverrideTemperature": "Temperature Override",
+  "OverrideTemperatureTime": "Temperature Override Time",
+
+
+
+  "vis_2_widgets-HeatingRoom": "Heating Room",
+
+
+  "vis_2_widgets-HeatingRoomsOverview": "Heating Rooms Overview",
+
+
+  "vis_2_widgets-HeatingWindowStatusOverview": "Heating Window Status Overview",
+
+
+  "oid_CurrentProfile": "OID Current Profile"
+
 
 
 

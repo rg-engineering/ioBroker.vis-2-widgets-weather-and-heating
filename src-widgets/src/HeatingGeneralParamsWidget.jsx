@@ -10,7 +10,7 @@ import { withStyles, withTheme } from "@mui/styles";
 
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import FormGroup from '@mui/material/FormGroup';
+import FormGroup from "@mui/material/FormGroup";
 
 
 
@@ -236,7 +236,8 @@ class HeatingGeneralParamsWidget extends (Generic) {
 
     handleChange = (event) => {
 
-        console.log("handleChange " );
+        console.log("handleChange ");
+        this.setState({ checked: event.target.checked });
 
     };
 

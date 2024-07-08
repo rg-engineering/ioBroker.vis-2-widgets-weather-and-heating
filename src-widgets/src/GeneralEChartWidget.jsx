@@ -456,7 +456,7 @@ class GeneralEChartWidget extends (Generic) {
 
                 for (let i = 0; i < data_json.length; i++) {
 
-                    let date = data_json[i][0];
+                    const date = data_json[i][0];
                     let value = data_json[i][1];
 
                     console.log("got # " + JSON.stringify(data_json[i]));

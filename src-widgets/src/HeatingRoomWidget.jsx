@@ -23,11 +23,9 @@ const styles = () => ({
     },
 });
 
-
-//todo Zeit / Temperatur eingebbar
-//todo aktuelle Periode markieren
-//todo Breite optimieren
-//todo bei mehreren Perioden : untereinander darstellen, wenn breite zu klein
+//todo default oid's
+//todo oid nach Instanz neu belegen
+//todo alles anzeigen
 
 const setDataStructures = async (field, data, changeData, socket) => {
 
@@ -38,7 +36,18 @@ const setDataStructures = async (field, data, changeData, socket) => {
     if (instance && instance.length > 0 && instance.includes("heatingcontrol") ) {
 
 
-      
+        //todo
+        data["oid_TargetTemperature"] = instance;
+        data["oid_CurrentTemperature"] = instance;
+        data["oid_CurrentTemperatureExtSensor"] = instance;
+        data["oid_CurrentActorState"] = instance;
+
+        data["oid_CurrentValveValue"] = instance;
+        data["oid_RoomState"] = instance;
+        data["oid_RoomLog"] = instance;
+        data["oid_ThermostatBatteryState"] = instance;
+        data["oid_ThermostatBattreryVoltage"] = instance;
+        data["oid_ThermostatRSSI"] = instance;
 
     }
     changeData(data);
@@ -89,6 +98,13 @@ class HeatingRoomWidget extends (Generic) {
                             default: "heatingcontrol.0",
                             onChange: setDataStructures,
                         },
+                        {
+                            name: "RoomName",    // name in data structure
+                            label: "widgets_weather_label_roomname", // translated field label
+                            type: "text",
+                            default: "Wohnzimmer",
+                            
+                        },
 
 
                     ],
@@ -97,15 +113,67 @@ class HeatingRoomWidget extends (Generic) {
                     name: "OIDS_General", // group name
                     fields: [
                         {
-                            name: "oid_CurrentProfile",    // name in data structure
-                            label: "widgets_heating_label_currentprofile", // translated field label
+                            name: "oid_TargetTemperature",    // name in data structure
+                            label: "widgets_heating_label_targettemperature", // translated field label
                             type: "id",
-                            default: "heatingcontrol.0.CurrentProfile",
+                            default: "", //todo
                         },
-                        
+                        {
+                            name: "oid_CurrentTemperature",    // name in data structure
+                            label: "widgets_heating_label_currenttemperature", // translated field label
+                            type: "id",
+                            default: "", //todo
+                        }, 
+                        {
+                            name: "oid_CurrentTemperatureExtSensor",    // name in data structure
+                            label: "widgets_heating_label_currenttemperatureextsensor", // translated field label
+                            type: "id",
+                            default: "", //todo
+                        }, 
+                        {
+                            name: "oid_CurrentActorState",    // name in data structure
+                            label: "widgets_heating_label_currentactorstate", // translated field label
+                            type: "id",
+                            default: "", //todo
+                        }, 
+                        {
+                            name: "oid_CurrentValveValue",    // name in data structure
+                            label: "widgets_heating_label_currentvalvevalue", // translated field label
+                            type: "id",
+                            default: "", //todo
+                        }, 
+                        {
+                            name: "oid_RoomState",    // name in data structure
+                            label: "widgets_heating_label_roomstate", // translated field label
+                            type: "id",
+                            default: "", //todo
+                        }, 
+                        {
+                            name: "oid_RoomLog",    // name in data structure
+                            label: "widgets_heating_label_roomlog", // translated field label
+                            type: "id",
+                            default: "", //todo
+                        }, 
+                        {
+                            name: "oid_ThermostatBatteryState",    // name in data structure
+                            label: "widgets_heating_label_thermostatbatterystate", // translated field label
+                            type: "id",
+                            default: "", //todo
+                        }, 
+                        {
+                            name: "oid_ThermostatBattreryVoltage",    // name in data structure
+                            label: "widgets_heating_label_thermostatbatteryvoltage", // translated field label
+                            type: "id",
+                            default: "", //todo
+                        }, 
+                        {
+                            name: "oid_ThermostatRSSI",    // name in data structure
+                            label: "widgets_heating_label_thermostatrssi", // translated field label
+                            type: "id",
+                            default: "", //todo
+                        },
 
                         
-
                     ],
                 },
                
@@ -189,7 +257,7 @@ class HeatingRoomWidget extends (Generic) {
             size = this.refCardContent.current.offsetHeight;
         }
 
-        console.log("heating time schedule: size " + size);
+        console.log("heating room state: size " + size);
 
 
         const content = this.CreateTable();
@@ -200,7 +268,7 @@ class HeatingRoomWidget extends (Generic) {
             return content;
         }
 
-        console.log("heating time schedule: wrap content");
+        console.log("heating room state: wrap content");
 
         return this.wrapContent(content, null, { textAlign: "center" });
     }

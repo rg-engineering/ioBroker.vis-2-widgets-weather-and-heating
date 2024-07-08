@@ -24,10 +24,8 @@ const styles = () => ({
 });
 
 
-//todo Zeit / Temperatur eingebbar
-//todo aktuelle Periode markieren
-//todo Breite optimieren
-//todo bei mehreren Perioden : untereinander darstellen, wenn breite zu klein
+
+
 
 const setDataStructures = async (field, data, changeData, socket) => {
 
@@ -37,7 +35,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
     
     if (instance && instance.length > 0 && instance.includes("heatingcontrol") ) {
 
-
+        data["oid_RoomStatesHtmlTable"] = instance + ".vis.RoomStatesHtmlTable";
       
 
     }
@@ -97,10 +95,10 @@ class HeatingRoomsOverviewWidget extends (Generic) {
                     name: "OIDS_General", // group name
                     fields: [
                         {
-                            name: "oid_CurrentProfile",    // name in data structure
-                            label: "widgets_heating_label_currentprofile", // translated field label
+                            name: "oid_RoomStatesHtmlTable",    // name in data structure
+                            label: "widgets_heating_label_roomstateshtmltable", // translated field label
                             type: "id",
-                            default: "heatingcontrol.0.CurrentProfile",
+                            default: "heatingcontrol.0.vis.RoomStatesHtmlTable",
                         },
                         
 
@@ -166,8 +164,23 @@ class HeatingRoomsOverviewWidget extends (Generic) {
 
     CreateTable() {
 
-        //to do
-        return null;
+
+        const htmlTable = this.state.values[`${this.state.rxData["oid_RoomStatesHtmlTable"]}.val`];
+
+        const content = <div
+            ref={this.refCardContent}
+            className={this.props.classes.cardContent}
+        >
+
+
+            <div  dangerouslySetInnerHTML={{ __html: htmlTable }}></div>
+
+        </div>;
+
+
+        return content;
+
+       
     }
   
 
@@ -190,7 +203,7 @@ class HeatingRoomsOverviewWidget extends (Generic) {
             size = this.refCardContent.current.offsetHeight;
         }
 
-        console.log("heating time schedule: size " + size);
+        console.log("heating rooms overview : size " + size);
 
 
         const content = this.CreateTable();
@@ -201,7 +214,7 @@ class HeatingRoomsOverviewWidget extends (Generic) {
             return content;
         }
 
-        console.log("heating time schedule: wrap content");
+        console.log("heating rooms overview: wrap content");
 
         return this.wrapContent(content, null, { textAlign: "center" });
     }

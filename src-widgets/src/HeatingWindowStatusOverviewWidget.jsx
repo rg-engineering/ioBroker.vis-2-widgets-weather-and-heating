@@ -23,11 +23,9 @@ const styles = () => ({
     },
 });
 
+//todo Anzahl offene Fenster anzeigen
 
-//todo Zeit / Temperatur eingebbar
-//todo aktuelle Periode markieren
-//todo Breite optimieren
-//todo bei mehreren Perioden : untereinander darstellen, wenn breite zu klein
+
 
 const setDataStructures = async (field, data, changeData, socket) => {
 
@@ -38,7 +36,8 @@ const setDataStructures = async (field, data, changeData, socket) => {
     if (instance && instance.length > 0 && instance.includes("heatingcontrol") ) {
 
 
-      
+        data["oid_WindowStatesHtmlTable"] = instance + ".vis.WindowStatesHtmlTable";
+        data["oid_OpenWindowRoomCount"] = instance + ".vis.OpenWindowRoomCount";
 
     }
     changeData(data);
@@ -97,12 +96,18 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
                     name: "OIDS_General", // group name
                     fields: [
                         {
-                            name: "oid_CurrentProfile",    // name in data structure
-                            label: "widgets_heating_label_currentprofile", // translated field label
+                            name: "oid_WindowStatesHtmlTable",    // name in data structure
+                            label: "widgets_heating_label_windowstateshtmltable", // translated field label
                             type: "id",
-                            default: "heatingcontrol.0.CurrentProfile",
+                            default: "heatingcontrol.0.vis.WindowStatesHtmlTable",
                         },
-                        
+                        {
+                            name: "oid_OpenWindowRoomCount",    // name in data structure
+                            label: "widgets_heating_label_openwindowsstatescount", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.OpenWindowRoomCount",
+                        },
+
 
                         
 
@@ -168,8 +173,20 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
 
     CreateTable() {
 
-        //to do
-        return null;
+        const htmlTable = this.state.values[`${this.state.rxData["oid_WindowStatesHtmlTable"]}.val`];
+
+        const content = <div
+            ref={this.refCardContent}
+            className={this.props.classes.cardContent}
+        >
+
+
+            <div dangerouslySetInnerHTML={{ __html: htmlTable }}></div>
+
+        </div>;
+
+
+        return content;
     }
 
 
@@ -190,7 +207,7 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
             size = this.refCardContent.current.offsetHeight;
         }
 
-        console.log("heating time schedule: size " + size);
+        console.log("heating window states overview: size " + size);
 
 
         const content = this.CreateTable();
@@ -201,7 +218,7 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
             return content;
         }
 
-        console.log("heating time schedule: wrap content");
+        console.log("heating window states overview: wrap content");
 
         return this.wrapContent(content, null, { textAlign: "center" });
     }

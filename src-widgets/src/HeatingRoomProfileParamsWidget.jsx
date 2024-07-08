@@ -8,18 +8,18 @@ import { withStyles, withTheme } from "@mui/styles";
 
 //import { Card, CardContent } from "@mui/material";
 
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
-import TextField from '@mui/material/TextField';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Box from "@mui/material/Box";
+//import IconButton from "@mui/material/IconButton";
+//import Input from "@mui/material/Input";
+import FilledInput from "@mui/material/FilledInput";
+//import OutlinedInput from "@mui/material/OutlinedInput";
+//import InputLabel from "@mui/material/InputLabel";
+import InputAdornment from "@mui/material/InputAdornment";
+import FormHelperText from "@mui/material/FormHelperText";
+import FormControl from "@mui/material/FormControl";
+//import TextField from "@mui/material/TextField";
+//import Visibility from "@mui/icons-material/Visibility";
+//import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 
 import { I18n } from "@iobroker/adapter-react-v5";
@@ -281,104 +281,104 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
             ref={this.refCardContent}
             className={this.props.classes.cardContent}
         >
-            <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
+            <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+                <FormControl sx={{ m: 1, width: "25ch" }} variant="filled">
                     <FilledInput
                         id="GuestIncrease"
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="GuestIncrease"
                         inputProps={{
-                            'aria-label':  I18n.t("Temperature") ,
+                            "aria-label":  I18n.t("Temperature") ,
                         }}
-                        type='number'
+                        type="number"
                         value={GuestIncrease}
                         onChange={this.handleChange}
                     />
                     <FormHelperText id="GuestIncrease-text">{I18n.t("GuestIncrease")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
+                <FormControl sx={{ m: 1, width: "25ch" }} variant="filled">
                     <FilledInput
                         id="PartyDecrease"
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="PartyDecrease"
                         inputProps={{
-                            'aria-label': I18n.t("Temperature") ,
+                            "aria-label": I18n.t("Temperature") ,
                         }}
-                        type='number'
+                        type="number"
                         value={PartyDecrease}
                         onChange={this.handleChange}
                     />
                     <FormHelperText id="PartyDecrease-text">{I18n.t("PartyDecrease")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
+                <FormControl sx={{ m: 1, width: "25ch" }} variant="filled">
                     <FilledInput
                         id="AbsentDecrease"
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="AbsentDecrease"
                         inputProps={{
-                            'aria-label':  I18n.t("Temperature") ,
+                            "aria-label":  I18n.t("Temperature") ,
                         }}
-                        type='number'
+                        type="number"
                         value={AbsentDecrease}
                         onChange={this.handleChange}
                     />
                     <FormHelperText id="AbsentDecrease-text">{I18n.t("AbsentDecrease")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
+                <FormControl sx={{ m: 1, width: "25ch" }} variant="filled">
                     <FilledInput
                         id="VacationAbsentDecrease"
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="VacationAbsentDecrease"
                         inputProps={{
-                            'aria-label':  I18n.t("Temperature") ,
+                            "aria-label":  I18n.t("Temperature") ,
                         }}
-                        type='number'
+                        type="number"
                         value={VacationAbsentDecrease}
                         onChange={this.handleChange}
                     />
                     <FormHelperText id="VacationAbsentDecrease-text">{I18n.t("VacationAbsentDecrease")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
+                <FormControl sx={{ m: 1, width: "25ch" }} variant="filled">
                     <FilledInput
                         id="WindowOpenDecrease"
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="WindowOpenDecrease"
                         inputProps={{
-                            'aria-label':  I18n.t("Temperature") ,
+                            "aria-label":  I18n.t("Temperature") ,
                         }}
-                        type='number'
+                        type="number"
                         value={WindowOpenDecrease}
                         onChange={this.handleChange}
                     />
                     <FormHelperText id="WindowOpenDecrease-text">{I18n.t("WindowOpenDecrease")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
+                <FormControl sx={{ m: 1, width: "25ch" }} variant="filled">
                     <FilledInput
                         id="FireplaceModeDecrease"
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="FireplaceModeDecrease"
                         inputProps={{
-                            'aria-label':  I18n.t("Temperature") ,
+                            "aria-label":  I18n.t("Temperature") ,
                         }}
-                        type='number'
+                        type="number"
                         value={FireplaceModeDecrease}
                         onChange={this.handleChange}
                     />
                     <FormHelperText id="FireplaceModeDecrease-text">{I18n.t("FireplaceModeDecrease")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
+                <FormControl sx={{ m: 1, width: "25ch" }} variant="filled">
                     <FilledInput
                         id="MinimumTemperature"
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="MinimumTemperature"
                         inputProps={{
-                            'aria-label':  I18n.t("Temperature") ,
+                            "aria-label":  I18n.t("Temperature") ,
                         }}
                         type='number'
                         value={MinimumTemperature}
@@ -387,30 +387,30 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                     <FormHelperText id="MinimumTemperature-text">{I18n.t("MinimumTemperature")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
+                <FormControl sx={{ m: 1, width: "25ch" }} variant="filled">
                     <FilledInput
                         id="OverrideTemperature"
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="OverrideTemperature"
                         inputProps={{
-                            'aria-label':  I18n.t("Temperature") ,
+                            "aria-label":  I18n.t("Temperature") ,
                         }}
-                        type='number'
+                        type="number"
                         value={OverrideTemperature}
                         onChange={this.handleChange}
                     />
                     <FormHelperText id="OverrideTemperature-text">{I18n.t("OverrideTemperature")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
+                <FormControl sx={{ m: 1, width: "25ch" }} variant="filled">
                     <FilledInput
                         id="OverrideTemperatureTime"
                         endAdornment={<InputAdornment position="end"> </InputAdornment>}
                         aria-describedby="OverrideTemperatureTime"
                         inputProps={{
-                            'aria-label':  I18n.t("Time") ,
+                            "aria-label":  I18n.t("Time") ,
                         }}
-                        type='text'
+                        type="text"
                         value={OverrideTemperatureTime}
                         onChange={this.handleChange}
                     />
@@ -443,7 +443,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
             size = this.refCardContent.current.offsetHeight;
         }
 
-        console.log("heating time schedule: size " + size);
+        console.log("heating room profile params: size " + size);
 
 
         const content = this.CreateTable();
@@ -454,7 +454,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
             return content;
         }
 
-        console.log("heating time schedule: wrap content");
+        console.log("heating room profile params: wrap content");
 
         return this.wrapContent(content, null, { textAlign: "center" });
     }

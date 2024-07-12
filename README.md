@@ -59,8 +59,7 @@ You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
-
-### **WORK IN PROGRESS**
+### 0.3.3 (2024-07-12)
  * (René) Heating Rooms Overview widget completed
  * (René) Heating Windows Status Overview widget completed
  * (René) Heating Room widget completed

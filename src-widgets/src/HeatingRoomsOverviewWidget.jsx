@@ -23,6 +23,8 @@ const styles = () => ({
     },
 });
 
+//todo Überschrift "Raumstatus" fehlt-> okay
+//todo Übersetzungen
 
 
 
@@ -167,11 +169,16 @@ class HeatingRoomsOverviewWidget extends (Generic) {
 
         const htmlTable = this.state.values[`${this.state.rxData["oid_RoomStatesHtmlTable"]}.val`];
 
+        console.log("html " + htmlTable);
+
         const content = <div
             ref={this.refCardContent}
             className={this.props.classes.cardContent}
         >
-
+            <div>
+                <p>{I18n.t("Rooms Status Overview")}</p>
+                
+            </div>
 
             <div  dangerouslySetInnerHTML={{ __html: htmlTable }}></div>
 

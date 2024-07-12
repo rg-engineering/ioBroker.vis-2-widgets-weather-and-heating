@@ -23,7 +23,11 @@ const styles = () => ({
     },
 });
 
-//todo Anzahl offene Fenster anzeigen
+//todo Image sollte in gleicher Zeile wie Raum, Uhrzeit sollte kleinere Schrift
+//todo Anzeige Anzahl offener Fenster fehlt
+//todo Überschrift: "Fensterstatus" fehlt -> okay
+//todo Übersetzungen
+//todo icon fenster offen noch hinzuüngne
 
 
 
@@ -175,11 +179,17 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
 
         const htmlTable = this.state.values[`${this.state.rxData["oid_WindowStatesHtmlTable"]}.val`];
 
+        console.log("html " + htmlTable);
+
         const content = <div
             ref={this.refCardContent}
             className={this.props.classes.cardContent}
         >
 
+            <div>
+                <p>{I18n.t("Window Status Overview")}</p>
+
+            </div>
 
             <div dangerouslySetInnerHTML={{ __html: htmlTable }}></div>
 

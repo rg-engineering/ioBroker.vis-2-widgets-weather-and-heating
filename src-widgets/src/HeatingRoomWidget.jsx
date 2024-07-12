@@ -32,6 +32,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
     console.log("set new datastructure instance" + data["instance"] );
 
     const instance = data["instance"];
+    const roomName = data["RoomName"];
     
     if (instance && instance.length > 0 && instance.includes("heatingcontrol") ) {
 
@@ -103,6 +104,7 @@ class HeatingRoomWidget extends (Generic) {
                             label: "widgets_weather_label_roomname", // translated field label
                             type: "text",
                             default: "Wohnzimmer",
+                            onChange: setDataStructures,
                             
                         },
 
@@ -236,8 +238,64 @@ class HeatingRoomWidget extends (Generic) {
 
     CreateTable() {
 
-        //to do
-        return null;
+        const roomName = this.state.rxData["RoomName"];
+
+        const targetTemperature = this.state.values[`${this.state.rxData["oid_TargetTemperature"]}.val`];
+        const currentTemperature = this.state.values[`${this.state.rxData["oid_CurrentTemperature"]}.val`];
+        const currentTemperatureExtSensor = this.state.values[`${this.state.rxData["oid_CurrentTemperatureExtSensor"]}.val`];
+        const currentActorState = this.state.values[`${this.state.rxData["oid_CurrentActorState"]}.val`];
+
+        const currentValveValue = this.state.values[`${this.state.rxData["oid_CurrentValveValue"]}.val`];
+        const roomState = this.state.values[`${this.state.rxData["oid_RoomState"]}.val`];
+        const roomLog = this.state.values[`${this.state.rxData["oid_RoomLog"]}.val`];
+        const thermostatBatteryState = this.state.values[`${this.state.rxData["oid_ThermostatBatteryState"]}.val`];
+        const thermostatBatteryVoltage = this.state.values[`${this.state.rxData["oid_ThermostatBattreryVoltage"]}.val`];
+        const thermostatRSSI = this.state.values[`${this.state.rxData["oid_ThermostatRSSI"]}.val`];
+
+
+        const style = {
+            width: '100%',
+            height: !noCard ? 'calc(100% - 36px)' : '100%',
+            border: '0',
+        };
+
+        const content = <div
+            ref={this.refCardContent}
+            className={this.props.classes.cardContent}
+        >
+            <div>
+                <p>{I18n.t("Room")}  {roomName}</p>
+            </div>
+
+            <div>
+                <p> {targetTemperature} °C</p>
+            </div>
+
+            <div>
+                <p> {currentTemperature} °C</p>
+                <p> {currentTemperatureExtSensor} °C</p>
+                <p> {currentActorState}</p>
+                <p> {currentValveValue} %</p>
+
+            </div>
+
+            <div>
+                <p> {roomState}</p>
+            </div>
+
+            <div dangerouslySetInnerHTML={{ __html: roomLog }} style={style} ></div>
+
+            <div>
+                <p> {thermostatBatteryState}</p>
+                <p> {thermostatBatteryVoltage} V</p>
+                <p> {thermostatRSSI} dB</p>
+            </div>
+
+        </div>;
+
+
+        return content;
+
     }
 
 

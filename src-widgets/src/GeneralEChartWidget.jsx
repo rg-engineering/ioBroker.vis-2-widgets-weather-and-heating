@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withStyles, withTheme } from "@mui/styles";
 
 import moment from "moment";
 
@@ -8,11 +7,9 @@ import moment from "moment";
 
 import ReactEchartsCore from "echarts-for-react";
 
-import { I18n } from "@iobroker/adapter-react-v5";
-
 import Generic from "./Generic";
 
-const styles = () => ({
+const styles = {
     cardContent: {
         flex: 1,
         display: "flex",
@@ -21,22 +18,14 @@ const styles = () => ({
         width: "100%",
         overflow: "hidden",
     },
-});
-
+};
 
 //todo Dummy-Y Achse wird nicht gelöscht, wenn reale Daten kommen
 //todo x achse unit einstellbar
 //todo x achse type (time or category) einstellbar
 
-
-
-
-
-
-
 const setDataStructures = async (field, data, changeData, socket) => {
-
-    console.log("set new datastructure " + data["dataCount"] + " " + JSON.stringify(field) + " " + JSON.stringify(data));
+    console.log(`set new datastructure ${data["dataCount"]} ${JSON.stringify(field)} ${JSON.stringify(data)}`);
 
     for (let d = 1; d <= data["dataCount"]; d++) {
 
@@ -81,7 +70,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
                 formatstring = "YYYY";
             }
 
-            console.log("new " + oid_data + " " + formatstring);
+            console.log(`new ${oid_data} ${formatstring}`);
 
             data["oid_data" + d] = oid_data;
 
@@ -119,7 +108,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
                 oid_data = oid_data + "value4";
                 formatstring = "ddd HH:mm";
             }
-            
+
             console.log("new " + oid_data + " " + formatstring);
 
             data["oid_data" + d] = oid_data;
@@ -133,20 +122,17 @@ const setDataStructures = async (field, data, changeData, socket) => {
         }
     }
 
-
     changeData(data);
 };
 
 
 class GeneralEChartWidget extends (Generic) {
-
     constructor(props) {
         super(props);
         this.refCardContent = React.createRef();
     }
 
     static getWidgetInfo() {
-
         return {
             id: "tplGeneralEChartWidget",                 // Unique widget type ID. Should start with `tpl` followed
             visSet: "vis-2-widgets-weather",        // Unique ID of widget set
@@ -158,8 +144,8 @@ class GeneralEChartWidget extends (Generic) {
             visWidgetLabel: "vis_2_widgets-generalechart", // Label of widget
             visWidgetColor: "#005cc4",               // Optional widget color. If not set, default color of widget set will be used.
             visResizeLocked: false,                   // require, that width is always equal to height
-            visResizable: true,                     // widget is not resizable 
-            visDraggable: true,                     // widget is not draggable 
+            visResizable: true,                     // widget is not resizable
+            visDraggable: true,                     // widget is not draggable
             visAttrs: [
                 {
                     // check here all possible types https://github.com/ioBroker/ioBroker.vis/blob/react/src/src/Attributes/Widget/SCHEMA.md
@@ -196,14 +182,14 @@ class GeneralEChartWidget extends (Generic) {
 
                         {
                             name: "name",    // name in data structure
-                            label: "widgets_weather_label_name", // translated field label
+                            label: "name", // translated field label
                             type: "text",
                             default: "serie",
                         },
 
                         {
                             name: "instance",    // name in data structure
-                            label: "widgets_weather_label_instance", // translated field label
+                            label: "instance", // translated field label
                             type: "instance",
                             default: "",
                             onChange: setDataStructures,
@@ -340,7 +326,7 @@ class GeneralEChartWidget extends (Generic) {
                                 }],
                             default: "left",
                         },
-                        
+
                         {
                             name: "data_calcdiff",    // name in data structure
                             label: "widgets_echart_data_calcdiff", // translated field label
@@ -356,7 +342,7 @@ class GeneralEChartWidget extends (Generic) {
                     fields: [
                         {
                             name: "xaxis_axisLabel_formatstring",    // name in data structure
-                            label: "widgets_weather_label_xaxis_axisLabel_formatstring", // translated field label
+                            label: "xaxis_axisLabel_formatstring", // translated field label
                             type: "text",
 
                             default: "ddd HH:mm",
@@ -371,46 +357,10 @@ class GeneralEChartWidget extends (Generic) {
         };
     }
 
-    // eslint-disable-next-line class-methods-use-this
-    propertiesUpdate() {
-        // Widget has 3 important states
-        // 1. this.state.values - contains all state values, that are used in widget (automatically collected from widget info).
-        //                        So you can use `this.state.values[this.state.rxData.oid + ".val"]` to get value of state with id this.state.rxData.oid
-        // 2. this.state.rxData - contains all widget data with replaced bindings. E.g. if this.state.data.type is `{system.adapter.admin.0.alive}`,
-        //                        then this.state.rxData.type will have state value of `system.adapter.admin.0.alive`
-        // 3. this.state.rxStyle - contains all widget styles with replaced bindings. E.g. if this.state.styles.width is `{javascript.0.width}px`,
-        //                        then this.state.rxData.type will have state value of `javascript.0.width` + "px
-    }
-
-    async componentDidMount() {
-        super.componentDidMount();
-
-        // Update data
-        this.propertiesUpdate();
-    }
-
     // Do not delete this method. It is used by vis to read the widget configuration.
     // eslint-disable-next-line class-methods-use-this
     getWidgetInfo() {
         return GeneralEChartWidget.getWidgetInfo();
-    }
-
-    // This function is called every time when rxData is changed
-    async onRxDataChanged() {
-
-        this.propertiesUpdate();
-    }
-
-    // This function is called every time when rxStyle is changed
-    // eslint-disable-next-line class-methods-use-this
-    onRxStyleChanged() {
-
-    }
-
-    // This function is called every time when some Object State updated, but all changes lands into this.state.values too
-    // eslint-disable-next-line class-methods-use-this, no-unused-vars
-    onStateUpdated(id, state) {
-
     }
 
     /**
@@ -418,7 +368,6 @@ class GeneralEChartWidget extends (Generic) {
      * @returns {echarts.EChartsOption}
      */
     getOption() {
-
         console.log("getOption 1");
 
         let dataMin = 0;
@@ -513,7 +462,7 @@ class GeneralEChartWidget extends (Generic) {
 
                 const autounit_name = "data_autounit" + d;
 
-                
+
                 let factor = 1;
                 if (this.state.rxData[autounit_name]) {
                     //G
@@ -598,7 +547,7 @@ class GeneralEChartWidget extends (Generic) {
 
             console.log("add dummy data");
 
-            legend.push(I18n.t("dummy"));
+            legend.push(Generic.t("dummy"));
             yaxis.push({
                 position: "left",
                 type: "value",
@@ -611,7 +560,7 @@ class GeneralEChartWidget extends (Generic) {
                 }
             });
             series.push({
-                name: I18n.t("dummy"),
+                name: Generic.t("dummy"),
                 type: "bar",
                 data: [
                     ["2024-04-30T00:00:00.000Z", 10],
@@ -681,13 +630,11 @@ class GeneralEChartWidget extends (Generic) {
         return content;
     }
 
-
     renderWidgetBody(props) {
         super.renderWidgetBody(props);
 
-
-        console.log("gechart values" + JSON.stringify(this.state.values));
-        console.log("gechart rxData " + JSON.stringify(this.state.rxData));
+        console.log(`gechart values${JSON.stringify(this.state.values)}`);
+        console.log(`gechart rxData ${JSON.stringify(this.state.rxData)}`);
 
         let size;
         if (!this.refCardContent.current) {
@@ -696,12 +643,12 @@ class GeneralEChartWidget extends (Generic) {
             size = this.refCardContent.current.offsetHeight;
         }
 
-        console.log("echart: size " + size);
+        console.log(`echart: size ${size}`);
 
 
         const content = <div
             ref={this.refCardContent}
-            className={this.props.classes.cardContent}
+            style={styles.cardContent}
         >
             {size && <ReactEchartsCore
                 option={this.getOption()}
@@ -729,5 +676,5 @@ GeneralEChartWidget.propTypes = {
     data: PropTypes.object,
 };
 
-export default withStyles(styles)(withTheme(GeneralEChartWidget));
+export default GeneralEChartWidget;
 

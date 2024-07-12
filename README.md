@@ -1,8 +1,6 @@
 ![Logo](admin/vis-2-widgets-weather.png)
 # ioBroker.vis-2-widgets-weather
 
-
-
 ![Number of Installations](http://iobroker.live/badges/vis-2-widgets-weather-installed.svg) ![Number of Installations](http://iobroker.live/badges/vis-2-widgets-weather-stable.svg)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.vis-2-widgets-weather.svg)](https://www.npmjs.com/package/iobroker.vis-2-widgets-weather)
 [![NPM version](http://img.shields.io/npm/v/iobroker.vis-2-widgets-weather.svg)](https://www.npmjs.com/package/iobroker.vis-2-widgets-weather)
@@ -38,26 +36,24 @@ You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
 ## weather day
 ![widget_weather_day.PNG](./doc/widget_weather_day.PNG)
 
-
 * OID's are automatically set based on general settings
-* icon set's are changeable
+* icon sets are changeable
 
 ## general chart
 
 ![widget_general_chart.PNG](./doc/widget_general_chart.PNG)
 
 
-
 ### input data for general chart
 
-* "OID data serie" should point to data point like "sbfspot.0.xxxxxxxx.history.years"
+* "OID data serie" should point to data point like `sbfspot.0.xxxxxxxx.history.years`
 * data point should contain key / value pairs like
 
 > [{"year":"2008","value":7000},{"year":"2009","value":2309000},{"year":"2010","value":4445000},{"year":"2011","value":7019000},{"year":"2012","value":9371000},{"year":"2013","value":11393000},{"year":"2014","value":13666000},{"year":"2015","value":16034000},{"year":"2016","value":17826790}]
 
 * it's possible to auto calculate and show differences of values. Just tick "difference calculation" in settings.
 
-* it supports adapter sbfspot and ebus: just select instance and basic adjustments are done automitcally
+* it supports adapter `sbfspot` and `ebus`: just select instance, and basic adjustments are done automatically
 
 <!--
     ### **WORK IN PROGRESS**

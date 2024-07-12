@@ -1,24 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withStyles, withTheme } from "@mui/styles";
 
-//https://github.com/Pittini/iobroker-heatingcontrol-vis
+// https://github.com/Pittini/iobroker-heatingcontrol-vis
 
-
-
-//import { Card, CardContent } from "@mui/material";
-
-import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormGroup from '@mui/material/FormGroup';
-
-
-
-import { I18n } from "@iobroker/adapter-react-v5";
+// For federation it is important to import from one package "@mui/material" and not from "@mui/material/Box"
+import {
+    Checkbox,
+    FormControlLabel,
+    FormGroup,
+} from "@mui/material";
 
 import Generic from "./Generic";
 
-const styles = () => ({
+const styles = {
     cardContent: {
         flex: 1,
         display: "block",
@@ -27,10 +21,9 @@ const styles = () => ({
         width: "100%",
         overflow: "hidden",
     },
-});
+};
 
-
-//todo aktuellen status in chheckbox darstellen
+//todo aktuellen status in checkbox darstellen
 //todo Änderungen der checkbox an adapter übergen
 //todo nur die Werte anzeigen, für die es auch OID's gibt
 
@@ -38,15 +31,12 @@ const styles = () => ({
 //todo Image
 
 const setDataStructures = async (field, data, changeData, socket) => {
-
-    console.log("set new datastructure instance" + data["instance"] );
+    console.log(`set new datastructure instance${data["instance"]}` );
 
     const instance = data["instance"];
-    
+
     if (instance && instance.length > 0 && instance.includes("heatingcontrol") ) {
-
-        data["oid_ChoosenRoom"] = instance + ".vis.ChoosenRoom";
-
+        data["oid_ChoosenRoom"] = `${instance}.vis.ChoosenRoom`;
 
         data["oid_HeatingPeriodActive"] = instance + ".HeatingPeriodActive";
         data["oid_PublicHolidyToday"] = instance + ".PublicHolidyToday";
@@ -56,27 +46,17 @@ const setDataStructures = async (field, data, changeData, socket) => {
         data["oid_HolidayPresent"] = instance + ".HolidayPresent";
         data["oid_VacationAbsent"] = instance + ".VacationAbsent";
         data["oid_FireplaceModeActive"] = instance + ".FireplaceModeActive";
-
-
-
     }
     changeData(data);
 };
 
-
 class HeatingGeneralParamsWidget extends (Generic) {
-
     constructor(props) {
         super(props);
         this.refCardContent = React.createRef();
     }
 
-
     static getWidgetInfo() {
-
-
-
-
         return {
             id: "tplHeatingGeneralParamsWidget",                 // Unique widget type ID. Should start with `tpl` followed
             visSet: "vis-2-widgets-weather",        // Unique ID of widget set
@@ -88,8 +68,8 @@ class HeatingGeneralParamsWidget extends (Generic) {
             visWidgetLabel: "vis_2_widgets-HeatingGeneralParams", // Label of widget
             visWidgetColor: "#005cc4",               // Optional widget color. If not set, default color of widget set will be used.
             visResizeLocked: false,                   // require, that width is always equal to height
-            visResizable: true,                     // widget is not resizable 
-            visDraggable: true,                     // widget is not draggable 
+            visResizable: true,                     // widget is not resizable
+            visDraggable: true,                     // widget is not draggable
             visAttrs: [
                 {
                     // check here all possible types https://github.com/ioBroker/ioBroker.vis/blob/react/src/src/Attributes/Widget/SCHEMA.md
@@ -103,73 +83,68 @@ class HeatingGeneralParamsWidget extends (Generic) {
                         },
                         {
                             name: "instance",    // name in data structure
-                            label: "widgets_weather_label_instance", // translated field label
+                            label: "instance", // translated field label
                             type: "instance",
                             default: "heatingcontrol.0",
                             onChange: setDataStructures,
                         },
-
-
                     ],
                 },
-
-
-
 
                 {
                     name: "OIDS_General", // group name
                     fields: [
                         {
                             name: "oid_ChoosenRoom",    // name in data structure
-                            label: "widgets_heating_label_choosenroom", // translated field label
+                            label: "choosenroom", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.ChoosenRoom",
                         },
                         {
                             name: "oid_HeatingPeriodActive",    // name in data structure
-                            label: "widgets_heating_label_heatingperiodactive", // translated field label
+                            label: "heatingperiodactive", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.HeatingPeriodActive",
                         },
                         {
                             name: "oid_PublicHolidyToday",    // name in data structure
-                            label: "widgets_heating_label_publicholidytoday", // translated field label
+                            label: "publicholidytoday", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.PublicHolidyToday",
                         },
                         {
                             name: "oid_Present",    // name in data structure
-                            label: "widgets_heating_label_present", // translated field label
+                            label: "present", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.Present",
                         },
                         {
                             name: "oid_PartyNow",    // name in data structure
-                            label: "widgets_heating_label_partynow", // translated field label
+                            label: "partynow", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.PartyNow",
                         },
                         {
                             name: "oid_GuestsPresent",    // name in data structure
-                            label: "widgets_heating_label_guestspresent", // translated field label
+                            label: "guestspresent", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.GuestsPresent",
                         },
                         {
                             name: "oid_HolidayPresent",    // name in data structure
-                            label: "widgets_heating_label_holidaypresent", // translated field label
+                            label: "holidaypresent", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.HolidayPresent",
                         },
                         {
                             name: "oid_VacationAbsent",    // name in data structure
-                            label: "widgets_heating_label_vacationabsent", // translated field label
+                            label: "vacationabsent", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.VacationAbsent",
                         },
                         {
                             name: "oid_FireplaceModeActive",    // name in data structure
-                            label: "widgets_heating_label_fireplacemodeactive", // translated field label
+                            label: "fireplacemodeactive", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.FireplaceModeActive",
                         },
@@ -240,8 +215,7 @@ class HeatingGeneralParamsWidget extends (Generic) {
 
     };
 
-    CreateTable() {
-
+    createTable() {
         const HeatingPeriodActiveChecked = this.state.values[`${this.state.rxData["oid_HeatingPeriodActive"]}.val`];
         const PublicHolydayTodayChecked = this.state.values[`${this.state.rxData["oid_PublicHolidyToday"]}.val`];
         const PresentChecked = this.state.values[`${this.state.rxData["oid_Present"]}.val`];
@@ -251,69 +225,64 @@ class HeatingGeneralParamsWidget extends (Generic) {
         const VacationChecked = this.state.values[`${this.state.rxData["oid_VacationAbsent"]}.val`];
         const FireplaceModeChecked = this.state.values[`${this.state.rxData["oid_FireplaceModeActive"]}.val`];
 
-        console.log("CreateTable " + HeatingPeriodActiveChecked + " " + PublicHolydayTodayChecked + " " + PresentChecked + " " + PartyNowChecked + " " + GuestsPresentChecked + " " + HolydayAtHomeChecked + " " + VacationChecked + " " + FireplaceModeChecked);
+        console.log(`CreateTable ${HeatingPeriodActiveChecked} ${PublicHolydayTodayChecked} ${PresentChecked} ${PartyNowChecked} ${GuestsPresentChecked} ${HolydayAtHomeChecked} ${VacationChecked} ${FireplaceModeChecked}`);
 
         const content = <div
             ref={this.refCardContent}
-            className={this.props.classes.cardContent}
+            style={styles.cardContent}
         >
             <FormGroup>
                 <FormControlLabel control={
                     <Checkbox
                         checked={HeatingPeriodActiveChecked}
                         onChange={this.handleChange}
-                    />} label={I18n.t("HeatingPeriodActive")} />
+                    />} label={Generic.t("HeatingPeriodActive")} />
                 <FormControlLabel control={
                     <Checkbox
                         checked={PublicHolydayTodayChecked}
                         onChange={this.handleChange}
-                    />} label={I18n.t("PublicHolydayToday")} />
+                    />} label={Generic.t("PublicHolydayToday")} />
                 <FormControlLabel control={
                     <Checkbox
                         checked={PresentChecked}
                         onChange={this.handleChange}
-                    />} label={I18n.t("Present")} />
+                    />} label={Generic.t("Present")} />
                 <FormControlLabel control={
                     <Checkbox
                         checked={PartyNowChecked}
                         onChange={this.handleChange}
-                    />} label={I18n.t("PartyNow")} />
+                    />} label={Generic.t("PartyNow")} />
                 <FormControlLabel control={
                     <Checkbox
                         checked={GuestsPresentChecked}
                         onChange={this.handleChange}
-                    />} label={I18n.t("GuestsPresent")} />
+                    />} label={Generic.t("GuestsPresent")} />
                 <FormControlLabel control={
                     <Checkbox
                         checked={HolydayAtHomeChecked}
                         onChange={this.handleChange}
-                    />} label={I18n.t("HolydayAtHome")} />
+                    />} label={Generic.t("HolydayAtHome")} />
                 <FormControlLabel control={
                     <Checkbox
                         checked={VacationChecked}
                         onChange={this.handleChange}
-                    />} label={I18n.t("Vacation")} />
+                    />} label={Generic.t("Vacation")} />
                 <FormControlLabel control={
                     <Checkbox
                         checked={FireplaceModeChecked}
                         onChange={this.handleChange}
-                    />} label={I18n.t("FireplaceMode")} />
+                    />} label={Generic.t("FireplaceMode")} />
             </FormGroup>
         </div>;
 
         return content;
     }
 
-
-
-
-
-
     renderWidgetBody(props) {
         super.renderWidgetBody(props);
 
-        console.log("values" + JSON.stringify(this.state.values));
-        console.log("rxData " + JSON.stringify(this.state.rxData));
+        console.log(`values ${JSON.stringify(this.state.values)}`);
+        console.log(`rxData ${JSON.stringify(this.state.rxData)}`);
 
         let size;
         if (!this.refCardContent.current) {
@@ -322,11 +291,9 @@ class HeatingGeneralParamsWidget extends (Generic) {
             size = this.refCardContent.current.offsetHeight;
         }
 
-        console.log("heating general params: size " + size);
+        console.log(`heating general params: size ${size}`);
 
-
-        const content = this.CreateTable();
-
+        const content = this.createTable();
 
         if (this.state.rxData.noCard || props.widget.usedInWidget) {
             console.log("nur content");
@@ -346,5 +313,5 @@ HeatingGeneralParamsWidget.propTypes = {
     data: PropTypes.object,
 };
 
-export default withStyles(styles)(withTheme(HeatingGeneralParamsWidget));
+export default HeatingGeneralParamsWidget;
 

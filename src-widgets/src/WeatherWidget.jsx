@@ -1,20 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withStyles, withTheme } from "@mui/styles";
 
 import moment from "moment";
 
-//import { Card, CardContent} from "@mui/material";
-
-//import ReactEchartsCore from "echarts-for-react";
-
 import EchartContainer from "./EchartContainer";
 
-import { I18n } from "@iobroker/adapter-react-v5";
+import Generic from "./Generic";
 
-import Generic from "./Generic"; 
-
-const styles = () => ({
+const styles = {
     cardContent: {
         flex: 1,
         display: "block",
@@ -23,7 +16,7 @@ const styles = () => ({
         width: "100%",
         overflow: "hidden",
     },
-});
+};
 
 //todo readme anpassen
 //todo Format-String für Zeitanzeige X Achse -> Übersetzen
@@ -36,8 +29,7 @@ const styles = () => ({
 
 
 const setDataStructures = async (field, data, changeData, socket) => {
-
-    console.log("set new datastructure instance " + data["instance"] + " " + data["datastructure"] );
+    console.log(`set new datastructure instance ${data["instance"]} ${data["datastructure"]}` );
 
     let max_days = 5;
     let max_periods = 8;
@@ -127,10 +119,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
                 //todo
                 console.log("data[datastructure] = forecast not yet implemented");
             }
-
-
         }
-
         else if (data["datastructure"] === "forecastHourly") {
             for (let h = 0; h < 36; h++) {
 
@@ -146,20 +135,17 @@ const setDataStructures = async (field, data, changeData, socket) => {
                 data["oid_chancerain_" + cnt] = "weatherunderground.0.forecastHourly." + h + "h.precipitationChance";
                 cnt++;
             }
-        }
-        else if (data["datastructure"] === "forecastPeriod") {
+        } else if (data["datastructure"] === "forecastPeriod") {
             for (let p = 0; p < 12; p++) {
 
                 //todo
                 console.log("data[datastructure] = forecastPeriod not yet implemented");
             }
 
-        }
-        else {
+        } else {
             console.log("datastructures: unknown data structure" + data["datastructure"]);
         }
-    }
-    else {
+    } else {
         //do nothing
     }
 
@@ -200,30 +186,30 @@ class WeatherWidget extends (Generic) {
             //labels nur für jeweilige Instanz sichtbar machen
             datastructure_options.push({
                 value: "forecast",
-                label: "widgets_weather_label_datastructure_forecast"
+                label: "datastructure_forecast"
             });
             datastructure_options.push({
                 value: "forecastHourly",
-                label: "widgets_weather_label_datastructure_forecastHourly"
+                label: "datastructure_forecastHourly"
             });
             datastructure_options.push({
                 value: "forecastPeriod",
-                label: "widgets_weather_label_datastructure_forecastPeriod"
+                label: "datastructure_forecastPeriod"
             });
         }
         else {
             //daswetter
             datastructure_options.push({
                 value: "NextDaysDetailed",
-                label: "widgets_weather_label_datastructure_nextdaysdetailed"
+                label: "datastructure_nextdaysdetailed"
             });
             datastructure_options.push({
                 value: "NextHours",
-                label: "widgets_weather_label_datastructure_nexthours"
+                label: "datastructure_nexthours"
             });
             datastructure_options.push({
                 value: "NextHours2",
-                label: "widgets_weather_label_datastructure_nexthours2"
+                label: "datastructure_nexthours2"
             });
 
         }
@@ -234,7 +220,7 @@ class WeatherWidget extends (Generic) {
             oid_general_fields.push(
                 {
                     name: "oid_general_day_" + d,    // name in data structure
-                    label: I18n.t("widgets_weather_label_oid_general_day_") + d, // translated field label
+                    label: Generic.t("oid_general_day_") + d, // translated field label
                     type: "id",
                     default: "daswetter.0.NextHours.Location_1.Day_" + d + ".day_value",
                 }
@@ -247,7 +233,7 @@ class WeatherWidget extends (Generic) {
                 oid_rain_fields.push(
                     {
                         name: "oid_rain_" + cnt,    // name in data structure
-                        label: I18n.t("widgets_weather_label_oid_rain_") + cnt, // translated field label
+                        label: Generic.t("oid_rain_") + cnt, // translated field label
                         type: "id",
                         default: "daswetter.0.NextHours.Location_1.Day_" + d + ".Hour_" + p + ".rain_value",
                     }
@@ -255,7 +241,7 @@ class WeatherWidget extends (Generic) {
                 oid_temp_fields.push(
                     {
                         name: "oid_temp_" + cnt,    // name in data structure
-                        label: I18n.t("widgets_weather_label_oid_temp_") + cnt, // translated field label
+                        label: Generic.t("oid_temp_") + cnt, // translated field label
                         type: "id",
                         default: "daswetter.0.NextHours.Location_1.Day_" + d + ".Hour_" + p + ".temp_value",
                     }
@@ -263,7 +249,7 @@ class WeatherWidget extends (Generic) {
                 oid_cloud_fields.push(
                     {
                         name: "oid_cloud_" + cnt,    // name in data structure
-                        label: I18n.t("widgets_weather_label_oid_cloud_") + cnt, // translated field label
+                        label: Generic.t("oid_cloud_") + cnt, // translated field label
                         type: "id",
                         default: "daswetter.0.NextHours.Location_1.Day_" + d + ".Hour_" + p + ".clouds_value",
                     }
@@ -271,7 +257,7 @@ class WeatherWidget extends (Generic) {
                 oid_time_fields.push(
                     {
                         name: "oid_time_" + cnt,    // name in data structure
-                        label: I18n.t("widgets_weather_label_oid_time_") + cnt, // translated field label
+                        label: Generic.t("oid_time_") + cnt, // translated field label
                         type: "id",
                         default: "daswetter.0.NextHours.Location_1.Day_" + d + ".Hour_" + p + ".hour_value",
                     }
@@ -283,15 +269,15 @@ class WeatherWidget extends (Generic) {
 
         return {
             id: "tplWeatherWidget",                 // Unique widget type ID. Should start with `tpl` followed
-            visSet: "vis-2-widgets-weather",        // Unique ID of widget set 
+            visSet: "vis-2-widgets-weather",        // Unique ID of widget set
             visSetLabel: "vis-2-widgets-weather",   // Widget set translated label (should be defined only in one widget of set)
             visSetColor: "#cf00ff",                 // Color of widget set. it is enough to set color only in one widget of set
             visName: "weather",                     // Name of widget
             visWidgetLabel: "vis_2_widgets-weather", // Label of widget
             visWidgetColor: "#005cc4",               // Optional widget color. If not set, default color of widget set will be used.
             visResizeLocked: false,                   // require, that width is always equal to height
-            visResizable: true,                     // widget is resizable 
-            visDraggable: true,                     // widget is draggable 
+            visResizable: true,                     // widget is resizable
+            visDraggable: true,                     // widget is draggable
             visAttrs: [
                 {
                     // check here all possible types https://github.com/ioBroker/ioBroker.vis/blob/react/src/src/Attributes/Widget/SCHEMA.md
@@ -310,14 +296,14 @@ class WeatherWidget extends (Generic) {
                         },
                         {
                             name: "instance",    // name in data structure
-                            label: "widgets_weather_label_instance", // translated field label
+                            label: "instance", // translated field label
                             type: "instance",
                             default: "daswetter.0",
                             onChange: setDataStructures,
                         },
                         {
                             name: "oid_location",    // name in data structure
-                            label: "widgets_weather_label_oidlocation", // translated field label
+                            label: "oidlocation", // translated field label
                             type: "id",
                             default: "daswetter.0.NextHours.Location_1.Location",
                             //only available with DasWetter
@@ -325,7 +311,7 @@ class WeatherWidget extends (Generic) {
                         },
                         {
                             name: "datastructure",    // name in data structure
-                            label: "widgets_weather_label_datastructure", // translated field label
+                            label: "datastructure", // translated field label
                             type: "select",
                             options: datastructure_options,
                             //default: weatherunderground ? "forecastHourly" : "NextHours",
@@ -340,7 +326,7 @@ class WeatherWidget extends (Generic) {
                     fields: [
                         {
                             name: "xaxis_axisLabel_formatstring",    // name in data structure
-                            label: "widgets_weather_label_xaxis_axisLabel_formatstring", // translated field label
+                            label: "xaxis_axisLabel_formatstring", // translated field label
                             type: "text",
                             default: "ddd HH:mm",
                         },
@@ -354,19 +340,19 @@ class WeatherWidget extends (Generic) {
                     fields: [
                         {
                             name: "rain_visible",    // name in data structure
-                            label: "widgets_weather_label_rain_visible", // translated field label
+                            label: "rain_visible", // translated field label
                             type: "checkbox",
                             default: false,
                         },
                         {
                             name: "rain_color",    // name in data structure
-                            label: "widgets_weather_label_rain_color", // translated field label
+                            label: "rain_color", // translated field label
                             type: "color",
                             default: "blue",
                         },
                         {
                             name: "rain_show_separate",    // name in data structure
-                            label: "widgets_weather_label_rain_show_separate", // translated field label
+                            label: "rain_show_separate", // translated field label
                             type: "checkbox",
                             default: false,
                         },
@@ -378,13 +364,13 @@ class WeatherWidget extends (Generic) {
                     fields: [
                         {
                             name: "temperature_visible",    // name in data structure
-                            label: "widgets_weather_label_temperature_visible", // translated field label
+                            label: "temperature_visible", // translated field label
                             type: "checkbox",
                             default: false,
                         },
                         {
                             name: "temperature_color",    // name in data structure
-                            label: "widgets_weather_label_temperature_color", // translated field label
+                            label: "temperature_color", // translated field label
                             type: "color",
                             default: "red",
                         },
@@ -396,34 +382,34 @@ class WeatherWidget extends (Generic) {
                     fields: [
                         {
                             name: "clouds_visible",    // name in data structure
-                            label: "widgets_weather_label_clouds_visible", // translated field label
+                            label: "clouds_visible", // translated field label
                             type: "checkbox",
                             default: false,
                         },
                         {
                             name: "clouds_color",    // name in data structure
-                            label: "widgets_weather_label_clouds_color", // translated field label
+                            label: "clouds_color", // translated field label
                             type: "color",
                             default: "yellow",
                         },
                         {
                             name: "clouds_show_separate",    // name in data structure
-                            label: "widgets_weather_label_clouds_show_separate", // translated field label
+                            label: "clouds_show_separate", // translated field label
                             type: "checkbox",
                             default: true,
                         },
                         {
                             name: "sun_or_cloud",    // name in data structure
-                            label: "widgets_weather_label_sunorcloud", // translated field label
+                            label: "sunorcloud", // translated field label
                             type: "select",
                             options: [
                                 {
                                     value: "sun",
-                                    label: "widgets_weather_label_sunorcloud_sun"
+                                    label: "sunorcloud_sun"
                                 },
                                 {
                                     value: "cloud",
-                                    label: "widgets_weather_label_sunorcloud_cloud"
+                                    label: "sunorcloud_cloud"
                                 },
                             ],
                             default: "sun",
@@ -438,7 +424,7 @@ class WeatherWidget extends (Generic) {
                     fields: [
                         {
                             name: "chanceofraining_visible",    // name in data structure
-                            label: "widgets_weather_label_chanceofraining_visible", // translated field label
+                            label: "chanceofraining_visible", // translated field label
                             type: "checkbox",
                             default: false,
 
@@ -447,7 +433,7 @@ class WeatherWidget extends (Generic) {
                         },
                         {
                             name: "chanceofraining_color",    // name in data structure
-                            label: "widgets_weather_label_chanceofraining_color", // translated field label
+                            label: "chanceofraining_color", // translated field label
                             type: "color",
                             default: "blue",
 
@@ -456,7 +442,7 @@ class WeatherWidget extends (Generic) {
                         },
                         {
                             name: "chanceofraining_show_separate",    // name in data structure
-                            label: "widgets_weather_label_chanceofraining_show_separate", // translated field label
+                            label: "chanceofraining_show_separate", // translated field label
                             type: "checkbox",
                             default: false,
 
@@ -587,10 +573,10 @@ class WeatherWidget extends (Generic) {
         const location = this.state.values[`${this.state.rxData["oid_location"]}.val`];
         const axisLabel_formatstring =  this.state.rxData["xaxis_axisLabel_formatstring"] ;
         console.log("##got " + location);
-        //let headline = I18n.t("Weather at ") + location;
+        //let headline = Generic.t("Weather at ") + location;
         const headline = location;
 
-        // min / max 
+        // min / max
         const MinMax = weatherData[0][3];
         console.log("min max " + JSON.stringify(MinMax));
 
@@ -608,7 +594,7 @@ class WeatherWidget extends (Generic) {
         let cnt = 0;
 
         if (this.state.rxData["rain_visible"] === true && this.state.rxData["rain_show_separate"] === false && weatherData[0][0].length > 1) {
-            legend.push(I18n.t("rain"));
+            legend.push(Generic.t("rain"));
 
             yaxis.push({
                 position: "right",
@@ -622,7 +608,7 @@ class WeatherWidget extends (Generic) {
             });
 
             series.push({
-                name: I18n.t("rain"),
+                name: Generic.t("rain"),
                 type: "bar",
                 data: weatherData[0][0],
                 color: this.state.rxData["rain_color"] || "blue",
@@ -636,7 +622,7 @@ class WeatherWidget extends (Generic) {
             cnt++;
         }
         if (this.state.rxData["temperature_visible"] === true && weatherData[0][1].length > 1) {
-            legend.push(I18n.t("temperature"));
+            legend.push(Generic.t("temperature"));
 
             yaxis.push({
                 position: "left",
@@ -650,7 +636,7 @@ class WeatherWidget extends (Generic) {
             });
 
             series.push({
-                name: I18n.t("temperature"),
+                name: Generic.t("temperature"),
                 type: "line",
                 data: weatherData[0][1],
                 color: this.state.rxData["temperature_color"] || "red",
@@ -667,10 +653,10 @@ class WeatherWidget extends (Generic) {
         if (this.state.rxData["clouds_visible"] === true && this.state.rxData["clouds_show_separate"] === false && weatherData[0][2].length > 1) {
 
             if (this.state.rxData["sun_or_cloud"] === "sun") {
-                legend.push(I18n.t("sun"));
+                legend.push(Generic.t("sun"));
             }
             else {
-                legend.push(I18n.t("cloud"));
+                legend.push(Generic.t("cloud"));
             }
             yaxis.push({
                 position: "right",
@@ -682,7 +668,7 @@ class WeatherWidget extends (Generic) {
                 }
             });
             series.push({
-                name: this.state.rxData["sun_or_cloud"] === "sun" ? I18n.t("sun") : I18n.t("cloud"),
+                name: this.state.rxData["sun_or_cloud"] === "sun" ? Generic.t("sun") : Generic.t("cloud"),
                 type: "bar",
                 data: weatherData[0][2],
                 color: this.state.rxData["clouds_color"] || "yellow",
@@ -701,7 +687,7 @@ class WeatherWidget extends (Generic) {
 
             console.log("add dummy data");
 
-            legend.push(I18n.t("dummy"));
+            legend.push(Generic.t("dummy"));
             yaxis.push({
                 position: "left",
                 type: "value",
@@ -712,7 +698,7 @@ class WeatherWidget extends (Generic) {
                 }
             });
             series.push({
-                name: I18n.t("dummy"),
+                name: Generic.t("dummy"),
                 type: "bar",
                 data: [
                     ["2024-04-30T00:00:00.000Z", 10],
@@ -809,7 +795,7 @@ class WeatherWidget extends (Generic) {
 
         const axisLabel_formatstring =  this.state.rxData["xaxis_axisLabel_formatstring"];
 
-        // min / max 
+        // min / max
         const MinMax = weatherData[0][3];
         console.log("min max " + JSON.stringify(MinMax));
 
@@ -828,7 +814,7 @@ class WeatherWidget extends (Generic) {
         let cnt = 0;
 
         if (this.state.rxData["rain_visible"] === true && this.state.rxData["rain_show_separate"] === true && weatherData[0][0].length > 1) {
-            legend.push(I18n.t("rain"));
+            legend.push(Generic.t("rain"));
 
             yaxis.push({
                 position: "right",
@@ -842,7 +828,7 @@ class WeatherWidget extends (Generic) {
             });
 
             series.push({
-                name: I18n.t("rain"),
+                name: Generic.t("rain"),
                 type: "bar",
                 data: weatherData[0][0],
                 color: this.state.rxData["rain_color"] || "blue",
@@ -859,10 +845,10 @@ class WeatherWidget extends (Generic) {
         if (this.state.rxData["clouds_visible"] === true && this.state.rxData["clouds_show_separate"] === true && weatherData[0][2].length > 1) {
 
             if (this.state.rxData["sun_or_cloud"] === "sun") {
-                legend.push(I18n.t("sun"));
+                legend.push(Generic.t("sun"));
             }
             else {
-                legend.push(I18n.t("cloud"));
+                legend.push(Generic.t("cloud"));
             }
             yaxis.push({
                 position: "right",
@@ -874,7 +860,7 @@ class WeatherWidget extends (Generic) {
                 }
             });
             series.push({
-                name: this.state.rxData["sun_or_cloud"] === "sun" ? I18n.t("sun") : I18n.t("cloud"),
+                name: this.state.rxData["sun_or_cloud"] === "sun" ? Generic.t("sun") : Generic.t("cloud"),
                 type: "bar",
                 data: weatherData[0][2],
                 color: this.state.rxData["clouds_color"] || "yellow",
@@ -893,7 +879,7 @@ class WeatherWidget extends (Generic) {
 
             console.log("add dummy data");
 
-            legend.push(I18n.t("dummy"));
+            legend.push(Generic.t("dummy"));
             yaxis.push({
                 position: "left",
                 type: "value",
@@ -904,7 +890,7 @@ class WeatherWidget extends (Generic) {
                 }
             });
             series.push({
-                name: I18n.t("dummy"),
+                name: Generic.t("dummy"),
                 type: "bar",
                 data: [
                     ["2024-04-30T00:00:00.000Z", 10],
@@ -1010,7 +996,7 @@ class WeatherWidget extends (Generic) {
 
             //console.log("dayData " + time_val);
 
-            
+
 
             let oDate = null;
 
@@ -1123,7 +1109,7 @@ class WeatherWidget extends (Generic) {
         let cnt = 1;
         for (let d = 1; d <= max_days; d++) {
 
-            
+
             console.log("day " + d);
 
             const dayData = this.state.values[`${this.state.rxData["oid_general_day_" + d]}.val`];
@@ -1229,7 +1215,7 @@ class WeatherWidget extends (Generic) {
                     console.log("oDate not defined ");
                 }
             }
-            
+
         }
 
         const MinMax = {
@@ -1288,11 +1274,8 @@ class WeatherWidget extends (Generic) {
         //zweites diagramm nur wenn notwendig
         const content = <div
             ref={this.refCardContent}
-            className={this.props.classes.cardContent}
+            style={styles.cardContent}
         >
-
-
-
             {size && <EchartContainer
                 option={this.getOption1()}
                 theme={this.props.themeType === "dark" ? "dark" : ""}
@@ -1306,7 +1289,6 @@ class WeatherWidget extends (Generic) {
                 style={{ height: `${size}px`, width: "100%" }}
                 opts={{ renderer: "svg" }}
             />}
-
         </div>;
 
         if (this.state.rxData.noCard || props.widget.usedInWidget) {
@@ -1328,4 +1310,4 @@ WeatherWidget.propTypes = {
     data: PropTypes.object,
 };
 
-export default withStyles(styles)(withTheme(WeatherWidget));
+export default WeatherWidget;

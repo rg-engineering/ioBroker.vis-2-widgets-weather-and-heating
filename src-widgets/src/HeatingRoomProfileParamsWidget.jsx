@@ -1,32 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withStyles, withTheme } from "@mui/styles";
 
-
-
-
-
-//import { Card, CardContent } from "@mui/material";
-
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
-import TextField from '@mui/material/TextField';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
-
-import { I18n } from "@iobroker/adapter-react-v5";
+// For federation it is important to import from one package "@mui/material" and not from "@mui/material/Box"
+import {
+    Box,
+    IconButton,
+    Input,
+    InputAdornment,
+    InputLabel,
+    FormControl,
+    FilledInput,
+    FormHelperText,
+    TextField,
+    OutlinedInput,
+    Visibility,
+    VisibilityOff,
+} from '@mui/material';
 
 import Generic from "./Generic";
 
-const styles = () => ({
+const styles = {
     cardContent: {
         flex: 1,
         display: "block",
@@ -35,9 +28,7 @@ const styles = () => ({
         width: "100%",
         overflow: "hidden",
     },
-});
-
-
+};
 
 //todo aktuellen status in input darstellen
 //todo Änderungen der inputs an adapter übergen
@@ -52,7 +43,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
     console.log("set new datastructure instance" + data["instance"] );
 
     const instance = data["instance"];
-    
+
     if (instance && instance.length > 0 && instance.includes("heatingcontrol") ) {
 
         data["oid_ChoosenRoom"] = instance + ".vis.ChoosenRoom";
@@ -99,8 +90,8 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
             visWidgetLabel: "vis_2_widgets-HeatingRoomProfileParams", // Label of widget
             visWidgetColor: "#005cc4",               // Optional widget color. If not set, default color of widget set will be used.
             visResizeLocked: false,                   // require, that width is always equal to height
-            visResizable: true,                     // widget is not resizable 
-            visDraggable: true,                     // widget is not draggable 
+            visResizable: true,                     // widget is not resizable
+            visDraggable: true,                     // widget is not draggable
             visAttrs: [
                 {
                     // check here all possible types https://github.com/ioBroker/ioBroker.vis/blob/react/src/src/Attributes/Widget/SCHEMA.md
@@ -114,7 +105,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         },
                         {
                             name: "instance",    // name in data structure
-                            label: "widgets_weather_label_instance", // translated field label
+                            label: "instance", // translated field label
                             type: "instance",
                             default: "heatingcontrol.0",
                             onChange: setDataStructures,
@@ -132,70 +123,70 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                     fields: [
                         {
                             name: "oid_ChoosenRoom",    // name in data structure
-                            label: "widgets_heating_label_choosenroom", // translated field label
+                            label: "choosenroom", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.ChoosenRoom",
                         },
 
                         {
                             name: "oid_GuestIncrease",    // name in data structure
-                            label: "widgets_heating_label_guestincrease", // translated field label
+                            label: "guestincrease", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.TempDecreaseValues.GuestIncrease",
                         },
 
                         {
                             name: "oid_PartyDecrease",    // name in data structure
-                            label: "widgets_heating_label_partydecrease", // translated field label
+                            label: "partydecrease", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.TempDecreaseValues.PartyDecrease",
                         },
 
                         {
                             name: "oid_AbsentDecrease",    // name in data structure
-                            label: "widgets_heating_label_absentdecrease", // translated field label
+                            label: "absentdecrease", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.TempDecreaseValues.AbsentDecrease",
                         },
 
                         {
                             name: "oid_VacationAbsentDecrease",    // name in data structure
-                            label: "widgets_heating_label_vacationabsentdecrease", // translated field label
+                            label: "vacationabsentdecrease", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.TempDecreaseValues.VacationAbsentDecrease",
                         },
 
                         {
                             name: "oid_WindowOpenDecrease",    // name in data structure
-                            label: "widgets_heating_label_windowopendecrease", // translated field label
+                            label: "windowopendecrease", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.TempDecreaseValues.WindowOpenDecrease",
                         },
 
                         {
                             name: "oid_FireplaceModeDecrease",    // name in data structure
-                            label: "widgets_heating_label_fireplacemodedecrease", // translated field label
+                            label: "fireplacemodedecrease", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.TempDecreaseValues.FireplaceModeDecrease",
                         },
 
                         {
                             name: "oid_TemperaturOverride",    // name in data structure
-                            label: "widgets_heating_label_temperaturoverride", // translated field label
+                            label: "temperaturoverride", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.RoomValues.TemperaturOverride",
                         },
 
                         {
                             name: "oid_TemperaturOverrideTime",    // name in data structure
-                            label: "widgets_heating_label_temperaturoverridetime", // translated field label
+                            label: "temperaturoverridetime", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.RoomValues.TemperaturOverrideTime",
                         },
 
                         {
                             name: "oid_MinimumTemperature",    // name in data structure
-                            label: "widgets_heating_label_minimumtemperature", // translated field label
+                            label: "minimumtemperature", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.RoomValues.MinimumTemperature",
                         },
@@ -279,7 +270,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
 
         const content = <div
             ref={this.refCardContent}
-            className={this.props.classes.cardContent}
+            style={styles.cardContent}
         >
             <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
                 <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
@@ -288,13 +279,13 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="GuestIncrease"
                         inputProps={{
-                            'aria-label':  I18n.t("Temperature") ,
+                            'aria-label':  Generic.t("Temperature") ,
                         }}
                         type='number'
                         value={GuestIncrease}
                         onChange={this.handleChange}
                     />
-                    <FormHelperText id="GuestIncrease-text">{I18n.t("GuestIncrease")}</FormHelperText>
+                    <FormHelperText id="GuestIncrease-text">{Generic.t("GuestIncrease")}</FormHelperText>
                 </FormControl>
 
                 <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
@@ -303,13 +294,13 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="PartyDecrease"
                         inputProps={{
-                            'aria-label': I18n.t("Temperature") ,
+                            'aria-label': Generic.t("Temperature") ,
                         }}
                         type='number'
                         value={PartyDecrease}
                         onChange={this.handleChange}
                     />
-                    <FormHelperText id="PartyDecrease-text">{I18n.t("PartyDecrease")}</FormHelperText>
+                    <FormHelperText id="PartyDecrease-text">{Generic.t("PartyDecrease")}</FormHelperText>
                 </FormControl>
 
                 <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
@@ -318,13 +309,13 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="AbsentDecrease"
                         inputProps={{
-                            'aria-label':  I18n.t("Temperature") ,
+                            'aria-label':  Generic.t("Temperature") ,
                         }}
                         type='number'
                         value={AbsentDecrease}
                         onChange={this.handleChange}
                     />
-                    <FormHelperText id="AbsentDecrease-text">{I18n.t("AbsentDecrease")}</FormHelperText>
+                    <FormHelperText id="AbsentDecrease-text">{Generic.t("AbsentDecrease")}</FormHelperText>
                 </FormControl>
 
                 <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
@@ -333,13 +324,13 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="VacationAbsentDecrease"
                         inputProps={{
-                            'aria-label':  I18n.t("Temperature") ,
+                            'aria-label':  Generic.t("Temperature") ,
                         }}
                         type='number'
                         value={VacationAbsentDecrease}
                         onChange={this.handleChange}
                     />
-                    <FormHelperText id="VacationAbsentDecrease-text">{I18n.t("VacationAbsentDecrease")}</FormHelperText>
+                    <FormHelperText id="VacationAbsentDecrease-text">{Generic.t("VacationAbsentDecrease")}</FormHelperText>
                 </FormControl>
 
                 <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
@@ -348,13 +339,13 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="WindowOpenDecrease"
                         inputProps={{
-                            'aria-label':  I18n.t("Temperature") ,
+                            'aria-label':  Generic.t("Temperature") ,
                         }}
                         type='number'
                         value={WindowOpenDecrease}
                         onChange={this.handleChange}
                     />
-                    <FormHelperText id="WindowOpenDecrease-text">{I18n.t("WindowOpenDecrease")}</FormHelperText>
+                    <FormHelperText id="WindowOpenDecrease-text">{Generic.t("WindowOpenDecrease")}</FormHelperText>
                 </FormControl>
 
                 <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
@@ -363,13 +354,13 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="FireplaceModeDecrease"
                         inputProps={{
-                            'aria-label':  I18n.t("Temperature") ,
+                            'aria-label':  Generic.t("Temperature") ,
                         }}
                         type='number'
                         value={FireplaceModeDecrease}
                         onChange={this.handleChange}
                     />
-                    <FormHelperText id="FireplaceModeDecrease-text">{I18n.t("FireplaceModeDecrease")}</FormHelperText>
+                    <FormHelperText id="FireplaceModeDecrease-text">{Generic.t("FireplaceModeDecrease")}</FormHelperText>
                 </FormControl>
 
                 <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
@@ -378,13 +369,13 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="MinimumTemperature"
                         inputProps={{
-                            'aria-label':  I18n.t("Temperature") ,
+                            'aria-label':  Generic.t("Temperature") ,
                         }}
                         type='number'
                         value={MinimumTemperature}
                         onChange={this.handleChange}
                     />
-                    <FormHelperText id="MinimumTemperature-text">{I18n.t("MinimumTemperature")}</FormHelperText>
+                    <FormHelperText id="MinimumTemperature-text">{Generic.t("MinimumTemperature")}</FormHelperText>
                 </FormControl>
 
                 <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
@@ -393,13 +384,13 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="OverrideTemperature"
                         inputProps={{
-                            'aria-label':  I18n.t("Temperature") ,
+                            'aria-label':  Generic.t("Temperature") ,
                         }}
                         type='number'
                         value={OverrideTemperature}
                         onChange={this.handleChange}
                     />
-                    <FormHelperText id="OverrideTemperature-text">{I18n.t("OverrideTemperature")}</FormHelperText>
+                    <FormHelperText id="OverrideTemperature-text">{Generic.t("OverrideTemperature")}</FormHelperText>
                 </FormControl>
 
                 <FormControl sx={{ m: 1, width: '25ch' }} variant="filled">
@@ -408,13 +399,13 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         endAdornment={<InputAdornment position="end"> </InputAdornment>}
                         aria-describedby="OverrideTemperatureTime"
                         inputProps={{
-                            'aria-label':  I18n.t("Time") ,
+                            'aria-label':  Generic.t("Time") ,
                         }}
                         type='text'
                         value={OverrideTemperatureTime}
                         onChange={this.handleChange}
                     />
-                    <FormHelperText id="OverrideTemperatureTime-text">{I18n.t("OverrideTemperatureTime")}</FormHelperText>
+                    <FormHelperText id="OverrideTemperatureTime-text">{Generic.t("OverrideTemperatureTime")}</FormHelperText>
                 </FormControl>
 
 
@@ -467,5 +458,5 @@ HeatingRoomProfileParamsWidget.propTypes = {
     data: PropTypes.object,
 };
 
-export default withStyles(styles)(withTheme(HeatingRoomProfileParamsWidget));
+export default HeatingRoomProfileParamsWidget;
 

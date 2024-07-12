@@ -70,13 +70,10 @@ gulp.task('widget-3-copy', () => Promise.all([
 
             `${src}build/static/js/*mui_utils_useControlled*.*.*`,
 
-            `${SRC}build/static/js/*mui_styled-engine_index_js-node_modules_mui_system_esm*.*`,
-
-            
+            `${SRC}build/static/js/*mui_styled-engine_index_js-node_modules_mui_system_esm*.*`
         ],
         ...[`!${SRC}build/static/js/*.map`, `!${SRC}build/static/js/*.txt`],
     ]).pipe(gulp.dest(`widgets/${adapterName}/static/js`)),
-
 
     gulp.src([`${SRC}src/i18n/*.json`]).pipe(gulp.dest(`widgets/${adapterName}/i18n`)),
     new Promise(resolve =>

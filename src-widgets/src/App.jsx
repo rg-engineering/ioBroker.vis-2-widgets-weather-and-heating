@@ -1,8 +1,8 @@
 import React from "react";
-import { withStyles } from "@mui/styles";
 
+import { Box } from "@mui/material";
 import WidgetDemoApp from "@iobroker/vis-2-widgets-react-dev/widgetDemoApp";
-import { i18n as I18n } from "@iobroker/adapter-react-v5";
+import { I18n } from "@iobroker/adapter-react-v5";
 
 import WeatherWidget from "./WeatherWidget";
 import WeatherDayWidget from "./WeatherDayWidget";
@@ -10,16 +10,16 @@ import GeneralEChartWidget from "./GeneralEChartWidget";
 import HeatingTimescheduleWidget from "./HeatingTimescheduleWidget";
 import translations from "./translations";
 
-const styles = theme => ({
-    app: {
+const styles = {
+    app: theme => ({
         backgroundColor: theme?.palette?.background.default,
         color: theme?.palette?.text.primary,
         height: "100%",
         width: "100%",
         overflow: "auto",
         display: "flex",
-    },
-});
+    }),
+};
 
 class App extends WidgetDemoApp {
     constructor(props) {
@@ -30,8 +30,7 @@ class App extends WidgetDemoApp {
     }
 
     renderWidget() {
-        return <div className={this.props.classes.app}>
-
+        return <Box sx={this.props.classes.app}>
             <WeatherWidget
                 socket={this.socket}
                 themeType={this.state.themeType}
@@ -80,8 +79,8 @@ class App extends WidgetDemoApp {
                 }}
             />;
 
-        </div>;
+        </Box>;
     }
 }
 
-export default withStyles(styles)(App);
+export default App;

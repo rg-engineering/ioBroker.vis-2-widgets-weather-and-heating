@@ -3,6 +3,17 @@ import PropTypes from "prop-types";
 
 import Generic from "./Generic";
 
+const styles = {
+    cardContent: {
+        flex: 1,
+        display: "block",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        overflow: "hidden",
+    },
+};
+
 //todo Image sollte in gleicher Zeile wie Raum, Uhrzeit sollte kleinere Schrift
 //todo Anzeige Anzahl offener Fenster fehlt
 //todo Überschrift: "Fensterstatus" fehlt -> okay
@@ -18,7 +29,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
 
     if (instance && instance.length > 0 && instance.includes("heatingcontrol") ) {
 
-        data["oid_OpenWindowRoomCount"] = instance + ".vis.OpenWindowRoomCount";
+        data["oid_OpenWindowRoomCount"] = `${instance}.vis.OpenWindowRoomCount`;
     }
     changeData(data);
 };
@@ -101,11 +112,11 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
 
         const content = <div
             ref={this.refCardContent}
-            className={this.props.classes.cardContent}
+            style={styles.cardContent}
         >
 
             <div>
-                <p>{I18n.t("Window Status Overview")}</p>
+                <p>{Generic.t("Window Status Overview")}</p>
 
             </div>
 

@@ -24,7 +24,7 @@ const styles = {
 };
 
 //todo aktuellen status in checkbox darstellen
-//todo Änderungen der checkbox an adapter übergen
+//todo Änderungen der checkbox an adapter übergeben
 //todo nur die Werte anzeigen, für die es auch OID's gibt
 
 //todo Übersetzungen
@@ -38,14 +38,14 @@ const setDataStructures = async (field, data, changeData, socket) => {
     if (instance && instance.length > 0 && instance.includes("heatingcontrol") ) {
         data["oid_ChoosenRoom"] = `${instance}.vis.ChoosenRoom`;
 
-        data["oid_HeatingPeriodActive"] = instance + ".HeatingPeriodActive";
-        data["oid_PublicHolidyToday"] = instance + ".PublicHolidyToday";
-        data["oid_Present"] = instance + ".Present";
-        data["oid_PartyNow"] = instance + ".PartyNow";
-        data["oid_GuestsPresent"] = instance + ".GuestsPresent";
-        data["oid_HolidayPresent"] = instance + ".HolidayPresent";
-        data["oid_VacationAbsent"] = instance + ".VacationAbsent";
-        data["oid_FireplaceModeActive"] = instance + ".FireplaceModeActive";
+        data["oid_HeatingPeriodActive"] = `${instance}.HeatingPeriodActive`;
+        data["oid_PublicHolidyToday"] = `${instance}.PublicHolidyToday`;
+        data["oid_Present"] = `${instance}.Present`;
+        data["oid_PartyNow"] = `${instance}.PartyNow`;
+        data["oid_GuestsPresent"] = `${instance}.GuestsPresent`;
+        data["oid_HolidayPresent"] = `${instance}.HolidayPresent`;
+        data["oid_VacationAbsent"] = `${instance}.VacationAbsent`;
+        data["oid_FireplaceModeActive"] = `${instance}.FireplaceModeActive`;
     }
     changeData(data);
 };

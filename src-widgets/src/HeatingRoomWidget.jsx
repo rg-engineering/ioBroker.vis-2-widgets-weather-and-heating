@@ -3,6 +3,17 @@ import PropTypes from "prop-types";
 
 import Generic from "./Generic";
 
+const styles = {
+    cardContent: {
+        flex: 1,
+        display: "block",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        overflow: "hidden",
+    },
+};
+
 //todo oid nach Instanz neu belegen
 //todo alles anzeigen
 
@@ -90,55 +101,55 @@ class HeatingRoomWidget extends (Generic) {
                         },
                         {
                             name: "oid_CurrentTemperature",    // name in data structure
-                            label: "widgets_heating_label_currenttemperature", // translated field label
+                            label: "currenttemperature", // translated field label
                             type: "id",
                             default: "", //todo
                         }, 
                         {
                             name: "oid_CurrentTemperatureExtSensor",    // name in data structure
-                            label: "widgets_heating_label_currenttemperatureextsensor", // translated field label
+                            label: "currenttemperatureextsensor", // translated field label
                             type: "id",
                             default: "", //todo
                         }, 
                         {
                             name: "oid_CurrentActorState",    // name in data structure
-                            label: "widgets_heating_label_currentactorstate", // translated field label
+                            label: "currentactorstate", // translated field label
                             type: "id",
                             default: "", //todo
                         }, 
                         {
                             name: "oid_CurrentValveValue",    // name in data structure
-                            label: "widgets_heating_label_currentvalvevalue", // translated field label
+                            label: "currentvalvevalue", // translated field label
                             type: "id",
                             default: "", //todo
                         }, 
                         {
                             name: "oid_RoomState",    // name in data structure
-                            label: "widgets_heating_label_roomstate", // translated field label
+                            label: "roomstate", // translated field label
                             type: "id",
                             default: "", //todo
                         }, 
                         {
                             name: "oid_RoomLog",    // name in data structure
-                            label: "widgets_heating_label_roomlog", // translated field label
+                            label: "roomlog", // translated field label
                             type: "id",
                             default: "", //todo
                         }, 
                         {
                             name: "oid_ThermostatBatteryState",    // name in data structure
-                            label: "widgets_heating_label_thermostatbatterystate", // translated field label
+                            label: "thermostatbatterystate", // translated field label
                             type: "id",
                             default: "", //todo
                         }, 
                         {
                             name: "oid_ThermostatBattreryVoltage",    // name in data structure
-                            label: "widgets_heating_label_thermostatbatteryvoltage", // translated field label
+                            label: "thermostatbatteryvoltage", // translated field label
                             type: "id",
                             default: "", //todo
                         }, 
                         {
                             name: "oid_ThermostatRSSI",    // name in data structure
-                            label: "widgets_heating_label_thermostatrssi", // translated field label
+                            label: "thermostatrssi", // translated field label
                             type: "id",
                             default: "", //todo
                         },
@@ -174,16 +185,16 @@ class HeatingRoomWidget extends (Generic) {
 
         const style = {
             width: '100%',
-            height: !noCard ? 'calc(100% - 36px)' : '100%',
+            height: '100%',
             border: '0',
         };
 
         const content = <div
             ref={this.refCardContent}
-            className={this.props.classes.cardContent}
+            style={styles.cardContent}
         >
             <div>
-                <p>{I18n.t("Room")}  {roomName}</p>
+                <p>{Generic.t("Room")}  {roomName}</p>
             </div>
 
             <div>

@@ -3,6 +3,17 @@ import PropTypes from "prop-types";
 
 import Generic from "./Generic";
 
+const styles = {
+    cardContent: {
+        flex: 1,
+        display: "block",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        overflow: "hidden",
+    },
+};
+
 //todo Überschrift "Raumstatus" fehlt-> okay
 //todo Übersetzungen
 
@@ -96,10 +107,10 @@ class HeatingRoomsOverviewWidget extends (Generic) {
 
         const content = <div
             ref={this.refCardContent}
-            className={this.props.classes.cardContent}
+            style={styles.cardContent}
         >
             <div>
-                <p>{I18n.t("Rooms Status Overview")}</p>
+                <p>{Generic.t("Rooms Status Overview")}</p>
                 
             </div>
 

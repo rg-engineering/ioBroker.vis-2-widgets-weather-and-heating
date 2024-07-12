@@ -46,17 +46,17 @@ const setDataStructures = async (field, data, changeData, socket) => {
 
     if (instance && instance.length > 0 && instance.includes("heatingcontrol") ) {
 
-        data["oid_ChoosenRoom"] = instance + ".vis.ChoosenRoom";
+        data["oid_ChoosenRoom"] = `${instance}.vis.ChoosenRoom`;
 
-        data["oid_GuestIncrease"] = instance + ".vis.TempDecreaseValues.GuestIncrease";
-        data["oid_PartyDecrease"] = instance + ".vis.TempDecreaseValues.PartyDecrease";
-        data["oid_AbsentDecrease"] = instance + ".vis.TempDecreaseValues.AbsentDecrease";
-        data["oid_VacationAbsentDecrease"] = instance + ".vis.TempDecreaseValues.VacationAbsentDecrease";
-        data["oid_WindowOpenDecrease"] = instance + ".vis.TempDecreaseValues.WindowOpenDecrease";
-        data["oid_FireplaceModeDecrease"] = instance + ".vis.TempDecreaseValues.FireplaceModeDecrease";
-        data["oid_TemperaturOverride"] = instance + ".vis.RoomValues.TemperaturOverride";
-        data["oid_TemperaturOverrideTime"] = instance + ".vis.RoomValues.TemperaturOverrideTime";
-        data["oid_MinimumTemperature"] = instance + ".vis.RoomValues.MinimumTemperature";
+        data["oid_GuestIncrease"] = `${instance}.vis.TempDecreaseValues.GuestIncrease`;
+        data["oid_PartyDecrease"] = `${instance}.vis.TempDecreaseValues.PartyDecrease`;
+        data["oid_AbsentDecrease"] = `${instance}.vis.TempDecreaseValues.AbsentDecrease`;
+        data["oid_VacationAbsentDecrease"] = `${instance}.vis.TempDecreaseValues.VacationAbsentDecrease`;
+        data["oid_WindowOpenDecrease"] = `${instance}.vis.TempDecreaseValues.WindowOpenDecrease`;
+        data["oid_FireplaceModeDecrease"] = `${instance}.vis.TempDecreaseValues.FireplaceModeDecrease`;
+        data["oid_TemperaturOverride"] = `${instance}.vis.RoomValues.TemperaturOverride`;
+        data["oid_TemperaturOverrideTime"] = `${instance}.vis.RoomValues.TemperaturOverrideTime`;
+        data["oid_MinimumTemperature"] = `${instance}.vis.RoomValues.MinimumTemperature`;
 
 
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 // https://github.com/Pittini/iobroker-heatingcontrol-vis
@@ -8,9 +8,14 @@ import {
     Checkbox,
     FormControlLabel,
     FormGroup,
+    Box,
+    Switch
 } from "@mui/material";
 
 import Generic from "./Generic";
+
+
+
 
 const styles = {
     cardContent: {
@@ -23,10 +28,8 @@ const styles = {
     },
 };
 
-//todo aktuellen status in checkbox darstellen
-//todo Änderungen der checkbox an adapter übergeben
-//todo nur die Werte anzeigen, für die es auch OID's gibt
 
+//todo nur die Werte anzeigen, für die es auch OID's gibt
 //todo Übersetzungen
 //todo Image
 
@@ -59,11 +62,10 @@ class HeatingGeneralParamsWidget extends (Generic) {
     static getWidgetInfo() {
         return {
             id: "tplHeatingGeneralParamsWidget",                 // Unique widget type ID. Should start with `tpl` followed
-            visSet: "vis-2-widgets-weather",        // Unique ID of widget set
+            visSet: "vis-2-widgets-heating",        // Unique ID of widget set
 
-            //visset -> see WeatherWidget
-            //visSetLabel: "vis-2-widgets-heating",   // Widget set translated label (should be defined only in one widget of set)
-            //visSetColor: "#cf00ff",                 // Color of widget set. it is enough to set color only in one widget of set
+            visSetLabel: "vis-2-widgets-heating",   // Widget set translated label (should be defined only in one widget of set)
+            visSetColor: "#cf00ff",                 // Color of widget set. it is enough to set color only in one widget of set
             visName: "HeatingGeneralParamsWidget",                     // Name of widget
             visWidgetLabel: "vis_2_widgets-HeatingGeneralParams", // Label of widget
             visWidgetColor: "#005cc4",               // Optional widget color. If not set, default color of widget set will be used.
@@ -203,20 +205,118 @@ class HeatingGeneralParamsWidget extends (Generic) {
 
     }
 
+
+    
     // This function is called every time when some Object State updated, but all changes lands into this.state.values too
     // eslint-disable-next-line class-methods-use-this, no-unused-vars
     onStateUpdated(id, state) {
-        console.log("onStateUpdated");
+        console.log("onStateUpdated " + id );
     }
 
-    handleChange = (event) => {
+   
+    onChange1() {
+        if (this.props.editMode) return;
+        const oid = this.state.rxData["oid_HeatingPeriodActive"];
+        if (this.getValue(oid) === true) {
+            this.props.context.setValue(oid, false);
+        } else {
+            this.props.context.setValue(oid, true);
+        }
+    }
+    onChange2() {
+        if (this.props.editMode) return;
+        const oid = this.state.rxData["oid_PublicHolidyToday"];
+        if (this.getValue(oid) === true) {
+            this.props.context.setValue(oid, false);
+        } else {
+            this.props.context.setValue(oid, true);
+        }
+    }
+    onChange3() {
+        if (this.props.editMode) return;
+        const oid = this.state.rxData["oid_Present"];
+        if (this.getValue(oid) === true) {
+            this.props.context.setValue(oid, false);
+        } else {
+            this.props.context.setValue(oid, true);
+        }
+    }
+    onChange4() {
+        if (this.props.editMode) return;
+        const oid = this.state.rxData["oid_PartyNow"];
+        if (this.getValue(oid) === true) {
+            this.props.context.setValue(oid, false);
+        } else {
+            this.props.context.setValue(oid, true);
+        }
+    }
+    onChange5() {
+        if (this.props.editMode) return;
+        const oid = this.state.rxData["oid_GuestsPresent"];
+        if (this.getValue(oid) === true) {
+            this.props.context.setValue(oid, false);
+        } else {
+            this.props.context.setValue(oid, true);
+        }
+    }
+    onChange6() {
+        if (this.props.editMode) return;
+        const oid = this.state.rxData["oid_HolidayPresent"];
+        if (this.getValue(oid) === true) {
+            this.props.context.setValue(oid, false);
+        } else {
+            this.props.context.setValue(oid, true);
+        }
+    }
+    onChange7() {
+        if (this.props.editMode) return;
+        const oid = this.state.rxData["oid_VacationAbsent"];
+        if (this.getValue(oid) === true) {
+            this.props.context.setValue(oid, false);
+        } else {
+            this.props.context.setValue(oid, true);
+        }
+    }
+    onChange8() {
+        if (this.props.editMode) return;
+        const oid = this.state.rxData["oid_FireplaceModeActive"];
+        if (this.getValue(oid) === true) {
+            this.props.context.setValue(oid, false);
+        } else {
+            this.props.context.setValue(oid, true);
+        }
+    }
 
-        console.log("handleChange ");
-        this.setState({ checked: event.target.checked });
+    getValue(oid) {
+        if (oid !== undefined && oid !== '' && oid !== 'nothing_selected') {
+            return this.state.values[`${oid}.val`];
+        }
+        return undefined;
+    }
 
-    };
+
+    static convertValue(value, defaultValue) {
+        if (value === 'true') {
+            return true;
+        }
+        if (value === 'false') {
+            return false;
+        }
+        // eslint-disable-next-line no-restricted-globals
+        if (!isNaN(value)) {
+            return parseFloat(value);
+        }
+        if (value === undefined || value === null || value === '') {
+            return defaultValue;
+        }
+
+        return value;
+    }
+ 
+
 
     createTable() {
+
         const HeatingPeriodActiveChecked = this.state.values[`${this.state.rxData["oid_HeatingPeriodActive"]}.val`];
         const PublicHolydayTodayChecked = this.state.values[`${this.state.rxData["oid_PublicHolidyToday"]}.val`];
         const PresentChecked = this.state.values[`${this.state.rxData["oid_Present"]}.val`];
@@ -226,54 +326,57 @@ class HeatingGeneralParamsWidget extends (Generic) {
         const VacationChecked = this.state.values[`${this.state.rxData["oid_VacationAbsent"]}.val`];
         const FireplaceModeChecked = this.state.values[`${this.state.rxData["oid_FireplaceModeActive"]}.val`];
 
-        console.log(`CreateTable ${HeatingPeriodActiveChecked} ${PublicHolydayTodayChecked} ${PresentChecked} ${PartyNowChecked} ${GuestsPresentChecked} ${HolydayAtHomeChecked} ${VacationChecked} ${FireplaceModeChecked}`);
+        console.log("createTable ${HeatingPeriodActiveChecked} ${PublicHolydayTodayChecked} ${PresentChecked} ${PartyNowChecked} ${GuestsPresentChecked} ${HolydayAtHomeChecked} ${VacationChecked} ${FireplaceModeChecked}");
+        
 
         const content = <div
             ref={this.refCardContent}
             style={styles.cardContent}
         >
-            <FormGroup>
-                <FormControlLabel control={
-                    <Checkbox
-                        checked={HeatingPeriodActiveChecked}
-                        onChange={this.handleChange}
-                    />} label={Generic.t("HeatingPeriodActive")} />
-                <FormControlLabel control={
-                    <Checkbox
-                        checked={PublicHolydayTodayChecked}
-                        onChange={this.handleChange}
-                    />} label={Generic.t("PublicHolydayToday")} />
-                <FormControlLabel control={
-                    <Checkbox
-                        checked={PresentChecked}
-                        onChange={this.handleChange}
-                    />} label={Generic.t("Present")} />
-                <FormControlLabel control={
-                    <Checkbox
-                        checked={PartyNowChecked}
-                        onChange={this.handleChange}
-                    />} label={Generic.t("PartyNow")} />
-                <FormControlLabel control={
-                    <Checkbox
-                        checked={GuestsPresentChecked}
-                        onChange={this.handleChange}
-                    />} label={Generic.t("GuestsPresent")} />
-                <FormControlLabel control={
-                    <Checkbox
-                        checked={HolydayAtHomeChecked}
-                        onChange={this.handleChange}
-                    />} label={Generic.t("HolydayAtHome")} />
-                <FormControlLabel control={
-                    <Checkbox
-                        checked={VacationChecked}
-                        onChange={this.handleChange}
-                    />} label={Generic.t("Vacation")} />
-                <FormControlLabel control={
-                    <Checkbox
-                        checked={FireplaceModeChecked}
-                        onChange={this.handleChange}
-                    />} label={Generic.t("FireplaceMode")} />
-            </FormGroup>
+            <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+                <FormGroup>
+                    <FormControlLabel control={
+                        <Switch
+                            checked={HeatingPeriodActiveChecked}
+                            onClick={() => this.onChange1()}
+                        />} label={Generic.t("HeatingPeriodActive")} />
+                    <FormControlLabel control={
+                        <Switch
+                            checked={PublicHolydayTodayChecked}
+                            onClick={() => this.onChange2()}
+                        />} label={Generic.t("PublicHolydayToday")} />
+                    <FormControlLabel control={
+                        <Switch
+                            checked={PresentChecked}
+                            onClick={() => this.onChange3()}
+                        />} label={Generic.t("Present")} />
+                    <FormControlLabel control={
+                        <Switch
+                            checked={PartyNowChecked}
+                            onClick={() => this.onChange4()}
+                        />} label={Generic.t("PartyNow")} />
+                    <FormControlLabel control={
+                        <Switch
+                            checked={GuestsPresentChecked}
+                            onClick={() => this.onChange5()}
+                        />} label={Generic.t("GuestsPresent")} />
+                    <FormControlLabel control={
+                        <Switch
+                            checked={HolydayAtHomeChecked}
+                            onClick={() => this.onChange6()}
+                        />} label={Generic.t("HolydayAtHome")} />
+                    <FormControlLabel control={
+                        <Switch
+                            checked={VacationChecked}
+                            onClick={() => this.onChange7()}
+                        />} label={Generic.t("Vacation")} />
+                    <FormControlLabel control={
+                        <Switch
+                            checked={FireplaceModeChecked}
+                            onClick={() => this.onChange8()}
+                        />} label={Generic.t("FireplaceMode")} />
+                </FormGroup>
+            </Box>
         </div>;
 
         return content;
@@ -282,8 +385,8 @@ class HeatingGeneralParamsWidget extends (Generic) {
     renderWidgetBody(props) {
         super.renderWidgetBody(props);
 
-        console.log(`values ${JSON.stringify(this.state.values)}`);
-        console.log(`rxData ${JSON.stringify(this.state.rxData)}`);
+        console.log("HeatingGeneralParamsWidget values ${JSON.stringify(this.state.values)}");
+        console.log("HeatingGeneralParamsWidget rxData ${JSON.stringify(this.state.rxData)}");
 
         let size;
         if (!this.refCardContent.current) {

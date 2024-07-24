@@ -16,6 +16,13 @@ const styles = {
     },
 };
 
+
+//todo tag auswahl setzt OID"s neu -> testen
+//todo mondphase anzeigen
+//todo bug fix icons (wetter und wind) passen nicht
+//todo Übersetzungen
+
+
 //weather icons
 
 const images1 = require.context("./assets/icons/tiempo-weather/galeria1", false);
@@ -53,12 +60,8 @@ const icons_wind_Beaufort = wind_images3.keys().map(wind_image3 => wind_images3(
 
 
 //moon icons
-//todo
+//fehlen noch
 
-
-
-//todo tag auswahl setzt OID"s neu -> testen
-//todo mondphase anzeigen
 
 const setDataStructures = async (field, data, changeData, socket) => {
 
@@ -359,7 +362,7 @@ class WeatherDayWidget extends (Generic) {
 
         //weather symbol
         const weather_icon = this.state.values[`${this.state.rxData["oid_symbol"]}.val`];
-        console.log("weather icon " + weather_icon);
+        
 
         let src_icon_weather = icons_weather_galeria1[weather_icon];
 
@@ -374,17 +377,22 @@ class WeatherDayWidget extends (Generic) {
             default: src_icon_weather = icons_weather_galeria1[weather_icon]; break;
         }
 
+        console.log("weather icon " + weather_icon + " " + src_icon_weather);
+
+
         //wind symbol
         const wind_icon = this.state.values[`${this.state.rxData["oid_wind_symbol"]}.val`];
-        console.log("wind icon " + wind_icon);
+        
         //todo galerie umschaltbar
         let src_icon_wind = icons_wind_galeria1[wind_icon];
         switch (windiconlabelset) {
-            case "galeria1": src_icon_wind = icons_wind_galeria1[weather_icon]; break;
-            case "galeria2": src_icon_wind = icons_wind_galeria2[weather_icon]; break;
-            case "Beaufort": src_icon_wind = icons_wind_Beaufort[weather_icon]; break;
-            default: src_icon_wind = icons_wind_galeria1[weather_icon]; break;
+            case "galeria1": src_icon_wind = icons_wind_galeria1[wind_icon]; break;
+            case "galeria2": src_icon_wind = icons_wind_galeria2[wind_icon]; break;
+            case "Beaufort": src_icon_wind = icons_wind_Beaufort[wind_icon]; break;
+            default: src_icon_wind = icons_wind_galeria1[wind_icon]; break;
         }
+
+        console.log("wind icon " + wind_icon + " " + src_icon_wind ) ;
 
         const date = this.state.values[`${this.state.rxData["oid_date"]}.val`];
         let day = 1;
@@ -430,6 +438,7 @@ class WeatherDayWidget extends (Generic) {
                 <Grid item xs={6} >
                     <div>
                         <img src={src_icon_weather} alt="icon"></img>
+                        <p>{weather_icon}</p>
                     </div>
                 </Grid>
                 <Grid item xs={6}>
@@ -448,6 +457,7 @@ class WeatherDayWidget extends (Generic) {
                 <Grid item xs={6}>
                     <div>
                         <img src={src_icon_wind} alt="icon"></img>
+                        <p>{wind_icon}</p>
                     </div>
                 </Grid>
                 <Grid item xs={6}>

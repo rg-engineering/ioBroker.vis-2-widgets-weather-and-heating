@@ -6,8 +6,16 @@ import { I18n } from "@iobroker/adapter-react-v5";
 
 import WeatherWidget from "./WeatherWidget";
 import WeatherDayWidget from "./WeatherDayWidget";
+
 import GeneralEChartWidget from "./GeneralEChartWidget";
+
 import HeatingTimescheduleWidget from "./HeatingTimescheduleWidget";
+import HeatingGeneralParamsWidget from "./HeatingGeneralParamsWidget";
+import HeatingRoomWidget from "./HeatingRoomWidget";
+import HeatingRoomsOverviewWidget from "./HeatingRoomsOverviewWidget";
+import HeatingRomProfileParamsWidget from "./HeatingRoomProfileParamsWidget";
+import HeatingWindowStatusOverviewWidget from "./HeatingWindowStatusOverviewWidget";
+
 import translations from "./translations";
 
 const styles = {
@@ -78,6 +86,67 @@ class App extends WidgetDemoApp {
                     type: "all",
                 }}
             />;
+
+            <HeatingGeneralParamsWidget
+                socket={this.socket}
+                themeType={this.state.themeType}
+                style={{
+                    width: 300,
+                    height: 150,
+                }}
+                data={{
+                    type: "all",
+                }}
+            />;
+
+            <HeatingRoomWidget
+                socket={this.socket}
+                themeType={this.state.themeType}
+                style={{
+                    width: 300,
+                    height: 150,
+                }}
+                data={{
+                    type: "all",
+                }}
+            />;
+
+            <HeatingRoomsOverviewWidget
+                socket={this.socket}
+                themeType={this.state.themeType}
+                style={{
+                    width: 300,
+                    height: 150,
+                }}
+                data={{
+                    type: "all",
+                }}
+            />;
+
+            <HeatingRomProfileParamsWidget
+                socket={this.socket}
+                themeType={this.state.themeType}
+                style={{
+                    width: 300,
+                    height: 150,
+                }}
+                data={{
+                    type: "all",
+                }}
+            />;
+
+            <HeatingWindowStatusOverviewWidget
+                socket={this.socket}
+                themeType={this.state.themeType}
+                style={{
+                    width: 300,
+                    height: 150,
+                }}
+                data={{
+                    type: "all",
+                }}
+            />;
+
 
         </Box>;
     }

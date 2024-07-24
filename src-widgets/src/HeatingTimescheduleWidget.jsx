@@ -204,9 +204,9 @@ class HeatingTimescheduleWidget extends (Generic) {
 
         return {
             id: "tplHeatingTimescheduleWidget",                 // Unique widget type ID. Should start with `tpl` followed
-            visSet: "vis-2-widgets-weather",        // Unique ID of widget set
+            visSet: "vis-2-widgets-heating",        // Unique ID of widget set
 
-            //visset -> see WeatherWidget
+            //visset -> see HeatingGeneralParamsWidget
             //visSetLabel: "vis-2-widgets-heating",   // Widget set translated label (should be defined only in one widget of set)
             //visSetColor: "#cf00ff",                 // Color of widget set. it is enough to set color only in one widget of set
             visName: "HeatingTimescheduleWidget",                     // Name of widget
@@ -1182,7 +1182,7 @@ class HeatingTimescheduleWidget extends (Generic) {
 
     createTable_EveryDay(noOfPeriods, room, profileName, currentProfile, currentTimePeriod) {
 
-        console.log("createTable_EvreryDay called " + room);
+        console.log("createTable_EveryDay called " + room);
 
         const periodsMon = this.copyPeriods(noOfPeriods, "Mon");
         const periodsTue = this.copyPeriods(noOfPeriods, "Tue");
@@ -1333,8 +1333,8 @@ class HeatingTimescheduleWidget extends (Generic) {
     renderWidgetBody(props) {
         super.renderWidgetBody(props);
 
-        console.log("values" + JSON.stringify(this.state.values));
-        console.log("rxData " + JSON.stringify(this.state.rxData));
+        console.log("HeatingTimescheduleWidget values ${JSON.stringify(this.state.values)");
+        console.log("HeatingTimescheduleWidget rxData ${JSON.stringify(this.state.rxData)");
 
         let size;
         if (!this.refCardContent.current) {

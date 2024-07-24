@@ -40,9 +40,9 @@ class HeatingRoomsOverviewWidget extends (Generic) {
     static getWidgetInfo() {
         return {
             id: "tplHeatingRoomsOverviewWidget",                 // Unique widget type ID. Should start with `tpl` followed
-            visSet: "vis-2-widgets-weather",        // Unique ID of widget set
+            visSet: "vis-2-widgets-heating",        // Unique ID of widget set
 
-            //visset -> see WeatherWidget
+            //visset -> see HeatingGeneralParamsWidget
             //visSetLabel: "vis-2-widgets-heating",   // Widget set translated label (should be defined only in one widget of set)
             //visSetColor: "#cf00ff",                 // Color of widget set. it is enough to set color only in one widget of set
             visName: "HeatingRoomsOverviewWidget",                     // Name of widget
@@ -127,8 +127,8 @@ class HeatingRoomsOverviewWidget extends (Generic) {
     renderWidgetBody(props) {
         super.renderWidgetBody(props);
 
-        console.log("values" + JSON.stringify(this.state.values));
-        console.log("rxData " + JSON.stringify(this.state.rxData));
+        console.log("HeatingRoomsOverviewWidget values ${JSON.stringify(this.state.values)");
+        console.log("HeatingRoomsOverviewWidget rxData ${JSON.stringify(this.state.rxData)");
 
         let size;
         if (!this.refCardContent.current) {

@@ -30,9 +30,9 @@ const styles = {
     },
 };
 
-//todo aktuellen status in input darstellen
-//todo Änderungen der inputs an adapter übergen
+
 //todo nur die Werte anzeigen, für die es auch OID's gibt
+//todo FormControl size and color einstellbar
 
 //todo Übersetzungen
 //todo Image
@@ -81,9 +81,9 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
 
         return {
             id: "tplHeatingRoomProfileParamsWidget",                 // Unique widget type ID. Should start with `tpl` followed
-            visSet: "vis-2-widgets-weather",        // Unique ID of widget set
+            visSet: "vis-2-widgets-heating",        // Unique ID of widget set
 
-            //visset -> see WeatherWidget
+            //visset -> see HeatingGeneralParamsWidget
             //visSetLabel: "vis-2-widgets-heating",   // Widget set translated label (should be defined only in one widget of set)
             //visSetColor: "#cf00ff",                 // Color of widget set. it is enough to set color only in one widget of set
             visName: "HeatingRoomProfileParamsWidget",                     // Name of widget
@@ -250,9 +250,81 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
         console.log("onStateUpdated " + id + " " + JSON.stringify(state));
     }
 
-    handleChange = (event) => {
-        console.log("handleChange " );
-    };
+    onChange1( val) {
+        const oid = this.state.rxData["oid_GuestIncrease"];
+        //convert value to number
+        console.log("onChange1 " + oid + "  " + val);
+        if (this.props.editMode) return;
+        this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
+    }
+    onChange2(val) {
+        const oid = this.state.rxData["oid_PartyDecrease"];
+        //convert value to number
+        console.log("onChange1 " + oid + "  " + val);
+        if (this.props.editMode) return;
+        this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
+    }
+    onChange3(val) {
+        const oid = this.state.rxData["oid_AbsentDecrease"];
+        //convert value to number
+        console.log("onChange1 " + oid + "  " + val);
+        if (this.props.editMode) return;
+        this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
+    }
+    onChange4(val) {
+        const oid = this.state.rxData["oid_VacationAbsentDecrease"];
+        //convert value to number
+        console.log("onChange1 " + oid + "  " + val);
+        if (this.props.editMode) return;
+        this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
+    }
+    onChange5(val) {
+        const oid = this.state.rxData["oid_WindowOpenDecrease"];
+        //convert value to number
+        console.log("onChange1 " + oid + "  " + val);
+        if (this.props.editMode) return;
+        this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
+    }
+    onChange6(val) {
+        const oid = this.state.rxData["oid_FireplaceModeDecrease"];
+        //convert value to number
+        console.log("onChange1 " + oid + "  " + val);
+        if (this.props.editMode) return;
+        this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
+    }
+    onChange7(val) {
+        const oid = this.state.rxData["oid_MinimumTemperature"];
+        //convert value to number
+        console.log("onChange1 " + oid + "  " + val);
+        if (this.props.editMode) return;
+        this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
+    }
+    onChange8(val) {
+        const oid = this.state.rxData["oid_TemperaturOverrideTime"];
+
+        console.log("onChange1 " + oid + "  " + val);
+        if (this.props.editMode) return;
+        this.props.context.setValue(oid, val);
+    }
+    onChange9(val) {
+        const oid = this.state.rxData["oid_TemperaturOverride"];
+        //convert value to number
+        console.log("onChange1 " + oid + "  " + val);
+        if (this.props.editMode) return;
+        this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
+    }
+
+    static convertValue2Number(value) {
+
+        try {
+            return parseInt(value);
+        }
+        catch (e) {
+            return 0;
+        }
+
+
+    }
 
 
     CreateTable() {
@@ -273,8 +345,9 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
             style={styles.cardContent}
         >
             <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-                <FormControl sx={{ m: 1, width: "25ch" }} variant="filled">
-                    <FilledInput
+                <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+                    <FilledInput 
+                        size="small"
                         id="GuestIncrease"
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="GuestIncrease"
@@ -283,13 +356,15 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         }}
                         type="number"
                         value={GuestIncrease}
-                        onChange={this.handleChange}
+                        onChange={(e) => this.onChange1( e.target.value)}
+                        sx={{ input: { color: "black", width: "100%" } }} 
                     />
                     <FormHelperText id="GuestIncrease-text">{Generic.t("GuestIncrease")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: "25ch" }} variant="filled">
+                <FormControl sx={{ m: 1, width: "15ch" }} variant="filled">
                     <FilledInput
+                        size="small"
                         id="PartyDecrease"
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="PartyDecrease"
@@ -298,13 +373,15 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         }}
                         type="number"
                         value={PartyDecrease}
-                        onChange={this.handleChange}
+                        onChange={(e) => this.onChange2(e.target.value)}
+                        sx={{ input: { color: "black", width: "100%" } }} 
                     />
                     <FormHelperText id="PartyDecrease-text">{Generic.t("PartyDecrease")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: "25ch" }} variant="filled">
+                <FormControl sx={{ m: 1, width: "15ch" }} variant="filled">
                     <FilledInput
+                        size="small"
                         id="AbsentDecrease"
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="AbsentDecrease"
@@ -313,13 +390,15 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         }}
                         type="number"
                         value={AbsentDecrease}
-                        onChange={this.handleChange}
+                        onChange={(e) => this.onChange3(e.target.value)}
+                        sx={{ input: { color: "black", width: "100%" } }} 
                     />
                     <FormHelperText id="AbsentDecrease-text">{Generic.t("AbsentDecrease")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: "25ch" }} variant="filled">
+                <FormControl sx={{ m: 1, width: "15ch" }} variant="filled">
                     <FilledInput
+                        size="small"
                         id="VacationAbsentDecrease"
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="VacationAbsentDecrease"
@@ -328,13 +407,15 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         }}
                         type="number"
                         value={VacationAbsentDecrease}
-                        onChange={this.handleChange}
+                        onChange={(e) => this.onChange4(e.target.value)}
+                        sx={{ input: { color: "black", width: "100%" } }} 
                     />
                     <FormHelperText id="VacationAbsentDecrease-text">{Generic.t("VacationAbsentDecrease")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: "25ch" }} variant="filled">
+                <FormControl sx={{ m: 1, width: "15ch" }} variant="filled">
                     <FilledInput
+                        size="small"
                         id="WindowOpenDecrease"
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="WindowOpenDecrease"
@@ -343,13 +424,15 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         }}
                         type="number"
                         value={WindowOpenDecrease}
-                        onChange={this.handleChange}
+                        onChange={(e) => this.onChange5(e.target.value)}
+                        sx={{ input: { color: "black", width: "100%" } }} 
                     />
                     <FormHelperText id="WindowOpenDecrease-text">{Generic.t("WindowOpenDecrease")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: "25ch" }} variant="filled">
+                <FormControl sx={{ m: 1, width: "15ch" }} variant="filled">
                     <FilledInput
+                        size="small"
                         id="FireplaceModeDecrease"
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="FireplaceModeDecrease"
@@ -358,13 +441,15 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         }}
                         type="number"
                         value={FireplaceModeDecrease}
-                        onChange={this.handleChange}
+                        onChange={(e) => this.onChange6(e.target.value)}
+                        sx={{ input: { color: "black", width: "100%" } }} 
                     />
                     <FormHelperText id="FireplaceModeDecrease-text">{Generic.t("FireplaceModeDecrease")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: "25ch" }} variant="filled">
+                <FormControl sx={{ m: 1, width: "15ch" }} variant="filled">
                     <FilledInput
+                        size="small"
                         id="MinimumTemperature"
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="MinimumTemperature"
@@ -373,13 +458,15 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         }}
                         type='number'
                         value={MinimumTemperature}
-                        onChange={this.handleChange}
+                        onChange={(e) => this.onChange7(e.target.value)}
+                        sx={{ input: { color: "black", width: "100%" } }} 
                     />
                     <FormHelperText id="MinimumTemperature-text">{Generic.t("MinimumTemperature")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: "25ch" }} variant="filled">
+                <FormControl sx={{ m: 1, width: "15ch" }} variant="filled">
                     <FilledInput
+                        size="small"
                         id="OverrideTemperature"
                         endAdornment={<InputAdornment position="end">°C</InputAdornment>}
                         aria-describedby="OverrideTemperature"
@@ -388,13 +475,15 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         }}
                         type="number"
                         value={OverrideTemperature}
-                        onChange={this.handleChange}
+                        onChange={(e) => this.onChange8(e.target.value)}
+                        sx={{ input: { color: "black", width: "100%" } }} 
                     />
                     <FormHelperText id="OverrideTemperature-text">{Generic.t("OverrideTemperature")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: "25ch" }} variant="filled">
+                <FormControl sx={{ m: 1, width: "15ch" }} variant="filled">
                     <FilledInput
+                        size="small"
                         id="OverrideTemperatureTime"
                         endAdornment={<InputAdornment position="end"> </InputAdornment>}
                         aria-describedby="OverrideTemperatureTime"
@@ -403,7 +492,8 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         }}
                         type="text"
                         value={OverrideTemperatureTime}
-                        onChange={this.handleChange}
+                        onChange={(e) => this.onChange9(e.target.value)}
+                        sx={{ input: { color: "black", width: "100%" } }} 
                     />
                     <FormHelperText id="OverrideTemperatureTime-text">{Generic.t("OverrideTemperatureTime")}</FormHelperText>
                 </FormControl>
@@ -424,8 +514,8 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
     renderWidgetBody(props) {
         super.renderWidgetBody(props);
 
-        console.log("values" + JSON.stringify(this.state.values));
-        console.log("rxData " + JSON.stringify(this.state.rxData));
+        console.log("HeatingRoomProfileParamsWidget values ${JSON.stringify(this.state.values)");
+        console.log("HeatingRoomProfileParamsWidget rxData ${JSON.stringify(this.state.rxData)");
 
         let size;
         if (!this.refCardContent.current) {

@@ -59,14 +59,12 @@ You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
-
-### **WORK IN PROGRESS**
+### 0.4.0 (2024-07-27)
  * (René) widget set renamed to weather and heating, because two widget sets are available
  * (René) bug fix icon in weather day widget
  * (René) heating and weather widgets sets are separeted
  * (René) Heating General Params Widget get and set values fixed
  * (René) Heating Room Profile Params Widget get and set values fixed
-
 
 ### 0.3.3 (2024-07-12)
  * (René) Heating Rooms Overview widget completed

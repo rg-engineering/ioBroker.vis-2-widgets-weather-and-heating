@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather_heating",
-    "version": "0.3.3",
+    "version": "0.4.0",
     "news": {
+      "0.4.0": {
+        "en": "widget set renamed to weather and heating, because two widget sets are available\nbug fix icon in weather day widget\nheating and weather widgets sets are separeted\nHeating General Params Widget get and set values fixed\nHeating Room Profile Params Widget get and set values fixed",
+        "de": "widget-set umbenannt auf wetter und heizung, weil zwei widget-sets verfügbar sind\nbug fix icon in wetter-tag widget\nheizung und wetter widgets sets werden getrennt\nHeizung Allgemeine Params Widget get und gesetzte Werte\nHeizraum Profil Params Widget get und gesetzte Werte",
+        "ru": "набор виджетов переименован в погоду и отопление, потому что доступны два набора виджетов\nзначок для исправления ошибок в дневном режиме\nнагревательные и погодные виджеты наборы\nОтопление Общие Виджет получить и установить фиксированные значения\nКомната для отопления Виджет получить и установить фиксированные значения",
+        "pt": "conjunto widget renomeado para clima e aquecimento, porque dois conjuntos de widgets estão disponíveis\nbug corrigir ícone no widget do dia do tempo\naquecimento e widgets de tempo conjuntos são separados\nParams gerais de aquecimento Widget obter e definir valores fixos\nParams de perfil de sala de aquecimento Widget obter e definir valores fixos",
+        "nl": "widget set hernoemd naar het weer en verwarming, omdat twee widgetsets beschikbaar zijn\nbug fix pictogram in het weer widget\nverwarming en weer widgets sets zijn gescheiden\nVerwarming Algemeen Params Widget krijgt en stelt waarden vast\nVerwarmingskamerprofiel Params Widget krijgt en stelt waarden vast",
+        "fr": "widget rebaptisé météo et chauffage, car deux widgets sont disponibles\nicône de correction de bug dans widget météo jour\nles ensembles widgets de chauffage et de temps sont séparés\nChauffage Params généraux Widget obtient et fixe les valeurs\nProfil de la chambre de chauffage Params Widget obtient et fixe les valeurs",
+        "it": "widget set rinominato meteo e riscaldamento, perché due set di widget sono disponibili\nicona correzione bug nel widget giorno del tempo\nriscaldamento e widget meteo set sono separeted\nRiscaldamento Generale Params Widget ottenere e impostare valori fissi\nParams del profilo della camera di riscaldamento Widget ottenere e impostare valori fissi",
+        "es": "widget set renombrado al clima y la calefacción, porque dos juegos widget están disponibles\nbug fijar icono en el día del tiempo widget\nsistemas de calefacción y widgets meteorológicos están separados\nParams generales de calefacción Widget conseguir y establecer valores fijos\nParámetros de perfil de la habitación Widget conseguir y establecer valores fijos",
+        "pl": "zestaw widget zmienił nazwę na pogoda i ogrzewanie, ponieważ dostępne są dwa zestawy widget\nikona fix błędu w widget dzień pogody\nogrzewanie i widżety pogodowe są separeted\nOgrzewanie Paramy ogólne Widget get and set values fixed\nOgrzewanie Params Profil pokoju Widget get and set values fixed",
+        "uk": "набір віджетів перейменований на погоду і опалення, тому що два комплекти віджетів доступні\nвиправлення помилок у погодні дні віджет\nнабори опалювальних і погодних віджетів відокремлюються\nНагрівальні загальні параметри Віджети і встановити значення фіксовані\nПараметри профілю нагрівальних кімнат Віджети і встановити значення фіксовані",
+        "zh-cn": "部件集重新命名为天气和暖气, 因为有两个部件集可用\n天气日部件中的错误修正图标\n暖气和天气部件组装已分离\n加热一般参数 部件获得并设定值\n加热室简介 部件获得并设定值"
+      },
       "0.3.3": {
         "en": "Heating Rooms Overview widget completed\nHeating Windows Status Overview widget completed\nHeating Room widget completed",
         "de": "Heizungsanlagen Übersicht Widget abgeschlossen\nHeizung Windows Status Übersicht Widget abgeschlossen\nHeizung Zimmer Widget abgeschlossen",
@@ -80,19 +93,6 @@
         "pl": "(René) ogólny widget diagramu: format etykiety x regulowany\n(René) ogólny widget diagramu: wsparcie sbfspot (wymaga sbfspot wersja 4.3.1)",
         "uk": "(René) загальний віджет діаграми: x вісь формат регульований\n(René) загальний віджет діаграми: підтримка sbfspot (needs sbfspot version 4.3.1)",
         "zh-cn": "(René) 一般图件:x轴标签格式可调整\n(René)普通图件:支持sbfspot(需要sbfspot版本4.3.1)"
-      },
-      "0.2.8": {
-        "en": "(René) X axis label adjustable",
-        "de": "(René) X-Achsenlabel einstellbar",
-        "ru": "(René)",
-        "pt": "(René) X eixo rótulo ajustável",
-        "nl": "(René) X-as label verstelbaar",
-        "fr": "(René) Étiquette à axe X réglable",
-        "it": "(René) Etichetta a asse X regolabile",
-        "es": "(René) etiqueta de eje X ajustable",
-        "pl": "(René) Etykieta na oś X regulowana",
-        "uk": "(René) X вісь регульований",
-        "zh-cn": "(René) X轴标签可调整"
       }
     },
     "licenseInformation": {

@@ -1,5 +1,5 @@
 {
-    "name": "iobroker.vis-2-widgets-weather",
+    "name": "iobroker.vis-2-widgets-weather_heating",
     "private": true,
     "version": "0.3.3",
     "dependencies": {

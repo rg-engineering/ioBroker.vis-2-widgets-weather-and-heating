@@ -17,6 +17,7 @@
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
     <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <Name>vis-2-widgets-weather_heating</Name>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptTarget>ES5</TypeScriptTarget>

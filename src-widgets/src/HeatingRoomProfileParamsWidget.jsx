@@ -30,13 +30,13 @@ const styles = {
     },
 };
 
-
+//todo Unterscheidung absolut / relativ
 //todo nur die Werte anzeigen, für die es auch OID's gibt
 //todo FormControl size and color einstellbar
 
 //todo Übersetzungen
 //todo Image
-//todo Unterscheidung absolut / relativ
+
 
 const setDataStructures = async (field, data, changeData, socket) => {
 
@@ -357,7 +357,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         type="number"
                         value={GuestIncrease}
                         onChange={(e) => this.onChange1( e.target.value)}
-                        sx={{ input: { color: "black", width: "100%" } }} 
+                        sx={{ input: { color: "white", width: "100%" } }} 
                     />
                     <FormHelperText id="GuestIncrease-text">{Generic.t("GuestIncrease")}</FormHelperText>
                 </FormControl>
@@ -374,7 +374,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         type="number"
                         value={PartyDecrease}
                         onChange={(e) => this.onChange2(e.target.value)}
-                        sx={{ input: { color: "black", width: "100%" } }} 
+                        sx={{ input: { color: "white", width: "100%" } }} 
                     />
                     <FormHelperText id="PartyDecrease-text">{Generic.t("PartyDecrease")}</FormHelperText>
                 </FormControl>
@@ -391,7 +391,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         type="number"
                         value={AbsentDecrease}
                         onChange={(e) => this.onChange3(e.target.value)}
-                        sx={{ input: { color: "black", width: "100%" } }} 
+                        sx={{ input: { color: "white", width: "100%" } }} 
                     />
                     <FormHelperText id="AbsentDecrease-text">{Generic.t("AbsentDecrease")}</FormHelperText>
                 </FormControl>
@@ -408,7 +408,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         type="number"
                         value={VacationAbsentDecrease}
                         onChange={(e) => this.onChange4(e.target.value)}
-                        sx={{ input: { color: "black", width: "100%" } }} 
+                        sx={{ input: { color: "white", width: "100%" } }} 
                     />
                     <FormHelperText id="VacationAbsentDecrease-text">{Generic.t("VacationAbsentDecrease")}</FormHelperText>
                 </FormControl>
@@ -425,7 +425,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         type="number"
                         value={WindowOpenDecrease}
                         onChange={(e) => this.onChange5(e.target.value)}
-                        sx={{ input: { color: "black", width: "100%" } }} 
+                        sx={{ input: { color: "white", width: "100%" } }} 
                     />
                     <FormHelperText id="WindowOpenDecrease-text">{Generic.t("WindowOpenDecrease")}</FormHelperText>
                 </FormControl>
@@ -442,7 +442,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         type="number"
                         value={FireplaceModeDecrease}
                         onChange={(e) => this.onChange6(e.target.value)}
-                        sx={{ input: { color: "black", width: "100%" } }} 
+                        sx={{ input: { color: "white", width: "100%" } }} 
                     />
                     <FormHelperText id="FireplaceModeDecrease-text">{Generic.t("FireplaceModeDecrease")}</FormHelperText>
                 </FormControl>
@@ -459,7 +459,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         type='number'
                         value={MinimumTemperature}
                         onChange={(e) => this.onChange7(e.target.value)}
-                        sx={{ input: { color: "black", width: "100%" } }} 
+                        sx={{ input: { color: "white", width: "100%" } }} 
                     />
                     <FormHelperText id="MinimumTemperature-text">{Generic.t("MinimumTemperature")}</FormHelperText>
                 </FormControl>
@@ -476,7 +476,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         type="number"
                         value={OverrideTemperature}
                         onChange={(e) => this.onChange8(e.target.value)}
-                        sx={{ input: { color: "black", width: "100%" } }} 
+                        sx={{ input: { color: "white", width: "100%" } }} 
                     />
                     <FormHelperText id="OverrideTemperature-text">{Generic.t("OverrideTemperature")}</FormHelperText>
                 </FormControl>
@@ -493,7 +493,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         type="text"
                         value={OverrideTemperatureTime}
                         onChange={(e) => this.onChange9(e.target.value)}
-                        sx={{ input: { color: "black", width: "100%" } }} 
+                        sx={{ input: { color: "white", width: "100%" } }} 
                     />
                     <FormHelperText id="OverrideTemperatureTime-text">{Generic.t("OverrideTemperatureTime")}</FormHelperText>
                 </FormControl>

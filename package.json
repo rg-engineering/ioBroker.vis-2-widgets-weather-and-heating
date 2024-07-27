@@ -1,16 +1,16 @@
 {
-  "name": "iobroker.vis-2-widgets-weather",
+  "name": "iobroker.vis-2-widgets-weather_heating",
   "version": "0.3.3",
-  "description": "ioBroker vis-2 weather widgets",
+  "description": "ioBroker vis-2 weather and heating widgets",
   "author": "rg-engineering <info@rg-engineering.eu>",
   "contributors": [
     "rg-engineering <info@rg-engineering.eu>"
   ],
-  "homepage": "https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather",
+  "homepage": "https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather_heating",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather"
+    "url": "https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather_heating"
   },
   "keywords": [
     "ioBroker",
@@ -49,7 +49,7 @@
     "npm": "npm i && cd src-widgets && npm i -f"
   },
   "bugs": {
-    "url": "https://github.com/rg-enineering/ioBroker.vis-2-widgets-weather/issues"
+    "url": "https://github.com/rg-enineering/ioBroker.vis-2-widgets-weather_heating/issues"
   },
   "readmeFilename": "README.md"
 }

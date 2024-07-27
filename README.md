@@ -1,23 +1,23 @@
 ![Logo](admin/vis-2-widgets-weather.png)
 # ioBroker.vis-2-widgets-weather
 
-![Number of Installations](http://iobroker.live/badges/vis-2-widgets-weather-installed.svg) ![Number of Installations](http://iobroker.live/badges/vis-2-widgets-weather-stable.svg)
-[![Downloads](https://img.shields.io/npm/dm/iobroker.vis-2-widgets-weather.svg)](https://www.npmjs.com/package/iobroker.vis-2-widgets-weather)
-[![NPM version](http://img.shields.io/npm/v/iobroker.vis-2-widgets-weather.svg)](https://www.npmjs.com/package/iobroker.vis-2-widgets-weather)
+![Number of Installations](http://iobroker.live/badges/vis-2-widgets-weather_heating_-installed.svg) ![Number of Installations](http://iobroker.live/badges/vis-2-widgets-weather_heating_-stable.svg)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.vis-2-widgets-weather_heating_.svg)](https://www.npmjs.com/package/iobroker.vis-2-widgets-weather_heating_)
+[![NPM version](http://img.shields.io/npm/v/iobroker.vis-2-widgets-weather_heating_.svg)](https://www.npmjs.com/package/iobroker.vis-2-widgets-weather_heating_)
 
-[![Known Vulnerabilities](https://snyk.io/test/github/rg-engineering/ioBroker.vis-2-widgets-weather/badge.svg)](https://snyk.io/test/github/rg-engineering/ioBroker.vis-2-widgets-weather)
-![GitHub Actions](https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather/workflows/Test%20and%20Release/badge.svg)
+[![Known Vulnerabilities](https://snyk.io/test/github/rg-engineering/ioBroker.vis-2-widgets-weather_heating_/badge.svg)](https://snyk.io/test/github/rg-engineering/ioBroker.vis-2-widgets-weather_heating_)
+![GitHub Actions](https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather_heating_/workflows/Test%20and%20Release/badge.svg)
 
-[![NPM](https://nodei.co/npm/iobroker.vis-2-widgets-weather.png?downloads=true)](https://nodei.co/npm/iobroker.vis-2-widgets-weather/)
+[![NPM](https://nodei.co/npm/iobroker.vis-2-widgets-weather_heating.png?downloads=true)](https://nodei.co/npm/iobroker.vis-2-widgets-weather_heating_/)
 
-![node-lts](https://img.shields.io/node/v-lts/iobroker.vis-2-widgets-weather?style=flat-square)
-![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/iobroker.vis-2-widgets-weather?label=npm%20dependencies&style=flat-square)
+![node-lts](https://img.shields.io/node/v-lts/iobroker.vis-2-widgets-weather_heating_?style=flat-square)
+![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/iobroker.vis-2-widgets-weather_heating_?label=npm%20dependencies&style=flat-square)
 
-![GitHub](https://img.shields.io/github/license/rg-engineering/ioBroker.vis-2-widgets-weather?style=flat-square)
-![GitHub repo size](https://img.shields.io/github/repo-size/rg-engineering/ioBroker.vis-2-widgets-weather?logo=github&style=flat-square)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/rg-engineering/ioBroker.vis-2-widgets-weather?logo=github&style=flat-square)
-![GitHub last commit](https://img.shields.io/github/last-commit/rg-engineering/ioBroker.vis-2-widgets-weather?logo=github&style=flat-square)
-![GitHub issues](https://img.shields.io/github/issues/rg-engineering/ioBroker.vis-2-widgets-weather?logo=github&style=flat-square)
+![GitHub](https://img.shields.io/github/license/rg-engineering/ioBroker.vis-2-widgets-weather_heating_?style=flat-square)
+![GitHub repo size](https://img.shields.io/github/repo-size/rg-engineering/ioBroker.vis-2-widgets-weather_heating_?logo=github&style=flat-square)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/rg-engineering/ioBroker.vis-2-widgets-weather_heating_?logo=github&style=flat-square)
+![GitHub last commit](https://img.shields.io/github/last-commit/rg-engineering/ioBroker.vis-2-widgets-weather_heating_?logo=github&style=flat-square)
+![GitHub issues](https://img.shields.io/github/issues/rg-engineering/ioBroker.vis-2-widgets-weather_heating_?logo=github&style=flat-square)
 
 
 **If you like it, please consider a donation:**
@@ -61,9 +61,12 @@ You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
 ## Changelog
 
 ### **WORK IN PROGRESS**
+ * (René) widget set renamed to weather and heating, because two widget sets are available
  * (René) bug fix icon in weather day widget
  * (René) heating and weather widgets sets are separeted
  * (René) Heating General Params Widget get and set values fixed
+ * (René) Heating Room Profile Params Widget get and set values fixed
+
 
 ### 0.3.3 (2024-07-12)
  * (René) Heating Rooms Overview widget completed

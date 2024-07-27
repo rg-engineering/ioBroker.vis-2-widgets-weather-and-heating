@@ -3,6 +3,13 @@ import PropTypes from "prop-types";
 
 import Generic from "./Generic";
 
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+
+
 const styles = {
     cardContent: {
         flex: 1,
@@ -13,6 +20,8 @@ const styles = {
         overflow: "hidden",
     },
 };
+
+
 
 //todo Image sollte in gleicher Zeile wie Raum, Uhrzeit sollte kleinere Schrift
 //todo Anzeige Anzahl offener Fenster fehlt
@@ -29,6 +38,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
 
     if (instance && instance.length > 0 && instance.includes("heatingcontrol") ) {
 
+        data["oid_WindowStatesHtmlTable"] = `${instance}.vis.WindowStatesHtmlTableVis2`;
         data["oid_OpenWindowRoomCount"] = `${instance}.vis.OpenWindowRoomCount`;
     }
     changeData(data);
@@ -80,9 +90,9 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
                     fields: [
                         {
                             name: "oid_WindowStatesHtmlTable",    // name in data structure
-                            label: "currentprofile", // translated field label
+                            label: "widgets_heating_label_windowsstateshtmltable", // translated field label
                             type: "id",
-                            default: "heatingcontrol.0.vis.WindowStatesHtmlTable",
+                            default: "heatingcontrol.0.vis.WindowStatesHtmlTableVis2",
                         },
                         {
                             name: "oid_OpenWindowRoomCount",    // name in data structure
@@ -110,6 +120,19 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
 
         console.log("html " + htmlTable);
 
+
+
+
+        /*
+        < div class="mdui-listitem mdui-center-v mdui-red-bg" style = "height:48px;" > 
+            <img height=40px src = "/vis.0/HeatingControl/images/fts_window_1w_open.svg" ></img > 
+                <div class="mdui-label">TestRaum
+                    <div class="mdui-subtitle">seit 25 Jul 2024 21:11:07</div>
+                </div>
+         </div >
+         */
+
+
         const content = <div
             ref={this.refCardContent}
             style={styles.cardContent}
@@ -117,8 +140,28 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
 
             <div>
                 <p>{Generic.t("Window Status Overview")}</p>
-
             </div>
+
+           
+            < List sx = {{ width: '100 % ', maxWidth: 360, bgcolor: 'background.paper' }  }>
+                <ListItem>
+                    <ListItemAvatar>
+                        <Avatar>
+                            <img 
+                                src='/vis.0/HeatingControl/images/fts_window_1w_open.svg' 
+                                height='40px' >
+                            </img>
+                        </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                        primary='TestRaum'
+                        secondary='seit 26 Jul 2024 21:36:13'
+                        primaryTypographyProps={{
+                            color: 'black',
+                        }}
+                    />
+                </ListItem >
+            </List >
 
             <div dangerouslySetInnerHTML={{ __html: htmlTable }}></div>
 

@@ -101,30 +101,12 @@
       "link": "https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather_heating/blob/master/LICENSE"
     },
     "titleLang": {
-      "en": "VIS-2 weather widgets",
-      "de": "VIS-2 Wetterwidgets",
-      "ru": "VIS-2 виджеты погоды",
-      "pt": "Widgets de tempo para: VIS-2",
-      "nl": "VIS-2 weerwidgets",
-      "fr": "Widgets météorologiques VIS-2",
-      "it": "VIS-2 widget meteo per il",
-      "es": "VIS-2 widgets meteorológicos",
-      "pl": "Widżety pogody VIS-2",
-      "uk": "VIS-2 віджети погоди",
-      "zh-cn": "VIS-2 气象部件"
+      "en": "VIS-2 weather and heating widgets"
+
     },
     "desc": {
-      "en": "VIS-2 weather widgets",
-      "de": "VIS-2 Wetterwidgets",
-      "ru": "VIS-2 виджеты погоды",
-      "pt": "Widgets de tempo para: VIS-2",
-      "nl": "VIS-2 weerwidgets",
-      "fr": "Widgets météorologiques VIS-2",
-      "it": "VIS-2 widget meteo per il",
-      "es": "VIS-2 widgets meteorológicos",
-      "pl": "Widżety pogody VIS-2",
-      "uk": "VIS-2 віджети погоди",
-      "zh-cn": "VIS-2 气象部件"
+      "en": "VIS-2 weather and heating widgets"
+
     },
     "authors": [
       "rg-engineering <info@rg-engineering.eu>"

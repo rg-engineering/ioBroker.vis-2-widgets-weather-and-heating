@@ -25,9 +25,9 @@ const styles = {
 
 //todo Image sollte in gleicher Zeile wie Raum, Uhrzeit sollte kleinere Schrift
 //todo Anzeige Anzahl offener Fenster fehlt
-//todo Überschrift: "Fensterstatus" fehlt -> okay
+
 //todo Übersetzungen
-//todo icon fenster offen noch hinzuüngne
+
 
 
 const setDataStructures = async (field, data, changeData, socket) => {
@@ -117,58 +117,107 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
     createTable() {
 
         const htmlTable = this.state.values[`${this.state.rxData["oid_WindowStatesHtmlTable"]}.val`];
+        console.log("###html " + htmlTable);
 
-        console.log("html " + htmlTable);
+        if (htmlTable != null && typeof htmlTable === "string" && htmlTable.length > 5) {
+
+            const data = JSON.parse(htmlTable);
+
+            console.log("###html " + htmlTable + " " + data.length + " " + JSON.stringify(data));
+
+            /* old version
+            < div class="mdui-listitem mdui-center-v mdui-red-bg" style = "height:48px;" > 
+                <img height=40px src = "/vis.0/HeatingControl/images/fts_window_1w_open.svg" ></img > 
+                    <div class="mdui-label">TestRaum
+                        <div class="mdui-subtitle">seit 25 Jul 2024 21:11:07</div>
+                    </div>
+             </div >
+             */
+
+            /* new version
+    
+            [{ "room": "TestRaum", "sinceText": "seit", "icon": "/vis.0/HeatingControl/images/fts_window_1w_open.svg", "changed": "28 Jul 2024 08:46:44" }]
+            */
 
 
+            const content = <div
+                ref={this.refCardContent}
+                style={styles.cardContent}
+            >
 
-
-        /*
-        < div class="mdui-listitem mdui-center-v mdui-red-bg" style = "height:48px;" > 
-            <img height=40px src = "/vis.0/HeatingControl/images/fts_window_1w_open.svg" ></img > 
-                <div class="mdui-label">TestRaum
-                    <div class="mdui-subtitle">seit 25 Jul 2024 21:11:07</div>
+                <div>
+                    <p>{Generic.t("Window Status Overview")}</p>
                 </div>
-         </div >
-         */
+
+                < List sx={{ width: '100 % ', maxWidth: 360, bgcolor: 'background.paper' }}>
+                    {data.map((roomData, i) => {
+
+                        return <ListItem>
+                            <ListItemAvatar>
+                                <Avatar>
+                                    <img
+                                        src={roomData.icon}
+                                        height='40px' >
+                                    </img>
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText
+                                primary={roomData.room}
+                                secondary={roomData.sinceText + " " + roomData.changed}
+                                primaryTypographyProps={{
+                                    color: roomData.isOpen ? 'red' : 'black',
+                                }}
+                            />
+                        </ListItem >
+
+                    })}
+                </List >
+            </div>;
 
 
-        const content = <div
-            ref={this.refCardContent}
-            style={styles.cardContent}
-        >
+            /*
+             const content = <div
+                 ref={this.refCardContent}
+                 style={styles.cardContent}
+             >
+     
+                 <div>
+                     <p>{Generic.t("Window Status Overview")}</p>
+                 </div>
+     
+     
+     
+                
+                 < List sx = {{ width: '100 % ', maxWidth: 360, bgcolor: 'background.paper' }  }>
+                     <ListItem>
+                         <ListItemAvatar>
+                             <Avatar>
+                                 <img 
+                                     src='/vis.0/HeatingControl/images/fts_window_1w_open.svg' 
+                                     height='40px' >
+                                 </img>
+                             </Avatar>
+                         </ListItemAvatar>
+                         <ListItemText
+                             primary='TestRaum'
+                             secondary='seit 26 Jul 2024 21:36:13'
+                             primaryTypographyProps={{
+                                 color: 'black',
+                             }}
+                         />
+                     </ListItem >
+                 </List >
+     
+                 
+     
+             </div>;
+             */
+            return content;
+        }
 
-            <div>
-                <p>{Generic.t("Window Status Overview")}</p>
-            </div>
+        return null;
 
-           
-            < List sx = {{ width: '100 % ', maxWidth: 360, bgcolor: 'background.paper' }  }>
-                <ListItem>
-                    <ListItemAvatar>
-                        <Avatar>
-                            <img 
-                                src='/vis.0/HeatingControl/images/fts_window_1w_open.svg' 
-                                height='40px' >
-                            </img>
-                        </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                        primary='TestRaum'
-                        secondary='seit 26 Jul 2024 21:36:13'
-                        primaryTypographyProps={{
-                            color: 'black',
-                        }}
-                    />
-                </ListItem >
-            </List >
-
-            <div dangerouslySetInnerHTML={{ __html: htmlTable }}></div>
-
-        </div>;
-
-
-        return content;
+        
     }
 
     renderWidgetBody(props) {

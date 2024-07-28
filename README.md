@@ -59,6 +59,10 @@ You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
     ### **WORK IN PROGRESS**
 -->
 ## Changelog
+
+### **WORK IN PROGRESS**
+ * (René) widget Heating Room Status overview overworked (works only with HeatingControl@1.12.9)
+
 ### 0.4.0 (2024-07-27)
  * (René) widget set renamed to weather and heating, because two widget sets are available
  * (René) bug fix icon in weather day widget

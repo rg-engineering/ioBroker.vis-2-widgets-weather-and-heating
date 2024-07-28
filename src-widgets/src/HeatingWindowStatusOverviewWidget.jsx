@@ -23,10 +23,8 @@ const styles = {
 
 
 
-//todo Image sollte in gleicher Zeile wie Raum, Uhrzeit sollte kleinere Schrift
-//todo Anzeige Anzahl offener Fenster fehlt
-
 //todo Übersetzungen
+//todo Image
 
 
 
@@ -117,6 +115,8 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
     createTable() {
 
         const htmlTable = this.state.values[`${this.state.rxData["oid_WindowStatesHtmlTable"]}.val`];
+
+        const windowsOpen = number.parse (this.state.values[`${this.state.rxData["oid_OpenWindowRoomCount"]}.val`]);
         console.log("###html " + htmlTable);
 
         if (htmlTable != null && typeof htmlTable === "string" && htmlTable.length > 5) {
@@ -148,6 +148,11 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
                 <div>
                     <p>{Generic.t("Window Status Overview")}</p>
                 </div>
+
+                <div>
+                    <p> {windowsOpen > 0 ? windowsOpen + " " + Generic.t("Windows open") : Generic.t("all windows closed")}</p>
+                </div>
+
 
                 < List sx={{ width: '100 % ', maxWidth: 360, bgcolor: 'background.paper' }}>
                     {data.map((roomData, i) => {

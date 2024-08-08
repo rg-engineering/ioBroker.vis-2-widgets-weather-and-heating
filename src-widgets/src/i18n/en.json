@@ -12,6 +12,7 @@
 
   "vis-2-widgets-weather": "Weather Widgets",
   "vis_2_widgets-weather": "weather widget",
+  "vis-2-widgets-heating": "heating widgets",
 
   "group_x_axis": "X Axis",
   "group_rain": "Rain",
@@ -272,14 +273,7 @@
   "vis_2_widgets-HeatingGeneralParams": "Heating General Parameter",
 
 
-  "oid_HeatingPeriodActive": "OID Heating Period Active",
-  "oid_PublicHolidyToday": "OID Public Holiday Today",
-  "oid_Present": "OID Present",
-  "oid_PartyNow": "OID Party Now",
-  "oid_GuestsPresent": "OID Guests Present",
-  "oid_HolidayPresent": "OID Holiday At Home",
-  "oid_VacationAbsent": "OID Vacation",
-  "oid_FireplaceModeActive": "OID Fireplace Mode",
+
 
   "HeatingPeriodActive": "Heating Period Active",
   "PublicHolydayToday": "Public Holiday Today",
@@ -292,6 +286,17 @@
 
 
   "vis_2_widgets-HeatingRoomProfileParams": "Heating Room Profile Parameter",
+  "widgets_heating_label_oid_choosenroom": "OID choosen room",
+  "widgets_heating_label_oid_heatingperiodactive": "OID heating period active",
+  "widgets_heating_label_oid_publicholidytoday": "OID public holiday today",
+  "widgets_heating_label_oid_present": "OID present",
+  "widgets_heating_label_oid_partynow": "OID party now",
+  "widgets_heating_label_oid_guestspresent": "OID guests present",
+  "widgets_heating_label_oid_holidaypresent": "OID holiday at home",
+  "widgets_heating_label_oid_vacationabsent": "OID vacation absent",
+  "widgets_heating_label_oid_fireplacemodeactive": "OID fireplace mode",
+
+ 
 
   "oid_GuestIncrease": "OID Guest Increase",
   "oid_PartyDecrease": "OID Party Decrease",
@@ -318,13 +323,27 @@
 
 
   "vis_2_widgets-HeatingRoom": "Heating Room",
-
+  "widgets_heating_label_roomname": "room name",
+  "widgets_heating_label_oid_currenttarget": "OID current target",
+  "widgets_heating_label_oid_currenttemperature": "OID thermostat current temperature",
+  "widgets_heating_label_oid_currenttemperatureextsensor": "OID external sensor surrent temperature",
+  "widgets_heating_label_oid_currentactorstate": "OID actuator state",
+  "widgets_heating_label_oid_currentvalvevalue": "OID valve value",
+  "widgets_heating_label_oid_roomstate": "OID room state",
+  "widgets_heating_label_oid_roomlog": "OID room log",
+  "widgets_heating_label_oid_thermostatbatterystate": "OID thermostat battery state",
+  "widgets_heating_label_oid_thermostatbatteryvoltage": "OID thermostat battery voltage",
+  "widgets_heating_label_oid_thermostatrssi": "OID thermostat RSSI",
 
   "vis_2_widgets-HeatingRoomsOverview": "Heating Rooms Overview",
 
 
   "vis_2_widgets-HeatingWindowStatusOverview": "Heating Window Status Overview",
-
+  "widgets_heating_label_windowsstateshtmltable": "OID window states HTML table",
+  "widgets_heating_label_openwindowsstatescount": "OID open windows count",
+  "Window Status Overview": "Window Status Overview",
+  "Windows open": "Windows open",
+  "all windows closed": "all windows closed",
 
   "oid_CurrentProfile": "OID Current Profile"
 }

@@ -53,6 +53,8 @@ gulp.task('widget-3-copy', () => Promise.all([
         `${src}build/static/js/*node_modules_echarts-for-react_esm_index_js.*.*`,
         `${src}build/static/js/*echarts-for-react_esm_index_js-node_modules_babel_runtime_helpers_esm*.*.*`,
         `${src}build/static/js/*echarts-for-react_esm_index_js-node_modules_react*.*.*`,
+        `${src}build/static/js/*iobroker_vis-2-widgets-react-dev_index*.*.*`,
+
     ]).pipe(gulp.dest(`widgets/${adapterName}/static/js`)),
 
     gulp.src([
@@ -67,10 +69,14 @@ gulp.task('widget-3-copy', () => Promise.all([
             `${src}build/static/js/*mui_material_ButtonBase*.*.*`,
             `${src}build/static/js/*mui_material_Paper*.*.*`,
             `${src}build/static/js/*mui_material_Box*.*.*`,
+            `${src}build/static/js/*mui_material_colors_blue*.*.*`,
+
+            `${SRC}build/static/js/*mui_material_utils_createSvgIcon*.*.*`,
 
             `${src}build/static/js/*mui_utils_useControlled*.*.*`,
 
             `${SRC}build/static/js/*mui_styled-engine_index_js-node_modules_mui_system_esm*.*`
+
         ],
         ...[`!${SRC}build/static/js/*.map`, `!${SRC}build/static/js/*.txt`],
     ]).pipe(gulp.dest(`widgets/${adapterName}/static/js`)),

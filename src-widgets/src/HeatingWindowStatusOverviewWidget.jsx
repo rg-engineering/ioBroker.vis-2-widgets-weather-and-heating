@@ -116,7 +116,7 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
 
         const htmlTable = this.state.values[`${this.state.rxData["oid_WindowStatesHtmlTable"]}.val`];
 
-        const windowsOpen = number.parse (this.state.values[`${this.state.rxData["oid_OpenWindowRoomCount"]}.val`]);
+        const windowsOpen = parseInt (this.state.values[`${this.state.rxData["oid_OpenWindowRoomCount"]}.val`],10);
         console.log("###html " + htmlTable);
 
         if (htmlTable != null && typeof htmlTable === "string" && htmlTable.length > 5) {

@@ -3,9 +3,9 @@ const adapterName = require('../package.json').name.split('.').pop();
 
 //just to other widgets too
 
-const heating_widget_set = "vis-2-widgets-heating";
+const widget_sets = [ "vis-2-widgets-weather", "vis-2-widgets-heating"];
 
-describe('vis-2-widgets-weather', () => {
+describe(widget_sets[0], () => {
     before(async function () {
         this.timeout(720000);
         // install js-controller, web and vis-2-beta
@@ -14,11 +14,11 @@ describe('vis-2-widgets-weather', () => {
         await helper.createProject();
 
         // open widgets
-        console.log("open " + adapterName);
-        await helper.palette.openWidgetSet(null, adapterName);
+       //console.log("open " + adapterName);
+        //await helper.palette.openWidgetSet(null, adapterName);
 
-        //console.log("open " + heating_widget_set);
-        //await helper.palette.openWidgetSet(null, heating_widget_set);
+        console.log("open " + widget_sets[0]);
+        await helper.palette.openWidgetSet(null, widget_sets[0]);
 
         await helper.screenshot(null, '02_widgets_opened');
     });
@@ -27,8 +27,9 @@ describe('vis-2-widgets-weather', () => {
         this.timeout(120000);
 
         
-        let widgets = await helper.palette.getListOfWidgets(null, adapterName);
-        console.log("got " + widgets.length + " widgets " + adapterName);
+        //let widgets = await helper.palette.getListOfWidgets(null, adapterName);
+        let widgets = await helper.palette.getListOfWidgets(null, widget_sets[0]);
+        console.log("got " + widgets.length + " widgets " + adapterName + " " + widget_sets[0]);
         for (let w = 0; w < widgets.length; w++) {
 
             console.log("widget " + widgets[w]);

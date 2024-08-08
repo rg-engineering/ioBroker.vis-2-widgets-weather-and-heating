@@ -98,55 +98,55 @@ class HeatingGeneralParamsWidget extends (Generic) {
                     fields: [
                         {
                             name: "oid_ChoosenRoom",    // name in data structure
-                            label: "choosenroom", // translated field label
+                            label: "widgets_heating_label_oid_choosenroom", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.ChoosenRoom",
                         },
                         {
                             name: "oid_HeatingPeriodActive",    // name in data structure
-                            label: "heatingperiodactive", // translated field label
+                            label: "widgets_heating_label_oid_heatingperiodactive", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.HeatingPeriodActive",
                         },
                         {
                             name: "oid_PublicHolidyToday",    // name in data structure
-                            label: "publicholidytoday", // translated field label
+                            label: "widgets_heating_label_oid_publicholidytoday", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.PublicHolidyToday",
                         },
                         {
                             name: "oid_Present",    // name in data structure
-                            label: "present", // translated field label
+                            label: "widgets_heating_label_oid_present", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.Present",
                         },
                         {
                             name: "oid_PartyNow",    // name in data structure
-                            label: "partynow", // translated field label
+                            label: "widgets_heating_label_oid_partynow", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.PartyNow",
                         },
                         {
                             name: "oid_GuestsPresent",    // name in data structure
-                            label: "guestspresent", // translated field label
+                            label: "widgets_heating_label_oid_guestspresent", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.GuestsPresent",
                         },
                         {
                             name: "oid_HolidayPresent",    // name in data structure
-                            label: "holidaypresent", // translated field label
+                            label: "widgets_heating_label_oid_holidaypresent", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.HolidayPresent",
                         },
                         {
                             name: "oid_VacationAbsent",    // name in data structure
-                            label: "vacationabsent", // translated field label
+                            label: "widgets_heating_label_oid_vacationabsent", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.VacationAbsent",
                         },
                         {
                             name: "oid_FireplaceModeActive",    // name in data structure
-                            label: "fireplacemodeactive", // translated field label
+                            label: "widgets_heating_label_oid_fireplacemodeactive", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.FireplaceModeActive",
                         },

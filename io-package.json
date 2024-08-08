@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather_heating",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "news": {
+      "0.5.0": {
+        "en": "widget Heating Room Status overview overworked (works only with HeatingControl@1.12.9)\nshow number of open windows in Heating Window Status Overview\n",
+        "de": "widget Heizraum Statusübersicht überbearbeitet (nur mit HeizungControl@1.12.9)\nanzahl der offenen Fenster in Heizfenster Status Überblick\n",
+        "ru": "виджет Отопление Статус переутомленный (работает только с ОтоплениеControl@1.12.9)\nпоказать количество открытых окон в изолированных окнах\n",
+        "pt": "widget Visão geral do estado da sala de aquecimento sobretrabalhado (trabalha apenas com o aquecimentoControl@1.12.9)\nmostrar número de janelas abertas em janela de aquecimento Visão geral do estado\n",
+        "nl": "widget Verwarming Kamer Status overzicht overwerkt (werken alleen met verwarmingControl@1.12.9)\ntoon aantal geopende vensters in Verwarming Venster Status Overzicht\n",
+        "fr": "widget Heating Room Aperçu de l'état des travaux surchargés (travaille uniquement avec HeatingControl@1.12.9)\nafficher le nombre de fenêtres ouvertes dans l'état de la fenêtre de chauffage\n",
+        "it": "widget Riscaldamento Camera Panoramica stato sovralavorato (funziona solo con RiscaldamentoControl@1.12.9)\nmostra il numero di finestre aperte in Riscaldamento Finestra Stato Panoramica\n",
+        "es": "widget Calefacción Habitación Estado general overworked (works only with HeatingControl@1.12.9)\nmostrar número de ventanas abiertas en Calefacción ventana Estado general\n",
+        "pl": "widget Ogrzewanie Pokój Przegląd stanu przepracowany (działa tylko z HeatingControl @ 1.12.9)\npokaż liczbę otwartych okien w Przeglądzie stanu okna ogrzewania\n",
+        "uk": "огляд стану опалювальних приміщень (працює тільки з HeatControl@1.12.9)\nпоказати кількість відкритих вікон в опалювальному віконному статусі Огляд\n",
+        "zh-cn": "供热室状况概览超负荷工作(仅使用供热控制器工作@1.12.9)\n在加热窗口状态概览中显示打开窗口的数量\n"
+      },
       "0.4.0": {
         "en": "widget set renamed to weather and heating, because two widget sets are available\nbug fix icon in weather day widget\nheating and weather widgets sets are separeted\nHeating General Params Widget get and set values fixed\nHeating Room Profile Params Widget get and set values fixed",
         "de": "widget-set umbenannt auf wetter und heizung, weil zwei widget-sets verfügbar sind\nbug fix icon in wetter-tag widget\nheizung und wetter widgets sets werden getrennt\nHeizung Allgemeine Params Widget get und gesetzte Werte\nHeizraum Profil Params Widget get und gesetzte Werte",
@@ -80,19 +93,6 @@
         "pl": "(René) ogólny widget diagramu: wsparcie ebus (wymaga ebus wersja 3.3.0)\n(René) ogólny widget diagramu: automatyczne obliczanie jednostki jako opcja",
         "uk": "(René) загальний віджет діаграми: підтримка ebus (needs ebus version 3.3.0)\n(René) загальний віджет діаграми: розрахунок автоблока як варіант",
         "zh-cn": "(René)普通图件:支持ebus(需要ebus版本3.3.0)\n(René) 通用图件: 自动单元计算为选项"
-      },
-      "0.2.9": {
-        "en": "(René) general diagram widget: x axis label format adjustable\n(René) general diagram widget: support sbfspot (needs sbfspot version 4.3.1)",
-        "de": "(René) allgemeines Diagramm Widget: x-Achsenlabel Format einstellbar\n(René) allgemeines Diagramm Widget: sbfspot (needs sbfspot version 4.3.1)",
-        "ru": "(René) виджет общей диаграммы: x ось\n(René) общая диаграмма виджет: поддержка sbfspot",
-        "pt": "(René) widget geral do diagrama: x formato da etiqueta do eixo ajustável\n(René) widget geral do diagrama: suporte sbfspot (needs sbfspot versão 4.3.1)",
-        "nl": "(René) algemeen diagram widget: x as label formaat instelbaar\n(René) algemeen diagram widget: ondersteuning sbfspot (nodige sbfspot versie 4.3.1)",
-        "fr": "Widget de diagramme général (René) : format d'étiquette x axe réglable\n(René) widget de diagramme général: support sbfspot (besoins sbfspot version 4.3.1)",
-        "it": "(René) widget diagramma generale: formato etichetta x asse regolabile\n(René) widget diagramma generale: support sbfspot (needs sbfspot versione 4.3.1)",
-        "es": "(René) widget de diagrama general: formato de etiqueta de eje x ajustable\n(René) widget de diagrama general: soporte sbfspot (necesidad sbfspot versión 4.3.1)",
-        "pl": "(René) ogólny widget diagramu: format etykiety x regulowany\n(René) ogólny widget diagramu: wsparcie sbfspot (wymaga sbfspot wersja 4.3.1)",
-        "uk": "(René) загальний віджет діаграми: x вісь формат регульований\n(René) загальний віджет діаграми: підтримка sbfspot (needs sbfspot version 4.3.1)",
-        "zh-cn": "(René) 一般图件:x轴标签格式可调整\n(René)普通图件:支持sbfspot(需要sbfspot版本4.3.1)"
       }
     },
     "licenseInformation": {
@@ -102,11 +102,9 @@
     },
     "titleLang": {
       "en": "VIS-2 weather and heating widgets"
-
     },
     "desc": {
       "en": "VIS-2 weather and heating widgets"
-
     },
     "authors": [
       "rg-engineering <info@rg-engineering.eu>"

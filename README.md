@@ -1,4 +1,5 @@
 <img src="admin/vis-2-widgets-weather.png" alt="logo" width="200"/>
+
 # ioBroker.vis-2-widgets-weather
 
 ![Number of Installations](http://iobroker.live/badges/vis-2-widgets-weather_heating_-installed.svg) ![Number of Installations](http://iobroker.live/badges/vis-2-widgets-weather_heating_-stable.svg)

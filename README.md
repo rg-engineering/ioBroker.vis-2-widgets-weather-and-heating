@@ -28,16 +28,19 @@ This vis-2-widget shows weather forecast data from DasWetter.com or weatherunder
 You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
 
 ## weather
+
+### weather
 ![widget_weather.PNG](./doc/widget_weather.PNG)
 
 * OID's are automatically set based on general settings
 * x axis labels can be configured according [momentjs docu](http://momentjs.com/docs/#/displaying/format/) 
 
-## weather day
+### weather day
 ![widget_weather_day.PNG](./doc/widget_weather_day.PNG)
 
 * OID's are automatically set based on general settings
 * icon sets are changeable
+
 
 ## general chart
 
@@ -55,14 +58,47 @@ You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
 
 * it supports adapter `sbfspot` and `ebus`: just select instance, and basic adjustments are done automatically
 
+
+
+## heating
+
+Based on Pittini's vis for ol VIS there are similar widgets available for VIS-2 now.
+
+### Room Overview
+![vis-widget-HeatingRoomsOverview.png](./doc/vis-widget-HeatingRoomsOverview.png)
+
+### Heating Time Schedule
+![vis-widget-heatingtimeschedule.png](./doc/vis-widget-heatingtimeschedule.png)
+
+### General Parameter
+![vis-widget-HeatingGeneralParams.png](./doc/vis-widget-HeatingGeneralParams.png)
+
+### Room
+![vis-widget-HeatingRoom.png](./doc/vis-widget-HeatingRoom.png)
+
+### Room Profile Paeameter
+![vis-widget-HeatingRoomProfileParams.png](./doc/vis-widget-HeatingRoomProfileParams.png)
+
+### Window Status Overview 
+![vis-widget-HeatingWindowStatusOverview.pn.png](./doc/vis-widget-HeatingWindowStatusOverview.pn.png)
+
+
 <!--
     ### **WORK IN PROGRESS**
 -->
+
+
+
 ## Changelog
+
+### **WORK IN PROGRESS**
+ * (René) Icons and translations
+ * (René) readme update
+ 
 ### 0.5.0 (2024-08-08)
  * (René) widget Heating Room Status overview overworked (works only with HeatingControl@1.12.9)
  * (René) show number of open windows in Heating Window Status Overview
- *
+ * (René) widget Heating Room overworked
 
 ### 0.4.0 (2024-07-27)
  * (René) widget set renamed to weather and heating, because two widget sets are available

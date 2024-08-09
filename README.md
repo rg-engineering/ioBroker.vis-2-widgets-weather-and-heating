@@ -2,23 +2,23 @@
 
 # ioBroker.vis-2-widgets-weather
 
-![Number of Installations](http://iobroker.live/badges/vis-2-widgets-weather_heating_-installed.svg) ![Number of Installations](http://iobroker.live/badges/vis-2-widgets-weather_heating_-stable.svg)
-[![Downloads](https://img.shields.io/npm/dm/iobroker.vis-2-widgets-weather_heating_.svg)](https://www.npmjs.com/package/iobroker.vis-2-widgets-weather_heating_)
-[![NPM version](http://img.shields.io/npm/v/iobroker.vis-2-widgets-weather_heating_.svg)](https://www.npmjs.com/package/iobroker.vis-2-widgets-weather_heating_)
+![Number of Installations](http://iobroker.live/badges/vis-2-widgets-weather_heating-installed.svg) ![Number of Installations](http://iobroker.live/badges/vis-2-widgets-weather_heating-stable.svg)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.vis-2-widgets-weather_heating.svg)](https://www.npmjs.com/package/iobroker.vis-2-widgets-weather_heating)
+[![NPM version](http://img.shields.io/npm/v/iobroker.vis-2-widgets-weather_heating.svg)](https://www.npmjs.com/package/iobroker.vis-2-widgets-weather_heating)
 
-[![Known Vulnerabilities](https://snyk.io/test/github/rg-engineering/ioBroker.vis-2-widgets-weather_heating_/badge.svg)](https://snyk.io/test/github/rg-engineering/ioBroker.vis-2-widgets-weather_heating_)
-![GitHub Actions](https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather_heating_/workflows/Test%20and%20Release/badge.svg)
+[![Known Vulnerabilities](https://snyk.io/test/github/rg-engineering/ioBroker.vis-2-widgets-weather_heating/badge.svg)](https://snyk.io/test/github/rg-engineering/ioBroker.vis-2-widgets-weather_heating)
+![GitHub Actions](https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather_heating/workflows/Test%20and%20Release/badge.svg)
 
-[![NPM](https://nodei.co/npm/iobroker.vis-2-widgets-weather_heating.png?downloads=true)](https://nodei.co/npm/iobroker.vis-2-widgets-weather_heating_/)
+[![NPM](https://nodei.co/npm/iobroker.vis-2-widgets-weather_heating.png?downloads=true)](https://nodei.co/npm/iobroker.vis-2-widgets-weather_heating/)
 
-![node-lts](https://img.shields.io/node/v-lts/iobroker.vis-2-widgets-weather_heating_?style=flat-square)
-![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/iobroker.vis-2-widgets-weather_heating_?label=npm%20dependencies&style=flat-square)
+![node-lts](https://img.shields.io/node/v-lts/iobroker.vis-2-widgets-weather_heating?style=flat-square)
+![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/iobroker.vis-2-widgets-weather_heating?label=npm%20dependencies&style=flat-square)
 
-![GitHub](https://img.shields.io/github/license/rg-engineering/ioBroker.vis-2-widgets-weather_heating_?style=flat-square)
-![GitHub repo size](https://img.shields.io/github/repo-size/rg-engineering/ioBroker.vis-2-widgets-weather_heating_?logo=github&style=flat-square)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/rg-engineering/ioBroker.vis-2-widgets-weather_heating_?logo=github&style=flat-square)
-![GitHub last commit](https://img.shields.io/github/last-commit/rg-engineering/ioBroker.vis-2-widgets-weather_heating_?logo=github&style=flat-square)
-![GitHub issues](https://img.shields.io/github/issues/rg-engineering/ioBroker.vis-2-widgets-weather_heating_?logo=github&style=flat-square)
+![GitHub](https://img.shields.io/github/license/rg-engineering/ioBroker.vis-2-widgets-weather_heating?style=flat-square)
+![GitHub repo size](https://img.shields.io/github/repo-size/rg-engineering/ioBroker.vis-2-widgets-weather_heating?logo=github&style=flat-square)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/rg-engineering/ioBroker.vis-2-widgets-weather_heating?logo=github&style=flat-square)
+![GitHub last commit](https://img.shields.io/github/last-commit/rg-engineering/ioBroker.vis-2-widgets-weather_heating?logo=github&style=flat-square)
+![GitHub issues](https://img.shields.io/github/issues/rg-engineering/ioBroker.vis-2-widgets-weather_heating?logo=github&style=flat-square)
 
 
 **If you like it, please consider a donation:**

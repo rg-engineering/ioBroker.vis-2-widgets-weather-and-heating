@@ -101,10 +101,30 @@
       "link": "https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather_heating/blob/master/LICENSE"
     },
     "titleLang": {
-      "en": "VIS-2 weather and heating widgets"
+      "en": "VIS-2 weather and heating widgets",
+      "de": "VIS-2 Wetter und Heizung Widgets",
+      "ru": "Виджеты погоды и отопления VIS-2",
+      "pt": "Widgets de tempo e aquecimento VIS-2",
+      "nl": "VIS-2 weers- en verwarmingselementen",
+      "fr": "VIS-2 widgets météo et chauffage",
+      "it": "VIS-2 widget meteo e riscaldamento",
+      "es": "VIS-2 widgets de clima y calefacción",
+      "pl": "Witryny pogodowe i grzewcze VIS-2",
+      "uk": "VIS-2 погода та опалення віджети",
+      "zh-cn": "VIS-2 天气和暖气部件"
     },
     "desc": {
-      "en": "VIS-2 weather and heating widgets"
+      "en": "VIS-2 weather and heating widgets",
+      "de": "VIS-2 Wetter und Heizung Widgets",
+      "ru": "Виджеты погоды и отопления VIS-2",
+      "pt": "Widgets de tempo e aquecimento VIS-2",
+      "nl": "VIS-2 weers- en verwarmingselementen",
+      "fr": "VIS-2 widgets météo et chauffage",
+      "it": "VIS-2 widget meteo e riscaldamento",
+      "es": "VIS-2 widgets de clima y calefacción",
+      "pl": "Witryny pogodowe i grzewcze VIS-2",
+      "uk": "VIS-2 погода та опалення віджети",
+      "zh-cn": "VIS-2 天气和暖气部件"
     },
     "authors": [
       "rg-engineering <info@rg-engineering.eu>"
@@ -112,9 +132,8 @@
     "keywords": [
       "weather"
     ],
-    "license": "MIT",
     "platform": "Javascript/Node.js",
-    "icon": "vis-2-widgets-weather.png",
+    "icon": "vis-2-widgets-weather_heating.png",
     "extIcon": "https://raw.githubusercontent.com/rg-engineering/ioBroker.vis-2-widgets-weather/master/admin/vis-2-widgets-weather_heating.png",
     "enabled": true,
     "readme": "https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather_heating/blob/master/README.md",

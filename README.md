@@ -1,4 +1,4 @@
-<img src="admin/vis-2-widgets-weather.png" alt="logo" width="200"/>
+<img src="admin/vis-2-widgets-weather_heating.png" alt="logo" width="200"/>
 
 # ioBroker.vis-2-widgets-weather
 
@@ -8,6 +8,8 @@
 
 [![Known Vulnerabilities](https://snyk.io/test/github/rg-engineering/ioBroker.vis-2-widgets-weather_heating/badge.svg)](https://snyk.io/test/github/rg-engineering/ioBroker.vis-2-widgets-weather_heating)
 ![GitHub Actions](https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather_heating/workflows/Test%20and%20Release/badge.svg)
+
+
 
 [![NPM](https://nodei.co/npm/iobroker.vis-2-widgets-weather_heating.png?downloads=true)](https://nodei.co/npm/iobroker.vis-2-widgets-weather_heating/)
 
@@ -61,9 +63,9 @@ You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
 
 
 
-## heating
+## heating (widgets for HeatingControl adapter)
 
-Based on Pittini's vis for ol VIS there are similar widgets available for VIS-2 now.
+Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) project for old VIS there are similar widgets available for VIS-2 now.
 
 ### Room Overview
 ![vis-widget-HeatingRoomsOverview.png](./doc/vis-widget-HeatingRoomsOverview.png)

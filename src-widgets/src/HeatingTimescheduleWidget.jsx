@@ -956,7 +956,7 @@ class HeatingTimescheduleWidget extends (Generic) {
 
 
             ],
-            visPrev: "widgets/vis-2-widgets-weather/img/vis-widget-heatingtimeschedule.png",
+            visPrev: "widgets/vis-2-widgets-weather_heating/img/vis-widget-heatingtimeschedule.png",
         };
     }
 
@@ -1008,6 +1008,17 @@ class HeatingTimescheduleWidget extends (Generic) {
         return { index, time, temperature };
     }
 
+    handleOnChange(val) {
+
+        /*
+        const oid = this.state.rxData["oid_GuestIncrease"];
+        //convert value to number
+        console.log("onChange1 " + oid + "  " + val);
+        if (this.props.editMode) return;
+        this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
+        */
+    }
+
 
     copyPeriods(noOfPeriods, part) {
 
@@ -1030,18 +1041,23 @@ class HeatingTimescheduleWidget extends (Generic) {
     }
 
 
-    createTimeTableDetails(periods, currentTimePeriod) {
+    createTimeTableDetails(periods, currentTimePeriod, day) {
         //https://mui.com/material-ui/react-table/
 
         console.log("createTimeTableDetails " + currentTimePeriod);
 
-        const timetable = <TableContainer component={Paper}>
-            <Table  size="small" >
+        const timetable = 
+            <Table size="small" style={{ width: "auto", margin: "5px" }}>
                 <TableHead>
                     <TableRow>
-                        <TableCell align="right">{Generic.t("Period")}</TableCell>
-                        <TableCell align="right">{Generic.t("from")}</TableCell>
-                        <TableCell align="right" > {Generic.t("Temperature")}</TableCell>
+                        <TableCell align="right" spawn="3">
+                            {day}
+                        </TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell align="right" maxWidth="30px" >{Generic.t("Period")}</TableCell>
+                        <TableCell align="right" maxWidth="50px">{Generic.t("from")}</TableCell>
+                        <TableCell align="right" maxWidth="50px" > {Generic.t("Temperature")}</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -1052,13 +1068,45 @@ class HeatingTimescheduleWidget extends (Generic) {
                             style={{ background: period.index === currentTimePeriod ? "red" : "" }}
                         >
                             <TableCell align="center">{period.index}</TableCell>
-                            <TableCell align="right">{period.time}</TableCell>
-                            <TableCell align="right">{period.temperature}</TableCell>
+                            <TableCell align="right">
+                                <input
+                                    type={"text"}
+                                    placeholder="from"
+                                    className="form-control"
+                                    onChange={(e) => {
+                                        handleOnChange({
+                                            ...cell.row.original,
+                                            time: e.target.value,
+                                        });
+                                    }}
+                                    
+                                    value={period.time}
+                                    style={{ width: "50px" }}
+                                />
+
+                            </TableCell>
+                            <TableCell align="right">
+                                <input
+                                    type={"number"}
+                                    placeholder="from"
+                                    className="form-control"
+                                    onChange={(e) => {
+                                        handleOnChange({
+                                            ...cell.row.original,
+                                            temperature: e.target.value,
+                                        });
+                                    }}
+                                    min={0}
+                                    max={30}
+                                    value={period.temperature}
+                                    style={{ width: "50px" }}
+                                />
+
+                            </TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
-            </Table>
-        </TableContainer>;
+            </Table>;
 
 
         return timetable;
@@ -1073,7 +1121,7 @@ class HeatingTimescheduleWidget extends (Generic) {
 
 
         const periods = this.copyPeriods(noOfPeriods, "MoSu");
-        const timetable = this.createTimeTableDetails(periods, currentTimePeriod);
+        const timetable = this.createTimeTableDetails(periods, currentTimePeriod, Generic.t("Mo. - So."));
 
 
         const content = <div
@@ -1086,23 +1134,13 @@ class HeatingTimescheduleWidget extends (Generic) {
                 <p> {Generic.t("Profil")}  {currentProfile}  /   {room}</p>
             </div>
 
-
             <Grid
                 container spacing={0.5}
                 alignItems="center"
                 justifyContent="center"
             >
-
-
-                <Grid item xs={12} maxWidth="150px">
-                    <div>
-                        <p>{Generic.t("Mo. - So.")}</p>
-                        {timetable}
-                    </div>
-                </Grid>
+                {timetable}
             </Grid>
-
-
 
         </div>;
 
@@ -1122,14 +1160,14 @@ class HeatingTimescheduleWidget extends (Generic) {
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
-        const timetableMoFr = this.createTimeTableDetails(periodsMoFr, curTimePeriod);
+        const timetableMoFr = this.createTimeTableDetails(periodsMoFr, curTimePeriod, Generic.t("Mo. - Fr."));
 
         tempTimePeriod = tempTimePeriod - 5;
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
 
-        const timetableSaSu = this.createTimeTableDetails(periodsSaSu, curTimePeriod);
+        const timetableSaSu = this.createTimeTableDetails(periodsSaSu, curTimePeriod, Generic.t("Sa. - Su."));
 
         const content = <div
             ref={this.refCardContent}
@@ -1155,19 +1193,8 @@ class HeatingTimescheduleWidget extends (Generic) {
             >
 
 
-                <Grid item xs={6} maxWidth="150px">
-                    <div>
-                        <p>{Generic.t("Mo. - Fr.")}</p>
-                        {timetableMoFr}
-                    </div>
-                </Grid>
-
-                <Grid item xs={6} maxWidth="150px">
-                    <div>
-                        <p>{Generic.t("Sa. - Su.")}</p>
-                        {timetableSaSu}
-                    </div>
-                </Grid>
+                {timetableMoFr}
+                {timetableSaSu}
 
 
 
@@ -1199,37 +1226,37 @@ class HeatingTimescheduleWidget extends (Generic) {
             curTimePeriod = tempTimePeriod;
         }
 
-        const timetableMon = this.createTimeTableDetails(periodsMon, curTimePeriod);
+        const timetableMon = this.createTimeTableDetails(periodsMon, curTimePeriod, Generic.t("Mon."));
         tempTimePeriod = tempTimePeriod - 5;
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
-        const timetableTue = this.createTimeTableDetails(periodsTue, curTimePeriod);
+        const timetableTue = this.createTimeTableDetails(periodsTue, curTimePeriod, Generic.t("Tue."));
         tempTimePeriod = tempTimePeriod - 5;
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
-        const timetableWed = this.createTimeTableDetails(periodsWed, curTimePeriod);
+        const timetableWed = this.createTimeTableDetails(periodsWed, curTimePeriod, Generic.t("Wed."));
         tempTimePeriod = tempTimePeriod - 5;
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
-        const timetableThu = this.createTimeTableDetails(periodsThu, curTimePeriod);
+        const timetableThu = this.createTimeTableDetails(periodsThu, curTimePeriod, Generic.t("Thu."));
         tempTimePeriod = tempTimePeriod - 5;
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
-        const timetableFri = this.createTimeTableDetails(periodsFri, curTimePeriod);
+        const timetableFri = this.createTimeTableDetails(periodsFri, curTimePeriod, Generic.t("Fri."));
         tempTimePeriod = tempTimePeriod - 5;
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
-        const timetableSat = this.createTimeTableDetails(periodsSat, curTimePeriod);
+        const timetableSat = this.createTimeTableDetails(periodsSat, curTimePeriod, Generic.t("Sat."));
         tempTimePeriod = tempTimePeriod - 5;
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
-        const timetableSun = this.createTimeTableDetails(periodsSun, curTimePeriod);
+        const timetableSun = this.createTimeTableDetails(periodsSun, curTimePeriod, Generic.t("Sun."));
 
 
 
@@ -1244,51 +1271,26 @@ class HeatingTimescheduleWidget extends (Generic) {
 
             <Grid
                 container
-                spacing={5}
-                wrap="wrap"
-            >
-                <Grid item xs={12 / 7} maxWidth="150px">
-                    <div>
-                        <p>{Generic.t("Mon.")}</p>
-                        {timetableMon}
-                    </div>
-                </Grid>
-                <Grid item xs={12 / 7} maxWidth="150px">
-                    <div>
-                        <p>{Generic.t("Tue.")}</p>
-                        {timetableTue}
-                    </div>
-                </Grid>
-                <Grid item xs={12 / 7} maxWidth="150px">
-                    <div>
-                        <p>{Generic.t("Wed.")}</p>
-                        {timetableWed}
-                    </div>
-                </Grid>
-                <Grid item xs={12 / 7} maxWidth="150px">
-                    <div>
-                        <p>{Generic.t("Thu.")}</p>
-                        {timetableThu}
-                    </div>
-                </Grid>
-                <Grid item xs={12 / 7} maxWidth="150px">
-                    <div>
-                        <p>{Generic.t("Fri.")}</p>
-                        {timetableFri}
-                    </div>
-                </Grid>
-                <Grid item xs={12 / 7} maxWidth="150px">
-                    <div>
-                        <p>{Generic.t("Sat.")}</p>
-                        {timetableSat}
-                    </div>
-                </Grid>
-                <Grid item xs={12 / 7} maxWidth="150px">
-                    <div>
-                        <p>{Generic.t("Sun.")}</p>
-                        {timetableSun}
-                    </div>
-                </Grid>
+                spacing={0}>
+                
+
+            
+
+
+                {timetableMon}
+
+                {timetableTue}
+
+                {timetableWed}
+
+                {timetableThu}
+
+                {timetableFri}
+
+                {timetableSat}
+
+                {timetableSun}
+
             </Grid>
 
 

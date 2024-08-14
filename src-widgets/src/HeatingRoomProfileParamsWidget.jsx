@@ -201,7 +201,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
 
 
             ],
-            visPrev: "widgets/vis-2-widgets-weather/img/vis-widget-HeatingRoomProfileParams.png",
+            visPrev: "widgets/vis-2-widgets-weather_heating/img/vis-widget-HeatingRoomProfileParams.png",
         };
     }
 
@@ -362,7 +362,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                     <FormHelperText id="GuestIncrease-text">{Generic.t("GuestIncrease")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: "15ch" }} variant="filled">
+                <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                     <FilledInput
                         size="small"
                         id="PartyDecrease"
@@ -379,7 +379,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                     <FormHelperText id="PartyDecrease-text">{Generic.t("PartyDecrease")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: "15ch" }} variant="filled">
+                <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                     <FilledInput
                         size="small"
                         id="AbsentDecrease"
@@ -396,7 +396,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                     <FormHelperText id="AbsentDecrease-text">{Generic.t("AbsentDecrease")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: "15ch" }} variant="filled">
+                <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                     <FilledInput
                         size="small"
                         id="VacationAbsentDecrease"
@@ -413,7 +413,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                     <FormHelperText id="VacationAbsentDecrease-text">{Generic.t("VacationAbsentDecrease")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: "15ch" }} variant="filled">
+                <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                     <FilledInput
                         size="small"
                         id="WindowOpenDecrease"
@@ -430,7 +430,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                     <FormHelperText id="WindowOpenDecrease-text">{Generic.t("WindowOpenDecrease")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: "15ch" }} variant="filled">
+                <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                     <FilledInput
                         size="small"
                         id="FireplaceModeDecrease"
@@ -447,7 +447,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                     <FormHelperText id="FireplaceModeDecrease-text">{Generic.t("FireplaceModeDecrease")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: "15ch" }} variant="filled">
+                <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                     <FilledInput
                         size="small"
                         id="MinimumTemperature"
@@ -464,7 +464,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                     <FormHelperText id="MinimumTemperature-text">{Generic.t("MinimumTemperature")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: "15ch" }} variant="filled">
+                <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                     <FilledInput
                         size="small"
                         id="OverrideTemperature"
@@ -481,7 +481,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                     <FormHelperText id="OverrideTemperature-text">{Generic.t("OverrideTemperature")}</FormHelperText>
                 </FormControl>
 
-                <FormControl sx={{ m: 1, width: "15ch" }} variant="filled">
+                <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                     <FilledInput
                         size="small"
                         id="OverrideTemperatureTime"

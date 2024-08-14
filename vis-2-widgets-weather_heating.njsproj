@@ -48,7 +48,7 @@
     <Content Include=".github\workflows\test-and-release.yml" />
     <Content Include=".gitignore" />
     <Content Include=".releaseconfig.json" />
-    <Content Include="admin\vis-2-widgets-weather.png" />
+    <Content Include="admin\vis-2-widgets-weather_heating.png" />
     <Content Include="doc\widget_general_chart.PNG" />
     <Content Include="doc\widget_weather.PNG" />
     <Content Include="doc\widget_weather_day.PNG" />

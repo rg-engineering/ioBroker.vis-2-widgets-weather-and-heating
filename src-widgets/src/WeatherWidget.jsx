@@ -490,7 +490,7 @@ class WeatherWidget extends (Generic) {
                 height: 182,
                 position: "relative",
             },
-            visPrev: "widgets/vis-2-widgets-weather/img/vis-widget-weather.png",
+            visPrev: "widgets/vis-2-widgets-weather_heating/img/vis-widget-weather.png",
         };
     }
 

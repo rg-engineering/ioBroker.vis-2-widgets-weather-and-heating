@@ -26,10 +26,9 @@ const styles = {
     },
 };
 
-//todo Zeit / Temperatur eingebbar
-//todo aktuelle Periode markieren
-//todo Breite optimieren
-//todo bei mehreren Perioden : untereinander darstellen, wenn breite zu klein
+//todo Zeit / Temperatur eingebbar -> Handler fehlt noch
+//todo Tabellen noch kleiner darstellen
+
 
 const setDataStructures = async (field, data, changeData, socket) => {
 
@@ -1047,7 +1046,15 @@ class HeatingTimescheduleWidget extends (Generic) {
         console.log("createTimeTableDetails " + currentTimePeriod);
 
         const timetable = 
-            <Table size="small" style={{ width: "auto", margin: "5px" }}>
+            <Table
+                size="small"
+                style={{ width: "auto", margin: "5px" }}
+                sx={{
+                    "& .MuiTableCell-sizeSmall": {
+                        padding: "1px 1px",
+                    },
+                }}
+            >
                 <TableHead>
                     <TableRow>
                         <TableCell align="right" spawn="3">
@@ -1074,7 +1081,7 @@ class HeatingTimescheduleWidget extends (Generic) {
                                     placeholder="from"
                                     className="form-control"
                                     onChange={(e) => {
-                                        handleOnChange({
+                                        this.handleOnChange({
                                             ...cell.row.original,
                                             time: e.target.value,
                                         });
@@ -1091,7 +1098,7 @@ class HeatingTimescheduleWidget extends (Generic) {
                                     placeholder="from"
                                     className="form-control"
                                     onChange={(e) => {
-                                        handleOnChange({
+                                        this.handleOnChange({
                                             ...cell.row.original,
                                             temperature: e.target.value,
                                         });

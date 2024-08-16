@@ -34,8 +34,6 @@ const styles = {
 //todo nur die Werte anzeigen, für die es auch OID's gibt
 //todo FormControl size and color einstellbar
 
-//todo Übersetzungen
-//todo Image
 
 
 const setDataStructures = async (field, data, changeData, socket) => {

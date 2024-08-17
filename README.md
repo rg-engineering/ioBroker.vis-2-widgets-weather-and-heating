@@ -97,6 +97,7 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 ### **WORK IN PROGRESS**
  * (René) Icons and translations
  * (René) readme update
+ * (René) heating time schedule widget overworked
  
 ### 0.5.0 (2024-08-08)
  * (René) widget Heating Room Status overview overworked (works only with HeatingControl@1.12.9)

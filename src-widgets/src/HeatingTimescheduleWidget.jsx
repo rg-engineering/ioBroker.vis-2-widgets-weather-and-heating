@@ -27,7 +27,7 @@ const styles = {
 };
 
 //todo Zeit / Temperatur eingebbar -> Handler fehlt noch
-//todo Tabellen noch kleiner darstellen
+
 
 
 const setDataStructures = async (field, data, changeData, socket) => {
@@ -1003,21 +1003,36 @@ class HeatingTimescheduleWidget extends (Generic) {
 
     }
 
-    createData(index, time, temperature) {
-        return { index, time, temperature };
+
+  
+    createData(index, time, temperature, oid_time,  oid_temperature) {
+        return { index, time, temperature,oid_time, oid_temperature };
     }
 
-    handleOnChange(val) {
+    handleOnChangeTemperature(val) {
 
-        /*
-        const oid = this.state.rxData["oid_GuestIncrease"];
-        //convert value to number
-        console.log("onChange1 " + oid + "  " + val);
+        console.log("onChange Temp: " + val.temperature + "  " + val.OID + " " + JSON.stringify(val));
+
+        //onChange Temp: 6  oid_profile_Sat_1_Temperature { "temperature": "6", "OID": "oid_profile_Sat_1_Temperature" }
+
+        const oid = this.state.rxData[val.OID];
+
+        console.log("onChange1 " + oid + "  " + val.temperature);
         if (this.props.editMode) return;
-        this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
-        */
+        this.props.context.setValue(oid, val.temperature);
     }
 
+    handleOnChangeTime(val) {
+
+        console.log("onChange Time: " + val.time + "  " + val.OID + " " + JSON.stringify(val));
+
+        const oid = this.state.rxData[val.OID];
+
+        console.log("onChange1 " + oid + "  " + val.time);
+        if (this.props.editMode) return;
+        this.props.context.setValue(oid, val.time);
+
+    }
 
     copyPeriods(noOfPeriods, part) {
 
@@ -1031,9 +1046,9 @@ class HeatingTimescheduleWidget extends (Generic) {
             const time = this.state.values[`${this.state.rxData[oid_time]}.val`];
             const temperature = this.state.values[`${this.state.rxData[oid_temperature]}.val`];
 
-            console.log("map " + p + " " + time + " " + temperature + " " + oid_time + " " + oid_temperature);
+            //console.log("map " + p + " " + time + " " + temperature + " " + oid_time + " " + oid_temperature);
 
-            periods.push(this.createData(p, time, temperature));
+            periods.push(this.createData(p, time, temperature, oid_time, oid_temperature ));
         }
 
         return periods;
@@ -1043,7 +1058,7 @@ class HeatingTimescheduleWidget extends (Generic) {
     createTimeTableDetails(periods, currentTimePeriod, day) {
         //https://mui.com/material-ui/react-table/
 
-        console.log("createTimeTableDetails " + currentTimePeriod);
+        console.log("createTimeTableDetails " + currentTimePeriod + " " + JSON.stringify(periods));
 
         const timetable = 
             <Table
@@ -1081,9 +1096,9 @@ class HeatingTimescheduleWidget extends (Generic) {
                                     placeholder="from"
                                     className="form-control"
                                     onChange={(e) => {
-                                        this.handleOnChange({
-                                            ...cell.row.original,
+                                        this.handleOnChangeTime({
                                             time: e.target.value,
+                                            OID: period.oid_time
                                         });
                                     }}
                                     
@@ -1098,9 +1113,9 @@ class HeatingTimescheduleWidget extends (Generic) {
                                     placeholder="from"
                                     className="form-control"
                                     onChange={(e) => {
-                                        this.handleOnChange({
-                                            ...cell.row.original,
+                                        this.handleOnChangeTemperature({
                                             temperature: e.target.value,
+                                            OID: period.oid_temperature
                                         });
                                     }}
                                     min={0}

@@ -33,13 +33,13 @@ You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
 ## weather
 
 ### weather
-![widget_weather.PNG](./doc/widget_weather.PNG)
+![widget_weather.png](./doc/widget_weather.png)
 
 * OID's are automatically set based on general settings
 * x axis labels can be configured according [momentjs docu](http://momentjs.com/docs/#/displaying/format/) 
 
 ### weather day
-![widget_weather_day.PNG](./doc/widget_weather_day.PNG)
+![widget_weather_day.png](./doc/widget_weather_day.png)
 
 * OID's are automatically set based on general settings
 * icon sets are changeable
@@ -47,7 +47,7 @@ You need DasWetter-Adapter or weatherunderground-Adapter running on your system.
 
 ## general chart
 
-![widget_general_chart.PNG](./doc/widget_general_chart.PNG)
+![widget_general_chart.png](./doc/widget_general_chart.png)
 
 
 ### input data for general chart

@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather-and-heating",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "news": {
+      "0.6.0": {
+        "en": "widget set renamed again because adapter checker doesn't accept the name\nIcons and translations\nreadme update\nheating time schedule widget overworked",
+        "de": "widget set erneut umbenannt, weil adapter-checker den namen nicht akzeptiert\nIcons und Übersetzungen\ndas ist mein name\nheizzeitplan widget überbearbeitet",
+        "ru": "widget set переименован снова, потому что адаптер шашка не принимает имя\nИконы и переводы\nобновление\nграфик отопительного времени",
+        "pt": "conjunto widget renomeado novamente porque o verificador do adaptador não aceita o nome\nÍcones e traduções\natualização de leitura\ntempo de aquecimento widget overworked",
+        "nl": "widget set hernoemd omdat adaptercontrole de naam niet accepteert\nPictogrammen en vertalingen\nleesme update\nverwarmingstijd schema widget overwerkt",
+        "fr": "widget set rebaptisé car adaptateur checker n'accepte pas le nom\nIcônes et traductions\nmise à jour de lecture\nwidget horaire de chauffage surchargé",
+        "it": "widget set rinominato di nuovo perché adattatore checker non accetta il nome\nIcone e traduzioni\naggiornamento di lettura\norario di riscaldamento widget overworked",
+        "es": "widget set renombrado de nuevo porque el adaptador no acepta el nombre\nIconos y traducciones\nreadme update\ntiempo de calefacción widget overworked",
+        "pl": "zestaw widget zmienił nazwę ponownie, ponieważ sprawdzacz adaptera nie akceptuje nazwy\nIkony i tłumaczenia\nreadme update\nczas grzewczy widget przepracowany",
+        "uk": "набір віджетів знову перейменований, тому що адаптер не приймає назву\nІкона і переклади\nоновлення\nграфік роботи на опалювальному режимі",
+        "zh-cn": "部件集重新命名是因为适配器检查器不接受名称\n图标和翻译\n读取更新\n加热时间表部件超负荷工作"
+      },
       "0.5.0": {
         "en": "widget Heating Room Status overview overworked (works only with HeatingControl@1.12.9)\nshow number of open windows in Heating Window Status Overview\n",
         "de": "widget Heizraum Statusübersicht überbearbeitet (nur mit HeizungControl@1.12.9)\nanzahl der offenen Fenster in Heizfenster Status Überblick\n",
@@ -80,19 +93,6 @@
         "pl": "(René) Name",
         "uk": "(René) Heat TimeSchedule віджет",
         "zh-cn": "(René) 加热时间表部件"
-      },
-      "0.2.10": {
-        "en": "(René) general diagram widget: support ebus (needs ebus version 3.3.0)\n(René) general diagram widget: auto unit calculation as an option",
-        "de": "(René) allgemeines Diagramm Widget: Unterstützung ebus (needs ebus version 3.3.0)\n(René) allgemeines Diagramm Widget: Auto-Einheit Berechnung als Option",
-        "ru": "(René) общая диаграмма виджет: поддержка ebus\n(René) виджет общей диаграммы: расчет автоблока как опция",
-        "pt": "(René) widget geral do diagrama: ebus de suporte (needs ebus versão 3.3.0)\n(René) widget geral do diagrama: cálculo da unidade automática como opção",
-        "nl": "(René) algemeen diagram widget: ondersteuning ebus (needs ebus versie 3.3.0)\n(René) algemeen diagram widget: automatische eenheid berekening als optie",
-        "fr": "(René) widget de diagramme général: support ebus (besoins ebus version 3.3.0)\nWidget de diagramme général (René) : calcul automatique en option",
-        "it": "(René) widget diagramma generale: supporto ebus (necessario versione 3.3.0)\n(René) widget diagramma generale: calcolo dell'unità automatica come opzione",
-        "es": "(René) widget de diagrama general: soporte ebus (necesidad ebus versión 3.3.0)\n(René) widget de diagrama general: cálculo de la unidad auto como opción",
-        "pl": "(René) ogólny widget diagramu: wsparcie ebus (wymaga ebus wersja 3.3.0)\n(René) ogólny widget diagramu: automatyczne obliczanie jednostki jako opcja",
-        "uk": "(René) загальний віджет діаграми: підтримка ebus (needs ebus version 3.3.0)\n(René) загальний віджет діаграми: розрахунок автоблока як варіант",
-        "zh-cn": "(René)普通图件:支持ebus(需要ebus版本3.3.0)\n(René) 通用图件: 自动单元计算为选项"
       }
     },
     "licenseInformation": {

@@ -1,6 +1,6 @@
 {
   "common": {
-    "name": "vis-2-widgets-weather_heating",
+    "name": "vis-2-widgets-weather-and-heating",
     "version": "0.5.0",
     "news": {
       "0.5.0": {
@@ -98,7 +98,7 @@
     "licenseInformation": {
       "license": "MIT",
       "type": "free",
-      "link": "https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather_heating/blob/master/LICENSE"
+      "link": "https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather-and-heating/blob/master/LICENSE"
     },
     "titleLang": {
       "en": "VIS-2 weather and heating widgets",
@@ -133,10 +133,10 @@
       "weather"
     ],
     "platform": "Javascript/Node.js",
-    "icon": "vis-2-widgets-weather_heating.png",
-    "extIcon": "https://raw.githubusercontent.com/rg-engineering/ioBroker.vis-2-widgets-weather/master/admin/vis-2-widgets-weather_heating.png",
+    "icon": "vis-2-widgets-weather-and-heating.png",
+    "extIcon": "https://raw.githubusercontent.com/rg-engineering/ioBroker.vis-2-widgets-weather/master/admin/vis-2-widgets-weather-and-heating.png",
     "enabled": true,
-    "readme": "https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather_heating/blob/master/README.md",
+    "readme": "https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather-and-heating/blob/master/README.md",
     "loglevel": "info",
     "mode": "none",
     "noConfig": true,
@@ -152,7 +152,7 @@
       "vis2Weather": {
         "i18n": "component",
         "name": "vis2Weatherheating",
-        "url": "vis-2-widgets-weather_heating/customWidgets.js",
+        "url": "vis-2-widgets-weather-and-heating/customWidgets.js",
         "components": [
           "GeneralEChartWidget",
           "WeatherWidget",

@@ -101,7 +101,7 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
                     ],
                 },
             ],
-            visPrev: "widgets/vis-2-widgets-weather_heating/img/vis-widget-HeatingWindowStatusOverview.png",
+            visPrev: "widgets/vis-2-widgets-weather-and-heating/img/vis-widget-HeatingWindowStatusOverview.png",
         };
     }
 

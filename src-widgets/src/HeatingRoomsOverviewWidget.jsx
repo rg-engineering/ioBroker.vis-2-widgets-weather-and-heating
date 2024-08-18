@@ -89,7 +89,7 @@ class HeatingRoomsOverviewWidget extends (Generic) {
                     ],
                 },
             ],
-            visPrev: "widgets/vis-2-widgets-weather_heating/img/vis-widget-HeatingRoomsOverview.png",
+            visPrev: "widgets/vis-2-widgets-weather-and-heating/img/vis-widget-HeatingRoomsOverview.png",
         };
     }
 

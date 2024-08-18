@@ -160,7 +160,7 @@ class HeatingGeneralParamsWidget extends (Generic) {
 
 
             ],
-            visPrev: "widgets/vis-2-widgets-weather_heating/img/vis-widget-HeatingGeneralParams.png",
+            visPrev: "widgets/vis-2-widgets-weather-and-heating/img/vis-widget-HeatingGeneralParams.png",
         };
     }
 

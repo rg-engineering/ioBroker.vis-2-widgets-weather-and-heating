@@ -267,62 +267,62 @@ class HeatingGeneralParamsWidget extends (Generic) {
 
     createTable() {
         const HeatingPeriodActiveChecked = this.state.values[`${this.state.rxData["oid_HeatingPeriodActive"]}.val`];
-        const PublicHolydayTodayChecked = this.state.values[`${this.state.rxData["oid_PublicHolidayToday"]}.val`];
+        const PublicHolidayTodayChecked = this.state.values[`${this.state.rxData["oid_PublicHolidayToday"]}.val`];
         const PresentChecked = this.state.values[`${this.state.rxData["oid_Present"]}.val`];
         const PartyNowChecked = this.state.values[`${this.state.rxData["oid_PartyNow"]}.val`];
         const GuestsPresentChecked = this.state.values[`${this.state.rxData["oid_GuestsPresent"]}.val`];
-        const HolydayAtHomeChecked = this.state.values[`${this.state.rxData["oid_HolidayPresent"]}.val`];
+        const HolidayAtHomeChecked = this.state.values[`${this.state.rxData["oid_HolidayPresent"]}.val`];
         const VacationChecked = this.state.values[`${this.state.rxData["oid_VacationAbsent"]}.val`];
         const FireplaceModeChecked = this.state.values[`${this.state.rxData["oid_FireplaceModeActive"]}.val`];
 
-        console.log("createTable ${HeatingPeriodActiveChecked} ${PublicHolydayTodayChecked} ${PresentChecked} ${PartyNowChecked} ${GuestsPresentChecked} ${HolydayAtHomeChecked} ${VacationChecked} ${FireplaceModeChecked}");
+        console.log("createTable ${HeatingPeriodActiveChecked} ${PublicHolidayTodayChecked} ${PresentChecked} ${PartyNowChecked} ${GuestsPresentChecked} ${HolidayAtHomeChecked} ${VacationChecked} ${FireplaceModeChecked}");
 
         return <div
             ref={this.refCardContent}
             style={styles.cardContent}
         >
-            <Box sx={{display: "flex", flexWrap: "wrap"}}>
+            <Box sx={{ display: "flex", flexWrap: "wrap" }}>
                 <FormGroup>
                     <FormControlLabel control={
                         <Switch
                             checked={HeatingPeriodActiveChecked}
                             onClick={() => this.onChange1()}
-                        />} label={Generic.t("HeatingPeriodActive")}/>
+                        />} label={Generic.t("HeatingPeriodActive")} />
                     <FormControlLabel control={
                         <Switch
-                            checked={PublicHolydayTodayChecked}
+                            checked={PublicHolidayTodayChecked}
                             onClick={() => this.onChange2()}
-                        />} label={Generic.t("PublicHolydayToday")}/>
+                        />} label={Generic.t("PublicHolidayToday")} />
                     <FormControlLabel control={
                         <Switch
                             checked={PresentChecked}
                             onClick={() => this.onChange3()}
-                        />} label={Generic.t("Present")}/>
+                        />} label={Generic.t("Present")} />
                     <FormControlLabel control={
                         <Switch
                             checked={PartyNowChecked}
                             onClick={() => this.onChange4()}
-                        />} label={Generic.t("PartyNow")}/>
+                        />} label={Generic.t("PartyNow")} />
                     <FormControlLabel control={
                         <Switch
                             checked={GuestsPresentChecked}
                             onClick={() => this.onChange5()}
-                        />} label={Generic.t("GuestsPresent")}/>
+                        />} label={Generic.t("GuestsPresent")} />
                     <FormControlLabel control={
                         <Switch
-                            checked={HolydayAtHomeChecked}
+                            checked={HolidayAtHomeChecked}
                             onClick={() => this.onChange6()}
-                        />} label={Generic.t("HolydayAtHome")}/>
+                        />} label={Generic.t("HolidayAtHome")} />
                     <FormControlLabel control={
                         <Switch
                             checked={VacationChecked}
                             onClick={() => this.onChange7()}
-                        />} label={Generic.t("Vacation")}/>
+                        />} label={Generic.t("Vacation")} />
                     <FormControlLabel control={
                         <Switch
                             checked={FireplaceModeChecked}
                             onClick={() => this.onChange8()}
-                        />} label={Generic.t("FireplaceMode")}/>
+                        />} label={Generic.t("FireplaceMode")} />
                 </FormGroup>
             </Box>
         </div>;

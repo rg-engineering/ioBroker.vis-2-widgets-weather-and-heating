@@ -276,11 +276,11 @@
 
 
   "HeatingPeriodActive": "Heating Period Active",
-  "PublicHolydayToday": "Public Holiday Today",
+  "PublicPublicHolidayTodayToday": "Public Holiday Today",
   "Present": "Present",
   "PartyNow": "Party Now",
   "GuestsPresent": "Guests Present",
-  "HolydayAtHome": "Holiday At Home",
+  "PublicHolidayTodayAtHome": "Holiday At Home",
   "Vacation": "Vacation",
   "FireplaceMode": "Fireplace Mode",
 
@@ -296,7 +296,7 @@
   "widgets_heating_label_oid_vacationabsent": "OID vacation absent",
   "widgets_heating_label_oid_fireplacemodeactive": "OID fireplace mode",
 
- 
+
 
   "oid_GuestIncrease": "OID Guest Increase",
   "oid_PartyDecrease": "OID Party Decrease",

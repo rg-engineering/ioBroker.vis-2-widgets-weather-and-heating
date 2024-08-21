@@ -1,16 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-// For federation it is important to import from one package "@mui/material" and not from "@mui/material/Box"
+// For federation, it is important to import from one package "@mui/material" and not from "@mui/material/Box"
 import {
-    Grid,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Paper,
+    Grid, Table, TableBody,
+    TableCell, TableHead, TableRow,
 } from "@mui/material";
 
 import Generic from "./Generic";
@@ -26,28 +20,22 @@ const styles = {
     },
 };
 
-//todo Zeit / Temperatur eingebbar -> Handler fehlt noch
-
-
+// todo Zeit / Temperatur eingebbar -> Handler fehlt noch
 
 const setDataStructures = async (field, data, changeData, socket) => {
-
-    console.log("set new datastructure instance" + data["instance"] );
+    console.log(`set new data structure instance ${data["instance"]}` );
 
     const instance = data["instance"];
 
     if (instance && instance.length > 0 && instance.includes("heatingcontrol") ) {
+        data["oid_CurrentProfile"] = `${instance}.CurrentProfile`;
+        data["oid_ChosenRoom"] = `${instance}.vis.ChosenRoom`;
+        data["oid_ProfileType"] = `${instance}.info.ProfileType`;
+        // data["oid_ProfileName"] = instance + ".info.ProfileType";
 
+        data["oid_CurrentTimePeriod"] = `${instance}.vis.RoomValues.CurrentTimePeriod`;
 
-        data["oid_CurrentProfile"] = instance + ".CurrentProfile";
-        data["oid_ChoosenRoom"] = instance + ".vis.ChoosenRoom";
-        data["oid_ProfileType"] = instance + ".info.ProfileType";
-        //data["oid_ProfileName"] = instance + ".info.ProfileType";
-
-        data["oid_CurrentTimePeriod"] = instance + ".vis.RoomValues.CurrentTimePeriod";
-
-
-        //Mo-Su
+        // Mo-Su
         data["oid_NumberOfPeriods"] = instance + ".info.NumberOfPeriods";
         data["oid_profile_MoSu_1_Temperature"] = instance + ".vis.ProfileTypes.Mo-Su.Periods.1.Temperature";
         data["oid_profile_MoSu_1_Time"] = instance + ".vis.ProfileTypes.Mo-Su.Periods.1.time";
@@ -60,7 +48,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
         data["oid_profile_MoSu_5_Temperature"] = instance + ".vis.ProfileTypes.Mo-Su.Periods.5.Temperature";
         data["oid_profile_MoSu_5_Time"] = instance + ".vis.ProfileTypes.Mo-Su.Periods.5.time";
 
-        //Mo-Fr
+        // Mo-Fr
         data["oid_profile_MoFr_1_Temperature"] = instance + ".vis.ProfileTypes.Mo-Fr.Periods.1.Temperature";
         data["oid_profile_MoFr_1_Time"] = instance + ".vis.ProfileTypes.Mo-Fr.Periods.1.time";
         data["oid_profile_MoFr_2_Temperature"] = instance + ".vis.ProfileTypes.Mo-Fr.Periods.2.Temperature";
@@ -72,7 +60,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
         data["oid_profile_MoFr_5_Temperature"] = instance + ".vis.ProfileTypes.Mo-Fr.Periods.5.Temperature";
         data["oid_profile_MoFr_5_Time"] = instance + ".vis.ProfileTypes.Mo-Fr.Periods.5.time";
 
-        //Sa-Su
+        // Sa-Su
         data["oid_profile_SaSu_1_Temperature"] = instance + ".vis.ProfileTypes.Sa-Su.Periods.1.Temperature";
         data["oid_profile_SaSu_1_Time"] = instance + ".vis.ProfileTypes.Sa-Su.Periods.1.time";
         data["oid_profile_SaSu_2_Temperature"] = instance + ".vis.ProfileTypes.Sa-Su.Periods.2.Temperature";
@@ -84,7 +72,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
         data["oid_profile_SaSu_5_Temperature"] = instance + ".vis.ProfileTypes.Sa-Su.Periods.5.Temperature";
         data["oid_profile_SaSu_5_Time"] = instance + ".vis.ProfileTypes.Sa-Su.Periods.5.time";
 
-        //Mon
+        // Mon
         data["oid_profile_Mon_1_Temperature"] = instance + ".vis.ProfileTypes.Mon.Periods.1.Temperature";
         data["oid_profile_Mon_1_Time"] = instance + ".vis.ProfileTypes.Mon.Periods.1.time";
         data["oid_profile_Mon_2_Temperature"] = instance + ".vis.ProfileTypes.Mon.Periods.2.Temperature";
@@ -96,7 +84,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
         data["oid_profile_Mon_5_Temperature"] = instance + ".vis.ProfileTypes.Mon.Periods.5.Temperature";
         data["oid_profile_Mon_5_Time"] = instance + ".vis.ProfileTypes.Mon.Periods.5.time";
 
-        //Tue
+        // Tue
         data["oid_profile_Tue_1_Temperature"] = instance + ".vis.ProfileTypes.Tue.Periods.1.Temperature";
         data["oid_profile_Tue_1_Time"] = instance + ".vis.ProfileTypes.Tue.Periods.1.time";
         data["oid_profile_Tue_2_Temperature"] = instance + ".vis.ProfileTypes.Tue.Periods.2.Temperature";
@@ -108,7 +96,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
         data["oid_profile_Tue_5_Temperature"] = instance + ".vis.ProfileTypes.Tue.Periods.5.Temperature";
         data["oid_profile_Tue_5_Time"] = instance + ".vis.ProfileTypes.Tue.Periods.5.time";
 
-        //Wed
+        // Wed
         data["oid_profile_Wed_1_Temperature"] = instance + ".vis.ProfileTypes.Wed.Periods.1.Temperature";
         data["oid_profile_Wed_1_Time"] = instance + ".vis.ProfileTypes.Wed.Periods.1.time";
         data["oid_profile_Wed_2_Temperature"] = instance + ".vis.ProfileTypes.Wed.Periods.2.Temperature";
@@ -120,7 +108,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
         data["oid_profile_Wed_5_Temperature"] = instance + ".vis.ProfileTypes.Wed.Periods.5.Temperature";
         data["oid_profile_Wed_5_Time"] = instance + ".vis.ProfileTypes.Wed.Periods.5.time";
 
-        //Thu
+        // Thu
         data["oid_profile_Thu_1_Temperature"] = instance + ".vis.ProfileTypes.Thu.Periods.1.Temperature";
         data["oid_profile_Thu_1_Time"] = instance + ".vis.ProfileTypes.Thu.Periods.1.time";
         data["oid_profile_Thu_2_Temperature"] = instance + ".vis.ProfileTypes.Thu.Periods.2.Temperature";
@@ -132,7 +120,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
         data["oid_profile_Thu_5_Temperature"] = instance + ".vis.ProfileTypes.Thu.Periods.5.Temperature";
         data["oid_profile_Thu_5_Time"] = instance + ".vis.ProfileTypes.Thu.Periods.5.time";
 
-        //Fri
+        // Fri
         data["oid_profile_Fri_1_Temperature"] = instance + ".vis.ProfileTypes.Fri.Periods.1.Temperature";
         data["oid_profile_Fri_1_Time"] = instance + ".vis.ProfileTypes.Fri.Periods.1.time";
         data["oid_profile_Fri_2_Temperature"] = instance + ".vis.ProfileTypes.Fri.Periods.2.Temperature";
@@ -144,7 +132,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
         data["oid_profile_Fri_5_Temperature"] = instance + ".vis.ProfileTypes.Fri.Periods.5.Temperature";
         data["oid_profile_Fri_5_Time"] = instance + ".vis.ProfileTypes.Fri.Periods.5.time";
 
-        //Sat
+        // Sat
         data["oid_profile_Sat_1_Temperature"] = instance + ".vis.ProfileTypes.Sat.Periods.1.Temperature";
         data["oid_profile_Sat_1_Time"] = instance + ".vis.ProfileTypes.Sat.Periods.1.time";
         data["oid_profile_Sat_2_Temperature"] = instance + ".vis.ProfileTypes.Sat.Periods.2.Temperature";
@@ -156,7 +144,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
         data["oid_profile_Sat_5_Temperature"] = instance + ".vis.ProfileTypes.Sat.Periods.5.Temperature";
         data["oid_profile_Sat_5_Time"] = instance + ".vis.ProfileTypes.Sat.Periods.5.time";
 
-        //Sun
+        // Sun
         data["oid_profile_Sun_1_Temperature"] = instance + ".vis.ProfileTypes.Sun.Periods.1.Temperature";
         data["oid_profile_Sun_1_Time"] = instance + ".vis.ProfileTypes.Sun.Periods.1.time";
         data["oid_profile_Sun_2_Temperature"] = instance + ".vis.ProfileTypes.Sun.Periods.2.Temperature";
@@ -172,7 +160,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
         heatingcontrol.0.CurrentProfile
         heatingcontrol.0.Profiles.1.ProfileName
 
-        heatingcontrol.0.vis.ChoosenRoom
+        heatingcontrol.0.vis.ChosenRoom
 
         heatingcontrol.0.info.ProfileType
         heatingcontrol.0.info.NumberOfPeriods
@@ -187,28 +175,20 @@ const setDataStructures = async (field, data, changeData, socket) => {
     changeData(data);
 };
 
-
-class HeatingTimescheduleWidget extends (Generic) {
-
+class HeatingTimeScheduleWidget extends (Generic) {
     constructor(props) {
         super(props);
         this.refCardContent = React.createRef();
     }
 
-
     static getWidgetInfo() {
-
-
-
-
         return {
-            id: "tplHeatingTimescheduleWidget",                 // Unique widget type ID. Should start with `tpl` followed
+            id: "tplHeatingTimeScheduleWidget",                 // Unique widget type ID. Should start with `tpl` followed
             visSet: "vis-2-widgets-heating",        // Unique ID of widget set
-
-            //visset -> see HeatingGeneralParamsWidget
-            //visSetLabel: "vis-2-widgets-heating",   // Widget set translated label (should be defined only in one widget of set)
-            //visSetColor: "#cf00ff",                 // Color of widget set. it is enough to set color only in one widget of set
-            visName: "HeatingTimescheduleWidget",                     // Name of widget
+            // visset -> see HeatingGeneralParamsWidget
+            // visSetLabel: "vis-2-widgets-heating",   // Widget set translated label (should be defined only in one widget of set)
+            // visSetColor: "#cf00ff",                 // Color of widget set. it is enough to set color only in one widget of set
+            visName: "HeatingTimeScheduleWidget",                     // Name of widget
             visWidgetLabel: "vis_2_widgets-heatingtimeschedule", // Label of widget
             visWidgetColor: "#005cc4",               // Optional widget color. If not set, default color of widget set will be used.
             visResizeLocked: false,                   // require, that width is always equal to height
@@ -219,7 +199,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                     // check here all possible types https://github.com/ioBroker/ioBroker.vis/blob/react/src/src/Attributes/Widget/SCHEMA.md
                     name: "common", // group name
                     fields: [
-
                         {
                             name: "noCard",
                             label: "without_card",
@@ -232,8 +211,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             default: "heatingcontrol.0",
                             onChange: setDataStructures,
                         },
-
-
                     ],
                 },
                 {
@@ -246,10 +223,10 @@ class HeatingTimescheduleWidget extends (Generic) {
                             default: "heatingcontrol.0.CurrentProfile",
                         },
                         {
-                            name: "oid_ChoosenRoom",    // name in data structure
+                            name: "oid_ChosenRoom",    // name in data structure
                             label: "choosenroom", // translated field label
                             type: "id",
-                            default: "heatingcontrol.0.vis.ChoosenRoom",
+                            default: "heatingcontrol.0.vis.ChosenRoom",
                         },
                         {
                             name: "oid_ProfileType",    // name in data structure
@@ -269,10 +246,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.RoomValues.CurrentTimePeriod",
                         },
-
-
-
-
                     ],
                 },
                 {
@@ -477,14 +450,12 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Sa-Su.Periods.5.time",
                         },
-
                     ]
                 },
                 {
                     name: "OIDS_Profile_EveryDay", // group name
                     fields: [
-
-                        //Mon
+                        // Mon
                         {
                             name: "oid_profile_Mon_1_Temperature",    // name in data structure
                             label: "profilemon1_temperature", // translated field label
@@ -510,7 +481,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.2.time",
                         },
-
                         {
                             name: "oid_profile_Mon_3_Temperature",    // name in data structure
                             label: "profilemon3_temperature", // translated field label
@@ -523,7 +493,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.3.time",
                         },
-
                         {
                             name: "oid_profile_Mon_4_Temperature",    // name in data structure
                             label: "profilemon4_temperature", // translated field label
@@ -536,7 +505,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.4.time",
                         },
-
                         {
                             name: "oid_profile_Mon_5_Temperature",    // name in data structure
                             label: "profilemon5_temperature", // translated field label
@@ -549,9 +517,7 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Mon.Periods.5.time",
                         },
-
-
-                        //Tue
+                        // Tue
                         {
                             name: "oid_profile_Tue_1_Temperature",    // name in data structure
                             label: "profiletue1_temperature", // translated field label
@@ -564,7 +530,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Tue.Periods.1.time",
                         },
-
                         {
                             name: "oid_profile_Tue_2_Temperature",    // name in data structure
                             label: "profiletue2_temperature", // translated field label
@@ -577,7 +542,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Tue.Periods.2.time",
                         },
-
                         {
                             name: "oid_profile_Tue_3_Temperature",    // name in data structure
                             label: "profiletue3_temperature", // translated field label
@@ -590,7 +554,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Tue.Periods.3.time",
                         },
-
                         {
                             name: "oid_profile_Tue_4_Temperature",    // name in data structure
                             label: "profiletue4_temperature", // translated field label
@@ -603,7 +566,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Tue.Periods.4.time",
                         },
-
                         {
                             name: "oid_profile_Tue_5_Temperature",    // name in data structure
                             label: "profiletue5_temperature", // translated field label
@@ -617,8 +579,7 @@ class HeatingTimescheduleWidget extends (Generic) {
                             default: "heatingcontrol.0.vis.ProfileTypes.Tue.Periods.5.time",
                         },
 
-
-                        //Wed
+                        // Wed
                         {
                             name: "oid_profile_Wed_1_Temperature",    // name in data structure
                             label: "profilewed1_temperature", // translated field label
@@ -631,7 +592,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Wed.Periods.1.time",
                         },
-
                         {
                             name: "oid_profile_Wed_2_Temperature",    // name in data structure
                             label: "profilewed2_temperature", // translated field label
@@ -644,7 +604,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Wed.Periods.2.time",
                         },
-
                         {
                             name: "oid_profile_Wed_3_Temperature",    // name in data structure
                             label: "profilewed3_temperature", // translated field label
@@ -657,7 +616,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Wed.Periods.3.time",
                         },
-
                         {
                             name: "oid_profile_Wed_4_Temperature",    // name in data structure
                             label: "profilewed4_temperature", // translated field label
@@ -670,7 +628,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Wed.Periods.4.time",
                         },
-
                         {
                             name: "oid_profile_Wed_5_Temperature",    // name in data structure
                             label: "profilewed5_temperature", // translated field label
@@ -684,7 +641,7 @@ class HeatingTimescheduleWidget extends (Generic) {
                             default: "heatingcontrol.0.vis.ProfileTypes.Wed.Periods.5.time",
                         },
 
-                        //Thu
+                        // Thu
                         {
                             name: "oid_profile_Thu_1_Temperature",    // name in data structure
                             label: "profilethu1_temperature", // translated field label
@@ -697,7 +654,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Thu.Periods.1.time",
                         },
-
                         {
                             name: "oid_profile_Thu_2_Temperature",    // name in data structure
                             label: "profilethu2_temperature", // translated field label
@@ -710,7 +666,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Thu.Periods.2.time",
                         },
-
                         {
                             name: "oid_profile_Thu_3_Temperature",    // name in data structure
                             label: "profilethu3_temperature", // translated field label
@@ -723,7 +678,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Thu.Periods.3.time",
                         },
-
                         {
                             name: "oid_profile_Thu_4_Temperature",    // name in data structure
                             label: "profilethu4_temperature", // translated field label
@@ -736,7 +690,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Thu.Periods.4.time",
                         },
-
                         {
                             name: "oid_profile_Thu_5_Temperature",    // name in data structure
                             label: "profilethu5_temperature", // translated field label
@@ -750,7 +703,7 @@ class HeatingTimescheduleWidget extends (Generic) {
                             default: "heatingcontrol.0.vis.ProfileTypes.Thu.Periods.5.time",
                         },
 
-                        //Fri
+                        // Fri
                         {
                             name: "oid_profile_Fri_1_Temperature",    // name in data structure
                             label: "profilefri1_temperature", // translated field label
@@ -763,7 +716,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Fri.Periods.1.time",
                         },
-
                         {
                             name: "oid_profile_Fri_2_Temperature",    // name in data structure
                             label: "profilefri2_temperature", // translated field label
@@ -776,7 +728,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Fri.Periods.2.time",
                         },
-
                         {
                             name: "oid_profile_Fri_3_Temperature",    // name in data structure
                             label: "profilefri3_temperature", // translated field label
@@ -789,7 +740,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Fri.Periods.3.time",
                         },
-
                         {
                             name: "oid_profile_Fri_4_Temperature",    // name in data structure
                             label: "profilefri4_temperature", // translated field label
@@ -802,7 +752,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Fri.Periods.4.time",
                         },
-
                         {
                             name: "oid_profile_Fri_5_Temperature",    // name in data structure
                             label: "profilefri5_temperature", // translated field label
@@ -816,8 +765,7 @@ class HeatingTimescheduleWidget extends (Generic) {
                             default: "heatingcontrol.0.vis.ProfileTypes.Fri.Periods.5.time",
                         },
 
-
-                        //Sat
+                        // Sat
                         {
                             name: "oid_profile_Sat_1_Temperature",    // name in data structure
                             label: "profilesat1_temperature", // translated field label
@@ -830,7 +778,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Sat.Periods.1.time",
                         },
-
                         {
                             name: "oid_profile_Sat_2_Temperature",    // name in data structure
                             label: "profilesat2_temperature", // translated field label
@@ -843,7 +790,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Sat.Periods.2.time",
                         },
-
                         {
                             name: "oid_profile_Sat_3_Temperature",    // name in data structure
                             label: "profilesat3_temperature", // translated field label
@@ -856,7 +802,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Sat.Periods.3.time",
                         },
-
                         {
                             name: "oid_profile_Sat_4_Temperature",    // name in data structure
                             label: "profilesat4_temperature", // translated field label
@@ -869,7 +814,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Sat.Periods.4.time",
                         },
-
                         {
                             name: "oid_profile_Sat_5_Temperature",    // name in data structure
                             label: "profilesat5_temperature", // translated field label
@@ -883,7 +827,7 @@ class HeatingTimescheduleWidget extends (Generic) {
                             default: "heatingcontrol.0.vis.ProfileTypes.Sat.Periods.5.time",
                         },
 
-                        //Sun
+                        // Sun
                         {
                             name: "oid_profile_Sun_1_Temperature",    // name in data structure
                             label: "profilesun1_temperature", // translated field label
@@ -896,7 +840,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Sun.Periods.1.time",
                         },
-
                         {
                             name: "oid_profile_Sun_2_Temperature",    // name in data structure
                             label: "profilesun2_temperature", // translated field label
@@ -909,7 +852,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Sun.Periods.2.time",
                         },
-
                         {
                             name: "oid_profile_Sun_3_Temperature",    // name in data structure
                             label: "profilesun3_temperature", // translated field label
@@ -922,7 +864,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Sun.Periods.3.time",
                         },
-
                         {
                             name: "oid_profile_Sun_4_Temperature",    // name in data structure
                             label: "profilesun4_temperature", // translated field label
@@ -935,7 +876,6 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Sun.Periods.4.time",
                         },
-
                         {
                             name: "oid_profile_Sun_5_Temperature",    // name in data structure
                             label: "profilesun5_temperature", // translated field label
@@ -948,100 +888,55 @@ class HeatingTimescheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.ProfileTypes.Sun.Periods.5.time",
                         },
-
-
-                    ]
-                }
-
-
+                    ],
+                },
             ],
             visPrev: "widgets/vis-2-widgets-weather-and-heating/img/vis-widget-heatingtimeschedule.png",
         };
     }
 
-    // eslint-disable-next-line class-methods-use-this
-    propertiesUpdate() {
-        // Widget has 3 important states
-        // 1. this.state.values - contains all state values, that are used in widget (automatically collected from widget info).
-        //                        So you can use `this.state.values[this.state.rxData.oid + ".val"]` to get value of state with id this.state.rxData.oid
-        // 2. this.state.rxData - contains all widget data with replaced bindings. E.g. if this.state.data.type is `{system.adapter.admin.0.alive}`,
-        //                        then this.state.rxData.type will have state value of `system.adapter.admin.0.alive`
-        // 3. this.state.rxStyle - contains all widget styles with replaced bindings. E.g. if this.state.styles.width is `{javascript.0.width}px`,
-        //                        then this.state.rxData.type will have state value of `javascript.0.width` + "px
-    }
-
-
-
-    async componentDidMount() {
-        super.componentDidMount();
-
-        // Update data
-        this.propertiesUpdate();
-    }
-
     // Do not delete this method. It is used by vis to read the widget configuration.
     // eslint-disable-next-line class-methods-use-this
     getWidgetInfo() {
-        return HeatingTimescheduleWidget.getWidgetInfo();
+        return HeatingTimeScheduleWidget.getWidgetInfo();
     }
 
-    // This function is called every time when rxData is changed
-    async onRxDataChanged() {
-
-        this.propertiesUpdate();
-    }
-
-    // This function is called every time when rxStyle is changed
-    // eslint-disable-next-line class-methods-use-this
-    onRxStyleChanged() {
-
-    }
-
-    // This function is called every time when some Object State updated, but all changes lands into this.state.values too
-    // eslint-disable-next-line class-methods-use-this, no-unused-vars
-    onStateUpdated(id, state) {
-
-    }
-
-
-  
     createData(index, time, temperature, oid_time,  oid_temperature) {
         return { index, time, temperature,oid_time, oid_temperature };
     }
 
     handleOnChangeTemperature(val) {
-
-        console.log("onChange Temp: " + val.temperature + "  " + val.OID + " " + JSON.stringify(val));
+        console.log(`onChange Temp: ${val.temperature}  ${val.OID} ${JSON.stringify(val)}`);
 
         //onChange Temp: 6  oid_profile_Sat_1_Temperature { "temperature": "6", "OID": "oid_profile_Sat_1_Temperature" }
 
         const oid = this.state.rxData[val.OID];
 
-        console.log("onChange1 " + oid + "  " + val.temperature);
-        if (this.props.editMode) return;
+        console.log(`onChange1 ${oid}  ${val.temperature}`);
+        if (this.props.editMode) {
+            return;
+        }
         this.props.context.setValue(oid, val.temperature);
     }
 
     handleOnChangeTime(val) {
-
-        console.log("onChange Time: " + val.time + "  " + val.OID + " " + JSON.stringify(val));
+        console.log(`onChange Time: ${val.time}  ${val.OID} ${JSON.stringify(val)}`);
 
         const oid = this.state.rxData[val.OID];
 
-        console.log("onChange1 " + oid + "  " + val.time);
-        if (this.props.editMode) return;
+        console.log(`onChange1 ${oid}  ${val.time}`);
+        if (this.props.editMode) {
+            return;
+        }
         this.props.context.setValue(oid, val.time);
-
     }
 
     copyPeriods(noOfPeriods, part) {
-
         const periods = [];
 
         for (let p = 1; p <= noOfPeriods; p++) {
-
-            const oid_time = "oid_profile_" + part + "_" + p + "_Time";
-            const oid_temperature = "oid_profile_" + part + "_" + p + "_Temperature";
+            const oid_time = `oid_profile_${part}_${p}_Time`;
+            const oid_temperature = `oid_profile_${part}_${p}_Temperature`;
 
             const time = this.state.values[`${this.state.rxData[oid_time]}.val`];
             const temperature = this.state.values[`${this.state.rxData[oid_temperature]}.val`];
@@ -1058,102 +953,89 @@ class HeatingTimescheduleWidget extends (Generic) {
     createTimeTableDetails(periods, currentTimePeriod, day) {
         //https://mui.com/material-ui/react-table/
 
-        console.log("createTimeTableDetails " + currentTimePeriod + " " + JSON.stringify(periods));
+        console.log(`createTimeTableDetails ${currentTimePeriod} ${JSON.stringify(periods)}`);
 
-        const timetable = 
-            <Table
-                size="small"
-                style={{ width: "auto", margin: "5px" }}
-                sx={{
-                    "& .MuiTableCell-sizeSmall": {
-                        padding: "1px 1px",
-                    },
-                }}
-            >
-                <TableHead>
-                    <TableRow>
-                        <TableCell align="right" spawn="3">
-                            {day}
+        return <Table
+            size="small"
+            style={{ width: "auto", margin: 5 }}
+            sx={{
+                "& .MuiTableCell-sizeSmall": {
+                    padding: "1px 1px",
+                },
+            }}
+        >
+            <TableHead>
+                <TableRow>
+                    <TableCell align="right" spawn="3">
+                        {day}
+                    </TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell align="right" maxWidth="30px">{Generic.t("Period")}</TableCell>
+                    <TableCell align="right" maxWidth="50px">{Generic.t("from")}</TableCell>
+                    <TableCell align="right" maxWidth="50px"> {Generic.t("Temperature")}</TableCell>
+                </TableRow>
+            </TableHead>
+            <TableBody>
+                {periods.map((period) => (
+                    <TableRow
+                        key={period.index}
+                        sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                        style={{background: period.index === currentTimePeriod ? "red" : ""}}
+                    >
+                        <TableCell align="center">{period.index}</TableCell>
+                        <TableCell align="right">
+                            <input
+                                type="text"
+                                placeholder="from"
+                                className="form-control"
+                                onChange={(e) => {
+                                    this.handleOnChangeTime({
+                                        time: e.target.value,
+                                        OID: period.oid_time
+                                    });
+                                }}
+                                value={period.time}
+                                style={{ width: 50 }}
+                            />
+
+                        </TableCell>
+                        <TableCell align="right">
+                            <input
+                                type={"number"}
+                                placeholder="from"
+                                className="form-control"
+                                onChange={(e) => {
+                                    this.handleOnChangeTemperature({
+                                        temperature: e.target.value,
+                                        OID: period.oid_temperature
+                                    });
+                                }}
+                                min={0}
+                                max={30}
+                                value={period.temperature}
+                                style={{ width: 50 }}
+                            />
                         </TableCell>
                     </TableRow>
-                    <TableRow>
-                        <TableCell align="right" maxWidth="30px" >{Generic.t("Period")}</TableCell>
-                        <TableCell align="right" maxWidth="50px">{Generic.t("from")}</TableCell>
-                        <TableCell align="right" maxWidth="50px" > {Generic.t("Temperature")}</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {periods.map((period) => (
-                        <TableRow
-                            key={period.index}
-                            sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                            style={{ background: period.index === currentTimePeriod ? "red" : "" }}
-                        >
-                            <TableCell align="center">{period.index}</TableCell>
-                            <TableCell align="right">
-                                <input
-                                    type={"text"}
-                                    placeholder="from"
-                                    className="form-control"
-                                    onChange={(e) => {
-                                        this.handleOnChangeTime({
-                                            time: e.target.value,
-                                            OID: period.oid_time
-                                        });
-                                    }}
-                                    
-                                    value={period.time}
-                                    style={{ width: "50px" }}
-                                />
-
-                            </TableCell>
-                            <TableCell align="right">
-                                <input
-                                    type={"number"}
-                                    placeholder="from"
-                                    className="form-control"
-                                    onChange={(e) => {
-                                        this.handleOnChangeTemperature({
-                                            temperature: e.target.value,
-                                            OID: period.oid_temperature
-                                        });
-                                    }}
-                                    min={0}
-                                    max={30}
-                                    value={period.temperature}
-                                    style={{ width: "50px" }}
-                                />
-
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>;
-
-
-        return timetable;
-
-
+                ))}
+            </TableBody>
+        </Table>;
     }
 
-
     createTable_MoSu(noOfPeriods, room, profileName, currentProfile, currentTimePeriod) {
-
-        console.log("createTable_MoSu called " + room);
-
+        console.log(`createTable_MoSu called ${room}`);
 
         const periods = this.copyPeriods(noOfPeriods, "MoSu");
         const timetable = this.createTimeTableDetails(periods, currentTimePeriod, Generic.t("Mo. - So."));
 
-
-        const content = <div
+        return <div
             ref={this.refCardContent}
             style={styles.cardContent}
         >
-
             <div>
                 <p>{Generic.t("Times in week")}</p>
-                <p> {Generic.t("Profil")}  {currentProfile}  /   {room}</p>
+                <p>{Generic.t("Profil")} {currentProfile} / {room}</p>
             </div>
 
             <Grid
@@ -1165,13 +1047,10 @@ class HeatingTimescheduleWidget extends (Generic) {
             </Grid>
 
         </div>;
-
-
-        return content;
     }
 
     createTable_MoFr_SaSo(noOfPeriods, room, profileName, currentProfile, currentTimePeriod) {
-        console.log("createTable_MoFr_SaSo called " + room + " " + noOfPeriods + " " + currentTimePeriod);
+        console.log(`createTable_MoFr_SaSo called ${room} ${noOfPeriods} ${currentTimePeriod}`);
 
         const periodsMoFr = this.copyPeriods(noOfPeriods, "MoFr");
         const periodsSaSu = this.copyPeriods(noOfPeriods, "SaSu");
@@ -1191,13 +1070,13 @@ class HeatingTimescheduleWidget extends (Generic) {
 
         const timetableSaSu = this.createTimeTableDetails(periodsSaSu, curTimePeriod, Generic.t("Sa. - Su."));
 
-        const content = <div
+        return <div
             ref={this.refCardContent}
             style={styles.cardContent}
         >
             <div>
                 <p>{Generic.t("Times in week")}</p>
-                <p> {Generic.t("Profil ")} {currentProfile}  /   {room}</p>
+                <p> {Generic.t("Profil ")} {currentProfile} / {room}</p>
             </div>
 
             <Grid
@@ -1213,25 +1092,14 @@ class HeatingTimescheduleWidget extends (Generic) {
                     overflow: "auto",
                 }}
             >
-
-
                 {timetableMoFr}
                 {timetableSaSu}
-
-
-
-
             </Grid>
-
         </div>;
-
-
-        return content;
     }
 
     createTable_EveryDay(noOfPeriods, room, profileName, currentProfile, currentTimePeriod) {
-
-        console.log("createTable_EveryDay called " + room);
+        console.log(`createTable_EveryDay called ${room}`);
 
         const periodsMon = this.copyPeriods(noOfPeriods, "Mon");
         const periodsTue = this.copyPeriods(noOfPeriods, "Tue");
@@ -1280,24 +1148,18 @@ class HeatingTimescheduleWidget extends (Generic) {
         }
         const timetableSun = this.createTimeTableDetails(periodsSun, curTimePeriod, Generic.t("Sun."));
 
-
-
-        const content = <div
+        return <div
             ref={this.refCardContent}
             style={styles.cardContent}
         >
             <div>
                 <p>{Generic.t("Times in week")}</p>
-                <p> {Generic.t("Profil ")} {currentProfile}  /   {room}</p>
+                <p> {Generic.t("Profil ")} {currentProfile} / {room}</p>
             </div>
 
             <Grid
                 container
                 spacing={0}>
-                
-
-            
-
 
                 {timetableMon}
 
@@ -1314,51 +1176,36 @@ class HeatingTimescheduleWidget extends (Generic) {
                 {timetableSun}
 
             </Grid>
-
-
-
         </div>;
-
-
-        return content;
-
     }
 
-    CreateTable() {
-
+    createTable() {
         const profileType = this.state.values[`${this.state.rxData["oid_ProfileType"]}.val`];
         const noOfPeriods = this.state.values[`${this.state.rxData["oid_NumberOfPeriods"]}.val`];
-        const room = this.state.values[`${this.state.rxData["oid_ChoosenRoom"]}.val`];
+        const room = this.state.values[`${this.state.rxData["oid_ChosenRoom"]}.val`];
         const profileName = "";
-        //const profileName = this.state.values[`${this.state.rxData["oid_ProfileName"]}.val`];
+        // const profileName = this.state.values[`${this.state.rxData["oid_ProfileName"]}.val`];
         const currentProfile = this.state.values[`${this.state.rxData["oid_CurrentProfile"]}.val`];
 
         const currentTimePeriod = this.state.values[`${this.state.rxData["oid_CurrentTimePeriod"]}.val`];
 
         if (profileType === "Mo - Su") {
             return this.createTable_MoSu(noOfPeriods, room, profileName, currentProfile, currentTimePeriod);
-        }
-
-        else if (profileType === "Mo - Fr / Sa - Su") {
+        } else if (profileType === "Mo - Fr / Sa - Su") {
             return this.createTable_MoFr_SaSo(noOfPeriods, room, profileName, currentProfile, currentTimePeriod);
-        }
-
-        else if (profileType === "every Day") {
+        } else if (profileType === "every Day") {
             return this.createTable_EveryDay(noOfPeriods, room, profileName, currentProfile, currentTimePeriod);
-        }
-        else {
-            console.log("unknown profile type " + profileType);
+        } else {
+            console.log(`unknown profile type ${profileType}`);
             return null;
-
         }
     }
-
 
     renderWidgetBody(props) {
         super.renderWidgetBody(props);
 
-        console.log("HeatingTimescheduleWidget values ${JSON.stringify(this.state.values)");
-        console.log("HeatingTimescheduleWidget rxData ${JSON.stringify(this.state.rxData)");
+        console.log("HeatingTimeScheduleWidget values ${JSON.stringify(this.state.values)");
+        console.log("HeatingTimeScheduleWidget rxData ${JSON.stringify(this.state.rxData)");
 
         let size;
         if (!this.refCardContent.current) {
@@ -1367,11 +1214,9 @@ class HeatingTimescheduleWidget extends (Generic) {
             size = this.refCardContent.current.offsetHeight;
         }
 
-        console.log("heating time schedule: size " + size);
+        console.log(`heating time schedule: size ${size}`);
 
-
-        const content = this.CreateTable();
-
+        const content = this.createTable();
 
         if (this.state.rxData.noCard || props.widget.usedInWidget) {
             console.log("nur content");
@@ -1384,12 +1229,11 @@ class HeatingTimescheduleWidget extends (Generic) {
     }
 }
 
-HeatingTimescheduleWidget.propTypes = {
+HeatingTimeScheduleWidget.propTypes = {
     socket: PropTypes.object,
     themeType: PropTypes.string,
     style: PropTypes.object,
     data: PropTypes.object,
 };
 
-export default HeatingTimescheduleWidget;
-
+export default HeatingTimeScheduleWidget;

@@ -14,13 +14,11 @@ const styles = {
     },
 };
 
-//todo Überschrift "Raumstatus" fehlt-> okay
-//todo Übersetzungen
-
-
+//todo Ã¼berschrift "Raumstatus" fehlt-> okay
+//todo Ã¼bersetzungen
 
 const setDataStructures = async (field, data, changeData, socket) => {
-    console.log("set new datastructure instance" + data["instance"] );
+    console.log(`set new data structure instance ${data["instance"]}` );
 
     const instance = data["instance"];
 
@@ -56,7 +54,6 @@ class HeatingRoomsOverviewWidget extends (Generic) {
                     // check here all possible types https://github.com/ioBroker/ioBroker.vis/blob/react/src/src/Attributes/Widget/SCHEMA.md
                     name: "common", // group name
                     fields: [
-
                         {
                             name: "noCard",
                             label: "without_card",
@@ -69,8 +66,6 @@ class HeatingRoomsOverviewWidget extends (Generic) {
                             default: "heatingcontrol.0",
                             onChange: setDataStructures,
                         },
-
-
                     ],
                 },
                 {
@@ -82,10 +77,6 @@ class HeatingRoomsOverviewWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.RoomStatesHtmlTable",
                         },
-
-
-
-
                     ],
                 },
             ],
@@ -100,28 +91,19 @@ class HeatingRoomsOverviewWidget extends (Generic) {
     }
 
     createTable() {
-
         const htmlTable = this.state.values[`${this.state.rxData["oid_RoomStatesHtmlTable"]}.val`];
 
-        console.log("html " + htmlTable);
+        console.log(`html ${htmlTable}`);
 
-        const content = <div
+        return <div
             ref={this.refCardContent}
             style={styles.cardContent}
         >
             <div>
                 <p>{Generic.t("Rooms Status Overview")}</p>
-                
             </div>
-
-            <div  dangerouslySetInnerHTML={{ __html: htmlTable }}></div>
-
+            <div dangerouslySetInnerHTML={{__html: htmlTable}}></div>
         </div>;
-
-
-        return content;
-
-       
     }
 
     renderWidgetBody(props) {

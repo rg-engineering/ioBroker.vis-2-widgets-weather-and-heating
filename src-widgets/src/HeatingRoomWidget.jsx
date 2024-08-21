@@ -1,50 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import {Box, TextField, Typography,} from "@mui/material";
+
 import {
-    //  Checkbox,
-    //  FormControlLabel,
-    //  FormGroup,
-    Box,
-    //  Switch,
-    //  Slider,
-    //  Stack,
-    Typography,
-    TextField,
-    //  IconButton,
-    //  Input,
-    //  InputAdornment,
-    //  InputLabel,
-    //  FormControl,
-    //  FilledInput,
-    //  FormHelperText,
-    //  OutlinedInput,
-    //  Visibility,
-    //  VisibilityOff,
-} from "@mui/material";
-
-import Battery1BarIcon from "@mui/icons-material/Battery1Bar";
-import Battery2BarIcon from "@mui/icons-material/Battery2Bar";
-import Battery3BarIcon from "@mui/icons-material/Battery3Bar";
-import Battery4BarIcon from "@mui/icons-material/Battery4Bar";
-import Battery5BarIcon from "@mui/icons-material/Battery5Bar";
-import Battery6BarIcon from "@mui/icons-material/Battery6Bar";
-import BatteryFull from "@mui/icons-material/BatteryFull";
-
-import SignalWifi0BarIcon from "@mui/icons-material/SignalCellular0Bar";
-import SignalWifi1BarIcon from "@mui/icons-material/SignalCellular1Bar";
-import SignalWifi2BarIcon from "@mui/icons-material/SignalCellular2Bar";
-import SignalWifi3BarIcon from "@mui/icons-material/SignalCellular3Bar";
-import SignalWifi4BarIcon from "@mui/icons-material/SignalCellular4Bar";
-
-import ThermostatIcon from "@mui/icons-material/Thermostat";
-
-import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
-import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
-
+    Battery1Bar as Battery1BarIcon,
+    Battery2Bar as Battery2BarIcon,
+    Battery3Bar as Battery3BarIcon,
+    Battery4Bar as Battery4BarIcon,
+    Battery5Bar as Battery5BarIcon,
+    Battery6Bar as Battery6BarIcon,
+    BatteryFull,
+    RadioButtonChecked as RadioButtonCheckedIcon,
+    RadioButtonUnchecked as RadioButtonUncheckedIcon,
+    SignalCellular0Bar as SignalWifi0BarIcon,
+    SignalCellular1Bar as SignalWifi1BarIcon,
+    SignalCellular2Bar as SignalWifi2BarIcon,
+    SignalCellular3Bar as SignalWifi3BarIcon,
+    SignalCellular4Bar as SignalWifi4BarIcon,
+    Thermostat as ThermostatIcon,
+} from "@mui/icons-material";
 
 import Generic from "./Generic";
-
 
 const styles = {
     cardContent: {
@@ -57,21 +34,20 @@ const styles = {
     },
 };
 
-//todo oid nach Instanz neu belegen
-//todo alles anzeigen
+// todo oid nach Instanz neu belegen
+// todo alles anzeigen
 
-//todo Übersetzungen
-//todo Images
+// todo Übersetzungen
+// todo Images
 
 const setDataStructures = async (field, data, changeData, socket) => {
-    console.log("set new datastructure instance" + data["instance"] );
+    console.log(`set new datastructure instance ${data["instance"]}` );
 
     const instance = data["instance"];
     const roomName = data["RoomName"];
 
     if (instance && instance.length > 0 && instance.includes("heatingcontrol") ) {
-
-        //todo
+        // todo
         data["oid_TargetTemperature"] = instance;
         data["oid_CurrentTemperature"] = instance;
         data["oid_CurrentTemperatureExtSensor"] = instance;
@@ -80,7 +56,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
         data["oid_RoomState"] = instance;
         data["oid_RoomLog"] = instance;
         data["oid_ThermostatBatteryState"] = instance;
-        data["oid_ThermostatBattreryVoltage"] = instance;
+        data["oid_ThermostatBatteryVoltage"] = instance;
         data["oid_ThermostatRSSI"] = instance;
     }
     changeData(data);
@@ -130,10 +106,7 @@ class HeatingRoomWidget extends (Generic) {
                             type: "text",
                             default: "Wohnzimmer",
                             onChange: setDataStructures,
-                            
                         },
-
-
                     ],
                 },
                 {
@@ -150,49 +123,49 @@ class HeatingRoomWidget extends (Generic) {
                             label: "widgets_heating_label_oid_currenttemperature", // translated field label
                             type: "id",
                             default: "", //todo
-                        }, 
+                        },
                         {
                             name: "oid_CurrentTemperatureExtSensor",    // name in data structure
                             label: "widgets_heating_label_oid_currenttemperatureextsensor", // translated field label
                             type: "id",
                             default: "", //todo
-                        }, 
+                        },
                         {
                             name: "oid_CurrentActorState",    // name in data structure
                             label: "widgets_heating_label_oid_currentactorstate", // translated field label
                             type: "id",
                             default: "", //todo
-                        }, 
+                        },
                         {
                             name: "oid_CurrentValveValue",    // name in data structure
                             label: "widgets_heating_label_oid_currentvalvevalue", // translated field label
                             type: "id",
                             default: "", //todo
-                        }, 
+                        },
                         {
                             name: "oid_RoomState",    // name in data structure
                             label: "widgets_heating_label_oid_roomstate", // translated field label
                             type: "id",
                             default: "", //todo
-                        }, 
+                        },
                         {
                             name: "oid_RoomLog",    // name in data structure
                             label: "widgets_heating_label_oid_roomlog", // translated field label
                             type: "id",
                             default: "", //todo
-                        }, 
+                        },
                         {
                             name: "oid_ThermostatBatteryState",    // name in data structure
                             label: "widgets_heating_label_oid_thermostatbatterystate", // translated field label
                             type: "id",
                             default: "", //todo
-                        }, 
+                        },
                         {
-                            name: "oid_ThermostatBattreryVoltage",    // name in data structure
+                            name: "oid_ThermostatBatteryVoltage",    // name in data structure
                             label: "widgets_heating_label_oid_thermostatbatteryvoltage", // translated field label
                             type: "id",
                             default: "", //todo
-                        }, 
+                        },
                         {
                             name: "oid_ThermostatRSSI",    // name in data structure
                             label: "widgets_heating_label_oid_thermostatrssi", // translated field label
@@ -212,23 +185,22 @@ class HeatingRoomWidget extends (Generic) {
         return HeatingRoomWidget.getWidgetInfo();
     }
 
-    GetCurrentTargetTemperature() {
-
+    getCurrentTargetTemperature() {
         let content = null;
         const oid = this.state.rxData["oid_TargetTemperature"];
 
         console.log(oid);
 
         if (oid !== undefined && oid.length > 5) {
-            const targetTemperature = this.state.values[oid + ".val"];
+            const targetTemperature = this.state.values[`${oid}.val`];
 
-            const sTemperature = (Math.round(targetTemperature * 100) / 100).toFixed(2)  + "°C";
+            const sTemperature = `${(Math.round(targetTemperature * 100) / 100).toFixed(2)}°C`;
 
             content = <TextField
                 size="small"
                 type="text"
                 value={sTemperature}
-                disabled={true}
+                disabled
                 sx={{ m: 0, width: "8ch" }}
             />;
         }
@@ -236,14 +208,12 @@ class HeatingRoomWidget extends (Generic) {
         return content;
     }
 
-
-    GetBatteryState() {
-
+    getBatteryState() {
         let content = null;
         const oid = this.state.rxData["oid_ThermostatBatteryState"];
-        
+
         if (oid !== undefined && oid.length > 5) {
-            const thermostatBatteryState = this.state.values[oid + ".val"];
+            const thermostatBatteryState = this.state.values[`${oid}.val`];
 
             if (Number(thermostatBatteryState) > 70) {
                 content = <BatteryFull />;
@@ -264,8 +234,7 @@ class HeatingRoomWidget extends (Generic) {
         return content;
     }
 
-    GetRSSIState() {
-
+    getRSSIState() {
         let content = null;
         const oid = this.state.rxData["oid_ThermostatRSSI"];
 
@@ -287,64 +256,57 @@ class HeatingRoomWidget extends (Generic) {
         return content;
     }
 
-
-    GetCurrentActorState() {
-
+    getCurrentActorState() {
         let content = null;
         const oid = this.state.rxData["oid_CurrentActorState"];
 
         if (oid !== undefined && oid.length > 5) {
-            const currentActorState = this.state.values[oid + ".val"];
+            const currentActorState = this.state.values[`${oid}.val`];
 
             if (currentActorState) {
                 content = <RadioButtonCheckedIcon />;
-            }
-            else {
+            } else {
                 content = <RadioButtonUncheckedIcon />;
             }
         }
         return content;
-
     }
 
-    GetCurrentValveValue() {
-
+    getCurrentValveValue() {
         let content = null;
         const oid = this.state.rxData["oid_CurrentValveValue"];
 
         if (oid !== undefined && oid.length > 5) {
-            const currentValveValue = this.state.values[oid + ".val"];
+            const currentValveValue = this.state.values[`${oid}.val`];
 
-            const sValveValue = (Math.round(currentValveValue * 100) / 100).toFixed(2) + "%";
+            const sValveValue = `${(Math.round(currentValveValue * 100) / 100).toFixed(2)}%`;
 
             content = <TextField
                 size="small"
                 type="text"
                 value={sValveValue}
-                disabled={true}
+                disabled
                 sx={{ m: 0, width: "8ch" }}
             />;
         }
         return content;
-
     }
 
-    GetCurentThermostatBatteryVoltage() {
-
+    getCurrentThermostatBatteryVoltage() {
         let content = null;
-        const oid = this.state.rxData["oid_ThermostatBattreryVoltage"];
+        const oid = this.state.rxData["oid_ThermostatBatteryVoltage"];
 
         if (oid !== undefined && oid.length > 5) {
-            const thermostatBatteryVoltage = this.state.values[oid + ".val"];
+            const thermostatBatteryVoltage = this.state.values[`${oid}.val`];
 
-            const sBatteryVoltage = thermostatBatteryVoltage + "V";
+            const sBatteryVoltage = `${thermostatBatteryVoltage}V`;
 
             content = <TextField
                 size="small"
                 type="text"
                 value={sBatteryVoltage}
-                disabled={true}
-                sx={{ m: 0, width: "8ch" }}
+                disabled
+                style={{ margin: 0, width: "8ch" }}
             />;
         }
         return content;
@@ -355,13 +317,12 @@ class HeatingRoomWidget extends (Generic) {
         const oid = this.state.rxData["oid_CurrentTemperature"];
 
         if (oid !== undefined && oid.length > 5) {
-            const currentTemperature = this.state.values[oid + ".val"];
-
-
+            const currentTemperature = this.state.values[`${oid}.val`];
             const sCurrentTemperature = (Math.round(currentTemperature * 100) / 100).toFixed(2) + "°C";
 
             content = <div>
-                <ThermostatIcon /> {sCurrentTemperature}
+                <ThermostatIcon style={{ marginRight: 8 }} />
+                {sCurrentTemperature}
             </div>;
         }
         return content;
@@ -372,99 +333,94 @@ class HeatingRoomWidget extends (Generic) {
         const oid = this.state.rxData["oid_CurrentTemperatureExtSensor"];
 
         if (oid !== undefined && oid.length > 5) {
-            const currentTemperatureExtSensor = this.state.values[oid + ".val"];
-
-
-
+            const currentTemperatureExtSensor = this.state.values[`${oid}.val`];
             const sCurrentTemperatureExtSensor = (Math.round(currentTemperatureExtSensor * 100) / 100).toFixed(2) + "°C";
 
             content = <div>
-                <ThermostatIcon /> {sCurrentTemperatureExtSensor}
+                <ThermostatIcon style={{ marginRight: 8 }} />
+                {sCurrentTemperatureExtSensor}
             </div>;
         }
         return content;
     }
 
-
     createTable() {
-
         const roomName = this.state.rxData["RoomName"];
-
-
         const roomState = this.state.values[`${this.state.rxData["oid_RoomState"]}.val`];
         const roomLog = this.state.values[`${this.state.rxData["oid_RoomLog"]}.val`];
 
         const style = {
             width: "100%",
             height: "100%",
-            border: "1px",
-
-            "text-align": "left",
-            "font-size": "smaller",
-
-
+            border: 1,
+            textAlign: "left",
+            fontSize: "smaller",
         };
 
-        const content = <div
+        return <div
             ref={this.refCardContent}
             style={styles.cardContent}
         >
-            <Box sx={{ display: "flex", flexWrap: "wrap", borderRadius: "5px", "border-color": "primary.main", "background-color": "rgba(255, 255, 255, 0.09)", margin: "2px" }}>
-
+            <Box
+                sx={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    borderRadius: "5px",
+                    borderColor: "primary.main",
+                    backgroundColor: "rgba(255, 255, 255, 0.09)",
+                    m: "2px"
+                }}
+            >
                 <Box>
                     <Typography gutterBottom variant="h5" component="div">
                         {roomName}
                     </Typography>
                 </Box>
                 <Box>
-                    {this.GetCurrentTargetTemperature()}
-                    {this.GetBatteryState()}
-                    {this.GetRSSIState()}
-                    {this.GetCurentThermostatBatteryVoltage()}
+                    {this.getCurrentTargetTemperature()}
+                    {this.getBatteryState()}
+                    {this.getRSSIState()}
+                    {this.getCurrentThermostatBatteryVoltage()}
                 </Box>
-
                 <Box>
                     {this.getCurrentTemperature()}
                     {this.getCurrentTemperatureExtSensor()}
                 </Box>
-
                 <Box>
-                    {this.GetCurrentActorState()}
-                    {this.GetCurrentValveValue()}
+                    {this.getCurrentActorState()}
+                    {this.getCurrentValveValue()}
                 </Box>
             </Box>
 
-            <Box sx={{ display: "flex", flexWrap: "wrap", borderRadius: "5px", "border-color": "primary.main", "background-color": "rgba(255, 255, 255, 0.09)", margin: "2px" }}>
-
-                <p> {roomState}</p>
-
+            <Box sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                borderRadius: "5px",
+                borderColor: "primary.main",
+                backgroundColor: "rgba(255, 255, 255, 0.09)",
+                m: "2px"
+            }}>
+                <p>{roomState}</p>
             </Box>
 
-            <Box sx={{ display: "flex", flexWrap: "wrap", borderRadius: "5px", "border-color": "primary.main", "background-color": "rgba(255, 255, 255, 0.09)", margin: "2px" }}>
-                <div dangerouslySetInnerHTML={{ __html: roomLog }} style={style} ></div>
+            <Box sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                borderRadius: "5px",
+                borderColor: "primary.main",
+                backgroundColor: "rgba(255, 255, 255, 0.09)",
+                m: "2px"
+            }}>
+                <div dangerouslySetInnerHTML={{__html: roomLog}} style={style} />
             </Box>
-
-
-
-
-
         </div>;
-
-
-        return content;
-
     }
 
     /*
-
-
-
     <img class="mdui-green-glow" height='32px' src='/vis.0/HeatingControl/images/it_wifi.svg'></img>
 
                 <img class="mdui-red-blink" height='32px' src='/vis.0/HeatingControl/images/it_wifi.svg'></img>
     */
-
-
 
     renderWidgetBody(props) {
         super.renderWidgetBody(props);
@@ -479,11 +435,9 @@ class HeatingRoomWidget extends (Generic) {
             size = this.refCardContent.current.offsetHeight;
         }
 
-        console.log("heating room state: size " + size);
-
+        console.log(`heating room state: size ${size}`);
 
         const content = this.createTable();
-
 
         if (this.state.rxData.noCard || props.widget.usedInWidget) {
             console.log("nur content");

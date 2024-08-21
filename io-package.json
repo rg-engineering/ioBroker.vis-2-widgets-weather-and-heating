@@ -97,8 +97,7 @@
     },
     "licenseInformation": {
       "license": "MIT",
-      "type": "free",
-      "link": "https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather-and-heating/blob/master/LICENSE"
+      "type": "free"
     },
     "titleLang": {
       "en": "VIS-2 weather and heating widgets",

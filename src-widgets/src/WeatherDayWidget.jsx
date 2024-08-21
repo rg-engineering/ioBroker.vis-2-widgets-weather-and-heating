@@ -16,15 +16,12 @@ const styles = {
     },
 };
 
+// todo tag auswahl setzt OID"s neu -> testen
+// todo mondphase anzeigen
+// todo bug fix icons (wetter und wind) passen nicht
+// todo Übersetzungen
 
-//todo tag auswahl setzt OID"s neu -> testen
-//todo mondphase anzeigen
-//todo bug fix icons (wetter und wind) passen nicht
-//todo Übersetzungen
-
-
-//weather icons
-
+// weather icons
 const images1 = require.context("./assets/icons/tiempo-weather/galeria1", false);
 const icons_weather_galeria1 = images1.keys().map(image1 => images1(image1));
 
@@ -59,13 +56,13 @@ const wind_images3 = require.context("./assets/icons/viento-wind/Beaufort-White"
 const icons_wind_Beaufort = wind_images3.keys().map(wind_image3 => wind_images3(wind_image3));
 
 
-//moon icons
-//fehlen noch
+// moon icons
+// fehlen noch
 
 
 const setDataStructures = async (field, data, changeData, socket) => {
 
-    console.log("set new datastructure instance" + data["instance"] + " " + data["datastructure"]);
+    console.log(`set new datastructure instance ${data["instance"]} ${data["datastructure"]}`);
 
     const instance = data["instance"];
     const day2show = data["day2show"];
@@ -127,7 +124,6 @@ class WeatherDayWidget extends (Generic) {
                     // check here all possible types https://github.com/ioBroker/ioBroker.vis/blob/react/src/src/Attributes/Widget/SCHEMA.md
                     name: "common", // group name
                     fields: [
-
                         {
                             name: "noCard",
                             label: "without_card",
@@ -157,11 +153,10 @@ class WeatherDayWidget extends (Generic) {
                                 {
                                     value: "NextHours2",
                                     label: "datastructure_nexthours2"
-                                }
+                                },
                             ],
                             default: "NextHours",
                             onChange: setDataStructures,
-
                         },
                         {
                             name: "day2show",    // name in data structure
@@ -188,11 +183,9 @@ class WeatherDayWidget extends (Generic) {
                                     value: "4",
                                     label: "day2show_today+4"
                                 },
-
                             ],
                             default: "0",
                             onChange: setDataStructures,
-
                         },
 
                         {
@@ -228,11 +221,9 @@ class WeatherDayWidget extends (Generic) {
                                     value: "galeria6",
                                     label: "iconset_galeria6"
                                 },
-
                             ],
                             default: "galeria1",
                             onChange: setDataStructures,
-
                         },
 
                         {
@@ -252,23 +243,15 @@ class WeatherDayWidget extends (Generic) {
                                     value: "Beaufort",
                                     label: "windiconset_beaufort"
                                 },
-
-
                             ],
                             default: "galeria1",
                             onChange: setDataStructures,
-
                         },
-
                     ],
                 },
                 {
-
-
-
                     name: "OIDS", // group name
                     fields: [
-
                         {
                             name: "oid_dayname",    // name in data structure
                             label: "oiddayname", // translated field label
@@ -332,8 +315,6 @@ class WeatherDayWidget extends (Generic) {
 
                     ],
                 },
-
-
             ],
             visPrev: "widgets/vis-2-widgets-weather-and-heating/img/vis-widget-weatherday.png",
         };
@@ -362,7 +343,7 @@ class WeatherDayWidget extends (Generic) {
 
         //weather symbol
         const weather_icon = this.state.values[`${this.state.rxData["oid_symbol"]}.val`];
-        
+
 
         let src_icon_weather = icons_weather_galeria1[weather_icon];
 
@@ -377,12 +358,11 @@ class WeatherDayWidget extends (Generic) {
             default: src_icon_weather = icons_weather_galeria1[weather_icon]; break;
         }
 
-        console.log("weather icon " + weather_icon + " " + src_icon_weather);
-
+        console.log(`weather icon ${weather_icon} ${src_icon_weather}`);
 
         //wind symbol
         const wind_icon = this.state.values[`${this.state.rxData["oid_wind_symbol"]}.val`];
-        
+
         //todo galerie umschaltbar
         let src_icon_wind = icons_wind_galeria1[wind_icon];
         switch (windiconlabelset) {
@@ -392,7 +372,7 @@ class WeatherDayWidget extends (Generic) {
             default: src_icon_wind = icons_wind_galeria1[wind_icon]; break;
         }
 
-        console.log("wind icon " + wind_icon + " " + src_icon_wind ) ;
+        console.log(`wind icon ${wind_icon} ${src_icon_wind}` ) ;
 
         const date = this.state.values[`${this.state.rxData["oid_date"]}.val`];
         let day = 1;
@@ -493,4 +473,3 @@ WeatherDayWidget.propTypes = {
 };
 
 export default WeatherDayWidget;
-

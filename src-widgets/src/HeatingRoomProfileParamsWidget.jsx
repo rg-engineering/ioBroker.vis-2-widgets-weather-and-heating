@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-// For federation it is important to import from one package "@mui/material" and not from "@mui/material/Box"
+// For federation, it is important to import from one package "@mui/material" and not from "@mui/material/Box"
 import {
     Box,
     IconButton,
@@ -43,7 +43,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
 
     if (instance && instance.length > 0 && instance.includes("heatingcontrol") ) {
 
-        data["oid_ChoosenRoom"] = `${instance}.vis.ChoosenRoom`;
+        data["oid_ChosenRoom"] = `${instance}.vis.ChosenRoom`;
 
         data["oid_GuestIncrease"] = `${instance}.vis.TempDecreaseValues.GuestIncrease`;
         data["oid_PartyDecrease"] = `${instance}.vis.TempDecreaseValues.PartyDecrease`;
@@ -119,10 +119,10 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                     name: "OIDS_General", // group name
                     fields: [
                         {
-                            name: "oid_ChoosenRoom",    // name in data structure
+                            name: "oid_ChosenRoom",    // name in data structure
                             label: "choosenroom", // translated field label
                             type: "id",
-                            default: "heatingcontrol.0.vis.ChoosenRoom",
+                            default: "heatingcontrol.0.vis.ChosenRoom",
                         },
 
                         {
@@ -332,7 +332,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
             const GuestIncrease = this.state.values[oid + ".val"];
 
             <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
-                <FilledInput
+                    <FilledInput
                     size="small"
                     id="GuestIncrease"
                     endAdornment={<InputAdornment position="end">°C</InputAdornment>}
@@ -343,7 +343,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                     type="number"
                     value={GuestIncrease}
                     onChange={(e) => this.onChange1(e.target.value)}
-                    sx={{ input: { color: "white", width: "100%" } }}
+                        sx={{ input: { color: "white", width: "100%" } }}
                 />
                 <FormHelperText id="GuestIncrease-text">{Generic.t("GuestIncrease")}</FormHelperText>
             </FormControl>
@@ -372,7 +372,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                     type="number"
                     value={PartyDecrease}
                     onChange={(e) => this.onChange2(e.target.value)}
-                    sx={{ input: { color: "white", width: "100%" } }}
+                        sx={{ input: { color: "white", width: "100%" } }}
                 />
                 <FormHelperText id="PartyDecrease-text">{Generic.t("PartyDecrease")}</FormHelperText>
             </FormControl>
@@ -401,7 +401,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                     type="number"
                     value={AbsentDecrease}
                     onChange={(e) => this.onChange3(e.target.value)}
-                    sx={{ input: { color: "white", width: "100%" } }}
+                        sx={{ input: { color: "white", width: "100%" } }}
                 />
                 <FormHelperText id="AbsentDecrease-text">{Generic.t("AbsentDecrease")}</FormHelperText>
             </FormControl>
@@ -430,7 +430,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                     type="number"
                     value={VacationAbsentDecrease}
                     onChange={(e) => this.onChange4(e.target.value)}
-                    sx={{ input: { color: "white", width: "100%" } }}
+                        sx={{ input: { color: "white", width: "100%" } }}
                 />
                 <FormHelperText id="VacationAbsentDecrease-text">{Generic.t("VacationAbsentDecrease")}</FormHelperText>
             </FormControl>
@@ -459,7 +459,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                     type="number"
                     value={WindowOpenDecrease}
                     onChange={(e) => this.onChange5(e.target.value)}
-                    sx={{ input: { color: "white", width: "100%" } }}
+                        sx={{ input: { color: "white", width: "100%" } }}
                 />
                 <FormHelperText id="WindowOpenDecrease-text">{Generic.t("WindowOpenDecrease")}</FormHelperText>
             </FormControl>
@@ -490,7 +490,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                     type="number"
                     value={FireplaceModeDecrease}
                     onChange={(e) => this.onChange6(e.target.value)}
-                    sx={{ input: { color: "white", width: "100%" } }}
+                        sx={{ input: { color: "white", width: "100%" } }}
                 />
                 <FormHelperText id="FireplaceModeDecrease-text">{Generic.t("FireplaceModeDecrease")}</FormHelperText>
             </FormControl>
@@ -519,7 +519,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                     type='number'
                     value={MinimumTemperature}
                     onChange={(e) => this.onChange7(e.target.value)}
-                    sx={{ input: { color: "white", width: "100%" } }}
+                        sx={{ input: { color: "white", width: "100%" } }}
                 />
                 <FormHelperText id="MinimumTemperature-text">{Generic.t("MinimumTemperature")}</FormHelperText>
             </FormControl>

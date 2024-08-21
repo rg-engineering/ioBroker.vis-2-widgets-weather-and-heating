@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 
 import Generic from "./Generic";
 
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Avatar from "@mui/material/Avatar";
-
+import {
+    List,
+    ListItem,
+    ListItemText,
+    ListItemAvatar,
+    Avatar,
+} from "@mui/material";
 
 const styles = {
     cardContent: {
@@ -21,16 +22,11 @@ const styles = {
     },
 };
 
-
-
-//todo Übersetzungen
-//todo Image
-
-
+// todo Ã¼bersetzungen
+// todo Image
 
 const setDataStructures = async (field, data, changeData, socket) => {
-
-    console.log(`set new datastructure instance ${data["instance"]}` );
+    console.log(`set new data structure instance ${data["instance"]}` );
 
     const instance = data["instance"];
 
@@ -126,8 +122,8 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
             console.log("###html " + htmlTable + " " + data.length + " " + JSON.stringify(data));
 
             /* old version
-            < div class="mdui-listitem mdui-center-v mdui-red-bg" style = "height:48px;" > 
-                <img height=40px src = "/vis.0/HeatingControl/images/fts_window_1w_open.svg" ></img > 
+            < div class="mdui-listitem mdui-center-v mdui-red-bg" style = "height:48px;" >
+                <img height=40px src = "/vis.0/HeatingControl/images/fts_window_1w_open.svg" ></img >
                     <div class="mdui-label">TestRaum
                         <div class="mdui-subtitle">seit 25 Jul 2024 21:11:07</div>
                     </div>
@@ -135,70 +131,62 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
              */
 
             /* new version
-    
+
             [{ "room": "TestRaum", "sinceText": "seit", "icon": "/vis.0/HeatingControl/images/fts_window_1w_open.svg", "changed": "28 Jul 2024 08:46:44" }]
             */
 
 
-            const content = <div
+            return <div
                 ref={this.refCardContent}
                 style={styles.cardContent}
             >
-
                 <div>
                     <p>{Generic.t("Window Status Overview")}</p>
                 </div>
 
                 <div>
-                    <p> {windowsOpen > 0 ? windowsOpen + " " + Generic.t("Windows open") : Generic.t("all windows closed")}</p>
+                    <p>{windowsOpen > 0 ? `${windowsOpen} ${Generic.t("Windows open")}` : Generic.t("all windows closed")}</p>
                 </div>
 
-
-                < List sx={{ width: '100 % ', maxWidth: 360, bgcolor: 'background.paper' }}>
-                    {data.map((roomData, i) => {
-
-                        return <ListItem>
-                            <ListItemAvatar>
-                                <Avatar>
-                                    <img
-                                        src={roomData.icon}
-                                        height='40px' >
-                                    </img>
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText
-                                primary={roomData.room}
-                                secondary={roomData.sinceText + " " + roomData.changed}
-                                primaryTypographyProps={{
-                                    color: roomData.isOpen ? 'red' : 'black',
-                                }}
-                            />
-                        </ListItem >
-
-                    })}
+                <List sx={{ width: '100 %', maxWidth: 360, bgcolor: 'background.paper' }}>
+                    {data.map((roomData, i) => <ListItem>
+                        <ListItemAvatar>
+                            <Avatar>
+                                <img
+                                    src={roomData.icon}
+                                    height='40px' />
+                            </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText
+                            primary={roomData.room}
+                            secondary={`${roomData.sinceText} ${roomData.changed}`}
+                            primaryTypographyProps={{
+                                color: roomData.isOpen ? 'red' : 'black',
+                            }}
+                        />
+                    </ListItem>)}
                 </List >
             </div>;
-
 
             /*
              const content = <div
                  ref={this.refCardContent}
                  style={styles.cardContent}
              >
-     
+
                  <div>
                      <p>{Generic.t("Window Status Overview")}</p>
                  </div>
-     
-     
-     
-                
+
+
+
+
                  < List sx = {{ width: '100 % ', maxWidth: 360, bgcolor: 'background.paper' }  }>
                      <ListItem>
                          <ListItemAvatar>
                              <Avatar>
-                                 <img 
-                                     src='/vis.0/HeatingControl/images/fts_window_1w_open.svg' 
+                                 <img
+                                     src='/vis.0/HeatingControl/images/fts_window_1w_open.svg'
                                      height='40px' >
                                  </img>
                              </Avatar>
@@ -212,17 +200,14 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
                          />
                      </ListItem >
                  </List >
-     
-                 
-     
+
+
+
              </div>;
              */
-            return content;
         }
 
         return null;
-
-        
     }
 
     renderWidgetBody(props) {
@@ -238,7 +223,7 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
             size = this.refCardContent.current.offsetHeight;
         }
 
-        console.log("heating window states overview: size " + size);
+        console.log(`heating window states overview: size ${size}`);
 
         const content = this.createTable();
 
@@ -261,4 +246,3 @@ HeatingWindowStatusOverviewWidget.propTypes = {
 };
 
 export default HeatingWindowStatusOverviewWidget;
-

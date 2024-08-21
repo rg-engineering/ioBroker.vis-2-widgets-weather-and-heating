@@ -1,21 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 // https://github.com/Pittini/iobroker-heatingcontrol-vis
-
-// For federation it is important to import from one package "@mui/material" and not from "@mui/material/Box"
-import {
-    Checkbox,
-    FormControlLabel,
-    FormGroup,
-    Box,
-    Switch
-} from "@mui/material";
+// For federation, it is important to import from one package "@mui/material" and not from "@mui/material/Box"
+import { Box, FormControlLabel, FormGroup, Switch } from "@mui/material";
 
 import Generic from "./Generic";
-
-
-
 
 const styles = {
     cardContent: {
@@ -28,21 +18,20 @@ const styles = {
     },
 };
 
-
-//todo nur die Werte anzeigen, für die es auch OID's gibt
-//todo Übersetzungen
-//todo Image
+// todo nur die Werte anzeigen, für die es auch OID's gibt
+// todo Übersetzungen
+// todo Image
 
 const setDataStructures = async (field, data, changeData, socket) => {
-    console.log(`set new datastructure instance${data["instance"]}` );
+    console.log(`set new data structure instance${data["instance"]}` );
 
     const instance = data["instance"];
 
     if (instance && instance.length > 0 && instance.includes("heatingcontrol") ) {
-        data["oid_ChoosenRoom"] = `${instance}.vis.ChoosenRoom`;
+        data["oid_ChosenRoom"] = `${instance}.vis.ChosenRoom`;
 
         data["oid_HeatingPeriodActive"] = `${instance}.HeatingPeriodActive`;
-        data["oid_PublicHolidyToday"] = `${instance}.PublicHolidyToday`;
+        data["oid_PublicHolidayToday"] = `${instance}.PublicHolidayToday`;
         data["oid_Present"] = `${instance}.Present`;
         data["oid_PartyNow"] = `${instance}.PartyNow`;
         data["oid_GuestsPresent"] = `${instance}.GuestsPresent`;
@@ -97,10 +86,10 @@ class HeatingGeneralParamsWidget extends (Generic) {
                     name: "OIDS_General", // group name
                     fields: [
                         {
-                            name: "oid_ChoosenRoom",    // name in data structure
+                            name: "oid_ChosenRoom",    // name in data structure
                             label: "widgets_heating_label_oid_choosenroom", // translated field label
                             type: "id",
-                            default: "heatingcontrol.0.vis.ChoosenRoom",
+                            default: "heatingcontrol.0.vis.ChosenRoom",
                         },
                         {
                             name: "oid_HeatingPeriodActive",    // name in data structure
@@ -109,10 +98,10 @@ class HeatingGeneralParamsWidget extends (Generic) {
                             default: "heatingcontrol.0.HeatingPeriodActive",
                         },
                         {
-                            name: "oid_PublicHolidyToday",    // name in data structure
-                            label: "widgets_heating_label_oid_publicholidytoday", // translated field label
+                            name: "oid_PublicHolidayToday",    // name in data structure
+                            label: "widgets_heating_label_oid_publicholidaytoday", // translated field label
                             type: "id",
-                            default: "heatingcontrol.0.PublicHolidyToday",
+                            default: "heatingcontrol.0.PublicHolidayToday",
                         },
                         {
                             name: "oid_Present",    // name in data structure
@@ -164,56 +153,12 @@ class HeatingGeneralParamsWidget extends (Generic) {
         };
     }
 
-    // eslint-disable-next-line class-methods-use-this
-    propertiesUpdate() {
-        // Widget has 3 important states
-        // 1. this.state.values - contains all state values, that are used in widget (automatically collected from widget info).
-        //                        So you can use `this.state.values[this.state.rxData.oid + ".val"]` to get value of state with id this.state.rxData.oid
-        // 2. this.state.rxData - contains all widget data with replaced bindings. E.g. if this.state.data.type is `{system.adapter.admin.0.alive}`,
-        //                        then this.state.rxData.type will have state value of `system.adapter.admin.0.alive`
-        // 3. this.state.rxStyle - contains all widget styles with replaced bindings. E.g. if this.state.styles.width is `{javascript.0.width}px`,
-        //                        then this.state.rxData.type will have state value of `javascript.0.width` + "px
-    }
-
-
-
-    async componentDidMount() {
-        super.componentDidMount();
-
-        // Update data
-        this.propertiesUpdate();
-    }
-
     // Do not delete this method. It is used by vis to read the widget configuration.
     // eslint-disable-next-line class-methods-use-this
     getWidgetInfo() {
         return HeatingGeneralParamsWidget.getWidgetInfo();
     }
 
-    // This function is called every time when rxData is changed
-    async onRxDataChanged() {
-
-        this.propertiesUpdate();
-
-        console.log("onRxDataChanged");
-    }
-
-    // This function is called every time when rxStyle is changed
-    // eslint-disable-next-line class-methods-use-this
-    onRxStyleChanged() {
-        console.log("onRxStyleChanged");
-
-    }
-
-
-    
-    // This function is called every time when some Object State updated, but all changes lands into this.state.values too
-    // eslint-disable-next-line class-methods-use-this, no-unused-vars
-    onStateUpdated(id, state) {
-        console.log("onStateUpdated " + id );
-    }
-
-   
     onChange1() {
         if (this.props.editMode) return;
         const oid = this.state.rxData["oid_HeatingPeriodActive"];
@@ -223,15 +168,17 @@ class HeatingGeneralParamsWidget extends (Generic) {
             this.props.context.setValue(oid, true);
         }
     }
+
     onChange2() {
         if (this.props.editMode) return;
-        const oid = this.state.rxData["oid_PublicHolidyToday"];
+        const oid = this.state.rxData["oid_PublicHolidayToday"];
         if (this.getValue(oid) === true) {
             this.props.context.setValue(oid, false);
         } else {
             this.props.context.setValue(oid, true);
         }
     }
+
     onChange3() {
         if (this.props.editMode) return;
         const oid = this.state.rxData["oid_Present"];
@@ -241,6 +188,7 @@ class HeatingGeneralParamsWidget extends (Generic) {
             this.props.context.setValue(oid, true);
         }
     }
+
     onChange4() {
         if (this.props.editMode) return;
         const oid = this.state.rxData["oid_PartyNow"];
@@ -250,6 +198,7 @@ class HeatingGeneralParamsWidget extends (Generic) {
             this.props.context.setValue(oid, true);
         }
     }
+
     onChange5() {
         if (this.props.editMode) return;
         const oid = this.state.rxData["oid_GuestsPresent"];
@@ -259,6 +208,7 @@ class HeatingGeneralParamsWidget extends (Generic) {
             this.props.context.setValue(oid, true);
         }
     }
+
     onChange6() {
         if (this.props.editMode) return;
         const oid = this.state.rxData["oid_HolidayPresent"];
@@ -268,6 +218,7 @@ class HeatingGeneralParamsWidget extends (Generic) {
             this.props.context.setValue(oid, true);
         }
     }
+
     onChange7() {
         if (this.props.editMode) return;
         const oid = this.state.rxData["oid_VacationAbsent"];
@@ -277,6 +228,7 @@ class HeatingGeneralParamsWidget extends (Generic) {
             this.props.context.setValue(oid, true);
         }
     }
+
     onChange8() {
         if (this.props.editMode) return;
         const oid = this.state.rxData["oid_FireplaceModeActive"];
@@ -312,24 +264,20 @@ class HeatingGeneralParamsWidget extends (Generic) {
 
         return value;
     }
- 
-
 
     createTable() {
-
         const HeatingPeriodActiveChecked = this.state.values[`${this.state.rxData["oid_HeatingPeriodActive"]}.val`];
-        const PublicHolydayTodayChecked = this.state.values[`${this.state.rxData["oid_PublicHolidyToday"]}.val`];
+        const PublicHolidayTodayChecked = this.state.values[`${this.state.rxData["oid_PublicHolidayToday"]}.val`];
         const PresentChecked = this.state.values[`${this.state.rxData["oid_Present"]}.val`];
         const PartyNowChecked = this.state.values[`${this.state.rxData["oid_PartyNow"]}.val`];
         const GuestsPresentChecked = this.state.values[`${this.state.rxData["oid_GuestsPresent"]}.val`];
-        const HolydayAtHomeChecked = this.state.values[`${this.state.rxData["oid_HolidayPresent"]}.val`];
+        const HolidayAtHomeChecked = this.state.values[`${this.state.rxData["oid_HolidayPresent"]}.val`];
         const VacationChecked = this.state.values[`${this.state.rxData["oid_VacationAbsent"]}.val`];
         const FireplaceModeChecked = this.state.values[`${this.state.rxData["oid_FireplaceModeActive"]}.val`];
 
-        console.log("createTable ${HeatingPeriodActiveChecked} ${PublicHolydayTodayChecked} ${PresentChecked} ${PartyNowChecked} ${GuestsPresentChecked} ${HolydayAtHomeChecked} ${VacationChecked} ${FireplaceModeChecked}");
-        
+        console.log("createTable ${HeatingPeriodActiveChecked} ${PublicHolidayTodayChecked} ${PresentChecked} ${PartyNowChecked} ${GuestsPresentChecked} ${HolidayAtHomeChecked} ${VacationChecked} ${FireplaceModeChecked}");
 
-        const content = <div
+        return <div
             ref={this.refCardContent}
             style={styles.cardContent}
         >
@@ -342,9 +290,9 @@ class HeatingGeneralParamsWidget extends (Generic) {
                         />} label={Generic.t("HeatingPeriodActive")} />
                     <FormControlLabel control={
                         <Switch
-                            checked={PublicHolydayTodayChecked}
+                            checked={PublicHolidayTodayChecked}
                             onClick={() => this.onChange2()}
-                        />} label={Generic.t("PublicHolydayToday")} />
+                        />} label={Generic.t("PublicHolidayToday")} />
                     <FormControlLabel control={
                         <Switch
                             checked={PresentChecked}
@@ -362,9 +310,9 @@ class HeatingGeneralParamsWidget extends (Generic) {
                         />} label={Generic.t("GuestsPresent")} />
                     <FormControlLabel control={
                         <Switch
-                            checked={HolydayAtHomeChecked}
+                            checked={HolidayAtHomeChecked}
                             onClick={() => this.onChange6()}
-                        />} label={Generic.t("HolydayAtHome")} />
+                        />} label={Generic.t("HolidayAtHome")} />
                     <FormControlLabel control={
                         <Switch
                             checked={VacationChecked}
@@ -378,8 +326,6 @@ class HeatingGeneralParamsWidget extends (Generic) {
                 </FormGroup>
             </Box>
         </div>;
-
-        return content;
     }
 
     renderWidgetBody(props) {

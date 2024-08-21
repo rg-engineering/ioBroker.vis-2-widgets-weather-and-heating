@@ -245,7 +245,7 @@
   "vis_2_widgets-HeatingRoomProfileParams": "Parametro del profilo della stanza di riscaldamento",
   "widgets_heating_label_oid_choosenroom": "Camera scelta dall'OID",
   "widgets_heating_label_oid_heatingperiodactive": "Periodo di riscaldamento OID attivo",
-  "widgets_heating_label_oid_publicholidytoday": "Giorno festivo OID oggi",
+  "widgets_heating_label_oid_publicholidaytoday": "Giorno festivo OID oggi",
   "widgets_heating_label_oid_present": "OID presente",
   "widgets_heating_label_oid_partynow": "Festa dell'OID adesso",
   "widgets_heating_label_oid_guestspresent": "Ospiti OID presenti",

@@ -99,7 +99,7 @@ class HeatingGeneralParamsWidget extends (Generic) {
                         },
                         {
                             name: "oid_PublicHolidayToday",    // name in data structure
-                            label: "widgets_heating_label_oid_publicholidytoday", // translated field label
+                            label: "widgets_heating_label_oid_publicholidaytoday", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.PublicHolidayToday",
                         },

@@ -245,7 +245,7 @@
   "vis_2_widgets-HeatingRoomProfileParams": "Параметр профиля отопительного помещения",
   "widgets_heating_label_oid_choosenroom": "OID выбранный номер",
   "widgets_heating_label_oid_heatingperiodactive": "OID период нагрева активен",
-  "widgets_heating_label_oid_publicholidytoday": "ОИД сегодня государственный праздник",
+  "widgets_heating_label_oid_publicholidaytoday": "ОИД сегодня государственный праздник",
   "widgets_heating_label_oid_present": "OID присутствует",
   "widgets_heating_label_oid_partynow": "ОИД вечеринка сейчас",
   "widgets_heating_label_oid_guestspresent": "Присутствуют гости ОИД",

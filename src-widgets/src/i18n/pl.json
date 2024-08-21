@@ -245,7 +245,7 @@
   "vis_2_widgets-HeatingRoomProfileParams": "Parametr profilu kotłowni",
   "widgets_heating_label_oid_choosenroom": "Wybrany pokój OID",
   "widgets_heating_label_oid_heatingperiodactive": "Aktywny okres ogrzewania OID",
-  "widgets_heating_label_oid_publicholidytoday": "Dziś święto państwowe OID",
+  "widgets_heating_label_oid_publicholidaytoday": "Dziś święto państwowe OID",
   "widgets_heating_label_oid_present": "Obecny OID",
   "widgets_heating_label_oid_partynow": "Impreza OID teraz",
   "widgets_heating_label_oid_guestspresent": "Obecni goście OID",

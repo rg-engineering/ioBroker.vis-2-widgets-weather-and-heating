@@ -245,7 +245,7 @@
   "vis_2_widgets-HeatingRoomProfileParams": "Parameter verwarmingsruimteprofiel",
   "widgets_heating_label_oid_choosenroom": "OID gekozen kamer",
   "widgets_heating_label_oid_heatingperiodactive": "OID verwarmingsperiode actief",
-  "widgets_heating_label_oid_publicholidytoday": "OID feestdag vandaag",
+  "widgets_heating_label_oid_publicholidaytoday": "OID feestdag vandaag",
   "widgets_heating_label_oid_present": "OID aanwezig",
   "widgets_heating_label_oid_partynow": "OID feest nu",
   "widgets_heating_label_oid_guestspresent": "OID-gasten aanwezig",

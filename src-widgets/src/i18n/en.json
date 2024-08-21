@@ -276,11 +276,11 @@
 
 
   "HeatingPeriodActive": "Heating Period Active",
-  "PublicPublicHolidayTodayToday": "Public Holiday Today",
+  "PublicHolidayToday": "Public Holiday Today",
   "Present": "Present",
   "PartyNow": "Party Now",
   "GuestsPresent": "Guests Present",
-  "PublicHolidayTodayAtHome": "Holiday At Home",
+  "HolydayAtHome": "Holiday At Home",
   "Vacation": "Vacation",
   "FireplaceMode": "Fireplace Mode",
 

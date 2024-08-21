@@ -31,7 +31,6 @@ const styles = {
 };
 
 //todo Unterscheidung absolut / relativ
-//todo nur die Werte anzeigen, für die es auch OID's gibt
 //todo FormControl size and color einstellbar
 
 
@@ -325,189 +324,301 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
     }
 
 
+    getGuestIncrease() {
+        let content = null;
+        const oid = this.state.rxData["oid_GuestIncrease"];
+
+        if (oid !== undefined && oid.length > 5) {
+            const GuestIncrease = this.state.values[oid + ".val"];
+
+            <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+                <FilledInput
+                    size="small"
+                    id="GuestIncrease"
+                    endAdornment={<InputAdornment position="end">°C</InputAdornment>}
+                    aria-describedby="GuestIncrease"
+                    inputProps={{
+                        'aria-label': Generic.t("Temperature"),
+                    }}
+                    type="number"
+                    value={GuestIncrease}
+                    onChange={(e) => this.onChange1(e.target.value)}
+                    sx={{ input: { color: "white", width: "100%" } }}
+                />
+                <FormHelperText id="GuestIncrease-text">{Generic.t("GuestIncrease")}</FormHelperText>
+            </FormControl>
+
+           
+        }
+        return content;
+    }
+
+    getPartyDecrease() {
+        let content = null;
+        const oid = this.state.rxData["oid_PartyDecrease"];
+
+        if (oid !== undefined && oid.length > 5) {
+            const PartyDecrease = this.state.values[oid + ".val"];
+
+            <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+                <FilledInput
+                    size="small"
+                    id="PartyDecrease"
+                    endAdornment={<InputAdornment position="end">°C</InputAdornment>}
+                    aria-describedby="PartyDecrease"
+                    inputProps={{
+                        'aria-label': Generic.t("Temperature"),
+                    }}
+                    type="number"
+                    value={PartyDecrease}
+                    onChange={(e) => this.onChange2(e.target.value)}
+                    sx={{ input: { color: "white", width: "100%" } }}
+                />
+                <FormHelperText id="PartyDecrease-text">{Generic.t("PartyDecrease")}</FormHelperText>
+            </FormControl>
+
+
+        }
+        return content;
+    }
+
+    getAbsentDecrease() {
+        let content = null;
+        const oid = this.state.rxData["oid_AbsentDecrease"];
+
+        if (oid !== undefined && oid.length > 5) {
+            const AbsentDecrease = this.state.values[oid + ".val"];
+
+            <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+                <FilledInput
+                    size="small"
+                    id="AbsentDecrease"
+                    endAdornment={<InputAdornment position="end">°C</InputAdornment>}
+                    aria-describedby="AbsentDecrease"
+                    inputProps={{
+                        'aria-label': Generic.t("Temperature"),
+                    }}
+                    type="number"
+                    value={AbsentDecrease}
+                    onChange={(e) => this.onChange3(e.target.value)}
+                    sx={{ input: { color: "white", width: "100%" } }}
+                />
+                <FormHelperText id="AbsentDecrease-text">{Generic.t("AbsentDecrease")}</FormHelperText>
+            </FormControl>
+
+
+        }
+        return content;
+    }
+
+    getVacationAbsentDecrease() {
+        let content = null;
+        const oid = this.state.rxData["oid_VacationAbsentDecrease"];
+
+        if (oid !== undefined && oid.length > 5) {
+            const VacationAbsentDecrease = this.state.values[oid + ".val"];
+
+            <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+                <FilledInput
+                    size="small"
+                    id="VacationAbsentDecrease"
+                    endAdornment={<InputAdornment position="end">°C</InputAdornment>}
+                    aria-describedby="VacationAbsentDecrease"
+                    inputProps={{
+                        'aria-label': Generic.t("Temperature"),
+                    }}
+                    type="number"
+                    value={VacationAbsentDecrease}
+                    onChange={(e) => this.onChange4(e.target.value)}
+                    sx={{ input: { color: "white", width: "100%" } }}
+                />
+                <FormHelperText id="VacationAbsentDecrease-text">{Generic.t("VacationAbsentDecrease")}</FormHelperText>
+            </FormControl>
+
+
+        }
+        return content;
+    }
+
+    getWindowOpenDecrease() {
+        let content = null;
+        const oid = this.state.rxData["oid_WindowOpenDecrease"];
+
+        if (oid !== undefined && oid.length > 5) {
+            const WindowOpenDecrease = this.state.values[oid + ".val"];
+
+            <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+                <FilledInput
+                    size="small"
+                    id="WindowOpenDecrease"
+                    endAdornment={<InputAdornment position="end">°C</InputAdornment>}
+                    aria-describedby="WindowOpenDecrease"
+                    inputProps={{
+                        'aria-label': Generic.t("Temperature"),
+                    }}
+                    type="number"
+                    value={WindowOpenDecrease}
+                    onChange={(e) => this.onChange5(e.target.value)}
+                    sx={{ input: { color: "white", width: "100%" } }}
+                />
+                <FormHelperText id="WindowOpenDecrease-text">{Generic.t("WindowOpenDecrease")}</FormHelperText>
+            </FormControl>
+
+
+        }
+        return content;
+    }
+
+
+
+    getFireplaceModeDecrease() {
+        let content = null;
+        const oid = this.state.rxData["oid_FireplaceModeDecrease"];
+
+        if (oid !== undefined && oid.length > 5) {
+            const FireplaceModeDecrease = this.state.values[oid + ".val"];
+
+            <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+                <FilledInput
+                    size="small"
+                    id="FireplaceModeDecrease"
+                    endAdornment={<InputAdornment position="end">°C</InputAdornment>}
+                    aria-describedby="FireplaceModeDecrease"
+                    inputProps={{
+                        'aria-label': Generic.t("Temperature"),
+                    }}
+                    type="number"
+                    value={FireplaceModeDecrease}
+                    onChange={(e) => this.onChange6(e.target.value)}
+                    sx={{ input: { color: "white", width: "100%" } }}
+                />
+                <FormHelperText id="FireplaceModeDecrease-text">{Generic.t("FireplaceModeDecrease")}</FormHelperText>
+            </FormControl>
+
+
+        }
+        return content;
+    }
+
+    getMinimumTemperature() {
+        let content = null;
+        const oid = this.state.rxData["oid_MinimumTemperature"];
+
+        if (oid !== undefined && oid.length > 5) {
+            const MinimumTemperature = this.state.values[oid + ".val"];
+
+            <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+                <FilledInput
+                    size="small"
+                    id="MinimumTemperature"
+                    endAdornment={<InputAdornment position="end">°C</InputAdornment>}
+                    aria-describedby="MinimumTemperature"
+                    inputProps={{
+                        'aria-label': Generic.t("Temperature"),
+                    }}
+                    type='number'
+                    value={MinimumTemperature}
+                    onChange={(e) => this.onChange7(e.target.value)}
+                    sx={{ input: { color: "white", width: "100%" } }}
+                />
+                <FormHelperText id="MinimumTemperature-text">{Generic.t("MinimumTemperature")}</FormHelperText>
+            </FormControl>
+
+
+        }
+        return content;
+    }
+
+    getOverrideTemperatureTime() {
+        let content = null;
+        const oid = this.state.rxData["oid_TemperaturOverrideTime"];
+
+        if (oid !== undefined && oid.length > 5) {
+            const OverrideTemperatureTime = this.state.values[oid + ".val"];
+
+            <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+                <FilledInput
+                    size="small"
+                    id="OverrideTemperatureTime"
+                    endAdornment={<InputAdornment position="end"> </InputAdornment>}
+                    aria-describedby="OverrideTemperatureTime"
+                    inputProps={{
+                        'aria-label': Generic.t("Time"),
+                    }}
+                    type="text"
+                    value={OverrideTemperatureTime}
+                    onChange={(e) => this.onChange9(e.target.value)}
+                    sx={{ input: { color: "white", width: "100%" } }}
+                />
+                <FormHelperText id="OverrideTemperatureTime-text">{Generic.t("OverrideTemperatureTime")}</FormHelperText>
+            </FormControl>
+
+
+        }
+        return content;
+    }
+
+    getOverrideTemperature() {
+        let content = null;
+        const oid = this.state.rxData["oid_TemperaturOverride"];
+
+        if (oid !== undefined && oid.length > 5) {
+            const OverrideTemperature = this.state.values[oid + ".val"];
+
+            <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+                <FilledInput
+                    size="small"
+                    id="OverrideTemperature"
+                    endAdornment={<InputAdornment position="end">°C</InputAdornment>}
+                    aria-describedby="OverrideTemperature"
+                    inputProps={{
+                        'aria-label': Generic.t("Temperature"),
+                    }}
+                    type="number"
+                    value={OverrideTemperature}
+                    onChange={(e) => this.onChange8(e.target.value)}
+                    sx={{ input: { color: "white", width: "100%" } }}
+                />
+                <FormHelperText id="OverrideTemperature-text">{Generic.t("OverrideTemperature")}</FormHelperText>
+            </FormControl>
+
+
+        }
+        return content;
+    }
+
+
     CreateTable() {
-
-
-        const OverrideTemperature = this.state.values[`${this.state.rxData["oid_TemperaturOverride"]}.val`];
-        const OverrideTemperatureTime = this.state.values[`${this.state.rxData["oid_TemperaturOverrideTime"]}.val`];
-        const MinimumTemperature = this.state.values[`${this.state.rxData["oid_MinimumTemperature"]}.val`];
-        const FireplaceModeDecrease = this.state.values[`${this.state.rxData["oid_FireplaceModeDecrease"]}.val`];
-        const WindowOpenDecrease = this.state.values[`${this.state.rxData["oid_WindowOpenDecrease"]}.val`];
-        const VacationAbsentDecrease = this.state.values[`${this.state.rxData["oid_VacationAbsentDecrease"]}.val`];
-        const AbsentDecrease = this.state.values[`${this.state.rxData["oid_AbsentDecrease"]}.val`];
-        const PartyDecrease = this.state.values[`${this.state.rxData["oid_PartyDecrease"]}.val`];
-        const GuestIncrease = this.state.values[`${this.state.rxData["oid_GuestIncrease"]}.val`];
 
         const content = <div
             ref={this.refCardContent}
             style={styles.cardContent}
         >
             <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-                <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
-                    <FilledInput 
-                        size="small"
-                        id="GuestIncrease"
-                        endAdornment={<InputAdornment position="end">°C</InputAdornment>}
-                        aria-describedby="GuestIncrease"
-                        inputProps={{
-                            'aria-label':  Generic.t("Temperature") ,
-                        }}
-                        type="number"
-                        value={GuestIncrease}
-                        onChange={(e) => this.onChange1( e.target.value)}
-                        sx={{ input: { color: "white", width: "100%" } }} 
-                    />
-                    <FormHelperText id="GuestIncrease-text">{Generic.t("GuestIncrease")}</FormHelperText>
-                </FormControl>
 
-                <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
-                    <FilledInput
-                        size="small"
-                        id="PartyDecrease"
-                        endAdornment={<InputAdornment position="end">°C</InputAdornment>}
-                        aria-describedby="PartyDecrease"
-                        inputProps={{
-                            'aria-label': Generic.t("Temperature") ,
-                        }}
-                        type="number"
-                        value={PartyDecrease}
-                        onChange={(e) => this.onChange2(e.target.value)}
-                        sx={{ input: { color: "white", width: "100%" } }} 
-                    />
-                    <FormHelperText id="PartyDecrease-text">{Generic.t("PartyDecrease")}</FormHelperText>
-                </FormControl>
+                {this.getGuestIncrease()}
 
-                <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
-                    <FilledInput
-                        size="small"
-                        id="AbsentDecrease"
-                        endAdornment={<InputAdornment position="end">°C</InputAdornment>}
-                        aria-describedby="AbsentDecrease"
-                        inputProps={{
-                            'aria-label':  Generic.t("Temperature") ,
-                        }}
-                        type="number"
-                        value={AbsentDecrease}
-                        onChange={(e) => this.onChange3(e.target.value)}
-                        sx={{ input: { color: "white", width: "100%" } }} 
-                    />
-                    <FormHelperText id="AbsentDecrease-text">{Generic.t("AbsentDecrease")}</FormHelperText>
-                </FormControl>
+                {this.getPartyDecrease()}
 
-                <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
-                    <FilledInput
-                        size="small"
-                        id="VacationAbsentDecrease"
-                        endAdornment={<InputAdornment position="end">°C</InputAdornment>}
-                        aria-describedby="VacationAbsentDecrease"
-                        inputProps={{
-                            'aria-label':  Generic.t("Temperature") ,
-                        }}
-                        type="number"
-                        value={VacationAbsentDecrease}
-                        onChange={(e) => this.onChange4(e.target.value)}
-                        sx={{ input: { color: "white", width: "100%" } }} 
-                    />
-                    <FormHelperText id="VacationAbsentDecrease-text">{Generic.t("VacationAbsentDecrease")}</FormHelperText>
-                </FormControl>
+                {this.getAbsentDecrease()}
+                
+                {this.getVacationAbsentDecrease()}
 
-                <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
-                    <FilledInput
-                        size="small"
-                        id="WindowOpenDecrease"
-                        endAdornment={<InputAdornment position="end">°C</InputAdornment>}
-                        aria-describedby="WindowOpenDecrease"
-                        inputProps={{
-                            'aria-label':  Generic.t("Temperature") ,
-                        }}
-                        type="number"
-                        value={WindowOpenDecrease}
-                        onChange={(e) => this.onChange5(e.target.value)}
-                        sx={{ input: { color: "white", width: "100%" } }} 
-                    />
-                    <FormHelperText id="WindowOpenDecrease-text">{Generic.t("WindowOpenDecrease")}</FormHelperText>
-                </FormControl>
+                {this.getWindowOpenDecrease() }
+               
+                {this.getFireplaceModeDecrease() }
+                
+                {this.getMinimumTemperature() }
+                
+                {this.getOverrideTemperature()}
 
-                <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
-                    <FilledInput
-                        size="small"
-                        id="FireplaceModeDecrease"
-                        endAdornment={<InputAdornment position="end">°C</InputAdornment>}
-                        aria-describedby="FireplaceModeDecrease"
-                        inputProps={{
-                            'aria-label':  Generic.t("Temperature") ,
-                        }}
-                        type="number"
-                        value={FireplaceModeDecrease}
-                        onChange={(e) => this.onChange6(e.target.value)}
-                        sx={{ input: { color: "white", width: "100%" } }} 
-                    />
-                    <FormHelperText id="FireplaceModeDecrease-text">{Generic.t("FireplaceModeDecrease")}</FormHelperText>
-                </FormControl>
-
-                <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
-                    <FilledInput
-                        size="small"
-                        id="MinimumTemperature"
-                        endAdornment={<InputAdornment position="end">°C</InputAdornment>}
-                        aria-describedby="MinimumTemperature"
-                        inputProps={{
-                            'aria-label':  Generic.t("Temperature") ,
-                        }}
-                        type='number'
-                        value={MinimumTemperature}
-                        onChange={(e) => this.onChange7(e.target.value)}
-                        sx={{ input: { color: "white", width: "100%" } }} 
-                    />
-                    <FormHelperText id="MinimumTemperature-text">{Generic.t("MinimumTemperature")}</FormHelperText>
-                </FormControl>
-
-                <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
-                    <FilledInput
-                        size="small"
-                        id="OverrideTemperature"
-                        endAdornment={<InputAdornment position="end">°C</InputAdornment>}
-                        aria-describedby="OverrideTemperature"
-                        inputProps={{
-                            'aria-label':  Generic.t("Temperature") ,
-                        }}
-                        type="number"
-                        value={OverrideTemperature}
-                        onChange={(e) => this.onChange8(e.target.value)}
-                        sx={{ input: { color: "white", width: "100%" } }} 
-                    />
-                    <FormHelperText id="OverrideTemperature-text">{Generic.t("OverrideTemperature")}</FormHelperText>
-                </FormControl>
-
-                <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
-                    <FilledInput
-                        size="small"
-                        id="OverrideTemperatureTime"
-                        endAdornment={<InputAdornment position="end"> </InputAdornment>}
-                        aria-describedby="OverrideTemperatureTime"
-                        inputProps={{
-                            'aria-label':  Generic.t("Time") ,
-                        }}
-                        type="text"
-                        value={OverrideTemperatureTime}
-                        onChange={(e) => this.onChange9(e.target.value)}
-                        sx={{ input: { color: "white", width: "100%" } }} 
-                    />
-                    <FormHelperText id="OverrideTemperatureTime-text">{Generic.t("OverrideTemperatureTime")}</FormHelperText>
-                </FormControl>
-
-
+                {this.getOverrideTemperatureTime() }
+               
             </Box>
-
         </div>;
 
         return content;
     }
-
-
-
-
-
 
     renderWidgetBody(props) {
         super.renderWidgetBody(props);

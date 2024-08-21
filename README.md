@@ -93,6 +93,10 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 
 ## Changelog
+### **WORK IN PROGRESS**
+ * (René) bug fix images
+ * (René) Icons and translations
+
 ### 0.6.0 (2024-08-18)
  * (René) widget set renamed again because adapter checker doesn't accept the name
  * (René) Icons and translations

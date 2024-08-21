@@ -280,10 +280,9 @@
   "Present": "Present",
   "PartyNow": "Party Now",
   "GuestsPresent": "Guests Present",
-  "HolydayAtHome": "Holiday At Home",
+  "HolidayAtHome": "Holiday At Home",
   "Vacation": "Vacation",
   "FireplaceMode": "Fireplace Mode",
-
 
   "vis_2_widgets-HeatingRoomProfileParams": "Heating Room Profile Parameter",
   "widgets_heating_label_oid_choosenroom": "OID choosen room",

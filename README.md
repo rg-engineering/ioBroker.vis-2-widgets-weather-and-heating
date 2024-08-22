@@ -1,6 +1,6 @@
 <img src="admin/vis-2-widgets-weather-and-heating.png" alt="logo" width="200"/>
 
-# ioBroker.vis-2-widgets-weather
+# ioBroker.vis-2-widgets-weather-and-heating
 
 ![Number of Installations](http://iobroker.live/badges/vis-2-widgets-weather-and-heating-installed.svg) ![Number of Installations](http://iobroker.live/badges/vis-2-widgets-weather-and-heating-stable.svg)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.vis-2-widgets-weather-and-heating.svg)](https://www.npmjs.com/package/iobroker.vis-2-widgets-weather-and-heating)

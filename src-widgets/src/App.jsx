@@ -9,7 +9,7 @@ import WeatherDayWidget from "./WeatherDayWidget";
 
 import GeneralEChartWidget from "./GeneralEChartWidget";
 
-import HeatingTimescheduleWidget from "./HeatingTimescheduleWidget";
+import HeatingTimeScheduleWidget from "./HeatingTimeScheduleWidget";
 import HeatingGeneralParamsWidget from "./HeatingGeneralParamsWidget";
 import HeatingRoomWidget from "./HeatingRoomWidget";
 import HeatingRoomsOverviewWidget from "./HeatingRoomsOverviewWidget";
@@ -75,7 +75,7 @@ class App extends WidgetDemoApp {
                 }}
             />;
 
-            <HeatingTimescheduleWidget
+            <HeatingTimeScheduleWidget
                 socket={this.socket}
                 themeType={this.state.themeType}
                 style={{

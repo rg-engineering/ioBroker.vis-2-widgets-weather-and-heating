@@ -9,7 +9,7 @@ import WeatherDayWidget from "./WeatherDayWidget";
 
 import GeneralEChartWidget from "./GeneralEChartWidget";
 
-import HeatingTimeScheduleWidget from "./HeatingTimescheduleWidget";
+import HeatingTimeScheduleWidget from "./HeatingTimeScheduleWidget";
 import HeatingGeneralParamsWidget from "./HeatingGeneralParamsWidget";
 import HeatingRoomWidget from "./HeatingRoomWidget";
 import HeatingRoomsOverviewWidget from "./HeatingRoomsOverviewWidget";

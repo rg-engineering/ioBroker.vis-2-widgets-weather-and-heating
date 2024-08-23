@@ -265,17 +265,147 @@ class HeatingGeneralParamsWidget extends (Generic) {
         return value;
     }
 
-    createTable() {
-        const HeatingPeriodActiveChecked = this.state.values[`${this.state.rxData["oid_HeatingPeriodActive"]}.val`];
-        const PublicHolidayTodayChecked = this.state.values[`${this.state.rxData["oid_PublicHolidayToday"]}.val`];
-        const PresentChecked = this.state.values[`${this.state.rxData["oid_Present"]}.val`];
-        const PartyNowChecked = this.state.values[`${this.state.rxData["oid_PartyNow"]}.val`];
-        const GuestsPresentChecked = this.state.values[`${this.state.rxData["oid_GuestsPresent"]}.val`];
-        const HolidayAtHomeChecked = this.state.values[`${this.state.rxData["oid_HolidayPresent"]}.val`];
-        const VacationChecked = this.state.values[`${this.state.rxData["oid_VacationAbsent"]}.val`];
-        const FireplaceModeChecked = this.state.values[`${this.state.rxData["oid_FireplaceModeActive"]}.val`];
 
-        console.log("createTable ${HeatingPeriodActiveChecked} ${PublicHolidayTodayChecked} ${PresentChecked} ${PartyNowChecked} ${GuestsPresentChecked} ${HolidayAtHomeChecked} ${VacationChecked} ${FireplaceModeChecked}");
+    getHeatingPeriodActive() {
+        let content = null;
+        const oid = this.state.rxData["oid_HeatingPeriodActive"];
+        console.log("oid " + oid);
+
+        if (oid !== undefined && oid.length > 5) {
+            const HeatingPeriodActiveChecked = this.state.values[oid + ".val"];
+
+            content = <FormControlLabel control={
+                <Switch
+                    checked={HeatingPeriodActiveChecked}
+                    onClick={() => this.onChange1()}
+                />} label={Generic.t("HeatingPeriodActive")} />
+
+        }
+        return content;
+    }
+
+    getPublicHolidayToday() {
+        let content = null;
+        const oid = this.state.rxData["oid_PublicHolidayToday"];
+        console.log("oid " + oid);
+
+        if (oid !== undefined && oid.length > 5) {
+            const PublicHolidayTodayChecked = this.state.values[oid + ".val"];
+
+            content = <FormControlLabel control={
+                <Switch
+                    checked={PublicHolidayTodayChecked}
+                    onClick={() => this.onChange2()}
+                />} label={Generic.t("PublicHolidayToday")} />
+
+        }
+        return content;
+    }
+
+    getPresent() {
+        let content = null;
+        const oid = this.state.rxData["oid_Present"];
+        console.log("oid " + oid);
+
+        if (oid !== undefined && oid.length > 5) {
+            const PresentChecked = this.state.values[oid + ".val"];
+
+            content = <FormControlLabel control={
+                <Switch
+                    checked={PresentChecked}
+                    onClick={() => this.onChange3()}
+                />} label={Generic.t("Present")} />
+
+        }
+        return content;
+    }
+
+    getPartyNow() {
+        let content = null;
+        const oid = this.state.rxData["oid_PartyNow"];
+        console.log("oid " + oid);
+
+        if (oid !== undefined && oid.length > 5) {
+            const PartyNowChecked = this.state.values[oid + ".val"];
+
+            content = <FormControlLabel control={
+                <Switch
+                    checked={PartyNowChecked}
+                    onClick={() => this.onChange4()}
+                />} label={Generic.t("PartyNow")} />
+        }
+        return content;
+    }
+
+    getGuestsPresent() {
+        let content = null;
+        const oid = this.state.rxData["oid_GuestsPresent"];
+        console.log("oid " + oid);
+
+        if (oid !== undefined && oid.length > 5) {
+            const GuestsPresentChecked = this.state.values[oid + ".val"];
+
+            content = <FormControlLabel control={
+                <Switch
+                    checked={GuestsPresentChecked}
+                    onClick={() => this.onChange5()}
+                />} label={Generic.t("GuestsPresent")} />
+        }
+        return content;
+    }
+
+    getHolidayPresent() {
+        let content = null;
+        const oid = this.state.rxData["oid_HolidayPresent"];
+        console.log("oid " + oid);
+
+        if (oid !== undefined && oid.length > 5) {
+            const HolidayAtHomeChecked = this.state.values[oid + ".val"];
+
+            content = <FormControlLabel control={
+                <Switch
+                    checked={HolidayAtHomeChecked}
+                    onClick={() => this.onChange6()}
+                />} label={Generic.t("HolidayAtHome")} />
+        }
+        return content;
+    }
+
+    getVacationAbsent() {
+        let content = null;
+        const oid = this.state.rxData["oid_VacationAbsent"];
+        console.log("oid " + oid);
+
+        if (oid !== undefined && oid.length > 5) {
+            const VacationChecked = this.state.values[oid + ".val"];
+
+            content = <FormControlLabel control={
+                <Switch
+                    checked={VacationChecked}
+                    onClick={() => this.onChange7()}
+                />} label={Generic.t("Vacation")} />
+        }
+        return content;
+    }
+
+    getFireplaceModeActive() {
+        let content = null;
+        const oid = this.state.rxData["oid_FireplaceModeActive"];
+        console.log("oid " + oid);
+
+        if (oid !== undefined && oid.length > 5) {
+            const FireplaceModeChecked = this.state.values[oid + ".val"];
+
+            content = <FormControlLabel control={
+                <Switch
+                    checked={FireplaceModeChecked}
+                    onClick={() => this.onChange8()}
+                />} label={Generic.t("FireplaceMode")} />
+        }
+        return content;
+    }
+
+    createTable() {
 
         return <div
             ref={this.refCardContent}
@@ -283,46 +413,15 @@ class HeatingGeneralParamsWidget extends (Generic) {
         >
             <Box sx={{ display: "flex", flexWrap: "wrap" }}>
                 <FormGroup>
-                    <FormControlLabel control={
-                        <Switch
-                            checked={HeatingPeriodActiveChecked}
-                            onClick={() => this.onChange1()}
-                        />} label={Generic.t("HeatingPeriodActive")} />
-                    <FormControlLabel control={
-                        <Switch
-                            checked={PublicHolidayTodayChecked}
-                            onClick={() => this.onChange2()}
-                        />} label={Generic.t("PublicHolidayToday")} />
-                    <FormControlLabel control={
-                        <Switch
-                            checked={PresentChecked}
-                            onClick={() => this.onChange3()}
-                        />} label={Generic.t("Present")} />
-                    <FormControlLabel control={
-                        <Switch
-                            checked={PartyNowChecked}
-                            onClick={() => this.onChange4()}
-                        />} label={Generic.t("PartyNow")} />
-                    <FormControlLabel control={
-                        <Switch
-                            checked={GuestsPresentChecked}
-                            onClick={() => this.onChange5()}
-                        />} label={Generic.t("GuestsPresent")} />
-                    <FormControlLabel control={
-                        <Switch
-                            checked={HolidayAtHomeChecked}
-                            onClick={() => this.onChange6()}
-                        />} label={Generic.t("HolidayAtHome")} />
-                    <FormControlLabel control={
-                        <Switch
-                            checked={VacationChecked}
-                            onClick={() => this.onChange7()}
-                        />} label={Generic.t("Vacation")} />
-                    <FormControlLabel control={
-                        <Switch
-                            checked={FireplaceModeChecked}
-                            onClick={() => this.onChange8()}
-                        />} label={Generic.t("FireplaceMode")} />
+                    {this.getHeatingPeriodActive()}
+                    {this.getPublicHolidayToday()}
+                    {this.getPresent()}
+                    {this.getPartyNow() }
+                    {this.getGuestsPresent() }
+                    {this.getHolidayPresent() }
+                    {this.getVacationAbsent()}
+                    {this.getFireplaceModeActive() }
+                    
                 </FormGroup>
             </Box>
         </div>;

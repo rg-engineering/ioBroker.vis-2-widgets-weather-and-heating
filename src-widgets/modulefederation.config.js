@@ -8,7 +8,7 @@ module.exports = makeFederation(
         "./WeatherWidget": "./src/WeatherWidget", // List of all widgets in this package
         "./WeatherDayWidget": "./src/WeatherDayWidget",
 
-        "./HeatingTimeScheduleWidget": "./src/HeatingTimescheduleWidget",
+        "./HeatingTimeScheduleWidget": "./src/HeatingTimeScheduleWidget",
         "./HeatingGeneralParamsWidget": "./src/HeatingGeneralParamsWidget",
         "./HeatingRoomWidget": "./src/HeatingRoomWidget",
         "./HeatingRoomsOverviewWidget": "./src/HeatingRoomsOverviewWidget",

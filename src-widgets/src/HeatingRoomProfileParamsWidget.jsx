@@ -327,11 +327,12 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
     getGuestIncrease() {
         let content = null;
         const oid = this.state.rxData["oid_GuestIncrease"];
+        console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
             const GuestIncrease = this.state.values[oid + ".val"];
 
-            <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+            content = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                     <FilledInput
                     size="small"
                     id="GuestIncrease"
@@ -356,11 +357,12 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
     getPartyDecrease() {
         let content = null;
         const oid = this.state.rxData["oid_PartyDecrease"];
+        console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
             const PartyDecrease = this.state.values[oid + ".val"];
 
-            <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+            content = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                 <FilledInput
                     size="small"
                     id="PartyDecrease"
@@ -385,11 +387,12 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
     getAbsentDecrease() {
         let content = null;
         const oid = this.state.rxData["oid_AbsentDecrease"];
+        console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
             const AbsentDecrease = this.state.values[oid + ".val"];
 
-            <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+            content = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                 <FilledInput
                     size="small"
                     id="AbsentDecrease"
@@ -414,11 +417,12 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
     getVacationAbsentDecrease() {
         let content = null;
         const oid = this.state.rxData["oid_VacationAbsentDecrease"];
+        console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
             const VacationAbsentDecrease = this.state.values[oid + ".val"];
 
-            <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+            content = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                 <FilledInput
                     size="small"
                     id="VacationAbsentDecrease"
@@ -443,11 +447,12 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
     getWindowOpenDecrease() {
         let content = null;
         const oid = this.state.rxData["oid_WindowOpenDecrease"];
+        console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
             const WindowOpenDecrease = this.state.values[oid + ".val"];
 
-            <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+            content = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                 <FilledInput
                     size="small"
                     id="WindowOpenDecrease"
@@ -474,11 +479,12 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
     getFireplaceModeDecrease() {
         let content = null;
         const oid = this.state.rxData["oid_FireplaceModeDecrease"];
+        console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
             const FireplaceModeDecrease = this.state.values[oid + ".val"];
 
-            <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+            content = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                 <FilledInput
                     size="small"
                     id="FireplaceModeDecrease"
@@ -503,11 +509,12 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
     getMinimumTemperature() {
         let content = null;
         const oid = this.state.rxData["oid_MinimumTemperature"];
+        console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
             const MinimumTemperature = this.state.values[oid + ".val"];
 
-            <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+            content = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                 <FilledInput
                     size="small"
                     id="MinimumTemperature"
@@ -532,11 +539,12 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
     getOverrideTemperatureTime() {
         let content = null;
         const oid = this.state.rxData["oid_TemperaturOverrideTime"];
+        console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
             const OverrideTemperatureTime = this.state.values[oid + ".val"];
 
-            <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+            content = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                 <FilledInput
                     size="small"
                     id="OverrideTemperatureTime"
@@ -561,11 +569,12 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
     getOverrideTemperature() {
         let content = null;
         const oid = this.state.rxData["oid_TemperaturOverride"];
+        console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
             const OverrideTemperature = this.state.values[oid + ".val"];
 
-            <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+            content = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                 <FilledInput
                     size="small"
                     id="OverrideTemperature"

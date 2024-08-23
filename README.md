@@ -93,7 +93,7 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 0.7.0 (2024-08-23)
  * (René) bug fix images
  * (René) Icons and translations
  * (René) Heating General Parameter: show paramter only if OID is set

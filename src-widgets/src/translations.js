@@ -9,8 +9,8 @@ const translations = {
     es: require("./i18n/es.json"),
     pl: require("./i18n/pl.json"),
     uk: require("./i18n/uk.json"),
-    prefix: 'widgets_weather_label_',
     "zh-cn": require("./i18n/zh-cn.json"),
+    prefix: 'vis_2_widgets_weather_heating_label_',
 };
 
 export default translations;

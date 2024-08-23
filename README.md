@@ -96,6 +96,9 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 ### **WORK IN PROGRESS**
  * (René) bug fix images
  * (René) Icons and translations
+ * (René) Heating General Parameter: show paramter only if OID is set
+ * (René) Heating Room Profile Parameter: show paramter only if OID is set
+ * (Bluefox) Typos, Refactoring, Formating
 
 ### 0.6.0 (2024-08-18)
  * (René) widget set renamed again because adapter checker doesn't accept the name

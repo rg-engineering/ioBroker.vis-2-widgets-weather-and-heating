@@ -6,7 +6,7 @@ class Generic extends (window.visRxWidget || VisRxWidget) {
     getPropertyValue = state => this.state.values[`${this.state.rxData[state]}.val`];
 
     static getI18nPrefix() {
-        return '';
+        return 'vis_2_widgets_weather_heating_label_';
     }
 }
 

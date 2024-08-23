@@ -110,7 +110,7 @@ class HeatingRoomWidget extends (Generic) {
                     ],
                 },
                 {
-                    name: "OIDS_General", // group name
+                    name: "OIDS_general", // group name
                     fields: [
                         {
                             name: "oid_TargetTemperature",    // name in data structure

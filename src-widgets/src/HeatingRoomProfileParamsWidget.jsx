@@ -116,74 +116,74 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
 
 
                 {
-                    name: "OIDS_General", // group name
+                    name: "OIDS_general", // group name
                     fields: [
                         {
                             name: "oid_ChosenRoom",    // name in data structure
-                            label: "choosenroom", // translated field label
+                            label: "oid_choosenroom", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.ChosenRoom",
                         },
 
                         {
                             name: "oid_GuestIncrease",    // name in data structure
-                            label: "guestincrease", // translated field label
+                            label: "oid_GuestIncrease", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.TempDecreaseValues.GuestIncrease",
                         },
 
                         {
                             name: "oid_PartyDecrease",    // name in data structure
-                            label: "partydecrease", // translated field label
+                            label: "oid_PartyDecrease", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.TempDecreaseValues.PartyDecrease",
                         },
 
                         {
                             name: "oid_AbsentDecrease",    // name in data structure
-                            label: "absentdecrease", // translated field label
+                            label: "oid_AbsentDecrease", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.TempDecreaseValues.AbsentDecrease",
                         },
 
                         {
                             name: "oid_VacationAbsentDecrease",    // name in data structure
-                            label: "vacationabsentdecrease", // translated field label
+                            label: "oid_VacationAbsentDecrease", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.TempDecreaseValues.VacationAbsentDecrease",
                         },
 
                         {
                             name: "oid_WindowOpenDecrease",    // name in data structure
-                            label: "windowopendecrease", // translated field label
+                            label: "oid_WindowOpenDecrease", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.TempDecreaseValues.WindowOpenDecrease",
                         },
 
                         {
                             name: "oid_FireplaceModeDecrease",    // name in data structure
-                            label: "fireplacemodedecrease", // translated field label
+                            label: "oid_FireplaceModeDecrease", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.TempDecreaseValues.FireplaceModeDecrease",
                         },
 
                         {
                             name: "oid_TemperaturOverride",    // name in data structure
-                            label: "temperaturoverride", // translated field label
+                            label: "oid_TemperaturOverride", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.RoomValues.TemperaturOverride",
                         },
 
                         {
                             name: "oid_TemperaturOverrideTime",    // name in data structure
-                            label: "temperaturoverridetime", // translated field label
+                            label: "oid_TemperaturOverrideTime", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.RoomValues.TemperaturOverrideTime",
                         },
 
                         {
                             name: "oid_MinimumTemperature",    // name in data structure
-                            label: "minimumtemperature", // translated field label
+                            label: "oid_MinimumTemperature", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.RoomValues.MinimumTemperature",
                         },

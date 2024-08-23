@@ -214,7 +214,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
                     ],
                 },
                 {
-                    name: "OIDS_General", // group name
+                    name: "OIDS_general", // group name
                     fields: [
                         {
                             name: "oid_CurrentProfile",    // name in data structure
@@ -1204,8 +1204,8 @@ class HeatingTimeScheduleWidget extends (Generic) {
     renderWidgetBody(props) {
         super.renderWidgetBody(props);
 
-        console.log("HeatingTimeScheduleWidget values ${JSON.stringify(this.state.values)");
-        console.log("HeatingTimeScheduleWidget rxData ${JSON.stringify(this.state.rxData)");
+        //console.log("HeatingTimeScheduleWidget values ${JSON.stringify(this.state.values)");
+        //console.log("HeatingTimeScheduleWidget rxData ${JSON.stringify(this.state.rxData)");
 
         let size;
         if (!this.refCardContent.current) {
@@ -1214,16 +1214,16 @@ class HeatingTimeScheduleWidget extends (Generic) {
             size = this.refCardContent.current.offsetHeight;
         }
 
-        console.log(`heating time schedule: size ${size}`);
+        //console.log(`heating time schedule: size ${size}`);
 
         const content = this.createTable();
 
         if (this.state.rxData.noCard || props.widget.usedInWidget) {
-            console.log("nur content");
+            //console.log("nur content");
             return content;
         }
 
-        console.log("heating time schedule: wrap content");
+        //console.log("heating time schedule: wrap content");
 
         return this.wrapContent(content, null, { textAlign: "center" });
     }

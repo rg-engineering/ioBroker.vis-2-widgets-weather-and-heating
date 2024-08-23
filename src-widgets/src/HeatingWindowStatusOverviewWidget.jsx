@@ -80,7 +80,7 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
                     ],
                 },
                 {
-                    name: "OIDS_General", // group name
+                    name: "OIDS_general", // group name
                     fields: [
                         {
                             name: "oid_WindowStatesHtmlTable",    // name in data structure

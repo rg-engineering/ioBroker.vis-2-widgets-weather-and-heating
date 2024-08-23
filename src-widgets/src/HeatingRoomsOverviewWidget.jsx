@@ -69,7 +69,7 @@ class HeatingRoomsOverviewWidget extends (Generic) {
                     ],
                 },
                 {
-                    name: "OIDS_General", // group name
+                    name: "OIDS_general", // group name
                     fields: [
                         {
                             name: "oid_RoomStatesHtmlTable",    // name in data structure
@@ -109,8 +109,8 @@ class HeatingRoomsOverviewWidget extends (Generic) {
     renderWidgetBody(props) {
         super.renderWidgetBody(props);
 
-        console.log("HeatingRoomsOverviewWidget values ${JSON.stringify(this.state.values)");
-        console.log("HeatingRoomsOverviewWidget rxData ${JSON.stringify(this.state.rxData)");
+        //console.log("HeatingRoomsOverviewWidget values ${JSON.stringify(this.state.values)");
+        //console.log("HeatingRoomsOverviewWidget rxData ${JSON.stringify(this.state.rxData)");
 
         let size;
         if (!this.refCardContent.current) {
@@ -119,16 +119,16 @@ class HeatingRoomsOverviewWidget extends (Generic) {
             size = this.refCardContent.current.offsetHeight;
         }
 
-        console.log(`heating time schedule: size ${size}`);
+        //console.log(`heating time schedule: size ${size}`);
 
         const content = this.createTable();
 
         if (this.state.rxData.noCard || props.widget.usedInWidget) {
-            console.log("nur content");
+            //console.log("nur content");
             return content;
         }
 
-        console.log("heating rooms overview: wrap content");
+        //console.log("heating rooms overview: wrap content");
 
         return this.wrapContent(content, null, { textAlign: "center" });
     }

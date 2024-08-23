@@ -20,17 +20,19 @@
   "group_clouds": "Clouds",
   "group_chanceofrain": "Chance of Rain",
   "group_oids_general": "OID General",
+  "group_OIDS": "OID",
   "group_oids_rain": "OID Rain",
   "group_oids_temp": "OID Temperature",
   "group_oids_cloud": "OID Clouds",
   "group_oids_time": "OID Time",
   "group_oids_chanceofrain": "OID Chance of Rain",
 
+
   "group_OIDS_General": "OID's General",
   "group_OIDS_Profile_MoSu": "OID's Profile Mo - Su",
   "group_OIDS_Profile_MoFr_SaSu": "OID's Profile Mo-Fr / Sa-Su",
   "group_OIDS_Profile_EveryDay": "OID's every day",
-  "group_OIDS": "OID's",
+  
 
   "without_card": "without card",
   "name": "name",
@@ -250,7 +252,7 @@
   "from": "from",
   "Temperature": "Temperature",
   "Times in week": "Times / Week",
-  "Profil": "Profil",
+  "Profil ": "Profil ",
   "Mo. - So.": "Mo. - Su",
   "Mo. - Fr.": "Mo. - Fr.",
   "Sa. - Su.": "Sa. - Su",
@@ -343,6 +345,9 @@
   "Window Status Overview": "Window Status Overview",
   "Windows open": "Windows open",
   "all windows closed": "all windows closed",
+
+  "Rooms Status Overview": "Rooms Status Overview",
+
 
   "oid_CurrentProfile": "OID Current Profile"
 }

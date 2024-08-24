@@ -28,72 +28,8 @@
         "pl": "zestaw widget zmienił nazwę ponownie, ponieważ sprawdzacz adaptera nie akceptuje nazwy\nIkony i tłumaczenia\nreadme update\nczas grzewczy widget przepracowany",
         "uk": "набір віджетів знову перейменований, тому що адаптер не приймає назву\nІкона і переклади\nоновлення\nграфік роботи на опалювальному режимі",
         "zh-cn": "部件集重新命名是因为适配器检查器不接受名称\n图标和翻译\n读取更新\n加热时间表部件超负荷工作"
-      },
-      "0.5.0": {
-        "en": "widget Heating Room Status overview overworked (works only with HeatingControl@1.12.9)\nshow number of open windows in Heating Window Status Overview\n",
-        "de": "widget Heizraum Statusübersicht überbearbeitet (nur mit HeizungControl@1.12.9)\nanzahl der offenen Fenster in Heizfenster Status Überblick\n",
-        "ru": "виджет Отопление Статус переутомленный (работает только с ОтоплениеControl@1.12.9)\nпоказать количество открытых окон в изолированных окнах\n",
-        "pt": "widget Visão geral do estado da sala de aquecimento sobretrabalhado (trabalha apenas com o aquecimentoControl@1.12.9)\nmostrar número de janelas abertas em janela de aquecimento Visão geral do estado\n",
-        "nl": "widget Verwarming Kamer Status overzicht overwerkt (werken alleen met verwarmingControl@1.12.9)\ntoon aantal geopende vensters in Verwarming Venster Status Overzicht\n",
-        "fr": "widget Heating Room Aperçu de l'état des travaux surchargés (travaille uniquement avec HeatingControl@1.12.9)\nafficher le nombre de fenêtres ouvertes dans l'état de la fenêtre de chauffage\n",
-        "it": "widget Riscaldamento Camera Panoramica stato sovralavorato (funziona solo con RiscaldamentoControl@1.12.9)\nmostra il numero di finestre aperte in Riscaldamento Finestra Stato Panoramica\n",
-        "es": "widget Calefacción Habitación Estado general overworked (works only with HeatingControl@1.12.9)\nmostrar número de ventanas abiertas en Calefacción ventana Estado general\n",
-        "pl": "widget Ogrzewanie Pokój Przegląd stanu przepracowany (działa tylko z HeatingControl @ 1.12.9)\npokaż liczbę otwartych okien w Przeglądzie stanu okna ogrzewania\n",
-        "uk": "огляд стану опалювальних приміщень (працює тільки з HeatControl@1.12.9)\nпоказати кількість відкритих вікон в опалювальному віконному статусі Огляд\n",
-        "zh-cn": "供热室状况概览超负荷工作(仅使用供热控制器工作@1.12.9)\n在加热窗口状态概览中显示打开窗口的数量\n"
-      },
-      "0.4.0": {
-        "en": "widget set renamed to weather and heating, because two widget sets are available\nbug fix icon in weather day widget\nheating and weather widgets sets are separeted\nHeating General Params Widget get and set values fixed\nHeating Room Profile Params Widget get and set values fixed",
-        "de": "widget-set umbenannt auf wetter und heizung, weil zwei widget-sets verfügbar sind\nbug fix icon in wetter-tag widget\nheizung und wetter widgets sets werden getrennt\nHeizung Allgemeine Params Widget get und gesetzte Werte\nHeizraum Profil Params Widget get und gesetzte Werte",
-        "ru": "набор виджетов переименован в погоду и отопление, потому что доступны два набора виджетов\nзначок для исправления ошибок в дневном режиме\nнагревательные и погодные виджеты наборы\nОтопление Общие Виджет получить и установить фиксированные значения\nКомната для отопления Виджет получить и установить фиксированные значения",
-        "pt": "conjunto widget renomeado para clima e aquecimento, porque dois conjuntos de widgets estão disponíveis\nbug corrigir ícone no widget do dia do tempo\naquecimento e widgets de tempo conjuntos são separados\nParams gerais de aquecimento Widget obter e definir valores fixos\nParams de perfil de sala de aquecimento Widget obter e definir valores fixos",
-        "nl": "widget set hernoemd naar het weer en verwarming, omdat twee widgetsets beschikbaar zijn\nbug fix pictogram in het weer widget\nverwarming en weer widgets sets zijn gescheiden\nVerwarming Algemeen Params Widget krijgt en stelt waarden vast\nVerwarmingskamerprofiel Params Widget krijgt en stelt waarden vast",
-        "fr": "widget rebaptisé météo et chauffage, car deux widgets sont disponibles\nicône de correction de bug dans widget météo jour\nles ensembles widgets de chauffage et de temps sont séparés\nChauffage Params généraux Widget obtient et fixe les valeurs\nProfil de la chambre de chauffage Params Widget obtient et fixe les valeurs",
-        "it": "widget set rinominato meteo e riscaldamento, perché due set di widget sono disponibili\nicona correzione bug nel widget giorno del tempo\nriscaldamento e widget meteo set sono separeted\nRiscaldamento Generale Params Widget ottenere e impostare valori fissi\nParams del profilo della camera di riscaldamento Widget ottenere e impostare valori fissi",
-        "es": "widget set renombrado al clima y la calefacción, porque dos juegos widget están disponibles\nbug fijar icono en el día del tiempo widget\nsistemas de calefacción y widgets meteorológicos están separados\nParams generales de calefacción Widget conseguir y establecer valores fijos\nParámetros de perfil de la habitación Widget conseguir y establecer valores fijos",
-        "pl": "zestaw widget zmienił nazwę na pogoda i ogrzewanie, ponieważ dostępne są dwa zestawy widget\nikona fix błędu w widget dzień pogody\nogrzewanie i widżety pogodowe są separeted\nOgrzewanie Paramy ogólne Widget get and set values fixed\nOgrzewanie Params Profil pokoju Widget get and set values fixed",
-        "uk": "набір віджетів перейменований на погоду і опалення, тому що два комплекти віджетів доступні\nвиправлення помилок у погодні дні віджет\nнабори опалювальних і погодних віджетів відокремлюються\nНагрівальні загальні параметри Віджети і встановити значення фіксовані\nПараметри профілю нагрівальних кімнат Віджети і встановити значення фіксовані",
-        "zh-cn": "部件集重新命名为天气和暖气, 因为有两个部件集可用\n天气日部件中的错误修正图标\n暖气和天气部件组装已分离\n加热一般参数 部件获得并设定值\n加热室简介 部件获得并设定值"
-      },
-      "0.3.3": {
-        "en": "Heating Rooms Overview widget completed\nHeating Windows Status Overview widget completed\nHeating Room widget completed",
-        "de": "Heizungsanlagen Übersicht Widget abgeschlossen\nHeizung Windows Status Übersicht Widget abgeschlossen\nHeizung Zimmer Widget abgeschlossen",
-        "ru": "Отопление Комнаты Обзор виджет завершен\nОбзор состояния Windows завершен\nОтопление Вигжет комнаты завершен",
-        "pt": "Quartos de Aquecimento Visão geral widget concluído\nWidget de Visão Geral do Status do Windows de Aquecimento concluído\nWidget de sala de aquecimento completo",
-        "nl": "Verwarmingsruimten Overzichtswidget voltooid\nVerwarming Windows Status Overzicht widget voltooid\nVerwarmingskamer widget voltooid",
-        "fr": "Chambres de chauffage Aperçu widget terminé\nChauffage de l'état de Windows Aperçu widget terminé\nWidget de chauffage terminé",
-        "it": "Camere per il riscaldamento Panoramica widget completato\nRiscaldamento Windows Status Panoramica widget completato\nPulsante della camera di riscaldamento completato",
-        "es": "Calefacción Habitaciones Visión general completa\nCalefacción estado de Windows Vista general widget completado\nEl widget de la habitación de calefacción completado",
-        "pl": "Ogrzewanie Pokoje Ukończony widżet przeglądu\nOgrzewanie Widżet stanu systemu Windows\nOgrzewanie Widget pokoju zakończone",
-        "uk": "Опалення кімнат Огляд віджету завершено\nОпалення Windows Статус Огляд віджет завершено\nОпалювальний віджет",
-        "zh-cn": "暖房 概览部件完成\n加热窗口状态概览部件完成\n暖房部件完成"
-      },
-      "0.3.2": {
-        "en": "Heating General Params widget added\nHeating Room widget adde\nHeating Rooms Overview widget added\nHeating Room Profile Params widget added\nHeating Windows Status Overview widget added",
-        "de": "Heizung General Params Widget hinzugefügt\nHeizung Zimmer Widget hinzufügen\nHeizungsanlagen Übersicht Widget hinzugefügt\nHeizung Zimmer Profil Params Widget hinzugefügt\nHeizung Windows Status Übersicht Widget hinzugefügt",
-        "ru": "Отопление Общие Парамс виджет добавлен\nКомната для отопления\nОтопление Комнаты Добавить виджет\nКомплект для обогрева\nОбзор состояния Windows добавлен",
-        "pt": "Aquecimento Geral Params widget adicionado\nAdicionar widget do quarto de aquecimento\nQuartos de Aquecimento Visão geral widget adicionado\nPerfil de quarto de aquecimento params widget adicionado\nWidget de Visão Geral do Status do Windows de Aquecimento adicionado",
-        "nl": "Verwarming Algemeen Params widget toegevoegd\nVerwarmingsruimte widget adde\nVerwarmingsruimten Overzicht widget toegevoegd\nVerwarming kamerprofiel Params widget toegevoegd\nVerwarming van Windows Status Overzicht widget toegevoegd",
-        "fr": "Widget de chauffage général Params ajouté\nWidget de chauffage de chambre adde\nChambres de chauffage Aperçu widget ajouté\nProfil de la chambre de chauffage Params widget ajouté\nChauffage de l'état de Windows Aperçu widget ajouté",
-        "it": "Riscaldamento Generale Params widget aggiunto\nRiscaldamento Camera widget adde\nCamere per il riscaldamento Panoramica widget aggiunto\nPulsante Params profilo camera riscaldamento aggiunto\nRiscaldamento Windows Status Panoramica widget aggiunto",
-        "es": "Calefacción General Params widget añadido\nCalefacción habitación widget adde\nCalefacción Habitaciones Resúmenes añadidos\nPerfil de la habitación de calefacción\nCalefacción estado de Windows Vista general widget añadido",
-        "pl": "Ogrzewanie Ogólne Params widget dodany\nOgrzewanie Pokój widget adde\nOgrzewanie Pokoje Name\nProfil ogrzewania Params dodano\nOgrzewanie Widżet stanu systemu Windows",
-        "uk": "Нагрівальний загальний Params віджет додано\nОпалювальний номер віджет додати\nОпалення кімнат Огляд віджету додано\nОпалювальний номер профілю Params віджет додано\nОпалення Windows Status Огляд віджету",
-        "zh-cn": "添加加热常规参数部件\n加热室部件\n暖房 概览部件已添加\n加热室配置文件参数部件\n添加加热窗口状态概览部件"
-      },
-      "0.3.1": {
-        "en": "(René) translations",
-        "de": "(René) Übersetzungen",
-        "ru": "(René) переводы",
-        "pt": "(René) traduções",
-        "nl": "(René) vertalingen",
-        "fr": "(René) traductions",
-        "it": "(René) traduzioni",
-        "es": "(René) traducciones",
-        "pl": "(René) tłumaczenia",
-        "uk": "(René) переклади",
-        "zh-cn": "(René)翻译"
       }
+     
     },
     "licenseInformation": {
       "license": "MIT",
@@ -138,7 +74,6 @@
     "readme": "https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather-and-heating/blob/master/README.md",
     "loglevel": "info",
     "mode": "none",
-    "noConfig": true,
     "adminUI": {
       "config": "none"
     },

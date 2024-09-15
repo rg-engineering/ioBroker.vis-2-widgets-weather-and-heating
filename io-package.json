@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather-and-heating",
-    "version": "0.7.1",
+    "version": "0.7.2",
     "news": {
+      "0.7.2": {
+        "en": "bug fix to show widgets in runtime too",
+        "de": "fehler beheben, um widgets in laufzeit zu zeigen",
+        "ru": "исправление ошибок, чтобы показать виджеты в беге",
+        "pt": "correção de bug para mostrar widgets no tempo de execução também",
+        "nl": "bug fix om widgets ook in runtime te tonen",
+        "fr": "correction de bug pour afficher des widgets dans l'exécution aussi",
+        "it": "bug fix per mostrare widget in runtime troppo",
+        "es": "bug fijado para mostrar widgets en tiempo de ejecución también",
+        "pl": "błąd naprawić, aby pokazać widżety w runtime zbyt",
+        "uk": "виправлення помилок, щоб показати віджети занадто",
+        "zh-cn": "错误修复以在运行时间显示部件"
+      },
       "0.7.1": {
         "en": "bug fix to show widgets in runtime too",
         "de": "fehler beheben, um widgets in laufzeit zu zeigen",

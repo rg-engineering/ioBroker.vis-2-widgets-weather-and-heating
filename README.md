@@ -93,7 +93,7 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 0.7.2 (2024-09-15)
  * (René) bug fix to show widgets in runtime too
 
 ### 0.7.0 (2024-08-23)

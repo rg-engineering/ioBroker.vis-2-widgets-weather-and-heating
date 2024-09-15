@@ -3,7 +3,7 @@ const adapterName = require('../package.json').name.split('.').pop();
 
 //just to other widgets too
 
-const widget_sets = ["vis-2-widgets-weather", "vis-2-widgets-heating"];
+const widget_sets = ["vis-2-widgets-weather-and-heating"];
 
 describe(widget_sets[0], () => {
     before(async function () {

@@ -121,7 +121,7 @@ class GeneralEChartWidget extends (Generic) {
     static getWidgetInfo() {
         return {
             id: "tplGeneralEChartWidget",                 // Unique widget type ID. Should start with `tpl` followed
-            visSet: "vis-2-widgets-weather",        // Unique ID of widget set
+            visSet: "vis-2-widgets-weather-and-heating",        // Unique ID of widget set
 
             //visset -> see WeatherWidget
             //visSetLabel: "vis-2-widgets-weather",   // Widget set translated label (should be defined only in one widget of set)

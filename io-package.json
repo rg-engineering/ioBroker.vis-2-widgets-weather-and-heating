@@ -83,9 +83,9 @@
     "connectionType": "cloud",
     "dataSource": "poll",
     "visWidgets": {
-      "vis2Weather": {
+      "vis2WeatherHeatingWidgets": {
         "i18n": "component",
-        "name": "vis2Weatherheating",
+        "name": "vis2WeatherHeatingWidgets",
         "url": "vis-2-widgets-weather-and-heating/customWidgets.js",
         "components": [
           "GeneralEChartWidget",

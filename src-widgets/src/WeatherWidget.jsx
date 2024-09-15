@@ -18,7 +18,7 @@ const styles = {
     },
 };
 
-// todo readme anpassen
+
 // todo Format-String für Zeitanzeige X Achse -> Übersetzen
 // todo rerender verzögern, wenn Daten aktualisiert werden
 // todo Farbe für Background einstellbar
@@ -230,8 +230,8 @@ class WeatherWidget extends (Generic) {
 
         return {
             id: "tplWeatherWidget",                 // Unique widget type ID. Should start with `tpl` followed
-            visSet: "vis-2-widgets-weather",        // Unique ID of widget set
-            visSetLabel: "vis-2-widgets-weather",   // Widget set translated label (should be defined only in one widget of set)
+            visSet: "vis-2-widgets-weather-and-heating",        // Unique ID of widget set
+            visSetLabel: "vis-2-widgets-weather-and-heating",   // Widget set translated label (should be defined only in one widget of set)
             visSetColor: "#cf00ff",                 // Color of widget set. it is enough to set color only in one widget of set
             visName: "weather",                     // Name of widget
             visWidgetLabel: "vis_2_widgets-weather", // Label of widget

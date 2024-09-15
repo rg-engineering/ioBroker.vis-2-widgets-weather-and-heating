@@ -19,7 +19,7 @@ const styles = {
 // todo tag auswahl setzt OID"s neu -> testen
 // todo mondphase anzeigen
 // todo bug fix icons (wetter und wind) passen nicht
-// todo Übersetzungen
+
 
 // weather icons
 const images1 = require.context("./assets/icons/tiempo-weather/galeria1", false);
@@ -108,7 +108,7 @@ class WeatherDayWidget extends (Generic) {
     static getWidgetInfo() {
         return {
             id: "tplWeatherDayWidget",                 // Unique widget type ID. Should start with `tpl` followed
-            visSet: "vis-2-widgets-weather",        // Unique ID of widget set
+            visSet: "vis-2-widgets-weather-and-heating",        // Unique ID of widget set
 
             //visset -> see WeatherWidget
             //visSetLabel: "vis-2-widgets-weather",   // Widget set translated label (should be defined only in one widget of set)

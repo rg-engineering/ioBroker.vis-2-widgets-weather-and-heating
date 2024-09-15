@@ -30,7 +30,7 @@ const styles = {
     },
 };
 
-//todo Unterscheidung absolut / relativ
+//todo Unterscheidung absolut / relativ -> okay, aber Anzeige fehlt, welcher Modus aktiv
 //todo FormControl size and color einstellbar
 
 
@@ -78,7 +78,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
 
         return {
             id: "tplHeatingRoomProfileParamsWidget",                 // Unique widget type ID. Should start with `tpl` followed
-            visSet: "vis-2-widgets-heating",        // Unique ID of widget set
+            visSet: "vis-2-widgets-weather-and-heating",        // Unique ID of widget set
 
             //visset -> see HeatingGeneralParamsWidget
             //visSetLabel: "vis-2-widgets-heating",   // Widget set translated label (should be defined only in one widget of set)

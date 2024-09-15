@@ -20,7 +20,8 @@ const styles = {
     },
 };
 
-// todo Zeit / Temperatur eingebbar -> Handler fehlt noch
+//todo Copy Periods fehlt noch
+
 
 const setDataStructures = async (field, data, changeData, socket) => {
     console.log(`set new data structure instance ${data["instance"]}` );
@@ -184,7 +185,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
     static getWidgetInfo() {
         return {
             id: "tplHeatingTimeScheduleWidget",                 // Unique widget type ID. Should start with `tpl` followed
-            visSet: "vis-2-widgets-heating",        // Unique ID of widget set
+            visSet: "vis-2-widgets-weather-and-heating",        // Unique ID of widget set
             // visset -> see HeatingGeneralParamsWidget
             // visSetLabel: "vis-2-widgets-heating",   // Widget set translated label (should be defined only in one widget of set)
             // visSetColor: "#cf00ff",                 // Color of widget set. it is enough to set color only in one widget of set

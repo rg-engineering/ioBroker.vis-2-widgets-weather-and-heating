@@ -22,8 +22,6 @@ const styles = {
     },
 };
 
-// todo übersetzungen
-// todo Image
 
 const setDataStructures = async (field, data, changeData, socket) => {
     console.log(`set new data structure instance ${data["instance"]}` );
@@ -48,7 +46,7 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
     static getWidgetInfo() {
         return {
             id: "tplHeatingWindowStatusOverviewWidget",                 // Unique widget type ID. Should start with `tpl` followed
-            visSet: "vis-2-widgets-heating",        // Unique ID of widget set
+            visSet: "vis-2-widgets-weather-and-heating",        // Unique ID of widget set
 
             //visset -> see HeatingGeneralParamsWidget
             //visSetLabel: "vis-2-widgets-heating",   // Widget set translated label (should be defined only in one widget of set)

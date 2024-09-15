@@ -38,6 +38,7 @@
   <ItemGroup>
     <Content Include=".eslintignore" />
     <Content Include=".eslintrc.js" />
+    <Content Include=".github\auto-merge.yml" />
     <Content Include=".github\dependabot.yml" />
     <Content Include=".github\FUNDING.yml" />
     <Content Include=".github\ISSUE_TEMPLATE\BugReport.md" />

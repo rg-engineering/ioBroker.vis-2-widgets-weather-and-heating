@@ -18,9 +18,6 @@ const styles = {
     },
 };
 
-// todo nur die Werte anzeigen, für die es auch OID's gibt
-// todo Übersetzungen
-// todo Image
 
 const setDataStructures = async (field, data, changeData, socket) => {
     console.log(`set new data structure instance${data["instance"]}` );
@@ -51,10 +48,10 @@ class HeatingGeneralParamsWidget extends (Generic) {
     static getWidgetInfo() {
         return {
             id: "tplHeatingGeneralParamsWidget",                 // Unique widget type ID. Should start with `tpl` followed
-            visSet: "vis-2-widgets-heating",        // Unique ID of widget set
+            visSet: "vis-2-widgets-weather-and-heating",        // Unique ID of widget set
 
-            visSetLabel: "vis-2-widgets-heating",   // Widget set translated label (should be defined only in one widget of set)
-            visSetColor: "#cf00ff",                 // Color of widget set. it is enough to set color only in one widget of set
+            //visSetLabel: "vis-2-widgets-heating",   // Widget set translated label (should be defined only in one widget of set)
+            //visSetColor: "#cf000f",                 // Color of widget set. it is enough to set color only in one widget of set
             visName: "HeatingGeneralParamsWidget",                     // Name of widget
             visWidgetLabel: "vis_2_widgets-HeatingGeneralParams", // Label of widget
             visWidgetColor: "#005cc4",               // Optional widget color. If not set, default color of widget set will be used.

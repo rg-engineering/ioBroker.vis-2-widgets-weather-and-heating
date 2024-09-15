@@ -35,10 +35,8 @@ const styles = {
 };
 
 // todo oid nach Instanz neu belegen
-// todo alles anzeigen
 
-// todo Übersetzungen
-// todo Images
+
 
 const setDataStructures = async (field, data, changeData, socket) => {
     console.log(`set new datastructure instance ${data["instance"]}` );
@@ -49,15 +47,15 @@ const setDataStructures = async (field, data, changeData, socket) => {
     if (instance && instance.length > 0 && instance.includes("heatingcontrol") ) {
         // todo
         data["oid_TargetTemperature"] = instance;
-        data["oid_CurrentTemperature"] = instance;
-        data["oid_CurrentTemperatureExtSensor"] = instance;
-        data["oid_CurrentActorState"] = instance;
-        data["oid_CurrentValveValue"] = instance;
-        data["oid_RoomState"] = instance;
-        data["oid_RoomLog"] = instance;
-        data["oid_ThermostatBatteryState"] = instance;
-        data["oid_ThermostatBatteryVoltage"] = instance;
-        data["oid_ThermostatRSSI"] = instance;
+        //data["oid_CurrentTemperature"] = instance;
+        //data["oid_CurrentTemperatureExtSensor"] = instance;
+        //data["oid_CurrentActorState"] = instance;
+        //data["oid_CurrentValveValue"] = instance;
+        //data["oid_RoomState"] = instance;
+        //data["oid_RoomLog"] = instance;
+        //data["oid_ThermostatBatteryState"] = instance;
+        //data["oid_ThermostatBatteryVoltage"] = instance;
+        //data["oid_ThermostatRSSI"] = instance;
     }
     changeData(data);
 };
@@ -71,7 +69,7 @@ class HeatingRoomWidget extends (Generic) {
     static getWidgetInfo() {
         return {
             id: "tplHeatingRoomWidget",                 // Unique widget type ID. Should start with `tpl` followed
-            visSet: "vis-2-widgets-heating",        // Unique ID of widget set
+            visSet: "vis-2-widgets-weather-and-heating",        // Unique ID of widget set
 
             //visset -> see HeatingGeneralParamsWidget
             //visSetLabel: "vis-2-widgets-heating",   // Widget set translated label (should be defined only in one widget of set)

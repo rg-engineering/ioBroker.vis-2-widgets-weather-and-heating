@@ -3,4 +3,7 @@
   <PropertyGroup>
     <LastActiveSolutionConfig>Debug|Any CPU</LastActiveSolutionConfig>
   </PropertyGroup>
+  <PropertyGroup>
+    <PromptedToMigrateToJsps />
+  </PropertyGroup>
 </Project>

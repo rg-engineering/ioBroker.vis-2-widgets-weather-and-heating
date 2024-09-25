@@ -4,9 +4,14 @@
   "oid_temp_": "OID: Temperatur",
   "oid_cloud_": "OID: Wolken",
   "oid_time_": "OID: Zeit",
+
   "vis-2-widgets-weather": "Wetter-Widgets",
   "vis_2_widgets-weather": "Wetter-Widget",
   "vis-2-widgets-heating": "Heizungs-Widgets",
+
+  "vis-2-widgets-weather-and-heating": "Heizungs- und Wetter-Widgets",
+
+
   "group_x_axis": "X-Achse",
   "group_rain": "Regen",
   "group_temperature": "Temperatur",

@@ -14,6 +14,8 @@
   "vis_2_widgets-weather": "weather widget",
   "vis-2-widgets-heating": "heating widgets",
 
+  "vis-2-widgets-weather-and-heating": "heating and weather widgets",
+
   "group_x_axis": "X Axis",
   "group_rain": "Rain",
   "group_temperature": "Temperature",
@@ -32,7 +34,7 @@
   "group_OIDS_Profile_MoSu": "OID's Profile Mo - Su",
   "group_OIDS_Profile_MoFr_SaSu": "OID's Profile Mo-Fr / Sa-Su",
   "group_OIDS_Profile_EveryDay": "OID's every day",
-  
+
 
   "without_card": "without card",
   "name": "name",

@@ -278,6 +278,14 @@ class WeatherWidget extends (Generic) {
                             //default: weatherunderground ? "forecastHourly" : "NextHours",
                             onChange: setDataStructures,
                         },
+
+                        {
+                            name: "headline_color",    // name in data structure
+                            label: "headline_color", // translated field label
+                            type: "color",
+                            default: "white",
+                        },
+
                     ],
                 },
                 {
@@ -289,6 +297,12 @@ class WeatherWidget extends (Generic) {
                             label: "xaxis_axisLabel_formatstring", // translated field label
                             type: "text",
                             default: "ddd HH:mm",
+                        },
+                        {
+                            name: "xaxis_color",    // name in data structure
+                            label: "xaxis_color", // translated field label
+                            type: "color",
+                            default: "white",
                         },
                     ]
                 },
@@ -305,6 +319,12 @@ class WeatherWidget extends (Generic) {
                         {
                             name: "rain_color",    // name in data structure
                             label: "rain_color", // translated field label
+                            type: "color",
+                            default: "blue",
+                        },
+                        {
+                            name: "rain_axislablecolor",    // name in data structure
+                            label: "rain_axislablecolor", // translated field label
                             type: "color",
                             default: "blue",
                         },
@@ -332,6 +352,12 @@ class WeatherWidget extends (Generic) {
                             type: "color",
                             default: "red",
                         },
+                        {
+                            name: "temperature_axislablecolor",    // name in data structure
+                            label: "temperature_axislablecolor", // translated field label
+                            type: "color",
+                            default: "red",
+                        },
                     ]
                 },
                 {
@@ -347,6 +373,12 @@ class WeatherWidget extends (Generic) {
                         {
                             name: "clouds_color",    // name in data structure
                             label: "clouds_color", // translated field label
+                            type: "color",
+                            default: "yellow",
+                        },
+                        {
+                            name: "clouds_axislablecolor",    // name in data structure
+                            label: "clouds_axislablecolor", // translated field label
                             type: "color",
                             default: "yellow",
                         },
@@ -487,7 +519,10 @@ class WeatherWidget extends (Generic) {
         const axisLabel_formatstring =  this.state.rxData["xaxis_axisLabel_formatstring"] ;
         console.log(`##got ${location}`);
         //let headline = Generic.t("Weather at ") + location;
-        const headline = location;
+        let headline = "";
+        if (location != null && typeof location == "string" && location.length>0) {
+            headline = location;
+        }
 
         // min / max
         const MinMax = weatherData[0][3];
@@ -516,6 +551,7 @@ class WeatherWidget extends (Generic) {
                 min: RainMin,
                 max: RainMax,
                 axisLabel: {
+                    color: this.state.rxData["rain_axislablecolor"] || "blue",
                     formatter: "{value} mm",
                 },
             });
@@ -542,6 +578,7 @@ class WeatherWidget extends (Generic) {
                 min: TempMin,
                 max: TempMax,
                 axisLabel: {
+                    color: this.state.rxData["temperature_axislablecolor"] || "red",
                     formatter: "{value} °C",
                 },
             });
@@ -571,6 +608,7 @@ class WeatherWidget extends (Generic) {
                 min: CloudMin,
                 max: CloudMax,
                 axisLabel: {
+                    color: this.state.rxData["clouds_axislablecolor"] || "yellow",
                     formatter: "{value} %",
                 },
             });
@@ -599,6 +637,11 @@ class WeatherWidget extends (Generic) {
                 min: 0,
                 max: 100,
                 axisLabel: {
+
+                    //todo axis lable color
+                    color: "yellow",
+
+
                     formatter: "{value} %",
                 },
             });
@@ -624,6 +667,12 @@ class WeatherWidget extends (Generic) {
             backgroundColor: "transparent",
             title: {
                 text: headline,
+
+                show: headline.length>0 ? true : false,
+                textStyle: {
+                    //headline color
+                    color: this.state.rxData["headline_color"] || "white",
+                }
             },
             grid: {
                 show: true,
@@ -645,6 +694,9 @@ class WeatherWidget extends (Generic) {
                 show: !useSecondDiagram,
                 axisLabel: {
                     rotate: 45,
+
+                    // axis lable color 
+                    color: this.state.rxData["xaxis_color"] || "white",
                     formatter: value => {
                         //http://momentjs.com/docs/#/displaying/format/
                         let formatstring = "ddd HH:mm";
@@ -711,6 +763,7 @@ class WeatherWidget extends (Generic) {
                 min: RainMin,
                 max: RainMax,
                 axisLabel: {
+                    color: this.state.rxData["rain_axislablecolor"] || "blue",
                     formatter: "{value} mm",
                 },
             });
@@ -740,6 +793,7 @@ class WeatherWidget extends (Generic) {
                 min: CloudMin,
                 max: CloudMax,
                 axisLabel: {
+                    color: this.state.rxData["clouds_axislablecolor"] || "yellow",
                     formatter: "{value} %",
                 },
             });
@@ -813,6 +867,10 @@ class WeatherWidget extends (Generic) {
 
                 axisLabel: {
                     rotate: 45,
+
+                    // axis lable color 
+                    color: this.state.rxData["xaxis_color"] || "white",
+
                     formatter: value => {
                         //http://momentjs.com/docs/#/displaying/format/
                         let formatstring = "ddd HH:mm";

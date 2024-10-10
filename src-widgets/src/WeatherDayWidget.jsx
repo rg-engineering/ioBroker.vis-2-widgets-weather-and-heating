@@ -21,28 +21,56 @@ const styles = {
 // todo bug fix icons (wetter und wind) passen nicht
 
 
+function importAllImages(requireContext) {
+    let images = new Map();
+
+    // Iteriere durch alle importierten Dateien
+    requireContext.keys().forEach((key) => {
+        // Erhalte den Dateinamen ohne Pfad und Dateiendung
+        const fileName = key.replace('./', '').replace(/\.[^/.]+$/, '');
+
+        // Füge Bildpfad und Dateinamen der Map hinzu
+        images.set(fileName, {
+            src: requireContext(key),  // Bildpfad
+            name: fileName             // Ursprünglicher Dateiname
+        });
+    });
+
+    return images;
+}
+//const imagesTest = importAllImages(require.context('./assets/icons/tiempo-weather/galeria1', false, /\.(png)$/));
+
+
+
+
 // weather icons
-const images1 = require.context("./assets/icons/tiempo-weather/galeria1", false);
-const icons_weather_galeria1 = images1.keys().map(image1 => images1(image1));
+//const images1 = require.context("./assets/icons/tiempo-weather/galeria1", false);
+//const icons_weather_galeria1 = images1.keys().map(image1 => images1(image1));
+const icons_weather_galeria1 = importAllImages(require.context('./assets/icons/tiempo-weather/galeria1', false, /\.(png)$/));
 
-const images2 = require.context("./assets/icons/tiempo-weather/galeria2", false);
-const icons_weather_galeria2 = images2.keys().map(image2 => images2(image2));
+//const images2 = require.context("./assets/icons/tiempo-weather/galeria2", false);
+//const icons_weather_galeria2 = images2.keys().map(image2 => images2(image2));
+const icons_weather_galeria2 = importAllImages(require.context('./assets/icons/tiempo-weather/galeria2', false, /\.(png)$/));
 
-const images3 = require.context("./assets/icons/tiempo-weather/galeria3", false);
-const icons_weather_galeria3 = images3.keys().map(image3 => images3(image3));
+//const images3 = require.context("./assets/icons/tiempo-weather/galeria3", false);
+//const icons_weather_galeria3 = images3.keys().map(image3 => images3(image3));
+const icons_weather_galeria3 = importAllImages(require.context('./assets/icons/tiempo-weather/galeria3', false, /\.(png)$/));
 
-const images4 = require.context("./assets/icons/tiempo-weather/galeria4", false);
-const icons_weather_galeria4 = images4.keys().map(image4 => images4(image4));
+//const images4 = require.context("./assets/icons/tiempo-weather/galeria4", false);
+//const icons_weather_galeria4 = images4.keys().map(image4 => images4(image4));
+const icons_weather_galeria4 = importAllImages(require.context('./assets/icons/tiempo-weather/galeria4', false, /\.(png)$/));
 
-const images5_color = require.context("./assets/icons/tiempo-weather/galeria5/PNG/Color", false);
-const icons_weather_galeria5_color = images5_color.keys().map(image5_color => images5_color(image5_color));
+//const images5_color = require.context("./assets/icons/tiempo-weather/galeria5/PNG/Color", false);
+//const icons_weather_galeria5_color = images5_color.keys().map(image5_color => images5_color(image5_color));
+const icons_weather_galeria5_color = importAllImages(require.context('./assets/icons/tiempo-weather/galeria5/PNG/Color', false, /\.(png)$/));
 
-const images5_white = require.context("./assets/icons/tiempo-weather/galeria5/PNG/White", false);
-const icons_weather_galeria5_white = images5_white.keys().map(image5_white => images5_white(image5_white));
+//const images5_white = require.context("./assets/icons/tiempo-weather/galeria5/PNG/White", false);
+//const icons_weather_galeria5_white = images5_white.keys().map(image5_white => images5_white(image5_white));
+const icons_weather_galeria5_white = importAllImages(require.context('./assets/icons/tiempo-weather/galeria5/PNG/White', false, /\.(png)$/));
 
-const images6 = require.context("./assets/icons/tiempo-weather/galeria6", false);
-const icons_weather_galeria6 = images6.keys().map(image6 => images6(image6));
-
+//const images6 = require.context("./assets/icons/tiempo-weather/galeria6", false);
+//const icons_weather_galeria6 = images6.keys().map(image6 => images6(image6));
+const icons_weather_galeria6 = importAllImages(require.context('./assets/icons/tiempo-weather/galeria6', false, /\.(png)$/));
 
 //wind icons
 const wind_images1 = require.context("./assets/icons/viento-wind/galeria1", false);
@@ -344,21 +372,59 @@ class WeatherDayWidget extends (Generic) {
         //weather symbol
         const weather_icon = this.state.values[`${this.state.rxData["oid_symbol"]}.val`];
 
+        //todo: hier wird wohl falsches icon gefunden?
+        //https://forum.iobroker.net/topic/77220/vis-2-widgets-f%C3%BCr-daswetter-und-heatingcontrol/4
+        let src_icon_weather = icons_weather_galeria1.get(weather_icon);
+        let src_icon_weather_name = "";
 
-        let src_icon_weather = icons_weather_galeria1[weather_icon];
+        //const tobj = Object.fromEntries(icons_weather_galeria1);
+        //const tjson = JSON.stringify(tobj);
+        //console.warn("icons_weather_galeria1 " + tjson);
 
-        switch (iconlabelset) {
-            case "galeria1": src_icon_weather = icons_weather_galeria1[weather_icon]; break;
-            case "galeria2": src_icon_weather = icons_weather_galeria2[weather_icon]; break;
-            case "galeria3": src_icon_weather = icons_weather_galeria3[weather_icon]; break;
-            case "galeria4": src_icon_weather = icons_weather_galeria4[weather_icon]; break;
-            case "galeria5_white": src_icon_weather = icons_weather_galeria5_white[weather_icon]; break;
-            case "galeria5_color": src_icon_weather = icons_weather_galeria5_color[weather_icon]; break;
-            case "galeria6": src_icon_weather = icons_weather_galeria6[weather_icon]; break;
-            default: src_icon_weather = icons_weather_galeria1[weather_icon]; break;
+        let image = icons_weather_galeria1.get("1");
+
+        src_icon_weather = image.src;
+        src_icon_weather_name = image.name;
+
+        //console.warn("1111");
+
+        if (weather_icon != null && typeof weather_icon !== 'undefined') {
+
+            //console.log("weather icon " + weather_icon + " / " + weather_icon.toString() + " / " + typeof weather_icon);
+
+
+            switch (iconlabelset) {
+                case "galeria1":
+                    image = icons_weather_galeria1.get(weather_icon.toString());
+                    break;
+                case "galeria2":
+                    image = icons_weather_galeria2.get(weather_icon.toString());
+                    break;
+                case "galeria3":
+                    image = icons_weather_galeria3.get(weather_icon.toString());
+                    break;
+                case "galeria4":
+                    image = icons_weather_galeria4.get(weather_icon.toString());
+                    break;
+                case "galeria5_white":
+                    image = icons_weather_galeria5_white.get(weather_icon.toString());
+                    break;
+                case "galeria5_color":
+                    image = icons_weather_galeria5_color.get(weather_icon.toString());
+                    break;
+                case "galeria6":
+                    image = icons_weather_galeria6.get(weather_icon.toString());
+                    break;
+                default:
+                    console.warn("weather no iconlabelset found " + iconlabelset);
+                    image = icons_weather_galeria1.get(weather_icon.toString());
+                    break;
+            }
         }
+        src_icon_weather = image.src;
+        src_icon_weather_name = image.name;
 
-        console.log(`weather icon ${weather_icon} ${src_icon_weather}`);
+        console.log(`weather icon ${weather_icon} = ${src_icon_weather_name}  ` + typeof weather_icon );
 
         //wind symbol
         const wind_icon = this.state.values[`${this.state.rxData["oid_wind_symbol"]}.val`];
@@ -369,7 +435,10 @@ class WeatherDayWidget extends (Generic) {
             case "galeria1": src_icon_wind = icons_wind_galeria1[wind_icon]; break;
             case "galeria2": src_icon_wind = icons_wind_galeria2[wind_icon]; break;
             case "Beaufort": src_icon_wind = icons_wind_Beaufort[wind_icon]; break;
-            default: src_icon_wind = icons_wind_galeria1[wind_icon]; break;
+            default:
+                console.warn("no windiconlabelset found " + windiconlabelset);
+                src_icon_wind = icons_wind_galeria1[wind_icon];
+                break;
         }
 
         console.log(`wind icon ${wind_icon} ${src_icon_wind}` ) ;
@@ -417,7 +486,7 @@ class WeatherDayWidget extends (Generic) {
                 </Grid>
                 <Grid item xs={6} >
                     <div>
-                        <img src={src_icon_weather} alt="icon"></img>
+                        <img src={src_icon_weather} alt={src_icon_weather_name} ></img>
                         <p>{weather_icon}</p>
                     </div>
                 </Grid>

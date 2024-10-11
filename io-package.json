@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather-and-heating",
-    "version": "0.7.3",
+    "version": "0.7.4",
     "news": {
+      "0.7.4": {
+        "en": "see issue #51 weather widget: title not shown at all, if no string available or no OID set\nsee issue #51 weather widget: color for title and axis lables adjustable\nsee issue #53: wrong icon (weather and wind) shown in WeatherDayWidget fixed",
+        "de": "siehe Ausgabe #51 Wetter Widget: Titel überhaupt nicht angezeigt, wenn keine Zeichenkette verfügbar oder kein OID-Set\nsiehe ausgabe #51 wetter widget: farbe für titel und achsen einstellbar\nsiehe Ausgabe #53: falsches Symbol (Wetter und Wind) gezeigt in WeatherDayWidget fix",
+        "ru": "#51 виджет погоды: название не показано вообще, если нет строки или нет OID набора\n#51 виджет погоды: цвет для титула и ось лабораторные регулируемые\n#53: неправильная икона (погода и ветер), показанная в WeatherDayWidget",
+        "pt": "ver problema #51 widget do tempo: título não mostrado em tudo, se nenhuma string disponível ou nenhum conjunto OID\nver a questão #51 widget do tempo: cor para os laboratórios de título e eixo ajustável\nveja a questão #53: ícone errado (casa e vento) mostrado em WeatherDayWidget corrigido",
+        "nl": "zie probleem #51 Weer widget: titel wordt helemaal niet getoond, als er geen tekenreeks beschikbaar is of geen OID ingesteld\nzie nummer #51 weer widget: kleur voor titel en as lables verstelbaar\nzie nummer #53: verkeerde pictogram (weer en wind) getoond in WeatherDayWidget fixed",
+        "fr": "voir le numéro #51 widget météo: titre non affiché du tout, si aucune chaîne disponible ou aucun ensemble OID\nvoir le numéro #51 widget météo: couleur pour titre et axe lables réglable\nvoir le numéro n°53: fausse icône (température et vent) affichée dans MétéoDayWidget corrigé",
+        "it": "vedi problema #51 widget meteo: titolo non mostrato affatto, se nessuna stringa disponibile o nessun set OID\nvedi problema #51 widget meteo: colore per titolo e assi regolabili\nvedi numero #53: icona sbagliata (piuma e vento) mostrata in WeatherDayWidget fisso",
+        "es": "ver número #51 widget meteorológico: título no se muestra en absoluto, si no hay cadena disponible o ningún conjunto OID\nver número #51 widget del tiempo: color para el título y los lables del eje ajustable\nver el número #53: icono incorrecto (weather y viento) mostrado en WeatherDayWidget fijo",
+        "pl": "zobacz numer # 51 widget pogody: tytuł nie jest wyświetlany w ogóle, jeśli nie ma dostępnych znaków lub nie ma zestawu OID\nzobacz problem # 51 widget pogody: kolor dla tytułu i label osi regulowane\nzobacz numer # 53: zła ikona (pogoda i wiatr) pokazana w WeatherDayWidget stała",
+        "uk": "переглянути проблему #51 віджет погоди: назва не відображається на всіх, якщо немає рядка доступна або немає OID встановити\nпереглянути проблему #51 віджет погоди: колір для назв і вісь регульовані\nдив. питання #53: неправильна ікона (погода і вітер) показана в WeatherDayWidget фіксована",
+        "zh-cn": "参见第51期天气部件: 如果没有字符串可用或没有 OID 设置, 标题根本不显示\n参见第51期气象部件:标题和轴的颜色可调整\n参见第53期: 在 WeatherDayWidget 中显示的错误图标( 天气和风)"
+      },
       "0.7.3": {
         "en": "add missing translations",
         "de": "fehlende übersetzungen hinzufügen",

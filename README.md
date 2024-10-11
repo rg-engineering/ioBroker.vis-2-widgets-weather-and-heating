@@ -93,8 +93,7 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 
 ## Changelog
-
-### **WORK IN PROGRESS**
+### 0.7.4 (2024-10-11)
  * (René) see issue #51 weather widget: title not shown at all, if no string available or no OID set
  * (René) see issue #51 weather widget: color for title and axis lables adjustable
  * (René) see issue #53: wrong icon (weather and wind) shown in WeatherDayWidget fixed

@@ -45,6 +45,13 @@
   "datastructure_nexthours": "next hours",
   "datastructure_nexthours2": "next hours JSON",
 
+
+  "headline_color": null,
+  "xaxis_color": null,
+  "rain_axislablecolor": null,
+  "temperature_axislablecolor": null,
+  "clouds_axislablecolor": null,
+
   "datastructure_forecast": "forecast",
   "datastructure_forecastHourly": "forecast hourly",
   "datastructure_forecastPeriod": "forecast period",

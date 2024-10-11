@@ -36,6 +36,14 @@
   "datastructure_nextdaysdetailed": "Nächste Tage im Detail",
   "datastructure_nexthours": "nächsten Stunden",
   "datastructure_nexthours2": "nächste Stunden JSON",
+
+  "headline_color": "Farbe der Überschrift",
+  "xaxis_color": "Farbe der X-Achse",
+  "rain_axislablecolor": "Farbe der Achsenbeschriftung",
+  "temperature_axislablecolor": "Farbe der Achsenbeschriftung",
+  "clouds_axislablecolor": "Farbe der Achsenbeschriftung",
+
+
   "datastructure_forecast": "Vorhersage",
   "datastructure_forecastHourly": "stündlich prognostizieren",
   "datastructure_forecastPeriod": "Prognosezeitraum",

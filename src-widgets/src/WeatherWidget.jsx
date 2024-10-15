@@ -344,7 +344,7 @@ class WeatherWidget extends (Generic) {
                             name: "temperature_visible",    // name in data structure
                             label: "temperature_visible", // translated field label
                             type: "checkbox",
-                            default: false,
+                            default: true,
                         },
                         {
                             name: "temperature_color",    // name in data structure

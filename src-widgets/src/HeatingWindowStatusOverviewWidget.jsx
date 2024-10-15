@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 
 import Generic from "./Generic";
 
+
+import { ReactComponent as WindowOpenIcon } from './assets/heating/fts_window_1w_open.svg';
+import { ReactComponent as WindowCloseIcon } from './assets/heating/fts_window_1w.svg';
+
 import {
     List,
     ListItem,
@@ -94,6 +98,47 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
                         },
                     ],
                 },
+                {
+                    name: "colors", // group name
+                    fields: [
+                        {
+                            name: "headline_color",    // name in data structure
+                            label: "headline_color", // translated field label
+                            type: "color",
+                            default: "white",
+                        },
+                        {
+                            name: "statusline_color",    // name in data structure
+                            label: "statusline_color", // translated field label
+                            type: "color",
+                            default: "white",
+                        },
+                        {
+                            name: "roomname_window_closed_color",    // name in data structure
+                            label: "roomname_window_closed_color", // translated field label
+                            type: "color",
+                            default: "green",
+                        },
+                        {
+                            name: "roomname_window_open_color",    // name in data structure
+                            label: "roomname_window_open_color", // translated field label
+                            type: "color",
+                            default: "red",
+                        },
+                        {
+                            name: "roomlastchange_window_closed_color",    // name in data structure
+                            label: "roomlastchange_window_closed_color", // translated field label
+                            type: "color",
+                            default: "blue",
+                        },
+                        {
+                            name: "roomlastchange_window_open_color",    // name in data structure
+                            label: "roomlastchange_window_open_color", // translated field label
+                            type: "color",
+                            default: "red",
+                        },
+                    ],
+                },
             ],
             visPrev: "widgets/vis-2-widgets-weather-and-heating/img/vis-widget-HeatingWindowStatusOverview.png",
         };
@@ -106,12 +151,32 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
         return HeatingWindowStatusOverviewWidget.getWidgetInfo();
     }
 
+
+    GetIcon(icon) {
+        //fts_window_1w_open.svg or fts_window_1w.svg
+
+        let ret = null;
+
+        if (icon.includes("_open.svg")) {
+            ret = <Avatar>
+                < WindowOpenIcon />
+            </Avatar>
+        }
+        else {
+            ret = <Avatar>
+                < WindowCloseIcon />
+            </Avatar>
+        }
+
+        return ret;
+    }
+
     createTable() {
 
         const htmlTable = this.state.values[`${this.state.rxData["oid_WindowStatesHtmlTable"]}.val`];
 
         const windowsOpen = parseInt (this.state.values[`${this.state.rxData["oid_OpenWindowRoomCount"]}.val`],10);
-        console.log("###html " + htmlTable);
+        //console.log("###html " + htmlTable);
 
         if (htmlTable != null && typeof htmlTable === "string" && htmlTable.length > 5) {
 
@@ -134,32 +199,33 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
             */
 
 
+
+
             return <div
                 ref={this.refCardContent}
                 style={styles.cardContent}
             >
-                <div>
+                <div style={{ color: this.state.rxData["headline_color"] || "white" }} >
                     <p>{Generic.t("Window Status Overview")}</p>
                 </div>
 
-                <div>
+                <div style={{ color: this.state.rxData["statusline_color"] || "white" }} >
                     <p>{windowsOpen > 0 ? `${windowsOpen} ${Generic.t("Windows open")}` : Generic.t("all windows closed")}</p>
                 </div>
 
                 <List sx={{ width: '100 %', maxWidth: 360, bgcolor: 'background.paper' }}>
                     {data.map((roomData, i) => <ListItem>
                         <ListItemAvatar>
-                            <Avatar>
-                                <img
-                                    src={roomData.icon}
-                                    height='40px' />
-                            </Avatar>
+                            {this.GetIcon( roomData.icon )}
                         </ListItemAvatar>
                         <ListItemText
                             primary={roomData.room}
                             secondary={`${roomData.sinceText} ${roomData.changed}`}
                             primaryTypographyProps={{
-                                color: roomData.isOpen ? 'red' : 'black',
+                                color: roomData.isOpen ? this.state.rxData["roomname_window_closed_color"] || "red" : this.state.rxData["roomname_window_open_color"] || "green",
+                            }}
+                            secondaryTypographyProps={{
+                                color: roomData.isOpen ? this.state.rxData["roomlastchange_window_closed_color"] || "red" : this.state.rxData["roomlastchange_window_open_color"] || "blue",
                             }}
                         />
                     </ListItem>)}

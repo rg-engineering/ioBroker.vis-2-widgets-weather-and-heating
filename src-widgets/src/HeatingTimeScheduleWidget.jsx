@@ -22,7 +22,6 @@ const styles = {
 
 //todo Copy Periods fehlt noch
 
-
 const setDataStructures = async (field, data, changeData, socket) => {
     console.log(`set new data structure instance ${data["instance"]}` );
 
@@ -30,7 +29,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
 
     if (instance && instance.length > 0 && instance.includes("heatingcontrol") ) {
         data["oid_CurrentProfile"] = `${instance}.CurrentProfile`;
-        data["oid_ChosenRoom"] = `${instance}.vis.ChosenRoom`;
+        data["oid_ChoosenRoom"] = `${instance}.vis.ChoosenRoom`;
         data["oid_ProfileType"] = `${instance}.info.ProfileType`;
         // data["oid_ProfileName"] = instance + ".info.ProfileType";
 
@@ -224,10 +223,10 @@ class HeatingTimeScheduleWidget extends (Generic) {
                             default: "heatingcontrol.0.CurrentProfile",
                         },
                         {
-                            name: "oid_ChosenRoom",    // name in data structure
+                            name: "oid_ChoosenRoom",    // name in data structure
                             label: "choosenroom", // translated field label
                             type: "id",
-                            default: "heatingcontrol.0.vis.ChosenRoom",
+                            default: "heatingcontrol.0.vis.ChoosenRoom",
                         },
                         {
                             name: "oid_ProfileType",    // name in data structure
@@ -891,6 +890,17 @@ class HeatingTimeScheduleWidget extends (Generic) {
                         },
                     ],
                 },
+                {
+                    name: "colors", // group name
+                    fields: [
+                        {
+                            name: "headline_color",    // name in data structure
+                            label: "headline_color", // translated field label
+                            type: "color",
+                            default: "white",
+                        },
+                    ],
+                },
             ],
             visPrev: "widgets/vis-2-widgets-weather-and-heating/img/vis-widget-heatingtimeschedule.png",
         };
@@ -1034,9 +1044,9 @@ class HeatingTimeScheduleWidget extends (Generic) {
             ref={this.refCardContent}
             style={styles.cardContent}
         >
-            <div>
+            <div style={{ color: this.state.rxData["headline_color"] || "white" }}>
                 <p>{Generic.t("Times in week")}</p>
-                <p>{Generic.t("Profil")} {currentProfile} / {room}</p>
+                <p>{Generic.t("Profil ")} {currentProfile} / {room}</p>
             </div>
 
             <Grid
@@ -1075,7 +1085,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
             ref={this.refCardContent}
             style={styles.cardContent}
         >
-            <div>
+            <div style={{ color: this.state.rxData["headline_color"] || "white" }}>
                 <p>{Generic.t("Times in week")}</p>
                 <p> {Generic.t("Profil ")} {currentProfile} / {room}</p>
             </div>
@@ -1153,7 +1163,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
             ref={this.refCardContent}
             style={styles.cardContent}
         >
-            <div>
+            <div style={{ color: this.state.rxData["headline_color"] || "white" }}>
                 <p>{Generic.t("Times in week")}</p>
                 <p> {Generic.t("Profil ")} {currentProfile} / {room}</p>
             </div>
@@ -1183,7 +1193,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
     createTable() {
         const profileType = this.state.values[`${this.state.rxData["oid_ProfileType"]}.val`];
         const noOfPeriods = this.state.values[`${this.state.rxData["oid_NumberOfPeriods"]}.val`];
-        const room = this.state.values[`${this.state.rxData["oid_ChosenRoom"]}.val`];
+        const room = this.state.values[`${this.state.rxData["oid_ChoosenRoom"]}.val`];
         const profileName = "";
         // const profileName = this.state.values[`${this.state.rxData["oid_ProfileName"]}.val`];
         const currentProfile = this.state.values[`${this.state.rxData["oid_CurrentProfile"]}.val`];

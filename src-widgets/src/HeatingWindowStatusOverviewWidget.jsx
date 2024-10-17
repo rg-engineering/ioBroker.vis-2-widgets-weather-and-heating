@@ -137,6 +137,16 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
                             type: "color",
                             default: "red",
                         },
+                        {
+                            name: "roombackground_color",    // name in data structure
+                            label: "roombackground_color", // translated field label
+                            type: "color",
+                            default: "background.paper",
+                        },
+
+
+
+                        
                     ],
                 },
             ],
@@ -213,7 +223,8 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
                     <p>{windowsOpen > 0 ? `${windowsOpen} ${Generic.t("Windows open")}` : Generic.t("all windows closed")}</p>
                 </div>
 
-                <List sx={{ width: '100 %', maxWidth: 360, bgcolor: 'background.paper' }}>
+
+                <List sx={{ width: '100 %', maxWidth: 300, bgcolor: this.state.rxData["roombackground_color"] || "background.paper"  }}>
                     {data.map((roomData, i) => <ListItem>
                         <ListItemAvatar>
                             {this.GetIcon( roomData.icon )}

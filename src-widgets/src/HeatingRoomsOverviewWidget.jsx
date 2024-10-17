@@ -78,6 +78,17 @@ class HeatingRoomsOverviewWidget extends (Generic) {
                         },
                     ],
                 },
+                {
+                    name: "colors", // group name
+                    fields: [
+                        {
+                            name: "headline_color",    // name in data structure
+                            label: "headline_color", // translated field label
+                            type: "color",
+                            default: "white",
+                        },
+                    ],
+                },
             ],
             visPrev: "widgets/vis-2-widgets-weather-and-heating/img/vis-widget-HeatingRoomsOverview.png",
         };
@@ -98,10 +109,10 @@ class HeatingRoomsOverviewWidget extends (Generic) {
             ref={this.refCardContent}
             style={styles.cardContent}
         >
-            <div>
+            <div style={{ color: this.state.rxData["headline_color"] || "white" }} >
                 <p>{Generic.t("Rooms Status Overview")}</p>
             </div>
-            <div dangerouslySetInnerHTML={{__html: htmlTable}}></div>
+            <div dangerouslySetInnerHTML={{ __html: htmlTable }} style={{ margin: "10px"  }} ></div>
         </div>;
     }
 

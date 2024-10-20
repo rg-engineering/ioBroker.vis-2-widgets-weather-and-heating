@@ -278,12 +278,17 @@ class WeatherWidget extends (Generic) {
                             //default: weatherunderground ? "forecastHourly" : "NextHours",
                             onChange: setDataStructures,
                         },
-
                         {
                             name: "headline_color",    // name in data structure
                             label: "headline_color", // translated field label
                             type: "color",
                             default: "white",
+                        },
+                        {
+                            name: "legend_text_color",    // name in data structure
+                            label: "legend_text_color", // translated field label
+                            type: "color",
+                            default: "black",
                         },
 
                     ],
@@ -329,6 +334,22 @@ class WeatherWidget extends (Generic) {
                             default: "blue",
                         },
                         {
+                            name: "rain_positionYAxis",    // name in data structure
+                            label: "rain_positionYAxis", // translated field label
+                            type: "select",
+                            options: [
+                                {
+                                    value: "left",
+                                    label: "left"
+                                },
+                                {
+                                    value: "right",
+                                    label: "right"
+                                },
+                            ],
+                            default: "right",
+                        },
+                        {
                             name: "rain_show_separate",    // name in data structure
                             label: "rain_show_separate", // translated field label
                             type: "checkbox",
@@ -358,6 +379,22 @@ class WeatherWidget extends (Generic) {
                             type: "color",
                             default: "red",
                         },
+                        {
+                            name: "temperature_positionYAxis",    // name in data structure
+                            label: "temperature_positionYAxis", // translated field label
+                            type: "select",
+                            options: [
+                                {
+                                    value: "left",
+                                    label: "left"
+                                },
+                                {
+                                    value: "right",
+                                    label: "right"
+                                },
+                            ],
+                            default: "left",
+                        },
                     ]
                 },
                 {
@@ -381,6 +418,22 @@ class WeatherWidget extends (Generic) {
                             label: "clouds_axislablecolor", // translated field label
                             type: "color",
                             default: "yellow",
+                        },
+                        {
+                            name: "clouds_positionYAxis",    // name in data structure
+                            label: "clouds_positionYAxis", // translated field label
+                            type: "select",
+                            options: [
+                                {
+                                    value: "left",
+                                    label: "left"
+                                },
+                                {
+                                    value: "right",
+                                    label: "right"
+                                },
+                            ],
+                            default: "right",
                         },
                         {
                             name: "clouds_show_separate",    // name in data structure
@@ -545,7 +598,7 @@ class WeatherWidget extends (Generic) {
             legend.push(Generic.t("rain"));
 
             yaxis.push({
-                position: "right",
+                position: this.state.rxData["rain_positionYAxis"] || "right",
                 type: "value",
                 // min max berechnen
                 min: RainMin,
@@ -572,7 +625,7 @@ class WeatherWidget extends (Generic) {
             legend.push(Generic.t("temperature"));
 
             yaxis.push({
-                position: "left",
+                position: this.state.rxData["temperature_positionYAxis"] || "left",
                 type: "value",
                 // min max berechnen
                 min: TempMin,
@@ -603,7 +656,7 @@ class WeatherWidget extends (Generic) {
                 legend.push(Generic.t("cloud"));
             }
             yaxis.push({
-                position: "right",
+                position: this.state.rxData["clouds_positionYAxis"] || "right",
                 type: "value",
                 min: CloudMin,
                 max: CloudMax,
@@ -688,6 +741,9 @@ class WeatherWidget extends (Generic) {
                 orient: "horizontal",
                 right: 10,
                 // top: "center",
+                textStyle: {
+                    color: this.state.rxData["legend_text_color"] || "black",
+                }
             },
             xAxis: {
                 type: "time",
@@ -757,7 +813,7 @@ class WeatherWidget extends (Generic) {
             legend.push(Generic.t("rain"));
 
             yaxis.push({
-                position: "right",
+                position: this.state.rxData["rain_positionYAxis"] || "right",
                 type: "value",
                 //rain min / max berechnen
                 min: RainMin,
@@ -788,7 +844,7 @@ class WeatherWidget extends (Generic) {
                 legend.push(Generic.t("cloud"));
             }
             yaxis.push({
-                position: "right",
+                position: this.state.rxData["clouds_positionYAxis"] || "right",
                 type: "value",
                 min: CloudMin,
                 max: CloudMax,
@@ -861,6 +917,9 @@ class WeatherWidget extends (Generic) {
                 orient: "horizontal",
                 right: 10,
                 // top: "center",
+                textStyle: {
+                    color: this.state.rxData["legend_text_color"] || "black",
+                }
             },
             xAxis: {
                 type: "time",

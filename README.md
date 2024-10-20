@@ -93,7 +93,8 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 
 ## Changelog
-### 0.7.5 (2024-10-20)
+### **WORK IN PROGRESS**
+ * (René) added missing svg's
  * (René) see issue #55 and #50: in some widgets color configuration added (text and background)
  * (René) see issue #55: bug fix to show icon in Heating Window Status widget
  * (René) see issue #55: in weather widget position of y axis (left or right) adjustable

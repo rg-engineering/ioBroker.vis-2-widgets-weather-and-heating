@@ -3,19 +3,7 @@
     "name": "vis-2-widgets-weather-and-heating",
     "version": "0.7.5",
     "news": {
-      "0.7.5": {
-        "en": "see issue #55 and #50: in some widgets color configuration added (text and background)\nsee issue #55: bug fix to show icon in Heating Window Status widget\nsee issue #55: in weather widget position of y axis (left or right) adjustable",
-        "de": "siehe ausgabe #55 und #50: in einigen widgets farbkonfiguration hinzugefügt (text und hintergrund)\nsiehe Ausgabe #55: Bugfix, um Icon in Heizfenster Status Widget anzuzeigen\nsiehe ausgabe #55: bei wetter widget position y achse (links oder rechts) einstellbar",
-        "ru": "#55 и #50: в некоторых виджетах добавлена цветовая конфигурация (текст и фон)\nсм. вопрос #55: исправление ошибок, чтобы показать иконку в виджете состояния окна нагрева\n#55: в погодном положении виджета оси y (слева или справа) регулируемый",
-        "pt": "veja o problema #55 e #50: em alguns widgets configuração de cor adicionada (texto e fundo)\nveja o problema #55: correção de bugs para mostrar ícone no widget de status da janela de aquecimento\nver a questão #55: na posição do widget do tempo do eixo y (esquerda ou direita) ajustável",
-        "nl": "zie probleem #55 en #50: in sommige widgets kleurconfiguratie toegevoegd (tekst en achtergrond)\nzie probleem #55: bug fix te tonen pictogram in Verwarming Window Status widget\nzie probleem #55: in weerwidget positie van y as (links of rechts) verstelbaar",
-        "fr": "voir le numéro #55 et #50: dans certains widgets configuration de couleur ajoutée (texte et arrière-plan)\nvoir le numéro #55: Correction de bug pour afficher l'icône dans le widget État de la fenêtre de chauffage\nvoir numéro 55: en position widget météo de l'axe y (gauche ou droite) réglable",
-        "it": "vedi numero #55 e #50: in alcuni widget la configurazione del colore aggiunta (testo e sfondo)\nvedi numero #55: bug fix to show icon in Riscaldamento Finestra Status widget\nvedi numero #55: in posizione widget meteo di asse y (sinistra o destra) regolabile",
-        "es": "ver número #55 y #50: en algunos widgets configuración de color añadido (texto y fondo)\nver edición #55: bug fix to show icon in Calefacción Window Status widget\nver el número #55: en la posición del widget meteorológico del eje y (izquierda o derecha) ajustable",
-        "pl": "zobacz numer # 55 i # 50: w dodanej konfiguracji kolorów widżetów (tekst i tło)\nzobacz problem # 55: błąd naprawić, aby pokazać ikonę w widżecie Ogrzewania Okna Status\nzob. numer # 55: w pozycji widget pogody osi y (lewa lub prawa) regulowana",
-        "uk": "див. питання #55 і #50: в деяких віджетах кольорова конфігурація додано (текст і фон)\nпереглянути проблему #55: Виправлення помилок, щоб показати значок у віджеті статусу вікна\nдив. питання #55: в погоді позицію віджету осі я (лівий або правий) регульований",
-        "zh-cn": "参见第55期和第50期:在一些部件中添加了颜色配置(文本和背景)\n参见第 55 期: 错误修正以在加热窗口状态部件中显示图标\n参见第55期: y 轴( 左或右) 可调整的天气部件位置"
-      },
+     
       "0.7.4": {
         "en": "see issue #51 weather widget: title not shown at all, if no string available or no OID set\nsee issue #51 weather widget: color for title and axis lables adjustable\nsee issue #53: wrong icon (weather and wind) shown in WeatherDayWidget fixed",
         "de": "siehe Ausgabe #51 Wetter Widget: Titel überhaupt nicht angezeigt, wenn keine Zeichenkette verfügbar oder kein OID-Set\nsiehe ausgabe #51 wetter widget: farbe für titel und achsen einstellbar\nsiehe Ausgabe #53: falsches Symbol (Wetter und Wind) gezeigt in WeatherDayWidget fix",

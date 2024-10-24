@@ -296,6 +296,9 @@
   "MinimumTemperature": "Minimale Temperatur",
   "OverrideTemperature": "Override Temperatur",
   "OverrideTemperatureTime": "Override Zeit",
+  "Increase / Decrease values are ": "Werte für Absenkung / Erhöhung sind ",
+
+
   "vis_2_widgets-HeatingRoom": "Raum Details",
   "widgets_heating_label_roomname": "Raumname",
   "widgets_heating_label_oid_currenttarget": "OID: Zieltemperatur",

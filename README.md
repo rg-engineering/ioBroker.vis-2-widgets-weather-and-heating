@@ -93,6 +93,10 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 
 ## Changelog
+
+### **WORK IN PROGRESS**
+ * (René) show absolute / relative as info in Heating Room Profile Params widget
+
 ### 0.7.6 (2024-10-20)
  * (René) added missing svg's
  * (René) see issue #55 and #50: in some widgets color configuration added (text and background)

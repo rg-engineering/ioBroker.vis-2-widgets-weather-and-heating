@@ -30,11 +30,6 @@ const styles = {
     },
 };
 
-//todo Unterscheidung absolut / relativ -> okay, aber Anzeige fehlt, welcher Modus aktiv
-//todo FormControl size and color einstellbar
-
-
-
 const setDataStructures = async (field, data, changeData, socket) => {
 
     console.log("set new datastructure instance" + data["instance"] );
@@ -55,9 +50,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
         data["oid_TemperaturOverrideTime"] = `${instance}.vis.RoomValues.TemperaturOverrideTime`;
         data["oid_MinimumTemperature"] = `${instance}.vis.RoomValues.MinimumTemperature`;
 
-
-
-
+        data["oid_TemperatureDecreaseMode"] = `${instance}.info.TemperatureDecreaseMode`;
     }
     changeData(data);
 };
@@ -187,6 +180,14 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.RoomValues.MinimumTemperature",
                         },
+
+                        {
+                            name: "oid_TemperatureDecreaseMode",    // name in data structure
+                            label: "oid_TemperatureDecreaseMode", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.info.TemperatureDecreaseMode",
+                        },
+
                         {
                             name: "colors", // group name
                             fields: [
@@ -604,6 +605,26 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
         return content;
     }
 
+    getTemperatureDecreaseMode() { 
+
+        let content = null;
+        const oid = this.state.rxData["oid_TemperatureDecreaseMode"];
+        console.log("oid " + oid);
+
+        if (oid !== undefined && oid.length > 5) {
+            const TemperatureDecreaseMode = this.state.values[oid + ".val"];
+
+            content = <div>
+                <p style={{'font-size':'smaller' }} >
+                    {Generic.t("Increase / Decrease values are ")} {TemperatureDecreaseMode}
+                </p>
+            </div>
+
+        }
+        return content;
+        
+    }
+
 
     CreateTable() {
 
@@ -629,7 +650,9 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                 
                 {this.getOverrideTemperature()}
 
-                {this.getOverrideTemperatureTime() }
+                {this.getOverrideTemperatureTime()}
+
+                {this.getTemperatureDecreaseMode()}
                
             </Box>
         </div>;

@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather-and-heating",
-    "version": "0.7.6",
+    "version": "0.7.7",
     "news": {
+      "0.7.7": {
+        "en": "show absolute / relative as info in Heating Room Profile Params widget\nHeating Time Schedule: copy periods added",
+        "de": "absolut / relativ als Informationen in Heizraum Profil Params Widget anzeigen\nHeizzeit Zeitplan: Kopierzeiträume hinzugefügt",
+        "ru": "показать абсолютный / относительный как информация в Отопление номер профили Парамс виджет\nВремя нагревания Расписание: добавлены периоды копирования",
+        "pt": "mostrar absoluto / relativo como informação no widget do perfil da sala de aquecimento\nTempo de aquecimento Calendário: períodos de cópia adicionados",
+        "nl": "toon absoluut / relatief als info in warmtekamerprofiel Params widget\nVerwarmingstijd Schema: toegevoegde kopieerperioden",
+        "fr": "montrer absolu / relatif comme info dans Profil de chambre de chauffage Params widget\nTemps de chauffage Horaire : période de copie ajoutée",
+        "it": "mostra assoluto / relativo come informazioni in Heat Room Profile Params widget\nTempo di riscaldamento Orari: aggiunta dei periodi di copia",
+        "es": "mostrar absoluto / relativo como información en la habitación de calefacción Perfil Params widget\nTiempo de calentamiento Calendario: períodos de copia añadidos",
+        "pl": "pokaż bezwzględną / względną jako informacje w Ogrzewanie Profil Params widget\nCzas ogrzewania Harmonogram: dodano okresy kopiowania",
+        "uk": "показати абсолютний / відносний як інформація в {_tag}\nЧас нагрівання Графік роботи: додані періоди копіювання",
+        "zh-cn": "在Heating Room 配置文件中显示绝对/ 相对信息\n加热时间 附表:增加的复制期"
+      },
       "0.7.6": {
         "en": "added missing svg's\nsee issue #55 and #50: in some widgets color configuration added (text and background)\nsee issue #55: bug fix to show icon in Heating Window Status widget\nsee issue #55: in weather widget position of y axis (left or right) adjustable",
         "de": "fehlende svg's\nsiehe ausgabe #55 und #50: in einigen widgets farbkonfiguration hinzugefügt (text und hintergrund)\nsiehe Ausgabe #55: Bugfix, um Icon in Heizfenster Status Widget anzuzeigen\nsiehe ausgabe #55: bei wetter widget position y achse (links oder rechts) einstellbar",

@@ -96,6 +96,7 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 ### **WORK IN PROGRESS**
  * (René) show absolute / relative as info in Heating Room Profile Params widget
+ * (René) Heating Time Schedule: copy periods added
 
 ### 0.7.6 (2024-10-20)
  * (René) added missing svg's

@@ -6,6 +6,10 @@ import {
     Grid, Table, TableBody,
     TableCell, TableHead, TableRow,
 } from "@mui/material";
+import SendIcon from '@mui/icons-material/Send';
+
+import Button from '@mui/material/Button';
+
 
 import Generic from "./Generic";
 
@@ -155,6 +159,16 @@ const setDataStructures = async (field, data, changeData, socket) => {
         data["oid_profile_Sun_4_Time"] = instance + ".vis.ProfileTypes.Sun.Periods.4.time";
         data["oid_profile_Sun_5_Temperature"] = instance + ".vis.ProfileTypes.Sun.Periods.5.Temperature";
         data["oid_profile_Sun_5_Time"] = instance + ".vis.ProfileTypes.Sun.Periods.5.time";
+
+
+
+        //copy periods
+        data["oid_profile_Mon_CopyPeriods"] = instance + ".vis.ProfileTypes.Mon.CopyPeriods";
+        data["oid_profile_Tue_CopyPeriods"] = instance + ".vis.ProfileTypes.Tue.CopyPeriods";
+        data["oid_profile_Wed_CopyPeriods"] = instance + ".vis.ProfileTypes.Wed.CopyPeriods";
+        data["oid_profile_Thu_CopyPeriods"] = instance + ".vis.ProfileTypes.Thu.CopyPeriods";
+        data["oid_profile_Fri_CopyPeriods"] = instance + ".vis.ProfileTypes.Fri.CopyPeriods";
+        data["oid_profile_Sat_CopyPeriods"] = instance + ".vis.ProfileTypes.Sat.CopyPeriods";
 
         /*
         heatingcontrol.0.CurrentProfile
@@ -891,6 +905,48 @@ class HeatingTimeScheduleWidget extends (Generic) {
                     ],
                 },
                 {
+                    name: "OIDS_Profile_CopyPeriods", // group name
+                    fields: [
+                        {
+                            name: "oid_profile_Mon_CopyPeriods",    // name in data structure
+                            label: "oid_profile_Mon_CopyPeriods", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Mon.CopyPeriods",
+                        },
+                        {
+                            name: "oid_profile_Tue_CopyPeriods",    // name in data structure
+                            label: "oid_profile_Tue_CopyPeriods", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Tue.CopyPeriods",
+                        },
+                        {
+                            name: "oid_profile_Wed_CopyPeriods",    // name in data structure
+                            label: "oid_profile_Wed_CopyPeriods", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Wed.CopyPeriods",
+                        },
+                        {
+                            name: "oid_profile_Thu_CopyPeriods",    // name in data structure
+                            label: "oid_profile_Thu_CopyPeriods", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Thu.CopyPeriods",
+                        },
+                        {
+                            name: "oid_profile_Fri_CopyPeriods",    // name in data structure
+                            label: "oid_profile_Fri_CopyPeriods", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Fri.CopyPeriods",
+                        },
+                        {
+                            name: "oid_profile_Sat_CopyPeriods",    // name in data structure
+                            label: "oid_profile_Sat_CopyPeriods", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTypes.Sat.CopyPeriods",
+                        },
+                    ],
+                },
+
+                {
                     name: "colors", // group name
                     fields: [
                         {
@@ -960,13 +1016,43 @@ class HeatingTimeScheduleWidget extends (Generic) {
         return periods;
     }
 
+    handleCopyPeriods(oid) {
+        console.log("handly copy periods clicked " + oid);
 
-    createTimeTableDetails(periods, currentTimePeriod, day) {
+        if (this.props.editMode) {
+            return;
+        }
+        this.props.context.setValue(oid, true);
+    }
+
+    CreateCopyButton(copyOID) {
+
+        let ret = null;
+
+        console.log(`CreateCopyButton ${copyOID} `);
+
+        if (copyOID != null) {
+         ret =   <Button
+                variant="outlined"
+                endIcon={<SendIcon />}
+                onClick={() => {
+                    this.handleCopyPeriods(copyOID);
+                }}
+            >
+                Copy
+            </Button>
+        }
+
+        return ret;
+    }
+
+    createTimeTableDetails(periods, currentTimePeriod, day, CopyOID) {
         //https://mui.com/material-ui/react-table/
 
         console.log(`createTimeTableDetails ${currentTimePeriod} ${JSON.stringify(periods)}`);
 
-        return <Table
+        return <div>
+            <Table
             size="small"
             style={{ width: "auto", margin: 5 }}
             sx={{
@@ -1031,14 +1117,21 @@ class HeatingTimeScheduleWidget extends (Generic) {
                     </TableRow>
                 ))}
             </TableBody>
-        </Table>;
+            </Table>
+
+            {this.CreateCopyButton(CopyOID)}
+
+            
+        </div>
+
     }
+    //todo button nur bei every day... und nicht am Sonntag
 
     createTable_MoSu(noOfPeriods, room, profileName, currentProfile, currentTimePeriod) {
         console.log(`createTable_MoSu called ${room}`);
 
         const periods = this.copyPeriods(noOfPeriods, "MoSu");
-        const timetable = this.createTimeTableDetails(periods, currentTimePeriod, Generic.t("Mo. - So."));
+        const timetable = this.createTimeTableDetails(periods, currentTimePeriod, Generic.t("Mo. - So."), null);
 
         return <div
             ref={this.refCardContent}
@@ -1072,14 +1165,14 @@ class HeatingTimeScheduleWidget extends (Generic) {
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
-        const timetableMoFr = this.createTimeTableDetails(periodsMoFr, curTimePeriod, Generic.t("Mo. - Fr."));
+        const timetableMoFr = this.createTimeTableDetails(periodsMoFr, curTimePeriod, Generic.t("Mo. - Fr."), null);
 
         tempTimePeriod = tempTimePeriod - 5;
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
 
-        const timetableSaSu = this.createTimeTableDetails(periodsSaSu, curTimePeriod, Generic.t("Sa. - Su."));
+        const timetableSaSu = this.createTimeTableDetails(periodsSaSu, curTimePeriod, Generic.t("Sa. - Su."), null);
 
         return <div
             ref={this.refCardContent}
@@ -1127,37 +1220,44 @@ class HeatingTimeScheduleWidget extends (Generic) {
             curTimePeriod = tempTimePeriod;
         }
 
-        const timetableMon = this.createTimeTableDetails(periodsMon, curTimePeriod, Generic.t("Mon."));
+
+        const CopyPeriods_Mon = this.state.rxData["oid_profile_Mon_CopyPeriods"];
+        const timetableMon = this.createTimeTableDetails(periodsMon, curTimePeriod, Generic.t("Mon."), CopyPeriods_Mon);
         tempTimePeriod = tempTimePeriod - 5;
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
-        const timetableTue = this.createTimeTableDetails(periodsTue, curTimePeriod, Generic.t("Tue."));
+        const CopyPeriods_Tue = this.state.rxData["oid_profile_Tue_CopyPeriods"];
+        const timetableTue = this.createTimeTableDetails(periodsTue, curTimePeriod, Generic.t("Tue."), CopyPeriods_Tue);
         tempTimePeriod = tempTimePeriod - 5;
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
-        const timetableWed = this.createTimeTableDetails(periodsWed, curTimePeriod, Generic.t("Wed."));
+        const CopyPeriods_Wed = this.state.rxData["oid_profile_Wed_CopyPeriods"];
+        const timetableWed = this.createTimeTableDetails(periodsWed, curTimePeriod, Generic.t("Wed."), CopyPeriods_Wed);
         tempTimePeriod = tempTimePeriod - 5;
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
-        const timetableThu = this.createTimeTableDetails(periodsThu, curTimePeriod, Generic.t("Thu."));
+        const CopyPeriods_Thu = this.state.rxData["oid_profile_Thu_CopyPeriods"];
+        const timetableThu = this.createTimeTableDetails(periodsThu, curTimePeriod, Generic.t("Thu."), CopyPeriods_Thu);
         tempTimePeriod = tempTimePeriod - 5;
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
-        const timetableFri = this.createTimeTableDetails(periodsFri, curTimePeriod, Generic.t("Fri."));
+        const CopyPeriods_Fri = this.state.rxData["oid_profile_Fri_CopyPeriods"];
+        const timetableFri = this.createTimeTableDetails(periodsFri, curTimePeriod, Generic.t("Fri."), CopyPeriods_Fri);
         tempTimePeriod = tempTimePeriod - 5;
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
-        const timetableSat = this.createTimeTableDetails(periodsSat, curTimePeriod, Generic.t("Sat."));
+        const CopyPeriods_Sat = this.state.rxData["oid_profile_Sat_CopyPeriods"];
+        const timetableSat = this.createTimeTableDetails(periodsSat, curTimePeriod, Generic.t("Sat."), CopyPeriods_Sat);
         tempTimePeriod = tempTimePeriod - 5;
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
-        const timetableSun = this.createTimeTableDetails(periodsSun, curTimePeriod, Generic.t("Sun."));
+        const timetableSun = this.createTimeTableDetails(periodsSun, curTimePeriod, Generic.t("Sun."), null);
 
         return <div
             ref={this.refCardContent}

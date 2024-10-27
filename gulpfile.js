@@ -71,6 +71,7 @@ gulp.task('widget-3-copy', () => Promise.all([
             `${src}build/static/js/*mui_material_Box*.*.*`,
             `${src}build/static/js/*mui_material_colors_blue*.*.*`,
 
+            `${src}build/static/js/*mui_material_utils*.*.*`,
             `${SRC}build/static/js/*mui_material_utils_createSvgIcon*.*.*`,
 
             `${src}build/static/js/*mui_utils_useControlled*.*.*`,

@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather-and-heating",
-    "version": "0.7.7",
+    "version": "0.8.0",
     "news": {
+      "0.8.0": {
+        "en": "see issue #60: add missing module",
+        "de": "siehe ausgabe #60: fehlendes modul hinzufügen",
+        "ru": "#60: добавить недостающий модуль",
+        "pt": "veja o problema #60: adicione o módulo ausente",
+        "nl": "zie probleem #60: ontbrekende module toevoegen",
+        "fr": "voir numéro 60: ajouter le module manquant",
+        "it": "vedi numero #60: aggiungi modulo mancante",
+        "es": "ver número #60: añadir módulo perdido",
+        "pl": "zobacz numer # 60: dodaj brakujący moduł",
+        "uk": "переглянути номер #60: додати відсутній модуль",
+        "zh-cn": "参见第60期: 添加缺少的模块"
+      },
       "0.7.7": {
         "en": "show absolute / relative as info in Heating Room Profile Params widget\nHeating Time Schedule: copy periods added",
         "de": "absolut / relativ als Informationen in Heizraum Profil Params Widget anzeigen\nHeizzeit Zeitplan: Kopierzeiträume hinzugefügt",
@@ -80,19 +93,6 @@
         "pl": "błąd naprawić obrazy\nIkony i tłumaczenia\nOgrzewanie Parametr ogólny: pokazać parametr tylko jeśli OID jest ustawiony\nParametr profilu pokoju grzewczego: pokaż parametr tylko wtedy, gdy OID jest ustawiony\nTypos, Refactoring, Forcaking",
         "uk": "виправлення помилок\nІкона і переклади\nНагрівальний загальний параметр: показати параметр тільки якщо OID встановлюється\nПараметр профілю опалювальної кімнати: показати параметр тільки якщо OID встановлюється\nTypos, Рефакторинг, Форматування",
         "zh-cn": "错误修正图像\n图标和翻译\n加热通用参数:仅在设定 OID 时显示参数\n加热室配置 参数: 如果设置了 OID , 只显示参数\n调制、 重构、 格式"
-      },
-      "0.6.0": {
-        "en": "widget set renamed again because adapter checker doesn't accept the name\nIcons and translations\nreadme update\nheating time schedule widget overworked",
-        "de": "widget set erneut umbenannt, weil adapter-checker den namen nicht akzeptiert\nIcons und Übersetzungen\ndas ist mein name\nheizzeitplan widget überbearbeitet",
-        "ru": "widget set переименован снова, потому что адаптер шашка не принимает имя\nИконы и переводы\nобновление\nграфик отопительного времени",
-        "pt": "conjunto widget renomeado novamente porque o verificador do adaptador não aceita o nome\nÍcones e traduções\natualização de leitura\ntempo de aquecimento widget overworked",
-        "nl": "widget set hernoemd omdat adaptercontrole de naam niet accepteert\nPictogrammen en vertalingen\nleesme update\nverwarmingstijd schema widget overwerkt",
-        "fr": "widget set rebaptisé car adaptateur checker n'accepte pas le nom\nIcônes et traductions\nmise à jour de lecture\nwidget horaire de chauffage surchargé",
-        "it": "widget set rinominato di nuovo perché adattatore checker non accetta il nome\nIcone e traduzioni\naggiornamento di lettura\norario di riscaldamento widget overworked",
-        "es": "widget set renombrado de nuevo porque el adaptador no acepta el nombre\nIconos y traducciones\nreadme update\ntiempo de calefacción widget overworked",
-        "pl": "zestaw widget zmienił nazwę ponownie, ponieważ sprawdzacz adaptera nie akceptuje nazwy\nIkony i tłumaczenia\nreadme update\nczas grzewczy widget przepracowany",
-        "uk": "набір віджетів знову перейменований, тому що адаптер не приймає назву\nІкона і переклади\nоновлення\nграфік роботи на опалювальному режимі",
-        "zh-cn": "部件集重新命名是因为适配器检查器不接受名称\n图标和翻译\n读取更新\n加热时间表部件超负荷工作"
       }
     },
     "licenseInformation": {

@@ -93,8 +93,7 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 
 ## Changelog
-
-### **WORK IN PROGRESS**
+### 0.8.0 (2024-11-24)
  * (René) see issue #60: add missing module
 
 ### 0.7.7 (2024-10-27)

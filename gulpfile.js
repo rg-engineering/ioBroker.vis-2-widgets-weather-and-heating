@@ -76,6 +76,8 @@ gulp.task('widget-3-copy', () => Promise.all([
 
             `${src}build/static/js/*mui_utils_useControlled*.*.*`,
 
+            `${src}build/static/js/*mui_styled-engine_index_js-node_modules_mui_ma*.*.*`,
+
             `${SRC}build/static/js/*mui_styled-engine_index_js-node_modules_mui_system_esm*.*`
 
         ],

@@ -143,6 +143,7 @@
     },
     "nogit": true,
     "onlyWWW": true,
+    "noConfig": true,
     "type": "visualization-widgets",
     "connectionType": "cloud",
     "dataSource": "poll",

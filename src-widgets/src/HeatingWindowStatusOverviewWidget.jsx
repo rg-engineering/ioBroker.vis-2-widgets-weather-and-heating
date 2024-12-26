@@ -65,6 +65,8 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
                 {
                     // check here all possible types https://github.com/ioBroker/ioBroker.vis/blob/react/src/src/Attributes/Widget/SCHEMA.md
                     name: "common", // group name
+                    label: "common", // group label
+
                     fields: [
 
                         {
@@ -83,6 +85,7 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
                 },
                 {
                     name: "OIDS_general", // group name
+                    label: "OIDS_general", // group label
                     fields: [
                         {
                             name: "oid_WindowStatesHtmlTable",    // name in data structure
@@ -100,6 +103,7 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
                 },
                 {
                     name: "colors", // group name
+                    label: "colors", // group label
                     fields: [
                         {
                             name: "headline_color",    // name in data structure

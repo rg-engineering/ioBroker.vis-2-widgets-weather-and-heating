@@ -136,6 +136,7 @@ class GeneralEChartWidget extends (Generic) {
                 {
                     // check here all possible types https://github.com/ioBroker/ioBroker.vis/blob/react/src/src/Attributes/Widget/SCHEMA.md
                     name: "common", // group name
+                    label: "common", 
                     fields: [
                         {
                             name: "noCard",
@@ -314,6 +315,7 @@ class GeneralEChartWidget extends (Generic) {
                 },
                 {
                     name: "X_axis", // group name
+                    label: "X_axis",
                     fields: [
                         {
                             name: "xaxis_axisLabel_formatstring",    // name in data structure

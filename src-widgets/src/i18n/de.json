@@ -12,22 +12,27 @@
   "vis-2-widgets-weather-and-heating": "Heizungs- und Wetter-Widgets",
 
 
-  "group_x_axis": "X-Achse",
-  "group_rain": "Regen",
-  "group_temperature": "Temperatur",
-  "group_clouds": "Wolken",
-  "group_chanceofrain": "Regenwahrscheinlichkeit",
-  "group_oids_general": "OIDs Allgemein",
-  "group_OIDS": "OID",
-  "group_oids_rain": "OIDs Regen",
-  "group_oids_temp": "OIDs Temperatur",
-  "group_oids_cloud": "OIDs Wolken",
-  "group_oids_time": "OIDs Zeit",
-  "group_oids_chanceofrain": "OIDs Regenwahrscheinlichkeit",
-  "group_OIDS_General": "OIDs Allgemein",
-  "group_OIDS_Profile_MoSu": "OIDs Profil Mo – So",
-  "group_OIDS_Profile_MoFr_SaSu": "OIDs Profil Mo-Fr / Sa-So",
-  "group_OIDS_Profile_EveryDay": "OIDs jeden Tag",
+  "x_axis": "X-Achse",
+  "rain": "Regen",
+  "temperature": "Temperatur",
+  "clouds": "Wolken",
+  "chanceofrain": "Regenwahrscheinlichkeit",
+  "oids_general": "OIDs Allgemein",
+  "OIDS": "OID",
+  "oids_rain": "OIDs Regen",
+  "oids_temp": "OIDs Temperatur",
+  "oids_cloud": "OIDs Wolken",
+  "oids_time": "OIDs Zeit",
+  "oids_chanceofrain": "OIDs Regenwahrscheinlichkeit",
+
+  "common": "Allgemein",
+  "OIDS_general": "OIDs Allgemein",
+  "OIDS_Profile_MoSu": "OIDs Profil Mo – So",
+  "OIDS_Profile_MoFr_SaSu": "OIDs Profil Mo-Fr / Sa-So",
+  "OIDS_Profile_EveryDay": "OIDs jeden Tag",
+  "OIDS_Profile_CopyPeriods": "OIDs Perioden kopieren",
+  "colors": "Farben",
+
   "without_card": "ohne Karte",
   "name": "Name",
   "instance": "Instanz",
@@ -139,6 +144,12 @@
   "choosenroom": "OID: gewählter Raum",
   "profiletype": "OID: Profiltyp",
   "numberofperiods": "OID: Anzahl der Perioden",
+  "currenttimeperiod": "OID: aktuelle Periode",
+  "profilemintemperature": "OID: minimale Profil-Temperatur",
+  "TempSetWidthLow": "Temperatureinstellung mit kleiner Sprungweite",
+
+
+
   "profilemosu1_temperature": "OID: Profil Mo-So Periode 1 Temperatur",
   "profilemosu1_time": "OID: Profil Mo-So Zeitraum 1 Zeit",
   "profilemosu2_temperature": "OID: Profil Mo-So Periode 2 Temperatur",
@@ -321,5 +332,13 @@
 
   "Rooms Status Overview": "Übersicht Raum-Status",
 
-  "oid_CurrentProfile": "OID: Aktuelles Profil"
+  "oid_CurrentProfile": "OID: Aktuelles Profil",
+
+  "oid_profile_Mon_CopyPeriods": "OID: Perioden kopieren Montag",
+  "oid_profile_Tue_CopyPeriods": "OID: Perioden kopieren Dienstag",
+  "oid_profile_Wed_CopyPeriods": "OID: Perioden kopieren Mittwoch",
+  "oid_profile_Thu_CopyPeriods": "OID: Perioden kopieren Donnerstag",
+  "oid_profile_Fri_CopyPeriods": "OID: Perioden kopieren Freitag",
+  "oid_profile_Sat_CopyPeriods": "OID: Perioden kopieren Samstag"
+
 }

@@ -16,24 +16,26 @@
 
   "vis-2-widgets-weather-and-heating": "heating and weather widgets",
 
-  "group_x_axis": "X Axis",
-  "group_rain": "Rain",
-  "group_temperature": "Temperature",
-  "group_clouds": "Clouds",
-  "group_chanceofrain": "Chance of Rain",
-  "group_oids_general": "OID General",
-  "group_OIDS": "OID",
-  "group_oids_rain": "OID Rain",
-  "group_oids_temp": "OID Temperature",
-  "group_oids_cloud": "OID Clouds",
-  "group_oids_time": "OID Time",
-  "group_oids_chanceofrain": "OID Chance of Rain",
+  "x_axis": "X Axis",
+  "rain": "Rain",
+  "temperature": "Temperature",
+  "clouds": "Clouds",
+  "chanceofrain": "Chance of Rain",
+  "oids_general": "OID General",
+  "OIDS": "OID",
+  "oids_rain": "OID Rain",
+  "oids_temp": "OID Temperature",
+  "oids_cloud": "OID Clouds",
+  "oids_time": "OID Time",
+  "oids_chanceofrain": "OID Chance of Rain",
 
-
-  "group_OIDS_General": "OID's General",
-  "group_OIDS_Profile_MoSu": "OID's Profile Mo - Su",
-  "group_OIDS_Profile_MoFr_SaSu": "OID's Profile Mo-Fr / Sa-Su",
-  "group_OIDS_Profile_EveryDay": "OID's every day",
+  "common": "common",
+  "OIDS_general": "OID's General",
+  "OIDS_Profile_MoSu": "OID's Profile Mo - Su",
+  "OIDS_Profile_MoFr_SaSu": "OID's Profile Mo-Fr / Sa-Su",
+  "OIDS_Profile_EveryDay": "OID's every day",
+  "OIDS_Profile_CopyPeriods": "OID's copy periods",
+  "colors": "colors",
 
 
   "without_card": "without card",
@@ -154,6 +156,9 @@
   "choosenroom": "OID choosen room",
   "profiletype": "OID profile type",
   "numberofperiods": "OID number of periods",
+  "currenttimeperiod": "OID current time period",
+  "profilemintemperature": "OID profile minimum temperature",
+  "TempSetWidthLow": "temperature set step small",
 
   "profilemosu1_temperature": "OID profile Mo-Su period 1 temperature",
   "profilemosu1_time": "OID profile Mo-Su period 1 time",
@@ -368,5 +373,14 @@
   "Rooms Status Overview": "Rooms Status Overview",
 
 
-  "oid_CurrentProfile": "OID Current Profile"
+  "oid_CurrentProfile": "OID Current Profile",
+
+
+  "oid_profile_Mon_CopyPeriods": "OID Copy Periods Monday",
+  "oid_profile_Tue_CopyPeriods": "OID Copy Periods Tuesday",
+  "oid_profile_Wed_CopyPeriods": "OID Copy Periods Wednesday",
+  "oid_profile_Thu_CopyPeriods": "OID Copy Periods Thursday",
+  "oid_profile_Fri_CopyPeriods": "OID Copy Periods Friday",
+  "oid_profile_Sat_CopyPeriods": "OID Copy Periods Saturday"
+
 }

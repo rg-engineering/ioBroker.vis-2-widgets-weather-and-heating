@@ -86,6 +86,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                 {
                     // check here all possible types https://github.com/ioBroker/ioBroker.vis/blob/react/src/src/Attributes/Widget/SCHEMA.md
                     name: "common", // group name
+                    label: "common", // group label
                     fields: [
 
                         {
@@ -110,6 +111,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
 
                 {
                     name: "OIDS_general", // group name
+                    label: "OIDS_general", // group label
                     fields: [
                         {
                             name: "oid_ChosenRoom",    // name in data structure
@@ -190,6 +192,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
 
                         {
                             name: "colors", // group name
+                            label: "colors", // group label
                             fields: [
                                 {
                                     name: "valuebackground_color",    // name in data structure
@@ -328,8 +331,6 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
         catch (e) {
             return 0;
         }
-
-
     }
 
 
@@ -357,8 +358,6 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                 />
                 <FormHelperText id="GuestIncrease-text">{Generic.t("GuestIncrease")}</FormHelperText>
             </FormControl>
-
-           
         }
         return content;
     }
@@ -387,8 +386,6 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                 />
                 <FormHelperText id="PartyDecrease-text">{Generic.t("PartyDecrease")}</FormHelperText>
             </FormControl>
-
-
         }
         return content;
     }
@@ -417,8 +414,6 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                 />
                 <FormHelperText id="AbsentDecrease-text">{Generic.t("AbsentDecrease")}</FormHelperText>
             </FormControl>
-
-
         }
         return content;
     }
@@ -447,8 +442,6 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                 />
                 <FormHelperText id="VacationAbsentDecrease-text">{Generic.t("VacationAbsentDecrease")}</FormHelperText>
             </FormControl>
-
-
         }
         return content;
     }
@@ -477,8 +470,6 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                 />
                 <FormHelperText id="WindowOpenDecrease-text">{Generic.t("WindowOpenDecrease")}</FormHelperText>
             </FormControl>
-
-
         }
         return content;
     }
@@ -509,8 +500,6 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                 />
                 <FormHelperText id="FireplaceModeDecrease-text">{Generic.t("FireplaceModeDecrease")}</FormHelperText>
             </FormControl>
-
-
         }
         return content;
     }
@@ -539,8 +528,6 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                 />
                 <FormHelperText id="MinimumTemperature-text">{Generic.t("MinimumTemperature")}</FormHelperText>
             </FormControl>
-
-
         }
         return content;
     }
@@ -564,13 +551,11 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                     }}
                     type="text"
                     value={OverrideTemperatureTime}
-                    onChange={(e) => this.onChange9(e.target.value)}
+                    onChange={(e) => this.onChange8(e.target.value)}
                     sx={{ input: {  width: "100%" } }}
                 />
                 <FormHelperText id="OverrideTemperatureTime-text">{Generic.t("OverrideTemperatureTime")}</FormHelperText>
             </FormControl>
-
-
         }
         return content;
     }
@@ -594,13 +579,11 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                     }}
                     type="number"
                     value={OverrideTemperature}
-                    onChange={(e) => this.onChange8(e.target.value)}
+                    onChange={(e) => this.onChange9(e.target.value)}
                     sx={{ input: {  width: "100%" } }}
                 />
                 <FormHelperText id="OverrideTemperature-text">{Generic.t("OverrideTemperature")}</FormHelperText>
             </FormControl>
-
-
         }
         return content;
     }
@@ -619,10 +602,8 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                     {Generic.t("Increase / Decrease values are ")} {TemperatureDecreaseMode}
                 </p>
             </div>
-
         }
         return content;
-        
     }
 
 

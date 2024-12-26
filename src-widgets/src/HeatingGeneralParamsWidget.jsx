@@ -62,6 +62,7 @@ class HeatingGeneralParamsWidget extends (Generic) {
                 {
                     // check here all possible types https://github.com/ioBroker/ioBroker.vis/blob/react/src/src/Attributes/Widget/SCHEMA.md
                     name: "common", // group name
+                    label: "Common", // group label
                     fields: [
 
                         {
@@ -81,6 +82,7 @@ class HeatingGeneralParamsWidget extends (Generic) {
 
                 {
                     name: "OIDS_general", // group name
+                    label: "OIDS_general", // group label
                     fields: [
                         {
                             name: "oid_ChosenRoom",    // name in data structure

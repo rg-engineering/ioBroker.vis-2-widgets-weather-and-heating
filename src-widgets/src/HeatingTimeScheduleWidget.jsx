@@ -38,6 +38,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
         // data["oid_ProfileName"] = instance + ".info.ProfileType";
 
         data["oid_CurrentTimePeriod"] = `${instance}.vis.RoomValues.CurrentTimePeriod`;
+        data["oid_ProfileMinTemperature"] = `${instance}.vis.RoomValues.MinimumTemperature`;
 
         // Mo-Su
         data["oid_NumberOfPeriods"] = instance + ".info.NumberOfPeriods";
@@ -212,6 +213,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
                 {
                     // check here all possible types https://github.com/ioBroker/ioBroker.vis/blob/react/src/src/Attributes/Widget/SCHEMA.md
                     name: "common", // group name
+                    label: "common", // translated group label
                     fields: [
                         {
                             name: "noCard",
@@ -225,10 +227,17 @@ class HeatingTimeScheduleWidget extends (Generic) {
                             default: "heatingcontrol.0",
                             onChange: setDataStructures,
                         },
+                        {
+                            name: "TempSetWidthLow",    // name in data structure
+                            label: "TempSetWidthLow", // translated field label
+                            type: "checkbox",
+                            default: false,
+                        },
                     ],
                 },
                 {
                     name: "OIDS_general", // group name
+                    label: "OIDS_general", // translated group label
                     fields: [
                         {
                             name: "oid_CurrentProfile",    // name in data structure
@@ -260,10 +269,19 @@ class HeatingTimeScheduleWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.vis.RoomValues.CurrentTimePeriod",
                         },
+                        {
+                            name: "oid_ProfileMinTemperature",    // name in data structure
+                            label: "profilemintemperature", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.RoomValues.MinimumTemperature",
+                        }
+                        
+
                     ],
                 },
                 {
                     name: "OIDS_Profile_MoSu", // group name
+                    label: "OIDS_Profile_MoSu", // translated group label
                     fields: [
                         {
                             name: "oid_profile_MoSu_1_Temperature",    // name in data structure
@@ -333,6 +351,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
                 },
                 {
                     name: "OIDS_Profile_MoFr_SaSu", // group name
+                    label: "OIDS_Profile_MoFr_SaSu", // translated group label
                     fields: [
                         {
                             name: "oid_profile_MoFr_1_Temperature",    // name in data structure
@@ -468,6 +487,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
                 },
                 {
                     name: "OIDS_Profile_EveryDay", // group name
+                    label: "OIDS_Profile_EveryDay", // translated group label
                     fields: [
                         // Mon
                         {
@@ -906,6 +926,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
                 },
                 {
                     name: "OIDS_Profile_CopyPeriods", // group name
+                    label: "OIDS_Profile_CopyPeriods", // translated
                     fields: [
                         {
                             name: "oid_profile_Mon_CopyPeriods",    // name in data structure
@@ -948,6 +969,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
 
                 {
                     name: "colors", // group name
+                    label: "colors", // translated
                     fields: [
                         {
                             name: "headline_color",    // name in data structure
@@ -1046,10 +1068,13 @@ class HeatingTimeScheduleWidget extends (Generic) {
         return ret;
     }
 
-    createTimeTableDetails(periods, currentTimePeriod, day, CopyOID) {
+    createTimeTableDetails(periods, currentTimePeriod, day, CopyOID, ProfileMinTemperature) {
         //https://mui.com/material-ui/react-table/
 
-        console.log(`createTimeTableDetails ${currentTimePeriod} ${JSON.stringify(periods)}`);
+
+        let TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? "0.5" : "1.0";
+
+        console.log(`createTimeTableDetails ${currentTimePeriod} ${JSON.stringify(periods)} ${day} ${ProfileMinTemperature} ${TempSetWidthLow}`);
 
         return <div>
             <Table
@@ -1108,8 +1133,11 @@ class HeatingTimeScheduleWidget extends (Generic) {
                                         OID: period.oid_temperature
                                     });
                                 }}
-                                min={0}
+                                min={ProfileMinTemperature}
                                 max={30}
+
+                                step={TempSetWidthLow}
+
                                 value={period.temperature}
                                 style={{ width: 50 }}
                             />
@@ -1127,11 +1155,11 @@ class HeatingTimeScheduleWidget extends (Generic) {
     }
     //todo button nur bei every day... und nicht am Sonntag
 
-    createTable_MoSu(noOfPeriods, room, profileName, currentProfile, currentTimePeriod) {
+    createTable_MoSu(noOfPeriods, room, profileName, currentProfile, currentTimePeriod, ProfileMinTemperature) {
         console.log(`createTable_MoSu called ${room}`);
 
         const periods = this.copyPeriods(noOfPeriods, "MoSu");
-        const timetable = this.createTimeTableDetails(periods, currentTimePeriod, Generic.t("Mo. - So."), null);
+        const timetable = this.createTimeTableDetails(periods, currentTimePeriod, Generic.t("Mo. - So."), null, ProfileMinTemperature);
 
         return <div
             ref={this.refCardContent}
@@ -1153,7 +1181,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
         </div>;
     }
 
-    createTable_MoFr_SaSo(noOfPeriods, room, profileName, currentProfile, currentTimePeriod) {
+    createTable_MoFr_SaSo(noOfPeriods, room, profileName, currentProfile, currentTimePeriod, ProfileMinTemperature) {
         console.log(`createTable_MoFr_SaSo called ${room} ${noOfPeriods} ${currentTimePeriod}`);
 
         const periodsMoFr = this.copyPeriods(noOfPeriods, "MoFr");
@@ -1165,14 +1193,14 @@ class HeatingTimeScheduleWidget extends (Generic) {
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
-        const timetableMoFr = this.createTimeTableDetails(periodsMoFr, curTimePeriod, Generic.t("Mo. - Fr."), null);
+        const timetableMoFr = this.createTimeTableDetails(periodsMoFr, curTimePeriod, Generic.t("Mo. - Fr."), null, ProfileMinTemperature);
 
         tempTimePeriod = tempTimePeriod - 5;
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
 
-        const timetableSaSu = this.createTimeTableDetails(periodsSaSu, curTimePeriod, Generic.t("Sa. - Su."), null);
+        const timetableSaSu = this.createTimeTableDetails(periodsSaSu, curTimePeriod, Generic.t("Sa. - Su."), null, ProfileMinTemperature);
 
         return <div
             ref={this.refCardContent}
@@ -1202,7 +1230,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
         </div>;
     }
 
-    createTable_EveryDay(noOfPeriods, room, profileName, currentProfile, currentTimePeriod) {
+    createTable_EveryDay(noOfPeriods, room, profileName, currentProfile, currentTimePeriod, ProfileMinTemperature) {
         console.log(`createTable_EveryDay called ${room}`);
 
         const periodsMon = this.copyPeriods(noOfPeriods, "Mon");
@@ -1222,42 +1250,42 @@ class HeatingTimeScheduleWidget extends (Generic) {
 
 
         const CopyPeriods_Mon = this.state.rxData["oid_profile_Mon_CopyPeriods"];
-        const timetableMon = this.createTimeTableDetails(periodsMon, curTimePeriod, Generic.t("Mon."), CopyPeriods_Mon);
+        const timetableMon = this.createTimeTableDetails(periodsMon, curTimePeriod, Generic.t("Mon."), CopyPeriods_Mon, ProfileMinTemperature);
         tempTimePeriod = tempTimePeriod - 5;
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
         const CopyPeriods_Tue = this.state.rxData["oid_profile_Tue_CopyPeriods"];
-        const timetableTue = this.createTimeTableDetails(periodsTue, curTimePeriod, Generic.t("Tue."), CopyPeriods_Tue);
+        const timetableTue = this.createTimeTableDetails(periodsTue, curTimePeriod, Generic.t("Tue."), CopyPeriods_Tue, ProfileMinTemperature);
         tempTimePeriod = tempTimePeriod - 5;
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
         const CopyPeriods_Wed = this.state.rxData["oid_profile_Wed_CopyPeriods"];
-        const timetableWed = this.createTimeTableDetails(periodsWed, curTimePeriod, Generic.t("Wed."), CopyPeriods_Wed);
+        const timetableWed = this.createTimeTableDetails(periodsWed, curTimePeriod, Generic.t("Wed."), CopyPeriods_Wed, ProfileMinTemperature);
         tempTimePeriod = tempTimePeriod - 5;
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
         const CopyPeriods_Thu = this.state.rxData["oid_profile_Thu_CopyPeriods"];
-        const timetableThu = this.createTimeTableDetails(periodsThu, curTimePeriod, Generic.t("Thu."), CopyPeriods_Thu);
+        const timetableThu = this.createTimeTableDetails(periodsThu, curTimePeriod, Generic.t("Thu."), CopyPeriods_Thu, ProfileMinTemperature);
         tempTimePeriod = tempTimePeriod - 5;
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
         const CopyPeriods_Fri = this.state.rxData["oid_profile_Fri_CopyPeriods"];
-        const timetableFri = this.createTimeTableDetails(periodsFri, curTimePeriod, Generic.t("Fri."), CopyPeriods_Fri);
+        const timetableFri = this.createTimeTableDetails(periodsFri, curTimePeriod, Generic.t("Fri."), CopyPeriods_Fri, ProfileMinTemperature);
         tempTimePeriod = tempTimePeriod - 5;
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
         const CopyPeriods_Sat = this.state.rxData["oid_profile_Sat_CopyPeriods"];
-        const timetableSat = this.createTimeTableDetails(periodsSat, curTimePeriod, Generic.t("Sat."), CopyPeriods_Sat);
+        const timetableSat = this.createTimeTableDetails(periodsSat, curTimePeriod, Generic.t("Sat."), CopyPeriods_Sat, ProfileMinTemperature);
         tempTimePeriod = tempTimePeriod - 5;
         if (tempTimePeriod <= noOfPeriods) {
             curTimePeriod = tempTimePeriod;
         }
-        const timetableSun = this.createTimeTableDetails(periodsSun, curTimePeriod, Generic.t("Sun."), null);
+        const timetableSun = this.createTimeTableDetails(periodsSun, curTimePeriod, Generic.t("Sun."), null, ProfileMinTemperature);
 
         return <div
             ref={this.refCardContent}
@@ -1300,12 +1328,16 @@ class HeatingTimeScheduleWidget extends (Generic) {
 
         const currentTimePeriod = this.state.values[`${this.state.rxData["oid_CurrentTimePeriod"]}.val`];
 
+        const ProfileMinTemperature = this.state.values[`${this.state.rxData["oid_ProfileMinTemperature"]}.val`];
+
+        console.log(`createTable ${ProfileMinTemperature}  ${this.state.rxData["oid_ProfileMinTemperature"]}`);
+
         if (profileType === "Mo - Su") {
-            return this.createTable_MoSu(noOfPeriods, room, profileName, currentProfile, currentTimePeriod);
+            return this.createTable_MoSu(noOfPeriods, room, profileName, currentProfile, currentTimePeriod, ProfileMinTemperature);
         } else if (profileType === "Mo - Fr / Sa - Su") {
-            return this.createTable_MoFr_SaSo(noOfPeriods, room, profileName, currentProfile, currentTimePeriod);
+            return this.createTable_MoFr_SaSo(noOfPeriods, room, profileName, currentProfile, currentTimePeriod, ProfileMinTemperature);
         } else if (profileType === "every Day") {
-            return this.createTable_EveryDay(noOfPeriods, room, profileName, currentProfile, currentTimePeriod);
+            return this.createTable_EveryDay(noOfPeriods, room, profileName, currentProfile, currentTimePeriod, ProfileMinTemperature);
         } else {
             console.log(`unknown profile type ${profileType}`);
             return null;

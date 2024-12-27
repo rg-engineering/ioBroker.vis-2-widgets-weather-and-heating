@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather-and-heating",
-    "version": "0.8.0",
+    "version": "0.8.1",
     "news": {
+      "0.8.1": {
+        "en": "update dependencies\nsee issue #66: Heating Time Schedule widget - uses minimum temperature from adapter for input value range\nsee issue #66: Heating Time Schedule widget - step width for temperature adjustable (1°C or 0.5°C)\ntranslations",
+        "de": "aktualisierung der abhängigkeiten\nsiehe Ausgabe #66: Heizzeitplan Widget - verwendet Mindesttemperatur von Adapter für Eingangswertbereich\nsiehe Ausgabe #66: Heizzeitplan Widget - Stufenbreite für Temperatur einstellbar (1°C oder 0.5°C)\nübersetzungen",
+        "ru": "обновление зависимостей\n#66: Виджет графика нагревания - использует минимальную температуру от адаптера для диапазона входной стоимости\n#66: Виджет графика нагревания - ширина шага для регулируемой температуры (1°C или 0,5°C)\nперевод",
+        "pt": "dependências\nveja o problema #66: O widget do horário de tempo de aquecimento - usa a temperatura mínima do adaptador para o intervalo de valor de entrada\nveja a questão #66: widget do horário de aquecimento - largura do passo para a temperatura ajustável (1°C ou 0,5°C)\ntraduções",
+        "nl": "afhankelijkheden bijwerken\nzie nummer #66: Verwarming Tijd Schema widget - maakt gebruik van minimale temperatuur van adapter voor ingang waarde bereik\nzie nummer #66: Verwarmingstijd Schema widget - stapbreedte voor temperatuur instelbaar (1°C of 0,5°C)\nvertalingen",
+        "fr": "mettre à jour les dépendances\nvoir le numéro 66: Widget Horaire de chauffage - utilise la température minimale de l'adaptateur pour la plage de valeurs d'entrée\nvoir le numéro 66: Widget horaire de chauffage - largeur d'étape pour la température réglable (1°C ou 0,5°C)\ntraductions",
+        "it": "aggiornamento dipendenze\nvedi numero #66: Tempo di riscaldamento widget - utilizza la temperatura minima da adattatore per l'intervallo di valore di input\nvedi numero #66: Tempo di riscaldamento widget di pianificazione - larghezza passo per la temperatura regolabile (1°C o 0.5°C)\ntraduzioni",
+        "es": "dependencias de actualización\nver número #66: El widget Calendario de tiempo de calefacción - utiliza la temperatura mínima del adaptador para el rango de valor de entrada\nver número #66: Tiempo de calefacción widget programado - ancho paso para la temperatura ajustable (1°C o 0.5°C)\ntraducciones",
+        "pl": "aktualizacji zależności\nzobacz numer # 66: Widget czasu ogrzewania - wykorzystuje minimalną temperaturę adaptera do zakresu wartości wejściowej\nzob. numer # 66: Widget czasu ogrzewania - szerokość kroku dla regulacji temperatury (1 °C lub 0,5 ° C)\ntłumaczenia",
+        "uk": "оновлення залежності\nпереглянути номер #66: Поточний час нагріву віджет - використовує мінімальну температуру від адаптера для діапазону значень вхідних значень\nпереглянути проблему #66: Віджет часу нагрівання - ширина кроку для регулювання температури (1°C або 0.5°C)\nпереклади",
+        "zh-cn": "更新依赖关系\n参见第66期: 加热时间表部件 - 使用适配器的最低温度进行输入值范围\n参见第66期: 加热时间表部件 - 温度可调整的步宽(1°C或0.5°C)\n翻译"
+      },
       "0.8.0": {
         "en": "see issue #60: add missing module",
         "de": "siehe ausgabe #60: fehlendes modul hinzufügen",
@@ -80,19 +93,6 @@
         "pl": "błąd naprawić, aby pokazać widżety w runtime zbyt",
         "uk": "виправлення помилок, щоб показати віджети занадто",
         "zh-cn": "错误修复以在运行时间显示部件"
-      },
-      "0.7.0": {
-        "en": "bug fix images\nIcons and translations\nHeating General Parameter: show paramter only if OID is set\nHeating Room Profile Parameter: show paramter only if OID is set\nTypos, Refactoring, Formating",
-        "de": "fehlerbehebung bilder\nIcons und Übersetzungen\nHeizung Allgemeine Parameter: nur Paramter anzeigen, wenn OID eingestellt ist\nHeizraumprofil Parameter: nur Paramter anzeigen, wenn OID eingestellt ist\nTypos, Herstellung, Formatierung",
-        "ru": "bug исправить изображения\nИконы и переводы\nНагревательный общий параметр: показать парамтер только в случае установки OID\nПараметр нагревательной комнаты\nТипо, Изготовление, Формирование",
-        "pt": "imagens de correção de bugs\nÍcones e traduções\nParâmetro Geral de Aquecimento: mostrar parâmetro somente se OID estiver definido\nParâmetro do perfil da sala de aquecimento: mostrar parâmetro somente se OID estiver definido\nTypos, Refactoring, Formatação",
-        "nl": "bug repareren afbeeldingen\nPictogrammen en vertalingen\nVerwarming Algemene parameter: toon paramter alleen als OID is ingesteld\nVerwarming Kamerprofiel Parameter: toon paramter alleen als OID is ingesteld\nTypos, Refactoring, Formatteren",
-        "fr": "correction des images de bug\nIcônes et traductions\nParamètre général de chauffage: afficher le paramter seulement si l'OID est réglé\nParamètre du profil de la chambre de chauffage: afficher le paramètre seulement si l'OID est réglé\nTypos, refactoring, formating",
-        "it": "bug fix immagini\nIcone e traduzioni\nRiscaldamento Parametro generale: mostrare paramter solo se OID è impostato\nParametro del profilo della stanza di riscaldamento: mostrare paramter solo se OID è impostato\nTypos, Refactoring, Formattazione",
-        "es": "bug fijar imágenes\nIconos y traducciones\nParámetro General de Calefacción: muestre el paramter solamente si se establece OID\nParámetro del perfil de la habitación: muestre el paramter sólo si se establece OID\nTypos, Refactoring, Formating",
-        "pl": "błąd naprawić obrazy\nIkony i tłumaczenia\nOgrzewanie Parametr ogólny: pokazać parametr tylko jeśli OID jest ustawiony\nParametr profilu pokoju grzewczego: pokaż parametr tylko wtedy, gdy OID jest ustawiony\nTypos, Refactoring, Forcaking",
-        "uk": "виправлення помилок\nІкона і переклади\nНагрівальний загальний параметр: показати параметр тільки якщо OID встановлюється\nПараметр профілю опалювальної кімнати: показати параметр тільки якщо OID встановлюється\nTypos, Рефакторинг, Форматування",
-        "zh-cn": "错误修正图像\n图标和翻译\n加热通用参数:仅在设定 OID 时显示参数\n加热室配置 参数: 如果设置了 OID , 只显示参数\n调制、 重构、 格式"
       }
     },
     "licenseInformation": {
@@ -143,7 +143,6 @@
     },
     "nogit": true,
     "onlyWWW": true,
-
     "type": "visualization-widgets",
     "connectionType": "cloud",
     "dataSource": "poll",

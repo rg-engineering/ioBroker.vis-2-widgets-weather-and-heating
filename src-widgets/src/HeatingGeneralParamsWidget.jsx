@@ -62,7 +62,7 @@ class HeatingGeneralParamsWidget extends (Generic) {
                 {
                     // check here all possible types https://github.com/ioBroker/ioBroker.vis/blob/react/src/src/Attributes/Widget/SCHEMA.md
                     name: "common", // group name
-                    label: "Common", // group label
+                    label: "common", // group label
                     fields: [
 
                         {

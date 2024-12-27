@@ -45,6 +45,15 @@
   "legend_text_color": "Farbe des Textes der Legende",
 
   "headline_color": "Farbe der Überschrift",
+  "statusline_color": "Fareb der Statuszeile",
+  "roomname_window_closed_color": "Farbe des Raumnamens bei Fenster geschlossen",
+  "roomname_window_open_color": "Farbe des Raumnamens bei Fenster offen",
+  "roomlastchange_window_closed_color": "Farbe der letzten Änderung bei Fenster geschlossen",
+  "roomlastchange_window_open_color": "Farbe der letzten Änderung bei Fenster offen",
+  "roombackground_color": "Hintergrundfarbe",
+
+
+
   "xaxis_color": "Farbe der X-Achse",
   "rain_axislablecolor": "Farbe der Achsenbeschriftung",
   "temperature_axislablecolor": "Farbe der Achsenbeschriftung",
@@ -339,6 +348,9 @@
   "oid_profile_Wed_CopyPeriods": "OID: Perioden kopieren Mittwoch",
   "oid_profile_Thu_CopyPeriods": "OID: Perioden kopieren Donnerstag",
   "oid_profile_Fri_CopyPeriods": "OID: Perioden kopieren Freitag",
-  "oid_profile_Sat_CopyPeriods": "OID: Perioden kopieren Samstag"
+  "oid_profile_Sat_CopyPeriods": "OID: Perioden kopieren Samstag",
+
+  "Copy": "Kopieren"
+
 
 }

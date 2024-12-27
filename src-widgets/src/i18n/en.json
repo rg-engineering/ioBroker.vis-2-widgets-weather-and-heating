@@ -49,6 +49,13 @@
 
 
   "headline_color": "headline color",
+  "statusline_color": "status line color",
+  "roomname_window_closed_color": "window closed color",
+  "roomname_window_open_color": "window open color",
+  "roomlastchange_window_closed_color": "last change window closed color",
+  "roomlastchange_window_open_color": "last change window open color",
+  "roombackground_color": "background color",
+
   "xaxis_color": "X axis color",
   "rain_axislablecolor": "axis label color",
   "temperature_axislablecolor": "axis label color",
@@ -381,6 +388,9 @@
   "oid_profile_Wed_CopyPeriods": "OID Copy Periods Wednesday",
   "oid_profile_Thu_CopyPeriods": "OID Copy Periods Thursday",
   "oid_profile_Fri_CopyPeriods": "OID Copy Periods Friday",
-  "oid_profile_Sat_CopyPeriods": "OID Copy Periods Saturday"
+  "oid_profile_Sat_CopyPeriods": "OID Copy Periods Saturday",
+
+  "Copy": "Copy"
+
 
 }

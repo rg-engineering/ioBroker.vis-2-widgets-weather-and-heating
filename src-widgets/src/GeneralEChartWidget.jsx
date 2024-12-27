@@ -315,7 +315,7 @@ class GeneralEChartWidget extends (Generic) {
                 },
                 {
                     name: "X_axis", // group name
-                    label: "X_axis",
+                    label: "x_axis",
                     fields: [
                         {
                             name: "xaxis_axisLabel_formatstring",    // name in data structure

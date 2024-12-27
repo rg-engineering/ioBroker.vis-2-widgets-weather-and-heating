@@ -24,7 +24,6 @@ const styles = {
     },
 };
 
-//todo Copy Periods fehlt noch
 
 const setDataStructures = async (field, data, changeData, socket) => {
     console.log(`set new data structure instance ${data["instance"]}` );
@@ -1061,12 +1060,13 @@ class HeatingTimeScheduleWidget extends (Generic) {
                     this.handleCopyPeriods(copyOID);
                 }}
             >
-                Copy
+                {Generic.t("Copy")} 
             </Button>
         }
 
         return ret;
     }
+
 
     createTimeTableDetails(periods, currentTimePeriod, day, CopyOID, ProfileMinTemperature) {
         //https://mui.com/material-ui/react-table/

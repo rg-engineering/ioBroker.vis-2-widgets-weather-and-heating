@@ -243,7 +243,7 @@ class WeatherWidget extends (Generic) {
                 {
                     // check here all possible types https://github.com/ioBroker/ioBroker.vis/blob/react/src/src/Attributes/Widget/SCHEMA.md
                     name: "common", // group name
-                    //label: "common" //not required
+                    label: "common", //not required
                     fields: [
                         {
                             name: "noCard",
@@ -496,33 +496,33 @@ class WeatherWidget extends (Generic) {
                 },
                 {
                     name: "OIDS_general", // group name
-                    label: "group_oids_general",
+                    label: "oids_general",
                     fields: oid_general_fields,
                     hidden: data => data.instance.includes("daswetter")
                 },
                 {
                     name: "OIDS_rain", // group name
-                    label: "group_oids_rain",
+                    label: "oids_rain",
                     fields: oid_rain_fields
                 },
                 {
                     name: "OIDS_temp", // group name
-                    label: "group_oids_temp",
+                    label: "oids_temp",
                     fields: oid_temp_fields
                 },
                 {
                     name: "OIDS_cloud", // group name
-                    label: "group_oids_cloud",
+                    label: "oids_cloud",
                     fields: oid_cloud_fields
                 },
                 {
                     name: "OIDS_time", // group name
-                    label: "group_oids_time",
+                    label: "oids_time",
                     fields: oid_time_fields
                 },
                 {
                     name: "OIDS_chanceofrain", // group name
-                    label: "group_oids_chanceofrain",
+                    label: "oids_chanceofrain",
                     fields: oid_chanceofrain_fields,
                     hidden: data => data.instance.includes("daswetter")
                 },

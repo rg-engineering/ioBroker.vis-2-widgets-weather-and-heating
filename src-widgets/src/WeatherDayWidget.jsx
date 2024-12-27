@@ -151,6 +151,7 @@ class WeatherDayWidget extends (Generic) {
                 {
                     // check here all possible types https://github.com/ioBroker/ioBroker.vis/blob/react/src/src/Attributes/Widget/SCHEMA.md
                     name: "common", // group name
+                    label: "common", // group label
                     fields: [
                         {
                             name: "noCard",
@@ -279,6 +280,7 @@ class WeatherDayWidget extends (Generic) {
                 },
                 {
                     name: "OIDS", // group name
+                    label: "OIDS", // group label
                     fields: [
                         {
                             name: "oid_dayname",    // name in data structure

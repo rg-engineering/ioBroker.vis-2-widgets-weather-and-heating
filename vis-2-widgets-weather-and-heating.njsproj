@@ -62,6 +62,7 @@
     <Content Include="eslint.config.mjs" />
     <Content Include="gulpfile.js" />
     <Content Include="io-package.json" />
+    <Content Include="lib\tools.js" />
     <Content Include="LICENSE" />
     <Content Include="package-lock.json" />
     <Content Include="package.json" />
@@ -597,6 +598,7 @@
     <Folder Include=".github\workflows\" />
     <Folder Include="admin\" />
     <Folder Include="doc\" />
+    <Folder Include="lib\" />
     <Folder Include="src-widgets\" />
     <Folder Include="src-widgets\build\" />
     <Folder Include="src-widgets\public\" />

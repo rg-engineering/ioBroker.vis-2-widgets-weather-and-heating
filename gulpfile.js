@@ -107,6 +107,69 @@ gulp.task('widget-3-copy', () => Promise.all([
     )
 ]));
 
-gulp.task('widget-build', gulp.series(['widget-0-clean', 'widget-1-npm', 'widget-2-compile', 'widget-3-copy']));
+const translate = require('./lib/tools.js').translateText;
+
+const languages = {
+    de: {},
+    en: {},
+    es: {},
+    fr: {},
+    it: {},
+    nl: {},
+    pl: {},
+    pt: {},
+    ru: {},
+    uk: {},
+    ko: {},
+    'zh-cn': {},
+};
+
+
+gulp.task('translateWidget', async function (done) {
+
+    let yandex;
+    const i = process.argv.indexOf('--yandex');
+    if (i > -1) {
+        yandex = process.argv[i + 1];
+    }
+
+    console.log('Translate widget');
+
+    if (fs.existsSync('./src-widgets/src/i18n/en.json')) {
+        let enTranslations = require('./src-widgets/src/i18n/en.json');
+
+        for (let l in languages) {
+            console.log('Translate Text: ' + l);
+            let existing = {};
+
+            if (fs.existsSync('./src-widgets/src/i18n/' + l + '.json')) {
+                existing = require('./src-widgets/src/i18n/' + l + '.json');
+            }
+
+            for (let t in enTranslations) {
+                if (!existing[t]) {
+                    existing[t] = await translate(enTranslations[t], l, yandex);
+                }
+            }
+
+            fs.writeFileSync('./src-widgets/src/i18n/' + l + '.json', JSON.stringify(existing, null, 4));
+
+        }
+
+
+    } else {
+        console.error('No src-widgets/src/i18n/en.json found');
+        done();
+        return;
+    }
+
+
+    done();
+});
+
+gulp.task('widget-build', gulp.series(['widget-0-clean', 'widget-1-npm', 'translateWidget', 'widget-2-compile', 'widget-3-copy']));
+
+gulp.task('translateAndUpdateWidget', gulp.series('translateWidget'));
+
 
 gulp.task('default', gulp.series('widget-build'));

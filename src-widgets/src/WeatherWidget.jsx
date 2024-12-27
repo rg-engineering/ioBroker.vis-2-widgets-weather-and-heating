@@ -295,7 +295,7 @@ class WeatherWidget extends (Generic) {
                 },
                 {
                     name: "X_axis", // group name
-                    label: "group_x_axis",
+                    label: "x_axis",
                     fields: [
                         {
                             name: "xaxis_axisLabel_formatstring",    // name in data structure
@@ -313,7 +313,7 @@ class WeatherWidget extends (Generic) {
                 },
                 {
                     name: "rain", // group name
-                    label: "group_rain",
+                    label: "rain",
                     fields: [
                         {
                             name: "rain_visible",    // name in data structure
@@ -359,7 +359,7 @@ class WeatherWidget extends (Generic) {
                 },
                 {
                     name: "temperature", // group name
-                    label: "group_temperature",
+                    label: "temperature",
                     fields: [
                         {
                             name: "temperature_visible",    // name in data structure
@@ -399,7 +399,7 @@ class WeatherWidget extends (Generic) {
                 },
                 {
                     name: "clouds", // group name
-                    label: "group_clouds",
+                    label: "clouds",
                     fields: [
                         {
                             name: "clouds_visible",    // name in data structure
@@ -462,7 +462,7 @@ class WeatherWidget extends (Generic) {
                 {
                     //ausbelnden bei instance == wetter
                     name: "chanceofraining", // group name
-                    label: "group_chanceofrain",
+                    label: "chanceofrain",
                     hidden: data => data.instance.includes("daswetter"),
                     fields: [
                         {

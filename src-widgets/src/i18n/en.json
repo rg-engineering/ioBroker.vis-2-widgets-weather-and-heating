@@ -328,7 +328,7 @@
   "widgets_heating_label_oid_fireplacemodeactive": "OID fireplace mode",
 
 
-
+  "oid_choosenroom": "OID choosen room",
   "oid_GuestIncrease": "OID Guest Increase",
   "oid_PartyDecrease": "OID Party Decrease",
   "oid_AbsentDecrease": "OID Absent Decrease",
@@ -338,6 +338,9 @@
   "oid_TemperaturOverride": "OID Temperature Override",
   "oid_TemperaturOverrideTime": "OID Temperature Override Time",
   "oid_MinimumTemperature": "OID Minimum Temperature",
+  "oid_TemperatureDecreaseMode": "OID Temperature Decrease Mode",
+
+  "valuebackground_color": "Value background color",
 
   "Time": "Time",
 

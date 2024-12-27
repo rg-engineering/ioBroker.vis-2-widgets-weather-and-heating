@@ -297,6 +297,9 @@
   "widgets_heating_label_oid_holidaypresent": "OID: Urlaub zu Hause",
   "widgets_heating_label_oid_vacationabsent": "OID: Urlaub abwesend",
   "widgets_heating_label_oid_fireplacemodeactive": "OID: Kaminmodus",
+
+
+  "oid_choosenroom": "OID: gewählter Raum",
   "oid_GuestIncrease": "OID: Erhöhung Gäste",
   "oid_PartyDecrease": "OID: Absenkung bei Party",
   "oid_AbsentDecrease": "OID: Absenkung bei abwesend",
@@ -306,7 +309,12 @@
   "oid_TemperaturOverride": "OID: Override Temperatur",
   "oid_TemperaturOverrideTime": "OID: Override Zeit",
   "oid_MinimumTemperature": "OID: Mindesttemperatur",
+  "oid_TemperatureDecreaseMode": "OID: Temperaturabsenk-Modus",
+
+  "valuebackground_color": "Werte Hintergrund-Farbe",
+
   "Time": "Zeit",
+
   "GuestIncrease": "Anhebung bei Gästen",
   "PartyDecrease": "Absenkung bei Party",
   "AbsentDecrease": "Absenkung bei Abwesend",

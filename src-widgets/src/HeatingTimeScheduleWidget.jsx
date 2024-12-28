@@ -3,12 +3,20 @@ import PropTypes from "prop-types";
 
 // For federation, it is important to import from one package "@mui/material" and not from "@mui/material/Box"
 import {
-    Grid, Table, TableBody,
-    TableCell, TableHead, TableRow,
+    Grid,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow,
+    Button,
+    InputLabel,
+    MenuItem,
+    Select,
 } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 
-import Button from '@mui/material/Button';
+
 
 
 import Generic from "./Generic";
@@ -1125,7 +1133,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
                         <TableCell align="right">
                             <input
                                 type={"number"}
-                                placeholder="from"
+                                placeholder="temperature"
                                 className="form-control"
                                 onChange={(e) => {
                                     this.handleOnChangeTemperature({
@@ -1141,6 +1149,27 @@ class HeatingTimeScheduleWidget extends (Generic) {
                                 value={period.temperature}
                                 style={{ width: 50 }}
                             />
+
+
+                            <InputLabel id="label-target-temperature">{Generic.t('target-temperature') }</InputLabel>
+                            <Select
+                                labelId="label-target-temperature"
+                                
+                                value={period.temperature}
+                                label={Generic.t('target-temperature')}
+                                onChange={(e) => {
+                                    this.handleOnChangeTemperature({
+                                        temperature: e.target.value,
+                                        OID: period.oid_temperature
+                                    });
+                                }}
+                            >
+                                <MenuItem value={20}>20</MenuItem>
+                                <MenuItem value={21}>21</MenuItem>
+                                <MenuItem value={22}>22</MenuItem>
+                            </Select>
+                            
+
                         </TableCell>
                     </TableRow>
                 ))}

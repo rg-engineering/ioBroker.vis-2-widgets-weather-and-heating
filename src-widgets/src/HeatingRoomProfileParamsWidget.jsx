@@ -4,17 +4,17 @@ import PropTypes from "prop-types";
 // For federation, it is important to import from one package "@mui/material" and not from "@mui/material/Box"
 import {
     Box,
-    IconButton,
-    Input,
+    //IconButton,
+    //Input,
     InputAdornment,
-    InputLabel,
+    //InputLabel,
     FormControl,
     //FilledInput,
     FormHelperText,
-    TextField,
+    //TextField,
     OutlinedInput,
-    Visibility,
-    VisibilityOff,
+    //Visibility,
+    //VisibilityOff,
 } from '@mui/material';
 
 import Generic from "./Generic";

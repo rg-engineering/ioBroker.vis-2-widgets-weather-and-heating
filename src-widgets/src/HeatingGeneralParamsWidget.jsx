@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 
 // https://github.com/Pittini/iobroker-heatingcontrol-vis
 // For federation, it is important to import from one package "@mui/material" and not from "@mui/material/Box"
-import { Box, FormControlLabel, FormGroup, Switch } from "@mui/material";
+import {
+    Box,
+    FormControlLabel,
+    FormGroup,
+    Switch
+} from "@mui/material";
 
 import Generic from "./Generic";
 

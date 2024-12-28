@@ -1,7 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {Box, TextField, Typography,} from "@mui/material";
+import {
+    Box,
+    TextField,
+    Typography,
+} from "@mui/material";
 
 import {
     Battery1Bar as Battery1BarIcon,

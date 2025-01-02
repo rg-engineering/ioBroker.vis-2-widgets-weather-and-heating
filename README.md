@@ -93,6 +93,11 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 
 ## Changelog
+
+### **WORK IN PROGRESS**
+ * (René) see issue #66: Heating Time Schedule and Profile Params widget - option to use select box for temperature adjustment like Pittini vis
+ * (René) see issue #66: Heating Time Schedule and Profile Paramswidget - option to use time picker for time adjustments
+  
 ### 0.8.1 (2024-12-27)
  * (René) update dependencies
  * (René) see issue #66: Heating Time Schedule widget - uses minimum temperature from adapter for input value range

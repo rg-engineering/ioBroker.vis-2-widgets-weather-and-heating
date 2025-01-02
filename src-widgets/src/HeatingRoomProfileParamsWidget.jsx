@@ -15,7 +15,26 @@ import {
     OutlinedInput,
     //Visibility,
     //VisibilityOff,
+    MenuItem,
+    Select,
+    //InputLabel,
 } from '@mui/material';
+
+import { TimePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs';
+import 'dayjs/locale/de';
+import 'dayjs/locale/en';
+import 'dayjs/locale/ru';
+import 'dayjs/locale/zh-cn';
+import 'dayjs/locale/uk';
+import 'dayjs/locale/it';
+import 'dayjs/locale/fr';
+import 'dayjs/locale/es';
+import 'dayjs/locale/pl';
+import 'dayjs/locale/pt';
+import 'dayjs/locale/nl';
+
 
 import Generic from "./Generic";
 
@@ -28,7 +47,15 @@ const styles = {
         width: "100%",
         overflow: "hidden",
     },
+    textRoot: {
+        '& .MuiInputBase-root': {
+            width: '100%',
+            height: '100%',
+        },
+    }
 };
+
+
 
 const setDataStructures = async (field, data, changeData, socket) => {
 
@@ -51,6 +78,16 @@ const setDataStructures = async (field, data, changeData, socket) => {
         data["oid_MinimumTemperature"] = `${instance}.vis.RoomValues.MinimumTemperature`;
 
         data["oid_TemperatureDecreaseMode"] = `${instance}.info.TemperatureDecreaseMode`;
+
+
+        //value list for selectbox with temperatures
+        data["oid_TempAddValueListText"] = instance + ".vis.TempAddValueListText";
+        data["oid_TempDivValueListText"] = instance + ".vis.TempDivValueListText";
+        data["oid_TempValueListValue"] = instance + ".vis.TempValueListValue";
+
+        data["oid_OverrideTempValueListText"] = instance + ".vis.OverrideTempValueListText";
+        data["oid_OverrideTempValueListValue"] = instance + ".vis.OverrideTempValueListValue";
+       
     }
     changeData(data);
 };
@@ -101,7 +138,20 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                             default: "heatingcontrol.0",
                             onChange: setDataStructures,
                         },
-
+                        {
+                            // hide, wenn TempWithSelectbox==true
+                            name: "TempSetWidthLow",    // name in data structure
+                            label: "TempSetWidthLow", // translated field label
+                            type: "checkbox",
+                            default: false,
+                            hidden: "data.TempWithSelectbox",
+                        },
+                        {
+                            name: "TempWithSelectbox",    // name in data structure
+                            label: "TempWithSelectbox", // translated field label
+                            type: "checkbox",
+                            default: false,
+                        }
 
                     ],
                 },
@@ -189,26 +239,59 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                             type: "id",
                             default: "heatingcontrol.0.info.TemperatureDecreaseMode",
                         },
-
+                        // hide, wenn TempWithSelectbox!=true
                         {
-                            name: "colors", // group name
-                            label: "colors", // group label
-                            fields: [
-                                {
-                                    name: "valuebackground_color",    // name in data structure
-                                    label: "valuebackground_color", // translated field label
-                                    type: "color",
-                                    default: "background.paper",
-                                },
-                            ]
+                            name: "oid_TempAddValueListText",    // name in data structure
+                            label: "TempAddValueListText", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.TempAddValueListText",
+                            hidden: "!data.TempWithSelectbox",
                         },
+                        {
+                            name: "oid_TempDivValueListText",    // name in data structure
+                            label: "TempDivValueListText", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.TempDivValueListText",
+                            hidden: "!data.TempWithSelectbox",
+                        },
+                        {
+                            name: "oid_TempValueListValue",    // name in data structure
+                            label: "TempValueListValue", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.TempValueListValue",
+                            hidden: "!data.TempWithSelectbox",
+                        },
+                        {
+                            name: "oid_OverrideTempValueListText",    // name in data structure
+                            label: "OverrideTempValueListText", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.OverrideTempValueListText",
+                            hidden: "!data.TempWithSelectbox",
+                        },
+                        {
+                            name: "oid_OverrideTempValueListValue",    // name in data structure
+                            label: "OverrideTempValueListValue", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.OverrideTempValueListValue",
+                            hidden: "!data.TempWithSelectbox",
+                        },
+
                     ],
                 },
+                {
 
 
-
-
-
+                    name: "colors", // group name
+                    label: "colors", // group label
+                    fields: [
+                        {
+                            name: "valuebackground_color",    // name in data structure
+                            label: "valuebackground_color", // translated field label
+                            type: "color",
+                            default: "background.paper",
+                        },
+                    ]
+                },
             ],
             visPrev: "widgets/vis-2-widgets-weather-and-heating/img/vis-widget-HeatingRoomProfileParams.png",
         };
@@ -259,6 +342,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
         console.log("onStateUpdated " + id + " " + JSON.stringify(state));
     }
 
+    /*
     onChange1( val) {
         const oid = this.state.rxData["oid_GuestIncrease"];
         //convert value to number
@@ -301,6 +385,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
         if (this.props.editMode) return;
         this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
     }
+    */
     onChange7(val) {
         const oid = this.state.rxData["oid_MinimumTemperature"];
         //convert value to number
@@ -323,6 +408,27 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
         this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
     }
 
+    createValueData(value, text) {
+        return { value, text };
+    }
+
+    handleOnChangeTemperature(val) {
+        console.log(`onChange Temp: ${val.temperature}  ${val.OID} ${JSON.stringify(val)}`);
+        //onChange Temp: 6  oid_profile_Sat_1_Temperature { "temperature": "6", "OID": "oid_profile_Sat_1_Temperature" }
+        if (this.props.editMode) {
+            return;
+        }
+        this.props.context.setValue(val.OID, val.temperature);
+    }
+    handleOnChangeTime(val) {
+        console.log(`onChange Temp: ${val.time}  ${val.OID} ${JSON.stringify(val)}`);
+        //onChange Temp: 6  oid_profile_Sat_1_Temperature { "temperature": "6", "OID": "oid_profile_Sat_1_Temperature" }
+        if (this.props.editMode) {
+            return;
+        }
+        this.props.context.setValue(val.OID, val.time);
+    }
+
     static convertValue2Number(value) {
 
         try {
@@ -333,15 +439,241 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
         }
     }
 
+    showTimeValue(oid_time, value, name) {
+        let ret = null;
+
+        console.log(`showTimeValue ${oid_time} ${value} ${name}`);
+
+        if (this.state.rxData.TempWithSelectbox != true) {
+            ret = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+                <OutlinedInput
+                    size="small"
+                    id={name}
+                    endAdornment={<InputAdornment position="end"> </InputAdornment>}
+                    aria-describedby={name}
+                    inputProps={{
+                        'aria-label': Generic.t("Time"),
+                    }}
+                    type="text"
+                    value={value}
+                    onChange={(e) => this.handleOnChangeTime({
+                        time: e.target.value,
+                        OID: oid_time
+                    })}
+                    sx={{ input: { width: "100%" } }}
+                />
+                <FormHelperText id="Time-text">{Generic.t(name)}</FormHelperText>
+            </FormControl>
+        }
+        else {
+            ret = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+
+                <LocalizationProvider
+                    dateAdapter={AdapterDayjs}
+                    adapterLocale={this.props.context.lang}
+                >
+                    <TimePicker
+                        value={dayjs(value, "HH:mm")}
+                        ampm={false}
+                        minutesStep={1}
+                        
+                        formatDensity="dense"
+                        format="HH:mm"
+                        autoFocus="false"
+                        onChange={(value) => this.handleOnChangeTime({
+                            time: value,
+                            OID: oid_time
+                        })}
+                        slotProps={{
+                            textField: {
+                                variant: "outlined",
+                                style: {
+                                    width: "100%",
+                                    height: "100%",
+                                },
+                               sx: styles.textRoot,
+                            },
+                            field: {
+                                clearable: "true",
+                                onClear: () => {
+                                    console.debug("clear ");
+                                    this.props.context.setValue(oid_time, "00:00");
+                                },
+                            },
+                        }}
+                    />
+                </LocalizationProvider>
+                <FormHelperText id="Time-text">{Generic.t(name)}</FormHelperText>
+
+
+
+            </FormControl>
+        }
+
+        console.log(`showTimeValue done`);
+
+        return ret;
+    }
+
+    showTemperatureValue(oid_temperature, minTemperature, TempSetWidthLow, value, name, mode) {
+
+        let ret = null;
+
+        console.log(`showTemperatureValue ${oid_temperature}  ${minTemperature} ${TempSetWidthLow} ${value} ${name}`);
+
+
+        if (this.state.rxData.TempWithSelectbox != true) {
+
+            ret = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+                <OutlinedInput
+                    size="small"
+                    id={name}
+                    endAdornment={<InputAdornment position="end">°C</InputAdornment>}
+                    aria-describedby={name}
+                    inputProps={{
+                        'aria-label': Generic.t("Temperature"),
+                        'step': TempSetWidthLow
+                    }}
+                    type="number"
+                    value={value}
+                    min={minTemperature}
+                    max={30}
+                    onChange={(e) => {
+                        this.handleOnChangeTemperature({
+                            temperature: e.target.value,
+                            OID: oid_temperature
+                        });
+                    }}
+                    sx={{ input: { width: "100%" } }}
+                />
+                <FormHelperText id="Increase-text">{Generic.t(name)}</FormHelperText>
+            </FormControl>
+
+            /*
+            ret =
+                <input
+                    type={"number"}
+                    placeholder="temperature"
+                    className="form-control"
+                    onChange={(e) => {
+                        this.handleOnChangeTemperature({
+                            temperature: e.target.value,
+                            OID: oid_temperature
+                        });
+                    }}
+                    min={minTemperature}
+                    max={30}
+
+                    step={TempSetWidthLow}
+
+                    value={temperature}
+                    style={{ width: 50 }}
+                />
+                */
+        }
+        else {
+
+            // werte vorrat aus dem Adapter holen
+            /*
+                oid_TempAddValueListText
+                oid_TempDivValueListText
+                oid_TempValueListValue
+                oid_OverrideTempValueListText
+                oid_OverrideTempValueListValue
+
+
+            */
+
+
+            //todo
+           //* bei relaativ die Add / Div, bei absolut die Profilewerte
+           //* ovrride (temp und Zeit) und min Temperatur handeln
+
+            let TempAddValueListText = this.state.values[`${this.state.rxData["oid_TempAddValueListText"]}.val`];
+            let TempDivValueListText = this.state.values[`${this.state.rxData["oid_TempDivValueListText"]}.val`];
+            let TempValueListValue = this.state.values[`${this.state.rxData["oid_TempValueListValue"]}.val`];
+            let OverrideTempValueListText = this.state.values[`${this.state.rxData["oid_OverrideTempValueListText"]}.val`];
+            let OverrideTempValueListValue = this.state.values[`${this.state.rxData["oid_OverrideTempValueListValue"]}.val`];
+
+            //console.log(`showTemperatureValue ${TempAddValueListText}  ${TempValueListValue}`);
+
+            
+
+            if (
+                TempAddValueListText !== undefined &&
+                TempDivValueListText !== undefined &&
+                TempValueListValue !== undefined &&
+                OverrideTempValueListText !== undefined &&
+                OverrideTempValueListValue !== undefined) {
+
+                let oTempValueListValue = [];
+                let oTempValueListText = [];
+                if (mode == "absolute") {
+                    oTempValueListValue = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+                    oTempValueListText = ["0°C", "1°C", "2°C", "3°C", "4°C", "5°C", "6°C", "7°C", "8°C", "9°C", "10°C"];
+                }
+                else if (mode == "override") {
+                    oTempValueListValue = OverrideTempValueListValue.split(";");
+                    oTempValueListText = OverrideTempValueListText.split(";");
+                }
+                else if (mode == "increase") {
+                    oTempValueListValue = TempValueListValue.split(";");
+                    oTempValueListText = TempAddValueListText.split(";");
+                }
+                else {
+                    oTempValueListValue = TempValueListValue.split(";");
+                    oTempValueListText = TempDivValueListText.split(";");
+                }
+
+                console.log(`showTemperatureValue ${mode} ${oTempValueListValue}  ${oTempValueListText}`);
+
+                let values = [];
+                if (oTempValueListValue !== undefined && oTempValueListText !== undefined) {
+                    for (let p = 0; p < oTempValueListValue.length; p++) {
+                        values.push(this.createValueData(oTempValueListValue[p], oTempValueListText[p]));
+                    }
+                }
+
+                console.log(`showTemperatureValue ${JSON.stringify(values)}`);
+
+                ret = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+                    
+                    <Select
+                        value={value}
+                        variant="outlined"
+                        onChange={(e) => {
+                            this.handleOnChangeTemperature({
+                                temperature: e.target.value,
+                                OID: oid_temperature
+                            });
+                        }}
+                    >
+                        {values.map((value) => (
+                            <MenuItem value={value.value}>{value.text}</MenuItem>
+                        ))}
+                    </Select>
+                    <FormHelperText id="Increase-text">{Generic.t(name)}</FormHelperText>
+                </FormControl>
+            }
+        }
+
+
+        console.log(`showTemperatureValue done`);
+        return ret;
+    }
 
     getGuestIncrease() {
         let content = null;
         const oid = this.state.rxData["oid_GuestIncrease"];
-        console.log("oid " + oid);
+        //console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
             const GuestIncrease = this.state.values[oid + ".val"];
+            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? "0.5" : "1.0";
 
+            content = this.showTemperatureValue(oid, 0, TempSetWidthLow, GuestIncrease, "GuestIncrease", "increase");
+            
+            /*
             content = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                 <OutlinedInput 
                     size="small"
@@ -358,6 +690,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                 />
                 <FormHelperText id="GuestIncrease-text">{Generic.t("GuestIncrease")}</FormHelperText>
             </FormControl>
+            */
         }
         return content;
     }
@@ -365,11 +698,16 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
     getPartyDecrease() {
         let content = null;
         const oid = this.state.rxData["oid_PartyDecrease"];
-        console.log("oid " + oid);
+        //console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
             const PartyDecrease = this.state.values[oid + ".val"];
+            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? "0.5" : "1.0";
 
+            content = this.showTemperatureValue(oid, 0, TempSetWidthLow, PartyDecrease, "PartyDecrease", "decrease");
+
+
+            /*
             content = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                 <OutlinedInput 
                     size="small"
@@ -386,6 +724,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                 />
                 <FormHelperText id="PartyDecrease-text">{Generic.t("PartyDecrease")}</FormHelperText>
             </FormControl>
+            */
         }
         return content;
     }
@@ -393,10 +732,16 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
     getAbsentDecrease() {
         let content = null;
         const oid = this.state.rxData["oid_AbsentDecrease"];
-        console.log("oid " + oid);
+        //console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
             const AbsentDecrease = this.state.values[oid + ".val"];
+            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? "0.5" : "1.0";
+
+            content = this.showTemperatureValue(oid, 0, TempSetWidthLow, AbsentDecrease, "AbsentDecrease", "decrease");
+
+
+            /*
 
             content = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                 <OutlinedInput 
@@ -414,6 +759,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                 />
                 <FormHelperText id="AbsentDecrease-text">{Generic.t("AbsentDecrease")}</FormHelperText>
             </FormControl>
+            */
         }
         return content;
     }
@@ -421,10 +767,15 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
     getVacationAbsentDecrease() {
         let content = null;
         const oid = this.state.rxData["oid_VacationAbsentDecrease"];
-        console.log("oid " + oid);
+        //console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
             const VacationAbsentDecrease = this.state.values[oid + ".val"];
+            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? "0.5" : "1.0";
+
+            content = this.showTemperatureValue(oid, 0, TempSetWidthLow, VacationAbsentDecrease, "VacationAbsentDecrease", "decrease");
+
+            /*
 
             content = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                 <OutlinedInput 
@@ -442,6 +793,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                 />
                 <FormHelperText id="VacationAbsentDecrease-text">{Generic.t("VacationAbsentDecrease")}</FormHelperText>
             </FormControl>
+            */
         }
         return content;
     }
@@ -449,10 +801,16 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
     getWindowOpenDecrease() {
         let content = null;
         const oid = this.state.rxData["oid_WindowOpenDecrease"];
-        console.log("oid " + oid);
+        //console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
             const WindowOpenDecrease = this.state.values[oid + ".val"];
+            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? "0.5" : "1.0";
+
+            content = this.showTemperatureValue(oid, 0, TempSetWidthLow, WindowOpenDecrease, "WindowOpenDecrease", "decrease");
+
+
+            /*
 
             content = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                 <OutlinedInput 
@@ -470,6 +828,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                 />
                 <FormHelperText id="WindowOpenDecrease-text">{Generic.t("WindowOpenDecrease")}</FormHelperText>
             </FormControl>
+            */
         }
         return content;
     }
@@ -479,10 +838,15 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
     getFireplaceModeDecrease() {
         let content = null;
         const oid = this.state.rxData["oid_FireplaceModeDecrease"];
-        console.log("oid " + oid);
+        //console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
             const FireplaceModeDecrease = this.state.values[oid + ".val"];
+            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? "0.5" : "1.0";
+
+            content = this.showTemperatureValue(oid, 0, TempSetWidthLow, FireplaceModeDecrease, "FireplaceModeDecrease", "decrease");
+
+            /*
 
             content = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                 <OutlinedInput 
@@ -500,6 +864,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                 />
                 <FormHelperText id="FireplaceModeDecrease-text">{Generic.t("FireplaceModeDecrease")}</FormHelperText>
             </FormControl>
+            */
         }
         return content;
     }
@@ -507,10 +872,14 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
     getMinimumTemperature() {
         let content = null;
         const oid = this.state.rxData["oid_MinimumTemperature"];
-        console.log("oid " + oid);
+        //console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
             const MinimumTemperature = this.state.values[oid + ".val"];
+            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? "0.5" : "1.0";
+
+            content = this.showTemperatureValue(oid, -10, TempSetWidthLow, MinimumTemperature, "MinimumTemperature", "absolute");
+            /*
 
             content = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                 <OutlinedInput 
@@ -528,6 +897,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                 />
                 <FormHelperText id="MinimumTemperature-text">{Generic.t("MinimumTemperature")}</FormHelperText>
             </FormControl>
+            */
         }
         return content;
     }
@@ -535,11 +905,14 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
     getOverrideTemperatureTime() {
         let content = null;
         const oid = this.state.rxData["oid_TemperaturOverrideTime"];
-        console.log("oid " + oid);
+        //console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
             const OverrideTemperatureTime = this.state.values[oid + ".val"];
+           
+            content = this.showTimeValue(oid,  OverrideTemperatureTime, "OverrideTemperatureTime");
 
+            /*
             content = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
                 <OutlinedInput 
                     size="small"
@@ -556,6 +929,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                 />
                 <FormHelperText id="OverrideTemperatureTime-text">{Generic.t("OverrideTemperatureTime")}</FormHelperText>
             </FormControl>
+            */
         }
         return content;
     }
@@ -563,10 +937,15 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
     getOverrideTemperature() {
         let content = null;
         const oid = this.state.rxData["oid_TemperaturOverride"];
-        console.log("oid " + oid);
+        //console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
             const OverrideTemperature = this.state.values[oid + ".val"];
+            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? "0.5" : "1.0";
+
+            content = this.showTemperatureValue(oid, 0, TempSetWidthLow, OverrideTemperature, "OverrideTemperature", "override");
+            
+            /*
 
             content = <FormControl sx={{ m: 0.5, width: "15ch" }} >
                 <OutlinedInput 
@@ -584,6 +963,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                 />
                 <FormHelperText id="OverrideTemperature-text">{Generic.t("OverrideTemperature")}</FormHelperText>
             </FormControl>
+            */
         }
         return content;
     }
@@ -592,7 +972,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
 
         let content = null;
         const oid = this.state.rxData["oid_TemperatureDecreaseMode"];
-        console.log("oid " + oid);
+        //console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
             const TemperatureDecreaseMode = this.state.values[oid + ".val"];

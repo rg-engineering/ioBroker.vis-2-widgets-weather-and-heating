@@ -343,5 +343,8 @@
     "oid_profile_Thu_CopyPeriods": "Periodi di copia OID giovedì",
     "oid_profile_Fri_CopyPeriods": "Periodi di copia OID venerdì",
     "oid_profile_Sat_CopyPeriods": "Periodi di copia OID sabato",
-    "Copy": "Copia"
+    "Copy": "Copia",
+    "TempWithSelectbox": "Temperatura con SelectBox",
+    "ProfileTempValueListValue": "OID: elenco dei valori della temperatura del profilo",
+    "ProfileTempValueListText": "OID: elenco dei testi della temperatura del profilo"
 }

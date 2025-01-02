@@ -326,5 +326,8 @@
     "oid_profile_Thu_CopyPeriods": "OID 복사 기간 목요일",
     "oid_profile_Fri_CopyPeriods": "OID 복사 기간 금요일",
     "oid_profile_Sat_CopyPeriods": "OID 복사 기간 토요일",
-    "Copy": "복사"
+    "Copy": "복사",
+    "TempWithSelectbox": "SelectBox를 사용한 온도",
+    "ProfileTempValueListValue": "OID: 프로필 온도 값 목록",
+    "ProfileTempValueListText": "OID: 프로필 온도 텍스트 목록"
 }

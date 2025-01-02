@@ -48,7 +48,7 @@ module.exports = {
         'no-unused-expressions': 'off',
         'prefer-destructuring': 'off',
         'no-return-assign': 'off',
-        'no-multi-spaces': 'off',
+        'no-multi-spaces': 'error',
         'key-spacing': 'off',
         'no-undef': 2,
         'react/forbid-prop-types': 'off',

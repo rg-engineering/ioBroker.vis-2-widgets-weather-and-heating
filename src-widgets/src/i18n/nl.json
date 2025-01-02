@@ -343,5 +343,8 @@
     "oid_profile_Thu_CopyPeriods": "OID Kopieerperioden Donderdag",
     "oid_profile_Fri_CopyPeriods": "OID Kopieerperioden Vrijdag",
     "oid_profile_Sat_CopyPeriods": "OID Kopieerperioden Zaterdag",
-    "Copy": "Kopiëren"
+    "Copy": "Kopiëren",
+    "TempWithSelectbox": "Temperatuur met SelectBox",
+    "ProfileTempValueListValue": "OID: Lijst met profieltemperatuurwaarden",
+    "ProfileTempValueListText": "OID: Tekstlijst profieltemperatuur"
 }

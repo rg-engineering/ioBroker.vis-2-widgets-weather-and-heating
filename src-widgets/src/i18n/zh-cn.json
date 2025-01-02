@@ -343,5 +343,8 @@
     "oid_profile_Thu_CopyPeriods": "OID 复制周期周四",
     "oid_profile_Fri_CopyPeriods": "OID 复制周期周五",
     "oid_profile_Sat_CopyPeriods": "OID 复制时段周六",
-    "Copy": "复制"
+    "Copy": "复制",
+    "TempWithSelectbox": "带选择框的温度",
+    "ProfileTempValueListValue": "OID：剖面温度值列表",
+    "ProfileTempValueListText": "OID：配置文件温度文本列表"
 }

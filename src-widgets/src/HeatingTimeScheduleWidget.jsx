@@ -13,10 +13,35 @@ import {
     InputLabel,
     MenuItem,
     Select,
+    Box,
+    //IconButton,
+    //Input,
+    InputAdornment,
+    //InputLabel,
+    FormControl,
+    //FilledInput,
+    FormHelperText,
+    //TextField,
+    OutlinedInput,
+    //Visibility,
+    //VisibilityOff,
 } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 
-
+import { TimePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs';
+import 'dayjs/locale/de';
+import 'dayjs/locale/en';
+import 'dayjs/locale/ru';
+import 'dayjs/locale/zh-cn';
+import 'dayjs/locale/uk';
+import 'dayjs/locale/it';
+import 'dayjs/locale/fr';
+import 'dayjs/locale/es';
+import 'dayjs/locale/pl';
+import 'dayjs/locale/pt';
+import 'dayjs/locale/nl';
 
 
 import Generic from "./Generic";
@@ -30,6 +55,12 @@ const styles = {
         width: "100%",
         overflow: "hidden",
     },
+    textRoot: {
+        '& .MuiInputBase-root': {
+            width: '100%',
+            height: '100%',
+        },
+    }
 };
 
 
@@ -178,6 +209,11 @@ const setDataStructures = async (field, data, changeData, socket) => {
         data["oid_profile_Fri_CopyPeriods"] = instance + ".vis.ProfileTypes.Fri.CopyPeriods";
         data["oid_profile_Sat_CopyPeriods"] = instance + ".vis.ProfileTypes.Sat.CopyPeriods";
 
+        //value list for selectbox with temperatures
+        data["oid_ProfileTempValueListValue"] = instance + ".vis.ProfileTempValueListValue";
+        data["oid_ProfileTempValueListText"] = instance + ".vis.ProfileTempValueListText";
+        
+
         /*
         heatingcontrol.0.CurrentProfile
         heatingcontrol.0.Profiles.1.ProfileName
@@ -235,11 +271,20 @@ class HeatingTimeScheduleWidget extends (Generic) {
                             onChange: setDataStructures,
                         },
                         {
+                            // hide, wenn TempWithSelectbox==true
                             name: "TempSetWidthLow",    // name in data structure
                             label: "TempSetWidthLow", // translated field label
                             type: "checkbox",
                             default: false,
+                            hidden: "data.TempWithSelectbox",
                         },
+                        {
+                            name: "TempWithSelectbox",    // name in data structure
+                            label: "TempWithSelectbox", // translated field label
+                            type: "checkbox",
+                            default: false,
+                        }
+                        
                     ],
                 },
                 {
@@ -281,7 +326,22 @@ class HeatingTimeScheduleWidget extends (Generic) {
                             label: "profilemintemperature", // translated field label
                             type: "id",
                             default: "heatingcontrol.0.vis.RoomValues.MinimumTemperature",
-                        }
+                        },
+                        // hide, wenn TempWithSelectbox!=true
+                        {
+                            name: "oid_ProfileTempValueListValue",    // name in data structure
+                            label: "ProfileTempValueListValue", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTempValueListValue",
+                            hidden: "!data.TempWithSelectbox",
+                        },
+                        {
+                            name: "oid_ProfileTempValueListText",    // name in data structure
+                            label: "ProfileTempValueListText", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ProfileTempValueListText",
+                            hidden: "!data.TempWithSelectbox",
+                        },
                         
 
                     ],
@@ -1001,6 +1061,10 @@ class HeatingTimeScheduleWidget extends (Generic) {
         return { index, time, temperature,oid_time, oid_temperature };
     }
 
+    createValueData(value, text) {
+        return { value,text };
+    }
+
     handleOnChangeTemperature(val) {
         console.log(`onChange Temp: ${val.temperature}  ${val.OID} ${JSON.stringify(val)}`);
 
@@ -1008,7 +1072,6 @@ class HeatingTimeScheduleWidget extends (Generic) {
 
         const oid = this.state.rxData[val.OID];
 
-        console.log(`onChange1 ${oid}  ${val.temperature}`);
         if (this.props.editMode) {
             return;
         }
@@ -1020,7 +1083,6 @@ class HeatingTimeScheduleWidget extends (Generic) {
 
         const oid = this.state.rxData[val.OID];
 
-        console.log(`onChange1 ${oid}  ${val.time}`);
         if (this.props.editMode) {
             return;
         }
@@ -1076,11 +1138,158 @@ class HeatingTimeScheduleWidget extends (Generic) {
     }
 
 
+    showTimeValue(oid_time, value, name) {
+        let ret = null;
+
+        console.log(`showTimeValue ${oid_time} ${value} ${name}`);
+
+        if (this.state.rxData.TempWithSelectbox != true) {
+            ret = <FormControl sx={{ m: 0.5, width: "12ch" }} variant="filled">
+                <OutlinedInput
+                    size="small"
+                    id={name}
+                    endAdornment={<InputAdornment position="end"> </InputAdornment>}
+                    aria-describedby={name}
+                    inputProps={{
+                        'aria-label': Generic.t("Time"),
+                    }}
+                    type="text"
+                    value={value}
+                    onChange={(e) => this.handleOnChangeTime({
+                        time: e.target.value,
+                        OID: oid_time
+                    })}
+                    sx={{ input: { width: "100%" } }}
+                />
+                
+            </FormControl>
+        }
+        else {
+            ret = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+
+                <LocalizationProvider
+                    dateAdapter={AdapterDayjs}
+                    adapterLocale={this.props.context.lang}
+                >
+                    <TimePicker
+                        value={dayjs(value, "HH:mm")}
+                        ampm={false}
+                        minutesStep={1}
+                        
+                        formatDensity="dense"
+                        format="HH:mm"
+                        autoFocus="false"
+                        onChange={(value) => this.handleOnChangeTime({
+                            time: value,
+                            OID: oid_time
+                        })}
+                        slotProps={{
+                            textField: {
+                                variant: "outlined",
+                                style: {
+                                    width: "100%",
+                                    height: "100%",
+                                },
+                                sx: styles.textRoot,
+                            },
+                            field: {
+                                clearable: "true",
+                                onClear: () => {
+                                    console.debug("clear ");
+                                    this.props.context.setValue(oid_time, "00:00");
+                                },
+                            },
+                        }}
+                    />
+                </LocalizationProvider>
+
+
+
+
+            </FormControl>
+        }
+
+        console.log(`showTimeValue done`);
+
+        return ret;
+    }
+
+    showTemperatureValue(oid_temperature, ProfileMinTemperature, TempSetWidthLow, temperature, name) {
+
+        let ret = null;
+
+        if (this.state.rxData.TempWithSelectbox != true) {
+            ret = <FormControl sx={{ m: 0.5, width: "12ch" }} variant="filled">
+                <OutlinedInput
+                    size="small"
+                    id={name}
+                    endAdornment={<InputAdornment position="end"> </InputAdornment>}
+                    aria-describedby={name}
+                    inputProps={{
+                        'aria-label': Generic.t("Temperature"),
+                    }}
+                    type="number"
+                    min={ProfileMinTemperature}
+                    max={30}
+
+                    step={TempSetWidthLow}
+
+                    value={temperature}
+
+                    onChange={(e) => this.handleOnChangeTemperature({
+                        temperature: e.target.value,
+                        OID: oid_temperature
+                    })}
+                    sx={{ input: { width: "100%" } }}
+                />
+            </FormControl>
+
+        }
+        else {
+
+            // werte vorrat aus dem Adapter hole
+            let ProfileTempValueListValue = this.state.values[`${this.state.rxData["oid_ProfileTempValueListValue"]}.val`];
+            let ProfileTempValueListText = this.state.values[`${this.state.rxData["oid_ProfileTempValueListText"]}.val`];
+
+            //console.log(`showTemperatureValue ${ProfileTempValueListValue}  ${ProfileTempValueListText}`);
+
+            if (ProfileTempValueListValue !== undefined && ProfileTempValueListText !== undefined) {
+                let oProfileTempValueListValue = ProfileTempValueListValue.split(";");
+                let oProfileTempValueListText = ProfileTempValueListText.split(";");
+
+                let values = [];
+                for (let p = 1; p <= oProfileTempValueListValue.length; p++) {
+                    values.push(this.createValueData(oProfileTempValueListValue[p], oProfileTempValueListText[p]));
+                }
+
+                //console.log(`showTemperatureValue ${JSON.stringify(values)}`);
+
+                ret = <div>
+
+                    <Select
+                        value={temperature}
+                        onChange={(e) => {
+                            this.handleOnChangeTemperature({
+                                temperature: e.target.value,
+                                OID: oid_temperature
+                            });
+                        }}
+                    >
+                        {values.map((value) => (
+                            <MenuItem value={value.value}>{value.text}</MenuItem>
+                        ))}
+                    </Select>
+                </div>
+            }
+        }
+
+        return ret;
+    }
+
     createTimeTableDetails(periods, currentTimePeriod, day, CopyOID, ProfileMinTemperature) {
         //https://mui.com/material-ui/react-table/
 
-
-        let TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? "0.5" : "1.0";
+        const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? "0.5" : "1.0";
 
         console.log(`createTimeTableDetails ${currentTimePeriod} ${JSON.stringify(periods)} ${day} ${ProfileMinTemperature} ${TempSetWidthLow}`);
 
@@ -1115,61 +1324,10 @@ class HeatingTimeScheduleWidget extends (Generic) {
                     >
                         <TableCell align="center">{period.index}</TableCell>
                         <TableCell align="right">
-                            <input
-                                type="text"
-                                placeholder="from"
-                                className="form-control"
-                                onChange={(e) => {
-                                    this.handleOnChangeTime({
-                                        time: e.target.value,
-                                        OID: period.oid_time
-                                    });
-                                }}
-                                value={period.time}
-                                style={{ width: 50 }}
-                            />
-
+                            {this.showTimeValue(period.oid_time, period.time, "")}
                         </TableCell>
                         <TableCell align="right">
-                            <input
-                                type={"number"}
-                                placeholder="temperature"
-                                className="form-control"
-                                onChange={(e) => {
-                                    this.handleOnChangeTemperature({
-                                        temperature: e.target.value,
-                                        OID: period.oid_temperature
-                                    });
-                                }}
-                                min={ProfileMinTemperature}
-                                max={30}
-
-                                step={TempSetWidthLow}
-
-                                value={period.temperature}
-                                style={{ width: 50 }}
-                            />
-
-
-                            <InputLabel id="label-target-temperature">{Generic.t('target-temperature') }</InputLabel>
-                            <Select
-                                labelId="label-target-temperature"
-                                
-                                value={period.temperature}
-                                label={Generic.t('target-temperature')}
-                                onChange={(e) => {
-                                    this.handleOnChangeTemperature({
-                                        temperature: e.target.value,
-                                        OID: period.oid_temperature
-                                    });
-                                }}
-                            >
-                                <MenuItem value={20}>20</MenuItem>
-                                <MenuItem value={21}>21</MenuItem>
-                                <MenuItem value={22}>22</MenuItem>
-                            </Select>
-                            
-
+                            {this.showTemperatureValue(period.oid_temperature, ProfileMinTemperature, TempSetWidthLow, period.temperature,"") }
                         </TableCell>
                     </TableRow>
                 ))}
@@ -1182,7 +1340,24 @@ class HeatingTimeScheduleWidget extends (Generic) {
         </div>
 
     }
-    //todo button nur bei every day... und nicht am Sonntag
+
+
+    createTable_Dummy() {
+        return <div
+            ref={this.refCardContent}
+            style={styles.cardContent}
+        >
+            <div style={{ color: this.state.rxData["headline_color"] || "white" }}>
+                <p>{Generic.t("no data available")}</p>
+                <p>{Generic.t("please check OID settings")}</p>
+            </div>
+
+           
+
+        </div>;
+    }
+
+    //button nur bei every day... und nicht am Sonntag
 
     createTable_MoSu(noOfPeriods, room, profileName, currentProfile, currentTimePeriod, ProfileMinTemperature) {
         console.log(`createTable_MoSu called ${room}`);
@@ -1277,7 +1452,6 @@ class HeatingTimeScheduleWidget extends (Generic) {
             curTimePeriod = tempTimePeriod;
         }
 
-
         const CopyPeriods_Mon = this.state.rxData["oid_profile_Mon_CopyPeriods"];
         const timetableMon = this.createTimeTableDetails(periodsMon, curTimePeriod, Generic.t("Mon."), CopyPeriods_Mon, ProfileMinTemperature);
         tempTimePeriod = tempTimePeriod - 5;
@@ -1359,7 +1533,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
 
         const ProfileMinTemperature = this.state.values[`${this.state.rxData["oid_ProfileMinTemperature"]}.val`];
 
-        console.log(`createTable ${ProfileMinTemperature}  ${this.state.rxData["oid_ProfileMinTemperature"]}`);
+        console.log(`createTable ${profileType}  ${ProfileMinTemperature}  ${this.state.rxData["oid_ProfileMinTemperature"]}`);
 
         if (profileType === "Mo - Su") {
             return this.createTable_MoSu(noOfPeriods, room, profileName, currentProfile, currentTimePeriod, ProfileMinTemperature);
@@ -1369,7 +1543,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
             return this.createTable_EveryDay(noOfPeriods, room, profileName, currentProfile, currentTimePeriod, ProfileMinTemperature);
         } else {
             console.log(`unknown profile type ${profileType}`);
-            return null;
+            return this.createTable_Dummy();
         }
     }
 

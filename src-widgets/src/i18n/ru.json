@@ -343,5 +343,8 @@
     "oid_profile_Thu_CopyPeriods": "Периоды копирования OID: четверг",
     "oid_profile_Fri_CopyPeriods": "Периоды копирования OID: пятница",
     "oid_profile_Sat_CopyPeriods": "Период копирования OID суббота",
-    "Copy": "Копировать"
+    "Copy": "Копировать",
+    "TempWithSelectbox": "Температура с помощью SelectBox",
+    "ProfileTempValueListValue": "OID: Список значений температуры профиля",
+    "ProfileTempValueListText": "OID: Список текстов температуры профиля"
 }

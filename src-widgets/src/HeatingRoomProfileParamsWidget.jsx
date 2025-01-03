@@ -466,7 +466,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
             </FormControl>
         }
         else {
-            ret = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+            ret = <FormControl sx={{ m: 0.5, width: "20ch" }} >
 
                 <LocalizationProvider
                     dateAdapter={AdapterDayjs}
@@ -481,7 +481,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         format="HH:mm"
                         autoFocus="false"
                         onChange={(value) => this.handleOnChangeTime({
-                            time: value,
+                            time: value.format('HH:mm'),
                             OID: oid_time
                         })}
                         slotProps={{

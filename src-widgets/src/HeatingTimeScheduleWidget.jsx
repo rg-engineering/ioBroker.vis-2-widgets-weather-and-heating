@@ -1144,7 +1144,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
         console.log(`showTimeValue ${oid_time} ${value} ${name}`);
 
         if (this.state.rxData.TempWithSelectbox != true) {
-            ret = <FormControl sx={{ m: 0.5, width: "12ch" }} variant="filled">
+            ret = <FormControl sx={{ m: 0.5, width: "10ch" }} variant="filled">
                 <OutlinedInput
                     size="small"
                     id={name}
@@ -1165,7 +1165,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
             </FormControl>
         }
         else {
-            ret = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
+            ret = <FormControl sx={{ m: 0.5, width: "20ch" }} >
 
                 <LocalizationProvider
                     dateAdapter={AdapterDayjs}
@@ -1180,7 +1180,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
                         format="HH:mm"
                         autoFocus="false"
                         onChange={(value) => this.handleOnChangeTime({
-                            time: value,
+                            time: value.format('HH:mm'),
                             OID: oid_time
                         })}
                         slotProps={{
@@ -1219,7 +1219,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
         let ret = null;
 
         if (this.state.rxData.TempWithSelectbox != true) {
-            ret = <FormControl sx={{ m: 0.5, width: "12ch" }} variant="filled">
+            ret = <FormControl sx={{ m: 0.5, width: "10ch" }} variant="filled">
                 <OutlinedInput
                     size="small"
                     id={name}

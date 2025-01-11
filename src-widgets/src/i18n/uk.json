@@ -346,5 +346,12 @@
     "Copy": "Копія",
     "TempWithSelectbox": "Температура за допомогою SelectBox",
     "ProfileTempValueListValue": "OID: Список значень температури профілю",
-    "ProfileTempValueListText": "OID: Текстовий список температури профілю"
+    "ProfileTempValueListText": "OID: Текстовий список температури профілю",
+    "TempAddValueListText": "OID: текстовий список збільшення температури",
+    "TempDivValueListText": "OID: текстовий список зниження температури",
+    "TempValueListValue": "OID: Список значень збільшення/зниження температури",
+    "OverrideTempValueListText": "OID: список перевизначення тексту",
+    "OverrideTempValueListValue": "OID: Перевизначити список значень",
+    "no data available": "Немає даних.",
+    "please check OID settings": "Перевірте налаштування OID."
 }

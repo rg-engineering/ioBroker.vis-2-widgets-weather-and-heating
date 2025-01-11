@@ -329,5 +329,12 @@
     "Copy": "복사",
     "TempWithSelectbox": "SelectBox를 사용한 온도",
     "ProfileTempValueListValue": "OID: 프로필 온도 값 목록",
-    "ProfileTempValueListText": "OID: 프로필 온도 텍스트 목록"
+    "ProfileTempValueListText": "OID: 프로필 온도 텍스트 목록",
+    "TempAddValueListText": "OID: 온도 상승 텍스트 목록",
+    "TempDivValueListText": "OID: 온도 감소 텍스트 목록",
+    "TempValueListValue": "OID: 온도 증가/감소 값 목록",
+    "OverrideTempValueListText": "OID: 텍스트 목록 재정의",
+    "OverrideTempValueListValue": "OID: 값 목록 재정의",
+    "no data available": "데이터가 없습니다.",
+    "please check OID settings": "OID 설정을 확인해주세요."
 }

@@ -346,5 +346,12 @@
     "Copy": "Cópia",
     "TempWithSelectbox": "Temperatura com SelectBox",
     "ProfileTempValueListValue": "OID: Lista de valores de temperatura do perfil",
-    "ProfileTempValueListText": "OID: Lista de Texto de Temperatura do Perfil"
+    "ProfileTempValueListText": "OID: Lista de Texto de Temperatura do Perfil",
+    "TempAddValueListText": "OID: Lista de texto de aumento de temperatura",
+    "TempDivValueListText": "OID: Lista de Texto de Diminuição de Temperatura",
+    "TempValueListValue": "OID: Lista de valores de aumento/diminuição de temperatura",
+    "OverrideTempValueListText": "OID: Substituir lista de texto",
+    "OverrideTempValueListValue": "OID: Substituir lista de valores",
+    "no data available": "Não há dados disponíveis.",
+    "please check OID settings": "Verifique as configurações do OID."
 }

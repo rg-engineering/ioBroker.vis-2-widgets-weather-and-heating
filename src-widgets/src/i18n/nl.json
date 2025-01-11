@@ -346,5 +346,12 @@
     "Copy": "Kopiëren",
     "TempWithSelectbox": "Temperatuur met SelectBox",
     "ProfileTempValueListValue": "OID: Lijst met profieltemperatuurwaarden",
-    "ProfileTempValueListText": "OID: Tekstlijst profieltemperatuur"
+    "ProfileTempValueListText": "OID: Tekstlijst profieltemperatuur",
+    "TempAddValueListText": "OID: Tekstlijst temperatuurverhoging",
+    "TempDivValueListText": "OID: Tekstlijst temperatuurverlaging",
+    "TempValueListValue": "OID: Lijst met waarden voor temperatuurverhoging/-verlaging",
+    "OverrideTempValueListText": "OID: tekstlijst negeren",
+    "OverrideTempValueListValue": "OID: waardelijst negeren",
+    "no data available": "Geen gegevens beschikbaar.",
+    "please check OID settings": "Controleer de OID-instellingen."
 }

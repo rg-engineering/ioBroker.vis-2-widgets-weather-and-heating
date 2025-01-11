@@ -346,5 +346,12 @@
     "Copy": "复制",
     "TempWithSelectbox": "带选择框的温度",
     "ProfileTempValueListValue": "OID：剖面温度值列表",
-    "ProfileTempValueListText": "OID：配置文件温度文本列表"
+    "ProfileTempValueListText": "OID：配置文件温度文本列表",
+    "TempAddValueListText": "OID：温度增加文本列表",
+    "TempDivValueListText": "OID：温度降低文本列表",
+    "TempValueListValue": "OID：温度增减值列表",
+    "OverrideTempValueListText": "OID：覆盖文本列表",
+    "OverrideTempValueListValue": "OID：覆盖值列表",
+    "no data available": "无可用数据。",
+    "please check OID settings": "请检查 OID 设置。"
 }

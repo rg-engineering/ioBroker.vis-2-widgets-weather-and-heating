@@ -60,7 +60,8 @@ const styles = {
             width: '100%',
             height: '100%',
         },
-    }
+    },
+
 };
 
 
@@ -1141,7 +1142,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
     showTimeValue(oid_time, value, name) {
         let ret = null;
 
-        console.log(`showTimeValue ${oid_time} ${value} ${name}`);
+        console.log(`showTimeValue ${oid_time} ${value} ${name}  ${this.props.context.themeType}`);
 
         if (this.state.rxData.TempWithSelectbox != true) {
             ret = <FormControl sx={{ m: 0.5, width: "10ch" }} variant="filled">
@@ -1161,56 +1162,66 @@ class HeatingTimeScheduleWidget extends (Generic) {
                     })}
                     sx={{ input: { width: "100%" } }}
                 />
-                
+
             </FormControl>
         }
         else {
-            ret = <FormControl sx={{ m: 0.5, width: "20ch" }} >
+            ret =
 
-                <LocalizationProvider
-                    dateAdapter={AdapterDayjs}
-                    adapterLocale={this.props.context.lang}
-                >
-                    <TimePicker
-                        value={dayjs(value, "HH:mm")}
-                        ampm={false}
-                        minutesStep={1}
-                        
-                        formatDensity="dense"
-                        format="HH:mm"
-                        autoFocus="false"
-                        onChange={(value) => this.handleOnChangeTime({
-                            time: value.format('HH:mm'),
-                            OID: oid_time
-                        })}
-                        slotProps={{
-                            textField: {
-                                variant: "outlined",
-                                style: {
-                                    width: "100%",
-                                    height: "100%",
+
+                <FormControl  sx={{ m: 0.5, width: "20ch" }} >
+
+                    <LocalizationProvider
+                        dateAdapter={AdapterDayjs}
+                        adapterLocale={this.props.context.lang}
+                    >
+                        <TimePicker
+                            value={dayjs(value, "HH:mm")}
+                            ampm={false}
+                            minutesStep={1}
+
+                            formatDensity="dense"
+                            format="HH:mm"
+                            autoFocus="false"
+                            onChange={(value) => this.handleOnChangeTime({
+                                time: value.format('HH:mm'),
+                                OID: oid_time
+                            })}
+                            slotProps={{
+                                textField: {
+                                    variant: "outlined",
+                                    style: {
+                                        width: "100%",
+                                        height: "100%",
+                                      
+                                    },
+                                    sx: {
+                                        "& .MuiInputBase-root": {
+                                            width: "100%",
+                                            height: "100%",
+                                            color: this.props.context.themeType === 'dark' ? '#DDD' : '#222',
+                                            
+                                        },
+                                        "& .MuiIconButton-root": {
+                                            color: this.props.context.themeType === 'dark' ? '#DDD' : '#222',
+                                        },
+                                    }, 
                                 },
-                                sx: styles.textRoot,
-                            },
-                            field: {
-                                clearable: "true",
-                                onClear: () => {
-                                    console.debug("clear ");
-                                    this.props.context.setValue(oid_time, "00:00");
+                                field: {
+                                    clearable: "false",
+                                    
+                                    onClear: () => {
+                                        console.debug("clear ");
+                                        this.props.context.setValue(oid_time, "00:00");
+                                    },
                                 },
-                            },
-                        }}
-                    />
-                </LocalizationProvider>
+                            }}
+                        />
+                    </LocalizationProvider>
+                </FormControl>
 
-
-
-
-            </FormControl>
         }
-
         console.log(`showTimeValue done`);
-
         return ret;
     }
 

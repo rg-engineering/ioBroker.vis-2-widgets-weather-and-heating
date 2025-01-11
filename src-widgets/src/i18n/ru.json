@@ -346,5 +346,12 @@
     "Copy": "Копировать",
     "TempWithSelectbox": "Температура с помощью SelectBox",
     "ProfileTempValueListValue": "OID: Список значений температуры профиля",
-    "ProfileTempValueListText": "OID: Список текстов температуры профиля"
+    "ProfileTempValueListText": "OID: Список текстов температуры профиля",
+    "TempAddValueListText": "OID: Список текстов повышения температуры",
+    "TempDivValueListText": "OID: Список текстов о снижении температуры",
+    "TempValueListValue": "OID: Список значений повышения/понижения температуры",
+    "OverrideTempValueListText": "OID: переопределить список текстов",
+    "OverrideTempValueListValue": "OID: список переопределенных значений",
+    "no data available": "Данные отсутствуют.",
+    "please check OID settings": "Пожалуйста, проверьте настройки OID."
 }

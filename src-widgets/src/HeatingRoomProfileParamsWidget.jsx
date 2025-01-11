@@ -51,6 +51,8 @@ const styles = {
         '& .MuiInputBase-root': {
             width: '100%',
             height: '100%',
+            backgroundColor: 'green',
+            color: "red",
         },
     }
 };
@@ -442,7 +444,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
     showTimeValue(oid_time, value, name) {
         let ret = null;
 
-        console.log(`showTimeValue ${oid_time} ${value} ${name}`);
+        console.log(`showTimeValue ${oid_time} ${value} ${name} ${this.props.context.themeType}`);
 
         if (this.state.rxData.TempWithSelectbox != true) {
             ret = <FormControl sx={{ m: 0.5, width: "15ch" }} variant="filled">
@@ -491,7 +493,17 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                                     width: "100%",
                                     height: "100%",
                                 },
-                               sx: styles.textRoot,
+                                sx: {
+                                    "& .MuiInputBase-root": {
+                                        width: "100%",
+                                        height: "100%",
+                                        color: this.props.context.themeType === 'dark' ? '#DDD' : '#222',
+
+                                    },
+                                    "& .MuiIconButton-root": {
+                                        color: this.props.context.themeType === 'dark' ? '#DDD' : '#222',
+                                    },
+                                },
                             },
                             field: {
                                 clearable: "true",

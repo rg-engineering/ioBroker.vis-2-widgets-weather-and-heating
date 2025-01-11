@@ -200,7 +200,7 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 ## License
 The MIT License (MIT)
 
-Copyright (c) 2024 rg-engineering <info@rg-engineering.eu>
+Copyright (c) 2024 - 2025 rg-engineering <info@rg-engineering.eu>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

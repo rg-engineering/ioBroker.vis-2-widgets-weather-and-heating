@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather-and-heating",
-    "version": "0.9.0",
+    "version": "0.9.1",
     "news": {
+      "0.9.1": {
+        "en": "bug fix: support darkmode for time picker",
+        "de": "bugfix: unterstützung darkmode für zeitwähler",
+        "ru": "фиксация клопов: поддержка темной моды для пикера времени",
+        "pt": "correção de bugs: suporte para o darkmode para o picador de tempo",
+        "nl": "foutfix: ondersteuning voor de donkere modus voor tijdkiezer",
+        "fr": "correction du bug: support darkmode pour le sélectionneur de temps",
+        "it": "correzione bug: supporto darkmode per il time picker",
+        "es": "corrección de fallos: soporte de movimiento oscuro para el recolector de tiempo",
+        "pl": "fix: obsługa trybu darkmode dla pickera czasu",
+        "uk": "виправлення помилок: підтримка darkmode для таймера",
+        "zh-cn": "错误修正: 支持时间选择器的暗模式"
+      },
       "0.9.0": {
         "en": "see issue #66: Heating Time Schedule and Profile Params widget - option to use select box for temperature adjustment like Pittini vis\nsee issue #66: Heating Time Schedule and Profile Paramswidget - option to use time picker for time adjustments",
         "de": "siehe Ausgabe #66: Heizzeitplan und Profil Params Widget - Option, wählen Sie Feld für Temperaturanpassung wie Pittini vis zu verwenden\nsiehe Ausgabe #66: Heizzeitplan und Profil Paramswidget - Möglichkeit Zeitwähler für Zeitanpassungen zu verwenden",
@@ -80,19 +93,6 @@
         "pl": "zobacz numer # 51 widget pogody: tytuł nie jest wyświetlany w ogóle, jeśli nie ma dostępnych znaków lub nie ma zestawu OID\nzobacz problem # 51 widget pogody: kolor dla tytułu i label osi regulowane\nzobacz numer # 53: zła ikona (pogoda i wiatr) pokazana w WeatherDayWidget stała",
         "uk": "переглянути проблему #51 віджет погоди: назва не відображається на всіх, якщо немає рядка доступна або немає OID встановити\nпереглянути проблему #51 віджет погоди: колір для назв і вісь регульовані\nдив. питання #53: неправильна ікона (погода і вітер) показана в WeatherDayWidget фіксована",
         "zh-cn": "参见第51期天气部件: 如果没有字符串可用或没有 OID 设置, 标题根本不显示\n参见第51期气象部件:标题和轴的颜色可调整\n参见第53期: 在 WeatherDayWidget 中显示的错误图标( 天气和风)"
-      },
-      "0.7.3": {
-        "en": "add missing translations",
-        "de": "fehlende übersetzungen hinzufügen",
-        "ru": "добавить недостающие переводы",
-        "pt": "adicionar traduções em falta",
-        "nl": "ontbrekende vertalingen toevoegen",
-        "fr": "ajouter les traductions manquantes",
-        "it": "aggiungere le traduzioni mancanti",
-        "es": "añadir traducciones faltantes",
-        "pl": "dodaj brakujące tłumaczenia",
-        "uk": "додати відсутні переклади",
-        "zh-cn": "添加缺失的翻译"
       }
     },
     "licenseInformation": {

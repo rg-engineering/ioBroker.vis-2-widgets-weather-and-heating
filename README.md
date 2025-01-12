@@ -93,8 +93,7 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 
 ## Changelog
-
-### **WORK IN PROGRESS**
+### 0.9.1 (2025-01-12)
  * (René) bug fix: support darkmode for time picker
 
 ### 0.9.0 (2025-01-11)

@@ -93,6 +93,10 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 
 ## Changelog
+
+### **WORK IN PROGRESS**
+ * (René) bug fix: support darkmode for time picker
+
 ### 0.9.0 (2025-01-11)
  * (René) see issue #66: Heating Time Schedule and Profile Params widget - option to use select box for temperature adjustment like Pittini vis
  * (René) see issue #66: Heating Time Schedule and Profile Paramswidget - option to use time picker for time adjustments

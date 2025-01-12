@@ -86,6 +86,8 @@ gulp.task('widget-3-copy', () => Promise.all([
 
             `${SRC}build/static/js/*mui_styled-engine_index_js-node_modules_mui_system_esm*.*`,
             `${SRC}build/static/js/*mui_x-date-pickers_AdapterDayjs_AdapterDayjs_*.*`,
+
+            `${SRC}build/static/js/*mui_system_esm_DefaultPropsProvider_DefaultPropsProvider_*.*`,
             
             `${SRC}build/static/js/*popperjs_core_lib_popper_js-node_modules_react-transition-group_esm*.*`
             

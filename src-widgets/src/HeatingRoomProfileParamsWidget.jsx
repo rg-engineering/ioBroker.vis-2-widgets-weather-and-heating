@@ -503,6 +503,9 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                                     "& .MuiIconButton-root": {
                                         color: this.props.context.themeType === 'dark' ? '#DDD' : '#222',
                                     },
+                                    "& .MuiOutlinedInput-notchedOutline": {
+                                        "border-color": this.props.context.themeType === 'dark' ? '#DDD' : '#222',
+                                    },
                                 },
                             },
                             field: {

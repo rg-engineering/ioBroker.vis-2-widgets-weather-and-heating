@@ -336,5 +336,8 @@
     "OverrideTempValueListText": "OID: Override Text List",
     "OverrideTempValueListValue": "OID: Override Value List",
     "no data available": "No data available.",
-    "please check OID settings": "Please check OID settings."
+    "please check OID settings": "Please check OID settings.",
+    "vis_2_widgets-WeatherMeteoredWidget": "METEORED Weather Widget",
+    "MeteoredWidgetID": "Meteored Widget ID",
+    "MeteoredWidgetID_tooltip": "use the widget ID provided by www.daswetter.com/users/widget"
 }

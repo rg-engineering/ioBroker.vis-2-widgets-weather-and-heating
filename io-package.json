@@ -155,6 +155,7 @@
           "GeneralEChartWidget",
           "WeatherWidget",
           "WeatherDayWidget",
+          "WeatherMeteoredWidget",
           "HeatingTimeScheduleWidget",
           "HeatingGeneralParamsWidget",
           "HeatingRoomWidget",

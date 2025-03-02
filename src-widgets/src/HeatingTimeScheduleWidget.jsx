@@ -1206,7 +1206,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
                                             color: this.props.context.themeType === 'dark' ? '#DDD' : '#222',
                                         },
                                         "& .MuiOutlinedInput-notchedOutline": {
-                                            "border-color": this.props.context.themeType === 'dark' ? '#DDD' : '#222',
+                                            "border-color": this.props.context.themeType === 'dark' ? '#DDDD' : '#222',
                                         },
                                     }, 
                                 },

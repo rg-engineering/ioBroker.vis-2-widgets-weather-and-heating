@@ -336,5 +336,8 @@
     "OverrideTempValueListText": "OID: 텍스트 목록 재정의",
     "OverrideTempValueListValue": "OID: 값 목록 재정의",
     "no data available": "데이터가 없습니다.",
-    "please check OID settings": "OID 설정을 확인해주세요."
+    "please check OID settings": "OID 설정을 확인해주세요.",
+    "vis_2_widgets-WeatherMeteoredWidget": "기상 위젯",
+    "MeteoredWidgetID": "유성 위젯 ID",
+    "MeteoredWidgetID_tooltip": "www.daswetter.com/users/widget에서 제공하는 위젯 ID를 사용하십시오"
 }

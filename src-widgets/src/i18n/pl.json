@@ -353,5 +353,8 @@
     "OverrideTempValueListText": "OID: Zastąp listę tekstową",
     "OverrideTempValueListValue": "OID: Zastąp listę wartości",
     "no data available": "Brak dostępnych danych.",
-    "please check OID settings": "Sprawdź ustawienia OID."
+    "please check OID settings": "Sprawdź ustawienia OID.",
+    "vis_2_widgets-WeatherMeteoredWidget": "Widżet pogody",
+    "MeteoredWidgetID": "Meteored Widget Id",
+    "MeteoredWidgetID_tooltip": "Użyj identyfikatora widżetu dostarczonego przez www.daswetter.com/users/widget"
 }

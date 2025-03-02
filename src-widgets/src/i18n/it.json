@@ -353,5 +353,8 @@
     "OverrideTempValueListText": "OID: sovrascrivi elenco testi",
     "OverrideTempValueListValue": "OID: sovrascrivi elenco valori",
     "no data available": "Nessun dato disponibile.",
-    "please check OID settings": "Controlla le impostazioni OID."
+    "please check OID settings": "Controlla le impostazioni OID.",
+    "vis_2_widgets-WeatherMeteoredWidget": "Widget meteo meteorico",
+    "MeteoredWidgetID": "ID widget meterato",
+    "MeteoredWidgetID_tooltip": "Utilizzare l'ID widget fornito da www.daswetter.com/users/widget"
 }

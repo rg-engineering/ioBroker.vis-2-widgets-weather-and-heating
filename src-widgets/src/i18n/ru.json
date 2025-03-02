@@ -353,5 +353,8 @@
     "OverrideTempValueListText": "OID: переопределить список текстов",
     "OverrideTempValueListValue": "OID: список переопределенных значений",
     "no data available": "Данные отсутствуют.",
-    "please check OID settings": "Пожалуйста, проверьте настройки OID."
+    "please check OID settings": "Пожалуйста, проверьте настройки OID.",
+    "vis_2_widgets-WeatherMeteoredWidget": "Виджет по погоде",
+    "MeteoredWidgetID": "Метеорионный идентификатор виджета",
+    "MeteoredWidgetID_tooltip": "Используйте идентификатор виджета, предоставленный www.daswetter.com/users/widget"
 }

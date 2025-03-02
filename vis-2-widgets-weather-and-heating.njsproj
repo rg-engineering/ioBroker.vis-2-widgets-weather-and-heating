@@ -569,6 +569,7 @@
     <Content Include="src-widgets\src\eslint.config.mjs" />
     <Content Include="src-widgets\src\HeatingGeneralParamsWidget.jsx" />
     <Content Include="src-widgets\src\HeatingRoomProfileParamsWidget.jsx" />
+    <Content Include="src-widgets\src\WeatherMeteoredWidget.jsx" />
     <Content Include="src-widgets\src\HeatingWindowStatusOverviewWidget.jsx" />
     <Content Include="src-widgets\src\HeatingRoomWidget.jsx" />
     <Content Include="src-widgets\src\HeatingRoomsOverviewWidget.jsx" />

@@ -353,5 +353,8 @@
     "OverrideTempValueListText": "OID : remplacer la liste de textes",
     "OverrideTempValueListValue": "OID : Remplacer la liste de valeurs",
     "no data available": "Aucune donnée disponible.",
-    "please check OID settings": "Veuillez vérifier les paramètres OID."
+    "please check OID settings": "Veuillez vérifier les paramètres OID.",
+    "vis_2_widgets-WeatherMeteoredWidget": "Widget météo météoré",
+    "MeteoredWidgetID": "ID de widget météoré",
+    "MeteoredWidgetID_tooltip": "Utilisez l'ID de widget fourni par www.daswetter.com/users/widget"
 }

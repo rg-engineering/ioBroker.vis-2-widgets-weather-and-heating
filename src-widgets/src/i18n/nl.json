@@ -353,5 +353,8 @@
     "OverrideTempValueListText": "OID: tekstlijst negeren",
     "OverrideTempValueListValue": "OID: waardelijst negeren",
     "no data available": "Geen gegevens beschikbaar.",
-    "please check OID settings": "Controleer de OID-instellingen."
+    "please check OID settings": "Controleer de OID-instellingen.",
+    "vis_2_widgets-WeatherMeteoredWidget": "Meteored Weather Widget",
+    "MeteoredWidgetID": "Meteored widget -ID",
+    "MeteoredWidgetID_tooltip": "Gebruik de widget -ID geleverd door www.daswetter.com/users/widget"
 }

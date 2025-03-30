@@ -25,9 +25,9 @@
     "@alcalzone/release-script-plugin-manual-review": "^3.7.0",
     "@iobroker/vis-2-widgets-react-dev": "^4.0.4",
     "@iobroker/vis-2-widgets-testing": "^1.0.5",
-    "eslint": "^9.18.0",
+    "eslint": "^9.23.0",
     "gulp": "^4.0.2",
-    "mocha": "^11.1.0"
+    "mocha": "^11.2.0"
   },
   "files": [
     "admin/",

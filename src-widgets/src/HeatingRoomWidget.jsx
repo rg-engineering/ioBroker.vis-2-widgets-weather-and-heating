@@ -205,7 +205,12 @@ class HeatingRoomWidget extends (Generic) {
                 type="text"
                 value={sTemperature}
                 disabled
-                sx={{ m: 0, width: "8ch" }}
+                sx={{
+                    m: 0,
+                    width: "8ch",
+                    marginLeft: "5px",
+                    marginRight: "5px",
+                }}
             />;
         }
 
@@ -216,10 +221,21 @@ class HeatingRoomWidget extends (Generic) {
         let content = null;
         const oid = this.state.rxData["oid_ThermostatBatteryState"];
 
+        // nur true / false
+
         if (oid !== undefined && oid.length > 5) {
             const thermostatBatteryState = this.state.values[`${oid}.val`];
 
-            if (Number(thermostatBatteryState) > 70) {
+            console.log("getBatteryState got " + thermostatBatteryState + " / " + typeof thermostatBatteryState);
+
+            if (thermostatBatteryState == false && typeof thermostatBatteryState == "boolean") {
+                content = <BatteryFull />;
+            }
+            else if (thermostatBatteryState == true && typeof thermostatBatteryState == "boolean") {
+                content = <Battery1BarIcon />;
+            }
+
+            else if (Number(thermostatBatteryState) > 70) {
                 content = <BatteryFull />;
             } else if (Number(thermostatBatteryState) > 60) {
                 content = <Battery6BarIcon />;
@@ -242,19 +258,44 @@ class HeatingRoomWidget extends (Generic) {
         let content = null;
         const oid = this.state.rxData["oid_ThermostatRSSI"];
 
+
+        // RSSI in dBm
+        // -55 bis - 85 dBm: einwandfreier Empfang
+        //- 85 bis - 90 dBm: guter Empfang
+        //- 90 bis - 95 dBm: mäßiger Empfang
+        //- 95 bis - 104 dBm: ungenügender Empfang
+        //niedriger als - 104 dBm: instabiler bis gar kein Empfang
+
+
         if (oid !== undefined && oid.length > 5) {
             const thermostatRSSI = this.state.values[oid + ".val"];
 
-            if (Number(thermostatRSSI) > 70) {
-                content = <SignalWifi4BarIcon />;
-            } else if (Number(thermostatRSSI) > 50) {
-                content = <SignalWifi3BarIcon />;
-            } else if (Number(thermostatRSSI) > 30) {
-                content = <SignalWifi2BarIcon />;
-            } else if (Number(thermostatRSSI) > 10) {
-                content = <SignalWifi1BarIcon />;
-            } else {
-                content = <SignalWifi0BarIcon />;
+            if (thermostatRSSI < 0) {
+
+                if (Number(thermostatRSSI) < -104) {
+                    content = <SignalWifi0BarIcon />;
+                } else if (Number(thermostatRSSI) < -95) {
+                    content = <SignalWifi1BarIcon />;
+                } else if (Number(thermostatRSSI) < -90) {
+                    content = <SignalWifi2BarIcon />;
+                } else if (Number(thermostatRSSI) < -85) {
+                    content = <SignalWifi3BarIcon />;
+                } else {
+                    content = <SignalWifi4BarIcon />;
+                }
+            }
+            else {
+                if (Number(thermostatRSSI) > 70) {
+                    content = <SignalWifi4BarIcon />;
+                } else if (Number(thermostatRSSI) > 50) {
+                    content = <SignalWifi3BarIcon />;
+                } else if (Number(thermostatRSSI) > 30) {
+                    content = <SignalWifi2BarIcon />;
+                } else if (Number(thermostatRSSI) > 10) {
+                    content = <SignalWifi1BarIcon />;
+                } else {
+                    content = <SignalWifi0BarIcon />;
+                }
             }
         }
         return content;
@@ -283,14 +324,21 @@ class HeatingRoomWidget extends (Generic) {
         if (oid !== undefined && oid.length > 5) {
             const currentValveValue = this.state.values[`${oid}.val`];
 
-            const sValveValue = `${(Math.round(currentValveValue * 100) / 100).toFixed(2)}%`;
+            //in% deshalb keine Nachkommerstellen
+            const sValveValue = `${(Math.round(currentValveValue * 100) / 100).toFixed(0)}%`;
 
             content = <TextField
                 size="small"
                 type="text"
                 value={sValveValue}
                 disabled
-                sx={{ m: 0, width: "8ch" }}
+                sx={{
+                    m: 0,
+                    width: "8ch",
+                    marginLeft: "5px",
+                    marginRight: "5px",
+
+                }}
             />;
         }
         return content;
@@ -310,7 +358,13 @@ class HeatingRoomWidget extends (Generic) {
                 type="text"
                 value={sBatteryVoltage}
                 disabled
-                style={{ margin: 0, width: "8ch" }}
+                style={{
+                    margin: 0,
+                    width: "8ch",
+                    marginLeft: "5px",
+                    marginRight: "5px",
+
+                }}
             />;
         }
         return content;
@@ -322,7 +376,9 @@ class HeatingRoomWidget extends (Generic) {
 
         if (oid !== undefined && oid.length > 5) {
             const currentTemperature = this.state.values[`${oid}.val`];
-            const sCurrentTemperature = (Math.round(currentTemperature * 100) / 100).toFixed(2) + "°C";
+
+            //nur eine Nachkommerstelle
+            const sCurrentTemperature = (Math.round(currentTemperature * 100) / 100).toFixed(1) + "°C";
 
             content = <div>
                 <ThermostatIcon style={{ marginRight: 8 }} />
@@ -338,7 +394,7 @@ class HeatingRoomWidget extends (Generic) {
 
         if (oid !== undefined && oid.length > 5) {
             const currentTemperatureExtSensor = this.state.values[`${oid}.val`];
-            const sCurrentTemperatureExtSensor = (Math.round(currentTemperatureExtSensor * 100) / 100).toFixed(2) + "°C";
+            const sCurrentTemperatureExtSensor = (Math.round(currentTemperatureExtSensor * 100) / 100).toFixed(1) + "°C";
 
             content = <div>
                 <ThermostatIcon style={{ marginRight: 8 }} />
@@ -373,6 +429,7 @@ class HeatingRoomWidget extends (Generic) {
                     borderColor: "primary.main",
                     backgroundColor: "rgba(255, 255, 255, 0.09)",
                     m: "2px"
+                    
                 }}
             >
                 <Box>

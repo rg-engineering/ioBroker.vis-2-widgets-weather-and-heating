@@ -102,6 +102,10 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 
 ## Changelog
+
+ ### **WORK IN PROGRESS**
+ * (René) Heating Room widget: smaller optimizations
+
 ### 0.10.0 (2025-03-02)
 * (René) widget from Meteored (DasWetter.com) added, no further adapter needed, but only display of data from Meteored possible
 * (René) changes requested by adapter checker

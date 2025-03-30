@@ -102,8 +102,7 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 
 ## Changelog
-
-### **WORK IN PROGRESS**
+### 0.10.1 (2025-03-30)
  * (René) Heating Room widget: smaller optimizations
 
 ### 0.10.0 (2025-03-02)

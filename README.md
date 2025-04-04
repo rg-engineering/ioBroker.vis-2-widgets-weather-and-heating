@@ -102,6 +102,10 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 
 ## Changelog
+
+### **WORK IN PROGRESS**
+ * (René) Heating Room widget: support of more then one thermostat. ATTENTIOM: Please check your configuration!
+
 ### 0.10.1 (2025-03-30)
  * (René) Heating Room widget: smaller optimizations
 

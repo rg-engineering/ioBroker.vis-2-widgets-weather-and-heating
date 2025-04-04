@@ -339,5 +339,7 @@
     "please check OID settings": "OID 설정을 확인해주세요.",
     "vis_2_widgets-WeatherMeteoredWidget": "기상 위젯",
     "MeteoredWidgetID": "유성 위젯 ID",
-    "MeteoredWidgetID_tooltip": "www.daswetter.com/users/widget에서 제공하는 위젯 ID를 사용하십시오"
+    "MeteoredWidgetID_tooltip": "www.daswetter.com/users/widget에서 제공하는 위젯 ID를 사용하십시오",
+    "widgets_thermostats_datacount": "온도 조절기 수",
+    "OIDS_thermostats": "Oid의 온도 조절 장치"
 }

@@ -39,6 +39,8 @@ const styles = {
 };
 
 // todo oid nach Instanz neu belegen
+// todo: Status zentrieren
+// todo: button unter Status zum Rücksetzen manueller Mode
 
 
 
@@ -110,11 +112,39 @@ class HeatingRoomWidget extends (Generic) {
                             default: "Wohnzimmer",
                             onChange: setDataStructures,
                         },
+                        {
+                            name: "dataCount",
+                            type: "number",
+                            label: "widgets_thermostats_datacount",
+                            default: 1,
+                        },
                     ],
                 },
                 {
                     name: "OIDS_general", // group name
                     label: "OIDS_general", // group label
+                    fields: [
+                       
+                        {
+                            name: "oid_RoomState",    // name in data structure
+                            label: "widgets_heating_label_oid_roomstate", // translated field label
+                            type: "id",
+                            default: "", //todo
+                        },
+                        {
+                            name: "oid_RoomLog",    // name in data structure
+                            label: "widgets_heating_label_oid_roomlog", // translated field label
+                            type: "id",
+                            default: "", //todo
+                        },
+                       
+                    ],
+                },
+                {
+                    name: "OIDS_thermostats", // group name
+                    label: "OIDS_thermostats", // group label
+                    indexFrom: 1,
+                    indexTo: "dataCount",
                     fields: [
                         {
                             name: "oid_TargetTemperature",    // name in data structure
@@ -146,18 +176,7 @@ class HeatingRoomWidget extends (Generic) {
                             type: "id",
                             default: "", //todo
                         },
-                        {
-                            name: "oid_RoomState",    // name in data structure
-                            label: "widgets_heating_label_oid_roomstate", // translated field label
-                            type: "id",
-                            default: "", //todo
-                        },
-                        {
-                            name: "oid_RoomLog",    // name in data structure
-                            label: "widgets_heating_label_oid_roomlog", // translated field label
-                            type: "id",
-                            default: "", //todo
-                        },
+                        
                         {
                             name: "oid_ThermostatBatteryState",    // name in data structure
                             label: "widgets_heating_label_oid_thermostatbatterystate", // translated field label
@@ -189,27 +208,30 @@ class HeatingRoomWidget extends (Generic) {
         return HeatingRoomWidget.getWidgetInfo();
     }
 
-    getCurrentTargetTemperature() {
+    getCurrentTargetTemperature(d) {
         let content = null;
-        const oid = this.state.rxData["oid_TargetTemperature"];
 
+        const oid_name = "oid_TargetTemperature" + d;
+        console.log(oid_name);
+        const oid = this.state.rxData[oid_name];
         console.log(oid);
 
-        if (oid !== undefined && oid.length > 5) {
+        if (oid !== undefined && oid!=null && oid.length > 5) {
             const targetTemperature = this.state.values[`${oid}.val`];
 
-            const sTemperature = `${(Math.round(targetTemperature * 100) / 100).toFixed(2)}°C`;
+            const sTemperature = `${(Math.round(targetTemperature * 100) / 100).toFixed(1)}°C`;
 
             content = <TextField
                 size="small"
                 type="text"
+                label="Target"
                 value={sTemperature}
                 disabled
                 sx={{
                     m: 0,
-                    width: "8ch",
-                    marginLeft: "5px",
-                    marginRight: "5px",
+                    width: "10ch",
+                    marginLeft: "2px",
+                    marginRight: "2px",
                 }}
             />;
         }
@@ -217,13 +239,17 @@ class HeatingRoomWidget extends (Generic) {
         return content;
     }
 
-    getBatteryState() {
+    getBatteryState(d) {
         let content = null;
-        const oid = this.state.rxData["oid_ThermostatBatteryState"];
+
+        const oid_name = "oid_ThermostatBatteryState" + d;
+        console.log(oid_name);
+        const oid = this.state.rxData[oid_name];
+        console.log(oid);
 
         // nur true / false
 
-        if (oid !== undefined && oid.length > 5) {
+        if (oid !== undefined && oid != null && oid.length > 5) {
             const thermostatBatteryState = this.state.values[`${oid}.val`];
 
             console.log("getBatteryState got " + thermostatBatteryState + " / " + typeof thermostatBatteryState);
@@ -254,10 +280,13 @@ class HeatingRoomWidget extends (Generic) {
         return content;
     }
 
-    getRSSIState() {
+    getRSSIState(d) {
         let content = null;
-        const oid = this.state.rxData["oid_ThermostatRSSI"];
 
+        const oid_name = "oid_ThermostatRSSI" + d;
+        console.log(oid_name);
+        const oid = this.state.rxData[oid_name];
+        console.log(oid);
 
         // RSSI in dBm
         // -55 bis - 85 dBm: einwandfreier Empfang
@@ -267,7 +296,7 @@ class HeatingRoomWidget extends (Generic) {
         //niedriger als - 104 dBm: instabiler bis gar kein Empfang
 
 
-        if (oid !== undefined && oid.length > 5) {
+        if (oid !== undefined && oid != null && oid.length > 5) {
             const thermostatRSSI = this.state.values[oid + ".val"];
 
             if (thermostatRSSI < 0) {
@@ -301,11 +330,15 @@ class HeatingRoomWidget extends (Generic) {
         return content;
     }
 
-    getCurrentActorState() {
+    getCurrentActorState(d) {
         let content = null;
-        const oid = this.state.rxData["oid_CurrentActorState"];
 
-        if (oid !== undefined && oid.length > 5) {
+        const oid_name = "oid_CurrentActorState" + d;
+        console.log(oid_name);
+        const oid = this.state.rxData[oid_name];
+        console.log(oid);
+
+        if (oid !== undefined && oid != null && oid.length > 5) {
             const currentActorState = this.state.values[`${oid}.val`];
 
             if (currentActorState) {
@@ -317,11 +350,15 @@ class HeatingRoomWidget extends (Generic) {
         return content;
     }
 
-    getCurrentValveValue() {
+    getCurrentValveValue(d) {
         let content = null;
-        const oid = this.state.rxData["oid_CurrentValveValue"];
 
-        if (oid !== undefined && oid.length > 5) {
+        const oid_name = "oid_CurrentValveValue" + d;
+        console.log(oid_name);
+        const oid = this.state.rxData[oid_name];
+        console.log(oid);
+
+        if (oid !== undefined && oid != null && oid.length > 5) {
             const currentValveValue = this.state.values[`${oid}.val`];
 
             //in% deshalb keine Nachkommerstellen
@@ -330,13 +367,14 @@ class HeatingRoomWidget extends (Generic) {
             content = <TextField
                 size="small"
                 type="text"
+                label="Valve"
                 value={sValveValue}
                 disabled
                 sx={{
                     m: 0,
                     width: "8ch",
-                    marginLeft: "5px",
-                    marginRight: "5px",
+                    marginLeft: "2px",
+                    marginRight: "2px",
 
                 }}
             />;
@@ -344,11 +382,15 @@ class HeatingRoomWidget extends (Generic) {
         return content;
     }
 
-    getCurrentThermostatBatteryVoltage() {
+    getCurrentThermostatBatteryVoltage(d) {
         let content = null;
-        const oid = this.state.rxData["oid_ThermostatBatteryVoltage"];
 
-        if (oid !== undefined && oid.length > 5) {
+        const oid_name = "oid_ThermostatBatteryVoltage" + d;
+        console.log(oid_name);
+        const oid = this.state.rxData[oid_name];
+        console.log(oid);
+
+        if (oid !== undefined && oid != null && oid.length > 5) {
             const thermostatBatteryVoltage = this.state.values[`${oid}.val`];
 
             const sBatteryVoltage = `${thermostatBatteryVoltage}V`;
@@ -356,13 +398,14 @@ class HeatingRoomWidget extends (Generic) {
             content = <TextField
                 size="small"
                 type="text"
+                label="Bat"
                 value={sBatteryVoltage}
                 disabled
                 style={{
                     margin: 0,
                     width: "8ch",
-                    marginLeft: "5px",
-                    marginRight: "5px",
+                    marginLeft: "2px",
+                    marginRight: "2px",
 
                 }}
             />;
@@ -370,11 +413,15 @@ class HeatingRoomWidget extends (Generic) {
         return content;
     }
 
-    getCurrentTemperature() {
+    getCurrentTemperature(d) {
         let content = null;
-        const oid = this.state.rxData["oid_CurrentTemperature"];
 
-        if (oid !== undefined && oid.length > 5) {
+        const oid_name = "oid_CurrentTemperature" + d;
+        console.log(oid_name);
+        const oid = this.state.rxData[oid_name];
+        console.log(oid);
+
+        if (oid !== undefined && oid != null && oid.length > 5) {
             const currentTemperature = this.state.values[`${oid}.val`];
 
             //nur eine Nachkommerstelle
@@ -388,11 +435,15 @@ class HeatingRoomWidget extends (Generic) {
         return content;
     }
 
-    getCurrentTemperatureExtSensor() {
+    getCurrentTemperatureExtSensor(d) {
         let content = null;
-        const oid = this.state.rxData["oid_CurrentTemperatureExtSensor"];
 
-        if (oid !== undefined && oid.length > 5) {
+        const oid_name = "oid_CurrentTemperatureExtSensor" + d;
+        console.log(oid_name);
+        const oid = this.state.rxData[oid_name];
+        console.log(oid);
+
+        if (oid !== undefined && oid != null && oid.length > 5) {
             const currentTemperatureExtSensor = this.state.values[`${oid}.val`];
             const sCurrentTemperatureExtSensor = (Math.round(currentTemperatureExtSensor * 100) / 100).toFixed(1) + "°C";
 
@@ -403,6 +454,46 @@ class HeatingRoomWidget extends (Generic) {
         }
         return content;
     }
+
+
+    
+
+    getThermostats() {
+
+        let content = [];
+
+        for (let d = 1; d <= this.state.rxData["dataCount"]; d++) {
+
+            let cont = 
+                <Box sx={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    borderRadius: "5px",
+                    borderColor: "primary.main",
+                    backgroundColor: "rgba(255, 255, 255, 0.09)",
+                    m: "5px"
+
+                }}>
+                    {this.getCurrentTargetTemperature(d)}
+                    {this.getCurrentTemperature(d)}
+                    {this.getCurrentTemperatureExtSensor(d)}
+
+                    {this.getBatteryState(d)}
+                    {this.getRSSIState(d)}
+                    {this.getCurrentThermostatBatteryVoltage(d)}
+
+                    {this.getCurrentActorState(d)}
+                    {this.getCurrentValveValue(d)}
+                </Box>
+
+
+
+            content.push(cont);
+        }
+        return content;
+
+    }
+
 
     createTable() {
         const roomName = this.state.rxData["RoomName"];
@@ -428,7 +519,8 @@ class HeatingRoomWidget extends (Generic) {
                     borderRadius: "5px",
                     borderColor: "primary.main",
                     backgroundColor: "rgba(255, 255, 255, 0.09)",
-                    m: "2px"
+                    m: "2px",
+                    alignItems: "center",
                     
                 }}
             >
@@ -437,21 +529,10 @@ class HeatingRoomWidget extends (Generic) {
                         {roomName}
                     </Typography>
                 </Box>
-                <Box>
-                    {this.getCurrentTargetTemperature()}
-                    {this.getBatteryState()}
-                    {this.getRSSIState()}
-                    {this.getCurrentThermostatBatteryVoltage()}
-                </Box>
-                <Box>
-                    {this.getCurrentTemperature()}
-                    {this.getCurrentTemperatureExtSensor()}
-                </Box>
-                <Box>
-                    {this.getCurrentActorState()}
-                    {this.getCurrentValveValue()}
-                </Box>
             </Box>
+
+            {this.getThermostats()}
+            
 
             <Box sx={{
                 display: "flex",
@@ -459,7 +540,8 @@ class HeatingRoomWidget extends (Generic) {
                 borderRadius: "5px",
                 borderColor: "primary.main",
                 backgroundColor: "rgba(255, 255, 255, 0.09)",
-                m: "2px"
+                m: "2px",
+                alignItems: "center",
             }}>
                 <p>{roomState}</p>
             </Box>

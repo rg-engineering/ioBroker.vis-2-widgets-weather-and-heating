@@ -26,6 +26,7 @@ const styles = {
 };
 
 // todo oid nach Instanz neu belegen
+// todo reload script after timeout or reopen
 
 
 

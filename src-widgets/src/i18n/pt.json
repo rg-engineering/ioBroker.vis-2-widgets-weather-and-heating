@@ -356,5 +356,7 @@
     "please check OID settings": "Verifique as configurações do OID.",
     "vis_2_widgets-WeatherMeteoredWidget": "Widget meteorológico meteorado",
     "MeteoredWidgetID": "ID do widget meteorizado",
-    "MeteoredWidgetID_tooltip": "Use o ID do widget fornecido por www.daswetter.com/users/widget"
+    "MeteoredWidgetID_tooltip": "Use o ID do widget fornecido por www.daswetter.com/users/widget",
+    "widgets_thermostats_datacount": "Número de termostatos",
+    "OIDS_thermostats": "Termostatos de Oid"
 }

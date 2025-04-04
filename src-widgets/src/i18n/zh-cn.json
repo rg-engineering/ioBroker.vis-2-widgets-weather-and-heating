@@ -356,5 +356,7 @@
     "please check OID settings": "请检查 OID 设置。",
     "vis_2_widgets-WeatherMeteoredWidget": "Meteored天气小部件",
     "MeteoredWidgetID": "Meteored小部件ID",
-    "MeteoredWidgetID_tooltip": "使用www.daswetter.com/users/widget提供的小部件ID"
+    "MeteoredWidgetID_tooltip": "使用www.daswetter.com/users/widget提供的小部件ID",
+    "widgets_thermostats_datacount": "恒温器数量",
+    "OIDS_thermostats": "OID的恒温器"
 }

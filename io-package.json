@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather-and-heating",
-    "version": "0.10.1",
+    "version": "0.10.2",
     "news": {
+      "0.10.2": {
+        "en": "Heating Room widget: support of more then one thermostat. ATTENTIOM: Please check your configuration!",
+        "de": "Heizraum Widget: Unterstützung von mehr als einem Thermostat. ATTENTIOM: Bitte überprüfen Sie Ihre Konfiguration!",
+        "ru": "Виджет отопительной комнаты: поддержка более одного термостата. Пожалуйста, проверьте свою конфигурацию!",
+        "pt": "Widget de sala de aquecimento: suporte de mais um termostato. ATTENTIOM: Por favor, verifique sua configuração!",
+        "nl": "Verwarming Kamer widget: ondersteuning van meer dan één thermostaat. ATTENTIOM: Controleer uw configuratie!",
+        "fr": "Widget Chauffage Chambre: support de plus d'un thermostat. Veuillez vérifier votre configuration!",
+        "it": "Widget della stanza di riscaldamento: supporto di più allora un termostato. ATTENTIOM: Si prega di controllare la configurazione!",
+        "es": "Widget de la sala de calefacción: soporte de más entonces un termostato. ATTENTIOM: Por favor, compruebe su configuración!",
+        "pl": "Ogrzewanie widget pokoju: wsparcie więcej niż jeden termostat. UWAGA: Proszę sprawdzić konfigurację!",
+        "uk": "Опалювальний номер віджету: підтримка більш ніж одного термостату. УВАГА!",
+        "zh-cn": "暖室部件:支持一个以上的自动调温器。 请检查您的配置!"
+      },
       "0.10.1": {
         "en": "Heating Room widget: smaller optimizations",
         "de": "Heizraum Widget: kleinere Optimierungen",
@@ -80,19 +93,6 @@
         "pl": "zobacz numer # 60: dodaj brakujący moduł",
         "uk": "переглянути номер #60: додати відсутній модуль",
         "zh-cn": "参见第60期: 添加缺少的模块"
-      },
-      "0.7.7": {
-        "en": "show absolute / relative as info in Heating Room Profile Params widget\nHeating Time Schedule: copy periods added",
-        "de": "absolut / relativ als Informationen in Heizraum Profil Params Widget anzeigen\nHeizzeit Zeitplan: Kopierzeiträume hinzugefügt",
-        "ru": "показать абсолютный / относительный как информация в Отопление номер профили Парамс виджет\nВремя нагревания Расписание: добавлены периоды копирования",
-        "pt": "mostrar absoluto / relativo como informação no widget do perfil da sala de aquecimento\nTempo de aquecimento Calendário: períodos de cópia adicionados",
-        "nl": "toon absoluut / relatief als info in warmtekamerprofiel Params widget\nVerwarmingstijd Schema: toegevoegde kopieerperioden",
-        "fr": "montrer absolu / relatif comme info dans Profil de chambre de chauffage Params widget\nTemps de chauffage Horaire : période de copie ajoutée",
-        "it": "mostra assoluto / relativo come informazioni in Heat Room Profile Params widget\nTempo di riscaldamento Orari: aggiunta dei periodi di copia",
-        "es": "mostrar absoluto / relativo como información en la habitación de calefacción Perfil Params widget\nTiempo de calentamiento Calendario: períodos de copia añadidos",
-        "pl": "pokaż bezwzględną / względną jako informacje w Ogrzewanie Profil Params widget\nCzas ogrzewania Harmonogram: dodano okresy kopiowania",
-        "uk": "показати абсолютний / відносний як інформація в {_tag}\nЧас нагрівання Графік роботи: додані періоди копіювання",
-        "zh-cn": "在Heating Room 配置文件中显示绝对/ 相对信息\n加热时间 附表:增加的复制期"
       }
     },
     "licenseInformation": {

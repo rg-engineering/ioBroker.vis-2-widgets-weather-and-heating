@@ -358,5 +358,8 @@
     "MeteoredWidgetID": "ID de widget de meteoritos",
     "MeteoredWidgetID_tooltip": "Use la ID de widget proporcionada por www.daswetter.com/users/widget",
     "widgets_thermostats_datacount": "número de termostatos",
-    "OIDS_thermostats": "Termostatos de OID"
+    "OIDS_thermostats": "Termostatos de OID",
+    "Target": "Objetivo",
+    "Valve": "Válvula",
+    "Bat": "Murciélago"
 }

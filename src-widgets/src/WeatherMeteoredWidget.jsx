@@ -60,17 +60,22 @@ class WeatherMeteoredWidget extends (Generic) {
         //const html = "<script type='text/javascript' async src=" + src + " onLoad={() => console.log('Meteored script loaded')}></script >";
 
         // Prüfen, ob das Skript bereits geladen wurde
-        if (!document.getElementById(id)) {
-            console.log(`WeatherMeteoredWidget - script created `);
-            const script = document.createElement("script");
-            script.src = src;
-            script.id = id;
-            script.async = true;
-            document.body.appendChild(script);
+        if (document.getElementById(id)) {
+            console.log(`WeatherMeteoredWidget - script already loaded, need to remove `);
+
+            let element = document.getElementById(id);
+            element.remove();
         }
-        else {
-            console.log(`WeatherMeteoredWidget - script already loaded `);
-        }
+        
+
+        console.log(`WeatherMeteoredWidget - script new created `);
+        const script = document.createElement("script");
+        script.src = src;
+        script.id = id;
+        script.async = true;
+        document.body.appendChild(script);
+
+
     }
 
 

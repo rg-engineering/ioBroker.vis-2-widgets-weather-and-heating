@@ -358,5 +358,8 @@
     "MeteoredWidgetID": "ID do widget meteorizado",
     "MeteoredWidgetID_tooltip": "Use o ID do widget fornecido por www.daswetter.com/users/widget",
     "widgets_thermostats_datacount": "Número de termostatos",
-    "OIDS_thermostats": "Termostatos de Oid"
+    "OIDS_thermostats": "Termostatos de Oid",
+    "Target": "Alvo",
+    "Valve": "Válvula",
+    "Bat": "Bastão"
 }

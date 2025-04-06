@@ -358,5 +358,8 @@
     "MeteoredWidgetID": "ID widget meterato",
     "MeteoredWidgetID_tooltip": "Utilizzare l'ID widget fornito da www.daswetter.com/users/widget",
     "widgets_thermostats_datacount": "Numero di termostati",
-    "OIDS_thermostats": "I termostati di Oid"
+    "OIDS_thermostats": "I termostati di Oid",
+    "Target": "Bersaglio",
+    "Valve": "Valvola",
+    "Bat": "Pipistrello"
 }

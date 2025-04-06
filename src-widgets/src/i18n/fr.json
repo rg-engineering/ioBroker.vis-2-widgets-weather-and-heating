@@ -358,5 +358,8 @@
     "MeteoredWidgetID": "ID de widget météoré",
     "MeteoredWidgetID_tooltip": "Utilisez l'ID de widget fourni par www.daswetter.com/users/widget",
     "widgets_thermostats_datacount": "Nombre de thermostats",
-    "OIDS_thermostats": "Thermostats de l'OID"
+    "OIDS_thermostats": "Thermostats de l'OID",
+    "Target": "Cible",
+    "Valve": "Soupape",
+    "Bat": "Batte"
 }

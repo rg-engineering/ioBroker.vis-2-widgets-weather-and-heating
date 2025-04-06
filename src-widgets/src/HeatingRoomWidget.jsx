@@ -116,7 +116,7 @@ class HeatingRoomWidget extends (Generic) {
                             name: "dataCount",
                             type: "number",
                             label: "widgets_thermostats_datacount",
-                            default: 1,
+                            default: 0,
                         },
                     ],
                 },
@@ -224,7 +224,7 @@ class HeatingRoomWidget extends (Generic) {
             content = <TextField
                 size="small"
                 type="text"
-                label="Target"
+                label={Generic.t("Target")}
                 value={sTemperature}
                 disabled
                 sx={{
@@ -367,7 +367,7 @@ class HeatingRoomWidget extends (Generic) {
             content = <TextField
                 size="small"
                 type="text"
-                label="Valve"
+                label={Generic.t("Valve")}
                 value={sValveValue}
                 disabled
                 sx={{
@@ -398,7 +398,7 @@ class HeatingRoomWidget extends (Generic) {
             content = <TextField
                 size="small"
                 type="text"
-                label="Bat"
+                label={Generic.t("Bat")}
                 value={sBatteryVoltage}
                 disabled
                 style={{

@@ -358,5 +358,8 @@
     "MeteoredWidgetID": "Meteored widget -ID",
     "MeteoredWidgetID_tooltip": "Gebruik de widget -ID geleverd door www.daswetter.com/users/widget",
     "widgets_thermostats_datacount": "Aantal thermostaten",
-    "OIDS_thermostats": "Oid's thermostaten"
+    "OIDS_thermostats": "Oid's thermostaten",
+    "Target": "Doel",
+    "Valve": "Ventiel",
+    "Bat": "Knuppel"
 }

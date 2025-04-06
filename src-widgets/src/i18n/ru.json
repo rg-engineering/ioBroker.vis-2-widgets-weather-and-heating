@@ -358,5 +358,8 @@
     "MeteoredWidgetID": "Метеорионный идентификатор виджета",
     "MeteoredWidgetID_tooltip": "Используйте идентификатор виджета, предоставленный www.daswetter.com/users/widget",
     "widgets_thermostats_datacount": "Количество термостатов",
-    "OIDS_thermostats": "Термостаты Оида"
+    "OIDS_thermostats": "Термостаты Оида",
+    "Target": "Цель",
+    "Valve": "Клапан",
+    "Bat": "Летучая мышь"
 }

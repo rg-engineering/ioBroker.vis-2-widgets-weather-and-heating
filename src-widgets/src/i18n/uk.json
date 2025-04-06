@@ -358,5 +358,8 @@
     "MeteoredWidgetID": "Метеоредний ідентифікатор віджета",
     "MeteoredWidgetID_tooltip": "Використовуйте ідентифікатор віджета, наданий www.daswetter.com/users/widget",
     "widgets_thermostats_datacount": "Кількість термостатів",
-    "OIDS_thermostats": "Термостати Ойда"
+    "OIDS_thermostats": "Термостати Ойда",
+    "Target": "Цільовий",
+    "Valve": "Клапан",
+    "Bat": "Кажан"
 }

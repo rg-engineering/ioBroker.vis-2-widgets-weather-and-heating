@@ -358,5 +358,8 @@
     "MeteoredWidgetID": "Meteored Widget Id",
     "MeteoredWidgetID_tooltip": "Użyj identyfikatora widżetu dostarczonego przez www.daswetter.com/users/widget",
     "widgets_thermostats_datacount": "Liczba termostatów",
-    "OIDS_thermostats": "Termostaty OID"
+    "OIDS_thermostats": "Termostaty OID",
+    "Target": "Cel",
+    "Valve": "Zawór",
+    "Bat": "Nietoperz"
 }

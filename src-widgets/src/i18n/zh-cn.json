@@ -358,5 +358,8 @@
     "MeteoredWidgetID": "Meteored小部件ID",
     "MeteoredWidgetID_tooltip": "使用www.daswetter.com/users/widget提供的小部件ID",
     "widgets_thermostats_datacount": "恒温器数量",
-    "OIDS_thermostats": "OID的恒温器"
+    "OIDS_thermostats": "OID的恒温器",
+    "Target": "目标",
+    "Valve": "阀门",
+    "Bat": "蝙蝠"
 }

@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather-and-heating",
-    "version": "0.10.2",
+    "version": "0.10.3",
     "news": {
+      "0.10.3": {
+        "en": "Heating Room widget: some translations\nMeteored widget: make reload of widget possible",
+        "de": "Heizraum Widget: einige Übersetzungen\nWidget Meteored: Widget neu laden lassen",
+        "ru": "Виджет отопительной комнаты: некоторые переводы\nМетеоризированный виджет: сделать перезагрузку виджета возможной",
+        "pt": "Widget de sala de aquecimento: algumas traduções\nWidget Meteored: fazer recarga de widget possível",
+        "nl": "Verwarmingskamer widget: enkele vertalingen\nMeteoor widget: herladen van widget mogelijk maken",
+        "fr": "Widget de chauffage de chambre: quelques traductions\nWidget Météorisé : rendre possible le rechargement de widget",
+        "it": "Widget della stanza di riscaldamento: alcune traduzioni\nWidget Meteored: rendere possibile il ricarica di widget",
+        "es": "Cuarto de calefacción widget: algunas traducciones\nWidget meteored: hacer posible la recarga de widget",
+        "pl": "Ogrzewanie Widget pokoju: niektóre tłumaczenia\nMeteoryt widget: można przeładować widget",
+        "uk": "Опалювальний номер віджет: деякі переклади\nMeteored віджет: зробити перезавантаження віджету можливо",
+        "zh-cn": "暖室部件:一些翻译\n气象部件: 使部件可以重新装入"
+      },
       "0.10.2": {
         "en": "Heating Room widget: support of more then one thermostat. ATTENTIOM: Please check your configuration!",
         "de": "Heizraum Widget: Unterstützung von mehr als einem Thermostat. ATTENTIOM: Bitte überprüfen Sie Ihre Konfiguration!",
@@ -80,19 +93,6 @@
         "pl": "aktualizacji zależności\nzobacz numer # 66: Widget czasu ogrzewania - wykorzystuje minimalną temperaturę adaptera do zakresu wartości wejściowej\nzob. numer # 66: Widget czasu ogrzewania - szerokość kroku dla regulacji temperatury (1 °C lub 0,5 ° C)\ntłumaczenia",
         "uk": "оновлення залежності\nпереглянути номер #66: Поточний час нагріву віджет - використовує мінімальну температуру від адаптера для діапазону значень вхідних значень\nпереглянути проблему #66: Віджет часу нагрівання - ширина кроку для регулювання температури (1°C або 0.5°C)\nпереклади",
         "zh-cn": "更新依赖关系\n参见第66期: 加热时间表部件 - 使用适配器的最低温度进行输入值范围\n参见第66期: 加热时间表部件 - 温度可调整的步宽(1°C或0.5°C)\n翻译"
-      },
-      "0.8.0": {
-        "en": "see issue #60: add missing module",
-        "de": "siehe ausgabe #60: fehlendes modul hinzufügen",
-        "ru": "#60: добавить недостающий модуль",
-        "pt": "veja o problema #60: adicione o módulo ausente",
-        "nl": "zie probleem #60: ontbrekende module toevoegen",
-        "fr": "voir numéro 60: ajouter le module manquant",
-        "it": "vedi numero #60: aggiungi modulo mancante",
-        "es": "ver número #60: añadir módulo perdido",
-        "pl": "zobacz numer # 60: dodaj brakujący moduł",
-        "uk": "переглянути номер #60: додати відсутній модуль",
-        "zh-cn": "参见第60期: 添加缺少的模块"
       }
     },
     "licenseInformation": {

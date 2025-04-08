@@ -361,5 +361,7 @@
     "OIDS_thermostats": "Термостати Ойда",
     "Target": "Цільовий",
     "Valve": "Клапан",
-    "Bat": "Кажан"
+    "Bat": "Кажан",
+    "ReloadEnabled": "Увімкнути перезавантаження",
+    "MeteoredWidgetEnableReload_tooltip": "можливість перезавантажити прогноз погоди раз на годину"
 }

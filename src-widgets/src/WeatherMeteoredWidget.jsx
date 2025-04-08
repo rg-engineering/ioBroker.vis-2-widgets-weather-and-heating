@@ -41,6 +41,8 @@ class WeatherMeteoredWidget extends (Generic) {
     constructor(props) {
         super(props);
         this.refCardContent = React.createRef();
+
+        this.reloadTimer = null;
     }
 
    
@@ -49,9 +51,69 @@ class WeatherMeteoredWidget extends (Generic) {
 
         super.componentDidMount();
 
+        console.log(`WeatherMeteoredWidget - componentDidMount ` );
+
+        this.AppendScript();
+
+        this.CreateTimer();
+    }
+
+    async componentWillUnmount() {
+        super.componentWillUnmount();
+        console.log("WeatherMeteoredWidget - componentWillUnmount");
+        if (this.reloadTimer != null) {
+            clearTimeout(this.reloadTimer);
+            this.reloadTimer = null;
+        }
+        const WidgetID = this.state.rxData["WidgetID"];
+        const id = "script_mrwid" + WidgetID;
+        // Prüfen, ob das Skript bereits geladen wurde
+        if (document.getElementById(id)) {
+            console.log(`WeatherMeteoredWidget - script already loaded, need to remove `);
+            let element = document.getElementById(id);
+            element.remove();
+        }
+    }
+
+    async onPropertyUpdate() {
+
+        console.log("WeatherMeteoredWidget - onPropertyUpdate");
+
+        this.CreateTimer();
+    }
+
+    CreateTimer() {
+        if (this.state.rxData.EnableReload) {
+
+            console.log("WeatherMeteoredWidget - create intervall timer");
+            //only once per hour
+            const refreshInterval = 1000*60*60;
+
+            if (this.reloadTimer != null) {
+                clearTimeout(this.reloadTimer);
+                this.reloadTimer = null;
+            }
+
+            this.reloadTimer = setInterval(() => {
+                console.log("WeatherMeteoredWidget - reload script");
+                this.AppendScript();
+            }, refreshInterval);
+
+        }
+        else {
+            console.log("WeatherMeteoredWidget - clear intervall timer");
+            if (this.reloadTimer != null) {
+                clearTimeout(this.reloadTimer);
+                this.reloadTimer = null;
+            }
+        }
+    }
+
+
+    AppendScript() {
         const WidgetID = this.state.rxData["WidgetID"];
 
-        console.log(`WeatherMeteoredWidget - componentDidMount ` + WidgetID);
+       
         //ce1253dd6597325da4b49b518529938d
 
         const src = "https://api.meteored.com/widget/loader/" + WidgetID;
@@ -66,7 +128,7 @@ class WeatherMeteoredWidget extends (Generic) {
             let element = document.getElementById(id);
             element.remove();
         }
-        
+
 
         console.log(`WeatherMeteoredWidget - script new created `);
         const script = document.createElement("script");
@@ -74,9 +136,8 @@ class WeatherMeteoredWidget extends (Generic) {
         script.id = id;
         script.async = true;
         document.body.appendChild(script);
-
-
     }
+
 
 
     static getWidgetInfo() {
@@ -112,6 +173,13 @@ class WeatherMeteoredWidget extends (Generic) {
                             default: "",
                             onChange: setDataStructures,
                             tooltip: "MeteoredWidgetID_tooltip",
+                        },
+                        {
+                            name: "EnableReload",    // name in data structure
+                            label: "ReloadEnabled", // translated field label
+                            type: "checkbox",
+                            default: true,
+                            tooltip: "MeteoredWidgetEnableReload_tooltip",
                         },
                     ],
                 },

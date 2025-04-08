@@ -344,5 +344,7 @@
     "OIDS_thermostats": "OID's Thermostate",
     "Target": "Ziel",
     "Valve": "Ventil",
-    "Bat": "Bat"
+    "Bat": "Bat",
+    "ReloadEnabled": "reload aktivieren",
+    "MeteoredWidgetEnableReload_tooltip": "Option, die Wetterdaten einmal pro Stunde neu zu laden"
 }

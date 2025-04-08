@@ -361,5 +361,7 @@
     "OIDS_thermostats": "Termostaty OID",
     "Target": "Cel",
     "Valve": "Zawór",
-    "Bat": "Nietoperz"
+    "Bat": "Nietoperz",
+    "ReloadEnabled": "Włącz przeładowanie",
+    "MeteoredWidgetEnableReload_tooltip": "Opcja przeładowania prognozy pogody raz na godzinę"
 }

@@ -102,6 +102,10 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 
 ## Changelog
+
+### **WORK IN PROGRESS**
+  * (René) Meteored widget: reload once per hour as an option
+
 ### 0.10.3 (2025-04-06)
  * (René) Heating Room widget: some translations
  * (René) Meteored widget: make reload of widget possible

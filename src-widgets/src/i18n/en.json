@@ -344,5 +344,7 @@
     "OIDS_thermostats": "OID's thermostats",
     "Target": "Target",
     "Valve": "Valve",
-    "Bat": "Bat"
+    "Bat": "Bat",
+    "ReloadEnabled": "enable reload",
+    "MeteoredWidgetEnableReload_tooltip": "option to reload the weather forecast once a hour"
 }

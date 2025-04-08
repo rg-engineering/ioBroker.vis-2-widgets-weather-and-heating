@@ -361,5 +361,7 @@
     "OIDS_thermostats": "Thermostats de l'OID",
     "Target": "Cible",
     "Valve": "Soupape",
-    "Bat": "Batte"
+    "Bat": "Batte",
+    "ReloadEnabled": "Activer le rechargement",
+    "MeteoredWidgetEnableReload_tooltip": "Option pour recharger les prévisions météorologiques une fois par heure"
 }

@@ -361,5 +361,7 @@
     "OIDS_thermostats": "Термостаты Оида",
     "Target": "Цель",
     "Valve": "Клапан",
-    "Bat": "Летучая мышь"
+    "Bat": "Летучая мышь",
+    "ReloadEnabled": "Включить перезагрузку",
+    "MeteoredWidgetEnableReload_tooltip": "возможность перезагрузить прогноз погоды один раз в час"
 }

@@ -361,5 +361,7 @@
     "OIDS_thermostats": "OID的恒温器",
     "Target": "目标",
     "Valve": "阀门",
-    "Bat": "蝙蝠"
+    "Bat": "蝙蝠",
+    "ReloadEnabled": "启用重新加载",
+    "MeteoredWidgetEnableReload_tooltip": "每小时重新加载天气预报的选项"
 }

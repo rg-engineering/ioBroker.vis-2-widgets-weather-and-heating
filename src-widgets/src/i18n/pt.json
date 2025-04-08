@@ -361,5 +361,7 @@
     "OIDS_thermostats": "Termostatos de Oid",
     "Target": "Alvo",
     "Valve": "Válvula",
-    "Bat": "Bastão"
+    "Bat": "Bastão",
+    "ReloadEnabled": "Ativar recarregar",
+    "MeteoredWidgetEnableReload_tooltip": "opção para recarregar a previsão do tempo uma vez por hora"
 }

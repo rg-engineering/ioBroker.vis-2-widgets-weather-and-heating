@@ -361,5 +361,7 @@
     "OIDS_thermostats": "I termostati di Oid",
     "Target": "Bersaglio",
     "Valve": "Valvola",
-    "Bat": "Pipistrello"
+    "Bat": "Pipistrello",
+    "ReloadEnabled": "Abilita ricarica",
+    "MeteoredWidgetEnableReload_tooltip": "Opzione per ricaricare le previsioni del tempo una volta all'ora"
 }

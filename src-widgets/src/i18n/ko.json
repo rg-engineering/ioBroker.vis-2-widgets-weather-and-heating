@@ -344,5 +344,7 @@
     "OIDS_thermostats": "Oid의 온도 조절 장치",
     "Target": "목표",
     "Valve": "판막",
-    "Bat": "박쥐"
+    "Bat": "박쥐",
+    "ReloadEnabled": "Reload를 활성화합니다",
+    "MeteoredWidgetEnableReload_tooltip": "일기 예보를 한 시간에 한 번 다시로드하는 옵션"
 }

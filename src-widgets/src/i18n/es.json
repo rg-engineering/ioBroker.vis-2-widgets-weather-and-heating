@@ -361,5 +361,7 @@
     "OIDS_thermostats": "Termostatos de OID",
     "Target": "Objetivo",
     "Valve": "Válvula",
-    "Bat": "Murciélago"
+    "Bat": "Murciélago",
+    "ReloadEnabled": "Habilitar la recarga",
+    "MeteoredWidgetEnableReload_tooltip": "Opción para recargar el pronóstico del tiempo una vez por hora"
 }

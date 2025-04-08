@@ -361,5 +361,7 @@
     "OIDS_thermostats": "Oid's thermostaten",
     "Target": "Doel",
     "Valve": "Ventiel",
-    "Bat": "Knuppel"
+    "Bat": "Knuppel",
+    "ReloadEnabled": "Schakel herladen in",
+    "MeteoredWidgetEnableReload_tooltip": "Optie om de weersvoorspelling eenmaal per uur opnieuw te laden"
 }

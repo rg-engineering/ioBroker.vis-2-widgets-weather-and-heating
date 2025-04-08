@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather-and-heating",
-    "version": "0.10.3",
+    "version": "0.10.4",
     "news": {
+      "0.10.4": {
+        "en": "Meteored widget: reload once per hour as an option",
+        "de": "Widget Meteored: Einmal pro Stunde als Option neu laden",
+        "ru": "Метеоризированный виджет: перезагрузка один раз в час в качестве опции",
+        "pt": "Widget Meteored: recarregar uma vez por hora como uma opção",
+        "nl": "Meteoor widget: één keer per uur opnieuw laden als optie",
+        "fr": "Widget Meteored: recharger une fois par heure en option",
+        "it": "Widget meteorologico: ricaricare una volta all'ora come opzione",
+        "es": "Widget meteored: reload once per hour as an option",
+        "pl": "Meteoryt: przeładować raz na godzinę jako opcja",
+        "uk": "Meteored віджет: перезавантаження раз на годину як варіант",
+        "zh-cn": "气象部件: 作为选项重新装入一次"
+      },
       "0.10.3": {
         "en": "Heating Room widget: some translations\nMeteored widget: make reload of widget possible",
         "de": "Heizraum Widget: einige Übersetzungen\nWidget Meteored: Widget neu laden lassen",
@@ -80,19 +93,6 @@
         "pl": "zobacz numer # 66: Harmonogram ogrzewania i profil Params widget - opcja wyboru pola do regulacji temperatury jak Pittini vis\nzobacz numer # 66: Harmonogram ogrzewania i profil Paramswidget - opcja wyboru czasu na dostosowanie czasu",
         "uk": "див. питання #66: Графік роботи на опалювальному часі та Параметри профілю віджет - варіант використання вибрати коробку для регулювання температури, як Pittini vis\nдив. питання #66: Графік роботи на опалювальному часі та Параmswidget - варіант використання таймера часу для налаштування часу",
         "zh-cn": "参见第66期: 加热时间表和配置参数部件 - 选择使用选择框进行温度调整, 如 Pittini 相对\n参见第66期: 加热时间表和配置 Paramswidget - 选择使用计时器进行时间调整"
-      },
-      "0.8.1": {
-        "en": "update dependencies\nsee issue #66: Heating Time Schedule widget - uses minimum temperature from adapter for input value range\nsee issue #66: Heating Time Schedule widget - step width for temperature adjustable (1°C or 0.5°C)\ntranslations",
-        "de": "aktualisierung der abhängigkeiten\nsiehe Ausgabe #66: Heizzeitplan Widget - verwendet Mindesttemperatur von Adapter für Eingangswertbereich\nsiehe Ausgabe #66: Heizzeitplan Widget - Stufenbreite für Temperatur einstellbar (1°C oder 0.5°C)\nübersetzungen",
-        "ru": "обновление зависимостей\n#66: Виджет графика нагревания - использует минимальную температуру от адаптера для диапазона входной стоимости\n#66: Виджет графика нагревания - ширина шага для регулируемой температуры (1°C или 0,5°C)\nперевод",
-        "pt": "dependências\nveja o problema #66: O widget do horário de tempo de aquecimento - usa a temperatura mínima do adaptador para o intervalo de valor de entrada\nveja a questão #66: widget do horário de aquecimento - largura do passo para a temperatura ajustável (1°C ou 0,5°C)\ntraduções",
-        "nl": "afhankelijkheden bijwerken\nzie nummer #66: Verwarming Tijd Schema widget - maakt gebruik van minimale temperatuur van adapter voor ingang waarde bereik\nzie nummer #66: Verwarmingstijd Schema widget - stapbreedte voor temperatuur instelbaar (1°C of 0,5°C)\nvertalingen",
-        "fr": "mettre à jour les dépendances\nvoir le numéro 66: Widget Horaire de chauffage - utilise la température minimale de l'adaptateur pour la plage de valeurs d'entrée\nvoir le numéro 66: Widget horaire de chauffage - largeur d'étape pour la température réglable (1°C ou 0,5°C)\ntraductions",
-        "it": "aggiornamento dipendenze\nvedi numero #66: Tempo di riscaldamento widget - utilizza la temperatura minima da adattatore per l'intervallo di valore di input\nvedi numero #66: Tempo di riscaldamento widget di pianificazione - larghezza passo per la temperatura regolabile (1°C o 0.5°C)\ntraduzioni",
-        "es": "dependencias de actualización\nver número #66: El widget Calendario de tiempo de calefacción - utiliza la temperatura mínima del adaptador para el rango de valor de entrada\nver número #66: Tiempo de calefacción widget programado - ancho paso para la temperatura ajustable (1°C o 0.5°C)\ntraducciones",
-        "pl": "aktualizacji zależności\nzobacz numer # 66: Widget czasu ogrzewania - wykorzystuje minimalną temperaturę adaptera do zakresu wartości wejściowej\nzob. numer # 66: Widget czasu ogrzewania - szerokość kroku dla regulacji temperatury (1 °C lub 0,5 ° C)\ntłumaczenia",
-        "uk": "оновлення залежності\nпереглянути номер #66: Поточний час нагріву віджет - використовує мінімальну температуру від адаптера для діапазону значень вхідних значень\nпереглянути проблему #66: Віджет часу нагрівання - ширина кроку для регулювання температури (1°C або 0.5°C)\nпереклади",
-        "zh-cn": "更新依赖关系\n参见第66期: 加热时间表部件 - 使用适配器的最低温度进行输入值范围\n参见第66期: 加热时间表部件 - 温度可调整的步宽(1°C或0.5°C)\n翻译"
       }
     },
     "licenseInformation": {

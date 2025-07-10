@@ -1,6 +1,3 @@
-# This is a composition of lint and test scripts
-# Make sure to update this file along with the others
-
 name: Test and Release
 
 # Run this job on all pushes and pull requests
@@ -11,9 +8,9 @@ on:
       - '*'
     tags:
       # normal versions
-      - "v?[0-9]+.[0-9]+.[0-9]+"
+      - "v[0-9]+.[0-9]+.[0-9]+"
       # pre-releases
-      - "v?[0-9]+.[0-9]+.[0-9]+-**"
+      - "v[0-9]+.[0-9]+.[0-9]+-**"
   pull_request: {}
 
 # Cancel previous PR/branch runs when a new commit is pushed
@@ -29,8 +26,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: [ 22 ]
-        os: [ubuntu-latest]
+        node-version: [ 20.x, 22.x, 24.x ]
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
       - uses: actions/checkout@v4

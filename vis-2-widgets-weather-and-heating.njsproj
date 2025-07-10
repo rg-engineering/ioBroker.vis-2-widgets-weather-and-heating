@@ -7,7 +7,8 @@
     <ProjectHome>
     </ProjectHome>
     <ProjectView>ShowAllFiles</ProjectView>
-    <StartupFile>src-widgets\src\App.jsx</StartupFile>
+    <StartupFile>
+    </StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
@@ -36,16 +37,12 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
-    <Content Include=".eslintignore" />
-    <Content Include=".eslintrc.js" />
     <Content Include=".github\auto-merge.yml" />
     <Content Include=".github\dependabot.yml" />
     <Content Include=".github\FUNDING.yml" />
     <Content Include=".github\ISSUE_TEMPLATE\BugReport.md" />
     <Content Include=".github\ISSUE_TEMPLATE\bug_report.md" />
     <Content Include=".github\ISSUE_TEMPLATE\Enhancement.md" />
-    <Content Include=".github\workflows\dependabot-automerge.yml" />
-    <Content Include=".github\workflows\npmpublish.yml" />
     <Content Include=".github\workflows\test-and-release.yml" />
     <Content Include=".gitignore" />
     <Content Include=".releaseconfig.json" />
@@ -60,22 +57,20 @@
     <Content Include="doc\widget_weather.png" />
     <Content Include="doc\widget_weather_day.png" />
     <Content Include="eslint.config.mjs" />
-    <Content Include="gulpfile.js" />
     <Content Include="io-package.json" />
     <Content Include="lib\tools.js" />
     <Content Include="LICENSE" />
     <Content Include="package-lock.json" />
     <Content Include="package.json" />
+    <Content Include="prettier.config.mjs" />
     <Content Include="README.md" />
-    <Content Include="src-widgets\craco.config.js" />
-    <Content Include="src-widgets\modulefederation.config.js" />
+    <Content Include="src-widgets\index.html" />
     <Content Include="src-widgets\package-lock.json" />
     <Content Include="src-widgets\package.json" />
     <Content Include="src-widgets\public\img\vis-widget-echart.png" />
     <Content Include="src-widgets\public\img\vis-widget-weatherday.png" />
     <Content Include="src-widgets\public\img\vis-widget-weather.png" />
     <Content Include="src-widgets\public\index.html" />
-    <Content Include="src-widgets\src\App.jsx" />
     <Content Include="src-widgets\src\assets\heating\fts_window_1w.png" />
     <Content Include="src-widgets\src\assets\heating\fts_window_1w.svg" />
     <Content Include="src-widgets\src\assets\heating\fts_window_1w_open.png" />
@@ -565,21 +560,9 @@
     <Content Include="src-widgets\src\assets\icons\viento-wind\galeria2-Beaufort\97.png" />
     <Content Include="src-widgets\src\assets\icons\viento-wind\galeria2-Beaufort\98.png" />
     <Content Include="src-widgets\src\assets\icons\viento-wind\galeria2-Beaufort\99.png" />
-    <Content Include="src-widgets\src\bootstrap.js" />
-    <Content Include="src-widgets\src\eslint.config.mjs" />
-    <Content Include="src-widgets\src\HeatingGeneralParamsWidget.jsx" />
-    <Content Include="src-widgets\src\HeatingRoomProfileParamsWidget.jsx" />
-    <Content Include="src-widgets\src\WeatherMeteoredWidget.jsx" />
-    <Content Include="src-widgets\src\HeatingWindowStatusOverviewWidget.jsx" />
-    <Content Include="src-widgets\src\HeatingRoomWidget.jsx" />
-    <Content Include="src-widgets\src\HeatingRoomsOverviewWidget.jsx" />
     <Content Include="src-widgets\src\i18n\ko.json" />
     <Content Include="src-widgets\src\i18n\uk.json" />
-    <Content Include="src-widgets\src\HeatingTimeScheduleWidget.jsx" />
-    <Content Include="src-widgets\src\WeatherDayWidget.jsx" />
-    <Content Include="src-widgets\src\GeneralEChartWidget.jsx" />
-    <Content Include="src-widgets\src\Generic.jsx" />
-    <Content Include="src-widgets\src\WeatherWidget.jsx" />
+    <Content Include="src-widgets\src\GeneralEChartWidget.tsx" />
     <Content Include="src-widgets\src\i18n\de.json" />
     <Content Include="src-widgets\src\i18n\en.json" />
     <Content Include="src-widgets\src\i18n\es.json" />
@@ -590,8 +573,9 @@
     <Content Include="src-widgets\src\i18n\pt.json" />
     <Content Include="src-widgets\src\i18n\ru.json" />
     <Content Include="src-widgets\src\i18n\zh-cn.json" />
-    <Content Include="src-widgets\src\index.jsx" />
-    <Content Include="src-widgets\src\translations.js" />
+    <Content Include="src-widgets\tsconfig.json" />
+    <Content Include="src-widgets\tsconfig.node.json" />
+    <Content Include="tasks.js" />
     <Content Include="test\widgets.test.js" />
   </ItemGroup>
   <ItemGroup>
@@ -632,7 +616,20 @@
     <Folder Include="widgets\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="src-widgets\src\EchartContainer.jsx" />
+    <TypeScriptCompile Include="src-widgets\src\EchartContainer.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\Generic.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\HeatingGeneralParamsWidget.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\HeatingRoomProfileParamsWidget.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\HeatingRoomsOverviewWidget.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\HeatingRoomWidget.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\HeatingTimeScheduleWidget.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\HeatingWindowStatusOverviewWidget.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\index.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\translations.ts" />
+    <TypeScriptCompile Include="src-widgets\src\WeatherDayWidget.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\WeatherMeteoredWidget.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\WeatherWidget.tsx" />
+    <TypeScriptCompile Include="src-widgets\vite.config.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->

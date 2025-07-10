@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import Generic from "./Generic";
 
 
-import { ReactComponent as WindowOpenIcon } from './assets/heating/fts_window_1w_open.svg';
-import { ReactComponent as WindowCloseIcon } from './assets/heating/fts_window_1w.svg';
+import { ReactComponent as WindowOpenIcon } from "./assets/heating/fts_window_1w_open.svg";
+import { ReactComponent as WindowCloseIcon } from "./assets/heating/fts_window_1w.svg";
 
 import {
     List,

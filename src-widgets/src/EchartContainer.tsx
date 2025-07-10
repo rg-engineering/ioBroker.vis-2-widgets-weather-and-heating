@@ -2,7 +2,8 @@ import ReactECharts from "echarts-for-react";
 import * as echarts from "echarts";
 
 class EchartContainer extends (ReactECharts) {
-    constructor(props) {
+    constructor(props)
+    {
         console.log(`EchartContainer constructor ${JSON.stringify(props)}`);
 
         props.onChartReady = (instance) => {
@@ -10,7 +11,8 @@ class EchartContainer extends (ReactECharts) {
 
             console.log(`EchartContainer on chart ready ${group}`);
 
-            if (group !== undefined && group.length) {
+            if (group !== undefined && group.length)
+            {
                 console.log(`EchartContainer connect to ${group}`);
                 instance.group = group;
                 echarts.connect(group);

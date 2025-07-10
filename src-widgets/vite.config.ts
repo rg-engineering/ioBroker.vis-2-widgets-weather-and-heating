@@ -14,18 +14,18 @@ const config = {
             name: "vis2WeatherHeatingWidgets",
             filename: "customWidgets.js",
             exposes: {
-                "./GeneralEChartWidget": "./src/GeneralEChartWidget",
+                //"./GeneralEChartWidget": "./src/GeneralEChartWidget",
 
-                "./WeatherWidget": "./src/WeatherWidget", // List of all widgets in this package
-                "./WeatherDayWidget": "./src/WeatherDayWidget",
-                "./WeatherMeteoredWidget": "./src/WeatherMeteoredWidget",
+                //"./WeatherWidget": "./src/WeatherWidget", // List of all widgets in this package
+                //"./WeatherDayWidget": "./src/WeatherDayWidget",
+                //"./WeatherMeteoredWidget": "./src/WeatherMeteoredWidget",
 
-                "./HeatingTimeScheduleWidget": "./src/HeatingTimeScheduleWidget",
+                //"./HeatingTimeScheduleWidget": "./src/HeatingTimeScheduleWidget",
                 "./HeatingGeneralParamsWidget": "./src/HeatingGeneralParamsWidget",
-                "./HeatingRoomWidget": "./src/HeatingRoomWidget",
-                "./HeatingRoomsOverviewWidget": "./src/HeatingRoomsOverviewWidget",
-                "./HeatingRomProfileParamsWidget": "./src/HeatingRoomProfileParamsWidget",
-                "./HeatingWindowStatusOverviewWidget": "./src/HeatingWindowStatusOverviewWidget",
+                //"./HeatingRoomWidget": "./src/HeatingRoomWidget",
+                //"./HeatingRoomsOverviewWidget": "./src/HeatingRoomsOverviewWidget",
+                //"./HeatingRomProfileParamsWidget": "./src/HeatingRoomProfileParamsWidget",
+                //"./HeatingWindowStatusOverviewWidget": "./src/HeatingWindowStatusOverviewWidget",
 
                 "./translations": "./src/translations",
             },

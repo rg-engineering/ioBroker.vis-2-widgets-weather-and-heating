@@ -71,16 +71,8 @@
     <Content Include="src-widgets\public\img\vis-widget-weatherday.png" />
     <Content Include="src-widgets\public\img\vis-widget-weather.png" />
     <Content Include="src-widgets\public\index.html" />
-    <Content Include="src-widgets\src\assets\heating\fts_window_1w.png" />
     <Content Include="src-widgets\src\assets\heating\fts_window_1w.svg" />
-    <Content Include="src-widgets\src\assets\heating\fts_window_1w_open.png" />
     <Content Include="src-widgets\src\assets\heating\fts_window_1w_open.svg" />
-    <Content Include="src-widgets\src\assets\heating\it_wifi.png" />
-    <Content Include="src-widgets\src\assets\heating\it_wifi.svg" />
-    <Content Include="src-widgets\src\assets\heating\message_service.png" />
-    <Content Include="src-widgets\src\assets\heating\message_service.svg" />
-    <Content Include="src-widgets\src\assets\heating\scene_stove.png" />
-    <Content Include="src-widgets\src\assets\heating\scene_stove.svg" />
     <Content Include="src-widgets\src\assets\icons\luna-moon\0.png" />
     <Content Include="src-widgets\src\assets\icons\luna-moon\1.png" />
     <Content Include="src-widgets\src\assets\icons\luna-moon\10.png" />

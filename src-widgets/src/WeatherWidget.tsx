@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import type { RxRenderWidgetProps, RxWidgetInfo, VisRxWidgetProps, VisRxWidgetState } from '@iobroker/types-vis-2';
 
 import moment from "moment";
 
@@ -136,13 +137,54 @@ const setDataStructures = async (field, data, changeData, socket) => {
     changeData(data);
 };
 
-class WeatherWidget extends (Generic) {
-    constructor(props) {
+interface StaticRxData {
+    noCard: boolean;
+    widgetTitle: string;
+    instance: string;
+    oid_location: string;
+    datastructure: string;
+    headline_color: string;
+    legend_text_color: string;
+    xaxis_axisLabel_formatstring: string;
+    xaxis_color: string;
+    rain_visible: boolean;
+    rain_color: string;
+    rain_axislablecolor: string;
+    rain_positionYAxis: string;
+    rain_show_separate: boolean;
+    temperature_visible: boolean;
+    temperature_color: string;
+    temperature_axislablecolor: string;
+    temperature_positionYAxis: string;
+    clouds_visible: boolean;
+    clouds_color: string;
+    clouds_axislablecolor: string;
+    clouds_positionYAxis: string;
+    clouds_show_separate: boolean;
+    sun_or_cloud: string;
+    chanceofraining_visible: boolean;
+    chanceofraining_color: string;
+    chanceofraining_show_separate: boolean;
+    
+        
+}
+interface StaticState extends VisRxWidgetState {
+    showDialog: number | null;
+    objects: { common: ioBroker.StateCommon; _id: string; isChart: boolean }[];
+}
+class WeatherWidget extends Generic<StaticRxData, StaticState> {
+    private lastRxData?: string;
+    private updateTimeout: ReturnType<typeof setTimeout> | null = null;
+    constructor(props: VisRxWidgetProps) {
         super(props);
-        this.refCardContent = React.createRef();
+        this.state = {
+            ...this.state,
+            objects: [],
+            showDialog: null,
+        };
     }
 
-    static getWidgetInfo() {
+    static getWidgetInfo(): RxWidgetInfo{
         const oid_rain_fields = [];
         const oid_temp_fields = [];
         const oid_cloud_fields = [];
@@ -268,7 +310,7 @@ class WeatherWidget extends (Generic) {
                             type: "id",
                             default: "daswetter.0.NextHours.Location_1.Location",
                             //only available with DasWetter
-                            hidden: data => data.instance.includes("weatherunderground")
+                            hidden:  "!!data.instance.includes('weatherunderground')"
                         },
                         {
                             name: "datastructure",    // name in data structure

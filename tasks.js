@@ -1,14 +1,14 @@
-const { deleteFoldersRecursive, buildReact, npmInstall, copyFiles } = require('@iobroker/build-tools');
-
+const { deleteFoldersRecursive, buildReact, npmInstall, copyFiles } = require("@iobroker/build-tools");
+const adapterName = require("./package.json").name.replace("iobroker.", "");
 
 function copyAllFiles() {
     copyFiles(
         [
-            'src-widgets/build/**/*',
-            '!src-widgets/build/static/js/*node_modules*.*',
-            '!src-widgets/build/static/js/node_modules_*',
+            "src-widgets/build/**/*",
+            "!src-widgets/build/static/js/*node_modules*.*",
+            "!src-widgets/build/static/js/node_modules_*",
         ],
-        'widgets/vis-2-widgets-material/',
+        `widgets/${adapterName}`,
     );
     copyFiles(
         [
@@ -19,20 +19,20 @@ function copyAllFiles() {
             `src-widgets/build/static/js/*runtime_js-src_sketch_css*.*`,
             `src-widgets/build/static/js/*node_modules_babel_runtime_helpers_createForOfItera*.*`,
         ],
-        'widgets/vis-2-widgets-material/static/js',
+        `widgets/${adapterName}/static/js`,
     );
 }
 
-if (process.argv.includes('--copy-files')) {
+if (process.argv.includes("--copy-files")) {
     copyAllFiles();
-} else if (process.argv.includes('--build')) {
+} else if (process.argv.includes("--build")) {
     buildReact(`${__dirname}/src-widgets`, { rootDir: __dirname, vite: true }).catch(() =>
-        console.error('Error by build'),
+        console.error("Error by build"),
     );
 } else {
-    deleteFoldersRecursive('src-widgets/build');
-    deleteFoldersRecursive('widgets');
-    npmInstall('src-widgets')
+    deleteFoldersRecursive("src-widgets/build");
+    deleteFoldersRecursive("widgets");
+    npmInstall("src-widgets")
         .then(() => buildReact(`${__dirname}/src-widgets`, { rootDir: __dirname, vite: true }))
         .then(() => copyAllFiles());
 }

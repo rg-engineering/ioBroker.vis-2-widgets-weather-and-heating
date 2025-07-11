@@ -1,5 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { type CSSProperties } from 'react';
+import type {
+    RxRenderWidgetProps,
+    RxWidgetInfo,
+    VisRxWidgetProps,
+    VisWidgetCommand,
+    WidgetData,
+    VisRxWidgetState
+} from '@iobroker/types-vis-2';
 
 import {
     Box,
@@ -27,7 +34,7 @@ import {
 
 import Generic from "./Generic";
 
-const styles = {
+const styles: Record<string, CSSProperties> =  {
     cardContent: {
         flex: 1,
         display: "block",
@@ -43,7 +50,7 @@ const styles = {
 // todo: button unter Status zum Rücksetzen manueller Mode
 
 
-
+/*
 const setDataStructures = async (field, data, changeData, socket) => {
     console.log(`set new datastructure instance ${data["instance"]}` );
 
@@ -65,9 +72,38 @@ const setDataStructures = async (field, data, changeData, socket) => {
     }
     changeData(data);
 };
+*/
 
-class HeatingRoomWidget extends (Generic) {
-    constructor(props) {
+
+interface StaticRxData {
+    noCard: boolean;
+    widgetTitle: string;
+    instance: string;
+    RoomName: string;
+    dataCount: number;
+    oid_RoomState: string;
+    oid_RoomLog: string;
+
+    [key: `oid_TargetTemperature${number}`]: string;
+    [key: `oid_CurrentTemperature${number}`]: string;
+    [key: `oid_CurrentTemperatureExtSensor${number}`]: string;
+    [key: `oid_CurrentActorState${number}`]: string;
+    [key: `oid_CurrentValveValue${number}`]: string;
+    [key: `oid_ThermostatBatteryState${number}`]: string;
+    [key: `oid_ThermostatBatteryVoltage${number}`]: string;
+    [key: `oid_ThermostatRSSI${number}`]: string;
+}
+
+interface StaticState extends VisRxWidgetState {
+    showDialog: number | null;
+    objects: { common: ioBroker.StateCommon; _id: string; isChart: boolean }[];
+}
+
+export default class HeatingRoomWidget extends Generic < StaticRxData, StaticState > {
+    private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
+    private lastRxData: string | undefined;
+    private updateTimeout: ReturnType<typeof setTimeout> | undefined;
+    constructor(props: VisRxWidgetProps) {
         super(props);
         this.refCardContent = React.createRef();
     }
@@ -103,14 +139,14 @@ class HeatingRoomWidget extends (Generic) {
                             label: "instance", // translated field label
                             type: "instance",
                             default: "heatingcontrol.0",
-                            onChange: setDataStructures,
+                            //onChange: setDataStructures, todo
                         },
                         {
                             name: "RoomName",    // name in data structure
                             label: "widgets_heating_label_roomname", // translated field label
                             type: "text",
                             default: "Wohnzimmer",
-                            onChange: setDataStructures,
+                            //onChange: setDataStructures, tod
                         },
                         {
                             name: "dataCount",
@@ -239,12 +275,12 @@ class HeatingRoomWidget extends (Generic) {
         return content;
     }
 
-    getBatteryState(d) {
+    getBatteryState(d:number) {
         let content = null;
 
         const oid_name = "oid_ThermostatBatteryState" + d;
         console.log(oid_name);
-        const oid = this.state.rxData[oid_name];
+        const oid = this.state.rxData[`${oid_name}`];
         console.log(oid);
 
         // nur true / false
@@ -297,7 +333,7 @@ class HeatingRoomWidget extends (Generic) {
 
 
         if (oid !== undefined && oid != null && oid.length > 5) {
-            const thermostatRSSI = this.state.values[oid + ".val"];
+            const thermostatRSSI = this.state.values[`${oid}.val`];
 
             if (thermostatRSSI < 0) {
 
@@ -565,7 +601,7 @@ class HeatingRoomWidget extends (Generic) {
                 <img class="mdui-red-blink" height='32px' src='/vis.0/HeatingControl/images/it_wifi.svg'></img>
     */
 
-    renderWidgetBody(props) {
+    renderWidgetBody(props: RxRenderWidgetProps): React.JSX.Element | React.JSX.Element[] | null {
         super.renderWidgetBody(props);
 
         console.log("HeatingRoomWidget values ${JSON.stringify(this.state.values)");
@@ -593,12 +629,5 @@ class HeatingRoomWidget extends (Generic) {
     }
 }
 
-HeatingRoomWidget.propTypes = {
-    socket: PropTypes.object,
-    themeType: PropTypes.string,
-    style: PropTypes.object,
-    data: PropTypes.object,
-};
 
-export default HeatingRoomWidget;
 

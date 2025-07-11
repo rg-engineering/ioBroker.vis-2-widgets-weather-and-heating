@@ -1,9 +1,16 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { type CSSProperties } from 'react';
+import type {
+    RxRenderWidgetProps,
+    RxWidgetInfo,
+    VisRxWidgetProps,
+    VisWidgetCommand,
+    WidgetData,
+    VisRxWidgetState
+} from '@iobroker/types-vis-2';
 
 import Generic from "./Generic";
 
-const styles = {
+const styles: Record<string, CSSProperties> =  {
     cardContent: {
         flex: 1,
         display: "block",
@@ -15,7 +22,7 @@ const styles = {
 };
 
 
-
+/*
 const setDataStructures = async (field, data, changeData, socket) => {
     console.log(`set new data structure instance ${data["instance"]}` );
 
@@ -26,10 +33,29 @@ const setDataStructures = async (field, data, changeData, socket) => {
     }
     changeData(data);
 };
+*/
+
+interface StaticRxData {
+    noCard: boolean;
+    widgetTitle: string;
+    instance: string;
+    oid_RoomStatesHtmlTable: string;
+    headline_color: string;
+
+}
+
+interface StaticState extends VisRxWidgetState {
+    showDialog: number | null;
+    objects: { common: ioBroker.StateCommon; _id: string; isChart: boolean }[];
+}
 
 
-class HeatingRoomsOverviewWidget extends (Generic) {
-    constructor(props) {
+
+export default class HeatingRoomsOverviewWidget extends Generic<StaticRxData, StaticState> {
+    private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
+    private lastRxData: string | undefined;
+    private updateTimeout: ReturnType<typeof setTimeout> | undefined;
+    constructor(props: VisRxWidgetProps) {
         super(props);
         this.refCardContent = React.createRef();
     }
@@ -64,7 +90,7 @@ class HeatingRoomsOverviewWidget extends (Generic) {
                             label: "instance", // translated field label
                             type: "instance",
                             default: "heatingcontrol.0",
-                            onChange: setDataStructures,
+                            //onChange: setDataStructures, todo
                         },
                     ],
                 },
@@ -119,7 +145,7 @@ class HeatingRoomsOverviewWidget extends (Generic) {
         </div>;
     }
 
-    renderWidgetBody(props) {
+    renderWidgetBody(props: RxRenderWidgetProps): React.JSX.Element | React.JSX.Element[] | null{
         super.renderWidgetBody(props);
 
         //console.log("HeatingRoomsOverviewWidget values ${JSON.stringify(this.state.values)");
@@ -147,12 +173,5 @@ class HeatingRoomsOverviewWidget extends (Generic) {
     }
 }
 
-HeatingRoomsOverviewWidget.propTypes = {
-    socket: PropTypes.object,
-    themeType: PropTypes.string,
-    style: PropTypes.object,
-    data: PropTypes.object,
-};
 
-export default HeatingRoomsOverviewWidget;
 

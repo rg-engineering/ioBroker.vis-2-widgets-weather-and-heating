@@ -1,5 +1,15 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { type CSSProperties } from 'react';
+import type {
+    RxRenderWidgetProps,
+    RxWidgetInfo,
+    VisRxWidgetProps,
+    VisWidgetCommand,
+    WidgetData,
+    VisRxWidgetState
+} from '@iobroker/types-vis-2';
+
+
+
 import { Helmet } from 'react-helmet';
 import { useEffect } from 'react';
 
@@ -14,7 +24,7 @@ import {
 
 import Generic from "./Generic";
 
-const styles = {
+const styles: Record<string, CSSProperties> = {
     cardContent: {
         flex: 1,
         display: "block",
@@ -28,17 +38,31 @@ const styles = {
 // todo oid nach Instanz neu belegen
 // todo reload script after timeout or reopen
 
-
-
+/*
 const setDataStructures = async (field, data, changeData, socket) => {
     console.log(`WeatherMeteoredWidget - set new datastructure ` );
 
 
     changeData(data);
 };
+*/
 
-class WeatherMeteoredWidget extends (Generic) {
-    constructor(props) {
+interface StaticRxData {
+    noCard: boolean;
+    WidgetID: string;
+    EnableReload: boolean;
+}
+
+interface StaticState extends VisRxWidgetState {
+    showDialog: number | null;
+    objects: { common: ioBroker.StateCommon; _id: string; isChart: boolean }[];
+}
+
+export default class WeatherMeteoredWidget extends Generic<StaticRxData, StaticState> {
+    private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
+    private lastRxData: string | undefined;
+    private updateTimeout: ReturnType<typeof setTimeout> | undefined;
+    constructor(props: VisRxWidgetProps) {
         super(props);
         this.refCardContent = React.createRef();
 
@@ -171,7 +195,7 @@ class WeatherMeteoredWidget extends (Generic) {
                             label: "MeteoredWidgetID", // translated field label
                             type: "text",
                             default: "",
-                            onChange: setDataStructures,
+                            //onChange: setDataStructures,
                             tooltip: "MeteoredWidgetID_tooltip",
                         },
                         {
@@ -214,7 +238,7 @@ class WeatherMeteoredWidget extends (Generic) {
         </div>;
     }
 
-    renderWidgetBody(props) {
+    renderWidgetBody(props: RxRenderWidgetProps): React.JSX.Element | React.JSX.Element[] | null {
         super.renderWidgetBody(props);
 
         console.log(`WeatherMeteoredWidget - renderWidgetBody `);
@@ -242,12 +266,5 @@ class WeatherMeteoredWidget extends (Generic) {
     }
 }
 
-WeatherMeteoredWidget.propTypes = {
-    socket: PropTypes.object,
-    themeType: PropTypes.string,
-    style: PropTypes.object,
-    data: PropTypes.object,
-};
 
-export default WeatherMeteoredWidget;
 

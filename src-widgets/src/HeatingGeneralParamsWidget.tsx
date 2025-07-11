@@ -1,5 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { type CSSProperties } from 'react';
+import type {
+    RxRenderWidgetProps,
+    RxWidgetInfo,
+    VisRxWidgetProps,
+    VisWidgetCommand,
+    WidgetData,
+    VisRxWidgetState
+} from '@iobroker/types-vis-2';
 
 // https://github.com/Pittini/iobroker-heatingcontrol-vis
 // For federation, it is important to import from one package "@mui/material" and not from "@mui/material/Box"
@@ -12,18 +19,19 @@ import {
 
 import Generic from "./Generic";
 
-const styles = {
+const styles: Record<string, CSSProperties> = {
     cardContent: {
         flex: 1,
-        display: "block",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        overflow: "hidden",
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        overflow: 'hidden',
+        height: '100%',
     },
 };
 
-
+/*
 const setDataStructures = async (field, data, changeData, socket) => {
     console.log(`set new data structure instance${data["instance"]}` );
 
@@ -43,11 +51,38 @@ const setDataStructures = async (field, data, changeData, socket) => {
     }
     changeData(data);
 };
+*/
 
-class HeatingGeneralParamsWidget extends (Generic) {
-    constructor(props) {
+interface StaticRxData  {
+    noCard: boolean;
+    widgetTitle: string;
+    instance: string;
+    oid_ChosenRoom: string;
+    oid_HeatingPeriodActive: string;
+    oid_PublicHolidayToday: string;
+    oid_Present: string;
+    oid_PartyNow: string;
+    oid_GuestsPresent: string;
+    oid_HolidayPresent: string;
+    oid_VacationAbsent: string;
+    oid_FireplaceModeActive: string;
+
+
+
+}
+interface StaticState extends VisRxWidgetState {
+    showDialog: number | null;
+    objects: { common: ioBroker.StateCommon; _id: string; isChart: boolean }[];
+}
+
+export default class HeatingGeneralParamsWidget extends Generic<StaticRxData, StaticState> {
+    private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
+    private lastRxData: string | undefined;
+    private updateTimeout: ReturnType<typeof setTimeout> | undefined;
+
+    constructor(props: VisRxWidgetProps) {
         super(props);
-        this.refCardContent = React.createRef();
+        this.state = { ...this.state, objects: [] };
     }
 
     static getWidgetInfo() {
@@ -80,7 +115,7 @@ class HeatingGeneralParamsWidget extends (Generic) {
                             label: "instance", // translated field label
                             type: "instance",
                             default: "heatingcontrol.0",
-                            onChange: setDataStructures,
+                            //onChange: setDataStructures, todo
                         },
                     ],
                 },
@@ -163,6 +198,7 @@ class HeatingGeneralParamsWidget extends (Generic) {
         return HeatingGeneralParamsWidget.getWidgetInfo();
     }
 
+    
     onChange1() {
         if (this.props.editMode) return;
         const oid = this.state.rxData["oid_HeatingPeriodActive"];
@@ -242,8 +278,8 @@ class HeatingGeneralParamsWidget extends (Generic) {
             this.props.context.setValue(oid, true);
         }
     }
-
-    getValue(oid) {
+   
+    getValue(oid: string) {
         if (oid !== undefined && oid !== '' && oid !== 'nothing_selected') {
             return this.state.values[`${oid}.val`];
         }
@@ -251,7 +287,7 @@ class HeatingGeneralParamsWidget extends (Generic) {
     }
 
 
-    static convertValue(value, defaultValue) {
+    static convertValue(value: any, defaultValue: any):any {
         if (value === 'true') {
             return true;
         }
@@ -270,13 +306,13 @@ class HeatingGeneralParamsWidget extends (Generic) {
     }
 
 
-    getHeatingPeriodActive() {
+    getHeatingPeriodActive(): React.JSX.Element | React.JSX.Element[] | null{
         let content = null;
         const oid = this.state.rxData["oid_HeatingPeriodActive"];
         console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
-            const HeatingPeriodActiveChecked = this.state.values[oid + ".val"];
+            const HeatingPeriodActiveChecked = this.state.values[`${oid}.val`];
 
             content = <FormControlLabel control={
                 <Switch
@@ -288,13 +324,13 @@ class HeatingGeneralParamsWidget extends (Generic) {
         return content;
     }
 
-    getPublicHolidayToday() {
+    getPublicHolidayToday(): React.JSX.Element | React.JSX.Element[] | null{
         let content = null;
         const oid = this.state.rxData["oid_PublicHolidayToday"];
         console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
-            const PublicHolidayTodayChecked = this.state.values[oid + ".val"];
+            const PublicHolidayTodayChecked = this.state.values[`${oid}.val`];
 
             content = <FormControlLabel control={
                 <Switch
@@ -306,13 +342,13 @@ class HeatingGeneralParamsWidget extends (Generic) {
         return content;
     }
 
-    getPresent() {
+    getPresent(): React.JSX.Element | React.JSX.Element[] | null{
         let content = null;
         const oid = this.state.rxData["oid_Present"];
         console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
-            const PresentChecked = this.state.values[oid + ".val"];
+            const PresentChecked = this.state.values[`${oid}.val`];
 
             content = <FormControlLabel control={
                 <Switch
@@ -324,13 +360,13 @@ class HeatingGeneralParamsWidget extends (Generic) {
         return content;
     }
 
-    getPartyNow() {
+    getPartyNow(): React.JSX.Element | React.JSX.Element[] | null {
         let content = null;
         const oid = this.state.rxData["oid_PartyNow"];
         console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
-            const PartyNowChecked = this.state.values[oid + ".val"];
+            const PartyNowChecked = this.state.values[`${oid}.val`];
 
             content = <FormControlLabel control={
                 <Switch
@@ -341,13 +377,13 @@ class HeatingGeneralParamsWidget extends (Generic) {
         return content;
     }
 
-    getGuestsPresent() {
+    getGuestsPresent(): React.JSX.Element | React.JSX.Element[] | null{
         let content = null;
         const oid = this.state.rxData["oid_GuestsPresent"];
         console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
-            const GuestsPresentChecked = this.state.values[oid + ".val"];
+            const GuestsPresentChecked = this.state.values[`${oid}.val`];
 
             content = <FormControlLabel control={
                 <Switch
@@ -358,13 +394,13 @@ class HeatingGeneralParamsWidget extends (Generic) {
         return content;
     }
 
-    getHolidayPresent() {
+    getHolidayPresent(): React.JSX.Element | React.JSX.Element[] | null{
         let content = null;
         const oid = this.state.rxData["oid_HolidayPresent"];
         console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
-            const HolidayAtHomeChecked = this.state.values[oid + ".val"];
+            const HolidayAtHomeChecked = this.state.values[`${oid}.val`];
 
             content = <FormControlLabel control={
                 <Switch
@@ -375,13 +411,13 @@ class HeatingGeneralParamsWidget extends (Generic) {
         return content;
     }
 
-    getVacationAbsent() {
+    getVacationAbsent(): React.JSX.Element | React.JSX.Element[] | null{
         let content = null;
         const oid = this.state.rxData["oid_VacationAbsent"];
         console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
-            const VacationChecked = this.state.values[oid + ".val"];
+            const VacationChecked = this.state.values[`${oid}.val`];
 
             content = <FormControlLabel control={
                 <Switch
@@ -392,13 +428,14 @@ class HeatingGeneralParamsWidget extends (Generic) {
         return content;
     }
 
-    getFireplaceModeActive() {
+    getFireplaceModeActive(): React.JSX.Element | React.JSX.Element[] | null{
         let content = null;
         const oid = this.state.rxData["oid_FireplaceModeActive"];
         console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
-            const FireplaceModeChecked = this.state.values[oid + ".val"];
+            
+            const FireplaceModeChecked = this.state.values[`${oid}.val`];
 
             content = <FormControlLabel control={
                 <Switch
@@ -431,7 +468,7 @@ class HeatingGeneralParamsWidget extends (Generic) {
         </div>;
     }
 
-    renderWidgetBody(props) {
+    renderWidgetBody(props: RxRenderWidgetProps): React.JSX.Element | React.JSX.Element[] | null {
         super.renderWidgetBody(props);
 
         console.log("HeatingGeneralParamsWidget values ${JSON.stringify(this.state.values)}");
@@ -458,13 +495,3 @@ class HeatingGeneralParamsWidget extends (Generic) {
         return this.wrapContent(content, null, { textAlign: "center" });
     }
 }
-
-HeatingGeneralParamsWidget.propTypes = {
-    socket: PropTypes.object,
-    themeType: PropTypes.string,
-    style: PropTypes.object,
-    data: PropTypes.object,
-};
-
-export default HeatingGeneralParamsWidget;
-

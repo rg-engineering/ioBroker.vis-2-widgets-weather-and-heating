@@ -1,5 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { type CSSProperties } from 'react';
+import type {
+    RxRenderWidgetProps,
+    RxWidgetInfo,
+    VisRxWidgetProps,
+    VisWidgetCommand,
+    WidgetData,
+    VisRxWidgetState
+} from '@iobroker/types-vis-2';
 
 // For federation, it is important to import from one package "@mui/material" and not from "@mui/material/Box"
 import {
@@ -38,7 +45,7 @@ import 'dayjs/locale/nl';
 
 import Generic from "./Generic";
 
-const styles = {
+const styles: Record<string, CSSProperties> = {
     cardContent: {
         flex: 1,
         display: "block",
@@ -58,7 +65,7 @@ const styles = {
 };
 
 
-
+/*
 const setDataStructures = async (field, data, changeData, socket) => {
 
     console.log("set new datastructure instance" + data["instance"] );
@@ -93,20 +100,50 @@ const setDataStructures = async (field, data, changeData, socket) => {
     }
     changeData(data);
 };
+*/
 
+interface StaticRxData {
+    noCard: boolean;
+    widgetTitle: string;
+    instance: string;
+    TempSetWidthLow: boolean;
+    TempWithSelectbox: boolean;
+    oid_ChosenRoom: string;
+    oid_GuestIncrease: string;
+    oid_PartyDecrease: string;
+    oid_AbsentDecrease: string;
+    oid_VacationAbsentDecrease: string;
+    oid_WindowOpenDecrease: string;
+    oid_FireplaceModeDecrease: string;
+    oid_TemperaturOverride: string;
+    oid_TemperaturOverrideTime: string;
+    oid_MinimumTemperature: string;
+    oid_TemperatureDecreaseMode: string;
+    oid_TempAddValueListText: string;
+    oid_TempDivValueListText: string;
+    oid_TempValueListValue: string;
+    oid_OverrideTempValueListText: string;
+    oid_OverrideTempValueListValue: string;
 
-class HeatingRoomProfileParamsWidget extends (Generic) {
+}
 
-    constructor(props) {
+interface StaticState extends VisRxWidgetState {
+    showDialog: number | null;
+    objects: { common: ioBroker.StateCommon; _id: string; isChart: boolean }[];
+}
+
+export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData, StaticState> {
+    private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
+    private lastRxData: string | undefined;
+    private updateTimeout: ReturnType<typeof setTimeout> | undefined;
+
+    constructor(props: VisRxWidgetProps) {
         super(props);
-        this.refCardContent = React.createRef();
+        this.state = { ...this.state, objects: [] };
     }
 
 
     static getWidgetInfo() {
-
-
-
 
         return {
             id: "tplHeatingRoomProfileParamsWidget",                 // Unique widget type ID. Should start with `tpl` followed
@@ -138,7 +175,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                             label: "instance", // translated field label
                             type: "instance",
                             default: "heatingcontrol.0",
-                            onChange: setDataStructures,
+                            //onChange: setDataStructures,  todo
                         },
                         {
                             // hide, wenn TempWithSelectbox==true
@@ -277,6 +314,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                             default: "heatingcontrol.0.vis.OverrideTempValueListValue",
                             hidden: "!data.TempWithSelectbox",
                         },
+                       
 
                     ],
                 },
@@ -431,7 +469,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
         this.props.context.setValue(val.OID, val.time);
     }
 
-    static convertValue2Number(value) {
+    static convertValue2Number(value:string) {
 
         try {
             return parseInt(value);
@@ -441,7 +479,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
         }
     }
 
-    showTimeValue(oid_time, value, name) {
+    showTimeValue(oid_time:string, value, name:string) {
         let ret = null;
 
         console.log(`showTimeValue ${oid_time} ${value} ${name} ${this.props.context.themeType}`);
@@ -481,9 +519,9 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                         
                         formatDensity="dense"
                         format="HH:mm"
-                        autoFocus="false"
+                        autoFocus={false}
                         onChange={(value) => this.handleOnChangeTime({
-                            time: value.format('HH:mm'),
+                            time: value!=null ? value.format('HH:mm') : "n.a.",
                             OID: oid_time
                         })}
                         slotProps={{
@@ -509,7 +547,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
                                 },
                             },
                             field: {
-                                clearable: "true",
+                                clearable: true,
                                 onClear: () => {
                                     console.debug("clear ");
                                     this.props.context.setValue(oid_time, "00:00");
@@ -530,7 +568,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
         return ret;
     }
 
-    showTemperatureValue(oid_temperature, minTemperature, TempSetWidthLow, value, name, mode) {
+    showTemperatureValue(oid_temperature:string, minTemperature:number, TempSetWidthLow:number, value:number, name:string, mode:string) {
 
         let ret = null;
 
@@ -683,8 +721,8 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
         //console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
-            const GuestIncrease = this.state.values[oid + ".val"];
-            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? "0.5" : "1.0";
+            const GuestIncrease = this.state.values[`${oid}.val`];
+            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? 0.5 : 1.0;
 
             content = this.showTemperatureValue(oid, 0, TempSetWidthLow, GuestIncrease, "GuestIncrease", "increase");
             
@@ -716,8 +754,8 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
         //console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
-            const PartyDecrease = this.state.values[oid + ".val"];
-            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? "0.5" : "1.0";
+            const PartyDecrease = this.state.values[`${oid}.val`];
+            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? 0.5 : 1.0;
 
             content = this.showTemperatureValue(oid, 0, TempSetWidthLow, PartyDecrease, "PartyDecrease", "decrease");
 
@@ -750,8 +788,8 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
         //console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
-            const AbsentDecrease = this.state.values[oid + ".val"];
-            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? "0.5" : "1.0";
+            const AbsentDecrease = this.state.values[`${oid}.val`];
+            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? 0.5 : 1.0;
 
             content = this.showTemperatureValue(oid, 0, TempSetWidthLow, AbsentDecrease, "AbsentDecrease", "decrease");
 
@@ -785,8 +823,8 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
         //console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
-            const VacationAbsentDecrease = this.state.values[oid + ".val"];
-            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? "0.5" : "1.0";
+            const VacationAbsentDecrease = this.state.values[`${oid}.val`];
+            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? 0.5 : 1.0;
 
             content = this.showTemperatureValue(oid, 0, TempSetWidthLow, VacationAbsentDecrease, "VacationAbsentDecrease", "decrease");
 
@@ -819,8 +857,8 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
         //console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
-            const WindowOpenDecrease = this.state.values[oid + ".val"];
-            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? "0.5" : "1.0";
+            const WindowOpenDecrease = this.state.values[`${oid}.val`];
+            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? 0.5 : 1.0;
 
             content = this.showTemperatureValue(oid, 0, TempSetWidthLow, WindowOpenDecrease, "WindowOpenDecrease", "decrease");
 
@@ -856,8 +894,8 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
         //console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
-            const FireplaceModeDecrease = this.state.values[oid + ".val"];
-            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? "0.5" : "1.0";
+            const FireplaceModeDecrease = this.state.values[`${oid}.val`];
+            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? 0.5 : 1.0;
 
             content = this.showTemperatureValue(oid, 0, TempSetWidthLow, FireplaceModeDecrease, "FireplaceModeDecrease", "decrease");
 
@@ -890,8 +928,8 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
         //console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
-            const MinimumTemperature = this.state.values[oid + ".val"];
-            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? "0.5" : "1.0";
+            const MinimumTemperature = this.state.values[`${oid}.val`];
+            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? 0.5 : 1.0;
 
             content = this.showTemperatureValue(oid, -10, TempSetWidthLow, MinimumTemperature, "MinimumTemperature", "absolute");
             /*
@@ -923,7 +961,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
         //console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
-            const OverrideTemperatureTime = this.state.values[oid + ".val"];
+            const OverrideTemperatureTime = this.state.values[`${oid}.val`];
            
             content = this.showTimeValue(oid,  OverrideTemperatureTime, "OverrideTemperatureTime");
 
@@ -955,8 +993,8 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
         //console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
-            const OverrideTemperature = this.state.values[oid + ".val"];
-            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? "0.5" : "1.0";
+            const OverrideTemperature = this.state.values[`${oid}.val`];
+            const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? 0.5 : 1.0;
 
             content = this.showTemperatureValue(oid, 0, TempSetWidthLow, OverrideTemperature, "OverrideTemperature", "override");
             
@@ -990,7 +1028,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
         //console.log("oid " + oid);
 
         if (oid !== undefined && oid.length > 5) {
-            const TemperatureDecreaseMode = this.state.values[oid + ".val"];
+            const TemperatureDecreaseMode = this.state.values[`${oid}.val`];
 
             content = <div>
                 <p style={{'font-size':'smaller' }} >
@@ -1036,7 +1074,7 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
         return content;
     }
 
-    renderWidgetBody(props) {
+    renderWidgetBody(props: RxRenderWidgetProps): React.JSX.Element | React.JSX.Element[] | null {
         super.renderWidgetBody(props);
 
         console.log("HeatingRoomProfileParamsWidget values ${JSON.stringify(this.state.values)");
@@ -1066,12 +1104,5 @@ class HeatingRoomProfileParamsWidget extends (Generic) {
     }
 }
 
-HeatingRoomProfileParamsWidget.propTypes = {
-    socket: PropTypes.object,
-    themeType: PropTypes.string,
-    style: PropTypes.object,
-    data: PropTypes.object,
-};
 
-export default HeatingRoomProfileParamsWidget;
 

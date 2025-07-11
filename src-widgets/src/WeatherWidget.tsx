@@ -1,6 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-import type { RxRenderWidgetProps, RxWidgetInfo, VisRxWidgetProps, VisRxWidgetState } from '@iobroker/types-vis-2';
+import React, { type CSSProperties } from 'react';
+import type {
+    RxRenderWidgetProps,
+    RxWidgetInfo,
+    VisRxWidgetProps,
+    VisWidgetCommand,
+    WidgetData,
+    VisRxWidgetState
+} from '@iobroker/types-vis-2';
 
 import moment from "moment";
 
@@ -8,7 +14,7 @@ import EchartContainer from "./EchartContainer";
 
 import Generic from "./Generic";
 
-const styles = {
+const styles: Record<string, CSSProperties> =  {
     cardContent: {
         flex: 1,
         display: "block",
@@ -28,6 +34,7 @@ const styles = {
 // todo überflüssige OID"s löschen
 // todo WU weitere zwei Datenstrukturen supporten
 
+/*
 const setDataStructures = async (field, data, changeData, socket) => {
     console.log(`set new datastructure instance ${data["instance"]} ${data["datastructure"]}` );
 
@@ -137,6 +144,8 @@ const setDataStructures = async (field, data, changeData, socket) => {
     changeData(data);
 };
 
+*/
+
 interface StaticRxData {
     noCard: boolean;
     widgetTitle: string;
@@ -172,9 +181,10 @@ interface StaticState extends VisRxWidgetState {
     showDialog: number | null;
     objects: { common: ioBroker.StateCommon; _id: string; isChart: boolean }[];
 }
-class WeatherWidget extends Generic<StaticRxData, StaticState> {
-    private lastRxData?: string;
-    private updateTimeout: ReturnType<typeof setTimeout> | null = null;
+export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
+    private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
+    private lastRxData: string | undefined;
+    private updateTimeout: ReturnType<typeof setTimeout> | undefined;
     constructor(props: VisRxWidgetProps) {
         super(props);
         this.state = {
@@ -302,7 +312,7 @@ class WeatherWidget extends Generic<StaticRxData, StaticState> {
                             label: "instance", // translated field label
                             type: "instance",
                             default: "daswetter.0",
-                            onChange: setDataStructures,
+                            //onChange: setDataStructures,
                         },
                         {
                             name: "oid_location",    // name in data structure
@@ -318,7 +328,7 @@ class WeatherWidget extends Generic<StaticRxData, StaticState> {
                             type: "select",
                             options: datastructure_options,
                             //default: weatherunderground ? "forecastHourly" : "NextHours",
-                            onChange: setDataStructures,
+                            //onChange: setDataStructures,
                         },
                         {
                             name: "headline_color",    // name in data structure
@@ -1246,7 +1256,7 @@ class WeatherWidget extends Generic<StaticRxData, StaticState> {
         return weatherData;
     }
 
-    renderWidgetBody(props) {
+    renderWidgetBody(props: RxRenderWidgetProps): React.JSX.Element | React.JSX.Element[] | null {
         super.renderWidgetBody(props);
 
         console.log(`values ${JSON.stringify(this.state.values)}`);
@@ -1300,11 +1310,4 @@ class WeatherWidget extends Generic<StaticRxData, StaticState> {
     }
 }
 
-WeatherWidget.propTypes = {
-    socket: PropTypes.object,
-    themeType: PropTypes.string,
-    style: PropTypes.object,
-    data: PropTypes.object,
-};
 
-export default WeatherWidget;

@@ -1,5 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { type CSSProperties } from 'react';
+import type {
+    RxRenderWidgetProps,
+    RxWidgetInfo,
+    VisRxWidgetProps,
+    VisWidgetCommand,
+    WidgetData,
+    VisRxWidgetState
+} from '@iobroker/types-vis-2';
 
 import {
     Grid
@@ -7,7 +14,7 @@ import {
 
 import Generic from "./Generic";
 
-const styles = {
+const styles: Record<string, CSSProperties> = {
     cardContent: {
         flex: 1,
         display: "block",
@@ -89,7 +96,7 @@ const icons_wind_Beaufort = importAllImages(require.context("./assets/icons/vien
 // moon icons
 // fehlen noch
 
-
+/*
 const setDataStructures = async (field, data, changeData, socket) => {
 
     console.log(`set new datastructure instance ${data["instance"]} ${data["datastructure"]}`);
@@ -127,10 +134,37 @@ const setDataStructures = async (field, data, changeData, socket) => {
 
     changeData(data);
 };
+*/
+interface StaticRxData {
+    noCard: boolean;
+    widgetTitle: string;
+    instance: string; // name of instance, e.g. daswetter.0
+    datastructure: string; // name of datastructure, e.g. NextDaysDetailed
+    day2show: string; // day to show, e.g. 0 for today, 1 for tomorrow, etc.
+    iconset: string; // iconset to use, e.g. galeria1, galeria2, etc.
+    windiconset: string; // wind iconset to use, e.g. galeria1, galeria2, Beaufort
+    oid_dayname: string; // OID for day name, e.g. daswetter.0.NextHours.Location_1.Day_1.day_name
+    oid_date: string; // OID for date, e.g. daswetter.0.NextHours.Location_1.Day_1.day_value
+    oid_temp_max: string; // OID for max temperature, e.g. daswetter.0.NextHours.Location_1.Day_1.tempmax_value
+    oid_temp_min: string; // OID for min temperature, e.g. daswetter.0.NextHours.Location_1.Day_1.tempmin_value
+    oid_symbol_description: string; // OID for symbol description, e.g. daswetter.0.NextHours.Location_1.Day_1.symbol_desc
+    oid_symbol: string; // OID for weather symbol, e.g. daswetter.0.NextHours.Location_1.Day_1.symbol_value
+    oid_wind_symbol: string; // OID for wind symbol, e.g. daswetter.0.NextHours.Location_1.Day_1.wind_symbol
+    oid_wind_value: string; // OID for wind value, e.g. daswetter.0.NextHours.Location_1.Day_1.wind_value
+    oid_windgusts_value: string; // OID for wind gusts value, e.g. daswetter.0.NextHours.Location_1.Day_1.windgusts_value
+    oid_sunshine_duration: string; // OID for sunshine duration, e.g. daswetter.0.NextHours.Location_1.Day_1.sunshineDuration
+}
 
+interface StaticState extends VisRxWidgetState {
+    showDialog: number | null;
+    objects: { common: ioBroker.StateCommon; _id: string; isChart: boolean }[];
+}
 
-class WeatherDayWidget extends (Generic) {
-    constructor(props) {
+export default class WeatherDayWidget extends Generic<StaticRxData, StaticState> {
+    private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
+    private lastRxData: string | undefined;
+    private updateTimeout: ReturnType<typeof setTimeout> | undefined;
+    constructor(props: VisRxWidgetProps) {
         super(props);
         this.refCardContent = React.createRef();
     }
@@ -166,7 +200,7 @@ class WeatherDayWidget extends (Generic) {
                             type: "instance",
                             adapters: ["daswetter", "weatherunderground"],
                             default: "daswetter.0",
-                            onChange: setDataStructures,
+                            //onChange: setDataStructures,
                         },
                         {
                             name: "datastructure",    // name in data structure
@@ -187,7 +221,7 @@ class WeatherDayWidget extends (Generic) {
                                 },
                             ],
                             default: "NextHours",
-                            onChange: setDataStructures,
+                            //onChange: setDataStructures,
                         },
                         {
                             name: "day2show",    // name in data structure
@@ -216,7 +250,7 @@ class WeatherDayWidget extends (Generic) {
                                 },
                             ],
                             default: "0",
-                            onChange: setDataStructures,
+                            //onChange: setDataStructures,
                         },
 
                         {
@@ -254,7 +288,7 @@ class WeatherDayWidget extends (Generic) {
                                 },
                             ],
                             default: "galeria1",
-                            onChange: setDataStructures,
+                            //onChange: setDataStructures,
                         },
 
                         {
@@ -276,7 +310,7 @@ class WeatherDayWidget extends (Generic) {
                                 },
                             ],
                             default: "galeria1",
-                            onChange: setDataStructures,
+                            //onChange: setDataStructures,
                         },
                     ],
                 },
@@ -358,7 +392,7 @@ class WeatherDayWidget extends (Generic) {
         return WeatherDayWidget.getWidgetInfo();
     }
 
-    renderWidgetBody(props) {
+    renderWidgetBody(props: RxRenderWidgetProps): React.JSX.Element | React.JSX.Element[] | null  {
         super.renderWidgetBody(props);
 
         let size;
@@ -572,11 +606,3 @@ class WeatherDayWidget extends (Generic) {
     }
 }
 
-WeatherDayWidget.propTypes = {
-    socket: PropTypes.object,
-    themeType: PropTypes.string,
-    style: PropTypes.object,
-    data: PropTypes.object,
-};
-
-export default WeatherDayWidget;

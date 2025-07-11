@@ -1,5 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { type CSSProperties } from 'react';
+import type {
+    RxRenderWidgetProps,
+    RxWidgetInfo,
+    VisRxWidgetProps,
+    VisWidgetCommand,
+    WidgetData,
+    VisRxWidgetState
+} from '@iobroker/types-vis-2';
 
 // For federation, it is important to import from one package "@mui/material" and not from "@mui/material/Box"
 import {
@@ -46,7 +53,7 @@ import 'dayjs/locale/nl';
 
 import Generic from "./Generic";
 
-const styles = {
+const styles: Record<string, CSSProperties> = {
     cardContent: {
         flex: 1,
         display: "block",
@@ -64,7 +71,7 @@ const styles = {
 
 };
 
-
+/*
 const setDataStructures = async (field, data, changeData, socket) => {
     console.log(`set new data structure instance ${data["instance"]}` );
 
@@ -215,27 +222,167 @@ const setDataStructures = async (field, data, changeData, socket) => {
         data["oid_ProfileTempValueListText"] = instance + ".vis.ProfileTempValueListText";
         
 
-        /*
-        heatingcontrol.0.CurrentProfile
-        heatingcontrol.0.Profiles.1.ProfileName
+        
+        //heatingcontrol.0.CurrentProfile
+        //heatingcontrol.0.Profiles.1.ProfileName
 
-        heatingcontrol.0.vis.ChosenRoom
+        //heatingcontrol.0.vis.ChosenRoom
 
-        heatingcontrol.0.info.ProfileType
-        heatingcontrol.0.info.NumberOfPeriods
-        heatingcontrol.0.info.NumberOfPeriods
+        //heatingcontrol.0.info.ProfileType
+        //heatingcontrol.0.info.NumberOfPeriods
+        //heatingcontrol.0.info.NumberOfPeriods
 
 
-        heatingcontrol.0.vis.ProfileTypes.Mo-Su.Periods.1.Temperature
-        heatingcontrol.0.vis.ProfileTypes.Mo-Su.Periods.1.time
-        */
+        //heatingcontrol.0.vis.ProfileTypes.Mo-Su.Periods.1.Temperature
+        //heatingcontrol.0.vis.ProfileTypes.Mo-Su.Periods.1.time
+        
 
     }
     changeData(data);
 };
+*/
 
-class HeatingTimeScheduleWidget extends (Generic) {
-    constructor(props) {
+
+interface StaticRxData {
+    noCard: boolean;
+    widgetTitle: string;
+    instance: string;
+
+    TempSetWidthLow: boolean; // if true, the width of the temperature input field is reduced
+    TempWithSelectbox: boolean; // if true, the temperature input field is a select box with values from oid_ProfileTempValueListValue and oid_ProfileTempValueListText
+
+    oid_CurrentProfile: string
+    oid_ChoosenRoom: string
+    oid_ProfileType: string
+    oid_NumberOfPeriods: string
+    oid_CurrentTimePeriod: string
+    oid_ProfileMinTemperature: string
+    oid_ProfileTempValueListValue: string
+    oid_ProfileTempValueListText: string
+    oid_profile_MoSu_1_Temperature: string
+    oid_profile_MoSu_1_Time: string
+    oid_profile_MoSu_2_Temperature: string
+    oid_profile_MoSu_2_Time: string
+    oid_profile_MoSu_3_Temperature: string
+    oid_profile_MoSu_3_Time: string
+    oid_profile_MoSu_4_Temperature: string
+    oid_profile_MoSu_4_Time: string
+    oid_profile_MoSu_5_Temperature: string
+    oid_profile_MoSu_5_Time: string
+
+    oid_profile_MoFr_1_Temperature: string
+    oid_profile_MoFr_1_Time: string
+    oid_profile_MoFr_2_Temperature: string
+    oid_profile_MoFr_2_Time: string
+    oid_profile_MoFr_3_Temperature: string
+    oid_profile_MoFr_3_Time: string
+    oid_profile_MoFr_4_Temperature: string
+    oid_profile_MoFr_4_Time: string
+    oid_profile_MoFr_5_Temperature: string
+    oid_profile_MoFr_5_Time: string
+
+    oid_profile_SaSu_1_Temperature: string
+    oid_profile_SaSu_1_Time: string
+    oid_profile_SaSu_2_Temperature: string
+    oid_profile_SaSu_2_Time: string
+    oid_profile_SaSu_3_Temperature: string
+    oid_profile_SaSu_3_Time: string
+    oid_profile_SaSu_4_Temperature: string
+    oid_profile_SaSu_4_Time: string
+    oid_profile_SaSu_5_Temperature: string
+    oid_profile_SaSu_5_Time: string
+
+    oid_profile_Mon_1_Temperature: string
+    oid_profile_Mon_1_Time: string
+    oid_profile_Mon_2_Temperature: string
+    oid_profile_Mon_2_Time: string
+    oid_profile_Mon_3_Temperature: string
+    oid_profile_Mon_3_Time: string
+    oid_profile_Mon_4_Temperature: string
+    oid_profile_Mon_4_Time: string
+    oid_profile_Mon_5_Temperature: string
+    oid_profile_Mon_5_Time: string
+
+    oid_profile_Tue_1_Temperature: string
+    oid_profile_Tue_1_Time: string
+    oid_profile_Tue_2_Temperature: string
+    oid_profile_Tue_2_Time: string
+    oid_profile_Tue_3_Temperature: string
+    oid_profile_Tue_3_Time: string
+    oid_profile_Tue_4_Temperature: string
+    oid_profile_Tue_4_Time: string
+    oid_profile_Tue_5_Temperature: string
+    oid_profile_Tue_5_Time: string
+
+    oid_profile_Wed_1_Temperature: string
+    oid_profile_Wed_1_Time: string
+    oid_profile_Wed_2_Temperature: string
+    oid_profile_Wed_2_Time: string
+    oid_profile_Wed_3_Temperature: string
+    oid_profile_Wed_3_Time: string
+    oid_profile_Wed_4_Temperature: string
+    oid_profile_Wed_4_Time: string
+    oid_profile_Wed_5_Temperature: string
+    oid_profile_Wed_5_Time: string
+
+    oid_profile_Thu_1_Temperature: string
+    oid_profile_Thu_1_Time: string
+    oid_profile_Thu_2_Temperature: string
+    oid_profile_Thu_2_Time: string
+    oid_profile_Thu_3_Temperature: string
+    oid_profile_Thu_3_Time: string
+    oid_profile_Thu_4_Temperature: string
+    oid_profile_Thu_4_Time: string
+    oid_profile_Thu_5_Temperature: string
+    oid_profile_Thu_5_Time: string
+
+    oid_profile_Fri_1_Temperature: string
+    oid_profile_Fri_1_Time: string
+    oid_profile_Fri_2_Temperature: string
+    oid_profile_Fri_2_Time: string
+    oid_profile_Fri_3_Temperature: string
+    oid_profile_Fri_3_Time: string
+    oid_profile_Fri_4_Temperature: string
+    oid_profile_Fri_4_Time: string
+    oid_profile_Fri_5_Temperature: string
+    oid_profile_Fri_5_Time: string
+
+    oid_profile_Sat_1_Temperature: string
+    oid_profile_Sat_1_Time: string
+    oid_profile_Sat_2_Temperature: string
+    oid_profile_Sat_2_Time: string
+    oid_profile_Sat_3_Temperature: string
+    oid_profile_Sat_3_Time: string
+    oid_profile_Sat_4_Temperature: string
+    oid_profile_Sat_4_Time: string
+    oid_profile_Sat_5_Temperature: string
+    oid_profile_Sat_5_Time: string
+
+    oid_profile_Sun_1_Temperature: string
+    oid_profile_Sun_1_Time: string
+    oid_profile_Sun_2_Temperature: string
+    oid_profile_Sun_2_Time: string
+    oid_profile_Sun_3_Temperature: string
+    oid_profile_Sun_3_Time: string
+    oid_profile_Sun_4_Temperature: string
+    oid_profile_Sun_4_Time: string
+    oid_profile_Sun_5_Temperature: string
+    oid_profile_Sun_5_Time: string
+
+
+}
+
+interface StaticState extends VisRxWidgetState {
+    showDialog: number | null;
+    objects: { common: ioBroker.StateCommon; _id: string; isChart: boolean }[];
+}
+
+
+export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, StaticState> {
+    private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
+    private lastRxData: string | undefined;
+    private updateTimeout: ReturnType<typeof setTimeout> | undefined;
+    constructor(props: VisRxWidgetProps) {
         super(props);
         this.refCardContent = React.createRef();
     }
@@ -269,7 +416,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
                             label: "instance", // translated field label
                             type: "instance",
                             default: "heatingcontrol.0",
-                            onChange: setDataStructures,
+                            //onChange: setDataStructures,
                         },
                         {
                             // hide, wenn TempWithSelectbox==true
@@ -1090,7 +1237,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
         this.props.context.setValue(oid, val.time);
     }
 
-    copyPeriods(noOfPeriods, part) {
+    copyPeriods(noOfPeriods:number, part:string) {
         const periods = [];
 
         for (let p = 1; p <= noOfPeriods; p++) {
@@ -1108,7 +1255,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
         return periods;
     }
 
-    handleCopyPeriods(oid) {
+    handleCopyPeriods(oid:string) {
         console.log("handly copy periods clicked " + oid);
 
         if (this.props.editMode) {
@@ -1117,7 +1264,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
         this.props.context.setValue(oid, true);
     }
 
-    CreateCopyButton(copyOID) {
+    CreateCopyButton(copyOID:string) {
 
         let ret = null;
 
@@ -1139,7 +1286,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
     }
 
 
-    showTimeValue(oid_time, value, name) {
+    showTimeValue(oid_time:string, value:string, name:string) {
         let ret = null;
 
         console.log(`showTimeValue ${oid_time} ${value} ${name}  ${this.props.context.themeType}`);
@@ -1182,9 +1329,9 @@ class HeatingTimeScheduleWidget extends (Generic) {
 
                             formatDensity="dense"
                             format="HH:mm"
-                            autoFocus="false"
+                            autoFocus={false}
                             onChange={(value) => this.handleOnChangeTime({
-                                time: value.format('HH:mm'),
+                                time: value!=null ? value.format('HH:mm') : "n.a.",
                                 OID: oid_time
                             })}
                             slotProps={{
@@ -1561,7 +1708,7 @@ class HeatingTimeScheduleWidget extends (Generic) {
         }
     }
 
-    renderWidgetBody(props) {
+    renderWidgetBody(props: RxRenderWidgetProps): React.JSX.Element | React.JSX.Element[] | null {
         super.renderWidgetBody(props);
 
         //console.log("HeatingTimeScheduleWidget values ${JSON.stringify(this.state.values)");
@@ -1588,12 +1735,3 @@ class HeatingTimeScheduleWidget extends (Generic) {
         return this.wrapContent(content, null, { textAlign: "center" });
     }
 }
-
-HeatingTimeScheduleWidget.propTypes = {
-    socket: PropTypes.object,
-    themeType: PropTypes.string,
-    style: PropTypes.object,
-    data: PropTypes.object,
-};
-
-export default HeatingTimeScheduleWidget;

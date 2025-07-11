@@ -95,10 +95,7 @@
         "zh-cn": "参见第66期: 加热时间表和配置参数部件 - 选择使用选择框进行温度调整, 如 Pittini 相对\n参见第66期: 加热时间表和配置 Paramswidget - 选择使用计时器进行时间调整"
       }
     },
-    "licenseInformation": {
-      "license": "MIT",
-      "type": "free"
-    },
+
     "titleLang": {
       "en": "VIS-2 weather and heating widgets",
       "de": "VIS-2 Wetter und Heizung Widgets",
@@ -138,6 +135,7 @@
     "readme": "https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather-and-heating/blob/master/README.md",
     "loglevel": "info",
     "mode": "none",
+    "singleton": true,
     "adminUI": {
       "config": "none"
     },
@@ -146,11 +144,16 @@
     "type": "visualization-widgets",
     "connectionType": "cloud",
     "dataSource": "poll",
+    "licenseInformation": {
+      "license": "MIT",
+      "type": "free"
+    },
     "visWidgets": {
       "vis2WeatherHeatingWidgets": {
         "i18n": "component",
         "name": "vis2WeatherHeatingWidgets",
         "url": "vis-2-widgets-weather-and-heating/customWidgets.js",
+        "bundlerType": "module",
         "components": [
           "GeneralEChartWidget",
           "WeatherWidget",
@@ -165,6 +168,11 @@
         ]
       }
     },
+    "dependencies": [
+      {
+        "vis-2": ">=2.12.8"
+      }
+    ],
     "restartAdapters": [
       "vis-2"
     ],

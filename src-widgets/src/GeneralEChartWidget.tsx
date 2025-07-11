@@ -1,5 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { type CSSProperties } from 'react';
+import type {
+    RxRenderWidgetProps,
+    RxWidgetInfo,
+    VisRxWidgetProps,
+    VisWidgetCommand,
+    WidgetData,
+    VisRxWidgetState
+} from '@iobroker/types-vis-2';
 
 import moment from "moment";
 
@@ -8,7 +15,7 @@ import ReactEchartsCore from "echarts-for-react";
 
 import Generic from "./Generic";
 
-const styles = {
+const styles: Record<string, CSSProperties> = {
     cardContent: {
         flex: 1,
         display: "flex",
@@ -22,7 +29,7 @@ const styles = {
 // todo Dummy-Y Achse wird nicht gelöscht, wenn reale Daten kommen
 // todo x achse unit einstellbar
 // todo x achse type (time or category) einstellbar
-
+/*
 const setDataStructures = async (field, data, changeData, socket) => {
     console.log(`set new data structure ${data["dataCount"]} ${JSON.stringify(field)} ${JSON.stringify(data)}`);
 
@@ -110,10 +117,41 @@ const setDataStructures = async (field, data, changeData, socket) => {
 
     changeData(data);
 };
+*/
 
+interface StaticRxData {
+    noCard: boolean;
+    headline: string;
+    dataCount: number;
 
-class GeneralEChartWidget extends (Generic) {
-    constructor(props) {
+    [key: `name${number}`]: string;
+    [key: `instance${number}`]: string;
+
+    [key: `datastructure_ebus${number}`]: string;
+    [key: `datastructure_sbfspot${number}`]: string;
+    [key: `datastructure_sbfspot_serialnumber${number}`]: string;
+    [key: `oid_data${number}`]: string;
+    [key: `data_seriestype${number}`]: string;
+    [key: `data_unit${number}`]: string;
+    [key: `data_autounit${number}`]: string;
+    [key: `data_color${number}`]: string;
+    [key: `data_yaxispos${number}`]: string;
+    [key: `data_calcdiff${number}`]: boolean;
+
+    xaxis_axisLabel_formatstring: string;
+
+}
+
+interface StaticState extends VisRxWidgetState {
+    showDialog: number | null;
+    objects: { common: ioBroker.StateCommon; _id: string; isChart: boolean }[];
+}
+
+export default class GeneralEChartWidget extends Generic<StaticRxData, StaticState> {
+    private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
+    private lastRxData: string | undefined;
+    private updateTimeout: ReturnType<typeof setTimeout> | undefined;
+    constructor(props: VisRxWidgetProps) {
         super(props);
         this.refCardContent = React.createRef();
     }
@@ -174,7 +212,7 @@ class GeneralEChartWidget extends (Generic) {
                             label: "instance", // translated field label
                             type: "instance",
                             default: "",
-                            onChange: setDataStructures,
+                            //onChange: setDataStructures,
                         },
                         {
                             name: "datastructure_ebus",    // name in data structure
@@ -199,7 +237,7 @@ class GeneralEChartWidget extends (Generic) {
                                 },
                             ],
                             default: "value1",
-                            onChange: setDataStructures,
+                            //onChange: setDataStructures,
                             hidden: (data, index) => {
                                 console.log(`???? ${JSON.stringify(data)} ${JSON.stringify(index)}`);
                                 return data[`instance${index}`].indexOf("ebus") < 0;
@@ -228,7 +266,7 @@ class GeneralEChartWidget extends (Generic) {
                                 },
                             ],
                             default: "today",
-                            onChange: setDataStructures,
+                            //onChange: setDataStructures,
                             hidden: (data, index) => {
                                 console.log(`???? ${JSON.stringify(data)} ${JSON.stringify(index)}`);
                                 return data[`instance${index}`].indexOf("sbfspot") < 0;
@@ -239,7 +277,7 @@ class GeneralEChartWidget extends (Generic) {
                             label: "widgets_echart_datastructure_sbfspot_serialnumber", // translated field label
                             type: "text",
                             default: "",
-                            onChange: setDataStructures,
+                            //onChange: setDataStructures,
                             hidden: (data, index) => {
                                 console.log(`???? ${JSON.stringify(data)} ${JSON.stringify(index)}`);
                                 return data[`instance${index}`].indexOf("sbfspot") < 0;
@@ -577,7 +615,7 @@ class GeneralEChartWidget extends (Generic) {
         return content;
     }
 
-    renderWidgetBody(props) {
+    renderWidgetBody(props: RxRenderWidgetProps): React.JSX.Element | React.JSX.Element[] | null {
         super.renderWidgetBody(props);
 
         console.log(`gechart values${JSON.stringify(this.state.values)}`);
@@ -615,12 +653,5 @@ class GeneralEChartWidget extends (Generic) {
     }
 }
 
-GeneralEChartWidget.propTypes = {
-    socket: PropTypes.object,
-    themeType: PropTypes.string,
-    style: PropTypes.object,
-    data: PropTypes.object,
-};
 
-export default GeneralEChartWidget;
 

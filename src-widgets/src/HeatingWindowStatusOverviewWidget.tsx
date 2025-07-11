@@ -1,11 +1,22 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { type CSSProperties } from 'react';
+import type {
+    RxRenderWidgetProps,
+    RxWidgetInfo,
+    VisRxWidgetProps,
+    VisWidgetCommand,
+    WidgetData,
+    VisRxWidgetState
+} from '@iobroker/types-vis-2';
 
 import Generic from "./Generic";
 
 
-import { ReactComponent as WindowOpenIcon } from "./assets/heating/fts_window_1w_open.svg";
-import { ReactComponent as WindowCloseIcon } from "./assets/heating/fts_window_1w.svg";
+//import { ReactComponent as WindowOpenIcon } from "./assets/heating/fts_window_1w_open.svg";
+//import { ReactComponent as WindowCloseIcon } from "./assets/heating/fts_window_1w.svg";
+
+import WindowOpenIcon  from "./assets/heating/fts_window_1w_open.svg";
+import WindowCloseIcon from "./assets/heating/fts_window_1w.svg";
+
 
 import {
     List,
@@ -15,7 +26,7 @@ import {
     Avatar,
 } from "@mui/material";
 
-const styles = {
+const styles: Record<string, CSSProperties> = {
     cardContent: {
         flex: 1,
         display: "block",
@@ -26,7 +37,7 @@ const styles = {
     },
 };
 
-
+/*
 const setDataStructures = async (field, data, changeData, socket) => {
     console.log(`set new data structure instance ${data["instance"]}` );
 
@@ -39,10 +50,35 @@ const setDataStructures = async (field, data, changeData, socket) => {
     }
     changeData(data);
 };
+*/
 
 
-class HeatingWindowStatusOverviewWidget extends (Generic) {
-    constructor(props) {
+interface StaticRxData {
+    noCard: boolean;
+    widgetTitle: string;
+    instance: string;
+    oid_WindowStatesHtmlTable: string;
+    oid_OpenWindowRoomCount: string;
+    headline_color: string
+    statusline_color: string
+    roomname_window_closed_color: string
+    roomname_window_open_color: string
+    roomlastchange_window_closed_color: string
+    roomlastchange_window_open_color: string
+    roombackground_color: string
+
+}
+
+interface StaticState extends VisRxWidgetState {
+    showDialog: number | null;
+    objects: { common: ioBroker.StateCommon; _id: string; isChart: boolean }[];
+}
+
+export default class HeatingWindowStatusOverviewWidget extends Generic<StaticRxData, StaticState> {
+    private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
+    private lastRxData: string | undefined;
+    private updateTimeout: ReturnType<typeof setTimeout> | undefined;
+    constructor(props: VisRxWidgetProps) {
         super(props);
         this.refCardContent = React.createRef();
     }
@@ -79,7 +115,7 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
                             label: "instance", // translated field label
                             type: "instance",
                             default: "heatingcontrol.0",
-                            onChange: setDataStructures,
+                            //onChange: setDataStructures,
                         },
                     ],
                 },
@@ -166,7 +202,7 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
     }
 
 
-    GetIcon(icon) {
+    GetIcon(icon:string) {
         //fts_window_1w_open.svg or fts_window_1w.svg
 
         let ret = null;
@@ -289,7 +325,7 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
         return null;
     }
 
-    renderWidgetBody(props) {
+    renderWidgetBody(props: RxRenderWidgetProps): React.JSX.Element | React.JSX.Element[] | null{
         super.renderWidgetBody(props);
 
         console.log("HeatingWindowStatusOverviewWidget values ${JSON.stringify(this.state.values)");
@@ -317,11 +353,4 @@ class HeatingWindowStatusOverviewWidget extends (Generic) {
     }
 }
 
-HeatingWindowStatusOverviewWidget.propTypes = {
-    socket: PropTypes.object,
-    themeType: PropTypes.string,
-    style: PropTypes.object,
-    data: PropTypes.object,
-};
 
-export default HeatingWindowStatusOverviewWidget;

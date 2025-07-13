@@ -4,7 +4,6 @@ import vitetsConfigPaths from "vite-tsconfig-paths";
 import { federation } from "@module-federation/vite";
 import { moduleFederationShared } from "@iobroker/types-vis-2/modulefederation.vis.config";
 import { readFileSync } from "node:fs";
-import svgr from "vite-plugin-svgr";
 const pack = JSON.parse(readFileSync("./package.json").toString());
 
 const config = {

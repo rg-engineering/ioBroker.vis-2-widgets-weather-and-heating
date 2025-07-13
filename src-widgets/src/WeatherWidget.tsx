@@ -319,7 +319,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
                             label: "instance", // translated field label
                             type: "instance",
                             default: "daswetter.0",
-                            //onChange: setDataStructures,
+                            onChange: setDataStructures,
                         },
                         {
                             name: "oid_location",    // name in data structure
@@ -335,7 +335,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
                             type: "select",
                             options: datastructure_options,
                             //default: weatherunderground ? "forecastHourly" : "NextHours",
-                            //onChange: setDataStructures,
+                            onChange: setDataStructures,
                         },
                         {
                             name: "headline_color",    // name in data structure

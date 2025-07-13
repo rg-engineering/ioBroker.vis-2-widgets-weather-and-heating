@@ -17,8 +17,7 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "types": [
-      "@iobroker/types",
-      "webpack-env"
+      "@iobroker/types"
     ]
   },
   "include": [ "src" ],

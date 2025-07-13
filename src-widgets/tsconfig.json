@@ -16,7 +16,10 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "baseUrl": ".",
-    "types": [ "@iobroker/types" ]
+    "types": [
+      "@iobroker/types",
+      "webpack-env"
+    ]
   },
   "include": [ "src" ],
   "references": [

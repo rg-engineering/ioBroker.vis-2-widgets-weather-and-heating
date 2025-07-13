@@ -5,8 +5,10 @@ import type {
     VisRxWidgetProps,
     VisWidgetCommand,
     WidgetData,
-    VisRxWidgetState
+    VisRxWidgetState,
+    RxWidgetInfoAttributesField
 } from '@iobroker/types-vis-2';
+import type { LegacyConnection } from '@iobroker/adapter-react-v5';
 
 import Generic from "./Generic";
 
@@ -22,8 +24,13 @@ const styles: Record<string, CSSProperties> =  {
 };
 
 
-/*
-const setDataStructures = async (field, data, changeData, socket) => {
+
+const setDataStructures = async (
+    field: RxWidgetInfoAttributesField,
+    data: WidgetData,
+    changeData: (newData: WidgetData) => void,
+    socket: LegacyConnection,
+): Promise<void> => {
     console.log(`set new data structure instance ${data["instance"]}` );
 
     const instance = data["instance"];
@@ -33,7 +40,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
     }
     changeData(data);
 };
-*/
+
 
 interface StaticRxData {
     noCard: boolean;
@@ -60,7 +67,7 @@ export default class HeatingRoomsOverviewWidget extends Generic<StaticRxData, St
         this.refCardContent = React.createRef();
     }
 
-    static getWidgetInfo() {
+    static getWidgetInfo(): RxWidgetInfo {
         return {
             id: "tplHeatingRoomsOverviewWidget",                 // Unique widget type ID. Should start with `tpl` followed
             visSet: "vis-2-widgets-weather-and-heating",        // Unique ID of widget set
@@ -90,7 +97,7 @@ export default class HeatingRoomsOverviewWidget extends Generic<StaticRxData, St
                             label: "instance", // translated field label
                             type: "instance",
                             default: "heatingcontrol.0",
-                            //onChange: setDataStructures, todo
+                            onChange: setDataStructures, 
                         },
                     ],
                 },
@@ -125,11 +132,11 @@ export default class HeatingRoomsOverviewWidget extends Generic<StaticRxData, St
 
     // Do not delete this method. It is used by vis to read the widget configuration.
     // eslint-disable-next-line class-methods-use-this
-    getWidgetInfo() {
+    getWidgetInfo(): RxWidgetInfo {
         return HeatingRoomsOverviewWidget.getWidgetInfo();
     }
 
-    createTable() {
+    createTable(): React.JSX.Element {
         const htmlTable = this.state.values[`${this.state.rxData["oid_RoomStatesHtmlTable"]}.val`];
 
         console.log(`html ${htmlTable}`);

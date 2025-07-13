@@ -5,8 +5,10 @@ import type {
     VisRxWidgetProps,
     VisWidgetCommand,
     WidgetData,
-    VisRxWidgetState
+    VisRxWidgetState,
+    RxWidgetInfoAttributesField
 } from '@iobroker/types-vis-2';
+import type { LegacyConnection } from '@iobroker/adapter-react-v5';
 
 // https://github.com/Pittini/iobroker-heatingcontrol-vis
 // For federation, it is important to import from one package "@mui/material" and not from "@mui/material/Box"
@@ -31,8 +33,13 @@ const styles: Record<string, CSSProperties> = {
     },
 };
 
-/*
-const setDataStructures = async (field, data, changeData, socket) => {
+
+const setDataStructures = async (
+    field: RxWidgetInfoAttributesField,
+    data: WidgetData,
+    changeData: (newData: WidgetData) => void,
+    socket: LegacyConnection,
+): Promise<void> => {
     console.log(`set new data structure instance${data["instance"]}` );
 
     const instance = data["instance"];
@@ -51,7 +58,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
     }
     changeData(data);
 };
-*/
+
 
 interface StaticRxData  {
     noCard: boolean;
@@ -85,7 +92,7 @@ export default class HeatingGeneralParamsWidget extends Generic<StaticRxData, St
         this.state = { ...this.state, objects: [] };
     }
 
-    static getWidgetInfo() {
+    static getWidgetInfo(): RxWidgetInfo {
         return {
             id: "tplHeatingGeneralParamsWidget",                 // Unique widget type ID. Should start with `tpl` followed
             visSet: "vis-2-widgets-weather-and-heating",        // Unique ID of widget set
@@ -115,7 +122,7 @@ export default class HeatingGeneralParamsWidget extends Generic<StaticRxData, St
                             label: "instance", // translated field label
                             type: "instance",
                             default: "heatingcontrol.0",
-                            //onChange: setDataStructures, todo
+                            onChange: setDataStructures, 
                         },
                     ],
                 },
@@ -194,7 +201,7 @@ export default class HeatingGeneralParamsWidget extends Generic<StaticRxData, St
 
     // Do not delete this method. It is used by vis to read the widget configuration.
     // eslint-disable-next-line class-methods-use-this
-    getWidgetInfo() {
+    getWidgetInfo(): RxWidgetInfo {
         return HeatingGeneralParamsWidget.getWidgetInfo();
     }
 
@@ -446,7 +453,7 @@ export default class HeatingGeneralParamsWidget extends Generic<StaticRxData, St
         return content;
     }
 
-    createTable() {
+    createTable(): React.JSX.Element {
 
         return <div
             ref={this.refCardContent}

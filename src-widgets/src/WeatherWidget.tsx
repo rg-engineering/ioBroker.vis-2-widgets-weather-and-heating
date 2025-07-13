@@ -5,8 +5,10 @@ import type {
     VisRxWidgetProps,
     VisWidgetCommand,
     WidgetData,
-    VisRxWidgetState
+    VisRxWidgetState,
+    RxWidgetInfoAttributesField
 } from '@iobroker/types-vis-2';
+import type { LegacyConnection } from '@iobroker/adapter-react-v5';
 
 import moment from "moment";
 
@@ -34,8 +36,13 @@ const styles: Record<string, CSSProperties> =  {
 // todo überflüssige OID"s löschen
 // todo WU weitere zwei Datenstrukturen supporten
 
-/*
-const setDataStructures = async (field, data, changeData, socket) => {
+
+const setDataStructures = async (
+    field: RxWidgetInfoAttributesField,
+    data: WidgetData,
+    changeData: (newData: WidgetData) => void,
+    socket: LegacyConnection,
+): Promise<void> => {
     console.log(`set new datastructure instance ${data["instance"]} ${data["datastructure"]}` );
 
     let max_days = 5;
@@ -144,7 +151,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
     changeData(data);
 };
 
-*/
+
 
 interface StaticRxData {
     noCard: boolean;
@@ -590,7 +597,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
 
     // Do not delete this method. It is used by vis to read the widget configuration.
     // eslint-disable-next-line class-methods-use-this
-    getWidgetInfo() {
+    getWidgetInfo(): RxWidgetInfo {
         return WeatherWidget.getWidgetInfo();
     }
 
@@ -601,15 +608,16 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
     getOption1() {
         console.log("getOption1 ");
 
-        let weatherData;
+        let weatherData=null;
         if (this.state.rxData["instance"].includes("daswetter")) {
             weatherData = this.getWeatherDataDasWetter();
         } else if (this.state.rxData["instance"].includes("weatherunderground")) {
             weatherData = this.getWeatherDataWU();
         }
 
-        console.log(`##got ${JSON.stringify(weatherData[0])}`);
-
+        if (weatherData !== null) {
+            console.log(`##got ${JSON.stringify(weatherData[0])}`);
+        }
         let useSecondDiagram = false;
 
         if ((this.state.rxData["rain_visible"] && this.state.rxData["rain_show_separate"])

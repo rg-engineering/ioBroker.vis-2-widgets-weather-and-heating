@@ -3,10 +3,11 @@ import type {
     RxRenderWidgetProps,
     RxWidgetInfo,
     VisRxWidgetProps,
-    VisWidgetCommand,
     WidgetData,
-    VisRxWidgetState
+    VisRxWidgetState,
+    RxWidgetInfoAttributesField
 } from '@iobroker/types-vis-2';
+import type { LegacyConnection } from '@iobroker/adapter-react-v5';
 
 import {
     Grid
@@ -31,7 +32,7 @@ const styles: Record<string, CSSProperties> = {
 // todo wind: wenn beaufort-Galerie, dann muss auch Beafort-OID verwendet werden
 // todo wind: in galerie1 fehlt icon 9, 18,27
 
-function importAllImages(requireContext) {
+function importAllImages(requireContext: __WebpackModuleApi.RequireContext) {
     let images = new Map();
 
     // Iteriere durch alle importierten Dateien
@@ -96,8 +97,13 @@ const icons_wind_Beaufort = importAllImages(require.context("./assets/icons/vien
 // moon icons
 // fehlen noch
 
-/*
-const setDataStructures = async (field, data, changeData, socket) => {
+
+const setDataStructures = async (
+    field: RxWidgetInfoAttributesField,
+    data: WidgetData,
+    changeData: (newData: WidgetData) => void,
+    socket: LegacyConnection,
+): Promise<void> => {
 
     console.log(`set new datastructure instance ${data["instance"]} ${data["datastructure"]}`);
 
@@ -134,7 +140,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
 
     changeData(data);
 };
-*/
+
 interface StaticRxData {
     noCard: boolean;
     widgetTitle: string;
@@ -169,7 +175,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
         this.refCardContent = React.createRef();
     }
 
-    static getWidgetInfo() {
+    static getWidgetInfo(): RxWidgetInfo {
         return {
             id: "tplWeatherDayWidget",                 // Unique widget type ID. Should start with `tpl` followed
             visSet: "vis-2-widgets-weather-and-heating",        // Unique ID of widget set
@@ -200,7 +206,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                             type: "instance",
                             adapters: ["daswetter", "weatherunderground"],
                             default: "daswetter.0",
-                            //onChange: setDataStructures,
+                            onChange: setDataStructures,
                         },
                         {
                             name: "datastructure",    // name in data structure
@@ -221,7 +227,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                                 },
                             ],
                             default: "NextHours",
-                            //onChange: setDataStructures,
+                            onChange: setDataStructures,
                         },
                         {
                             name: "day2show",    // name in data structure
@@ -250,7 +256,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                                 },
                             ],
                             default: "0",
-                            //onChange: setDataStructures,
+                            onChange: setDataStructures,
                         },
 
                         {
@@ -288,7 +294,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                                 },
                             ],
                             default: "galeria1",
-                            //onChange: setDataStructures,
+                            onChange: setDataStructures,
                         },
 
                         {
@@ -310,7 +316,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                                 },
                             ],
                             default: "galeria1",
-                            //onChange: setDataStructures,
+                            onChange: setDataStructures,
                         },
                     ],
                 },
@@ -388,7 +394,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
 
     // Do not delete this method. It is used by vis to read the widget configuration.
     // eslint-disable-next-line class-methods-use-this
-    getWidgetInfo() {
+    getWidgetInfo(): RxWidgetInfo {
         return WeatherDayWidget.getWidgetInfo();
     }
 
@@ -538,7 +544,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
 
         let sunduration = 0;
         if (sundurationval) {
-            sunduration = Number(sundurationval).toFixed(2);
+            sunduration = Number(sundurationval);
             console.log(`sunduration ${sunduration} ${typeof sunduration}`);
         }
 

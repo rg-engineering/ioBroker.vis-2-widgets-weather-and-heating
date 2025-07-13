@@ -5,8 +5,10 @@ import type {
     VisRxWidgetProps,
     VisWidgetCommand,
     WidgetData,
-    VisRxWidgetState
+    VisRxWidgetState,
+    RxWidgetInfoAttributesField
 } from '@iobroker/types-vis-2';
+import type { LegacyConnection } from '@iobroker/adapter-react-v5';
 
 // For federation, it is important to import from one package "@mui/material" and not from "@mui/material/Box"
 import {
@@ -65,8 +67,13 @@ const styles: Record<string, CSSProperties> = {
 };
 
 
-/*
-const setDataStructures = async (field, data, changeData, socket) => {
+
+const setDataStructures = async (
+    field: RxWidgetInfoAttributesField,
+    data: WidgetData,
+    changeData: (newData: WidgetData) => void,
+    socket: LegacyConnection,
+): Promise<void> => {
 
     console.log("set new datastructure instance" + data["instance"] );
 
@@ -100,7 +107,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
     }
     changeData(data);
 };
-*/
+
 
 interface StaticRxData {
     noCard: boolean;
@@ -132,6 +139,16 @@ interface StaticState extends VisRxWidgetState {
     objects: { common: ioBroker.StateCommon; _id: string; isChart: boolean }[];
 }
 
+interface tempVal {
+    temperature: number,
+    OID: string
+}
+
+interface timeVal {
+    time: string,
+    OID: string
+}
+
 export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData, StaticState> {
     private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
     private lastRxData: string | undefined;
@@ -143,7 +160,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
     }
 
 
-    static getWidgetInfo() {
+    static getWidgetInfo(): RxWidgetInfo {
 
         return {
             id: "tplHeatingRoomProfileParamsWidget",                 // Unique widget type ID. Should start with `tpl` followed
@@ -175,7 +192,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
                             label: "instance", // translated field label
                             type: "instance",
                             default: "heatingcontrol.0",
-                            //onChange: setDataStructures,  todo
+                            onChange: setDataStructures,  
                         },
                         {
                             // hide, wenn TempWithSelectbox==true
@@ -359,7 +376,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
 
     // Do not delete this method. It is used by vis to read the widget configuration.
     // eslint-disable-next-line class-methods-use-this
-    getWidgetInfo() {
+    getWidgetInfo(): RxWidgetInfo {
         return HeatingRoomProfileParamsWidget.getWidgetInfo();
     }
 
@@ -378,69 +395,69 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
 
     // This function is called every time when some Object State updated, but all changes lands into this.state.values too
     // eslint-disable-next-line class-methods-use-this, no-unused-vars
-    onStateUpdated(id, state) {
+    onStateUpdated(id:string, state) {
         console.log("onStateUpdated " + id + " " + JSON.stringify(state));
     }
 
-    /*
-    onChange1( val) {
+    
+    onChange1( val:string) {
         const oid = this.state.rxData["oid_GuestIncrease"];
         //convert value to number
         console.log("onChange1 " + oid + "  " + val);
         if (this.props.editMode) return;
         this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
     }
-    onChange2(val) {
+    onChange2(val: string) {
         const oid = this.state.rxData["oid_PartyDecrease"];
         //convert value to number
         console.log("onChange1 " + oid + "  " + val);
         if (this.props.editMode) return;
         this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
     }
-    onChange3(val) {
+    onChange3(val: string) {
         const oid = this.state.rxData["oid_AbsentDecrease"];
         //convert value to number
         console.log("onChange1 " + oid + "  " + val);
         if (this.props.editMode) return;
         this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
     }
-    onChange4(val) {
+    onChange4(val: string) {
         const oid = this.state.rxData["oid_VacationAbsentDecrease"];
         //convert value to number
         console.log("onChange1 " + oid + "  " + val);
         if (this.props.editMode) return;
         this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
     }
-    onChange5(val) {
+    onChange5(val: string) {
         const oid = this.state.rxData["oid_WindowOpenDecrease"];
         //convert value to number
         console.log("onChange1 " + oid + "  " + val);
         if (this.props.editMode) return;
         this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
     }
-    onChange6(val) {
+    onChange6(val: string) {
         const oid = this.state.rxData["oid_FireplaceModeDecrease"];
         //convert value to number
         console.log("onChange1 " + oid + "  " + val);
         if (this.props.editMode) return;
         this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
     }
-    */
-    onChange7(val) {
+    
+    onChange7(val: string) {
         const oid = this.state.rxData["oid_MinimumTemperature"];
         //convert value to number
         console.log("onChange1 " + oid + "  " + val);
         if (this.props.editMode) return;
         this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
     }
-    onChange8(val) {
+    onChange8(val: string) {
         const oid = this.state.rxData["oid_TemperaturOverrideTime"];
 
         console.log("onChange1 " + oid + "  " + val);
         if (this.props.editMode) return;
         this.props.context.setValue(oid, val);
     }
-    onChange9(val) {
+    onChange9(val: string) {
         const oid = this.state.rxData["oid_TemperaturOverride"];
         //convert value to number
         console.log("onChange1 " + oid + "  " + val);
@@ -448,11 +465,11 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
         this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
     }
 
-    createValueData(value, text) {
+    createValueData(value:number, text: string) {
         return { value, text };
     }
 
-    handleOnChangeTemperature(val) {
+    handleOnChangeTemperature(val: tempVal ) {
         console.log(`onChange Temp: ${val.temperature}  ${val.OID} ${JSON.stringify(val)}`);
         //onChange Temp: 6  oid_profile_Sat_1_Temperature { "temperature": "6", "OID": "oid_profile_Sat_1_Temperature" }
         if (this.props.editMode) {
@@ -460,7 +477,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
         }
         this.props.context.setValue(val.OID, val.temperature);
     }
-    handleOnChangeTime(val) {
+    handleOnChangeTime(val: timeVal) {
         console.log(`onChange Temp: ${val.time}  ${val.OID} ${JSON.stringify(val)}`);
         //onChange Temp: 6  oid_profile_Sat_1_Temperature { "temperature": "6", "OID": "oid_profile_Sat_1_Temperature" }
         if (this.props.editMode) {
@@ -479,7 +496,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
         }
     }
 
-    showTimeValue(oid_time:string, value, name:string) {
+    showTimeValue(oid_time:string, value:string, name:string) {
         let ret = null;
 
         console.log(`showTimeValue ${oid_time} ${value} ${name} ${this.props.context.themeType}`);
@@ -593,7 +610,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
                     max={30}
                     onChange={(e) => {
                         this.handleOnChangeTemperature({
-                            temperature: e.target.value,
+                            temperature: Number(e.target.value),
                             OID: oid_temperature
                         });
                     }}
@@ -696,7 +713,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
                         variant="outlined"
                         onChange={(e) => {
                             this.handleOnChangeTemperature({
-                                temperature: e.target.value,
+                                temperature: Number(e.target.value),
                                 OID: oid_temperature
                             });
                         }}

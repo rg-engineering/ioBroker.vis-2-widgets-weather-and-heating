@@ -5,18 +5,17 @@ import type {
     VisRxWidgetProps,
     VisWidgetCommand,
     WidgetData,
-    VisRxWidgetState
+    VisRxWidgetState,
+    RxWidgetInfoAttributesField
 } from '@iobroker/types-vis-2';
-
+import type { LegacyConnection } from '@iobroker/adapter-react-v5';
 import Generic from "./Generic";
 
+//import WindowOpenIcon  from "./assets/heating/fts_window_1w_open.svg";
+//import WindowCloseIcon from "./assets/heating/fts_window_1w.svg";
 
-//import { ReactComponent as WindowOpenIcon } from "./assets/heating/fts_window_1w_open.svg";
-//import { ReactComponent as WindowCloseIcon } from "./assets/heating/fts_window_1w.svg";
-
-import WindowOpenIcon  from "./assets/heating/fts_window_1w_open.svg";
-import WindowCloseIcon from "./assets/heating/fts_window_1w.svg";
-
+const WindowOpenIcon = require("./assets/heating/fts_window_1w_open.svg") as string;
+const WindowCloseIcon = require("./assets/heating/fts_window_1w.svg") as string;
 
 import {
     List,
@@ -37,8 +36,13 @@ const styles: Record<string, CSSProperties> = {
     },
 };
 
-/*
-const setDataStructures = async (field, data, changeData, socket) => {
+
+const setDataStructures = async (
+    field: RxWidgetInfoAttributesField,
+    data: WidgetData,
+    changeData: (newData: WidgetData) => void,
+    socket: LegacyConnection,
+): Promise<void> => {
     console.log(`set new data structure instance ${data["instance"]}` );
 
     const instance = data["instance"];
@@ -50,7 +54,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
     }
     changeData(data);
 };
-*/
+
 
 
 interface StaticRxData {
@@ -74,6 +78,14 @@ interface StaticState extends VisRxWidgetState {
     objects: { common: ioBroker.StateCommon; _id: string; isChart: boolean }[];
 }
 
+interface roomData {
+    room: string;
+    sinceText: string;
+    icon: string;
+    changed: string;
+    isOpen?: boolean; // optional, if not set, it is closed
+}
+
 export default class HeatingWindowStatusOverviewWidget extends Generic<StaticRxData, StaticState> {
     private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
     private lastRxData: string | undefined;
@@ -83,7 +95,7 @@ export default class HeatingWindowStatusOverviewWidget extends Generic<StaticRxD
         this.refCardContent = React.createRef();
     }
 
-    static getWidgetInfo() {
+    static getWidgetInfo(): RxWidgetInfo {
         return {
             id: "tplHeatingWindowStatusOverviewWidget",                 // Unique widget type ID. Should start with `tpl` followed
             visSet: "vis-2-widgets-weather-and-heating",        // Unique ID of widget set
@@ -115,7 +127,7 @@ export default class HeatingWindowStatusOverviewWidget extends Generic<StaticRxD
                             label: "instance", // translated field label
                             type: "instance",
                             default: "heatingcontrol.0",
-                            //onChange: setDataStructures,
+                            onChange: setDataStructures,
                         },
                     ],
                 },
@@ -197,10 +209,9 @@ export default class HeatingWindowStatusOverviewWidget extends Generic<StaticRxD
 
     // Do not delete this method. It is used by vis to read the widget configuration.
     // eslint-disable-next-line class-methods-use-this
-    getWidgetInfo() {
+    getWidgetInfo(): RxWidgetInfo {
         return HeatingWindowStatusOverviewWidget.getWidgetInfo();
     }
-
 
     GetIcon(icon:string) {
         //fts_window_1w_open.svg or fts_window_1w.svg
@@ -221,7 +232,7 @@ export default class HeatingWindowStatusOverviewWidget extends Generic<StaticRxD
         return ret;
     }
 
-    createTable() {
+    createTable(): JSX.Element {
 
         const htmlTable = this.state.values[`${this.state.rxData["oid_WindowStatesHtmlTable"]}.val`];
 
@@ -264,10 +275,10 @@ export default class HeatingWindowStatusOverviewWidget extends Generic<StaticRxD
                 </div>
 
 
-                <List sx={{ width: '100 %', maxWidth: 300, bgcolor: this.state.rxData["roombackground_color"] || "background.paper"  }}>
-                    {data.map((roomData, i) => <ListItem>
+                <List sx={{ width: '100%', maxWidth: 300, bgcolor: this.state.rxData["roombackground_color"] || "background.paper" }}>
+                    {data.map((roomData: roomData, i: number) => <ListItem key={i} >
                         <ListItemAvatar>
-                            {this.GetIcon( roomData.icon )}
+                            {this.GetIcon(roomData.icon)}
                         </ListItemAvatar>
                         <ListItemText
                             primary={roomData.room}
@@ -321,8 +332,14 @@ export default class HeatingWindowStatusOverviewWidget extends Generic<StaticRxD
              </div>;
              */
         }
-
-        return null;
+        else {
+            //just return empty div
+            return <div
+                ref={this.refCardContent}
+                style={styles.cardContent}
+                >
+                </ div>;
+        }
     }
 
     renderWidgetBody(props: RxRenderWidgetProps): React.JSX.Element | React.JSX.Element[] | null{

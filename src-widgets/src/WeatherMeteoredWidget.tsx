@@ -3,24 +3,12 @@ import type {
     RxRenderWidgetProps,
     RxWidgetInfo,
     VisRxWidgetProps,
-    VisWidgetCommand,
     WidgetData,
-    VisRxWidgetState
+    VisRxWidgetState,
+    RxWidgetInfoAttributesField
 } from '@iobroker/types-vis-2';
 
-
-
-import { Helmet } from 'react-helmet';
-import { useEffect } from 'react';
-
-
-import {
-    Box,
-    TextField,
-    Typography,
-} from "@mui/material";
-
-
+import type { LegacyConnection } from '@iobroker/adapter-react-v5';
 
 import Generic from "./Generic";
 
@@ -38,14 +26,19 @@ const styles: Record<string, CSSProperties> = {
 // todo oid nach Instanz neu belegen
 // todo reload script after timeout or reopen
 
-/*
-const setDataStructures = async (field, data, changeData, socket) => {
+
+const setDataStructures = async (
+    field: RxWidgetInfoAttributesField,
+    data: WidgetData,
+    changeData: (newData: WidgetData) => void,
+    socket: LegacyConnection,
+): Promise<void> => {
     console.log(`WeatherMeteoredWidget - set new datastructure ` );
 
 
     changeData(data);
 };
-*/
+
 
 interface StaticRxData {
     noCard: boolean;
@@ -56,20 +49,23 @@ interface StaticRxData {
 interface StaticState extends VisRxWidgetState {
     showDialog: number | null;
     objects: { common: ioBroker.StateCommon; _id: string; isChart: boolean }[];
+    reloadTimer: NodeJS.Timeout | null;
 }
 
 export default class WeatherMeteoredWidget extends Generic<StaticRxData, StaticState> {
     private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
-    private lastRxData: string | undefined;
-    private updateTimeout: ReturnType<typeof setTimeout> | undefined;
+
+    private reloadTimer: ReturnType<typeof setTimeout> | null = null;
+
     constructor(props: VisRxWidgetProps) {
         super(props);
         this.refCardContent = React.createRef();
 
-        this.reloadTimer = null;
+        this.state = {
+            ...this.state,
+            
+        };
     }
-
-   
 
     async componentDidMount() {
 
@@ -95,7 +91,9 @@ export default class WeatherMeteoredWidget extends Generic<StaticRxData, StaticS
         if (document.getElementById(id)) {
             console.log(`WeatherMeteoredWidget - script already loaded, need to remove `);
             let element = document.getElementById(id);
-            element.remove();
+            if (element != null) {
+                element.remove();
+            }
         }
     }
 
@@ -133,12 +131,8 @@ export default class WeatherMeteoredWidget extends Generic<StaticRxData, StaticS
         }
     }
 
-
     AppendScript() {
         const WidgetID = this.state.rxData["WidgetID"];
-
-       
-        //ce1253dd6597325da4b49b518529938d
 
         const src = "https://api.meteored.com/widget/loader/" + WidgetID;
         const id = "script_mrwid" + WidgetID;
@@ -150,9 +144,10 @@ export default class WeatherMeteoredWidget extends Generic<StaticRxData, StaticS
             console.log(`WeatherMeteoredWidget - script already loaded, need to remove `);
 
             let element = document.getElementById(id);
-            element.remove();
+            if (element!=null) {
+                element.remove();
+            }
         }
-
 
         console.log(`WeatherMeteoredWidget - script new created `);
         const script = document.createElement("script");
@@ -162,9 +157,7 @@ export default class WeatherMeteoredWidget extends Generic<StaticRxData, StaticS
         document.body.appendChild(script);
     }
 
-
-
-    static getWidgetInfo() {
+    static getWidgetInfo(): RxWidgetInfo {
         return {
             id: "tplWeatherMeteoredWidget",                 // Unique widget type ID. Should start with `tpl` followed
             visSet: "vis-2-widgets-weather-and-heating",        // Unique ID of widget set
@@ -195,7 +188,7 @@ export default class WeatherMeteoredWidget extends Generic<StaticRxData, StaticS
                             label: "MeteoredWidgetID", // translated field label
                             type: "text",
                             default: "",
-                            //onChange: setDataStructures,
+                            onChange: setDataStructures,
                             tooltip: "MeteoredWidgetID_tooltip",
                         },
                         {
@@ -215,11 +208,11 @@ export default class WeatherMeteoredWidget extends Generic<StaticRxData, StaticS
 
     // Do not delete this method. It is used by vis to read the widget configuration.
     // eslint-disable-next-line class-methods-use-this
-    getWidgetInfo() {
+    getWidgetInfo(): RxWidgetInfo {
         return WeatherMeteoredWidget.getWidgetInfo();
     }
 
-    createTable() {
+    createTable(): JSX.Element {
 
         const WidgetID = this.state.rxData["WidgetID"];
         const id = "mrwid" + WidgetID;

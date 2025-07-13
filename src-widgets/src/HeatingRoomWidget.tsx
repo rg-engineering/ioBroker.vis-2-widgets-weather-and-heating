@@ -5,8 +5,10 @@ import type {
     VisRxWidgetProps,
     VisWidgetCommand,
     WidgetData,
-    VisRxWidgetState
+    VisRxWidgetState,
+    RxWidgetInfoAttributesField
 } from '@iobroker/types-vis-2';
+import type { LegacyConnection } from '@iobroker/adapter-react-v5';
 
 import {
     Box,
@@ -50,8 +52,13 @@ const styles: Record<string, CSSProperties> =  {
 // todo: button unter Status zum Rücksetzen manueller Mode
 
 
-/*
-const setDataStructures = async (field, data, changeData, socket) => {
+
+const setDataStructures = async (
+    field: RxWidgetInfoAttributesField,
+    data: WidgetData,
+    changeData: (newData: WidgetData) => void,
+    socket: LegacyConnection,
+): Promise<void> => {
     console.log(`set new datastructure instance ${data["instance"]}` );
 
     const instance = data["instance"];
@@ -72,7 +79,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
     }
     changeData(data);
 };
-*/
+
 
 
 interface StaticRxData {
@@ -108,7 +115,7 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
         this.refCardContent = React.createRef();
     }
 
-    static getWidgetInfo() {
+    static getWidgetInfo(): RxWidgetInfo {
         return {
             id: "tplHeatingRoomWidget",                 // Unique widget type ID. Should start with `tpl` followed
             visSet: "vis-2-widgets-weather-and-heating",        // Unique ID of widget set
@@ -139,14 +146,14 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
                             label: "instance", // translated field label
                             type: "instance",
                             default: "heatingcontrol.0",
-                            //onChange: setDataStructures, todo
+                            onChange: setDataStructures, 
                         },
                         {
                             name: "RoomName",    // name in data structure
                             label: "widgets_heating_label_roomname", // translated field label
                             type: "text",
                             default: "Wohnzimmer",
-                            //onChange: setDataStructures, tod
+                            onChange: setDataStructures, 
                         },
                         {
                             name: "dataCount",
@@ -240,11 +247,11 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
 
     // Do not delete this method. It is used by vis to read the widget configuration.
     // eslint-disable-next-line class-methods-use-this
-    getWidgetInfo() {
+    getWidgetInfo(): RxWidgetInfo {
         return HeatingRoomWidget.getWidgetInfo();
     }
 
-    getCurrentTargetTemperature(d) {
+    getCurrentTargetTemperature(d: number): React.JSX.Element | null {
         let content = null;
 
         const oid_name = "oid_TargetTemperature" + d;
@@ -275,7 +282,7 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
         return content;
     }
 
-    getBatteryState(d:number) {
+    getBatteryState(d: number): React.JSX.Element | null {
         let content = null;
 
         const oid_name = "oid_ThermostatBatteryState" + d;
@@ -316,7 +323,7 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
         return content;
     }
 
-    getRSSIState(d) {
+    getRSSIState(d: number): React.JSX.Element | null {
         let content = null;
 
         const oid_name = "oid_ThermostatRSSI" + d;
@@ -366,7 +373,7 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
         return content;
     }
 
-    getCurrentActorState(d) {
+    getCurrentActorState(d: number): React.JSX.Element | null {
         let content = null;
 
         const oid_name = "oid_CurrentActorState" + d;
@@ -386,7 +393,7 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
         return content;
     }
 
-    getCurrentValveValue(d) {
+    getCurrentValveValue(d: number): React.JSX.Element | null {
         let content = null;
 
         const oid_name = "oid_CurrentValveValue" + d;
@@ -418,7 +425,7 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
         return content;
     }
 
-    getCurrentThermostatBatteryVoltage(d) {
+    getCurrentThermostatBatteryVoltage(d: number): React.JSX.Element | null {
         let content = null;
 
         const oid_name = "oid_ThermostatBatteryVoltage" + d;
@@ -449,7 +456,7 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
         return content;
     }
 
-    getCurrentTemperature(d) {
+    getCurrentTemperature(d: number): React.JSX.Element | null {
         let content = null;
 
         const oid_name = "oid_CurrentTemperature" + d;
@@ -471,7 +478,7 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
         return content;
     }
 
-    getCurrentTemperatureExtSensor(d) {
+    getCurrentTemperatureExtSensor(d: number): React.JSX.Element | null{
         let content = null;
 
         const oid_name = "oid_CurrentTemperatureExtSensor" + d;
@@ -494,7 +501,7 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
 
     
 
-    getThermostats() {
+    getThermostats(): React.JSX.Element | React.JSX.Element[] | null{
 
         let content = [];
 
@@ -531,7 +538,7 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
     }
 
 
-    createTable() {
+    createTable(): React.JSX.Element  {
         const roomName = this.state.rxData["RoomName"];
         const roomState = this.state.values[`${this.state.rxData["oid_RoomState"]}.val`];
         const roomLog = this.state.values[`${this.state.rxData["oid_RoomLog"]}.val`];

@@ -45,7 +45,8 @@
 
 
     "@mui/x-date-pickers": "^7.27.1",
-    "dayjs": "1.11.13"
+    "dayjs": "1.11.13",
+    "@types/webpack-env": "^1.16.2"
 
   },
   "scripts": {

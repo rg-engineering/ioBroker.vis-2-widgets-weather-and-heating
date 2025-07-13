@@ -5,8 +5,10 @@ import type {
     VisRxWidgetProps,
     VisWidgetCommand,
     WidgetData,
-    VisRxWidgetState
+    VisRxWidgetState,
+    RxWidgetInfoAttributesField
 } from '@iobroker/types-vis-2';
+import type { LegacyConnection } from '@iobroker/adapter-react-v5';
 
 import moment from "moment";
 
@@ -29,8 +31,13 @@ const styles: Record<string, CSSProperties> = {
 // todo Dummy-Y Achse wird nicht gelöscht, wenn reale Daten kommen
 // todo x achse unit einstellbar
 // todo x achse type (time or category) einstellbar
-/*
-const setDataStructures = async (field, data, changeData, socket) => {
+
+const setDataStructures = async (
+    field: RxWidgetInfoAttributesField,
+    data: WidgetData,
+    changeData: (newData: WidgetData) => void,
+    socket: LegacyConnection,
+): Promise<void> => {
     console.log(`set new data structure ${data["dataCount"]} ${JSON.stringify(field)} ${JSON.stringify(data)}`);
 
     for (let d = 1; d <= data["dataCount"]; d++) {
@@ -117,7 +124,7 @@ const setDataStructures = async (field, data, changeData, socket) => {
 
     changeData(data);
 };
-*/
+
 
 interface StaticRxData {
     noCard: boolean;
@@ -156,7 +163,7 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
         this.refCardContent = React.createRef();
     }
 
-    static getWidgetInfo() {
+    static getWidgetInfo(): RxWidgetInfo {
         return {
             id: "tplGeneralEChartWidget",                 // Unique widget type ID. Should start with `tpl` followed
             visSet: "vis-2-widgets-weather-and-heating",        // Unique ID of widget set
@@ -237,7 +244,7 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
                                 },
                             ],
                             default: "value1",
-                            //onChange: setDataStructures,
+                            onChange: setDataStructures,
                             hidden: (data, index) => {
                                 console.log(`???? ${JSON.stringify(data)} ${JSON.stringify(index)}`);
                                 return data[`instance${index}`].indexOf("ebus") < 0;
@@ -266,7 +273,7 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
                                 },
                             ],
                             default: "today",
-                            //onChange: setDataStructures,
+                            onChange: setDataStructures,
                             hidden: (data, index) => {
                                 console.log(`???? ${JSON.stringify(data)} ${JSON.stringify(index)}`);
                                 return data[`instance${index}`].indexOf("sbfspot") < 0;
@@ -277,7 +284,7 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
                             label: "widgets_echart_datastructure_sbfspot_serialnumber", // translated field label
                             type: "text",
                             default: "",
-                            //onChange: setDataStructures,
+                            onChange: setDataStructures,
                             hidden: (data, index) => {
                                 console.log(`???? ${JSON.stringify(data)} ${JSON.stringify(index)}`);
                                 return data[`instance${index}`].indexOf("sbfspot") < 0;
@@ -347,7 +354,7 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
                             name: "data_calcdiff",    // name in data structure
                             label: "widgets_echart_data_calcdiff", // translated field label
                             type: "checkbox",
-                            default: "false",
+                            default: false,
                         },
                     ]
                 },
@@ -370,7 +377,7 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
 
     // Do not delete this method. It is used by vis to read the widget configuration.
     // eslint-disable-next-line class-methods-use-this
-    getWidgetInfo() {
+    getWidgetInfo(): RxWidgetInfo {
         return GeneralEChartWidget.getWidgetInfo();
     }
 

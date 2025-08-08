@@ -188,6 +188,22 @@ interface StaticState extends VisRxWidgetState {
     showDialog: number | null;
     objects: { common: ioBroker.StateCommon; _id: string; isChart: boolean }[];
 }
+
+interface WeatherData {
+    rain: [string, number][];
+    temp: [string, number][];
+    clouds: [string, number][];
+    time: [string, string][];
+    minMax: {
+        RainMin: number;
+        RainMax: number;
+        TempMin: number;
+        TempMax: number;
+        CloudMin: number;
+        CloudMax: number;
+    };
+}
+
 export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
     private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
     private lastRxData: string | undefined;
@@ -282,6 +298,12 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
                     label: Generic.t("oid_time_") + cnt, // translated field label
                     type: "id",
                     default: `daswetter.0.NextHours.Location_1.Day_${d}.Hour_${p}.hour_value`,
+                });
+                oid_chanceofrain_fields.push({
+                    name: `oid_chancerain_${cnt}`,    // name in data structure
+                    label: Generic.t("oid_chancerain_") + cnt, // translated field label
+                    type: "id",
+                    default: `daswetter.0.NextHours.Location_1.Day_${d}.Hour_${p}.chance_of_rain_value`,
                 });
                 cnt++;
             }
@@ -522,7 +544,10 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
                     //ausbelnden bei instance == wetter
                     name: "chanceofraining", // group name
                     label: "chanceofrain",
-                    hidden: data => data.instance.includes("daswetter"),
+
+                    
+
+                    hidden: (data: WidgetData) => data.instance.includes("daswetter"),
                     fields: [
                         {
                             name: "chanceofraining_visible",    // name in data structure
@@ -531,7 +556,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
                             default: false,
 
                             //enable for WU only
-                            hidden: data => data.instance.includes("daswetter"),
+                            hidden: (data: WidgetData) => data.instance.includes("daswetter"),
                         },
                         {
                             name: "chanceofraining_color",    // name in data structure
@@ -540,7 +565,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
                             default: "blue",
 
                             //enable for WU only
-                            hidden: data => data.instance.includes("daswetter"),
+                            hidden: (data: WidgetData) => data.instance.includes("daswetter"),
                         },
                         {
                             name: "chanceofraining_show_separate",    // name in data structure
@@ -549,7 +574,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
                             default: false,
 
                             //enable for WU only
-                            hidden: data => data.instance.includes("daswetter"),
+                            hidden: (data: WidgetData) => data.instance.includes("daswetter"),
                         },
                     ]
                 },
@@ -557,7 +582,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
                     name: "OIDS_general", // group name
                     label: "oids_general",
                     fields: oid_general_fields,
-                    hidden: data => data.instance.includes("daswetter")
+                    hidden: (data: WidgetData) => data.instance.includes("daswetter")
                 },
                 {
                     name: "OIDS_rain", // group name
@@ -583,7 +608,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
                     name: "OIDS_chanceofrain", // group name
                     label: "oids_chanceofrain",
                     fields: oid_chanceofrain_fields,
-                    hidden: data => data.instance.includes("daswetter")
+                    hidden: (data: WidgetData) => data.instance.includes("daswetter")
                 },
             ],
             visDefaultStyle: {
@@ -608,228 +633,242 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
     getOption1() {
         console.log("getOption1 ");
 
-        let weatherData=null;
+        let weatherData = null;
         if (this.state.rxData["instance"].includes("daswetter")) {
             weatherData = this.getWeatherDataDasWetter();
         } else if (this.state.rxData["instance"].includes("weatherunderground")) {
             weatherData = this.getWeatherDataWU();
         }
+        let content = null;
 
         if (weatherData !== null) {
             console.log(`##got ${JSON.stringify(weatherData[0])}`);
-        }
-        let useSecondDiagram = false;
 
-        if ((this.state.rxData["rain_visible"] && this.state.rxData["rain_show_separate"])
-            || (this.state.rxData["clouds_visible"] && this.state.rxData["clouds_show_separate"])
-        ) {
-            useSecondDiagram = true;
-        }
+            let useSecondDiagram = false;
 
-        console.log(`show second diagram ${useSecondDiagram}`);
-
-        const location = this.state.values[`${this.state.rxData["oid_location"]}.val`];
-        const axisLabel_formatstring =  this.state.rxData["xaxis_axisLabel_formatstring"] ;
-        console.log(`##got ${location}`);
-        //let headline = Generic.t("Weather at ") + location;
-        let headline = "";
-        if (location != null && typeof location == "string" && location.length>0) {
-            headline = location;
-        }
-
-        // min / max
-        const MinMax = weatherData[0][3];
-        console.log(`min max ${JSON.stringify(MinMax)}`);
-
-        const RainMin = MinMax["RainMin"];
-        const RainMax = MinMax["RainMax"];
-        const TempMin = MinMax["TempMin"];
-        const TempMax = MinMax["TempMax"];
-        const CloudMin = MinMax["CloudMin"];
-        const CloudMax = MinMax["CloudMax"];
-
-        const legend = [];
-        const yaxis = [];
-        const series = [];
-
-        let cnt = 0;
-
-        if (this.state.rxData["rain_visible"] === true && this.state.rxData["rain_show_separate"] === false && weatherData[0][0].length > 1) {
-            legend.push(Generic.t("rain"));
-
-            yaxis.push({
-                position: this.state.rxData["rain_positionYAxis"] || "right",
-                type: "value",
-                // min max berechnen
-                min: RainMin,
-                max: RainMax,
-                axisLabel: {
-                    color: this.state.rxData["rain_axislablecolor"] || "blue",
-                    formatter: "{value} mm",
-                },
-            });
-
-            series.push({
-                name: Generic.t("rain"),
-                type: "bar",
-                data: weatherData[0][0],
-                color: this.state.rxData["rain_color"] || "blue",
-                yAxisIndex: cnt,
-                tooltip: {
-                    valueFormatter: value => `${value} mm`,
-                },
-            });
-            cnt++;
-        }
-        if (this.state.rxData["temperature_visible"] === true && weatherData[0][1].length > 1) {
-            legend.push(Generic.t("temperature"));
-
-            yaxis.push({
-                position: this.state.rxData["temperature_positionYAxis"] || "left",
-                type: "value",
-                // min max berechnen
-                min: TempMin,
-                max: TempMax,
-                axisLabel: {
-                    color: this.state.rxData["temperature_axislablecolor"] || "red",
-                    formatter: "{value} °C",
-                },
-            });
-
-            series.push({
-                name: Generic.t("temperature"),
-                type: "line",
-                data: weatherData[0][1],
-                color: this.state.rxData["temperature_color"] || "red",
-                yAxisIndex: cnt,
-                tooltip: {
-                    valueFormatter: value => `${value} °C`,
-                },
-            });
-            cnt++;
-        }
-
-        if (this.state.rxData["clouds_visible"] === true && this.state.rxData["clouds_show_separate"] === false && weatherData[0][2].length > 1) {
-            if (this.state.rxData["sun_or_cloud"] === "sun") {
-                legend.push(Generic.t("sun"));
-            } else {
-                legend.push(Generic.t("cloud"));
+            if ((this.state.rxData["rain_visible"] && this.state.rxData["rain_show_separate"])
+                || (this.state.rxData["clouds_visible"] && this.state.rxData["clouds_show_separate"])
+            ) {
+                useSecondDiagram = true;
             }
-            yaxis.push({
-                position: this.state.rxData["clouds_positionYAxis"] || "right",
-                type: "value",
-                min: CloudMin,
-                max: CloudMax,
-                axisLabel: {
-                    color: this.state.rxData["clouds_axislablecolor"] || "yellow",
-                    formatter: "{value} %",
-                },
-            });
-            series.push({
-                name: this.state.rxData["sun_or_cloud"] === "sun" ? Generic.t("sun") : Generic.t("cloud"),
-                type: "bar",
-                data: weatherData[0][2],
-                color: this.state.rxData["clouds_color"] || "yellow",
-                yAxisIndex: cnt,
-                tooltip: {
-                    valueFormatter: value => `${value} %`,
-                },
-            });
-            cnt++;
-        }
 
-        if (cnt === 0) {
-            // add dummy data to show anything on screen
+            console.log(`show second diagram ${useSecondDiagram}`);
 
-            console.log("add dummy data");
+            const location = this.state.values[`${this.state.rxData["oid_location"]}.val`];
+            const axisLabel_formatstring = this.state.rxData["xaxis_axisLabel_formatstring"];
+            console.log(`##got ${location}`);
+            //let headline = Generic.t("Weather at ") + location;
+            let headline = "";
+            if (location != null && typeof location == "string" && location.length > 0) {
+                headline = location;
+            }
 
-            legend.push(Generic.t("dummy"));
-            yaxis.push({
-                position: "left",
-                type: "value",
-                min: 0,
-                max: 100,
-                axisLabel: {
-
-                    //todo axis lable color
-                    color: "yellow",
+            // min / max
 
 
-                    formatter: "{value} %",
-                },
-            });
-            series.push({
-                name: Generic.t("dummy"),
-                type: "bar",
-                data: [
-                    ["2024-04-30T00:00:00.000Z", 10],
-                    ["2024-04-30T03:00:00.000Z", 20],
-                    ["2024-04-30T06:00:00.000Z", 20],
-                    ["2024-04-30T09:00:00.000Z", 60]
-                ],
 
-                tooltip: {
-                    valueFormatter: value => `${value} %`,
-                },
-            });
-        }
 
-        // console.log("legend: " + JSON.stringify(legend) + " yaxis: " + JSON.stringify(yaxis));
 
-        const content = {
-            backgroundColor: "transparent",
-            title: {
-                text: headline,
 
-                show: headline.length>0 ? true : false,
-                textStyle: {
-                    //headline color
-                    color: this.state.rxData["headline_color"] || "white",
+            const MinMax = weatherData[0][3];
+            console.log(`min max ${JSON.stringify(MinMax)}`);
+
+            const RainMin = MinMax["RainMin"];
+            const RainMax = MinMax["RainMax"];
+            const TempMin = MinMax["TempMin"];
+            const TempMax = MinMax["TempMax"];
+            const CloudMin = MinMax["CloudMin"];
+            const CloudMax = MinMax["CloudMax"];
+
+
+
+            const legend = [];
+            const yaxis = [];
+            const series = [];
+
+            let cnt = 0;
+
+            if (this.state.rxData["rain_visible"] === true && this.state.rxData["rain_show_separate"] === false && weatherData[0][0].length > 1) {
+                legend.push(Generic.t("rain"));
+
+                yaxis.push({
+                    position: this.state.rxData["rain_positionYAxis"] || "right",
+                    type: "value",
+                    // min max berechnen
+                    min: RainMin,
+                    max: RainMax,
+                    axisLabel: {
+                        color: this.state.rxData["rain_axislablecolor"] || "blue",
+                        formatter: "{value} mm",
+                    },
+                });
+
+                series.push({
+                    name: Generic.t("rain"),
+                    type: "bar",
+                    data: weatherData[0][0],
+                    color: this.state.rxData["rain_color"] || "blue",
+                    yAxisIndex: cnt,
+                    tooltip: {
+                        valueFormatter: (value:number) => `${value} mm`,
+                    },
+                });
+                cnt++;
+            }
+            if (this.state.rxData["temperature_visible"] === true && weatherData[0][1].length > 1) {
+                legend.push(Generic.t("temperature"));
+
+                yaxis.push({
+                    position: this.state.rxData["temperature_positionYAxis"] || "left",
+                    type: "value",
+                    // min max berechnen
+                    min: TempMin,
+                    max: TempMax,
+                    axisLabel: {
+                        color: this.state.rxData["temperature_axislablecolor"] || "red",
+                        formatter: "{value} °C",
+                    },
+                });
+
+                series.push({
+                    name: Generic.t("temperature"),
+                    type: "line",
+                    data: weatherData[0][1],
+                    color: this.state.rxData["temperature_color"] || "red",
+                    yAxisIndex: cnt,
+                    tooltip: {
+                        valueFormatter: (value:number) => `${value} °C`,
+                    },
+                });
+                cnt++;
+            }
+
+            if (this.state.rxData["clouds_visible"] === true && this.state.rxData["clouds_show_separate"] === false && weatherData[0][2].length > 1) {
+                if (this.state.rxData["sun_or_cloud"] === "sun") {
+                    legend.push(Generic.t("sun"));
+                } else {
+                    legend.push(Generic.t("cloud"));
                 }
-            },
-            grid: {
-                show: true,
-                top: 30,
-                bottom: useSecondDiagram ? 30 : 60,
-                //backgroundColor: "#F5F5F5",
-            },
-            tooltip: {
-                trigger: "axis",
-            },
-            legend: {
-                data: legend,
-                orient: "horizontal",
-                right: 10,
-                // top: "center",
-                textStyle: {
-                    color: this.state.rxData["legend_text_color"] || "black",
-                }
-            },
-            xAxis: {
-                type: "time",
-                show: !useSecondDiagram,
-                axisLabel: {
-                    rotate: 45,
+                yaxis.push({
+                    position: this.state.rxData["clouds_positionYAxis"] || "right",
+                    type: "value",
+                    min: CloudMin,
+                    max: CloudMax,
+                    axisLabel: {
+                        color: this.state.rxData["clouds_axislablecolor"] || "yellow",
+                        formatter: "{value} %",
+                    },
+                });
+                series.push({
+                    name: this.state.rxData["sun_or_cloud"] === "sun" ? Generic.t("sun") : Generic.t("cloud"),
+                    type: "bar",
+                    data: weatherData[0][2],
+                    color: this.state.rxData["clouds_color"] || "yellow",
+                    yAxisIndex: cnt,
+                    tooltip: {
+                        valueFormatter: (value:number) => `${value} %`,
+                    },
+                });
+                cnt++;
+            }
 
-                    // axis lable color 
-                    color: this.state.rxData["xaxis_color"] || "white",
-                    formatter: value => {
-                        //http://momentjs.com/docs/#/displaying/format/
-                        let formatstring = "ddd HH:mm";
-                        if (axisLabel_formatstring !== null && axisLabel_formatstring !== undefined && axisLabel_formatstring.length>2) {
-                            formatstring = axisLabel_formatstring;
-                        }
-                        return moment(value).format(formatstring);
+            if (cnt === 0) {
+                // add dummy data to show anything on screen
+
+                console.log("add dummy data");
+
+                legend.push(Generic.t("dummy"));
+                yaxis.push({
+                    position: "left",
+                    type: "value",
+                    min: 0,
+                    max: 100,
+                    axisLabel: {
+
+                        //todo axis lable color
+                        color: "yellow",
+
+
+                        formatter: "{value} %",
+                    },
+                });
+                series.push({
+                    name: Generic.t("dummy"),
+                    type: "bar",
+                    data: [
+                        ["2024-04-30T00:00:00.000Z", 10],
+                        ["2024-04-30T03:00:00.000Z", 20],
+                        ["2024-04-30T06:00:00.000Z", 20],
+                        ["2024-04-30T09:00:00.000Z", 60]
+                    ],
+
+                    tooltip: {
+                        valueFormatter: (value:number) => `${value} %`,
+                    },
+                });
+            }
+
+            // console.log("legend: " + JSON.stringify(legend) + " yaxis: " + JSON.stringify(yaxis));
+
+            content = {
+                backgroundColor: "transparent",
+                title: {
+                    text: headline,
+
+                    show: headline.length > 0 ? true : false,
+                    textStyle: {
+                        //headline color
+                        color: this.state.rxData["headline_color"] || "white",
                     }
-                }
-            },
+                },
+                grid: {
+                    show: true,
+                    top: 30,
+                    bottom: useSecondDiagram ? 30 : 60,
+                    //backgroundColor: "#F5F5F5",
+                },
+                tooltip: {
+                    trigger: "axis",
+                },
+                legend: {
+                    data: legend,
+                    orient: "horizontal",
+                    right: 10,
+                    // top: "center",
+                    textStyle: {
+                        color: this.state.rxData["legend_text_color"] || "black",
+                    }
+                },
+                xAxis: {
+                    type: "time",
+                    show: !useSecondDiagram,
+                    axisLabel: {
+                        rotate: 45,
 
-            yAxis: yaxis,
+                        // axis lable color 
+                        color: this.state.rxData["xaxis_color"] || "white",
+                        formatter: value => {
+                            //http://momentjs.com/docs/#/displaying/format/
+                            let formatstring = "ddd HH:mm";
+                            if (axisLabel_formatstring !== null && axisLabel_formatstring !== undefined && axisLabel_formatstring.length > 2) {
+                                formatstring = axisLabel_formatstring;
+                            }
+                            return moment(value).format(formatstring);
+                        }
+                    }
+                },
 
-            series: series,
-        };
+                yAxis: yaxis,
 
-        console.log(`options1: ${JSON.stringify(content)}`);
+                series: series,
+            };
+
+            console.log(`options1: ${JSON.stringify(content)}`);
+        }
+        else {
+            console.log("weatherData is null");
+
+        }
 
         return content;
     }
@@ -848,170 +887,174 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
             weatherData = this.getWeatherDataWU();
         }
 
-        console.log(`##got ${JSON.stringify(weatherData[0])}`);
+        if (weatherData != null) {
+            console.log(`##got ${JSON.stringify(weatherData[0])}`);
 
-        const axisLabel_formatstring =  this.state.rxData["xaxis_axisLabel_formatstring"];
+            const axisLabel_formatstring = this.state.rxData["xaxis_axisLabel_formatstring"];
 
-        // min / max
-        const MinMax = weatherData[0][3];
-        console.log(`min max ${JSON.stringify(MinMax)}`);
+            // min / max
+            const MinMax = weatherData[0][3];
+            console.log(`min max ${JSON.stringify(MinMax)}`);
 
-        const RainMin = MinMax["RainMin"];
-        const RainMax = MinMax["RainMax"];
-        // const TempMin = MinMax["TempMin"];
-        // const TempMax = MinMax["TempMax"];
-        const CloudMin = MinMax["CloudMin"];
-        const CloudMax = MinMax["CloudMax"];
+            const RainMin = MinMax["RainMin"];
+            const RainMax = MinMax["RainMax"];
+            // const TempMin = MinMax["TempMin"];
+            // const TempMax = MinMax["TempMax"];
+            const CloudMin = MinMax["CloudMin"];
+            const CloudMax = MinMax["CloudMax"];
 
-        const legend = [];
-        const yaxis = [];
-        const series = [];
+            const legend = [];
+            const yaxis = [];
+            const series = [];
 
-        let cnt = 0;
+            let cnt = 0;
 
-        if (this.state.rxData["rain_visible"] === true && this.state.rxData["rain_show_separate"] === true && weatherData[0][0].length > 1) {
-            legend.push(Generic.t("rain"));
+            if (this.state.rxData["rain_visible"] === true && this.state.rxData["rain_show_separate"] === true && weatherData[0][0].length > 1) {
+                legend.push(Generic.t("rain"));
 
-            yaxis.push({
-                position: this.state.rxData["rain_positionYAxis"] || "right",
-                type: "value",
-                //rain min / max berechnen
-                min: RainMin,
-                max: RainMax,
-                axisLabel: {
-                    color: this.state.rxData["rain_axislablecolor"] || "blue",
-                    formatter: "{value} mm",
-                },
-            });
+                yaxis.push({
+                    position: this.state.rxData["rain_positionYAxis"] || "right",
+                    type: "value",
+                    //rain min / max berechnen
+                    min: RainMin,
+                    max: RainMax,
+                    axisLabel: {
+                        color: this.state.rxData["rain_axislablecolor"] || "blue",
+                        formatter: "{value} mm",
+                    },
+                });
 
-            series.push({
-                name: Generic.t("rain"),
-                type: "bar",
-                data: weatherData[0][0],
-                color: this.state.rxData["rain_color"] || "blue",
-                yAxisIndex: cnt,
-                tooltip: {
-                    valueFormatter: value => `${value} mm`,
-                },
-            });
-            cnt++;
-        }
-
-        if (this.state.rxData["clouds_visible"] === true && this.state.rxData["clouds_show_separate"] === true && weatherData[0][2].length > 1) {
-            if (this.state.rxData["sun_or_cloud"] === "sun") {
-                legend.push(Generic.t("sun"));
-            } else {
-                legend.push(Generic.t("cloud"));
+                series.push({
+                    name: Generic.t("rain"),
+                    type: "bar",
+                    data: weatherData[0][0],
+                    color: this.state.rxData["rain_color"] || "blue",
+                    yAxisIndex: cnt,
+                    tooltip: {
+                        valueFormatter: (value:number) => `${value} mm`,
+                    },
+                });
+                cnt++;
             }
-            yaxis.push({
-                position: this.state.rxData["clouds_positionYAxis"] || "right",
-                type: "value",
-                min: CloudMin,
-                max: CloudMax,
-                axisLabel: {
-                    color: this.state.rxData["clouds_axislablecolor"] || "yellow",
-                    formatter: "{value} %",
-                },
-            });
-            series.push({
-                name: this.state.rxData["sun_or_cloud"] === "sun" ? Generic.t("sun") : Generic.t("cloud"),
-                type: "bar",
-                data: weatherData[0][2],
-                color: this.state.rxData["clouds_color"] || "yellow",
-                yAxisIndex: cnt,
-                tooltip: {
-                    valueFormatter: value => `${value} %`,
-                },
-            });
-            cnt++;
-        }
 
-        if (cnt === 0) {
-            // add dummy data to show anything on screen
-
-            console.log("add dummy data");
-
-            legend.push(Generic.t("dummy"));
-            yaxis.push({
-                position: "left",
-                type: "value",
-                min: 0,
-                max: 100,
-                axisLabel: {
-                    formatter: "{value} %",
-                },
-            });
-            series.push({
-                name: Generic.t("dummy"),
-                type: "bar",
-                data: [
-                    ["2024-04-30T00:00:00.000Z", 10],
-                    ["2024-04-30T03:00:00.000Z", 20],
-                    ["2024-04-30T06:00:00.000Z", 20],
-                    ["2024-04-30T09:00:00.000Z", 60]
-                ],
-                tooltip: {
-                    valueFormatter: value => `${value} %`,
-                },
-            });
-        }
-
-        // console.log("legend: " + JSON.stringify(legend) + " yaxis: " + JSON.stringify(yaxis));
-
-        const content = {
-            backgroundColor: "transparent",
-            title: {
-                text: "",
-            },
-            grid: {
-                show: true,
-                top: 30,
-                bottom: 60,
-                //backgroundColor: "#F5F5F5",
-            },
-            tooltip: {
-                trigger: "axis"
-            },
-            legend: {
-                data: legend,
-                orient: "horizontal",
-                right: 10,
-                // top: "center",
-                textStyle: {
-                    color: this.state.rxData["legend_text_color"] || "black",
+            if (this.state.rxData["clouds_visible"] === true && this.state.rxData["clouds_show_separate"] === true && weatherData[0][2].length > 1) {
+                if (this.state.rxData["sun_or_cloud"] === "sun") {
+                    legend.push(Generic.t("sun"));
+                } else {
+                    legend.push(Generic.t("cloud"));
                 }
-            },
-            xAxis: {
-                type: "time",
+                yaxis.push({
+                    position: this.state.rxData["clouds_positionYAxis"] || "right",
+                    type: "value",
+                    min: CloudMin,
+                    max: CloudMax,
+                    axisLabel: {
+                        color: this.state.rxData["clouds_axislablecolor"] || "yellow",
+                        formatter: "{value} %",
+                    },
+                });
+                series.push({
+                    name: this.state.rxData["sun_or_cloud"] === "sun" ? Generic.t("sun") : Generic.t("cloud"),
+                    type: "bar",
+                    data: weatherData[0][2],
+                    color: this.state.rxData["clouds_color"] || "yellow",
+                    yAxisIndex: cnt,
+                    tooltip: {
+                        valueFormatter: (value:number) => `${value} %`,
+                    },
+                });
+                cnt++;
+            }
 
-                axisLabel: {
-                    rotate: 45,
+            if (cnt === 0) {
+                // add dummy data to show anything on screen
 
-                    // axis lable color 
-                    color: this.state.rxData["xaxis_color"] || "white",
+                console.log("add dummy data");
 
-                    formatter: value => {
-                        //http://momentjs.com/docs/#/displaying/format/
-                        let formatstring = "ddd HH:mm";
-                        if (axisLabel_formatstring !== null && axisLabel_formatstring !== undefined && axisLabel_formatstring.length > 2) {
-                            formatstring = axisLabel_formatstring;
-                        }
-                        return moment(value).format(formatstring);
+                legend.push(Generic.t("dummy"));
+                yaxis.push({
+                    position: "left",
+                    type: "value",
+                    min: 0,
+                    max: 100,
+                    axisLabel: {
+                        formatter: "{value} %",
+                    },
+                });
+                series.push({
+                    name: Generic.t("dummy"),
+                    type: "bar",
+                    data: [
+                        ["2024-04-30T00:00:00.000Z", 10],
+                        ["2024-04-30T03:00:00.000Z", 20],
+                        ["2024-04-30T06:00:00.000Z", 20],
+                        ["2024-04-30T09:00:00.000Z", 60]
+                    ],
+                    tooltip: {
+                        valueFormatter: (value:number) => `${value} %`,
+                    },
+                });
+            }
+
+            // console.log("legend: " + JSON.stringify(legend) + " yaxis: " + JSON.stringify(yaxis));
+
+            const content = {
+                backgroundColor: "transparent",
+                title: {
+                    text: "",
+                },
+                grid: {
+                    show: true,
+                    top: 30,
+                    bottom: 60,
+                    //backgroundColor: "#F5F5F5",
+                },
+                tooltip: {
+                    trigger: "axis"
+                },
+                legend: {
+                    data: legend,
+                    orient: "horizontal",
+                    right: 10,
+                    // top: "center",
+                    textStyle: {
+                        color: this.state.rxData["legend_text_color"] || "black",
                     }
-                }
-            },
+                },
+                xAxis: {
+                    type: "time",
 
-            yAxis: yaxis,
+                    axisLabel: {
+                        rotate: 45,
 
-            series: series,
-        };
+                        // axis lable color 
+                        color: this.state.rxData["xaxis_color"] || "white",
 
-        console.log(`options2: ${JSON.stringify(content)}`);
+                        formatter: value => {
+                            //http://momentjs.com/docs/#/displaying/format/
+                            let formatstring = "ddd HH:mm";
+                            if (axisLabel_formatstring !== null && axisLabel_formatstring !== undefined && axisLabel_formatstring.length > 2) {
+                                formatstring = axisLabel_formatstring;
+                            }
+                            return moment(value).format(formatstring);
+                        }
+                    }
+                },
 
+                yAxis: yaxis,
+
+                series: series,
+            };
+
+            console.log(`options2: ${JSON.stringify(content)}`);
+        }
+        else {
+            console.log("weatherData is null");
+        }
         return content;
     }
 
-    getWeatherDataWU() {
+    getWeatherDataWU(): WeatherData {
         console.log(`getWeatherData ${this.state.rxData["instance"]} / ${this.state.rxData["datastructure"]}`);
 
         const weatherData = [];
@@ -1124,7 +1167,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
         return weatherData;
     }
 
-    getWeatherDataDasWetter() {
+    getWeatherDataDasWetter(): WeatherData {
         console.log(`getWeatherData ${this.state.rxData["instance"]} / ${this.state.rxData["datastructure"]}`);
 
         const weatherData = [];

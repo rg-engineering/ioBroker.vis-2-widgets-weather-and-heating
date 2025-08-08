@@ -55,14 +55,6 @@ const styles: Record<string, CSSProperties> = {
         alignItems: "center",
         width: "100%",
         overflow: "hidden",
-    },
-    textRoot: {
-        '& .MuiInputBase-root': {
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'green',
-            color: "red",
-        },
     }
 };
 
@@ -395,9 +387,9 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
 
     // This function is called every time when some Object State updated, but all changes lands into this.state.values too
     // eslint-disable-next-line class-methods-use-this, no-unused-vars
-    onStateUpdated(id:string, state) {
-        console.log("onStateUpdated " + id + " " + JSON.stringify(state));
-    }
+    //onStateUpdated(id:string, state) {
+    //    console.log("onStateUpdated " + id + " " + JSON.stringify(state));
+    //}
 
     
     onChange1( val:string) {
@@ -602,12 +594,13 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
                     aria-describedby={name}
                     inputProps={{
                         'aria-label': Generic.t("Temperature"),
-                        'step': TempSetWidthLow
+                        'step': TempSetWidthLow,
+                        min: minTemperature,
+                        max: 30,
+                        type: "number", // <--- auch hierhin verschieben!
                     }}
-                    type="number"
+                    
                     value={value}
-                    min={minTemperature}
-                    max={30}
                     onChange={(e) => {
                         this.handleOnChangeTemperature({
                             temperature: Number(e.target.value),
@@ -1048,7 +1041,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
             const TemperatureDecreaseMode = this.state.values[`${oid}.val`];
 
             content = <div>
-                <p style={{'font-size':'smaller' }} >
+                <p style={{ fontSize:'smaller' }} >
                     {Generic.t("Increase / Decrease values are ")} {TemperatureDecreaseMode}
                 </p>
             </div>

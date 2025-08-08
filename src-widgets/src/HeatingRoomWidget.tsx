@@ -597,7 +597,13 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
                 backgroundColor: "rgba(255, 255, 255, 0.09)",
                 m: "2px"
             }}>
-                <div dangerouslySetInnerHTML={{__html: roomLog}} style={style} />
+                <div dangerouslySetInnerHTML={{ __html: roomLog }} style={{
+                    width: "100%",
+                    height: "300px",
+                    border: "1px solid",      // Border muss als string, nicht Zahl!
+                    textAlign: "center",
+                    fontSize: "14px"
+                }} />
             </Box>
         </div>;
     }

@@ -34,7 +34,7 @@ const styles: Record<string, CSSProperties> = {
 // todo wind: wenn beaufort-Galerie, dann muss auch Beafort-OID verwendet werden
 // todo wind: in galerie1 fehlt icon 9, 18,27
 
-function importAllImages(imageModules ) {
+function importAllImages(imageModules: Record<string, string> ) {
     //let images = new Map();
 
     // Iteriere durch alle importierten Dateien

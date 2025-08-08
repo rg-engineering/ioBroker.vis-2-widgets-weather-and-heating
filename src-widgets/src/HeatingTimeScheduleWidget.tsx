@@ -64,13 +64,7 @@ const styles: Record<string, CSSProperties> = {
         alignItems: "center",
         width: "100%",
         overflow: "hidden",
-    },
-    textRoot: {
-        '& .MuiInputBase-root': {
-            width: '100%',
-            height: '100%',
-        },
-    },
+    }
 
 };
 
@@ -1410,13 +1404,12 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
                     aria-describedby={name}
                     inputProps={{
                         'aria-label': Generic.t("Temperature"),
+                        type: "number",
+                        min: { ProfileMinTemperature },
+                        max:  30,
+                        step: { TempSetWidthLow }
                     }}
-                    type="number"
-                    min={ProfileMinTemperature}
-                    max={30}
-
-                    step={TempSetWidthLow}
-
+ 
                     value={temperature}
 
                     onChange={(e) => this.handleOnChangeTemperature({

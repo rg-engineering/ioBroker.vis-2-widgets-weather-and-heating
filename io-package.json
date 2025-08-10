@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather-and-heating",
-    "version": "0.10.4",
+    "version": "1.0.0",
     "news": {
+      "1.0.0": {
+        "en": "overworked with TypeScript and vite -> code review desired",
+        "de": "überarbeitet mit TypeScript und vite -> Code-Review gewünscht",
+        "ru": "перегруженный TypeScript и Vite Желаемый обзор кода",
+        "pt": "excesso de trabalho com TypeScript e Vite -> revisão de código desejada",
+        "nl": "overwerkt met TypeScript en vite -> code review gewenst",
+        "fr": "surtravaillé avec TypeScript et rite -> révision du code souhaitée",
+        "it": "overworked con TypeScript e vite -> codice recensione desiderata",
+        "es": "overworked with TypeScript and vite - título revisión del código deseado",
+        "pl": "przepracowane z TypeScript i vite - > żądany przegląd kodu",
+        "uk": "перероблений TypeScript і vite -> Огляд коду бажаний",
+        "zh-cn": "使用类型脚本和 vite 过度工作 - > 需要代码审查"
+      },
       "0.10.4": {
         "en": "Meteored widget: reload once per hour as an option",
         "de": "Widget Meteored: Einmal pro Stunde als Option neu laden",
@@ -80,22 +93,8 @@
         "pl": "fix: obsługa trybu darkmode dla pickera czasu",
         "uk": "виправлення помилок: підтримка darkmode для таймера",
         "zh-cn": "错误修正: 支持时间选择器的暗模式"
-      },
-      "0.9.0": {
-        "en": "see issue #66: Heating Time Schedule and Profile Params widget - option to use select box for temperature adjustment like Pittini vis\nsee issue #66: Heating Time Schedule and Profile Paramswidget - option to use time picker for time adjustments",
-        "de": "siehe Ausgabe #66: Heizzeitplan und Profil Params Widget - Option, wählen Sie Feld für Temperaturanpassung wie Pittini vis zu verwenden\nsiehe Ausgabe #66: Heizzeitplan und Profil Paramswidget - Möglichkeit Zeitwähler für Zeitanpassungen zu verwenden",
-        "ru": "#66: График нагревания и виджет профиля Парамс - возможность использовать поле для регулировки температуры, как Pittini vis\n#66: График нагревания и Парамсвиджет профиля - возможность использования пикера времени для корректировки времени",
-        "pt": "veja o número #66: Calendário de Tempo de Aquecimento e widget de parâmetros de perfil - opção para usar a caixa de seleção para ajuste de temperatura como Pittini vis\nveja o número #66: Calendário de Tempo de Aquecimento e Perfil Paramswidget - opção para usar o tempo de coleta para ajustes de tempo",
-        "nl": "zie nummer #66: Verwarmingstijd schema en profiel Params widget - optie om select box te gebruiken voor temperatuuraanpassing zoals Pittini vis\nzie nummer #66: Verwarmingstijd schema en profiel Paramswidget - optie om tijdkiezer te gebruiken voor tijdaanpassingen",
-        "fr": "voir le numéro 66: Calendrier de chauffage et profil Params widget - option d'utiliser la boîte de sélection pour le réglage de la température comme Pittini vis\nvoir le numéro 66: Horaire du chauffage et profil Paramswidget - option d'utiliser le choix du temps pour les ajustements de temps",
-        "it": "vedi numero #66: Heat Time Schedule and Profile Params widget - opzione per utilizzare la casella di selezione per la regolazione della temperatura come Pittini vis\nvedi numero #66: Orari di riscaldamento e profilo Paramswidget - opzione per utilizzare il time picker per le regolazioni di tempo",
-        "es": "ver el número #66: Calendario de calentamiento y Perfil Params widget - opción para usar el cuadro selecto para el ajuste de temperatura como Pittini vis\nver número #66: Calendario de tiempo de calefacción y perfil Paramswidget - opción para utilizar el tiempo de selección para ajustes de tiempo",
-        "pl": "zobacz numer # 66: Harmonogram ogrzewania i profil Params widget - opcja wyboru pola do regulacji temperatury jak Pittini vis\nzobacz numer # 66: Harmonogram ogrzewania i profil Paramswidget - opcja wyboru czasu na dostosowanie czasu",
-        "uk": "див. питання #66: Графік роботи на опалювальному часі та Параметри профілю віджет - варіант використання вибрати коробку для регулювання температури, як Pittini vis\nдив. питання #66: Графік роботи на опалювальному часі та Параmswidget - варіант використання таймера часу для налаштування часу",
-        "zh-cn": "参见第66期: 加热时间表和配置参数部件 - 选择使用选择框进行温度调整, 如 Pittini 相对\n参见第66期: 加热时间表和配置 Paramswidget - 选择使用计时器进行时间调整"
       }
     },
-
     "titleLang": {
       "en": "VIS-2 weather and heating widgets",
       "de": "VIS-2 Wetter und Heizung Widgets",

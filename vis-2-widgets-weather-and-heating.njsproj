@@ -604,10 +604,13 @@
     <Folder Include="src-widgets\src\assets\icons\viento-wind\galeria1\" />
     <Folder Include="src-widgets\src\assets\icons\viento-wind\galeria2-Beaufort\" />
     <Folder Include="src-widgets\src\i18n\" />
+    <Folder Include="src-widgets\src\components\" />
     <Folder Include="test\" />
     <Folder Include="widgets\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src-widgets\src\components\WindowCloseIcon.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\components\WindowOpenIcon.tsx" />
     <TypeScriptCompile Include="src-widgets\src\EchartContainer.tsx" />
     <TypeScriptCompile Include="src-widgets\src\Generic.tsx" />
     <TypeScriptCompile Include="src-widgets\src\HeatingGeneralParamsWidget.tsx" />

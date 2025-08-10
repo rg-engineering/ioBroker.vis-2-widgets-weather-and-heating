@@ -11,11 +11,9 @@ import type {
 import type { LegacyConnection } from '@iobroker/adapter-react-v5';
 import Generic from "./Generic";
 
-//import WindowOpenIcon  from "./assets/heating/fts_window_1w_open.svg";
-//import WindowCloseIcon from "./assets/heating/fts_window_1w.svg";
+//import WindowOpenIcon from './Components/WindowOpenIcon';
+//import WindowCloseIcon from './Components/WindowCloseIcon';
 
-const WindowOpenIcon = require("./assets/heating/fts_window_1w_open.svg") as string;
-const WindowCloseIcon = require("./assets/heating/fts_window_1w.svg") as string;
 
 import {
     List,
@@ -213,24 +211,29 @@ export default class HeatingWindowStatusOverviewWidget extends Generic<StaticRxD
         return HeatingWindowStatusOverviewWidget.getWidgetInfo();
     }
 
+
+    /* to do
     GetIcon(icon:string) {
         //fts_window_1w_open.svg or fts_window_1w.svg
+
+        console.log("get icon " + icon);
 
         let ret = null;
 
         if (icon.includes("_open.svg")) {
             ret = <Avatar>
-                < WindowOpenIcon />
-            </Avatar>
+                <WindowOpenIcon style={{ width: "40px", height: "40px" }} />    
+            </Avatar>;
         }
         else {
             ret = <Avatar>
-                < WindowCloseIcon />
-            </Avatar>
+                <WindowCloseIcon style={{ width: "40px", height: "40px" }} />
+            </Avatar>;
         }
 
         return ret;
     }
+    */
 
     createTable(): JSX.Element {
 
@@ -260,6 +263,8 @@ export default class HeatingWindowStatusOverviewWidget extends Generic<StaticRxD
             */
 
 
+            //todo:
+            // ListIitemAvatar wieder einbauen, wenn es geht
 
 
             return <div
@@ -274,7 +279,40 @@ export default class HeatingWindowStatusOverviewWidget extends Generic<StaticRxD
                     <p>{windowsOpen > 0 ? `${windowsOpen} ${Generic.t("Windows open")}` : Generic.t("all windows closed")}</p>
                 </div>
 
+                <List sx={{ width: '100%', maxWidth: 300, bgcolor: this.state.rxData["roombackground_color"] || "background.paper" }}>
+                    {data.map((roomData: roomData, i: number) => <ListItem key={i} >
+                        
+                        <ListItemText
+                            primary={roomData.room}
+                            secondary={`${roomData.sinceText} ${roomData.changed}`}
+                            primaryTypographyProps={{
+                                color: roomData.isOpen ? this.state.rxData["roomname_window_closed_color"] || "red" : this.state.rxData["roomname_window_open_color"] || "green",
+                            }}
+                            secondaryTypographyProps={{
+                                color: roomData.isOpen ? this.state.rxData["roomlastchange_window_closed_color"] || "red" : this.state.rxData["roomlastchange_window_open_color"] || "blue",
+                            }}
+                        />
+                    </ListItem>)}
+                </List >
 
+
+            </div>;
+
+
+           /* soll
+            return <div
+                ref={this.refCardContent}
+                style={styles.cardContent}
+            >
+                <div style={{ color: this.state.rxData["headline_color"] || "white" }} >
+                    <p>{Generic.t("Window Status Overview")}</p>
+                </div>
+
+                <div style={{ color: this.state.rxData["statusline_color"] || "white" }} >
+                    <p>{windowsOpen > 0 ? `${windowsOpen} ${Generic.t("Windows open")}` : Generic.t("all windows closed")}</p>
+                </div>
+
+                
                 <List sx={{ width: '100%', maxWidth: 300, bgcolor: this.state.rxData["roombackground_color"] || "background.paper" }}>
                     {data.map((roomData: roomData, i: number) => <ListItem key={i} >
                         <ListItemAvatar>
@@ -293,6 +331,7 @@ export default class HeatingWindowStatusOverviewWidget extends Generic<StaticRxD
                     </ListItem>)}
                 </List >
             </div>;
+            */
 
             /*
              const content = <div

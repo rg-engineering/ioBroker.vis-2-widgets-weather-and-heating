@@ -104,7 +104,7 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 ## Changelog
 
 ### **WORK IN PROGRESS**
-* (René) overworked with TypeScript and vite
+* (René) overworked with TypeScript and vite -> code review desired
 
 ### 0.10.4 (2025-04-08)
 * (René) Meteored widget: reload once per hour as an option

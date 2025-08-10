@@ -102,7 +102,9 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 
 ## Changelog
-### 1.0.0 (2025-08-10)
+
+
+### **WORK IN PROGRESS**
 * (René) overworked with TypeScript and vite -> code review desired
 
 ### 0.10.4 (2025-04-08)

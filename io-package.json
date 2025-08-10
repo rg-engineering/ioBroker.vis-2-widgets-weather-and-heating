@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather-and-heating",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "news": {
+      "1.0.1": {
+        "en": "overworked with TypeScript and vite -> code review desired",
+        "de": "überarbeitet mit TypeScript und vite -> Code-Review gewünscht",
+        "ru": "перегруженный TypeScript и Vite Желаемый обзор кода",
+        "pt": "excesso de trabalho com TypeScript e Vite -> revisão de código desejada",
+        "nl": "overwerkt met TypeScript en vite -> code review gewenst",
+        "fr": "surtravaillé avec TypeScript et rite -> révision du code souhaitée",
+        "it": "overworked con TypeScript e vite -> codice recensione desiderata",
+        "es": "overworked with TypeScript and vite - título revisión del código deseado",
+        "pl": "przepracowane z TypeScript i vite - > żądany przegląd kodu",
+        "uk": "перероблений TypeScript і vite -> Огляд коду бажаний",
+        "zh-cn": "使用类型脚本和 vite 过度工作 - > 需要代码审查"
+      },
       "1.0.0": {
         "en": "overworked with TypeScript and vite -> code review desired",
         "de": "überarbeitet mit TypeScript und vite -> Code-Review gewünscht",
@@ -80,19 +93,6 @@
         "pl": "widget z Meteored (DasWetter.com) dodał, nie potrzebny jest kolejny adapter, ale tylko wyświetlanie danych z Meteored możliwe\nzmiany wymagane przez sprawdzacz adaptera\nzaktualizowane zależności",
         "uk": "віджет від Meteored (DasWetter.com) додано, не потрібно додатково адаптер, але тільки відображення даних з Meteored можливо\nзміни, які вимагаються перевіркою адаптера\nоновлені залежності",
         "zh-cn": "来自Meteored (DasWetter.com) 的部件添加, 不需要更多的适配器, 只显示来自 Meteored 的数据\n适配器检查器要求的更改\n更新依赖关系"
-      },
-      "0.9.1": {
-        "en": "bug fix: support darkmode for time picker",
-        "de": "bugfix: unterstützung darkmode für zeitwähler",
-        "ru": "фиксация клопов: поддержка темной моды для пикера времени",
-        "pt": "correção de bugs: suporte para o darkmode para o picador de tempo",
-        "nl": "foutfix: ondersteuning voor de donkere modus voor tijdkiezer",
-        "fr": "correction du bug: support darkmode pour le sélectionneur de temps",
-        "it": "correzione bug: supporto darkmode per il time picker",
-        "es": "corrección de fallos: soporte de movimiento oscuro para el recolector de tiempo",
-        "pl": "fix: obsługa trybu darkmode dla pickera czasu",
-        "uk": "виправлення помилок: підтримка darkmode для таймера",
-        "zh-cn": "错误修正: 支持时间选择器的暗模式"
       }
     },
     "titleLang": {

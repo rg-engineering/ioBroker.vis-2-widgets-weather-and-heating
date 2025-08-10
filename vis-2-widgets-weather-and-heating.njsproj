@@ -622,6 +622,7 @@
     <TypeScriptCompile Include="src-widgets\src\index.tsx" />
     <TypeScriptCompile Include="src-widgets\src\translations.ts" />
     <TypeScriptCompile Include="src-widgets\src\WeatherDayWidget.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\SourceAnalytics2WeeksBarGraph.tsx" />
     <TypeScriptCompile Include="src-widgets\src\WeatherMeteoredWidget.tsx" />
     <TypeScriptCompile Include="src-widgets\src\WeatherWidget.tsx" />
     <TypeScriptCompile Include="src-widgets\vite.config.ts" />

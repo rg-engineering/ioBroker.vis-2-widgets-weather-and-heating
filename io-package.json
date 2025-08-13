@@ -155,15 +155,19 @@
         "bundlerType": "module",
         "components": [
           "GeneralEChartWidget",
+
           "WeatherWidget",
           "WeatherDayWidget",
           "WeatherMeteoredWidget",
+          
           "HeatingTimeScheduleWidget",
           "HeatingGeneralParamsWidget",
           "HeatingRoomWidget",
           "HeatingRoomsOverviewWidget",
           "HeatingRomProfileParamsWidget",
-          "HeatingWindowStatusOverviewWidget"
+          "HeatingWindowStatusOverviewWidget",
+          
+          "SourceAnalytics2WeeksBarGraphWidget"
         ]
       }
     },

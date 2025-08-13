@@ -630,7 +630,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
      *
      * @returns {echarts.EChartsOption}
      */
-    getOption1() {
+    getOption1(): echarts.EChartsOption {
         console.log("getOption1 ");
 
         let weatherData = null;
@@ -639,7 +639,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
         } else if (this.state.rxData["instance"].includes("weatherunderground")) {
             weatherData = this.getWeatherDataWU();
         }
-        let content = null;
+        let content: echarts.EChartsOption;
 
         if (weatherData !== null) {
             console.log(`##got ${JSON.stringify(weatherData[0])}`);
@@ -682,9 +682,9 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
 
 
 
-            const legend = [];
-            const yaxis = [];
-            const series = [];
+            const legend: string[] = [];
+            const yaxis: echarts.YAXisComponentOption[] = [];
+            const series: echarts.SeriesOption[] = [];
 
             let cnt = 0;
 
@@ -877,7 +877,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
      *
      * @returns {echarts.EChartsOption}
      */
-    getOption2() {
+    getOption2(): echarts.EChartsOption {
         console.log("getOption2 ");
 
         let weatherData;
@@ -886,6 +886,8 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
         } else if (this.state.rxData["instance"].includes("weatherunderground")) {
             weatherData = this.getWeatherDataWU();
         }
+
+        let content: echarts.EChartsOption;
 
         if (weatherData != null) {
             console.log(`##got ${JSON.stringify(weatherData[0])}`);
@@ -903,9 +905,9 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
             const CloudMin = MinMax["CloudMin"];
             const CloudMax = MinMax["CloudMax"];
 
-            const legend = [];
-            const yaxis = [];
-            const series = [];
+            const legend: string[] = [];
+            const yaxis: echarts.YAXisComponentOption[] = [];
+            const series: echarts.SeriesOption[] = [];
 
             let cnt = 0;
 
@@ -998,7 +1000,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
 
             // console.log("legend: " + JSON.stringify(legend) + " yaxis: " + JSON.stringify(yaxis));
 
-            const content = {
+            content = {
                 backgroundColor: "transparent",
                 title: {
                     text: "",

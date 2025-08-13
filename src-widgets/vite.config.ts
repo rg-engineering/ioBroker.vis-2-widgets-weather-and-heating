@@ -26,6 +26,8 @@ const config = {
                 "./HeatingRomProfileParamsWidget": "./src/HeatingRoomProfileParamsWidget",
                 "./HeatingWindowStatusOverviewWidget": "./src/HeatingWindowStatusOverviewWidget",
 
+                "./SourceAnalytics2WeeksBarGraphWidget": "./src/SourceAnalytics2WeeksBarGraphWidget",
+
                 "./translations": "./src/translations",
             },
             remotes: {},

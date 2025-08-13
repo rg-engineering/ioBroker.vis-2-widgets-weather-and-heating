@@ -29,7 +29,7 @@
     "@iobroker/eslint-config": "^2.0.2",
     "@iobroker/vis-2-widgets-testing": "^1.0.6",
     "@types/mocha": "^10.0.10",
-    "@types/node": "^22.15.19"
+    "@types/node": "^24.2.1"
   },
   "files": [
     "admin/",

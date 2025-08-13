@@ -105,7 +105,6 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 ### **WORK IN PROGRESS**
 * (René) new widget SourceAnalytics two weeks bar chart added 
-
 * (René) overworked with TypeScript and vite -> code review desired
 
 ### 0.10.4 (2025-04-08)

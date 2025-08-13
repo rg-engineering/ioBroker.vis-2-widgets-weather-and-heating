@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather-and-heating",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "news": {
+      "1.1.0": {
+        "en": "new widget SourceAnalytics two weeks bar chart added \noverworked with TypeScript and vite -> code review desired",
+        "de": "neue Widget SourceAnalytics zwei Wochen Bar Chart hinzugefügt\nüberarbeitet mit TypeScript und vite -> Code-Review gewünscht",
+        "ru": "добавлен новый виджет SourceAnalytics двухнедельный бар-чарт\nперегруженный TypeScript и Vite Желаемый обзор кода",
+        "pt": "novo gráfico de barras do SourceAnalytics de duas semanas adicionado\nexcesso de trabalho com TypeScript e Vite -> revisão de código desejada",
+        "nl": "nieuw widget SourceAnalytics twee weken bar grafiek toegevoegd\noverwerkt met TypeScript en vite -> code review gewenst",
+        "fr": "nouveau widget SourceAnalytics tableau à barres de deux semaines ajouté\nsurtravaillé avec TypeScript et rite -> révision du code souhaitée",
+        "it": "nuovo widget SourceAnalytics due settimane bar grafico aggiunto\noverworked con TypeScript e vite -> codice recensione desiderata",
+        "es": "nuevo widget SourceAnalytics dos semanas gráfico de barras añadido\noverworked with TypeScript and vite - título revisión del código deseado",
+        "pl": "nowy widget SourceAnalytics dwa tygodnie wykres bar dodany\nprzepracowane z TypeScript i vite - > żądany przegląd kodu",
+        "uk": "новий віджет SourceAnalytics два тижні бар діаграми додано\nперероблений TypeScript і vite -> Огляд коду бажаний",
+        "zh-cn": "添加了两周的条形图\n使用类型脚本和 vite 过度工作 - > 需要代码审查"
+      },
       "1.0.1": {
         "en": "overworked with TypeScript and vite -> code review desired",
         "de": "überarbeitet mit TypeScript und vite -> Code-Review gewünscht",
@@ -80,19 +93,6 @@
         "pl": "Ogrzewanie Widget pokoju: mniejsze optymalizacje",
         "uk": "Віджет опалювальної кімнати: менші оптимізації",
         "zh-cn": "暖室部件:较小的优化"
-      },
-      "0.10.0": {
-        "en": "widget from Meteored (DasWetter.com) added, no further adapter needed, but only display of data from Meteored possible\nchanges requested by adapter checker\ndependencies updated",
-        "de": "widget von Meteored (DasWetter.com) hinzugefügt, kein weiterer Adapter erforderlich, sondern nur Daten von Meteored möglich anzeigen\nänderungen, die von adapter checker angefordert werden\naktualisierte abhängigkeiten",
-        "ru": "добавлен виджет от Meteored (DasWetter.com), больше адаптер не нужен, а только отображение данных от Meteored возможно\nизменения, запрошенные adapter checker\nобновленные зависимости",
-        "pt": "widget de Meteored (DasWetter.com) adicionado, nenhum adaptador adicional necessário, mas apenas exibição de dados de Meteored possível\nalterações solicitadas pelo verificador do adaptador\ndependências atualizadas",
-        "nl": "widget van Meteoored (DasWetter.com) toegevoegd, geen verdere adapter nodig, maar alleen weergave van gegevens van Meteoored mogelijk\nwijzigingen gevraagd door adaptercontrole\nafhankelijkheden bijgewerkt",
-        "fr": "widget de Meteored (DasWetter.com) ajouté, aucun autre adaptateur nécessaire, mais uniquement l'affichage des données de Meteored possible\nmodifications demandées par l'adaptateur checker\ndépendances mises à jour",
-        "it": "widget di Meteored (DasWetter.com) aggiunto, nessun ulteriore adattatore necessario, ma solo la visualizzazione di dati da Meteored possibile\nmodifiche richieste da adattatore checker\ndipendenze aggiornate",
-        "es": "widget de Meteored (DasWetter.com) agregó, ningún adaptador adicional necesario, pero sólo muestra datos de Meteored posible\ncambios solicitados por el adaptador\ndependencias actualizadas",
-        "pl": "widget z Meteored (DasWetter.com) dodał, nie potrzebny jest kolejny adapter, ale tylko wyświetlanie danych z Meteored możliwe\nzmiany wymagane przez sprawdzacz adaptera\nzaktualizowane zależności",
-        "uk": "віджет від Meteored (DasWetter.com) додано, не потрібно додатково адаптер, але тільки відображення даних з Meteored можливо\nзміни, які вимагаються перевіркою адаптера\nоновлені залежності",
-        "zh-cn": "来自Meteored (DasWetter.com) 的部件添加, 不需要更多的适配器, 只显示来自 Meteored 的数据\n适配器检查器要求的更改\n更新依赖关系"
       }
     },
     "titleLang": {
@@ -155,18 +155,15 @@
         "bundlerType": "module",
         "components": [
           "GeneralEChartWidget",
-
           "WeatherWidget",
           "WeatherDayWidget",
           "WeatherMeteoredWidget",
-          
           "HeatingTimeScheduleWidget",
           "HeatingGeneralParamsWidget",
           "HeatingRoomWidget",
           "HeatingRoomsOverviewWidget",
           "HeatingRomProfileParamsWidget",
           "HeatingWindowStatusOverviewWidget",
-          
           "SourceAnalytics2WeeksBarGraphWidget"
         ]
       }

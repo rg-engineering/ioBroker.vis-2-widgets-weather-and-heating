@@ -356,8 +356,8 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
         const yaxis: echarts.YAXisComponentOption[] = [];
         const series: echarts.SeriesOption[] = [];
 
-        let Min = 0;
-        let Max = 100;
+        let Min;
+        let Max;
 
         
 
@@ -389,11 +389,13 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
             if (series1[i] === null || series1[i] === undefined || isNaN(series1[i])) {
             }
             else {
-                if (series1[i] < Min) {
+                if (Min === undefined || series1[i] < Min) {
                     Min = series1[i];
+                    console.log("new min " + Min);
                 }
-                if (series1[i] > Max) {
+                if (Max=== undefined || series1[i] > Max) {
                     Max = series1[i];
+                    console.log("new max " + Max);
                 }
             }
         }
@@ -402,11 +404,13 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
             if (series2[i] === null || series2[i] === undefined || isNaN(series2[i])) {
             }
             else {
-                if (series2[i] < Min) {
+                if (Min === undefined || series2[i] < Min) {
                     Min = series2[i];
+                    console.log("new min " + Min);
                 }
-                if (series2[i] > Max) {
+                if (Max === undefined || series2[i] > Max) {
                     Max = series2[i];
+                    console.log("new max " + Max);
                 }
             }
         }

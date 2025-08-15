@@ -102,6 +102,10 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 
 ## Changelog
+
+### **WORK IN PROGRESS**
+* (René) SourceAnalytics widget: bug fix min / max calculation
+
 ### 1.1.0 (2025-08-13)
 * (René) new widget SourceAnalytics two weeks bar chart added 
 * (René) overworked with TypeScript and vite -> code review desired

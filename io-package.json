@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather-and-heating",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "news": {
+      "1.1.1": {
+        "en": "SourceAnalytics widget: bug fix min / max calculation",
+        "de": "SourceAnalytics Widget: Bug fix min / max Berechnung",
+        "ru": "Виджет SourceAnalytics: исправление ошибок min/max расчет",
+        "pt": "Widget de análise de origem: cálculo min / max de correção de erros",
+        "nl": "SourceAnalytics widget: bug fix min / max berekening",
+        "fr": "Widget SourceAnalytics: correction du bug min / max",
+        "it": "Widget: bug fix min / max calcolo",
+        "es": "FuenteAnalytics widget: bug fix min / max calculation",
+        "pl": "Widżet SourceAnalytics: obliczenie błędu min / max",
+        "uk": "SourceAnalytics віджет: Виправлення помилок",
+        "zh-cn": "SourceAnatics 部件: 错误修正 min/ 最大计算"
+      },
       "1.1.0": {
         "en": "new widget SourceAnalytics two weeks bar chart added \noverworked with TypeScript and vite -> code review desired",
         "de": "neue Widget SourceAnalytics zwei Wochen Bar Chart hinzugefügt\nüberarbeitet mit TypeScript und vite -> Code-Review gewünscht",
@@ -80,19 +93,6 @@
         "pl": "Ogrzewanie widget pokoju: wsparcie więcej niż jeden termostat. UWAGA: Proszę sprawdzić konfigurację!",
         "uk": "Опалювальний номер віджету: підтримка більш ніж одного термостату. УВАГА!",
         "zh-cn": "暖室部件:支持一个以上的自动调温器。 请检查您的配置!"
-      },
-      "0.10.1": {
-        "en": "Heating Room widget: smaller optimizations",
-        "de": "Heizraum Widget: kleinere Optimierungen",
-        "ru": "Виджет отопительной комнаты: меньшие оптимизации",
-        "pt": "Widget de sala de aquecimento: otimizações menores",
-        "nl": "Verwarming Ruimte widget: kleinere optimalisaties",
-        "fr": "Widget Chambre de Chauffage: optimisations plus petites",
-        "it": "Widget della stanza di riscaldamento: ottimizzazioni più piccole",
-        "es": "Calefacción widget de la habitación: optimizaciones más pequeñas",
-        "pl": "Ogrzewanie Widget pokoju: mniejsze optymalizacje",
-        "uk": "Віджет опалювальної кімнати: менші оптимізації",
-        "zh-cn": "暖室部件:较小的优化"
       }
     },
     "titleLang": {

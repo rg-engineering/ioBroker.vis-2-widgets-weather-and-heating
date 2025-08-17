@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather-and-heating",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "news": {
+      "1.1.2": {
+        "en": "SourceAnalytics widget: min / max calculation optimisation",
+        "de": "SourceAnalytics Widget: min / max Berechnung Optimierung",
+        "ru": "Виджет SourceAnalytics: оптимизация вычислений min/max",
+        "pt": "Widget de análise de origem: otimização de cálculo min / max",
+        "nl": "BronAnalytics widget: min / max berekening optimalisatie",
+        "fr": "Widget SourceAnalytics: optimisation du calcul min / max",
+        "it": "Widget di SourceAnalytics: min / max calcolo ottimizzazione",
+        "es": "FuenteAnalytics widget: min / max calculation optimizaation",
+        "pl": "Widget SourceAnalytics: optymalizacja obliczeniowa min / max",
+        "uk": "SourceAnalytics віджет: min / макс оптимізації розрахунку",
+        "zh-cn": "SourceAnatics 部件: min/ 最大计算优化"
+      },
       "1.1.1": {
         "en": "SourceAnalytics widget: bug fix min / max calculation",
         "de": "SourceAnalytics Widget: Bug fix min / max Berechnung",
@@ -80,19 +93,6 @@
         "pl": "Ogrzewanie Widget pokoju: niektóre tłumaczenia\nMeteoryt widget: można przeładować widget",
         "uk": "Опалювальний номер віджет: деякі переклади\nMeteored віджет: зробити перезавантаження віджету можливо",
         "zh-cn": "暖室部件:一些翻译\n气象部件: 使部件可以重新装入"
-      },
-      "0.10.2": {
-        "en": "Heating Room widget: support of more then one thermostat. ATTENTIOM: Please check your configuration!",
-        "de": "Heizraum Widget: Unterstützung von mehr als einem Thermostat. ATTENTIOM: Bitte überprüfen Sie Ihre Konfiguration!",
-        "ru": "Виджет отопительной комнаты: поддержка более одного термостата. Пожалуйста, проверьте свою конфигурацию!",
-        "pt": "Widget de sala de aquecimento: suporte de mais um termostato. ATTENTIOM: Por favor, verifique sua configuração!",
-        "nl": "Verwarming Kamer widget: ondersteuning van meer dan één thermostaat. ATTENTIOM: Controleer uw configuratie!",
-        "fr": "Widget Chauffage Chambre: support de plus d'un thermostat. Veuillez vérifier votre configuration!",
-        "it": "Widget della stanza di riscaldamento: supporto di più allora un termostato. ATTENTIOM: Si prega di controllare la configurazione!",
-        "es": "Widget de la sala de calefacción: soporte de más entonces un termostato. ATTENTIOM: Por favor, compruebe su configuración!",
-        "pl": "Ogrzewanie widget pokoju: wsparcie więcej niż jeden termostat. UWAGA: Proszę sprawdzić konfigurację!",
-        "uk": "Опалювальний номер віджету: підтримка більш ніж одного термостату. УВАГА!",
-        "zh-cn": "暖室部件:支持一个以上的自动调温器。 请检查您的配置!"
       }
     },
     "titleLang": {

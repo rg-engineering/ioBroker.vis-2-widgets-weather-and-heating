@@ -345,6 +345,36 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
         return SourceAnalytics2WeeksBarGraphWidget.getWidgetInfo();
     }
 
+    roundToNiceRange(min: number, max: number): { newmin: number; newmax: number; step: number } {
+        const range = this.niceNum(max - min, false);
+        const step = this.niceNum(range / 10, true); // Schrittweite (z.B. für Ticks)
+        const newmin = Math.floor(min / step) * step;
+        const newmax = Math.ceil(max / step) * step;
+
+        return { newmin, newmax, step };
+    }
+
+    niceNum(range: number, round: boolean): number {
+        const exponent = Math.floor(Math.log10(range));
+        const fraction = range / Math.pow(10, exponent);
+
+        let niceFraction: number;
+        if (round) {
+            if (fraction < 1.5) niceFraction = 1;
+            else if (fraction < 3) niceFraction = 2;
+            else if (fraction < 7) niceFraction = 5;
+            else niceFraction = 10;
+        } else {
+            if (fraction <= 1) niceFraction = 1;
+            else if (fraction <= 2) niceFraction = 2;
+            else if (fraction <= 5) niceFraction = 5;
+            else niceFraction = 10;
+        }
+
+        return niceFraction * Math.pow(10, exponent);
+    }
+
+
 
     getOption(): echarts.EChartsOption {
         console.log("getOption ");
@@ -358,8 +388,6 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
 
         let Min;
         let Max;
-
-        
 
         let series1 = [
              this.state.values[`${this.state.rxData["OID_PreviousWeek_Monday"]}.val`],
@@ -415,7 +443,7 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
             }
         }
 
-
+        const { newmin, newmax, step } = this.roundToNiceRange(Min, Max);
         
 
         
@@ -424,8 +452,8 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
                 position: this.state.rxData["positionYAxis"] || "right",
                 type: "value",
                 // min max berechnen
-                min: Min,
-                max: Max,
+                min: newmin,
+                max: newmax,
                 axisLabel: {
                     color: this.state.rxData["axislablecolor"] || "blue",
                     formatter: (value: number) => `${value} ${this.state.rxData["unit"]}`,

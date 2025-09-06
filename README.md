@@ -102,8 +102,7 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 
 ## Changelog
-
-### **WORK IN PROGRESS**
+### 1.1.3 (2025-09-06)
 * (René) dependencies updated and bug fix based on adapter checker
 
 ### 1.1.2 (2025-08-17)

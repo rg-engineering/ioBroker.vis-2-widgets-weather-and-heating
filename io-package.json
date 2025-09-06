@@ -55,19 +55,6 @@
         "uk": "перероблений TypeScript і vite -> Огляд коду бажаний",
         "zh-cn": "使用类型脚本和 vite 过度工作 - > 需要代码审查"
       },
-      "1.0.0": {
-        "en": "overworked with TypeScript and vite -> code review desired",
-        "de": "überarbeitet mit TypeScript und vite -> Code-Review gewünscht",
-        "ru": "перегруженный TypeScript и Vite Желаемый обзор кода",
-        "pt": "excesso de trabalho com TypeScript e Vite -> revisão de código desejada",
-        "nl": "overwerkt met TypeScript en vite -> code review gewenst",
-        "fr": "surtravaillé avec TypeScript et rite -> révision du code souhaitée",
-        "it": "overworked con TypeScript e vite -> codice recensione desiderata",
-        "es": "overworked with TypeScript and vite - título revisión del código deseado",
-        "pl": "przepracowane z TypeScript i vite - > żądany przegląd kodu",
-        "uk": "перероблений TypeScript і vite -> Огляд коду бажаний",
-        "zh-cn": "使用类型脚本和 vite 过度工作 - > 需要代码审查"
-      },
       "0.10.4": {
         "en": "Meteored widget: reload once per hour as an option",
         "de": "Widget Meteored: Einmal pro Stunde als Option neu laden",

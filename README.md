@@ -102,6 +102,10 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 
 ## Changelog
+
+### **WORK IN PROGRESS**
+* (René) dependencies updated and bug fix based on adapter checker
+
 ### 1.1.2 (2025-08-17)
 * (René) SourceAnalytics widget: min / max calculation optimisation
 

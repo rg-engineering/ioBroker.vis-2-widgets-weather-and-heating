@@ -24,3 +24,6 @@
 /src-widgets/src/assets/heating/scene_stove.svg
 /bin/Microsoft.NodejsTools.WebRole.dll
 /obj/Release/vis-2-widgets-weather-and-heating.njsproj.AssemblyReference.cache
+
+.commitinfo
+/.vscode/extensions.json

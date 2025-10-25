@@ -1,9 +1,11 @@
+/* eslint-disable prefer-template */
+/* eslint-disable @typescript-eslint/dot-notation */
 import React, { type CSSProperties } from 'react';
 import type {
     RxRenderWidgetProps,
     RxWidgetInfo,
     VisRxWidgetProps,
-    VisWidgetCommand,
+    //VisWidgetCommand,
     WidgetData,
     VisRxWidgetState,
     RxWidgetInfoAttributesField
@@ -28,6 +30,8 @@ const styles: Record<string, CSSProperties> = {
     },
 };
 
+type OptionDataValue = string | number | Date | null | undefined;
+
 // todo Dummy-Y Achse wird nicht gelöscht, wenn reale Daten kommen
 // todo x achse unit einstellbar
 // todo x achse type (time or category) einstellbar
@@ -36,7 +40,9 @@ const setDataStructures = async (
     field: RxWidgetInfoAttributesField,
     data: WidgetData,
     changeData: (newData: WidgetData) => void,
-    socket: LegacyConnection,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    socket: LegacyConnection
+    // eslint-disable-next-line @typescript-eslint/require-await
 ): Promise<void> => {
     console.log(`set new data structure ${data["dataCount"]} ${JSON.stringify(field)} ${JSON.stringify(data)}`);
 
@@ -64,16 +70,13 @@ const setDataStructures = async (
             if (datastructure_sbfspot === "today") {
                 oid_data = `${oid_data}today`;
                 formatstring = "HH:mm";
-            }
-            else if (datastructure_sbfspot === "last30Days") {
+            } else if (datastructure_sbfspot === "last30Days") {
                 oid_data = `${oid_data}last30Days`;
                 formatstring = "DD.MM";
-            }
-            else if (datastructure_sbfspot === "last12Months") {
+            } else if (datastructure_sbfspot === "last12Months") {
                 oid_data = `${oid_data}last12Months`;
                 formatstring = "DD.MM.YY";
-            }
-            else if (datastructure_sbfspot === "years") {
+            } else if (datastructure_sbfspot === "years") {
                 oid_data = `${oid_data}years`;
                 formatstring = "YYYY";
             }
@@ -97,16 +100,13 @@ const setDataStructures = async (
             if (datastructure_ebus === "value1") {
                 oid_data = `${oid_data}value1`;
                 formatstring = "ddd HH:mm";
-            }
-            else if (datastructure_ebus === "value2") {
+            } else if (datastructure_ebus === "value2") {
                 oid_data = `${oid_data}value2`;
                 formatstring = "ddd HH:mm";
-            }
-            else if (datastructure_ebus === "value3") {
+            } else if (datastructure_ebus === "value3") {
                 oid_data = `${oid_data}value3`;
                 formatstring = "ddd HH:mm";
-            }
-            else if (datastructure_ebus === "value4") {
+            } else if (datastructure_ebus === "value4") {
                 oid_data = oid_data + "value4";
                 formatstring = "ddd HH:mm";
             }
@@ -376,16 +376,15 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
     }
 
     // Do not delete this method. It is used by vis to read the widget configuration.
-    // eslint-disable-next-line class-methods-use-this
     getWidgetInfo(): RxWidgetInfo {
         return GeneralEChartWidget.getWidgetInfo();
     }
 
-    /**
-     *
-     * @returns {echarts.EChartsOption}
-     */
-    getOption() {
+    getOid(obj: StaticRxData, key: keyof StaticRxData): string {
+        return obj[key] as string;
+    }
+
+    getOption(): echarts.EChartsOption {
         console.log("getOption 1");
 
         let dataMin = 0;
@@ -403,14 +402,15 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
 
         for (let d = 1; d <= this.state.rxData["dataCount"]; d++) {
 
-            const name_name =  "name" + d;
-            let name = this.state.rxData[name_name];
-            let OID_name = "oid_data" + d;
-            const OID = this.state.rxData[OID_name];
-            const OID_val = OID + ".val";
-            const data_org = this.state.values[OID_val];
+            //const name_name =  "name" + d;
+            //let name = this.state.rxData[name_name];
+            let name = this.getOid(this.state.rxData, `name${d}` as keyof StaticRxData);
+            //let OID_name = "oid_data" + d;
+            //const oid = this.state.rxData[OID_name];
+            const oid = this.getOid(this.state.rxData, `oid_data${d}` as keyof StaticRxData);
+            const data_org = this.state.values[`${oid}.val`];
 
-            console.log(`data${d} :  ${OID_name} ${OID} ${OID_val} ${JSON.stringify(data_org)}`);
+            console.log(`data${d} :  ${oid}  ${JSON.stringify(data_org)}`);
 
             const data = [];
 
@@ -425,11 +425,13 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
 
                     console.log(`got # ${JSON.stringify(data_json[i])}`);
 
+                    let doNotPush = false;
                     const oDate = new Date(date);
 
-                    OID_name = `data_calcdiff${d}`;
-                    let doNotPush = false;
-                    if (this.state.rxData[OID_name]) {
+                    //oid = `data_calcdiff${d}`;
+                    const calcDiff = this.getOid(this.state.rxData, `data_calcdiff${d}` as keyof StaticRxData);
+
+                    if (calcDiff) {
                         if (i === 0) {
                             lastval4diff = value;
                             doNotPush = true;
@@ -441,8 +443,12 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
                     }
 
                     if (doNotPush === false) {
-                        if (value < dataMin) { dataMin = value; }
-                        if (value > dataMax) { dataMax = value; }
+                        if (value < dataMin) {
+                            dataMin = value;
+                        }
+                        if (value > dataMax) {
+                            dataMax = value;
+                        }
 
                         console.log(`push # ${oDate.toLocaleString()} ${value}`);
                         data.push(
@@ -464,35 +470,32 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
 
                 legend.push(name);
 
-                const keys = Object.keys(data[0]);
-                console.log(`keys ${keys}`);
+                //const keys = Object.keys(data[0]);
+                //console.log(`keys ${keys}`);
 
-                const type_id = "data_seriestype" + d;
-                const type = this.state.rxData[type_id];
-                const color_id = `data_color${d}`;
-                const color = this.state.rxData[color_id];
+                //const type_id = "data_seriestype" + d;
+                //const type = this.state.rxData[type_id];
+                const type = this.getOid(this.state.rxData, `data_seriestype${d}` as keyof StaticRxData);
+                //const color_id = `data_color${d}`;
+                //const color = this.state.rxData[color_id];
+                const color = this.getOid(this.state.rxData, `data_color${d}` as keyof StaticRxData);
 
-                const autounit_name = `data_autounit${d}`;
+                //const autounit_name = `data_autounit${d}`;
+                const autounit_name = this.getOid(this.state.rxData, `data_autounit${d}` as keyof StaticRxData);
 
                 let factor = 1;
-                if (this.state.rxData[autounit_name]) {
+                if (autounit_name) {
                     // G
                     if (dataMax > 1000000000) {
                         preUnit = "G";
                         factor = 1000000000;
-                    }
-                    // M
-                    else if (dataMax > 1000000) {
+                    } else if (dataMax > 1000000) {
                         preUnit = "M";
                         factor = 1000000;
-                    }
-                    // k
-                    else if (dataMax > 1000) {
+                    } else if (dataMax > 1000) {
                         preUnit = "k";
                         factor = 1000;
-                    }
-                    // m
-                    else if (dataMin < 0.001) {
+                    } else if (dataMin < 0.001) {
                         preUnit = "m";
                         factor = 0.001;
                     }
@@ -514,32 +517,34 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
                     color: color,
                     yAxisIndex: cnt,
                     tooltip: {
-                        valueFormatter: value => `${value} `,
+                        valueFormatter: (value: OptionDataValue | OptionDataValue[]) => `${Number(value)} `,
                     },
                 });
                 cnt++;
             }
 
-            const unit_id = `data_unit${d}`;
-            let unit = preUnit + this.state.rxData[unit_id];
+            //const unit_id = `data_unit${d}`;
+            //let unit = preUnit + this.state.rxData[unit_id];
+            let unit = this.getOid(this.state.rxData, `data_unit${d}` as keyof StaticRxData);
             if (unit === null || unit === undefined) {
                 unit = "";
             }
 
-            const yaxispos_id = `data_yaxispos${d}`;
-            let yaxispos = this.state.rxData[yaxispos_id];
+            //const yaxispos_id = `data_yaxispos${d}`;
+            //let yaxispos = this.state.rxData[yaxispos_id];
+            let yaxispos = this.getOid(this.state.rxData, `data_yaxispos${d}` as keyof StaticRxData);
             if (yaxispos === null || yaxispos === undefined) {
                 yaxispos = "left";
             }
 
             yaxis.push({
-                position: yaxispos,
+                position: (yaxispos === 'left' || yaxispos === 'right' || yaxispos === 'top' || yaxispos === 'bottom') ? yaxispos : 'left',
                 show: yaxispos !== "none",
                 type: "value",
                 min: dataMin,
                 max: dataMax,
                 axisLabel: {
-                    formatter: value => `${value} ${unit}`,
+                    formatter: (value: OptionDataValue | OptionDataValue[]) => `${Number(value)} ${unit}`,
                 }
             });
         }
@@ -557,7 +562,7 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
                 min: 0,
                 max: 100,
                 axisLabel: {
-                    formatter: value => value,
+                    formatter: (value: OptionDataValue | OptionDataValue[]) => `${Number(value)}`,
                 },
             });
             series.push({
@@ -570,7 +575,7 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
                     ["2024-04-30T09:00:00.000Z", 60]
                 ],
                 tooltip: {
-                    valueFormatter: value => `${value} %`,
+                    valueFormatter: (value: OptionDataValue | OptionDataValue[]) => `${Number(value)} %`,
                 },
             });
         }
@@ -601,13 +606,21 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
                 show: !useSecondDiagram,
                 axisLabel: {
                     rotate: 45,
-                    formatter: value => {
+                    formatter: (value: OptionDataValue | OptionDataValue[]) => {
                         //http://momentjs.com/docs/#/displaying/format/
                         let formatstring = "ddd HH:mm";
                         if (axisLabel_formatstring !== null && axisLabel_formatstring !== undefined && axisLabel_formatstring.length > 2) {
                             formatstring = axisLabel_formatstring;
                         }
-                        return moment(value).format(formatstring);
+                        // Wenn value ein Array ist, nimm das erste Element 
+                        const singleValue = Array.isArray(value) ? value[0] : value;
+
+                        // moment akzeptiert null/undefined nicht, also fallback
+                        if (singleValue == null) {
+                            return "";
+                        }
+
+                        return moment(singleValue).format(formatstring);
                     },
                 }
             },
@@ -643,7 +656,7 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
         >
             {size && <ReactEchartsCore
                 option={this.getOption()}
-                theme={this.props.themeType === "dark" ? "dark" : ""}
+                
                 style={{ height: `${size}px`, width: "100%" }}
                 opts={{ renderer: "svg" }}
             />}

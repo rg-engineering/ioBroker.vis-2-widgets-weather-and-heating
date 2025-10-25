@@ -1,3 +1,5 @@
+/* eslint-disable prefer-template */
+/* eslint-disable @typescript-eslint/dot-notation */
 import React, { type CSSProperties } from 'react';
 import type {
     RxRenderWidgetProps,
@@ -9,8 +11,6 @@ import type {
 } from '@iobroker/types-vis-2';
 
 import type { LegacyConnection } from '@iobroker/adapter-react-v5';
-
-import moment from "moment";
 
 import EchartContainer from "./EchartContainer";
 
@@ -28,13 +28,16 @@ const styles: Record<string, CSSProperties> = {
 };
 
 
+type OptionDataValue = string | number | Date | null | undefined;
 
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const setDataStructures = async (
     field: RxWidgetInfoAttributesField,
     data: WidgetData,
     changeData: (newData: WidgetData) => void,
-    socket: LegacyConnection,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    socket: LegacyConnection
+    // eslint-disable-next-line @typescript-eslint/require-await
 ): Promise<void> => {
     console.log(`SourceAnalytics2WeeksBarGraph - set new datastructure ` );
 
@@ -77,8 +80,6 @@ interface StaticRxData {
     unit: string;
     axislablecolor: string;
     positionYAxis: string;
-
-
 }
 
 interface StaticState extends VisRxWidgetState {
@@ -102,7 +103,8 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
         };
     }
 
-    async componentDidMount() {
+    // eslint-disable-next-line @typescript-eslint/require-await
+    async componentDidMount() : Promise<void>{
 
         super.componentDidMount();
 
@@ -111,13 +113,15 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
 
     }
 
-    async componentWillUnmount() {
+    // eslint-disable-next-line @typescript-eslint/require-await
+    async componentWillUnmount() : Promise<void>{
         super.componentWillUnmount();
         console.log("SourceAnalytics2WeeksBarGraph - componentWillUnmount");
 
     }
 
-    async onPropertyUpdate() {
+    // eslint-disable-next-line @typescript-eslint/require-await
+    async onPropertyUpdate() : Promise<void>{
 
         console.log("SourceAnalytics2WeeksBarGraph - onPropertyUpdate");
 
@@ -340,14 +344,13 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
     }
 
     // Do not delete this method. It is used by vis to read the widget configuration.
-    // eslint-disable-next-line class-methods-use-this
     getWidgetInfo(): RxWidgetInfo {
         return SourceAnalytics2WeeksBarGraphWidget.getWidgetInfo();
     }
 
     roundToNiceRange(min: number, max: number): { newmin: number; newmax: number; step: number } {
         const range = this.niceNum(max - min, false);
-        const step = this.niceNum(range / 10, true); // Schrittweite (z.B. für Ticks)
+        const step = this.niceNum(range / 10, true); // Schrittweite (z.B. fÃ¼r Ticks)
         const newmin = Math.floor(min / step) * step;
         const newmax = Math.ceil(max / step) * step;
 
@@ -360,15 +363,25 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
 
         let niceFraction: number;
         if (round) {
-            if (fraction < 1.5) niceFraction = 1;
-            else if (fraction < 3) niceFraction = 2;
-            else if (fraction < 7) niceFraction = 5;
-            else niceFraction = 10;
+            if (fraction < 1.5) {
+                niceFraction = 1;
+            } else if (fraction < 3) {
+                niceFraction = 2;
+            } else if (fraction < 7) {
+                niceFraction = 5;
+            } else {
+                niceFraction = 10;
+            }
         } else {
-            if (fraction <= 1) niceFraction = 1;
-            else if (fraction <= 2) niceFraction = 2;
-            else if (fraction <= 5) niceFraction = 5;
-            else niceFraction = 10;
+            if (fraction <= 1) {
+                niceFraction = 1;
+            } else if (fraction <= 2) {
+                niceFraction = 2;
+            } else if (fraction <= 5) {
+                niceFraction = 5;
+            } else {
+                niceFraction = 10;
+            }
         }
 
         return niceFraction * Math.pow(10, exponent);
@@ -380,7 +393,7 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
         console.log("getOption ");
 
 
-        let content: echarts.EChartsOption;
+        let content: echarts.EChartsOption = {};
 
         const legend: string[] = [];
         const yaxis: echarts.YAXisComponentOption[] = [];
@@ -389,7 +402,7 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
         let Min;
         let Max;
 
-        let series1 = [
+        const series1 = [
              this.state.values[`${this.state.rxData["OID_PreviousWeek_Monday"]}.val`],
              this.state.values[`${this.state.rxData["OID_PreviousWeek_Tuesday"]}.val`],
              this.state.values[`${this.state.rxData["OID_PreviousWeek_Wednesday"]}.val`],
@@ -399,7 +412,7 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
              this.state.values[`${this.state.rxData["OID_PreviousWeek_Sunday"]}.val`],
             ];
 
-        let series2 = [
+        const series2 = [
              this.state.values[`${this.state.rxData["OID_CurrentWeek_Monday"]}.val`],
              this.state.values[`${this.state.rxData["OID_CurrentWeek_Tuesday"]}.val`],
              this.state.values[`${this.state.rxData["OID_CurrentWeek_Wednesday"]}.val`],
@@ -415,13 +428,13 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
         for (let i = 0; i < series1.length; i++) {
 
             if (series1[i] === null || series1[i] === undefined || isNaN(series1[i])) {
-            }
-            else {
+                //do nothing
+            } else {
                 if (Min === undefined || series1[i] < Min) {
                     Min = series1[i];
                     console.log("new min " + Min);
                 }
-                if (Max=== undefined || series1[i] > Max) {
+                if (Max === undefined || series1[i] > Max) {
                     Max = series1[i];
                     console.log("new max " + Max);
                 }
@@ -430,8 +443,8 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
         for (let i = 0; i < series2.length; i++) {
 
             if (series2[i] === null || series2[i] === undefined || isNaN(series2[i])) {
-            }
-            else {
+                //do nothing
+            } else {
                 if (Min === undefined || series2[i] < Min) {
                     Min = series2[i];
                     console.log("new min " + Min);
@@ -443,13 +456,13 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
             }
         }
 
-        const { newmin, newmax, step } = this.roundToNiceRange(Min, Max);
+        const { newmin, newmax } = this.roundToNiceRange(Min, Max);
         
-
+        const pos = this.state.rxData["positionYAxis"];
         
         if (this.state.rxData["visible"]) {
             yaxis.push({
-                position: this.state.rxData["positionYAxis"] || "right",
+                position: (pos === 'left' || pos === 'right' || pos === 'top' || pos === 'bottom') ? pos : 'right',
                 type: "value",
                 // min max berechnen
                 min: newmin,
@@ -468,7 +481,7 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
                 color: this.state.rxData["prevweek_color"] || "blue",
                 yAxisIndex: cnt,
                 tooltip: {
-                    valueFormatter: (value: number) => `${value} ${this.state.rxData["unit"]}`,
+                    valueFormatter: (value: OptionDataValue | OptionDataValue[]) => `${Number(value)} ${this.state.rxData["unit"]}`,
                 },
                 emphasis: {
                     focus: 'series'
@@ -483,7 +496,7 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
                 color: this.state.rxData["curweek_color"] || "green",
                 yAxisIndex: cnt,
                 tooltip: {
-                    valueFormatter: (value: number) => `${value} ${this.state.rxData["unit"]}`,
+                    valueFormatter: (value: OptionDataValue | OptionDataValue[]) => `${Number(value)} ${this.state.rxData["unit"]}`,
                 },
                 emphasis: {
                     focus: 'series'
@@ -527,14 +540,14 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
                 ],
 
                 tooltip: {
-                    valueFormatter: (value: number) => `${value} %`,
+                    valueFormatter: (value: OptionDataValue | OptionDataValue[]) => `${Number(value)} %`,
                 },
             });
         }
 
         // console.log("legend: " + JSON.stringify(legend) + " yaxis: " + JSON.stringify(yaxis));
 
-        let headline = this.state.rxData["headline"] || "";
+        const headline = this.state.rxData["headline"] || "";
 
         content = {
             backgroundColor: "transparent", 
@@ -604,7 +617,7 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
 
             {size && <EchartContainer
                 option={this.getOption()}
-                theme={this.props.themeType === "dark" ? "dark" : ""}
+                
                 style={{ height: `${size}px`, width: "100%" }}
                 opts={{ renderer: "svg" }}
             />}

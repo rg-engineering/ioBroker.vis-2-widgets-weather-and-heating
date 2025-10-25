@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/dot-notation */
 import React, { type CSSProperties } from 'react';
 import type {
     RxRenderWidgetProps,
     RxWidgetInfo,
     VisRxWidgetProps,
-    VisWidgetCommand,
+    //VisWidgetCommand,
     WidgetData,
     VisRxWidgetState,
     RxWidgetInfoAttributesField
@@ -29,14 +30,16 @@ const setDataStructures = async (
     field: RxWidgetInfoAttributesField,
     data: WidgetData,
     changeData: (newData: WidgetData) => void,
-    socket: LegacyConnection,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    socket: LegacyConnection
+    // eslint-disable-next-line @typescript-eslint/require-await
 ): Promise<void> => {
     console.log(`set new data structure instance ${data["instance"]}` );
 
     const instance = data["instance"];
 
     if (instance && instance.length > 0 && instance.includes("heatingcontrol") ) {
-
+        //do nothing 
     }
     changeData(data);
 };
@@ -131,7 +134,7 @@ export default class HeatingRoomsOverviewWidget extends Generic<StaticRxData, St
     }
 
     // Do not delete this method. It is used by vis to read the widget configuration.
-    // eslint-disable-next-line class-methods-use-this
+    
     getWidgetInfo(): RxWidgetInfo {
         return HeatingRoomsOverviewWidget.getWidgetInfo();
     }
@@ -165,7 +168,7 @@ export default class HeatingRoomsOverviewWidget extends Generic<StaticRxData, St
             size = this.refCardContent.current.offsetHeight;
         }
 
-        //console.log(`heating time schedule: size ${size}`);
+        console.log(`heating time schedule: size ${size}`);
 
         const content = this.createTable();
 

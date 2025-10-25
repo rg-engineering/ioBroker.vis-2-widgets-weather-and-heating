@@ -1,9 +1,11 @@
+/* eslint-disable prefer-template */
+/* eslint-disable @typescript-eslint/dot-notation */
 import React, { type CSSProperties } from 'react';
 import type {
     RxRenderWidgetProps,
     RxWidgetInfo,
     VisRxWidgetProps,
-    VisWidgetCommand,
+    //VisWidgetCommand,
     WidgetData,
     VisRxWidgetState,
     RxWidgetInfoAttributesField
@@ -13,24 +15,22 @@ import type { LegacyConnection } from '@iobroker/adapter-react-v5';
 
 // For federation, it is important to import from one package "@mui/material" and not from "@mui/material/Box"
 import {
-    Grid,
+    Grid2,
     Table,
     TableBody,
     TableCell,
     TableHead,
     TableRow,
     Button,
-    InputLabel,
     MenuItem,
     Select,
-    Box,
     //IconButton,
     //Input,
     InputAdornment,
     //InputLabel,
     FormControl,
     //FilledInput,
-    FormHelperText,
+    //FormHelperText,
     //TextField,
     OutlinedInput,
     //Visibility,
@@ -68,12 +68,14 @@ const styles: Record<string, CSSProperties> = {
 
 };
 
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const setDataStructures = async (
     field: RxWidgetInfoAttributesField,
     data: WidgetData,
     changeData: (newData: WidgetData) => void,
-    socket: LegacyConnection,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    socket: LegacyConnection
+    // eslint-disable-next-line @typescript-eslint/require-await
 ): Promise<void> => {
     console.log(`set new data structure instance ${data["instance"]}` );
 
@@ -371,7 +373,14 @@ interface StaticRxData {
     oid_profile_Sun_5_Temperature: string
     oid_profile_Sun_5_Time: string
 
+    oid_profile_Mon_CopyPeriods: string
+    oid_profile_Tue_CopyPeriods: string
+    oid_profile_Wed_CopyPeriods: string
+    oid_profile_Thu_CopyPeriods: string
+    oid_profile_Fri_CopyPeriods: string
+    oid_profile_Sat_CopyPeriods: string
 
+    headline_color:string
 }
 
 interface StaticState extends VisRxWidgetState {
@@ -389,10 +398,16 @@ interface timeVal {
     OID: string
 }
 
-interface periods {
-    temperature: tempVal[],
-    time: timeVal[]
+interface PeriodEntry {
+    index: number;
+    temperature: number;
+    time: string;
+    oid_temperature: string,
+    oid_time: string   
 }
+
+type periods = PeriodEntry[];
+
 
 export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, StaticState> {
     private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
@@ -1216,25 +1231,29 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
     }
 
     // Do not delete this method. It is used by vis to read the widget configuration.
-    // eslint-disable-next-line class-methods-use-this
     getWidgetInfo(): RxWidgetInfo {
         return HeatingTimeScheduleWidget.getWidgetInfo();
     }
 
-    createData(index:number, time:string, temperature:number, oid_time:string,  oid_temperature:string) {
+    getOid(obj: StaticRxData, key: keyof StaticRxData): string {
+        return obj[key] as string;
+    }
+
+    createData(index: number, time: string, temperature: number, oid_time: string, oid_temperature: string): {index:number, time: string, temperature: number,oid_time:string, oid_temperature: string} {
         return { index, time, temperature,oid_time, oid_temperature };
     }
 
-    createValueData(value: string[], text:string[]) {
+    createValueData(value: string[], text: string[]): {value:string[], text:string[]} {
         return { value,text };
     }
 
-    handleOnChangeTemperature(val: tempVal) {
+    handleOnChangeTemperature(val: tempVal) : void {
         console.log(`onChange Temp: ${val.temperature}  ${val.OID} ${JSON.stringify(val)}`);
 
         //onChange Temp: 6  oid_profile_Sat_1_Temperature { "temperature": "6", "OID": "oid_profile_Sat_1_Temperature" }
 
-        const oid = this.state.rxData[val.OID];
+        //const oid = this.state.rxData[val.OID];
+        const oid = this.getOid(this.state.rxData, val.OID as keyof StaticRxData);
 
         if (this.props.editMode) {
             return;
@@ -1242,11 +1261,12 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
         this.props.context.setValue(oid, val.temperature);
     }
 
-    handleOnChangeTime(val: timeVal) {
+    handleOnChangeTime(val: timeVal) : void {
         console.log(`onChange Time: ${val.time}  ${val.OID} ${JSON.stringify(val)}`);
 
-        const oid = this.state.rxData[val.OID];
-
+        //const oid = this.state.rxData[val.OID];
+        const oid = this.getOid(this.state.rxData, val.OID as keyof StaticRxData);
+        
         if (this.props.editMode) {
             return;
         }
@@ -1260,8 +1280,14 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
             const oid_time = `oid_profile_${part}_${p}_Time`;
             const oid_temperature = `oid_profile_${part}_${p}_Temperature`;
 
-            const time = this.state.values[`${this.state.rxData[oid_time]}.val`];
-            const temperature = this.state.values[`${this.state.rxData[oid_temperature]}.val`];
+            //const time = this.state.values[`${this.state.rxData[oid_time]}.val`];
+            //const temperature = this.state.values[`${this.state.rxData[oid_temperature]}.val`];
+
+            let oid = this.getOid(this.state.rxData, oid_time as keyof StaticRxData);
+            const time = this.state.values[`${oid}.val`];
+            oid = this.getOid(this.state.rxData, oid_temperature as keyof StaticRxData);
+            const temperature = this.state.values[`${oid}.val`];
+
 
             //console.log("map " + p + " " + time + " " + temperature + " " + oid_time + " " + oid_temperature);
 
@@ -1271,7 +1297,7 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
         return periods;
     }
 
-    handleCopyPeriods(oid:string) {
+    handleCopyPeriods(oid:string) : void {
         console.log("handly copy periods clicked " + oid);
 
         if (this.props.editMode) {
@@ -1280,21 +1306,21 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
         this.props.context.setValue(oid, true);
     }
 
-    CreateCopyButton(copyOID: string): JSX.Element | null{
+    CreateCopyButton(copyOID: string | null): JSX.Element | null {
 
         let ret = null;
 
         console.log(`CreateCopyButton ${copyOID} `);
 
         if (copyOID != null) {
-         ret =   <Button
+            ret = <Button
                 variant="outlined"
                 endIcon={<SendIcon />}
                 onClick={() => {
                     this.handleCopyPeriods(copyOID);
                 }}
             >
-                {Generic.t("Copy")} 
+                {Generic.t("Copy")}
             </Button>
         }
 
@@ -1327,12 +1353,11 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
                 />
 
             </FormControl>
-        }
-        else {
+        } else {
             ret =
 
 
-                <FormControl  sx={{ m: 0.5, width: "20ch" }} >
+                <FormControl sx={{ m: 0.5, width: "20ch" }} >
 
                     <LocalizationProvider
                         dateAdapter={AdapterDayjs}
@@ -1347,7 +1372,7 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
                             format="HH:mm"
                             autoFocus={false}
                             onChange={(value) => this.handleOnChangeTime({
-                                time: value!=null ? value.format('HH:mm') : "n.a.",
+                                time: value != null ? value.format('HH:mm') : "n.a.",
                                 OID: oid_time
                             })}
                             slotProps={{
@@ -1356,14 +1381,14 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
                                     style: {
                                         width: "100%",
                                         height: "100%",
-                                      
+
                                     },
                                     sx: {
                                         "& .MuiInputBase-root": {
                                             width: "100%",
                                             height: "100%",
                                             color: this.props.context.themeType === 'dark' ? '#DDD' : '#222',
-                                            
+
                                         },
                                         "& .MuiIconButton-root": {
                                             color: this.props.context.themeType === 'dark' ? '#DDD' : '#222',
@@ -1371,11 +1396,11 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
                                         "& .MuiOutlinedInput-notchedOutline": {
                                             "border-color": this.props.context.themeType === 'dark' ? '#DDDD' : '#222',
                                         },
-                                    }, 
+                                    },
                                 },
                                 field: {
                                     clearable: false,
-                                    
+
                                     onClear: () => {
                                         console.debug("clear ");
                                         this.props.context.setValue(oid_time, "00:00");
@@ -1391,7 +1416,7 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
         return ret;
     }
 
-    showTemperatureValue(oid_temperature:string, ProfileMinTemperature:number, TempSetWidthLow:number, temperature:number, name:string): JSX.Element {
+    showTemperatureValue(oid_temperature:string, ProfileMinTemperature:number, TempSetWidthLow:number, temperature:number, name:string): JSX.Element | null {
 
         let ret = null;
 
@@ -1420,20 +1445,19 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
                 />
             </FormControl>
 
-        }
-        else {
+        } else {
 
             // werte vorrat aus dem Adapter hole
-            let ProfileTempValueListValue = this.state.values[`${this.state.rxData["oid_ProfileTempValueListValue"]}.val`];
-            let ProfileTempValueListText = this.state.values[`${this.state.rxData["oid_ProfileTempValueListText"]}.val`];
+            const ProfileTempValueListValue = this.state.values[`${this.state.rxData["oid_ProfileTempValueListValue"]}.val`];
+            const ProfileTempValueListText = this.state.values[`${this.state.rxData["oid_ProfileTempValueListText"]}.val`];
 
             //console.log(`showTemperatureValue ${ProfileTempValueListValue}  ${ProfileTempValueListText}`);
 
             if (ProfileTempValueListValue !== undefined && ProfileTempValueListText !== undefined) {
-                let oProfileTempValueListValue = ProfileTempValueListValue.split(";");
-                let oProfileTempValueListText = ProfileTempValueListText.split(";");
+                const oProfileTempValueListValue = ProfileTempValueListValue.split(";");
+                const oProfileTempValueListText = ProfileTempValueListText.split(";");
 
-                let values = [];
+                const values = [];
                 for (let p = 1; p <= oProfileTempValueListValue.length; p++) {
                     values.push(this.createValueData(oProfileTempValueListValue[p], oProfileTempValueListText[p]));
                 }
@@ -1465,7 +1489,7 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
     createTimeTableDetails(periods:periods, currentTimePeriod:number, day:string, CopyOID:string | null, ProfileMinTemperature:number): JSX.Element{
         //https://mui.com/material-ui/react-table/
 
-        const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? "0.5" : "1.0";
+        const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? 0.5 : 1.0;
 
         console.log(`createTimeTableDetails ${currentTimePeriod} ${JSON.stringify(periods)} ${day} ${ProfileMinTemperature} ${TempSetWidthLow}`);
 
@@ -1481,14 +1505,14 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
         >
             <TableHead>
                 <TableRow>
-                    <TableCell align="right" spawn="3">
+                        <TableCell align="right" colSpan={3}>
                         {day}
                     </TableCell>
                 </TableRow>
                 <TableRow>
-                    <TableCell align="right" maxWidth="30px">{Generic.t("Period")}</TableCell>
-                    <TableCell align="right" maxWidth="50px">{Generic.t("from")}</TableCell>
-                    <TableCell align="right" maxWidth="50px"> {Generic.t("Temperature")}</TableCell>
+                    <TableCell align="right" style={{ maxWidth: "30px" }}>{Generic.t("Period")}</TableCell>
+                    <TableCell align="right" style={{ maxWidth: "50px" }}>{Generic.t("from")}</TableCell>
+                    <TableCell align="right" style={{ maxWidth: "50px" }}> {Generic.t("Temperature")}</TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
@@ -1519,6 +1543,9 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
 
 
     createTable_Dummy(): JSX.Element{
+
+        
+
         return <div
             ref={this.refCardContent}
             style={styles.cardContent}
@@ -1550,13 +1577,13 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
                 <p>{Generic.t("Profil ")} {currentProfile} / {room}</p>
             </div>
 
-            <Grid
+            <Grid2
                 container spacing={0.5}
                 alignItems="center"
                 justifyContent="center"
             >
                 {timetable}
-            </Grid>
+            </Grid2>
 
         </div>;
     }
@@ -1591,7 +1618,7 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
                 <p> {Generic.t("Profil ")} {currentProfile} / {room}</p>
             </div>
 
-            <Grid
+            <Grid2
                 container
                 spacing={0.5}
                 alignItems="center"
@@ -1606,7 +1633,7 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
             >
                 {timetableMoFr}
                 {timetableSaSu}
-            </Grid>
+            </Grid2>
         </div>;
     }
 
@@ -1675,7 +1702,7 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
                 <p> {Generic.t("Profil ")} {currentProfile} / {room}</p>
             </div>
 
-            <Grid
+            <Grid2
                 container
                 spacing={0}>
 
@@ -1693,7 +1720,7 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
 
                 {timetableSun}
 
-            </Grid>
+            </Grid2>
         </div>;
     }
 
@@ -1736,7 +1763,7 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
             size = this.refCardContent.current.offsetHeight;
         }
 
-        //console.log(`heating time schedule: size ${size}`);
+        console.log(`heating time schedule: size ${size}`);
 
         const content = this.createTable();
 

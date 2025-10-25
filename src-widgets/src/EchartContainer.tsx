@@ -1,16 +1,20 @@
 
 import React from "react";
-import ReactEChartsCore, { EChartsReactProps } from "echarts-for-react";
+//import ReactEChartsCore, { EChartsReactProps } from "echarts-for-react";
+
+import ReactEChartsCore from "echarts-for-react";
+import type { EChartsReactProps } from "echarts-for-react";
+
 import * as echarts from "echarts";
 import type { ECharts as EChartsType } from "echarts";
 
-interface EchartContainerProps extends EChartsReactProps { }
+//interface EchartContainerProps extends EChartsReactProps { }
 
-class EchartContainer extends React.Component<EchartContainerProps> {
-    render() {
+class EchartContainer extends React.Component<EChartsReactProps> {
+    render(): JSX.Element {
         const { onChartReady, ...restProps } = this.props;
 
-        const handleChartReady = (instance: EChartsType) => {
+        const handleChartReady = (instance: EChartsType): void => {
             const group = "Weather";
             console.log(`EchartContainer on chart ready ${group}`);
 

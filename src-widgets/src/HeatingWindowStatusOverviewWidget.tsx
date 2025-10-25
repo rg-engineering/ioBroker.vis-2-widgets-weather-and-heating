@@ -1,9 +1,10 @@
+/* eslint-disable prefer-template */
+/* eslint-disable @typescript-eslint/dot-notation */
 import React, { type CSSProperties } from 'react';
 import type {
     RxRenderWidgetProps,
     RxWidgetInfo,
     VisRxWidgetProps,
-    VisWidgetCommand,
     WidgetData,
     VisRxWidgetState,
     RxWidgetInfoAttributesField
@@ -18,9 +19,7 @@ import Generic from "./Generic";
 import {
     List,
     ListItem,
-    ListItemText,
-    ListItemAvatar,
-    Avatar,
+    ListItemText
 } from "@mui/material";
 
 const styles: Record<string, CSSProperties> = {
@@ -39,7 +38,9 @@ const setDataStructures = async (
     field: RxWidgetInfoAttributesField,
     data: WidgetData,
     changeData: (newData: WidgetData) => void,
-    socket: LegacyConnection,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    socket: LegacyConnection
+    // eslint-disable-next-line @typescript-eslint/require-await
 ): Promise<void> => {
     console.log(`set new data structure instance ${data["instance"]}` );
 
@@ -206,7 +207,6 @@ export default class HeatingWindowStatusOverviewWidget extends Generic<StaticRxD
 
 
     // Do not delete this method. It is used by vis to read the widget configuration.
-    // eslint-disable-next-line class-methods-use-this
     getWidgetInfo(): RxWidgetInfo {
         return HeatingWindowStatusOverviewWidget.getWidgetInfo();
     }
@@ -281,15 +281,25 @@ export default class HeatingWindowStatusOverviewWidget extends Generic<StaticRxD
 
                 <List sx={{ width: '100%', maxWidth: 300, bgcolor: this.state.rxData["roombackground_color"] || "background.paper" }}>
                     {data.map((roomData: roomData, i: number) => <ListItem key={i} >
-                        
+
                         <ListItemText
                             primary={roomData.room}
                             secondary={`${roomData.sinceText} ${roomData.changed}`}
-                            primaryTypographyProps={{
-                                color: roomData.isOpen ? this.state.rxData["roomname_window_closed_color"] || "red" : this.state.rxData["roomname_window_open_color"] || "green",
-                            }}
-                            secondaryTypographyProps={{
-                                color: roomData.isOpen ? this.state.rxData["roomlastchange_window_closed_color"] || "red" : this.state.rxData["roomlastchange_window_open_color"] || "blue",
+                            slotProps={{
+                                primary: {
+                                    sx: {
+                                        color: roomData.isOpen
+                                            ? this.state.rxData["roomname_window_closed_color"] || "red"
+                                            : this.state.rxData["roomname_window_open_color"] || "green",
+                                    },
+                                },
+                                secondary: {
+                                    sx: {
+                                        color: roomData.isOpen
+                                            ? this.state.rxData["roomlastchange_window_closed_color"] || "red"
+                                            : this.state.rxData["roomlastchange_window_open_color"] || "blue",
+                                    },
+                                },
                             }}
                         />
                     </ListItem>)}
@@ -299,39 +309,39 @@ export default class HeatingWindowStatusOverviewWidget extends Generic<StaticRxD
             </div>;
 
 
-           /* soll
-            return <div
-                ref={this.refCardContent}
-                style={styles.cardContent}
-            >
-                <div style={{ color: this.state.rxData["headline_color"] || "white" }} >
-                    <p>{Generic.t("Window Status Overview")}</p>
-                </div>
-
-                <div style={{ color: this.state.rxData["statusline_color"] || "white" }} >
-                    <p>{windowsOpen > 0 ? `${windowsOpen} ${Generic.t("Windows open")}` : Generic.t("all windows closed")}</p>
-                </div>
-
-                
-                <List sx={{ width: '100%', maxWidth: 300, bgcolor: this.state.rxData["roombackground_color"] || "background.paper" }}>
-                    {data.map((roomData: roomData, i: number) => <ListItem key={i} >
-                        <ListItemAvatar>
-                            {this.GetIcon(roomData.icon)}
-                        </ListItemAvatar>
-                        <ListItemText
-                            primary={roomData.room}
-                            secondary={`${roomData.sinceText} ${roomData.changed}`}
-                            primaryTypographyProps={{
-                                color: roomData.isOpen ? this.state.rxData["roomname_window_closed_color"] || "red" : this.state.rxData["roomname_window_open_color"] || "green",
-                            }}
-                            secondaryTypographyProps={{
-                                color: roomData.isOpen ? this.state.rxData["roomlastchange_window_closed_color"] || "red" : this.state.rxData["roomlastchange_window_open_color"] || "blue",
-                            }}
-                        />
-                    </ListItem>)}
-                </List >
-            </div>;
-            */
+            /* soll
+             return <div
+                 ref={this.refCardContent}
+                 style={styles.cardContent}
+             >
+                 <div style={{ color: this.state.rxData["headline_color"] || "white" }} >
+                     <p>{Generic.t("Window Status Overview")}</p>
+                 </div>
+ 
+                 <div style={{ color: this.state.rxData["statusline_color"] || "white" }} >
+                     <p>{windowsOpen > 0 ? `${windowsOpen} ${Generic.t("Windows open")}` : Generic.t("all windows closed")}</p>
+                 </div>
+ 
+                 
+                 <List sx={{ width: '100%', maxWidth: 300, bgcolor: this.state.rxData["roombackground_color"] || "background.paper" }}>
+                     {data.map((roomData: roomData, i: number) => <ListItem key={i} >
+                         <ListItemAvatar>
+                             {this.GetIcon(roomData.icon)}
+                         </ListItemAvatar>
+                         <ListItemText
+                             primary={roomData.room}
+                             secondary={`${roomData.sinceText} ${roomData.changed}`}
+                             primaryTypographyProps={{
+                                 color: roomData.isOpen ? this.state.rxData["roomname_window_closed_color"] || "red" : this.state.rxData["roomname_window_open_color"] || "green",
+                             }}
+                             secondaryTypographyProps={{
+                                 color: roomData.isOpen ? this.state.rxData["roomlastchange_window_closed_color"] || "red" : this.state.rxData["roomlastchange_window_open_color"] || "blue",
+                             }}
+                         />
+                     </ListItem>)}
+                 </List >
+             </div>;
+             */
 
             /*
              const content = <div
@@ -370,14 +380,13 @@ export default class HeatingWindowStatusOverviewWidget extends Generic<StaticRxD
 
              </div>;
              */
-        }
-        else {
+        } else {
             //just return empty div
             return <div
                 ref={this.refCardContent}
                 style={styles.cardContent}
-                >
-                </ div>;
+            >
+            </ div>;
         }
     }
 

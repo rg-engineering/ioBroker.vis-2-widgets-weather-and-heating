@@ -1,3 +1,4 @@
+
 import type { VisRxWidgetState } from '@iobroker/types-vis-2';
 import type VisRxWidget from '@iobroker/types-vis-2/visRxWidget';
 
@@ -17,6 +18,8 @@ export default class Generic<
         const parentOID = parts.join('.');
         return await this.props.context.socket.getObject(parentOID);
     }
+
+    
 }
 
 

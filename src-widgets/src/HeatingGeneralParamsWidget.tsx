@@ -1,9 +1,11 @@
+/* eslint-disable prefer-template */
+/* eslint-disable @typescript-eslint/dot-notation */
 import React, { type CSSProperties } from 'react';
 import type {
     RxRenderWidgetProps,
     RxWidgetInfo,
     VisRxWidgetProps,
-    VisWidgetCommand,
+    //VisWidgetCommand,
     WidgetData,
     VisRxWidgetState,
     RxWidgetInfoAttributesField
@@ -38,7 +40,9 @@ const setDataStructures = async (
     field: RxWidgetInfoAttributesField,
     data: WidgetData,
     changeData: (newData: WidgetData) => void,
-    socket: LegacyConnection,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    socket: LegacyConnection
+    // eslint-disable-next-line @typescript-eslint/require-await
 ): Promise<void> => {
     console.log(`set new data structure instance${data["instance"]}` );
 
@@ -200,14 +204,15 @@ export default class HeatingGeneralParamsWidget extends Generic<StaticRxData, St
     }
 
     // Do not delete this method. It is used by vis to read the widget configuration.
-    // eslint-disable-next-line class-methods-use-this
     getWidgetInfo(): RxWidgetInfo {
         return HeatingGeneralParamsWidget.getWidgetInfo();
     }
 
     
-    onChange1() {
-        if (this.props.editMode) return;
+    onChange1(): void  {
+        if (this.props.editMode) {
+            return;
+        }
         const oid = this.state.rxData["oid_HeatingPeriodActive"];
         if (this.getValue(oid) === true) {
             this.props.context.setValue(oid, false);
@@ -216,8 +221,10 @@ export default class HeatingGeneralParamsWidget extends Generic<StaticRxData, St
         }
     }
 
-    onChange2() {
-        if (this.props.editMode) return;
+    onChange2() : void{
+        if (this.props.editMode) {
+            return;
+        }
         const oid = this.state.rxData["oid_PublicHolidayToday"];
         if (this.getValue(oid) === true) {
             this.props.context.setValue(oid, false);
@@ -226,8 +233,10 @@ export default class HeatingGeneralParamsWidget extends Generic<StaticRxData, St
         }
     }
 
-    onChange3() {
-        if (this.props.editMode) return;
+    onChange3() : void{
+        if (this.props.editMode) {
+            return;
+        }
         const oid = this.state.rxData["oid_Present"];
         if (this.getValue(oid) === true) {
             this.props.context.setValue(oid, false);
@@ -236,8 +245,10 @@ export default class HeatingGeneralParamsWidget extends Generic<StaticRxData, St
         }
     }
 
-    onChange4() {
-        if (this.props.editMode) return;
+    onChange4() : void{
+        if (this.props.editMode) {
+            return;
+        }
         const oid = this.state.rxData["oid_PartyNow"];
         if (this.getValue(oid) === true) {
             this.props.context.setValue(oid, false);
@@ -246,8 +257,10 @@ export default class HeatingGeneralParamsWidget extends Generic<StaticRxData, St
         }
     }
 
-    onChange5() {
-        if (this.props.editMode) return;
+    onChange5() : void{
+        if (this.props.editMode) {
+            return;
+        }
         const oid = this.state.rxData["oid_GuestsPresent"];
         if (this.getValue(oid) === true) {
             this.props.context.setValue(oid, false);
@@ -256,8 +269,10 @@ export default class HeatingGeneralParamsWidget extends Generic<StaticRxData, St
         }
     }
 
-    onChange6() {
-        if (this.props.editMode) return;
+    onChange6() : void{
+        if (this.props.editMode) {
+            return;
+        }
         const oid = this.state.rxData["oid_HolidayPresent"];
         if (this.getValue(oid) === true) {
             this.props.context.setValue(oid, false);
@@ -266,8 +281,10 @@ export default class HeatingGeneralParamsWidget extends Generic<StaticRxData, St
         }
     }
 
-    onChange7() {
-        if (this.props.editMode) return;
+    onChange7() : void {
+        if (this.props.editMode) {
+            return;
+        }
         const oid = this.state.rxData["oid_VacationAbsent"];
         if (this.getValue(oid) === true) {
             this.props.context.setValue(oid, false);
@@ -276,8 +293,10 @@ export default class HeatingGeneralParamsWidget extends Generic<StaticRxData, St
         }
     }
 
-    onChange8() {
-        if (this.props.editMode) return;
+    onChange8() : void{
+        if (this.props.editMode) {
+            return;
+        }
         const oid = this.state.rxData["oid_FireplaceModeActive"];
         if (this.getValue(oid) === true) {
             this.props.context.setValue(oid, false);
@@ -285,8 +304,8 @@ export default class HeatingGeneralParamsWidget extends Generic<StaticRxData, St
             this.props.context.setValue(oid, true);
         }
     }
-   
-    getValue(oid: string) {
+
+    getValue(oid: string): string | boolean | undefined {
         if (oid !== undefined && oid !== '' && oid !== 'nothing_selected') {
             return this.state.values[`${oid}.val`];
         }
@@ -301,7 +320,7 @@ export default class HeatingGeneralParamsWidget extends Generic<StaticRxData, St
         if (value === 'false') {
             return false;
         }
-        // eslint-disable-next-line no-restricted-globals
+        
         if (!isNaN(value)) {
             return parseFloat(value);
         }

@@ -1,9 +1,10 @@
+/* eslint-disable prefer-template */
+/* eslint-disable @typescript-eslint/dot-notation */
 import React, { type CSSProperties } from 'react';
 import type {
     RxRenderWidgetProps,
     RxWidgetInfo,
     VisRxWidgetProps,
-    VisWidgetCommand,
     WidgetData,
     VisRxWidgetState,
     RxWidgetInfoAttributesField
@@ -57,12 +58,14 @@ const setDataStructures = async (
     field: RxWidgetInfoAttributesField,
     data: WidgetData,
     changeData: (newData: WidgetData) => void,
-    socket: LegacyConnection,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    socket: LegacyConnection
+    // eslint-disable-next-line @typescript-eslint/require-await
 ): Promise<void> => {
     console.log(`set new datastructure instance ${data["instance"]}` );
 
     const instance = data["instance"];
-    const roomName = data["RoomName"];
+    //const roomName = data["RoomName"];
 
     if (instance && instance.length > 0 && instance.includes("heatingcontrol") ) {
         // todo
@@ -246,17 +249,22 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
     }
 
     // Do not delete this method. It is used by vis to read the widget configuration.
-    // eslint-disable-next-line class-methods-use-this
     getWidgetInfo(): RxWidgetInfo {
         return HeatingRoomWidget.getWidgetInfo();
     }
 
+    getOid(obj: StaticRxData, key: keyof StaticRxData): string {
+        return obj[key] as string;
+    }
+
+
     getCurrentTargetTemperature(d: number): React.JSX.Element | null {
         let content = null;
 
-        const oid_name = "oid_TargetTemperature" + d;
-        console.log(oid_name);
-        const oid = this.state.rxData[oid_name];
+        //const oid_name = "oid_TargetTemperature" + d;
+        //console.log(oid_name);
+        //const oid = this.state.rxData[`${oid_name}`];
+        const oid = this.getOid(this.state.rxData, `oid_TargetTemperature${d}` as keyof StaticRxData);
         console.log(oid);
 
         if (oid !== undefined && oid!=null && oid.length > 5) {
@@ -285,9 +293,10 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
     getBatteryState(d: number): React.JSX.Element | null {
         let content = null;
 
-        const oid_name = "oid_ThermostatBatteryState" + d;
-        console.log(oid_name);
-        const oid = this.state.rxData[`${oid_name}`];
+        //const oid_name = "oid_ThermostatBatteryState" + d;
+        //console.log(oid_name);
+        //const oid = this.state.rxData[`${oid_name}`];
+        const oid = this.getOid(this.state.rxData, `oid_ThermostatBatteryState${d}` as keyof StaticRxData);
         console.log(oid);
 
         // nur true / false
@@ -299,12 +308,9 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
 
             if (thermostatBatteryState == false && typeof thermostatBatteryState == "boolean") {
                 content = <BatteryFull />;
-            }
-            else if (thermostatBatteryState == true && typeof thermostatBatteryState == "boolean") {
+            }            else if (thermostatBatteryState == true && typeof thermostatBatteryState == "boolean") {
                 content = <Battery1BarIcon />;
-            }
-
-            else if (Number(thermostatBatteryState) > 70) {
+            }            else if (Number(thermostatBatteryState) > 70) {
                 content = <BatteryFull />;
             } else if (Number(thermostatBatteryState) > 60) {
                 content = <Battery6BarIcon />;
@@ -326,9 +332,10 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
     getRSSIState(d: number): React.JSX.Element | null {
         let content = null;
 
-        const oid_name = "oid_ThermostatRSSI" + d;
-        console.log(oid_name);
-        const oid = this.state.rxData[oid_name];
+        //const oid_name = "oid_ThermostatRSSI" + d;
+        //console.log(oid_name);
+        //const oid = this.state.rxData[oid_name];
+        const oid = this.getOid(this.state.rxData, `oid_ThermostatRSSI${d}` as keyof StaticRxData);
         console.log(oid);
 
         // RSSI in dBm
@@ -355,8 +362,7 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
                 } else {
                     content = <SignalWifi4BarIcon />;
                 }
-            }
-            else {
+            }            else {
                 if (Number(thermostatRSSI) > 70) {
                     content = <SignalWifi4BarIcon />;
                 } else if (Number(thermostatRSSI) > 50) {
@@ -376,9 +382,10 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
     getCurrentActorState(d: number): React.JSX.Element | null {
         let content = null;
 
-        const oid_name = "oid_CurrentActorState" + d;
-        console.log(oid_name);
-        const oid = this.state.rxData[oid_name];
+        //const oid_name = "oid_CurrentActorState" + d;
+        //console.log(oid_name);
+        //const oid = this.state.rxData[oid_name];
+        const oid = this.getOid(this.state.rxData, `oid_CurrentActorState${d}` as keyof StaticRxData);
         console.log(oid);
 
         if (oid !== undefined && oid != null && oid.length > 5) {
@@ -396,9 +403,10 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
     getCurrentValveValue(d: number): React.JSX.Element | null {
         let content = null;
 
-        const oid_name = "oid_CurrentValveValue" + d;
-        console.log(oid_name);
-        const oid = this.state.rxData[oid_name];
+        //const oid_name = "oid_CurrentValveValue" + d;
+        //console.log(oid_name);
+        //const oid = this.state.rxData[oid_name];
+        const oid = this.getOid(this.state.rxData, `oid_CurrentValveValue${d}` as keyof StaticRxData);
         console.log(oid);
 
         if (oid !== undefined && oid != null && oid.length > 5) {
@@ -428,9 +436,10 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
     getCurrentThermostatBatteryVoltage(d: number): React.JSX.Element | null {
         let content = null;
 
-        const oid_name = "oid_ThermostatBatteryVoltage" + d;
-        console.log(oid_name);
-        const oid = this.state.rxData[oid_name];
+        //const oid_name = "oid_ThermostatBatteryVoltage" + d;
+        //console.log(oid_name);
+        //const oid = this.state.rxData[oid_name];
+        const oid = this.getOid(this.state.rxData, `oid_ThermostatBatteryVoltage${d}` as keyof StaticRxData);
         console.log(oid);
 
         if (oid !== undefined && oid != null && oid.length > 5) {
@@ -459,9 +468,10 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
     getCurrentTemperature(d: number): React.JSX.Element | null {
         let content = null;
 
-        const oid_name = "oid_CurrentTemperature" + d;
-        console.log(oid_name);
-        const oid = this.state.rxData[oid_name];
+        //const oid_name = "oid_CurrentTemperature" + d;
+        //console.log(oid_name);
+        //const oid = this.state.rxData[oid_name];
+        const oid = this.getOid(this.state.rxData, `oid_CurrentTemperature${d}` as keyof StaticRxData);
         console.log(oid);
 
         if (oid !== undefined && oid != null && oid.length > 5) {
@@ -481,9 +491,10 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
     getCurrentTemperatureExtSensor(d: number): React.JSX.Element | null{
         let content = null;
 
-        const oid_name = "oid_CurrentTemperatureExtSensor" + d;
-        console.log(oid_name);
-        const oid = this.state.rxData[oid_name];
+        //const oid_name = "oid_CurrentTemperatureExtSensor" + d;
+        //console.log(oid_name);
+        //const oid = this.state.rxData[oid_name];
+        const oid = this.getOid(this.state.rxData, `oid_CurrentTemperatureExtSensor${d}` as keyof StaticRxData);
         console.log(oid);
 
         if (oid !== undefined && oid != null && oid.length > 5) {
@@ -503,11 +514,11 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
 
     getThermostats(): React.JSX.Element | React.JSX.Element[] | null{
 
-        let content = [];
+        const content = [];
 
         for (let d = 1; d <= this.state.rxData["dataCount"]; d++) {
 
-            let cont = 
+            const cont = 
                 <Box sx={{
                     display: "flex",
                     flexWrap: "wrap",
@@ -543,13 +554,13 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
         const roomState = this.state.values[`${this.state.rxData["oid_RoomState"]}.val`];
         const roomLog = this.state.values[`${this.state.rxData["oid_RoomLog"]}.val`];
 
-        const style = {
-            width: "100%",
-            height: "100%",
-            border: 1,
-            textAlign: "left",
-            fontSize: "smaller",
-        };
+        //const style = {
+        //    width: "100%",
+        //    height: "100%",
+        //    border: 1,
+        //    textAlign: "left",
+        //    fontSize: "smaller",
+        //};
 
         return <div
             ref={this.refCardContent}

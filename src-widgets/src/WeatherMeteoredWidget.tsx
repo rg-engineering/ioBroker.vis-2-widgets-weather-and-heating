@@ -1,3 +1,5 @@
+/* eslint-disable prefer-template */
+/* eslint-disable @typescript-eslint/dot-notation */
 import React, { type CSSProperties } from 'react';
 import type {
     RxRenderWidgetProps,
@@ -31,7 +33,9 @@ const setDataStructures = async (
     field: RxWidgetInfoAttributesField,
     data: WidgetData,
     changeData: (newData: WidgetData) => void,
-    socket: LegacyConnection,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    socket: LegacyConnection
+    // eslint-disable-next-line @typescript-eslint/require-await
 ): Promise<void> => {
     console.log(`WeatherMeteoredWidget - set new datastructure ` );
 
@@ -67,7 +71,8 @@ export default class WeatherMeteoredWidget extends Generic<StaticRxData, StaticS
         };
     }
 
-    async componentDidMount() {
+    // eslint-disable-next-line @typescript-eslint/require-await
+    async componentDidMount() : Promise<void>{
 
         super.componentDidMount();
 
@@ -78,7 +83,8 @@ export default class WeatherMeteoredWidget extends Generic<StaticRxData, StaticS
         this.CreateTimer();
     }
 
-    async componentWillUnmount() {
+    // eslint-disable-next-line @typescript-eslint/require-await
+    async componentWillUnmount() : Promise<void>{
         super.componentWillUnmount();
         console.log("WeatherMeteoredWidget - componentWillUnmount");
         if (this.reloadTimer != null) {
@@ -87,29 +93,30 @@ export default class WeatherMeteoredWidget extends Generic<StaticRxData, StaticS
         }
         const WidgetID = this.state.rxData["WidgetID"];
         const id = "script_mrwid" + WidgetID;
-        // Prüfen, ob das Skript bereits geladen wurde
+        // PrÃ¼fen, ob das Skript bereits geladen wurde
         if (document.getElementById(id)) {
             console.log(`WeatherMeteoredWidget - script already loaded, need to remove `);
-            let element = document.getElementById(id);
+            const element = document.getElementById(id);
             if (element != null) {
                 element.remove();
             }
         }
     }
 
-    async onPropertyUpdate() {
+    // eslint-disable-next-line @typescript-eslint/require-await
+    async onPropertyUpdate():Promise<void> {
 
         console.log("WeatherMeteoredWidget - onPropertyUpdate");
 
         this.CreateTimer();
     }
 
-    CreateTimer() {
+    CreateTimer():void {
         if (this.state.rxData.EnableReload) {
 
             console.log("WeatherMeteoredWidget - create intervall timer");
             //only once per hour
-            const refreshInterval = 1000*60*60;
+            const refreshInterval = 1000 * 60 * 60;
 
             if (this.reloadTimer != null) {
                 clearTimeout(this.reloadTimer);
@@ -121,8 +128,7 @@ export default class WeatherMeteoredWidget extends Generic<StaticRxData, StaticS
                 this.AppendScript();
             }, refreshInterval);
 
-        }
-        else {
+        } else {
             console.log("WeatherMeteoredWidget - clear intervall timer");
             if (this.reloadTimer != null) {
                 clearTimeout(this.reloadTimer);
@@ -131,7 +137,7 @@ export default class WeatherMeteoredWidget extends Generic<StaticRxData, StaticS
         }
     }
 
-    AppendScript() {
+    AppendScript():void {
         const WidgetID = this.state.rxData["WidgetID"];
 
         const src = "https://api.meteored.com/widget/loader/" + WidgetID;
@@ -139,11 +145,11 @@ export default class WeatherMeteoredWidget extends Generic<StaticRxData, StaticS
 
         //const html = "<script type='text/javascript' async src=" + src + " onLoad={() => console.log('Meteored script loaded')}></script >";
 
-        // Prüfen, ob das Skript bereits geladen wurde
+        // PrÃ¼fen, ob das Skript bereits geladen wurde
         if (document.getElementById(id)) {
             console.log(`WeatherMeteoredWidget - script already loaded, need to remove `);
 
-            let element = document.getElementById(id);
+            const element = document.getElementById(id);
             if (element!=null) {
                 element.remove();
             }
@@ -207,7 +213,6 @@ export default class WeatherMeteoredWidget extends Generic<StaticRxData, StaticS
     }
 
     // Do not delete this method. It is used by vis to read the widget configuration.
-    // eslint-disable-next-line class-methods-use-this
     getWidgetInfo(): RxWidgetInfo {
         return WeatherMeteoredWidget.getWidgetInfo();
     }

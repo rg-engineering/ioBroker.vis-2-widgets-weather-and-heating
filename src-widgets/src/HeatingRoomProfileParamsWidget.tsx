@@ -1,9 +1,11 @@
+/* eslint-disable prefer-template */
+/* eslint-disable @typescript-eslint/dot-notation */
 import React, { type CSSProperties } from 'react';
 import type {
     RxRenderWidgetProps,
     RxWidgetInfo,
     VisRxWidgetProps,
-    VisWidgetCommand,
+    //VisWidgetCommand,
     WidgetData,
     VisRxWidgetState,
     RxWidgetInfoAttributesField
@@ -46,6 +48,7 @@ import 'dayjs/locale/nl';
 
 
 import Generic from "./Generic";
+//import { connect } from 'echarts';
 
 const styles: Record<string, CSSProperties> = {
     cardContent: {
@@ -64,7 +67,9 @@ const setDataStructures = async (
     field: RxWidgetInfoAttributesField,
     data: WidgetData,
     changeData: (newData: WidgetData) => void,
-    socket: LegacyConnection,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    socket: LegacyConnection
+    // eslint-disable-next-line @typescript-eslint/require-await
 ): Promise<void> => {
 
     console.log("set new datastructure instance" + data["instance"] );
@@ -346,8 +351,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
         };
     }
 
-    // eslint-disable-next-line class-methods-use-this
-    propertiesUpdate() {
+    propertiesUpdate() : void{
         // Widget has 3 important states
         // 1. this.state.values - contains all state values, that are used in widget (automatically collected from widget info).
         //                        So you can use `this.state.values[this.state.rxData.oid + ".val"]` to get value of state with id this.state.rxData.oid
@@ -358,8 +362,8 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
     }
 
 
-
-    async componentDidMount() {
+    // eslint-disable-next-line @typescript-eslint/require-await
+    async componentDidMount() : Promise<void>{
         super.componentDidMount();
 
         // Update data
@@ -367,101 +371,117 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
     }
 
     // Do not delete this method. It is used by vis to read the widget configuration.
-    // eslint-disable-next-line class-methods-use-this
     getWidgetInfo(): RxWidgetInfo {
         return HeatingRoomProfileParamsWidget.getWidgetInfo();
     }
 
     // This function is called every time when rxData is changed
-    async onRxDataChanged() {
+    // eslint-disable-next-line @typescript-eslint/require-await
+    async onRxDataChanged() : Promise<void>{
 
         this.propertiesUpdate();
         console.log("onRxDataChanged");
     }
 
     // This function is called every time when rxStyle is changed
-    // eslint-disable-next-line class-methods-use-this
-    onRxStyleChanged() {
+    onRxStyleChanged() : void {
         console.log("onRxStyleChanged");
     }
 
     // This function is called every time when some Object State updated, but all changes lands into this.state.values too
-    // eslint-disable-next-line class-methods-use-this, no-unused-vars
     //onStateUpdated(id:string, state) {
     //    console.log("onStateUpdated " + id + " " + JSON.stringify(state));
     //}
 
     
-    onChange1( val:string) {
+    onChange1( val:string) : void{
         const oid = this.state.rxData["oid_GuestIncrease"];
         //convert value to number
         console.log("onChange1 " + oid + "  " + val);
-        if (this.props.editMode) return;
+        if (this.props.editMode) {
+            return;
+        }
         this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
     }
-    onChange2(val: string) {
+    onChange2(val: string) : void{
         const oid = this.state.rxData["oid_PartyDecrease"];
         //convert value to number
         console.log("onChange1 " + oid + "  " + val);
-        if (this.props.editMode) return;
+        if (this.props.editMode) {
+            return;
+        }
         this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
     }
-    onChange3(val: string) {
+    onChange3(val: string) : void{
         const oid = this.state.rxData["oid_AbsentDecrease"];
         //convert value to number
         console.log("onChange1 " + oid + "  " + val);
-        if (this.props.editMode) return;
+        if (this.props.editMode) {
+            return;
+        }
         this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
     }
-    onChange4(val: string) {
+    onChange4(val: string) :void {
         const oid = this.state.rxData["oid_VacationAbsentDecrease"];
         //convert value to number
         console.log("onChange1 " + oid + "  " + val);
-        if (this.props.editMode) return;
+        if (this.props.editMode) {
+            return;
+        }
         this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
     }
-    onChange5(val: string) {
+    onChange5(val: string) : void{
         const oid = this.state.rxData["oid_WindowOpenDecrease"];
         //convert value to number
         console.log("onChange1 " + oid + "  " + val);
-        if (this.props.editMode) return;
+        if (this.props.editMode) {
+            return;
+        }
         this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
     }
-    onChange6(val: string) {
+    onChange6(val: string) : void{
         const oid = this.state.rxData["oid_FireplaceModeDecrease"];
         //convert value to number
         console.log("onChange1 " + oid + "  " + val);
-        if (this.props.editMode) return;
+        if (this.props.editMode) {
+            return;
+        }
         this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
     }
     
-    onChange7(val: string) {
+    onChange7(val: string) : void {
         const oid = this.state.rxData["oid_MinimumTemperature"];
         //convert value to number
         console.log("onChange1 " + oid + "  " + val);
-        if (this.props.editMode) return;
+        if (this.props.editMode) {
+            return;
+        }
         this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
     }
-    onChange8(val: string) {
+    onChange8(val: string) : void{
         const oid = this.state.rxData["oid_TemperaturOverrideTime"];
 
         console.log("onChange1 " + oid + "  " + val);
-        if (this.props.editMode) return;
+        if (this.props.editMode) {
+            return;
+        }
         this.props.context.setValue(oid, val);
     }
-    onChange9(val: string) {
+    onChange9(val: string) : void {
         const oid = this.state.rxData["oid_TemperaturOverride"];
         //convert value to number
         console.log("onChange1 " + oid + "  " + val);
-        if (this.props.editMode) return;
+        if (this.props.editMode) {
+            return;
+        }
         this.props.context.setValue(oid, HeatingRoomProfileParamsWidget.convertValue2Number(val));
     }
 
-    createValueData(value:number, text: string) {
+    createValueData(value: number, text: string): {value: number, text: string} {
         return { value, text };
     }
 
-    handleOnChangeTemperature(val: tempVal ) {
+    handleOnChangeTemperature(val: tempVal ) : void{
         console.log(`onChange Temp: ${val.temperature}  ${val.OID} ${JSON.stringify(val)}`);
         //onChange Temp: 6  oid_profile_Sat_1_Temperature { "temperature": "6", "OID": "oid_profile_Sat_1_Temperature" }
         if (this.props.editMode) {
@@ -469,7 +489,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
         }
         this.props.context.setValue(val.OID, val.temperature);
     }
-    handleOnChangeTime(val: timeVal) {
+    handleOnChangeTime(val: timeVal) : void{
         console.log(`onChange Temp: ${val.time}  ${val.OID} ${JSON.stringify(val)}`);
         //onChange Temp: 6  oid_profile_Sat_1_Temperature { "temperature": "6", "OID": "oid_profile_Sat_1_Temperature" }
         if (this.props.editMode) {
@@ -478,17 +498,17 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
         this.props.context.setValue(val.OID, val.time);
     }
 
-    static convertValue2Number(value:string) {
+    static convertValue2Number(value: string): number {
 
         try {
             return parseInt(value);
-        }
-        catch (e) {
+        } catch (e: unknown) {
+            console.error(`convertValue2Number error ${e as Error}`);
             return 0;
         }
     }
 
-    showTimeValue(oid_time:string, value:string, name:string) {
+    showTimeValue(oid_time: string, value: string, name: string): React.JSX.Element | React.JSX.Element[] | null{
         let ret = null;
 
         console.log(`showTimeValue ${oid_time} ${value} ${name} ${this.props.context.themeType}`);
@@ -513,8 +533,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
                 />
                 <FormHelperText id="Time-text">{Generic.t(name)}</FormHelperText>
             </FormControl>
-        }
-        else {
+        } else {
             ret = <FormControl sx={{ m: 0.5, width: "20ch" }} >
 
                 <LocalizationProvider
@@ -577,7 +596,8 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
         return ret;
     }
 
-    showTemperatureValue(oid_temperature:string, minTemperature:number, TempSetWidthLow:number, value:number, name:string, mode:string) {
+    
+    showTemperatureValue(oid_temperature: string, minTemperature: number, TempSetWidthLow: number, value: number, name: string, mode: string): React.JSX.Element | React.JSX.Element[] | null {
 
         let ret = null;
 
@@ -594,7 +614,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
                     aria-describedby={name}
                     inputProps={{
                         'aria-label': Generic.t("Temperature"),
-                        'step': TempSetWidthLow,
+                        step: TempSetWidthLow,
                         min: minTemperature,
                         max: 30,
                         type: "number", // <--- auch hierhin verschieben!
@@ -633,8 +653,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
                     style={{ width: 50 }}
                 />
                 */
-        }
-        else {
+        } else {
 
             // werte vorrat aus dem Adapter holen
             /*
@@ -652,11 +671,11 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
            //* bei relaativ die Add / Div, bei absolut die Profilewerte
            //* ovrride (temp und Zeit) und min Temperatur handeln
 
-            let TempAddValueListText = this.state.values[`${this.state.rxData["oid_TempAddValueListText"]}.val`];
-            let TempDivValueListText = this.state.values[`${this.state.rxData["oid_TempDivValueListText"]}.val`];
-            let TempValueListValue = this.state.values[`${this.state.rxData["oid_TempValueListValue"]}.val`];
-            let OverrideTempValueListText = this.state.values[`${this.state.rxData["oid_OverrideTempValueListText"]}.val`];
-            let OverrideTempValueListValue = this.state.values[`${this.state.rxData["oid_OverrideTempValueListValue"]}.val`];
+            const TempAddValueListText = this.state.values[`${this.state.rxData["oid_TempAddValueListText"]}.val`];
+            const TempDivValueListText = this.state.values[`${this.state.rxData["oid_TempDivValueListText"]}.val`];
+            const TempValueListValue = this.state.values[`${this.state.rxData["oid_TempValueListValue"]}.val`];
+            const OverrideTempValueListText = this.state.values[`${this.state.rxData["oid_OverrideTempValueListText"]}.val`];
+            const OverrideTempValueListValue = this.state.values[`${this.state.rxData["oid_OverrideTempValueListValue"]}.val`];
 
             //console.log(`showTemperatureValue ${TempAddValueListText}  ${TempValueListValue}`);
 
@@ -674,23 +693,20 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
                 if (mode == "absolute") {
                     oTempValueListValue = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
                     oTempValueListText = ["0°C", "1°C", "2°C", "3°C", "4°C", "5°C", "6°C", "7°C", "8°C", "9°C", "10°C"];
-                }
-                else if (mode == "override") {
+                } else if (mode == "override") {
                     oTempValueListValue = OverrideTempValueListValue.split(";");
                     oTempValueListText = OverrideTempValueListText.split(";");
-                }
-                else if (mode == "increase") {
+                } else if (mode == "increase") {
                     oTempValueListValue = TempValueListValue.split(";");
                     oTempValueListText = TempAddValueListText.split(";");
-                }
-                else {
+                } else {
                     oTempValueListValue = TempValueListValue.split(";");
                     oTempValueListText = TempDivValueListText.split(";");
                 }
 
                 console.log(`showTemperatureValue ${mode} ${oTempValueListValue}  ${oTempValueListText}`);
 
-                let values = [];
+                const values = [];
                 if (oTempValueListValue !== undefined && oTempValueListText !== undefined) {
                     for (let p = 0; p < oTempValueListValue.length; p++) {
                         values.push(this.createValueData(oTempValueListValue[p], oTempValueListText[p]));
@@ -725,7 +741,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
         return ret;
     }
 
-    getGuestIncrease() {
+    getGuestIncrease(): React.JSX.Element | React.JSX.Element[] | null {
         let content = null;
         const oid = this.state.rxData["oid_GuestIncrease"];
         //console.log("oid " + oid);
@@ -758,7 +774,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
         return content;
     }
 
-    getPartyDecrease() {
+    getPartyDecrease(): React.JSX.Element | React.JSX.Element[] | null{
         let content = null;
         const oid = this.state.rxData["oid_PartyDecrease"];
         //console.log("oid " + oid);
@@ -792,7 +808,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
         return content;
     }
 
-    getAbsentDecrease() {
+    getAbsentDecrease(): React.JSX.Element | React.JSX.Element[] | null {
         let content = null;
         const oid = this.state.rxData["oid_AbsentDecrease"];
         //console.log("oid " + oid);
@@ -827,7 +843,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
         return content;
     }
 
-    getVacationAbsentDecrease() {
+    getVacationAbsentDecrease(): React.JSX.Element | React.JSX.Element[] | null {
         let content = null;
         const oid = this.state.rxData["oid_VacationAbsentDecrease"];
         //console.log("oid " + oid);
@@ -861,7 +877,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
         return content;
     }
 
-    getWindowOpenDecrease() {
+    getWindowOpenDecrease(): React.JSX.Element | React.JSX.Element[] | null {
         let content = null;
         const oid = this.state.rxData["oid_WindowOpenDecrease"];
         //console.log("oid " + oid);
@@ -898,7 +914,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
 
 
 
-    getFireplaceModeDecrease() {
+    getFireplaceModeDecrease(): React.JSX.Element | React.JSX.Element[] | null {
         let content = null;
         const oid = this.state.rxData["oid_FireplaceModeDecrease"];
         //console.log("oid " + oid);
@@ -932,7 +948,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
         return content;
     }
 
-    getMinimumTemperature() {
+    getMinimumTemperature(): React.JSX.Element | React.JSX.Element[] | null {
         let content = null;
         const oid = this.state.rxData["oid_MinimumTemperature"];
         //console.log("oid " + oid);
@@ -965,7 +981,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
         return content;
     }
 
-    getOverrideTemperatureTime() {
+    getOverrideTemperatureTime(): React.JSX.Element | React.JSX.Element[] | null {
         let content = null;
         const oid = this.state.rxData["oid_TemperaturOverrideTime"];
         //console.log("oid " + oid);
@@ -997,7 +1013,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
         return content;
     }
 
-    getOverrideTemperature() {
+    getOverrideTemperature(): React.JSX.Element | React.JSX.Element[] | null {
         let content = null;
         const oid = this.state.rxData["oid_TemperaturOverride"];
         //console.log("oid " + oid);
@@ -1031,7 +1047,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
         return content;
     }
 
-    getTemperatureDecreaseMode() { 
+    getTemperatureDecreaseMode(): React.JSX.Element | React.JSX.Element[] | null { 
 
         let content = null;
         const oid = this.state.rxData["oid_TemperatureDecreaseMode"];
@@ -1050,7 +1066,7 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
     }
 
 
-    CreateTable() {
+    CreateTable(): React.JSX.Element | React.JSX.Element[] | null {
 
         const content = <div
             ref={this.refCardContent}
@@ -1100,8 +1116,13 @@ export default class HeatingRoomProfileParamsWidget extends Generic<StaticRxData
         console.log("heating room profile params: size " + size);
 
 
-        const content = this.CreateTable();
+        let content = this.CreateTable();
 
+        if (content == null) {
+            content = <div></div>;
+            console.log("content is null ");
+
+        }
 
         if (this.state.rxData.noCard || props.widget.usedInWidget) {
             console.log("nur content");

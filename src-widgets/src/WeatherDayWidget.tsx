@@ -1,3 +1,5 @@
+/* eslint-disable prefer-template */
+/* eslint-disable @typescript-eslint/dot-notation */
 /// <reference types="vite/client" />
 
 import React, { type CSSProperties } from 'react';
@@ -11,9 +13,9 @@ import type {
 } from '@iobroker/types-vis-2';
 import type { LegacyConnection } from '@iobroker/adapter-react-v5';
 
-import {
-    Grid
-} from "@mui/material";
+
+
+import Grid2 from "@mui/material/Grid2";
 
 import Generic from "./Generic";
 
@@ -34,7 +36,7 @@ const styles: Record<string, CSSProperties> = {
 // todo wind: wenn beaufort-Galerie, dann muss auch Beafort-OID verwendet werden
 // todo wind: in galerie1 fehlt icon 9, 18,27
 
-function importAllImages(imageModules: Record<string, string> ) {
+//function importAllImages(imageModules: Record<string, string> ) {
     //let images = new Map();
 
     // Iteriere durch alle importierten Dateien
@@ -51,19 +53,35 @@ function importAllImages(imageModules: Record<string, string> ) {
     });
     */
 
+//    const imageMap: Record<string, string> = {};
+
+//    for (const path in imageModules) {
+//        const fileName = path.split('/').pop()?.replace(/\.[^/.]+$/, ''); // z.B. "home" aus "/src/assets/icons/home.png"
+//        const mod = imageModules[path] as unknown as { default: string };
+//        if (fileName && mod?.default) {
+//            imageMap[fileName] = mod.default;
+//        }
+//    }
+
+
+//    return imageMap;
+//}
+
+function importAllImages(   imageModules: Record<string, { default: string }>): Record<string, string> {
     const imageMap: Record<string, string> = {};
 
     for (const path in imageModules) {
-        const fileName = path.split('/').pop()?.replace(/\.[^/.]+$/, ''); // z.B. "home" aus "/src/assets/icons/home.png"
-        const mod = imageModules[path] as { default: string };
+        const fileName = path.split('/').pop()?.replace(/\.[^/.]+$/, '');
+        const mod = imageModules[path];
         if (fileName && mod?.default) {
             imageMap[fileName] = mod.default;
         }
     }
 
-
     return imageMap;
 }
+
+
 //const imagesTest = importAllImages(require.context('./assets/icons/tiempo-weather/galeria1', false, /\.(png)$/));
 
 // weather icons
@@ -127,7 +145,9 @@ const setDataStructures = async (
     field: RxWidgetInfoAttributesField,
     data: WidgetData,
     changeData: (newData: WidgetData) => void,
-    socket: LegacyConnection,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    socket: LegacyConnection
+    // eslint-disable-next-line @typescript-eslint/require-await
 ): Promise<void> => {
 
     console.log(`set new datastructure instance ${data["instance"]} ${data["datastructure"]}`);
@@ -229,7 +249,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                             name: "instance",    // name in data structure
                             label: "instance", // translated field label
                             type: "instance",
-                            adapters: ["daswetter", "weatherunderground"],
+                            adapter: ["daswetter", "weatherunderground"].join(","),
                             default: "daswetter.0",
                             onChange: setDataStructures,
                         },
@@ -418,12 +438,11 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
     }
 
     // Do not delete this method. It is used by vis to read the widget configuration.
-    // eslint-disable-next-line class-methods-use-this
     getWidgetInfo(): RxWidgetInfo {
         return WeatherDayWidget.getWidgetInfo();
     }
 
-    renderWidgetBody(props: RxRenderWidgetProps): React.JSX.Element | React.JSX.Element[] | null  {
+    renderWidgetBody(props: RxRenderWidgetProps): React.JSX.Element | React.JSX.Element[] | null {
         super.renderWidgetBody(props);
 
         let size;
@@ -451,7 +470,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
         let weatherimage = icons_weather_galeria1["1"];
 
         src_icon_weather = weatherimage;
-        //src_icon_weather_name = weatherimage.name;
+        src_icon_weather_name = weatherimage;
 
         //console.warn("1111");
 
@@ -490,15 +509,14 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
             if (weatherimage != null && typeof weatherimage !== 'undefined') {
                 src_icon_weather = weatherimage;
                 //src_icon_weather_name = weatherimage.name;
-            }
-            else {
+            } else {
                 console.warn("weather image not found " + iconlabelset + " / " + weather_icon);
             }
         }
 
-        
 
-        console.log(`weather icon ${weather_icon} = ${src_icon_weather_name}  ` + typeof weather_icon );
+
+        console.log(`weather icon ${weather_icon} = ${src_icon_weather_name}  ` + typeof weather_icon);
 
         //wind symbol
         const wind_icon = this.state.values[`${this.state.rxData["oid_wind_symbol"]}.val`];
@@ -513,7 +531,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
         let windimage = icons_wind_galeria1["1"];
 
         src_icon_wind = windimage;
-        //src_icon_wind_name = windimage.name;
+        src_icon_wind_name = windimage;
 
         //console.warn("1111 " + windiconlabelset + "/ " + wind_icon);
 
@@ -540,13 +558,12 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
             if (windimage != null && typeof windimage !== 'undefined') {
                 src_icon_wind = windimage;
                 //src_icon_wind_name = windimage.name;
-            }
-            else {
+            } else {
                 console.warn("wind image not found " + windiconlabelset + " / " + wind_icon);
             }
         }
-        
-        console.log(`wind icon ${wind_icon} = ${src_icon_wind_name} ` + typeof wind_icon );
+
+        console.log(`wind icon ${wind_icon} = ${src_icon_wind_name} ` + typeof wind_icon);
 
         const date = this.state.values[`${this.state.rxData["oid_date"]}.val`];
         let day = 1;
@@ -577,53 +594,53 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
             ref={this.refCardContent}
             style={styles.cardContent}
         >
-            <Grid
+            <Grid2
                 container
                 spacing={0.5}
                 alignItems="center"
                 justifyContent="center"
             >
-                <Grid item xs={12}>
+                <Grid2 size={{ xs: 12 }} >
                     <div>
                         <p>{this.state.values[`${this.state.rxData["oid_dayname"]}.val`]}</p>
                         <p>{oDate.toLocaleDateString()}</p>
                     </div>
-                </Grid>
-                <Grid item xs={6} >
+                </Grid2>
+                <Grid2 size={{ xs: 6 }} >
                     <div>
                         <img src={src_icon_weather} alt={src_icon_weather_name} ></img>
                     </div>
-                </Grid>
-                <Grid item xs={6}>
+                </Grid2>
+                <Grid2 size={{ xs: 6 }}>
                     <div style={{ fontSize: "small" }}>
                         <p>{Generic.t("max")} {this.state.values[`${this.state.rxData["oid_temp_max"]}.val`]} °C</p>
                         <p>{Generic.t("min")} {this.state.values[`${this.state.rxData["oid_temp_min"]}.val`]} °C</p>
                     </div>
-                </Grid>
+                </Grid2>
 
-                <Grid item xs={12}>
+                <Grid2 size={{ xs: 12 }}>
                     <div>
                         <p>{this.state.values[`${this.state.rxData["oid_symbol_description"]}.val`]}</p>
                     </div>
-                </Grid>
+                </Grid2>
 
-                <Grid item xs={6}>
+                <Grid2 size={{ xs: 6 }}>
                     <div>
                         <img src={src_icon_wind} alt={src_icon_wind_name}></img>
                     </div>
-                </Grid>
-                <Grid item xs={6}>
+                </Grid2>
+                <Grid2 size={{ xs: 6 }}>
                     <div style={{ fontSize: "small" }}>
                         <p>{Generic.t("Wind")} {this.state.values[`${this.state.rxData["oid_wind_value"]}.val`]} km/h</p>
                         <p>{Generic.t("WindGusts")} {this.state.values[`${this.state.rxData["oid_windgusts_value"]}.val`]} km/h</p>
                     </div>
-                </Grid>
-                <Grid item xs={6}>
+                </Grid2>
+                <Grid2 size={{ xs: 6 }}>
                     <div>
                         <p>{Generic.t("sun")} {sunduration} h</p>
                     </div>
-                </Grid>
-            </Grid>
+                </Grid2>
+            </Grid2>
         </div>;
 
         if (this.state.rxData.noCard || props.widget.usedInWidget) {

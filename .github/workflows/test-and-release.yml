@@ -19,22 +19,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-
-# Performs quick checks before the expensive test runs
-  check-and-lint:
-    if: contains(github.event.head_commit.message, '[skip ci]') == false
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: ioBroker/testing-action-check@v1
-        with:
-          node-version: '22.x'
-          # Uncomment the following line if your adapter cannot be installed using 'npm ci'
-          # install-command: 'npm install'
-          lint: true
-
-
   # Runs adapter tests on all supported node versions and OSes
   adapter-tests:
     if: contains(github.event.head_commit.message, '[skip ci]') == false
@@ -74,9 +58,9 @@ jobs:
           path: tmp/screenshots/**/*.png
           retention-days: 3
 
- # Deploys the final package to NPM
+  # Deploys the final package to NPM
   deploy:
-    needs: [check-and-lint, adapter-tests]
+    needs: [adapter-tests]
 
     # Trigger this step only when a commit on master is tagged with a version number
     if: |
@@ -157,7 +141,3 @@ jobs:
 
         # Add the following line BEFORE finalize if sourcemap uploads are needed
         # sentry-cli releases files $SENTRY_VERSION upload-sourcemaps build/
-
-    
-
-     

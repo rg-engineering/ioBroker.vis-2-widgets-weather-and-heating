@@ -14,6 +14,7 @@ export default [
         files: ["**/*.js"],
         rules: {
             "@typescript-eslint/no-require-imports": "off",
+            "@typescript-eslint/no-redundant-type-constituents": "off"
         },
     },
     {
@@ -28,7 +29,7 @@ export default [
             "jsdoc/require-param": "off",
             "no-constant-binary-expression": "off",
             "valid-typeof": "off"
-
+            
 
             //"prettier/prettier": "off",
             //"jsdoc/require-jsdoc": "off",

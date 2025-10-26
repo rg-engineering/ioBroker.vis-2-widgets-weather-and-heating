@@ -10,7 +10,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather-and-heating"
+    "url": "git+https://github.com/rg-engineering/ioBroker.vis-2-widgets-weather-and-heating.git"
   },
   "keywords": [
     "ioBroker",

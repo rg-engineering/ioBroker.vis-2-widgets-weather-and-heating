@@ -48,7 +48,6 @@
     "test": "mocha ./test/*.test.js",
     "update-packages": "npx -y npm-check-updates --upgrade && cd src-widgets && npx -y npm-check-updates --upgrade",
     "npm": "npm i && cd src-widgets && npm i -f",
-    "test:package": "mocha ./test/*.test.js"
   },
   "bugs": {
     "url": "https://github.com/rg-enineering/ioBroker.vis-2-widgets-weather-and-heating/issues"

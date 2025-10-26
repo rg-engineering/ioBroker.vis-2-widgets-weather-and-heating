@@ -28,7 +28,8 @@ export default [
             "jsdoc/require-param-description": "off",
             "jsdoc/require-param": "off",
             "no-constant-binary-expression": "off",
-            "valid-typeof": "off"
+            "valid-typeof": "off",
+            "@typescript-eslint/no-redundant-type-constituents": "off"
             
 
             //"prettier/prettier": "off",

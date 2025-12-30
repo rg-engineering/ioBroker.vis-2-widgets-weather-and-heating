@@ -1,0 +1,7 @@
+
+
+
+Button für RaumStatus
+
+Min / Max-Temperatur in wetterwidget
+Icons update

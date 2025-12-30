@@ -39,7 +39,7 @@
   "scripts": {
     "prepublishOnly": "node tasks",
     "lint": "eslint -c eslint.config.mjs",
-    "build": "node tasks",
+    "build": "node tasks && npm pack",
     "copy-files": "node tasks --copy-files",
     "release": "release-script",
     "release-patch": "release-script patch --yes",

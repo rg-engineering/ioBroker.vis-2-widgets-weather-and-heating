@@ -597,8 +597,9 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
                 m: "2px",
                 alignItems: "center",
             }}>
-                <p>{roomState}</p>
+                <Typography sx={{ width: "100%", textAlign: "center" }}>{roomState}</Typography>
             </Box>
+
 
             <Box sx={{
                 display: "flex",

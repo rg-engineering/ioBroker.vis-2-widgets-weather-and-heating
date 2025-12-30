@@ -49,63 +49,50 @@ const setDataStructures = async (
 ): Promise<void> => {
     console.log(`set new datastructure instance ${data["instance"]} ${data["datastructure"]}` );
 
-    
+    const instance = data["instance"] || "DasWetter.0";
+    const location = data["location"] || "location_2"
     let max_days = 5;
     let max_periods = 8;
     let cnt = 1;
 
     // if DasWettter
     if (data["instance"].includes("daswetter")) {
-        if (data["datastructure"] !== "NextDaysDetailed" && data["datastructure"] !== "NextHours" && data["datastructure"] !== "NextHours2") {
-            data["datastructure"] = "NextHours";
+        if (data["datastructure"] !== "ForecastDaily" && data["datastructure"] !== "ForecastHourly") {
+            data["datastructure"] = "ForecastDaily";
         }
 
-        if (data["datastructure"] === "NextDaysDetailed") {
-            max_periods = 8;
+        const instance_part = instance;
+        const location_part = location;
+
+        if (data["datastructure"] === "ForecastDaily") {
+            //max_periods = 1;
             max_days = 5;
             for (let d = 1; d <= max_days; d++) {
-                data[`oid_general_day_${d}`] = `daswetter.0.NextDaysDetailed.Location_1.Day_${d}.day_value`;
+                data[`oid_general_day_${d}`] = `${instance_part}.${location_part}.ForecastDaily.Day_${d}.date`;
 
-                for (let p = 1; p <= max_periods; p++) {
-                    data[`oid_rain_${cnt}`] = `daswetter.0.NextDaysDetailed.Location_1.Day_${d}.Hour_${p}.rain_value`;
-                    data[`oid_temp_${cnt}`] = `daswetter.0.NextDaysDetailed.Location_1.Day_${d}.Hour_${p}.temp_value`;
-                    data[`oid_cloud_${cnt}`] = `daswetter.0.NextDaysDetailed.Location_1.Day_${d}.Hour_${p}.clouds_value`;
-                    data[`oid_time_${cnt}`] = `daswetter.0.NextDaysDetailed.Location_1.Day_${d}.Hour_${p}.hour_value`;
-                    cnt++;
-                }
+                //for (let p = 1; p <= max_periods; p++) {
+                data[`oid_rain_${cnt}`] = `${instance_part}.${location_part}.ForecastDaily.Day_${d}.Rain`;
+                data[`oid_temp_${cnt}`] = `${instance_part}.${location_part}.ForecastDaily.Day_${d}.Temperature_Max`;
+                data[`oid_cloud_${cnt}`] = "";
+                data[`oid_time_${cnt}`] = "";
+                cnt++;
+                //}
             }
-        } else if (data["datastructure"] === "NextHours") {
-            max_periods = 23;
-            max_days = 5;
-            for (let d = 1; d <= max_days; d++) {
-                data[`oid_general_day_${d}`] = `daswetter.0.NextHours.Location_1.Day_${d}.day_value`;
+        } else if (data["datastructure"] === "ForecastHourly") {
+            max_periods = 24;
+            //max_days = 1;
+            //for (let d = 1; d <= max_days; d++) {
+            data[`oid_general_day_1`] = `${instance_part}.${location_part}.ForecastDaily.Day_1.date`;
 
-                if (d > 3) {
-                    max_periods = 8;
-                }
-
-                for (let p = 1; p <= max_periods; p++) {
-                    data[`oid_rain_${cnt}`] = `daswetter.0.NextHours.Location_1.Day_${d}.Hour_${p}.rain_value`;
-                    data[`oid_temp_${cnt}`] = `daswetter.0.NextHours.Location_1.Day_${d}.Hour_${p}.temp_value`;
-                    data[`oid_cloud_${cnt}`] = `daswetter.0.NextHours.Location_1.Day_${d}.Hour_${p}.clouds_value`;
-                    data[`oid_time_${cnt}`] = `daswetter.0.NextHours.Location_1.Day_${d}.Hour_${p}.hour_value`;
-                    cnt++;
-                }
+            for (let p = 1; p <= max_periods; p++) {
+                data[`oid_rain_${cnt}`] = `${instance_part}.${location_part}.ForecastHourly.Hour_${p}.rain`;
+                data[`oid_temp_${cnt}`] = `${instance_part}.${location_part}.ForecastHourly.Hour_${p}.temperature`;
+                data[`oid_cloud_${cnt}`] = `${instance_part}.${location_part}.ForecastHourly.Hour_${p}.clouds`;
+                data[`oid_time_${cnt}`] = `${instance_part}.${location_part}.ForecastHourly.Hour_${p}.end`;
+                cnt++;
             }
-        } else if (data["datastructure"] === "NextHours2") {
-            max_periods = 8;
-            max_days = 5;
-            for (let d = 1; d <= max_days; d++) {
-                data[`oid_general_day_${d}`] = `daswetter.0.NextHours2.Location_1.Day_${d}.date`;
+            //}
 
-                for (let p = 1; p <= max_periods; p++) {
-                    data[`oid_rain_${cnt}`] = `daswetter.0.NextHours2.Location_1.Day_${d}.Hour_${p}.rain`;
-                    data[`oid_temp_${cnt}`] = `daswetter.0.NextHours2.Location_1.Day_${d}.Hour_${p}.temp`;
-                    data[`oid_cloud_${cnt}`] = `daswetter.0.NextHours2.Location_1.Day_${d}.Hour_${p}.clouds`;
-                    data[`oid_time_${cnt}`] = `daswetter.0.NextHours2.Location_1.Day_${d}.Hour_${p}.hour`;
-                    cnt++;
-                }
-            }
         } else {
             console.log(`datastructures: unknown data structure${data["datastructure"]}`);
         }
@@ -204,7 +191,10 @@ interface WeatherData {
     };
 }
 
-export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
+export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
+
+
+
     private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
     private lastRxData: string | undefined;
     private updateTimeout: ReturnType<typeof setTimeout> | undefined;
@@ -217,7 +207,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
         };
     }
 
-    static getWidgetInfo(): RxWidgetInfo{
+    static getWidgetInfo(): RxWidgetInfo {
         const oid_rain_fields = [];
         const oid_temp_fields = [];
         const oid_cloud_fields = [];
@@ -227,11 +217,11 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
 
         const datastructure_options = [];
 
-        
+
         let cnt = 1;
 
         const max_days = 5;
-        let max_periods = 23;
+        const max_periods = 24;
 
         /* das geht so nicht
         if (data => data.instance.includes("weatherunderground")) {
@@ -250,68 +240,65 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
             });
         } else {
         */
-            //daswetter
-            datastructure_options.push({
-                value: "NextDaysDetailed",
-                label: "datastructure_nextdaysdetailed"
-            });
-            datastructure_options.push({
-                value: "NextHours",
-                label: "datastructure_nexthours"
-            });
-            datastructure_options.push({
-                value: "NextHours2",
-                label: "datastructure_nexthours2"
-            });
-       // }
+        //daswetter
+        datastructure_options.push({
+            value: "ForecastDaily",
+            label: "datastructure_ForecastDaily"
+        });
+        datastructure_options.push({
+            value: "ForecastHourly",
+            label: "datastructure_ForecastHourly"
+        });
 
+        // }
+
+
+        //mit v4.x haben wir max 5 Tage
         for (let d = 1; d <= max_days; d++) {
             oid_general_fields.push({
                 name: `oid_general_day_${d}`,    // name in data structure
                 label: Generic.t("oid_general_day_") + d, // translated field label
                 type: "id",
-                default: `daswetter.0.NextHours.Location_1.Day_${d}.day_value`,
+                default: "",
             });
-
-            if (d > 3) {
-                max_periods = 8;
-            }
-
-            for (let p = 1; p <= max_periods; p++) {
-                oid_rain_fields.push({
-                    name: `oid_rain_${cnt}`,    // name in data structure
-                    label: Generic.t("oid_rain_") + cnt, // translated field label
-                    type: "id",
-                    default: `daswetter.0.NextHours.Location_1.Day_${d}.Hour_${p}.rain_value`,
-                });
-                oid_temp_fields.push({
-                    name: `oid_temp_${cnt}`,    // name in data structure
-                    label: Generic.t("oid_temp_") + cnt, // translated field label
-                    type: "id",
-                    default: `daswetter.0.NextHours.Location_1.Day_${d}.Hour_${p}.temp_value`,
-                });
-                oid_cloud_fields.push({
-                    name: `oid_cloud_${cnt}`,    // name in data structure
-                    label: Generic.t("oid_cloud_") + cnt, // translated field label
-                    type: "id",
-                    default: `daswetter.0.NextHours.Location_1.Day_${d}.Hour_${p}.clouds_value`,
-                });
-                oid_time_fields.push({
-                    name: `oid_time_${cnt}`,    // name in data structure
-                    label: Generic.t("oid_time_") + cnt, // translated field label
-                    type: "id",
-                    default: `daswetter.0.NextHours.Location_1.Day_${d}.Hour_${p}.hour_value`,
-                });
-                oid_chanceofrain_fields.push({
-                    name: `oid_chancerain_${cnt}`,    // name in data structure
-                    label: Generic.t("oid_chancerain_") + cnt, // translated field label
-                    type: "id",
-                    default: `daswetter.0.NextHours.Location_1.Day_${d}.Hour_${p}.chance_of_rain_value`,
-                });
-                cnt++;
-            }
         }
-        
+
+        //mit v4.x haben wir 1 Periode für 5 Tage oder 24 Perioden für einen Tag
+        for (let p = 1; p <= max_periods; p++) {
+            oid_rain_fields.push({
+                name: `oid_rain_${cnt}`,    // name in data structure
+                label: Generic.t("oid_rain_") + cnt, // translated field label
+                type: "id",
+                default: "",
+            });
+            oid_temp_fields.push({
+                name: `oid_temp_${cnt}`,    // name in data structure
+                label: Generic.t("oid_temp_") + cnt, // translated field label
+                type: "id",
+                default: "",
+            });
+            oid_cloud_fields.push({
+                name: `oid_cloud_${cnt}`,    // name in data structure
+                label: Generic.t("oid_cloud_") + cnt, // translated field label
+                type: "id",
+                default: "",
+            });
+            oid_time_fields.push({
+                name: `oid_time_${cnt}`,    // name in data structure
+                label: Generic.t("oid_time_") + cnt, // translated field label
+                type: "id",
+                default: "",
+            });
+            oid_chanceofrain_fields.push({
+                name: `oid_chancerain_${cnt}`,    // name in data structure
+                label: Generic.t("oid_chancerain_") + cnt, // translated field label
+                type: "id",
+                default: "",
+            });
+            cnt++;
+        }
+
+
 
         return {
             id: "tplWeatherWidget",                 // Unique widget type ID. Should start with `tpl` followed
@@ -351,9 +338,10 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
                             name: "oid_location",    // name in data structure
                             label: "oidlocation", // translated field label
                             type: "id",
-                            default: "daswetter.0.NextHours.Location_1.Location",
+                            default: "daswetter.0.location_1.Location",
                             //only available with DasWetter
-                            hidden:  "!!data.instance.includes('weatherunderground')"
+                            hidden: "!!data.instance.includes('weatherunderground')",
+                            tooltip: "OID if DP where location is available. If not set, location name is not shown"
                         },
                         {
                             name: "datastructure",    // name in data structure
@@ -362,6 +350,17 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
                             options: datastructure_options,
                             //default: weatherunderground ? "forecastHourly" : "NextHours",
                             onChange: setDataStructures,
+                            tooltip: "select a datastructure. Make sure the datastructure is available on object tree"
+                        },
+                        {
+                            name: "location",    // name in data structure
+                            label: "location oid part", // translated field label
+                            type: "text",
+                            default: "location_1",
+                            tooltip: "location part of OID to auto complete OID settings",
+                            onChange: setDataStructures,
+                            //only available with DasWetter
+                            hidden: "!!data.instance.includes('weatherunderground')"
                         },
                         {
                             name: "headline_color",    // name in data structure
@@ -545,11 +544,11 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
                     ]
                 },
                 {
-                    //ausbelnden bei instance == wetter
+                    //ausblenden bei instance == wetter
                     name: "chanceofraining", // group name
                     label: "chanceofrain",
 
-                    
+
 
                     hidden: (data: WidgetData) => data.instance.includes("daswetter"),
                     fields: [
@@ -586,7 +585,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
                     name: "OIDS_general", // group name
                     label: "oids_general",
                     fields: oid_general_fields,
-                    hidden: (data: WidgetData) => data.instance.includes("daswetter")
+                    //hidden: (data: WidgetData) => data.instance.includes("daswetter")
                 },
                 {
                     name: "OIDS_rain", // group name
@@ -633,7 +632,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
         return obj[key] as string;
     }
 
-    
+
     getOption1(): echarts.EChartsOption {
         console.log("getOption1 ");
 
@@ -892,7 +891,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
         return content;
     }
 
-    
+
     getOption2(): echarts.EChartsOption {
         console.log("getOption2 ");
 
@@ -1089,7 +1088,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
         const max_hours = 36;
         //let instanceID = this.state.rxData["instance"]
 
-        const rainData : [Date, number][] = [];
+        const rainData: [Date, number][] = [];
         const tempData: [Date, number][] = [];
         const cloudData: [Date, number][] = [];
 
@@ -1152,7 +1151,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
             }
 
             if (oDate !== null && oDate !== undefined) {
-                if (this.state.rxData["rain_visible"] === true &&  rain_val !== null) {
+                if (this.state.rxData["rain_visible"] === true && rain_val !== null) {
                     rainData.push(
                         [
                             oDate,
@@ -1161,7 +1160,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
                     );
                 }
 
-                if (this.state.rxData["temperature_visible"] === true &&  temp_val !== null) {
+                if (this.state.rxData["temperature_visible"] === true && temp_val !== null) {
                     tempData.push(
                         [
                             oDate,
@@ -1169,7 +1168,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
                         ],
                     );
                 }
-                if (this.state.rxData["clouds_visible"] === true &&  cloud_val !== null) {
+                if (this.state.rxData["clouds_visible"] === true && cloud_val !== null) {
                     let value = cloud_val;
                     if (this.state.rxData["sun_or_cloud"] === "sun") {
                         value = 100 - cloud_val;
@@ -1188,11 +1187,17 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
             }
         }
 
+        // Runden: Min => floor, Max => ceil (sicher stellen, dass Zahlen finite sind)
+        const roundedRainMin = Number.isFinite(RainMin) ? Math.floor(RainMin) : RainMin;
+        const roundedRainMax = Number.isFinite(RainMax) ? Math.ceil(RainMax) : RainMax;
+        const roundedTempMin = Number.isFinite(TempMin) ? Math.floor(TempMin) : TempMin;
+        const roundedTempMax = Number.isFinite(TempMax) ? Math.ceil(TempMax) : TempMax;
+
         const MinMax = {
-            RainMin: RainMin,
-            RainMax : RainMax,
-            TempMin: TempMin,
-            TempMax: TempMax,
+            RainMin: roundedRainMin,
+            RainMax: roundedRainMax,
+            TempMin: roundedTempMin,
+            TempMax: roundedTempMax,
             CloudMin: 0,
             CloudMax: 100
         };
@@ -1213,11 +1218,112 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
         return weatherData;
     }
 
+    parseDayData(dayData?: string | null): { year: number; month: number; monthIndex: number; day: number } | null {
+        if (!dayData) {
+            return null;
+        }
+        const s = String(dayData).trim();
+
+        if (s.length === 0) {
+            return null;
+        }
+
+        // Hilfsfunktion: prüft Bereich und liefert Objekt oder null
+        const toResult = (y: number, m: number, d: number) => {
+            if (!Number.isFinite(y) || !Number.isFinite(m) || !Number.isFinite(d)) {
+                console.log("anything finite");
+                return null;
+            }
+            if (m < 1 || m > 12) {
+                console.log("unexpected month " + m);
+                return null;
+            }
+            if (d < 1 || d > 31) {
+                console.log("unexpected day " + d);
+                return null;
+            }
+            console.log("returned " + y + " " + m + " " + d);
+            return { year: y, month: m, monthIndex: m - 1, day: d };
+        };
+
+        // 1) reines YYYYMMDD (genau 8 Ziffern)
+        const onlyDigits = s.replace(/\D/g, '');
+        if (/^\d{8}$/.test(onlyDigits)) {
+            const y = Number(onlyDigits.substring(0, 4));
+            const m = Number(onlyDigits.substring(4, 6));
+            const d = Number(onlyDigits.substring(6, 8));
+            const r = toResult(y, m, d);
+            if (r) {
+                return r;
+            }
+        }
+
+        // 2) Try mehrere Regex-Varianten (Jahr-Monat-Tag)
+        const patterns: { regex: RegExp; map: (m: RegExpExecArray) => { y: number; mo: number; da: number } }[] = [
+            // YYYY-MM-DD, YYYY.MM.DD, YYYY/MM/DD oder eingebettet
+            {
+                regex: /(\d{4})[.\-/](\d{1,2})[.\-/](\d{1,2})/,
+                map: (m) => ({ y: Number(m[1]), mo: Number(m[2]), da: Number(m[3]) }),
+            },
+            // DD.MM.YYYY oder DD-MM-YYYY oder DD/MM/YYYY
+            {
+                regex: /(\d{1,2})[.\-/](\d{1,2})[.\-/](\d{4})/,
+                map: (m) => ({ y: Number(m[3]), mo: Number(m[2]), da: Number(m[1]) }),
+            },
+            // Falls Jahr und Tag/Monat mit Leerzeichen / Komma kombiniert auftauchen, suche nach oben stehenden Mustern global
+            {
+                regex: /(\d{4})\s*(\d{2})\s*(\d{2})/, // z.B. "2025 12 30"
+                map: (m) => ({ y: Number(m[1]), mo: Number(m[2]), da: Number(m[3]) }),
+            },
+        ];
+
+        for (const p of patterns) {
+            const m = p.regex.exec(s);
+            if (m) {
+                let { y, mo, da } = p.map(m);
+                if (y >= 0 && y <= 99) {
+                    y = 2000 + y; // zweistelliges Jahr
+                }
+                const r = toResult(y, mo, da);
+                if (r) {
+                    return r;
+                }
+            }
+        }
+
+        // 3) Falls nichts gefunden wurde, versuche einzelne Token zu parsen (z.B. "Thu, 30.12.2025")
+        const tokens = s.split(/\s+/);
+        for (const t of tokens) {
+            // token ohne Uhrzeit-Teil (z.B. "30.12.2025,12:00" -> "30.12.2025")
+            const cleaned = t.split(',')[0];
+            for (const p of patterns) {
+                const m = p.regex.exec(cleaned);
+                if (m) {
+                    let { y, mo, da } = p.map(m);
+                    if (y >= 0 && y <= 99) {
+                        y = 2000 + y;
+                    }
+                    const r = toResult(y, mo, da);
+                    if (r) {
+                        return r;
+                    }
+                }
+            }
+        }
+
+        // nichts erkannt
+        return null;
+    }
+
+
+
     getWeatherDataDasWetter(): WeatherData {
         console.log(`getWeatherData ${this.state.rxData["instance"]} / ${this.state.rxData["datastructure"]}`);
 
+
+
         //const weatherData = [];
-        const max_days = 5;
+        let max_days = 5;
         let max_periods = 23;
         //const instanceID = this.state.rxData["instance"]
 
@@ -1225,12 +1331,25 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
         const tempData: [Date, number][] = [];
         const cloudData: [Date, number][] = [];
 
-        let TempMin = 0;
-        let TempMax = 20;
+        let TempMin = 20;
+        let TempMax = 5;
         const RainMin = 0;
         let RainMax = 1;
 
         let cnt = 1;
+
+        if (this.state.rxData["datastructure"] === "ForecastDaily") {
+            max_periods = 1;
+            max_days = 5;
+        } else if (this.state.rxData["datastructure"] === "ForecastHourly") {
+            max_days = 1;
+            max_periods = 24;
+
+        } else {
+            console.log("getWeatherData: unknown data structure");
+        }
+
+
         for (let d = 1; d <= max_days; d++) {
             console.log(`day ${d}`);
 
@@ -1248,26 +1367,23 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
 
             console.log(`dayData ${JSON.stringify(dayData)}`);
 
+            const parsed = this.parseDayData(dayData);
+            if (parsed) {
+                year = parsed.year;
+                month = parsed.month;
+                day = parsed.day;
+            }
+
+            /*
             if (dayData !== null && dayData!== undefined) {
                 year = Number(dayData.substring(0, 4));
                 month = Number(dayData.substring(4, 6));
                 month = month - 1;
                 day = Number(dayData.substring(6, 8));
             }
+            */
 
-            if (this.state.rxData["datastructure"] === "NextDaysDetailed") {
-                max_periods = 8;
-            } else if (this.state.rxData["datastructure"] === "NextHours") {
-                if (d > 3) {
-                    max_periods = 8;
-                } else {
-                    max_periods = 23;
-                }
-            } else if (this.state.rxData["datastructure"] === "NextHours2") {
-                max_periods = 8;
-            } else {
-                console.log("getWeatherData: unknown data structure");
-            }
+
 
             for (let p = 1; p <= max_periods; p++) {
                 //console.log("period " + p);
@@ -1288,10 +1404,32 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
                 oid = this.getOid(this.state.rxData, oid_cloud as keyof StaticRxData);
                 const cloud_val = this.state.values[`${oid}.val`];
 
+                let time_val = "00:00";
+
                 const oid_time = `oid_time_${cnt}`;
                 oid = this.getOid(this.state.rxData, oid_time as keyof StaticRxData);
-                const time_val = this.state.values[`${oid}.val`];
+                if (oid !== undefined && oid !== "") {
+                    time_val = this.state.values[`${oid}.val`];
+                } else {
+                    time_val = "12:00";
+                }
 
+                if (time_val === undefined) {
+                    time_val = "12:00";
+                }
+
+
+                console.log("time_val " + time_val);
+                // Falls unerwartet ein Datum mit Komma geliefert wird, entfernen wir alles bis zum Leerzeichen nach dem Komma
+                if (typeof time_val === "string" && time_val.includes(",")) {
+                    const commaIdx = time_val.indexOf(",");
+                    const spaceAfterCommaIdx = time_val.indexOf(" ", commaIdx);
+                    if (spaceAfterCommaIdx >= 0) {
+                        time_val = time_val.substring(spaceAfterCommaIdx + 1).trim();
+                    } else {
+                        time_val = time_val.substring(commaIdx + 1).trim();
+                    }
+                }
 
                 cnt++;
                 //console.log("got data " + JSON.stringify(rain_val) + " " + JSON.stringify(temp_val) + " " + JSON.stringify(cloud_val) + " " + JSON.stringify(time_val));
@@ -1301,10 +1439,14 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
 
                 if (time_val !== null && time_val !== undefined && year > 0 && month > 0 && day > 0) {
                     const timeData = time_val.split(":");
-                    hour = timeData[0];
-                    minute = timeData[1];
+                    hour = Number(timeData[0]);
+                    minute = Number(timeData[1]);
 
-                    oDate = new Date(year, month, day, hour, minute, 0, 0);
+                    console.log("hour " + hour + " minute " + minute);
+
+                    oDate = new Date(year, month - 1, day, hour, minute, 0, 0);
+
+                    console.log("= " + oDate.toLocaleString());
                 }
 
                 if (oDate !== null && oDate !== undefined) {
@@ -1325,13 +1467,13 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
                         ]);
                     }
 
-                    if (this.state.rxData["temperature_visible"] === true &&  temp_val !== null) {
+                    if (this.state.rxData["temperature_visible"] === true && temp_val !== null) {
                         tempData.push([
                             oDate,
                             temp_val
                         ]);
                     }
-                    if (this.state.rxData["clouds_visible"] === true &&  cloud_val !== null) {
+                    if (this.state.rxData["clouds_visible"] === true && cloud_val !== null) {
                         let value = cloud_val;
                         if (this.state.rxData["sun_or_cloud"] === "sun") {
                             value = 100 - cloud_val;
@@ -1350,11 +1492,17 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
             }
         }
 
+        // Runden: Min => floor, Max => ceil (sicher stellen, dass Zahlen finite sind)
+        const roundedRainMin = Number.isFinite(RainMin) ? Math.floor(RainMin) : RainMin;
+        const roundedRainMax = Number.isFinite(RainMax) ? Math.ceil(RainMax) : RainMax;
+        const roundedTempMin = Number.isFinite(TempMin) ? Math.floor(TempMin) : TempMin;
+        const roundedTempMax = Number.isFinite(TempMax) ? Math.ceil(TempMax) : TempMax;
+
         const MinMax = {
-            RainMin: RainMin,
-            RainMax: RainMax,
-            TempMin: TempMin,
-            TempMax: TempMax,
+            RainMin: roundedRainMin,
+            RainMax: roundedRainMax,
+            TempMin: roundedTempMin,
+            TempMax: roundedTempMax,
             CloudMin: 0,
             CloudMax: 100
         };
@@ -1362,6 +1510,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
         console.log(`rainData ${JSON.stringify(rainData)}`);
         console.log(`tempData ${JSON.stringify(tempData)}`);
         console.log(`cloudData ${JSON.stringify(cloudData)}`);
+        console.log(`min max ${JSON.stringify(MinMax)}`);
 
         //const weatherData = ids.length ? (await this.props.context.socket.getStates(ids)) : {};
 
@@ -1385,7 +1534,7 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
         if (!this.refCardContent.current) {
             setTimeout(() => this.forceUpdate(), 50);
         } else {
-            size = this.refCardContent.current.offsetHeight/2;
+            size = this.refCardContent.current.offsetHeight / 2;
         }
 
         let useSecondDiagram;
@@ -1404,14 +1553,14 @@ export default class WeatherWidget  extends Generic<StaticRxData, StaticState> {
         >
             {size && <EchartContainer
                 option={this.getOption1()}
-                
+
                 style={{ height: `${size}px`, width: "100%" }}
                 opts={{ renderer: "svg" }}
             />}
 
             {useSecondDiagram && size && <EchartContainer
                 option={this.getOption2()}
-                
+
                 style={{ height: `${size}px`, width: "100%" }}
                 opts={{ renderer: "svg" }}
             />}

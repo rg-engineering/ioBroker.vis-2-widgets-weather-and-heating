@@ -31,7 +31,11 @@ const styles: Record<string, CSSProperties> = {
 };
 
 
-// todo mondphase anzeigen
+// todo mondphase bzw. Ausleuchtung anzeigen anzeigen
+// todo Sonnenaufgang und Untergang
+// todo Mondaufgang und Untergang
+
+//windicons mit DasWetter@4.x nicht nutzbar
 
 // todo wind: wenn beaufort-Galerie, dann muss auch Beafort-OID verwendet werden
 // todo wind: in galerie1 fehlt icon 9, 18,27
@@ -150,17 +154,19 @@ const setDataStructures = async (
     // eslint-disable-next-line @typescript-eslint/require-await
 ): Promise<void> => {
 
-    console.log(`set new datastructure instance ${data["instance"]} ${data["datastructure"]}`);
+    console.log(`set new datastructure instance ${data["instance"]} ${data["location"]}`);
 
-    const instance = data["instance"];
-    const day2show = data["day2show"];
-    const datastructure = data["datastructure"];
+    const instance = data["instance"] || "DasWetter.0";
+    const day2show = data["day2show"] || "0";
+    //const datastructure = data["datastructure"];
     //const iconlabelset = data["iconset"];
     //const windiconlabelset = data["windiconset"];
+    const location = data["location"] || "Location_2"
 
-    if (instance && instance.length > 0 && instance.includes("daswetter") && datastructure && day2show) {
+    if (instance && instance.length > 0 && instance.includes("daswetter") && location && day2show) {
         const instance_part = instance;
-        const datastructure_part = datastructure;
+        //const datastructure_part = datastructure;
+        const location_part = location;
         let day_part = "Day_1";
         switch (day2show) {
             case "0": day_part = "Day_1"; break;
@@ -171,6 +177,7 @@ const setDataStructures = async (
             default: day_part = "Day_1"; break;
         }
 
+        /*
         data["oid_dayname"] = `${instance_part}.${datastructure_part}.Location_1.${day_part}.day_name`;
         data["oid_date"] = `${instance_part}.${datastructure_part}.Location_1.${day_part}.day_value`;
         data["oid_temp_max"] = `${instance_part}.${datastructure_part}.Location_1.${day_part}.tempmax_value`;
@@ -181,6 +188,40 @@ const setDataStructures = async (
         data["oid_wind_value"] = `${instance_part}.${datastructure_part}.Location_1.${day_part}.wind_value`;
         data["oid_windgusts_value"] = `${instance_part}.${datastructure_part}.Location_1.${day_part}.windgusts_value`;
         data["oid_sunshine_duration"] = `${instance_part}.${datastructure_part}.Location_1.${day_part}.sunshineDuration`;
+        */
+
+        data["oid_dayname"] = `${instance_part}.${location_part}.ForecastDaily.${day_part}.NameOfDay`;
+        data["oid_date"] = `${instance_part}.${location_part}.ForecastDaily.${day_part}.date`;
+        data["oid_temp_max"] = `${instance_part}.${location_part}.ForecastDaily.${day_part}.Temperature_Max`;
+        data["oid_temp_min"] = `${instance_part}.${location_part}.ForecastDaily.${day_part}.Temperature_Min`;
+        data["oid_symbol_description"] = `${instance_part}.${location_part}.ForecastDaily.${day_part}.symbol_description`;
+        data["oid_symbol"] = `${instance_part}.${location_part}.ForecastDaily.${day_part}.symbol`;
+        data["oid_wind_symbol"] = "";
+        data["oid_wind_value"] = `${instance_part}.${location_part}.ForecastDaily.${day_part}.Wind_Speed`;
+        data["oid_windgusts_value"] = `${instance_part}.${location_part}.ForecastDaily.${day_part}.Wind_Gust`;
+        data["oid_sunshine_duration"] = `${instance_part}.${location_part}.ForecastDaily.${day_part}.sunshineduration`;
+
+
+        /*
+        neue OID's ab DasWetter@4.x.x
+
+        max. 5 Days
+        verschiedene locations
+        Wind-symbol wird nicht zur Verfügung gestellt
+
+        daswetter.0.location_2.ForecastDaily.Day_1.NameOfDay
+        daswetter.0.location_2.ForecastDaily.Day_1.date
+        daswetter.0.location_2.ForecastDaily.Day_1.Temperature_Max
+        daswetter.0.location_2.ForecastDaily.Day_1.Temperature_Min
+        daswetter.0.location_2.ForecastDaily.Day_1.symbol_description
+        daswetter.0.location_2.ForecastDaily.Day_1.symbol
+
+        daswetter.0.location_2.ForecastDaily.Day_1.Wind_Speed
+        daswetter.0.location_2.ForecastDaily.Day_1.Wind_Gust
+        daswetter.0.location_2.ForecastDaily.Day_1.sunshineduration
+
+
+        */
     }
 
     changeData(data);
@@ -190,7 +231,7 @@ interface StaticRxData {
     noCard: boolean;
     widgetTitle: string;
     instance: string; // name of instance, e.g. daswetter.0
-    datastructure: string; // name of datastructure, e.g. NextDaysDetailed
+    //datastructure: string; // name of datastructure, e.g. NextDaysDetailed
     day2show: string; // day to show, e.g. 0 for today, 1 for tomorrow, etc.
     iconset: string; // iconset to use, e.g. galeria1, galeria2, etc.
     windiconset: string; // wind iconset to use, e.g. galeria1, galeria2, Beaufort
@@ -254,6 +295,15 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                             onChange: setDataStructures,
                         },
                         {
+                            name: "location",    // name in data structure
+                            label: "location", // translated field label
+                            type: "text",
+                            default: "location_1",
+                            onChange: setDataStructures,
+                        },
+
+                        /*
+                        {
                             name: "datastructure",    // name in data structure
                             label: "datastructure", // translated field label
                             type: "select",
@@ -274,6 +324,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                             default: "NextHours",
                             onChange: setDataStructures,
                         },
+                        */
                         {
                             name: "day2show",    // name in data structure
                             label: "day2show", // translated field label
@@ -342,6 +393,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                             onChange: setDataStructures,
                         },
 
+                        
                         {
                             name: "windiconset",    // name in data structure
                             label: "windiconset", // translated field label
@@ -363,6 +415,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                             default: "galeria1",
                             onChange: setDataStructures,
                         },
+                        
                     ],
                 },
                 {
@@ -373,61 +426,63 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                             name: "oid_dayname",    // name in data structure
                             label: "oiddayname", // translated field label
                             type: "id",
-                            default: "daswetter.0.NextHours.Location_1.Day_1.day_name",
+                            default: "daswetter.0.location_1.ForecastDaily.Day_1.NameOfDay",
                         },
                         {
                             name: "oid_date",    // name in data structure
                             label: "oiddate", // translated field label
                             type: "id",
-                            default: "daswetter.0.NextHours.Location_1.Day_1.day_value",
+                            default: "daswetter.0.location_1.ForecastDaily.Day_1.date",
                         },
                         {
                             name: "oid_temp_max",    // name in data structure
                             label: "oidtempmax", // translated field label
                             type: "id",
-                            default: "daswetter.0.NextHours.Location_1.Day_1.tempmax_value",
+                            default: "daswetter.0.location_1.ForecastDaily.Day_1.Temperature_Max",
                         },
                         {
                             name: "oid_temp_min",    // name in data structure
                             label: "oidtempmin", // translated field label
                             type: "id",
-                            default: "daswetter.0.NextHours.Location_1.Day_1.tempmin_value",
+                            default: "daswetter.0.location_1.ForecastDaily.Day_1.Temperature_Min",
                         },
                         {
                             name: "oid_symbol_description",    // name in data structure
                             label: "oidsymboldescription", // translated field label
                             type: "id",
-                            default: "daswetter.0.NextHours.Location_1.Day_1.symbol_desc",
+                            default: "daswetter.0.location_1.ForecastDaily.Day_1.symbol_description",
                         },
                         {
                             name: "oid_symbol",    // name in data structure
                             label: "oidsymbol", // translated field label
                             type: "id",
-                            default: "daswetter.0.NextHours.Location_1.Day_1.symbol_value",
+                            default: "daswetter.0.location_1.ForecastDaily.Day_1.symbol",
                         },
+                        
                         {
                             name: "oid_wind_symbol",    // name in data structure
                             label: "oidwindsymbol", // translated field label
                             type: "id",
-                            default: "daswetter.0.NextHours.Location_1.Day_1.wind_symbol",
+                            default: "",
                         },
+                        
                         {
                             name: "oid_wind_value",    // name in data structure
                             label: "oidwindvalue", // translated field label
                             type: "id",
-                            default: "daswetter.0.NextHours.Location_1.Day_1.wind_value",
+                            default: "daswetter.0.location_1.ForecastDaily.Day_1.Wind_Speed",
                         },
                         {
                             name: "oid_windgusts_value",    // name in data structure
                             label: "oidwindgustsvalue", // translated field label
                             type: "id",
-                            default: "daswetter.0.NextHours.Location_1.Day_1.windgusts_value",
+                            default: "daswetter.0.location_1.ForecastDaily.Day_1.Wind_Gust",
                         },
                         {
                             name: "oid_sunshine_duration",    // name in data structure
                             label: "oidsunshineduration", // translated field label
                             type: "id",
-                            default: "daswetter.0.NextHours.Location_1.Day_1.sunshineDuration",
+                            default: "daswetter.0.location_1.ForecastDaily.Day_1.sunshineduration",
                         },
 
                     ],
@@ -443,12 +498,19 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
     }
 
     renderWidgetBody(props: RxRenderWidgetProps): React.JSX.Element | React.JSX.Element[] | null {
-        super.renderWidgetBody(props);
+
+        //super.renderWidgetBody(props);
+        const baseRender = (Generic.prototype as any).renderWidgetBody;
+        if (typeof baseRender === 'function') {
+            baseRender.call(this, props);
+        }
+
 
         let size;
-        if (!this.refCardContent.current) {
-            setTimeout(() => this.forceUpdate(), 50);
-        } else {
+        //if (!this.refCardContent.current) {
+        //    setTimeout(() => this.forceUpdate(), 50);
+        //} else {
+        if (this.refCardContent.current) { 
             size = this.refCardContent.current.offsetHeight;
         }
 
@@ -528,14 +590,16 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
         //const tjson = JSON.stringify(tobj);
         //console.warn("icons_wind_galeria1 " + tjson);
 
-        let windimage = icons_wind_galeria1["1"];
-
-        src_icon_wind = windimage;
-        src_icon_wind_name = windimage;
-
         //console.warn("1111 " + windiconlabelset + "/ " + wind_icon);
 
+        
         if (wind_icon != null && typeof wind_icon !== 'undefined') {
+
+            let windimage = icons_wind_galeria1["1"];
+
+            src_icon_wind = windimage;
+            src_icon_wind_name = windimage;
+
             switch (windiconlabelset) {
                 case "galeria1":
                     //src_icon_wind = icons_wind_galeria1[wind_icon];
@@ -564,22 +628,8 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
         }
 
         console.log(`wind icon ${wind_icon} = ${src_icon_wind_name} ` + typeof wind_icon);
-
+        
         const date = this.state.values[`${this.state.rxData["oid_date"]}.val`];
-        let day = 1;
-        let month = 1;
-        let year = 2024;
-
-        if (date && date.length > 0) {
-            day = date.substring(6);
-            month = date.substring(4, 6);
-            month = month - 1;
-            year = date.substring(0, 4);
-        }
-
-        console.log(`date ${date} ${day}.${month}.${year}`);
-        const oDate = new Date(year, month, day);
-        console.log(`date ${oDate.toLocaleDateString()}`);
 
         const sundurationval = (this.state.values[`${this.state.rxData["oid_sunshine_duration"]}.val`]);
         console.log(`sunduration ${sundurationval}`);
@@ -603,7 +653,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                 <Grid2 size={{ xs: 12 }} >
                     <div>
                         <p>{this.state.values[`${this.state.rxData["oid_dayname"]}.val`]}</p>
-                        <p>{oDate.toLocaleDateString()}</p>
+                        <p>{date}</p>
                     </div>
                 </Grid2>
                 <Grid2 size={{ xs: 6 }} >
@@ -624,11 +674,24 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                     </div>
                 </Grid2>
 
-                <Grid2 size={{ xs: 6 }}>
-                    <div>
-                        <img src={src_icon_wind} alt={src_icon_wind_name}></img>
-                    </div>
-                </Grid2>
+                
+                {
+                    src_icon_wind != null ? (
+                        <Grid2 size={{ xs: 6 }}>
+                            <div>
+                                <img src={src_icon_wind} alt={src_icon_wind_name}></img>
+                            </div>
+                        </Grid2>
+                    ) : (
+                        <Grid2 size={{ xs: 6 }}>
+                            <div>
+
+                            </div>
+                        </Grid2>
+                    )
+                }
+
+
                 <Grid2 size={{ xs: 6 }}>
                     <div style={{ fontSize: "small" }}>
                         <p>{Generic.t("Wind")} {this.state.values[`${this.state.rxData["oid_wind_value"]}.val`]} km/h</p>

@@ -1,9 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather-and-heating",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "news": {
-
+      "1.2.1": {
+        "en": "* bug fix deployment and dependencies updated\n* update to support DasWetter@4.x\nknown issue: Icons are not updated yet.\n* fixes based on Lint recommendation",
+        "de": "* fehlerbehebung bereitstellung und abhängigkeiten aktualisiert\n* Update zur Unterstützung von DasWetter@4.x\nbekannt: Icons werden noch nicht aktualisiert.\n* Korrekturen basierend auf Lint Empfehlung",
+        "ru": "* развертывание исправлений ошибок и обновленные зависимости\n* обновление для поддержки DasWetter@4.x\nизвестный вопрос: Иконки пока не обновляются.\n* исправления, основанные на рекомендации Lint",
+        "pt": "* correção de erros implantação e dependências atualizadas\n* atualização para suportar DasWitter@4.x\nnúmero conhecido: Os ícones ainda não estão actualizados.\n* correções baseadas na recomendação Lint",
+        "nl": "* bug repareren implementatie en afhankelijkheden bijgewerkt\n* update om DasWetter@4.x te ondersteunen\nbekend probleem: Pictogrammen zijn nog niet bijgewerkt.\n* fixes gebaseerd op Lint aanbeveling",
+        "fr": "* bug correction du déploiement et des dépendances mises à jour\n* mise à jour pour soutenir DasWetter@4.x\nnuméro connu: Les icônes ne sont pas encore mises à jour.\n* corrections fondées sur la recommandation Lint",
+        "it": "* bug fix distribuzione e dipendenze aggiornate\n* aggiornamento per supportare DasWetter@4.x\nproblema noto: Le icone non sono ancora aggiornate.\n* correzioni basate su raccomandazione Lint",
+        "es": "* instalación de errores y dependencias actualizadas\n* actualización para apoyar DasWetter@4.x\ncuestión conocida: Aún no se actualizan los iconos.\n* fijaciones basadas en la recomendación Lint",
+        "pl": "* bug fix implementation and dependences updated\n* update to support DasWetter @ 4.x\nznana kwestia: Ikony nie są jeszcze aktualizowane.\n* poprawki oparte na rekomendacji Lint",
+        "uk": "* виправлення помилок та залежностей оновлено\n* Оновлення для підтримки DasWetter@4.x\nвідомий питання: Ікони ще не оновлюються.\n* Виправлення на основі рекомендацій Lint",
+        "zh-cn": "* 错误修正部署和依赖性更新\n* 更新支持 DasWetter@ 4.x\n已知问题: 图标尚未更新 .\n* 根据Lint建议作出的修改"
+      },
       "1.1.5": {
         "en": "dependencies updated and bug fix based on adapter checker and linter",
         "de": "abhängigkeiten aktualisiert und fehler beheben basierend auf adapter checker und linter",

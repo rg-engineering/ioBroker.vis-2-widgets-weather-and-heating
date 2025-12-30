@@ -86,7 +86,7 @@ interface roomData {
 }
 
 export default class HeatingWindowStatusOverviewWidget extends Generic<StaticRxData, StaticState> {
-    private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
+    private readonly refCardContent: React.RefObject<HTMLDivElement | null> = React.createRef();
     private lastRxData: string | undefined;
     private updateTimeout: ReturnType<typeof setTimeout> | undefined;
     constructor(props: VisRxWidgetProps) {
@@ -235,7 +235,7 @@ export default class HeatingWindowStatusOverviewWidget extends Generic<StaticRxD
     }
     */
 
-    createTable(): JSX.Element {
+    createTable(): React.JSX.Element {
 
         const htmlTable = this.state.values[`${this.state.rxData["oid_WindowStatesHtmlTable"]}.val`];
 

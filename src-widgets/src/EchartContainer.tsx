@@ -11,7 +11,7 @@ import type { ECharts as EChartsType } from "echarts";
 //interface EchartContainerProps extends EChartsReactProps { }
 
 class EchartContainer extends React.Component<EChartsReactProps> {
-    render(): JSX.Element {
+    render(): React.JSX.Element {
         const { onChartReady, ...restProps } = this.props;
 
         const handleChartReady = (instance: EChartsType): void => {

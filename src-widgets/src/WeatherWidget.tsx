@@ -195,7 +195,7 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
 
 
 
-    private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
+    private readonly refCardContent: React.RefObject<HTMLDivElement | null> = React.createRef();
     private lastRxData: string | undefined;
     private updateTimeout: ReturnType<typeof setTimeout> | undefined;
     constructor(props: VisRxWidgetProps) {
@@ -1228,8 +1228,15 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
             return null;
         }
 
+        type ParsedDate = {
+            year: number;
+            month: number;
+            monthIndex: number;
+            day: number;
+        };
+
         // Hilfsfunktion: prüft Bereich und liefert Objekt oder null
-        const toResult = (y: number, m: number, d: number) => {
+        const toResult = (y: number, m: number, d: number): ParsedDate | null => {
             if (!Number.isFinite(y) || !Number.isFinite(m) || !Number.isFinite(d)) {
                 console.log("anything finite");
                 return null;
@@ -1280,11 +1287,12 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
         for (const p of patterns) {
             const m = p.regex.exec(s);
             if (m) {
-                let { y, mo, da } = p.map(m);
+                const { y, mo, da } = p.map(m);
+                let year = y;
                 if (y >= 0 && y <= 99) {
-                    y = 2000 + y; // zweistelliges Jahr
+                    year = 2000 + y; // zweistelliges Jahr
                 }
-                const r = toResult(y, mo, da);
+                const r = toResult(year, mo, da);
                 if (r) {
                     return r;
                 }
@@ -1299,11 +1307,12 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
             for (const p of patterns) {
                 const m = p.regex.exec(cleaned);
                 if (m) {
-                    let { y, mo, da } = p.map(m);
+                    const { y, mo, da } = p.map(m);
+                    let year = y;
                     if (y >= 0 && y <= 99) {
-                        y = 2000 + y;
+                        year = 2000 + y;
                     }
-                    const r = toResult(y, mo, da);
+                    const r = toResult(year, mo, da);
                     if (r) {
                         return r;
                     }

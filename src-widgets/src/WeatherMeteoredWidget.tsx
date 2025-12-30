@@ -57,7 +57,7 @@ interface StaticState extends VisRxWidgetState {
 }
 
 export default class WeatherMeteoredWidget extends Generic<StaticRxData, StaticState> {
-    private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
+    private readonly refCardContent: React.RefObject<HTMLDivElement | null> = React.createRef();
 
     private reloadTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -217,7 +217,7 @@ export default class WeatherMeteoredWidget extends Generic<StaticRxData, StaticS
         return WeatherMeteoredWidget.getWidgetInfo();
     }
 
-    createTable(): JSX.Element {
+    createTable(): React.JSX.Element {
 
         const WidgetID = this.state.rxData["WidgetID"];
         const id = "mrwid" + WidgetID;

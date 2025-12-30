@@ -15,7 +15,7 @@ import type { LegacyConnection } from '@iobroker/adapter-react-v5';
 
 // For federation, it is important to import from one package "@mui/material" and not from "@mui/material/Box"
 import {
-    Grid2,
+    Grid,
     Table,
     TableBody,
     TableCell,
@@ -410,7 +410,7 @@ type periods = PeriodEntry[];
 
 
 export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, StaticState> {
-    private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
+    private readonly refCardContent: React.RefObject<HTMLDivElement | null> = React.createRef();
     private lastRxData: string | undefined;
     private updateTimeout: ReturnType<typeof setTimeout> | undefined;
     constructor(props: VisRxWidgetProps) {
@@ -1306,7 +1306,7 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
         this.props.context.setValue(oid, true);
     }
 
-    CreateCopyButton(copyOID: string | null): JSX.Element | null {
+    CreateCopyButton(copyOID: string | null): React.JSX.Element | null {
 
         let ret = null;
 
@@ -1328,7 +1328,7 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
     }
 
 
-    showTimeValue(oid_time: string, value: string, name: string): JSX.Element {
+    showTimeValue(oid_time: string, value: string, name: string): React.JSX.Element {
         let ret = null;
 
         console.log(`showTimeValue ${oid_time} ${value} ${name}  ${this.props.context.themeType}`);
@@ -1416,7 +1416,7 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
         return ret;
     }
 
-    showTemperatureValue(oid_temperature:string, ProfileMinTemperature:number, TempSetWidthLow:number, temperature:number, name:string): JSX.Element | null {
+    showTemperatureValue(oid_temperature: string, ProfileMinTemperature: number, TempSetWidthLow: number, temperature: number, name: string): React.JSX.Element | null {
 
         let ret = null;
 
@@ -1486,7 +1486,7 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
         return ret;
     }
 
-    createTimeTableDetails(periods:periods, currentTimePeriod:number, day:string, CopyOID:string | null, ProfileMinTemperature:number): JSX.Element{
+    createTimeTableDetails(periods: periods, currentTimePeriod: number, day: string, CopyOID: string | null, ProfileMinTemperature: number): React.JSX.Element{
         //https://mui.com/material-ui/react-table/
 
         const TempSetWidthLow = this.state.rxData.TempSetWidthLow == true ? 0.5 : 1.0;
@@ -1542,7 +1542,7 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
     }
 
 
-    createTable_Dummy(): JSX.Element{
+    createTable_Dummy(): React.JSX.Element{
 
         
 
@@ -1562,7 +1562,7 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
 
     //button nur bei every day... und nicht am Sonntag
 
-    createTable_MoSu(noOfPeriods:number, room:string, profileName:string, currentProfile:number, currentTimePeriod:number, ProfileMinTemperature:number): JSX.Element {
+    createTable_MoSu(noOfPeriods: number, room: string, profileName: string, currentProfile: number, currentTimePeriod: number, ProfileMinTemperature: number): React.JSX.Element {
         console.log(`createTable_MoSu called ${room}`);
 
         const periods = this.copyPeriods(noOfPeriods, "MoSu");
@@ -1577,18 +1577,18 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
                 <p>{Generic.t("Profil ")} {currentProfile} / {room}</p>
             </div>
 
-            <Grid2
+            <Grid
                 container spacing={0.5}
                 alignItems="center"
                 justifyContent="center"
             >
                 {timetable}
-            </Grid2>
+            </Grid>
 
         </div>;
     }
 
-    createTable_MoFr_SaSo(noOfPeriods:number, room:string, profileName:string, currentProfile:number, currentTimePeriod:number, ProfileMinTemperature:number): JSX.Element {
+    createTable_MoFr_SaSo(noOfPeriods: number, room: string, profileName: string, currentProfile: number, currentTimePeriod: number, ProfileMinTemperature: number): React.JSX.Element {
         console.log(`createTable_MoFr_SaSo called ${room} ${noOfPeriods} ${currentTimePeriod}`);
 
         const periodsMoFr = this.copyPeriods(noOfPeriods, "MoFr");
@@ -1618,7 +1618,7 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
                 <p> {Generic.t("Profil ")} {currentProfile} / {room}</p>
             </div>
 
-            <Grid2
+            <Grid
                 container
                 spacing={0.5}
                 alignItems="center"
@@ -1633,11 +1633,11 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
             >
                 {timetableMoFr}
                 {timetableSaSu}
-            </Grid2>
+            </Grid>
         </div>;
     }
 
-    createTable_EveryDay(noOfPeriods:number, room:string, profileName:string, currentProfile:number, currentTimePeriod:number, ProfileMinTemperature:number): JSX.Element {
+    createTable_EveryDay(noOfPeriods: number, room: string, profileName: string, currentProfile: number, currentTimePeriod: number, ProfileMinTemperature: number): React.JSX.Element {
         console.log(`createTable_EveryDay called ${room}`);
 
         const periodsMon = this.copyPeriods(noOfPeriods, "Mon");
@@ -1702,7 +1702,7 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
                 <p> {Generic.t("Profil ")} {currentProfile} / {room}</p>
             </div>
 
-            <Grid2
+            <Grid
                 container
                 spacing={0}>
 
@@ -1720,11 +1720,11 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
 
                 {timetableSun}
 
-            </Grid2>
+            </Grid>
         </div>;
     }
 
-    createTable(): JSX.Element {
+    createTable(): React.JSX.Element {
         const profileType = this.state.values[`${this.state.rxData["oid_ProfileType"]}.val`];
         const noOfPeriods = this.state.values[`${this.state.rxData["oid_NumberOfPeriods"]}.val`];
         const room = this.state.values[`${this.state.rxData["oid_ChoosenRoom"]}.val`];

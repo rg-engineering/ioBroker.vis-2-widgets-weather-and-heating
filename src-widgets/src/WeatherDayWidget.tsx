@@ -13,9 +13,7 @@ import type {
 } from '@iobroker/types-vis-2';
 import type { LegacyConnection } from '@iobroker/adapter-react-v5';
 
-
-
-import Grid2 from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 
 import Generic from "./Generic";
 
@@ -57,18 +55,18 @@ const styles: Record<string, CSSProperties> = {
     });
     */
 
-//    const imageMap: Record<string, string> = {};
+    //    const imageMap: Record<string, string> = {};
 
-//    for (const path in imageModules) {
-//        const fileName = path.split('/').pop()?.replace(/\.[^/.]+$/, ''); // z.B. "home" aus "/src/assets/icons/home.png"
-//        const mod = imageModules[path] as unknown as { default: string };
-//        if (fileName && mod?.default) {
-//            imageMap[fileName] = mod.default;
-//        }
-//    }
+    //    for (const path in imageModules) {
+    //        const fileName = path.split('/').pop()?.replace(/\.[^/.]+$/, ''); // z.B. "home" aus "/src/assets/icons/home.png"
+    //        const mod = imageModules[path] as unknown as { default: string };
+    //        if (fileName && mod?.default) {
+    //            imageMap[fileName] = mod.default;
+    //        }
+    //    }
 
 
-//    return imageMap;
+    //    return imageMap;
 //}
 
 function importAllImages(   imageModules: Record<string, { default: string }>): Record<string, string> {
@@ -128,17 +126,17 @@ const icons_weather_galeria6 = importAllImages(import.meta.glob('./assets/icons/
 //wind icons
 //const wind_images1 = require.context("./assets/icons/viento-wind/galeria1", false);
 //const icons_wind_galeria1 = wind_images1.keys().map(wind_image1 => wind_images1(wind_image1));
-//const icons_wind_galeria1 = importAllImages(require.context("./assets/icons/viento-wind/galeria1", false, /\.(png)$/));
+//const icons_wind_galeria1 = importAllImages(require.context('./assets/icons/viento-wind/galeria1', false, /\.(png)$/));
 const icons_wind_galeria1 = importAllImages(import.meta.glob('./assets/icons/viento-wind/galeria1/*.png', { eager: true }));
 
 //const wind_images2 = require.context("./assets/icons/viento-wind/galeria2-Beaufort", false);
 //const icons_wind_galeria2 = wind_images2.keys().map(wind_image2 => wind_images2(wind_image2));
-//const icons_wind_galeria2 = importAllImages(require.context("./assets/icons/viento-wind/galeria2-Beaufort", false, /\.(png)$/));
+//const icons_wind_galeria2 = importAllImages(require.context('./assets/icons/viento-wind/galeria2-Beaufort', false, /\.(png)$/));
 const icons_wind_galeria2 = importAllImages(import.meta.glob('./assets/icons/viento-wind/galeria2-Beaufort/*.png', { eager: true }));
 
 //const wind_images3 = require.context("./assets/icons/viento-wind/Beaufort-White", false);
 //const icons_wind_Beaufort = wind_images3.keys().map(wind_image3 => wind_images3(wind_image3));
-//const icons_wind_Beaufort = importAllImages(require.context("./assets/icons/viento-wind/Beaufort-White", false, /\.(png)$/));
+//const icons_wind_Beaufort = importAllImages(require.context('./assets/icons/viento-wind/Beaufort-White', false, /\.(png)$/));
 const icons_wind_Beaufort = importAllImages(import.meta.glob('./assets/icons/viento-wind/Beaufort-White/*.png', { eager: true }));
 
 // moon icons
@@ -253,7 +251,7 @@ interface StaticState extends VisRxWidgetState {
 }
 
 export default class WeatherDayWidget extends Generic<StaticRxData, StaticState> {
-    private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
+    private readonly refCardContent: React.RefObject<HTMLDivElement | null> = React.createRef();
     private lastRxData: string | undefined;
     private updateTimeout: ReturnType<typeof setTimeout> | undefined;
     constructor(props: VisRxWidgetProps) {
@@ -393,7 +391,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                             onChange: setDataStructures,
                         },
 
-                        
+
                         {
                             name: "windiconset",    // name in data structure
                             label: "windiconset", // translated field label
@@ -415,7 +413,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                             default: "galeria1",
                             onChange: setDataStructures,
                         },
-                        
+
                     ],
                 },
                 {
@@ -458,14 +456,14 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                             type: "id",
                             default: "daswetter.0.location_1.ForecastDaily.Day_1.symbol",
                         },
-                        
+
                         {
                             name: "oid_wind_symbol",    // name in data structure
                             label: "oidwindsymbol", // translated field label
                             type: "id",
                             default: "",
                         },
-                        
+
                         {
                             name: "oid_wind_value",    // name in data structure
                             label: "oidwindvalue", // translated field label
@@ -510,7 +508,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
         //if (!this.refCardContent.current) {
         //    setTimeout(() => this.forceUpdate(), 50);
         //} else {
-        if (this.refCardContent.current) { 
+        if (this.refCardContent.current) {
             size = this.refCardContent.current.offsetHeight;
         }
 
@@ -592,7 +590,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
 
         //console.warn("1111 " + windiconlabelset + "/ " + wind_icon);
 
-        
+
         if (wind_icon != null && typeof wind_icon !== 'undefined') {
 
             let windimage = icons_wind_galeria1["1"];
@@ -628,7 +626,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
         }
 
         console.log(`wind icon ${wind_icon} = ${src_icon_wind_name} ` + typeof wind_icon);
-        
+
         const date = this.state.values[`${this.state.rxData["oid_date"]}.val`];
 
         const sundurationval = (this.state.values[`${this.state.rxData["oid_sunshine_duration"]}.val`]);
@@ -644,66 +642,69 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
             ref={this.refCardContent}
             style={styles.cardContent}
         >
-            <Grid2
+
+
+            <Grid
                 container
                 spacing={0.5}
                 alignItems="center"
                 justifyContent="center"
             >
-                <Grid2 size={{ xs: 12 }} >
+                <Grid size={{ xs: 12 }} >
                     <div>
                         <p>{this.state.values[`${this.state.rxData["oid_dayname"]}.val`]}</p>
                         <p>{date}</p>
                     </div>
-                </Grid2>
-                <Grid2 size={{ xs: 6 }} >
+                </Grid>
+                <Grid size={{ xs: 6 }} >
                     <div>
                         <img src={src_icon_weather} alt={src_icon_weather_name} ></img>
                     </div>
-                </Grid2>
-                <Grid2 size={{ xs: 6 }}>
+                </Grid>
+                <Grid size={{ xs: 6 }}>
                     <div style={{ fontSize: "small" }}>
                         <p>{Generic.t("max")} {this.state.values[`${this.state.rxData["oid_temp_max"]}.val`]} °C</p>
                         <p>{Generic.t("min")} {this.state.values[`${this.state.rxData["oid_temp_min"]}.val`]} °C</p>
                     </div>
-                </Grid2>
+                </Grid>
 
-                <Grid2 size={{ xs: 12 }}>
+                <Grid size={{ xs: 12 }}>
                     <div>
                         <p>{this.state.values[`${this.state.rxData["oid_symbol_description"]}.val`]}</p>
                     </div>
-                </Grid2>
+                </Grid>
 
-                
+
                 {
                     src_icon_wind != null ? (
-                        <Grid2 size={{ xs: 6 }}>
+                        <Grid size={{ xs: 6 }}>
                             <div>
                                 <img src={src_icon_wind} alt={src_icon_wind_name}></img>
                             </div>
-                        </Grid2>
+                        </Grid>
                     ) : (
-                        <Grid2 size={{ xs: 6 }}>
+                        <Grid size={{ xs: 6 }}>
                             <div>
 
                             </div>
-                        </Grid2>
+                        </Grid>
                     )
                 }
 
 
-                <Grid2 size={{ xs: 6 }}>
+                <Grid size={{ xs: 6 }}>
                     <div style={{ fontSize: "small" }}>
                         <p>{Generic.t("Wind")} {this.state.values[`${this.state.rxData["oid_wind_value"]}.val`]} km/h</p>
                         <p>{Generic.t("WindGusts")} {this.state.values[`${this.state.rxData["oid_windgusts_value"]}.val`]} km/h</p>
                     </div>
-                </Grid2>
-                <Grid2 size={{ xs: 6 }}>
+                </Grid>
+                <Grid size={{ xs: 6 }}>
                     <div>
                         <p>{Generic.t("sun")} {sunduration} h</p>
                     </div>
-                </Grid2>
-            </Grid2>
+                </Grid>
+            </Grid>
+
         </div>;
 
         if (this.state.rxData.noCard || props.widget.usedInWidget) {
@@ -711,7 +712,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
             return content;
         }
 
-        console.log("wdw: wrap content");
+        console.log("weatherday widget: wrap content");
 
         return this.wrapContent(content, null, { textAlign: "center" });
     }

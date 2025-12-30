@@ -89,7 +89,7 @@ interface StaticState extends VisRxWidgetState {
 }
 
 export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticRxData, StaticState> {
-    private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
+    private readonly refCardContent: React.RefObject<HTMLDivElement | null> = React.createRef();
 
    
 
@@ -608,7 +608,7 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
     }
 
 
-    createTable(size: number | undefined): JSX.Element {
+    createTable(size: number | undefined): React.JSX.Element {
 
         return <div
             ref={this.refCardContent}

@@ -3,19 +3,7 @@
     "name": "vis-2-widgets-weather-and-heating",
     "version": "1.2.0",
     "news": {
-      "1.2.0": {
-        "en": "* update to support DasWetter@4.x\nknown issue: Icons are not updated yet.\n* fixes based on Lint recommendation",
-        "de": "* Update zur Unterstützung von DasWetter@4.x\nbekannt: Icons werden noch nicht aktualisiert.\n* Korrekturen basierend auf Lint Empfehlung",
-        "ru": "* обновление для поддержки DasWetter@4.x\nизвестный вопрос: Иконки пока не обновляются.\n* исправления, основанные на рекомендации Lint",
-        "pt": "* atualização para suportar DasWitter@4.x\nnúmero conhecido: Os ícones ainda não estão actualizados.\n* correções baseadas na recomendação Lint",
-        "nl": "* update om DasWetter@4.x te ondersteunen\nbekend probleem: Pictogrammen zijn nog niet bijgewerkt.\n* fixes gebaseerd op Lint aanbeveling",
-        "fr": "* mise à jour pour soutenir DasWetter@4.x\nnuméro connu: Les icônes ne sont pas encore mises à jour.\n* corrections fondées sur la recommandation Lint",
-        "it": "* aggiornamento per supportare DasWetter@4.x\nproblema noto: Le icone non sono ancora aggiornate.\n* correzioni basate su raccomandazione Lint",
-        "es": "* actualización para apoyar DasWetter@4.x\ncuestión conocida: Aún no se actualizan los iconos.\n* fijaciones basadas en la recomendación Lint",
-        "pl": "* update to support DasWetter @ 4.x\nznana kwestia: Ikony nie są jeszcze aktualizowane.\n* poprawki oparte na rekomendacji Lint",
-        "uk": "* Оновлення для підтримки DasWetter@4.x\nвідомий питання: Ікони ще не оновлюються.\n* Виправлення на основі рекомендацій Lint",
-        "zh-cn": "* 更新支持 DasWetter@ 4.x\n已知问题: 图标尚未更新 .\n* 根据Lint建议作出的修改"
-      },
+
       "1.1.5": {
         "en": "dependencies updated and bug fix based on adapter checker and linter",
         "de": "abhängigkeiten aktualisiert und fehler beheben basierend auf adapter checker und linter",

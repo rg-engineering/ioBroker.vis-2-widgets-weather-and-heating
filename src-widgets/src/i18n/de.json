@@ -372,6 +372,14 @@
   "Previous Week Thursday OID": "OID vorherige Woche Donnerstag",
   "Previous Week Friday OID": "OID vorherige Woche Freitag",
   "Previous Week Saturday OID": "OID vorherige Woche Samstag",
-  "Previous Week Sunday OID": "OID vorherige Woche Sonntag"
+  "Previous Week Sunday OID": "OID vorherige Woche Sonntag",
 
+
+
+  "location oid part": "Teil der OID für den Standort",
+  "location part of OID to auto complete OID settings": "Teil der OID, um die OID's automatisch zu erstellen",
+  "select a datastructure. Make sure the datastructure is available on object tree": "Wähle eine Datenstruktur. Prüfe, ob die gewählten daten auch im Objektbaum vorhanden sind.",
+  "OID if DP where location is available. If not set, location name is not shown": "OID des Datenpunktes, wo der Ort hinterlegt ist. Wenn nicht gesetzt, wird kein Ort angezeigt.",
+  "datastructure_ForecastDaily": "ForecastDaily",
+  "datastructure_ForecastHourly": "ForecastHourly"
 }

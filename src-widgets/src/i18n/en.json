@@ -372,6 +372,15 @@
   "Previous Week Thursday OID": "OID previous week Thursday",
   "Previous Week Friday OID": "OID previous week Friday",
   "Previous Week Saturday OID": "OID previous week Saturday",
-  "Previous Week Sunday OID": "OID previous week Sunday"
+  "Previous Week Sunday OID": "OID previous week Sunday",
+
+
+
+  "location oid part": "location oid part",
+  "location part of OID to auto complete OID settings": "location part of OID to auto complete OID settings",
+  "select a datastructure. Make sure the datastructure is available on object tree": "select a datastructure. Make sure the datastructure is available on object tree",
+  "OID if DP where location is available. If not set, location name is not shown": "OID if DP where location is available. If not set, location name is not shown",
+  "datastructure_ForecastDaily": "ForecastDaily",
+  "datastructure_ForecastHourly": "ForecastHourly"
 
 }

@@ -102,6 +102,10 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 
 ## Changelog
+
+### **WORK IN PROGRESS**
+* (René) bug fix deployment
+
 ### 1.2.0 (2025-12-30)
 * (René) update to support DasWetter@4.x
 known issue: Icons are not updated yet.

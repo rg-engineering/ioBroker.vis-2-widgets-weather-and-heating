@@ -37,7 +37,7 @@
         "vite-plugin-svgr": "^4.3.0",
         "vite-tsconfig-paths": "^5.1.4",
         "@mui/x-date-pickers": "^7.27.1",
-        "dayjs": "1.11.13"
+        "dayjs": "1.11.19"
     },
     "scripts": {
         "start": "vite --port 4173",

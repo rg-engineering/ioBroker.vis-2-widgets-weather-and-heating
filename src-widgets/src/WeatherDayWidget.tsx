@@ -294,9 +294,10 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                         },
                         {
                             name: "location",    // name in data structure
-                            label: "location", // translated field label
+                            label: "location oid part", // translated field label
                             type: "text",
                             default: "location_1",
+                            tooltip: "location part of OID to auto complete OID settings",
                             onChange: setDataStructures,
                         },
 

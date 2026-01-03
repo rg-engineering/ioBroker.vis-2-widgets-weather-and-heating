@@ -1,7 +1,7 @@
 {
     "name": "iobroker.vis-2-widgets-weather-and-heating",
     "private": true,
-    "version": "1.2.1",
+    "version": "1.3.0",
     "type": "module",
     "dependencies": {
         "@adobe/react-spectrum": "^3.46.0",

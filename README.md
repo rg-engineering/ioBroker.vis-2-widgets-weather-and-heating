@@ -100,8 +100,7 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 -->
 
 ## Changelog
-
-### **WORK IN PROGRESS**
+### 1.3.0 (2026-01-03)
 * (René) dependencies updated
 * (René) update echarts@6.0.
 * (H5N1v2) 41 icons for DasWetter@4.x (galeria7)

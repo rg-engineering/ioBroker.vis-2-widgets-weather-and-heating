@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather-and-heating",
-    "version": "1.2.1",
+    "version": "1.3.0",
     "news": {
+      "1.3.0": {
+        "en": "dependencies updated\nupdate echarts@6.0.\n41 icons for DasWetter@4.x (galeria7)\noptimisations based on mui@7.x in WeatherDay-widget\nweather widget shows now min and max temperature (if values available)",
+        "de": "aktualisierte abhängigkeiten\necharts@6.0.\n41 Symbole für DasWetter@4.x (galeria7)\noptimierungen basierend auf mui@7.x in WeatherDay-widget\nwetter widget zeigt nun min und max temperatur (wenn werte verfügbar)",
+        "ru": "обновленные зависимости\nобновление echarts@6.0.\n41 значок для DasWetter@4.x (галерея7)\nоптимизация на основе mui@7.x в WeatherDay-widget\nвиджет погоды показывает мини- и максимальную температуру (если доступны значения)",
+        "pt": "dependências atualizadas\natualizar echarts@6.0.\n41 ícones para DasWitter@ 4. x (galeria7)\noptimizações baseadas em mui@7.x em WeatherDay-widget\nwidget meteorológico mostra agora a temperatura mínima e máxima (se os valores disponíveis)",
+        "nl": "afhankelijkheden bijgewerkt\necharts@6.0 bijwerken.\n41 iconen voor DasWetter@4.x (galeria7)\noptimalisaties gebaseerd op mui@7.x in WeatherDay-widget\nweer widget toont nu min en max temperatuur (indien beschikbaar)",
+        "fr": "dépendances mises à jour\nmettre à jour echarts@6.0.\n41 icônes pour DasWetter@4.x (galeria7)\noptimisations basées sur mui@7.x dans WeatherDay-widget\nwidget météo affiche maintenant la température min et max (si les valeurs sont disponibles)",
+        "it": "dipendenze aggiornate\naggiornamento echarts@6.0.\n41 icone per DasWetter@4.x (galeria7)\nottimizzazioni basate su mui@7.x in WeatherDay-widget\nwidget meteo mostra ora min e max temperatura (se i valori disponibili)",
+        "es": "dependencias actualizadas\nupdate echats@6.0.\n41 iconos para DasWetter@4.x (galeria7)\noptimizaciones basadas en mui@7.x en WeatherDay-widget\nwidget meteorológico muestra ahora temperatura mínima y máxima (si los valores disponibles)",
+        "pl": "zaktualizowane zależności\nupdate echarts @ 6.0.\n41 ikon dla DasWetter @ 4.x (galeria7)\noptymalizacje oparte na mui @ 7.x w WeatherDay- widget\nwidget pogody pokazuje teraz min i max temperatura (jeśli dostępne wartości)",
+        "uk": "оновлені залежності\nоновлення echarts@6.0.\n41 іконки для DasWetter@4.x (галерія7)\nоптимізація на основі mui@7.x в WeatherDay-widget\nвіджет погоди показує в даний час мінімум і максимальну температуру (за наявності значення)",
+        "zh-cn": "更新依赖关系\n更新 echarts@ 6.0.\n41 个 DasWetter@ 4.x (galeria7) 的图标\n基于 mui@ 7.x 在天气日- Widget 中的优化\n天气部件现在显示分钟和最大温度( 如果有值的话)"
+      },
       "1.2.1": {
         "en": "* bug fix deployment and dependencies updated\n* update to support DasWetter@4.x\nknown issue: Icons are not updated yet.\n* fixes based on Lint recommendation",
         "de": "* fehlerbehebung bereitstellung und abhängigkeiten aktualisiert\n* Update zur Unterstützung von DasWetter@4.x\nbekannt: Icons werden noch nicht aktualisiert.\n* Korrekturen basierend auf Lint Empfehlung",
@@ -80,19 +93,6 @@
         "pl": "nowy widget SourceAnalytics dwa tygodnie wykres bar dodany\nprzepracowane z TypeScript i vite - > żądany przegląd kodu",
         "uk": "новий віджет SourceAnalytics два тижні бар діаграми додано\nперероблений TypeScript і vite -> Огляд коду бажаний",
         "zh-cn": "添加了两周的条形图\n使用类型脚本和 vite 过度工作 - > 需要代码审查"
-      },
-      "1.0.1": {
-        "en": "overworked with TypeScript and vite -> code review desired",
-        "de": "überarbeitet mit TypeScript und vite -> Code-Review gewünscht",
-        "ru": "перегруженный TypeScript и Vite Желаемый обзор кода",
-        "pt": "excesso de trabalho com TypeScript e Vite -> revisão de código desejada",
-        "nl": "overwerkt met TypeScript en vite -> code review gewenst",
-        "fr": "surtravaillé avec TypeScript et rite -> révision du code souhaitée",
-        "it": "overworked con TypeScript e vite -> codice recensione desiderata",
-        "es": "overworked with TypeScript and vite - título revisión del código deseado",
-        "pl": "przepracowane z TypeScript i vite - > żądany przegląd kodu",
-        "uk": "перероблений TypeScript і vite -> Огляд коду бажаний",
-        "zh-cn": "使用类型脚本和 vite 过度工作 - > 需要代码审查"
       }
     },
     "titleLang": {

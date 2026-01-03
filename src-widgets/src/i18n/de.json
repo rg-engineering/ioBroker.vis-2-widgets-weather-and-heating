@@ -1,7 +1,6 @@
 {
   "oid_general_day_": "OID: Tag",
   "oid_rain_": "OID: Regen",
-  "oid_temp_": "OID: Temperatur",
   "oid_cloud_": "OID: Wolken",
   "oid_time_": "OID: Zeit",
   "vis-2-widgets-weather": "Wetter-Widgets",
@@ -10,13 +9,13 @@
   "vis-2-widgets-weather-and-heating": "Heizungs- und Wetter-Widgets",
   "x_axis": "X-Achse",
   "rain": "Regen",
-  "temperature": "Temperatur",
+
   "clouds": "Wolken",
   "chanceofrain": "Regenwahrscheinlichkeit",
   "oids_general": "OIDs Allgemein",
   "OIDS": "OIDs",
   "oids_rain": "OIDs Regen",
-  "oids_temp": "OIDs Temperatur",
+
   "oids_cloud": "OIDs Wolken",
   "oids_time": "OIDs Zeit",
   "oids_chanceofrain": "OIDs Regenwahrscheinlichkeit",
@@ -58,7 +57,7 @@
   "right": "rechts",
   "rain_show_separate": "im zweiten Diagramm darstellen",
   "temperature_visible": "Temperatur anzeigen",
-  "temperature_color": "Farbe Temperatur",
+
   "temperature_positionYAxis": "Position der Y-Achse",
   "clouds_visible": "Wolken anzeigen",
   "clouds_color": "Farbe Wolken",
@@ -381,5 +380,27 @@
   "select a datastructure. Make sure the datastructure is available on object tree": "Wähle eine Datenstruktur. Prüfe, ob die gewählten daten auch im Objektbaum vorhanden sind.",
   "OID if DP where location is available. If not set, location name is not shown": "OID des Datenpunktes, wo der Ort hinterlegt ist. Wenn nicht gesetzt, wird kein Ort angezeigt.",
   "datastructure_ForecastDaily": "ForecastDaily",
-  "datastructure_ForecastHourly": "ForecastHourly"
+  "datastructure_ForecastHourly": "ForecastHourly",
+  "iconset_galeria7": "Galerie 7",
+  "sunrise": "Sonnenaufgang",
+  "sunset": "Sonnenuntergang",
+  "moonrise": "Mondaufgang",
+  "moonset": "Monduntergang",
+  "moonIllumination": "Mondbeleuchtung",
+  "oidmoonsymbol": "OID Mondsymbol",
+  "oidmoonin": "OID Mondaufgang",
+  "oidmoonout": "OID Monduntergang",
+  "oidmoonillumination": "OID Mondbeleuchtung",
+  "oidsunin": "OID Sonnenaufgang",
+  "oidsunout": "OID Sonnenuntergang",
+  "oid_temp_max_": "OID max. Temperatur",
+  "oid_temp_min_": "OID min. Temperatur",
+  "oids_temp_min": "OIDs min. Temperatur",
+  "oids_temp_max": "OIDs max. Temperatur",
+  "temperature": "Temperatur",
+  "temperature_max": "max. Temperatur",
+  "temperature_min": "min. Temperatur",
+  "temperature_max_color": "Farbe max. Temperatur",
+  "temperature_min_color": "Farbe min. Temperatur"
+
 }

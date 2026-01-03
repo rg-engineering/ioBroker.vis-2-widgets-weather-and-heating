@@ -1,7 +1,7 @@
 {
   "oid_general_day_": "OID day",
   "oid_rain_": "OID rain",
-  "oid_temp_": "OID temperature",
+
   "oid_cloud_": "OID clouds",
   "oid_time_": "OID time",
   "vis-2-widgets-weather": "Weather Widgets",
@@ -10,13 +10,13 @@
   "vis-2-widgets-weather-and-heating": "heating and weather widgets",
   "x_axis": "X Axis",
   "rain": "rain",
-  "temperature": "temperature",
+
   "clouds": "Clouds",
   "chanceofrain": "Chance of Rain",
   "oids_general": "OID General",
   "OIDS": "OID",
   "oids_rain": "OID Rain",
-  "oids_temp": "OID Temperature",
+
   "oids_cloud": "OID Clouds",
   "oids_time": "OID Time",
   "oids_chanceofrain": "OID Chance of Rain",
@@ -58,7 +58,7 @@
   "right": "right",
   "rain_show_separate": "show in second diagram",
   "temperature_visible": "temperature to show",
-  "temperature_color": "temperature color",
+
   "temperature_positionYAxis": "position of Y axis",
   "clouds_visible": "clouds to show",
   "clouds_color": "clouds color",
@@ -381,6 +381,28 @@
   "select a datastructure. Make sure the datastructure is available on object tree": "select a datastructure. Make sure the datastructure is available on object tree",
   "OID if DP where location is available. If not set, location name is not shown": "OID if DP where location is available. If not set, location name is not shown",
   "datastructure_ForecastDaily": "ForecastDaily",
-  "datastructure_ForecastHourly": "ForecastHourly"
+  "datastructure_ForecastHourly": "ForecastHourly",
+  "iconset_galeria7": "galeria 7",
+  "sunrise": "sunrise",
+  "sunset": "sunset",
+  "moonrise": "moonrise",
+  "moonset": "moonset",
+  "moonIllumination": "moon illumination",
+  "oidmoonsymbol": "OID moon symbol",
+  "oidmoonin": "OID moonrise",
+  "oidmoonout": "OID moonset",
+  "oidmoonillumination": "OID moon illumination",
+  "oidsunin": "OID sunrise",
+  "oidsunout": "OID sunset",
+  "oid_temp_max_": "OID temperature max",
+  "oid_temp_min_": "OID temperature max",
+  "oids_temp_min": "OID Temperature min",
+  "oids_temp_max": "OID Temperature max",
+  "temperature": "temperature",
+  "temperature_max": "max. temperature",
+  "temperature_min": "min. temperature",
+  "temperature_max_color": "max. temperature color",
+  "temperature_min_color": "min. temperature color"
+
 
 }

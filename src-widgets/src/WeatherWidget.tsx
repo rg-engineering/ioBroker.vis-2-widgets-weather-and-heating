@@ -72,7 +72,8 @@ const setDataStructures = async (
 
                 //for (let p = 1; p <= max_periods; p++) {
                 data[`oid_rain_${cnt}`] = `${instance_part}.${location_part}.ForecastDaily.Day_${d}.Rain`;
-                data[`oid_temp_${cnt}`] = `${instance_part}.${location_part}.ForecastDaily.Day_${d}.Temperature_Max`;
+                data[`oid_temp_max_${cnt}`] = `${instance_part}.${location_part}.ForecastDaily.Day_${d}.Temperature_Max`;
+                data[`oid_temp_min_${cnt}`] = `${instance_part}.${location_part}.ForecastDaily.Day_${d}.Temperature_Min`;
                 data[`oid_cloud_${cnt}`] = "";
                 data[`oid_time_${cnt}`] = "";
                 cnt++;
@@ -86,7 +87,8 @@ const setDataStructures = async (
 
             for (let p = 1; p <= max_periods; p++) {
                 data[`oid_rain_${cnt}`] = `${instance_part}.${location_part}.ForecastHourly.Hour_${p}.rain`;
-                data[`oid_temp_${cnt}`] = `${instance_part}.${location_part}.ForecastHourly.Hour_${p}.temperature`;
+                data[`oid_temp_max_${cnt}`] = `${instance_part}.${location_part}.ForecastHourly.Hour_${p}.temperature`;
+                data[`oid_temp_min_${cnt}`] = "";
                 data[`oid_cloud_${cnt}`] = `${instance_part}.${location_part}.ForecastHourly.Hour_${p}.clouds`;
                 data[`oid_time_${cnt}`] = `${instance_part}.${location_part}.ForecastHourly.Hour_${p}.end`;
                 cnt++;
@@ -111,7 +113,8 @@ const setDataStructures = async (
                 // weatherunderground.0.forecastHourly.1h.precipitationChance
                 data[`oid_rain_${cnt}`] = `weatherunderground.0.forecastHourly.${h}h.precipitation`;
                 // weatherunderground.0.forecastHourly.1h.temp
-                data[`oid_temp_${cnt}`] = `weatherunderground.0.forecastHourly.${h}h.temp`;
+                data[`oid_temp_max_${cnt}`] = `weatherunderground.0.forecastHourly.${h}h.temp`;
+                data[`oid_temp_min_${cnt}`] = "";
                 // weatherunderground.0.forecastHourly.1h.sky
                 data[`oid_cloud_${cnt}`] = `weatherunderground.0.forecastHourly.${h}h.sky`;
                 // weatherunderground.0.forecastHourly.1h.time
@@ -157,7 +160,8 @@ interface StaticRxData {
     rain_positionYAxis: string;
     rain_show_separate: boolean;
     temperature_visible: boolean;
-    temperature_color: string;
+    temperature_max_color: string;
+    temperature_min_color: string;
     temperature_axislablecolor: string;
     temperature_positionYAxis: string;
     clouds_visible: boolean;
@@ -179,7 +183,8 @@ interface StaticState extends VisRxWidgetState {
 
 interface WeatherData {
     rain: [Date, number][];
-    temp: [Date, number][];
+    tempmax: [Date, number][];
+    tempmin: [Date, number][];
     clouds: [Date, number][];
     minMax: {
         RainMin: number;
@@ -209,7 +214,8 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
 
     static getWidgetInfo(): RxWidgetInfo {
         const oid_rain_fields = [];
-        const oid_temp_fields = [];
+        const oid_temp_max_fields = [];
+        const oid_temp_min_fields = [];
         const oid_cloud_fields = [];
         const oid_time_fields = [];
         const oid_general_fields = [];
@@ -271,9 +277,15 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
                 type: "id",
                 default: "",
             });
-            oid_temp_fields.push({
-                name: `oid_temp_${cnt}`,    // name in data structure
-                label: Generic.t("oid_temp_") + cnt, // translated field label
+            oid_temp_max_fields.push({
+                name: `oid_temp_max_${cnt}`,    // name in data structure
+                label: Generic.t("oid_temp_max_") + cnt, // translated field label
+                type: "id",
+                default: "",
+            });
+            oid_temp_min_fields.push({
+                name: `oid_temp_min_${cnt}`,    // name in data structure
+                label: Generic.t("oid_temp_min_") + cnt, // translated field label
                 type: "id",
                 default: "",
             });
@@ -452,10 +464,16 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
                             default: true,
                         },
                         {
-                            name: "temperature_color",    // name in data structure
-                            label: "temperature_color", // translated field label
+                            name: "temperature_max_color",    // name in data structure
+                            label: "temperature_max_color", // translated field label
                             type: "color",
                             default: "red",
+                        },
+                        {
+                            name: "temperature_min_color",    // name in data structure
+                            label: "temperature_min_color", // translated field label
+                            type: "color",
+                            default: "blue",
                         },
                         {
                             name: "temperature_axislablecolor",    // name in data structure
@@ -593,9 +611,14 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
                     fields: oid_rain_fields
                 },
                 {
-                    name: "OIDS_temp", // group name
-                    label: "oids_temp",
-                    fields: oid_temp_fields
+                    name: "OIDS_temp_max", // group name
+                    label: "oids_temp_max",
+                    fields: oid_temp_max_fields
+                },
+                {
+                    name: "OIDS_temp_min", // group name
+                    label: "oids_temp_min",
+                    fields: oid_temp_min_fields
                 },
                 {
                     name: "OIDS_cloud", // group name
@@ -723,14 +746,17 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
                 });
                 cnt++;
             }
-            if (this.state.rxData["temperature_visible"] === true && weatherData.temp.length > 1) {
-                legend.push(Generic.t("temperature"));
+
+            let tempYaxispushed = false;
+            let tempYaxisIndex = -1;
+            if (this.state.rxData["temperature_visible"] === true && weatherData.tempmax.length > 1) {
+                legend.push(Generic.t("temperature_max"));
 
                 let temperature_yaxispos = this.getOid(this.state.rxData, `temperature_positionYAxis` as keyof StaticRxData);
                 if (temperature_yaxispos === null || temperature_yaxispos === undefined) {
                     temperature_yaxispos = "left";
                 }
-
+                tempYaxispushed = true;
                 yaxis.push({
                     position: (temperature_yaxispos === 'left' || temperature_yaxispos === 'right' || temperature_yaxispos === 'top' || temperature_yaxispos === 'bottom') ? temperature_yaxispos : 'left',
                     type: "value",
@@ -744,17 +770,58 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
                 });
 
                 series.push({
-                    name: Generic.t("temperature"),
+                    name: Generic.t("temperature_max"),
                     type: "line",
-                    data: weatherData.temp,
-                    color: this.state.rxData["temperature_color"] || "red",
+                    data: weatherData.tempmax,
+                    color: this.state.rxData["temperature_max_color"] || "red",
                     yAxisIndex: cnt,
+                    tooltip: {
+                        valueFormatter: (value: OptionDataValue | OptionDataValue[]) => `${Number(value)} °C`,
+                    },
+                });
+                tempYaxisIndex = cnt;
+                cnt++;
+            }
+
+            if (this.state.rxData["temperature_visible"] === true && weatherData.tempmin.length > 1) {
+                legend.push(Generic.t("temperature_min"));
+
+                let temperature_yaxispos = this.getOid(this.state.rxData, `temperature_positionYAxis` as keyof StaticRxData);
+                if (temperature_yaxispos === null || temperature_yaxispos === undefined) {
+                    temperature_yaxispos = "left";
+                }
+
+                //todo
+                //nur wenn es noch keine Y Achse für max gibt!!
+                //gleiche Min/Max Werte für beide Temps verwenden 
+                if (!tempYaxispushed) {
+                    yaxis.push({
+                        position: (temperature_yaxispos === 'left' || temperature_yaxispos === 'right' || temperature_yaxispos === 'top' || temperature_yaxispos === 'bottom') ? temperature_yaxispos : 'left',
+                        type: "value",
+                        // min max berechnen
+                        min: TempMin,
+                        max: TempMax,
+                        axisLabel: {
+                            color: this.state.rxData["temperature_axislablecolor"] || "red",
+                            formatter: "{value} °C",
+                        },
+                    });
+                }
+                series.push({
+                    name: Generic.t("temperature_min"),
+                    type: "line",
+                    data: weatherData.tempmin,
+                    color: this.state.rxData["temperature_min_color"] || "blue",
+                    yAxisIndex: tempYaxisIndex >= 0 ? tempYaxisIndex : cnt,
                     tooltip: {
                         valueFormatter: (value: OptionDataValue | OptionDataValue[]) => `${Number(value)} °C`,
                     },
                 });
                 cnt++;
             }
+
+
+
 
             if (this.state.rxData["clouds_visible"] === true && this.state.rxData["clouds_show_separate"] === false && weatherData.clouds.length > 1) {
                 if (this.state.rxData["sun_or_cloud"] === "sun") {
@@ -1089,7 +1156,8 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
         //let instanceID = this.state.rxData["instance"]
 
         const rainData: [Date, number][] = [];
-        const tempData: [Date, number][] = [];
+        const tempmaxData: [Date, number][] = [];
+        const tempminData: [Date, number][] = [];
         const cloudData: [Date, number][] = [];
 
         let TempMin = 0;
@@ -1109,9 +1177,13 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
             let oid = this.getOid(this.state.rxData, oid_rain as keyof StaticRxData);
             const rain_val = this.state.values[`${oid}.val`];
 
-            const oid_temp = `oid_temp_${cnt}`;
-            oid = this.getOid(this.state.rxData, oid_temp as keyof StaticRxData);
-            const temp_val = this.state.values[`${oid}.val`];
+            const oid_temp_max = `oid_temp_max_${cnt}`;
+            oid = this.getOid(this.state.rxData, oid_temp_max as keyof StaticRxData);
+            const temp_max_val = this.state.values[`${oid}.val`];
+
+            const oid_temp_min = `oid_temp_min_${cnt}`;
+            oid = this.getOid(this.state.rxData, oid_temp_min as keyof StaticRxData);
+            const temp_min_val = this.state.values[`${oid}.val`];
 
             const oid_cloud = `oid_cloud_${cnt}`;
             oid = this.getOid(this.state.rxData, oid_cloud as keyof StaticRxData);
@@ -1143,11 +1215,17 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
             if (rain_val > RainMax) {
                 RainMax = rain_val;
             }
-            if (temp_val > TempMax) {
-                TempMax = temp_val;
+            if (temp_max_val > TempMax) {
+                TempMax = temp_max_val;
             }
-            if (temp_val < TempMin) {
-                TempMin = temp_val;
+            if (temp_max_val < TempMin) {
+                TempMin = temp_max_val;
+            }
+            if (temp_min_val > TempMax) {
+                TempMax = temp_min_val;
+            }
+            if (temp_min_val < TempMin) {
+                TempMin = temp_min_val;
             }
 
             if (oDate !== null && oDate !== undefined) {
@@ -1160,14 +1238,23 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
                     );
                 }
 
-                if (this.state.rxData["temperature_visible"] === true && temp_val !== null) {
-                    tempData.push(
+                if (this.state.rxData["temperature_visible"] === true && temp_max_val !== null) {
+                    tempmaxData.push(
                         [
                             oDate,
-                            temp_val,
+                            temp_max_val,
                         ],
                     );
                 }
+                if (this.state.rxData["temperature_visible"] === true && temp_min_val !== null) {
+                    tempminData.push(
+                        [
+                            oDate,
+                            temp_min_val,
+                        ],
+                    );
+                }
+
                 if (this.state.rxData["clouds_visible"] === true && cloud_val !== null) {
                     let value = cloud_val;
                     if (this.state.rxData["sun_or_cloud"] === "sun") {
@@ -1192,7 +1279,7 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
         const roundedRainMax = Number.isFinite(RainMax) ? Math.ceil(RainMax) : RainMax;
         const roundedTempMin = Number.isFinite(TempMin) ? Math.floor(TempMin) : TempMin;
         const roundedTempMax = Number.isFinite(TempMax) ? Math.ceil(TempMax) : TempMax;
-
+        
         const MinMax = {
             RainMin: roundedRainMin,
             RainMax: roundedRainMax,
@@ -1203,14 +1290,16 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
         };
 
         console.log(`rainData ${JSON.stringify(rainData)}`);
-        console.log(`tempData ${JSON.stringify(tempData)}`);
+        console.log(`tempmaxData ${JSON.stringify(tempmaxData)}`);
+        console.log(`tempinData ${JSON.stringify(tempminData)}`);
         console.log(`cloudData ${JSON.stringify(cloudData)}`);
 
         //const weatherData = ids.length ? (await this.props.context.socket.getStates(ids)) : {};
 
         const weatherData: WeatherData = {
             rain: rainData,   // [string, number][]
-            temp: tempData,   // [string, number][]
+            tempmax: tempmaxData,   // [string, number][]
+            tempmin: tempminData,   // [string, number][]
             clouds: cloudData, // [string, number][]
             minMax: MinMax    // { RainMin, RainMax, ... }
         };
@@ -1337,7 +1426,8 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
         //const instanceID = this.state.rxData["instance"]
 
         const rainData: [Date, number][] = [];
-        const tempData: [Date, number][] = [];
+        const tempmaxData: [Date, number][] = [];
+        const tempminData: [Date, number][] = [];
         const cloudData: [Date, number][] = [];
 
         let TempMin = 20;
@@ -1405,9 +1495,13 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
                 let oid = this.getOid(this.state.rxData, oid_rain as keyof StaticRxData);
                 const rain_val = this.state.values[`${oid}.val`];
 
-                const oid_temp = `oid_temp_${cnt}`;
-                oid = this.getOid(this.state.rxData, oid_temp as keyof StaticRxData);
-                const temp_val = this.state.values[`${oid}.val`];
+                const oid_temp_max = `oid_temp_max_${cnt}`;
+                oid = this.getOid(this.state.rxData, oid_temp_max as keyof StaticRxData);
+                const temp_max_val = this.state.values[`${oid}.val`];
+
+                const oid_temp_min = `oid_temp_min_${cnt}`;
+                oid = this.getOid(this.state.rxData, oid_temp_min as keyof StaticRxData);
+                const temp_min_val = this.state.values[`${oid}.val`];
 
                 const oid_cloud = `oid_cloud_${cnt}`;
                 oid = this.getOid(this.state.rxData, oid_cloud as keyof StaticRxData);
@@ -1446,7 +1540,7 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
                 //calc date
                 let oDate = null;
 
-                if (time_val !== null && time_val !== undefined && year > 0 && month > 0 && day > 0) {
+                if (time_val !== null && time_val !== undefined && typeof time_val === "string" && year > 0 && month > 0 && day > 0) {
                     const timeData = time_val.split(":");
                     hour = Number(timeData[0]);
                     minute = Number(timeData[1]);
@@ -1456,33 +1550,51 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
                     oDate = new Date(year, month - 1, day, hour, minute, 0, 0);
 
                     console.log("= " + oDate.toLocaleString());
+                } else if (time_val !== null && time_val !== undefined && typeof time_val === "number" && year > 0 && month > 0 && day > 0) {
+                    oDate = new Date(time_val);
+
+                    console.log("= " + oDate.toLocaleString());
+                } else {
+                    console.log("unknown type of time " + time_val + " " + typeof time_val);
                 }
 
                 if (oDate !== null && oDate !== undefined) {
                     if (rain_val > RainMax) {
                         RainMax = rain_val;
                     }
-                    if (temp_val > TempMax) {
-                        TempMax = temp_val;
+                    if (temp_max_val > TempMax) {
+                        TempMax = temp_max_val;
                     }
-                    if (temp_val < TempMin) {
-                        TempMin = temp_val;
+                    if (temp_max_val < TempMin) {
+                        TempMin = temp_max_val;
+                    }
+                    if (temp_min_val > TempMax) {
+                        TempMax = temp_min_val;
+                    }
+                    if (temp_min_val < TempMin) {
+                        TempMin = temp_min_val;
                     }
 
-                    if (this.state.rxData["rain_visible"] === true && rain_val !== null) {
+                    if (this.state.rxData["rain_visible"] === true && rain_val != null) {
                         rainData.push([
                             oDate,
                             rain_val
                         ]);
                     }
 
-                    if (this.state.rxData["temperature_visible"] === true && temp_val !== null) {
-                        tempData.push([
+                    if (this.state.rxData["temperature_visible"] === true && temp_max_val != null) {
+                        tempmaxData.push([
                             oDate,
-                            temp_val
+                            temp_max_val
                         ]);
                     }
-                    if (this.state.rxData["clouds_visible"] === true && cloud_val !== null) {
+                    if (this.state.rxData["temperature_visible"] === true && temp_min_val != null) {
+                        tempminData.push([
+                            oDate,
+                            temp_min_val
+                        ]);
+                    }
+                    if (this.state.rxData["clouds_visible"] === true && cloud_val != null) {
                         let value = cloud_val;
                         if (this.state.rxData["sun_or_cloud"] === "sun") {
                             value = 100 - cloud_val;
@@ -1517,7 +1629,8 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
         };
 
         console.log(`rainData ${JSON.stringify(rainData)}`);
-        console.log(`tempData ${JSON.stringify(tempData)}`);
+        console.log(`tempmaxData ${JSON.stringify(tempmaxData)}`);
+        console.log(`tempminData ${JSON.stringify(tempminData)}`);
         console.log(`cloudData ${JSON.stringify(cloudData)}`);
         console.log(`min max ${JSON.stringify(MinMax)}`);
 
@@ -1525,7 +1638,8 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
 
         const weatherData: WeatherData = {
             rain: rainData,   // [string, number][]
-            temp: tempData,   // [string, number][]
+            tempmax: tempmaxData,   // [string, number][]
+            tempmin: tempminData,   // [string, number][]
             clouds: cloudData, // [string, number][]
             minMax: MinMax    // { RainMin, RainMax, ... }
         };

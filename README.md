@@ -99,9 +99,15 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
     ### **WORK IN PROGRESS**
 -->
 
-
-
 ## Changelog
+
+### **WORK IN PROGRESS**
+* (René) dependencies updated
+* (René) update echarts@6.0.
+* (H5N1v2) 41 icons for DasWetter@4.x (galeria7)
+* (René) optimisations based on mui@7.x in WeatherDay-widget
+* (René) weather widget shows now min and max temperature (if values available)
+
 ### 1.2.1 (2025-12-30)
 * (René) bug fix deployment and dependencies updated
 * (René) update to support DasWetter@4.x

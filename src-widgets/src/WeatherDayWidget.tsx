@@ -29,45 +29,12 @@ const styles: Record<string, CSSProperties> = {
 };
 
 
-// todo mondphase bzw. Ausleuchtung anzeigen anzeigen
-// todo Sonnenaufgang und Untergang
-// todo Mondaufgang und Untergang
-
 //windicons mit DasWetter@4.x nicht nutzbar
 
 // todo wind: wenn beaufort-Galerie, dann muss auch Beafort-OID verwendet werden
 // todo wind: in galerie1 fehlt icon 9, 18,27
 
-//function importAllImages(imageModules: Record<string, string> ) {
-    //let images = new Map();
 
-    // Iteriere durch alle importierten Dateien
-    /*
-    requireContext.keys().forEach((key) => {
-        // Erhalte den Dateinamen ohne Pfad und Dateiendung
-        const fileName = key.replace('./', '').replace(/\.[^/.]+$/, '');
-
-        // Füge Bildpfad und Dateinamen der Map hinzu
-        images.set(fileName, {
-            src: requireContext(key),  // Bildpfad
-            name: fileName             // Ursprünglicher Dateiname
-        });
-    });
-    */
-
-    //    const imageMap: Record<string, string> = {};
-
-    //    for (const path in imageModules) {
-    //        const fileName = path.split('/').pop()?.replace(/\.[^/.]+$/, ''); // z.B. "home" aus "/src/assets/icons/home.png"
-    //        const mod = imageModules[path] as unknown as { default: string };
-    //        if (fileName && mod?.default) {
-    //            imageMap[fileName] = mod.default;
-    //        }
-    //    }
-
-
-    //    return imageMap;
-//}
 
 function importAllImages(   imageModules: Record<string, { default: string }>): Record<string, string> {
     const imageMap: Record<string, string> = {};
@@ -83,65 +50,23 @@ function importAllImages(   imageModules: Record<string, { default: string }>): 
     return imageMap;
 }
 
-
-//const imagesTest = importAllImages(require.context('./assets/icons/tiempo-weather/galeria1', false, /\.(png)$/));
-
 // weather icons
-//const images1 = require.context("./assets/icons/tiempo-weather/galeria1", false);
-//const icons_weather_galeria1 = images1.keys().map(image1 => images1(image1));
-//const icons_weather_galeria1 = importAllImages(require.context('./assets/icons/tiempo-weather/galeria1', false, /\.(png)$/));
 const icons_weather_galeria1 = importAllImages(import.meta.glob('./assets/icons/tiempo-weather/galeria1/*.png', { eager: true }));
-
-//const images2 = require.context("./assets/icons/tiempo-weather/galeria2", false);
-//const icons_weather_galeria2 = images2.keys().map(image2 => images2(image2));
-//const icons_weather_galeria2 = importAllImages(require.context('./assets/icons/tiempo-weather/galeria2', false, /\.(png)$/));
 const icons_weather_galeria2 = importAllImages(import.meta.glob('./assets/icons/tiempo-weather/galeria2/*.png', { eager: true }));
-
-//const images3 = require.context("./assets/icons/tiempo-weather/galeria3", false);
-//const icons_weather_galeria3 = images3.keys().map(image3 => images3(image3));
-//const icons_weather_galeria3 = importAllImages(require.context('./assets/icons/tiempo-weather/galeria3', false, /\.(png)$/));
 const icons_weather_galeria3 = importAllImages(import.meta.glob('./assets/icons/tiempo-weather/galeria3/*.png', { eager: true }));
-
-//const images4 = require.context("./assets/icons/tiempo-weather/galeria4", false);
-//const icons_weather_galeria4 = images4.keys().map(image4 => images4(image4));
-//const icons_weather_galeria4 = importAllImages(require.context('./assets/icons/tiempo-weather/galeria4', false, /\.(png)$/));
 const icons_weather_galeria4 = importAllImages(import.meta.glob('./assets/icons/tiempo-weather/galeria4/*.png', { eager: true }));
-
-
-//const images5_color = require.context("./assets/icons/tiempo-weather/galeria5/PNG/Color", false);
-//const icons_weather_galeria5_color = images5_color.keys().map(image5_color => images5_color(image5_color));
-//const icons_weather_galeria5_color = importAllImages(require.context('./assets/icons/tiempo-weather/galeria5/PNG/Color', false, /\.(png)$/));
 const icons_weather_galeria5_color = importAllImages(import.meta.glob('./assets/icons/tiempo-weather/galeria5/PNG/Color/*.png', { eager: true }));
-
-//const images5_white = require.context("./assets/icons/tiempo-weather/galeria5/PNG/White", false);
-//const icons_weather_galeria5_white = images5_white.keys().map(image5_white => images5_white(image5_white));
-//const icons_weather_galeria5_white = importAllImages(require.context('./assets/icons/tiempo-weather/galeria5/PNG/White', false, /\.(png)$/));
 const icons_weather_galeria5_white = importAllImages(import.meta.glob('./assets/icons/tiempo-weather/galeria5/PNG/White/*.png', { eager: true }));
-
-//const images6 = require.context("./assets/icons/tiempo-weather/galeria6", false);
-//const icons_weather_galeria6 = images6.keys().map(image6 => images6(image6));
-//const icons_weather_galeria6 = importAllImages(require.context('./assets/icons/tiempo-weather/galeria6', false, /\.(png)$/));
 const icons_weather_galeria6 = importAllImages(import.meta.glob('./assets/icons/tiempo-weather/galeria6/*.png', { eager: true }));
+const icons_weather_galeria7 = importAllImages(import.meta.glob('./assets/icons/tiempo-weather/galeria7/*.png', { eager: true }));
 
 //wind icons
-//const wind_images1 = require.context("./assets/icons/viento-wind/galeria1", false);
-//const icons_wind_galeria1 = wind_images1.keys().map(wind_image1 => wind_images1(wind_image1));
-//const icons_wind_galeria1 = importAllImages(require.context('./assets/icons/viento-wind/galeria1', false, /\.(png)$/));
 const icons_wind_galeria1 = importAllImages(import.meta.glob('./assets/icons/viento-wind/galeria1/*.png', { eager: true }));
-
-//const wind_images2 = require.context("./assets/icons/viento-wind/galeria2-Beaufort", false);
-//const icons_wind_galeria2 = wind_images2.keys().map(wind_image2 => wind_images2(wind_image2));
-//const icons_wind_galeria2 = importAllImages(require.context('./assets/icons/viento-wind/galeria2-Beaufort', false, /\.(png)$/));
 const icons_wind_galeria2 = importAllImages(import.meta.glob('./assets/icons/viento-wind/galeria2-Beaufort/*.png', { eager: true }));
-
-//const wind_images3 = require.context("./assets/icons/viento-wind/Beaufort-White", false);
-//const icons_wind_Beaufort = wind_images3.keys().map(wind_image3 => wind_images3(wind_image3));
-//const icons_wind_Beaufort = importAllImages(require.context('./assets/icons/viento-wind/Beaufort-White', false, /\.(png)$/));
 const icons_wind_Beaufort = importAllImages(import.meta.glob('./assets/icons/viento-wind/Beaufort-White/*.png', { eager: true }));
 
 // moon icons
-// fehlen noch
-
+const icons_moon = importAllImages(import.meta.glob('./assets/icons/luna-moon/*.png', { eager: true }));
 
 const setDataStructures = async (
     field: RxWidgetInfoAttributesField,
@@ -156,9 +81,6 @@ const setDataStructures = async (
 
     const instance = data["instance"] || "DasWetter.0";
     const day2show = data["day2show"] || "0";
-    //const datastructure = data["datastructure"];
-    //const iconlabelset = data["iconset"];
-    //const windiconlabelset = data["windiconset"];
     const location = data["location"] || "Location_2"
 
     if (instance && instance.length > 0 && instance.includes("daswetter") && location && day2show) {
@@ -198,6 +120,16 @@ const setDataStructures = async (
         data["oid_wind_value"] = `${instance_part}.${location_part}.ForecastDaily.${day_part}.Wind_Speed`;
         data["oid_windgusts_value"] = `${instance_part}.${location_part}.ForecastDaily.${day_part}.Wind_Gust`;
         data["oid_sunshine_duration"] = `${instance_part}.${location_part}.ForecastDaily.${day_part}.sunshineduration`;
+
+
+        data["oid_moon_symbol"] = `${instance_part}.${location_part}.ForecastDaily.${day_part}.Moon_symbol`;
+        data["oid_moon_in"] = `${instance_part}.${location_part}.ForecastDaily.${day_part}.Moon_in`;
+        data["oid_moon_out"] = `${instance_part}.${location_part}.ForecastDaily.${day_part}.Moon_out`;
+        data["oid_moon_illumination"] = `${instance_part}.${location_part}.ForecastDaily.${day_part}.Moon_illumination`;
+
+        data["oid_sun_in"] = `${instance_part}.${location_part}.ForecastDaily.${day_part}.Sun_in`;
+        data["oid_sun_out"] = `${instance_part}.${location_part}.ForecastDaily.${day_part}.Sun_out`;
+
 
 
         /*
@@ -243,6 +175,12 @@ interface StaticRxData {
     oid_wind_value: string; // OID for wind value, e.g. daswetter.0.NextHours.Location_1.Day_1.wind_value
     oid_windgusts_value: string; // OID for wind gusts value, e.g. daswetter.0.NextHours.Location_1.Day_1.windgusts_value
     oid_sunshine_duration: string; // OID for sunshine duration, e.g. daswetter.0.NextHours.Location_1.Day_1.sunshineDuration
+    oid_moon_symbol: string; //OIF for moon symbol, e.g. daswetter.0.location_2.ForecastDaily.Day_1.Moon_symbol
+    oid_moon_in: string;
+    oid_moon_out: string;
+    oid_moon_illumination: string;
+    oid_sun_in: string;
+    oid_sun_out: string;
 }
 
 interface StaticState extends VisRxWidgetState {
@@ -266,7 +204,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
 
             //visset -> see WeatherWidget
             //visSetLabel: "vis-2-widgets-weather",   // Widget set translated label (should be defined only in one widget of set)
-            //visSetColor: "#cf00ff",                 // Color of widget set. it is enough to set color only in one widget of set
+            //visSetColor: "#cf00ff",                 // Color of widget set. If not set, default color of widget set will be used.
             visName: "WeatherDayWidget",                     // Name of widget
             visWidgetLabel: "vis_2_widgets-weatherday", // Label of widget
             visWidgetColor: "#005cc4",               // Optional widget color. If not set, default color of widget set will be used.
@@ -387,8 +325,12 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                                     value: "galeria6",
                                     label: "iconset_galeria6"
                                 },
+                                {
+                                    value: "galeria7",
+                                    label: "iconset_galeria7"
+                                },
                             ],
-                            default: "galeria1",
+                            default: "galeria7",
                             onChange: setDataStructures,
                         },
 
@@ -483,7 +425,42 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                             type: "id",
                             default: "daswetter.0.location_1.ForecastDaily.Day_1.sunshineduration",
                         },
-
+                        {
+                            name: "oid_moon_symbol",    // name in data structure
+                            label: "oidmoonsymbol", // translated field label
+                            type: "id",
+                            default: "daswetter.0.location_1.ForecastDaily.Day_1.Moon_symbol",
+                        },
+                        {
+                            name: "oid_moon_in",    // name in data structure
+                            label: "oidmoonin", // translated field label
+                            type: "id",
+                            default: "daswetter.0.location_1.ForecastDaily.Day_1.Moon_in",
+                        },
+                        {
+                            name: "oid_moon_out",    // name in data structure
+                            label: "oidmoonout", // translated field label
+                            type: "id",
+                            default: "daswetter.0.location_1.ForecastDaily.Day_1.Moon_out",
+                        },
+                        {
+                            name: "oid_moon_illumination",    // name in data structure
+                            label: "oidmoonillumination", // translated field label
+                            type: "id",
+                            default: "daswetter.0.location_1.ForecastDaily.Day_1.Moon_illumination",
+                        },
+                        {
+                            name: "oid_sun_in",    // name in data structure
+                            label: "oidsunin", // translated field label
+                            type: "id",
+                            default: "daswetter.0.location_1.ForecastDaily.Day_1.Sun_in",
+                        },
+                        {
+                            name: "oid_sun_out",    // name in data structure
+                            label: "oidsunout", // translated field label
+                            type: "id",
+                            default: "daswetter.0.location_1.ForecastDaily.Day_1.Sun_out",
+                        },
                     ],
                 },
             ],
@@ -562,6 +539,9 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                 case "galeria6":
                     weatherimage = icons_weather_galeria6[weather_icon.toString()];
                     break;
+                case "galeria7":
+                    weatherimage = icons_weather_galeria7[weather_icon.toString()];
+                    break;
                 default:
                     console.warn("weather no iconlabelset found " + iconlabelset);
                     weatherimage = icons_weather_galeria1[weather_icon.toString()];
@@ -628,16 +608,53 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
 
         console.log(`wind icon ${wind_icon} = ${src_icon_wind_name} ` + typeof wind_icon);
 
+        //moon symbol
+        const moon_icon = this.state.values[`${this.state.rxData["oid_moon_symbol"]}.val`];
+
+        let src_icon_moon = null;
+        let src_icon_moon_name = "";
+
+
+
+
+
+        if (moon_icon != null && typeof moon_icon !== 'undefined') {
+
+            let moonimage = icons_moon["1"];
+
+            src_icon_moon = moonimage;
+            src_icon_moon_name = moonimage;
+
+            moonimage = icons_moon[moon_icon.toString()];
+
+            if (moonimage != null && typeof moonimage !== 'undefined') {
+                src_icon_moon = moonimage;
+                //src_icon_wind_name = windimage.name;
+            } else {
+                console.warn("moon image not found " + moon_icon);
+            }
+        }
+
+        console.log(`moon icon ${moon_icon} = ${src_icon_moon_name} ` + typeof moon_icon);
+
+        //================
+
         const date = this.state.values[`${this.state.rxData["oid_date"]}.val`];
 
         const sundurationval = (this.state.values[`${this.state.rxData["oid_sunshine_duration"]}.val`]);
-        console.log(`sunduration ${sundurationval}`);
 
         let sunduration = 0;
         if (sundurationval) {
             sunduration = Number(sundurationval);
             console.log(`sunduration ${sunduration} ${typeof sunduration}`);
         }
+
+        const moon_in = (this.state.values[`${this.state.rxData["oid_moon_in"]}.val`]);
+        const moon_out = (this.state.values[`${this.state.rxData["oid_moon_out"]}.val`]);
+        const moon_illumination = (this.state.values[`${this.state.rxData["oid_moon_illumination"]}.val`]);
+
+        const sun_in = (this.state.values[`${this.state.rxData["oid_sun_in"]}.val`]);
+        const sun_out = (this.state.values[`${this.state.rxData["oid_sun_out"]}.val`]);
 
         const content = <div
             ref={this.refCardContent}
@@ -651,25 +668,25 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                 alignItems="center"
                 justifyContent="center"
             >
-                <Grid size={{ xs: 12 }} >
+                <Grid size={12} >
                     <div>
                         <p>{this.state.values[`${this.state.rxData["oid_dayname"]}.val`]}</p>
                         <p>{date}</p>
                     </div>
                 </Grid>
-                <Grid size={{ xs: 6 }} >
+                <Grid size={6} >
                     <div>
                         <img src={src_icon_weather} alt={src_icon_weather_name} ></img>
                     </div>
                 </Grid>
-                <Grid size={{ xs: 6 }}>
+                <Grid size={6}>
                     <div style={{ fontSize: "small" }}>
                         <p>{Generic.t("max")} {this.state.values[`${this.state.rxData["oid_temp_max"]}.val`]} °C</p>
                         <p>{Generic.t("min")} {this.state.values[`${this.state.rxData["oid_temp_min"]}.val`]} °C</p>
                     </div>
                 </Grid>
 
-                <Grid size={{ xs: 12 }}>
+                <Grid size={12}>
                     <div>
                         <p>{this.state.values[`${this.state.rxData["oid_symbol_description"]}.val`]}</p>
                     </div>
@@ -678,32 +695,80 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
 
                 {
                     src_icon_wind != null ? (
-                        <Grid size={{ xs: 6 }}>
-                            <div>
-                                <img src={src_icon_wind} alt={src_icon_wind_name}></img>
-                            </div>
-                        </Grid>
-                    ) : (
-                        <Grid size={{ xs: 6 }}>
-                            <div>
+                        <div>
+                            <Grid size={6}>
+                                <div>
+                                    <img src={src_icon_wind} alt={src_icon_wind_name}></img>
+                                </div>
+                            </Grid>
+                            <Grid size={6}>
+                                <div style={{ fontSize: "small" }}>
+                                    <p>{Generic.t("Wind")} {this.state.values[`${this.state.rxData["oid_wind_value"]}.val`]} km/h</p>
+                                    <p>{Generic.t("WindGusts")} {this.state.values[`${this.state.rxData["oid_windgusts_value"]}.val`]} km/h</p>
+                                </div>
 
+                            </Grid>
+                        </div>
+                    ) : (
+                        <Grid size={12}>
+                            <div style={{ fontSize: "small" }}>
+                                <p>{Generic.t("Wind")} {this.state.values[`${this.state.rxData["oid_wind_value"]}.val`]} km/h</p>
+                                <p>{Generic.t("WindGusts")} {this.state.values[`${this.state.rxData["oid_windgusts_value"]}.val`]} km/h</p>
                             </div>
                         </Grid>
                     )
                 }
 
-
-                <Grid size={{ xs: 6 }}>
+                <Grid size={12}>
                     <div style={{ fontSize: "small" }}>
-                        <p>{Generic.t("Wind")} {this.state.values[`${this.state.rxData["oid_wind_value"]}.val`]} km/h</p>
-                        <p>{Generic.t("WindGusts")} {this.state.values[`${this.state.rxData["oid_windgusts_value"]}.val`]} km/h</p>
-                    </div>
-                </Grid>
-                <Grid size={{ xs: 6 }}>
-                    <div>
                         <p>{Generic.t("sun")} {sunduration} h</p>
                     </div>
                 </Grid>
+
+
+
+                {/* Ergänzung: Sonnen- und Mondzeiten anzeigen, nur wenn Werte vorhanden */}
+                {
+                    (sun_in || sun_out || moon_in || moon_out || moon_illumination) ? (
+
+                        <Grid size={12} style={{ fontSize: "small" }}>
+                            <div style={{ display: "flex", justifyContent: "center", gap: "1rem", flexWrap: "wrap" }}>
+                                {
+                                    (sun_in || sun_out) ? (
+                                        <div style={{ textAlign: "left", minWidth: "150px" }}>
+                                            {sun_in ? <p style={{ margin: 0 }}>🌅 {Generic.t("sunrise")} {sun_in}</p> : null}
+                                            {sun_out ? <p style={{ margin: 0 }}>🌇 {Generic.t("sunset")} {sun_out}</p> : null}
+                                        </div>
+                                    ) : null
+                                }
+
+                                {
+                                    (moon_in || moon_out || moon_illumination) ? (
+                                        <div style={{ textAlign: "left", minWidth: "150px" }}>
+                                            {moon_in ? <p style={{ margin: 0 }}>🌙 {Generic.t("moonrise")} {moon_in}</p> : null}
+                                            {moon_out ? <p style={{ margin: 0 }}>🌘 {Generic.t("moonset")} {moon_out}</p> : null}
+                                            {moon_illumination ? <p style={{ margin: 0 }}>🔆 {Generic.t("moonIllumination")} {moon_illumination}{typeof moon_illumination === "number" ? " %" : ""}</p> : null}
+                                        </div>
+                                    ) : null
+                                }
+                            </div>
+                        </Grid>
+
+                    ) : null
+                }
+                {
+                    src_icon_moon != null ? (
+
+                        <Grid size={12}>
+                            <div>
+                                <img src={src_icon_moon} alt={src_icon_moon_name}></img>
+                            </div>
+                        </Grid>
+
+
+                    ) : (null)
+                }
+
             </Grid>
 
         </div>;

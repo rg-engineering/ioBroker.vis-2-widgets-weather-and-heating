@@ -49,7 +49,7 @@
         ,
           "@mui/material": {
             name: "@mui/material",
-            version: "6.5.0",
+            version: "7.3.6",
             scope: ["default"],
             loaded: false,
             from: "vis2WeatherHeatingWidgets",
@@ -75,7 +75,7 @@
         ,
           "@mui/icons-material": {
             name: "@mui/icons-material",
-            version: "6.5.0",
+            version: "7.3.6",
             scope: ["default"],
             loaded: false,
             from: "vis2WeatherHeatingWidgets",

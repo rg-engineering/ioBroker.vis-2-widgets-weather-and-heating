@@ -36,7 +36,7 @@
         "vite-plugin-commonjs": "^0.10.4",
         "vite-plugin-svgr": "^4.5.0",
         "vite-tsconfig-paths": "^6.0.3",
-        "@mui/x-date-pickers": "^8.23.0",
+        "@mui/x-date-pickers": "^9.0.4",
         "dayjs": "^1.11.19"
     },
     "scripts": {

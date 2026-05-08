@@ -29,10 +29,12 @@ const styles: Record<string, CSSProperties> = {
 };
 
 
-//windicons mit DasWetter@4.x nicht nutzbar
+// windicons anzeigen
+// sunshineduration nur für heute
+// neue Icons für Aufgang und Untergang, alles möglichst in eine Zeile
 
-// todo wind: wenn beaufort-Galerie, dann muss auch Beafort-OID verwendet werden
-// todo wind: in galerie1 fehlt icon 9, 18,27
+
+
 
 
 

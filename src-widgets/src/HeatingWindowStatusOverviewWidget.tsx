@@ -9,7 +9,7 @@ import type {
     VisRxWidgetState,
     RxWidgetInfoAttributesField
 } from '@iobroker/types-vis-2';
-import type { LegacyConnection } from '@iobroker/adapter-react-v5';
+//import type { LegacyConnection } from '@iobroker/adapter-react-v5';
 import Generic from "./Generic";
 
 //import WindowOpenIcon from './Components/WindowOpenIcon';
@@ -39,7 +39,7 @@ const setDataStructures = async (
     data: WidgetData,
     changeData: (newData: WidgetData) => void,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    socket: LegacyConnection
+    socket: any
     // eslint-disable-next-line @typescript-eslint/require-await
 ): Promise<void> => {
     console.log(`set new data structure instance ${data["instance"]}` );

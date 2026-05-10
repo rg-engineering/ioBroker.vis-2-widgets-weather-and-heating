@@ -10,7 +10,7 @@ import type {
     VisRxWidgetState,
     RxWidgetInfoAttributesField
 } from '@iobroker/types-vis-2';
-import type { LegacyConnection } from '@iobroker/adapter-react-v5';
+//import type { LegacyConnection } from '@iobroker/adapter-react-v5';
 
 import moment from "moment";
 
@@ -18,6 +18,11 @@ import moment from "moment";
 import ReactEchartsCore from "echarts-for-react";
 
 import Generic from "./Generic";
+import type {
+    EChartsOption,
+    YAXisComponentOption,
+    SeriesOption, } from "echarts";
+//import type { OptionDataValue } from "echarts/types/dist/shared";
 
 const styles: Record<string, CSSProperties> = {
     cardContent: {
@@ -32,6 +37,8 @@ const styles: Record<string, CSSProperties> = {
 
 type OptionDataValue = string | number | Date | null | undefined;
 
+type GraphType = 'line' | 'bar';
+
 // todo Dummy-Y Achse wird nicht gelöscht, wenn reale Daten kommen
 // todo x achse unit einstellbar
 // todo x achse type (time or category) einstellbar
@@ -41,7 +48,7 @@ const setDataStructures = async (
     data: WidgetData,
     changeData: (newData: WidgetData) => void,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    socket: LegacyConnection
+    socket: any
     // eslint-disable-next-line @typescript-eslint/require-await
 ): Promise<void> => {
     console.log(`set new data structure ${data["dataCount"]} ${JSON.stringify(field)} ${JSON.stringify(data)}`);
@@ -384,15 +391,15 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
         return obj[key] as string;
     }
 
-    getOption(): echarts.EChartsOption {
+    getOption(): EChartsOption {
         console.log("getOption 1");
 
         let dataMin = 0;
         let dataMax = 100;
 
-        const legend = [];
-        const yaxis = [];
-        const series = [];
+        const legendData: string[] = [];
+        const yaxis: YAXisComponentOption[] = [];
+        const series: SeriesOption[] = [];
 
         const headline = this.state.rxData["headline"];
 
@@ -468,14 +475,14 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
                     name = `serie ${d}`;
                 }
 
-                legend.push(name);
+                legendData.push(name);
 
                 //const keys = Object.keys(data[0]);
                 //console.log(`keys ${keys}`);
 
                 //const type_id = "data_seriestype" + d;
                 //const type = this.state.rxData[type_id];
-                const type = this.getOid(this.state.rxData, `data_seriestype${d}` as keyof StaticRxData);
+                const type: GraphType = this.getOid(this.state.rxData, `data_seriestype${d}` as keyof StaticRxData) as GraphType;
                 //const color_id = `data_color${d}`;
                 //const color = this.state.rxData[color_id];
                 const color = this.getOid(this.state.rxData, `data_color${d}` as keyof StaticRxData);
@@ -538,7 +545,9 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
             }
 
             yaxis.push({
-                position: (yaxispos === 'left' || yaxispos === 'right' || yaxispos === 'top' || yaxispos === 'bottom') ? yaxispos : 'left',
+                position: (yaxispos === 'left' || yaxispos === 'right' || yaxispos === 'top' || yaxispos === 'bottom')
+                    ? yaxispos
+                    : 'left',
                 show: yaxispos !== "none",
                 type: "value",
                 min: dataMin,
@@ -546,7 +555,7 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
                 axisLabel: {
                     formatter: (value: OptionDataValue | OptionDataValue[]) => `${Number(value)} ${unit}`,
                 }
-            });
+            } )
         }
 
         const useSecondDiagram = false;
@@ -555,16 +564,16 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
             //add dummy data to show anything on screen
             console.log("add dummy data");
 
-            legend.push(Generic.t("dummy"));
+            legendData.push("Dummy");
             yaxis.push({
-                position: "left",
-                type: "value",
+                position: 'left',
+                type: "value" ,
                 min: 0,
                 max: 100,
                 axisLabel: {
                     formatter: (value: OptionDataValue | OptionDataValue[]) => `${Number(value)}`,
                 },
-            });
+            } );
             series.push({
                 name: Generic.t("dummy"),
                 type: "bar",
@@ -581,7 +590,7 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
         }
 
         //console.log("legend: " + JSON.stringify(legend) + " yaxis: " + JSON.stringify(yaxis));
-        const content = {
+        const content: EChartsOption = {
             backgroundColor: "transparent",
             title: {
                 text: headline,
@@ -593,16 +602,16 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
                 // backgroundColor: "#F5F5F5",
             },
             tooltip: {
-                trigger: "axis"
+                trigger: "axis" as const
             },
             legend: {
-                data: legend,
+                data: legendData,
                 orient: "horizontal",
                 right: 10,
                 //top: "center",
             },
             xAxis: {
-                type: "time",
+                type: "time" as const,
                 show: !useSecondDiagram,
                 axisLabel: {
                     rotate: 45,
@@ -622,10 +631,10 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
 
                         return moment(singleValue).format(formatstring);
                     },
-                }
+                } 
             },
 
-            yAxis: yaxis,
+            yAxis: yaxis.flat().filter(Boolean) as EChartsOption['yAxis'],
 
             series: series,
         };

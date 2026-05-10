@@ -3,8 +3,8 @@
 
     const importMap = {
       
-        "react": async () => {
-          let pkg = await import("__mf__virtual/vis2WeatherHeatingWidgets__prebuild__react__prebuild__.js")
+        "@mui/icons-material": async () => {
+          let pkg = await import("__mf__virtual/vis2WeatherHeatingWidgets__prebuild___mf_0_mui_mf_1_icons_mf_2_material__prebuild__.js")
           return pkg
         }
       ,
@@ -13,23 +13,23 @@
           return pkg
         }
       ,
-        "@mui/icons-material": async () => {
-          let pkg = await import("__mf__virtual/vis2WeatherHeatingWidgets__prebuild___mf_0_mui_mf_1_icons_mf_2_material__prebuild__.js")
+        "react": async () => {
+          let pkg = await import("__mf__virtual/vis2WeatherHeatingWidgets__prebuild__react__prebuild__.js")
           return pkg
         }
       
     }
       const usedShared = {
       
-          "react": {
-            name: "react",
-            version: "18.3.1",
+          "@mui/icons-material": {
+            name: "@mui/icons-material",
+            version: "7.3.6",
             scope: ["default"],
             loaded: false,
             from: "vis2WeatherHeatingWidgets",
             async get () {
-              usedShared["react"].loaded = true
-              const {"react": pkgDynamicImport} = importMap 
+              usedShared["@mui/icons-material"].loaded = true
+              const {"@mui/icons-material": pkgDynamicImport} = importMap 
               const res = await pkgDynamicImport()
               const exportModule = {...res}
               // All npm packages pre-built by vite will be converted to esm
@@ -49,7 +49,7 @@
         ,
           "@mui/material": {
             name: "@mui/material",
-            version: "7.3.6",
+            version: "9.0.1",
             scope: ["default"],
             loaded: false,
             from: "vis2WeatherHeatingWidgets",
@@ -73,15 +73,15 @@
             }
           }
         ,
-          "@mui/icons-material": {
-            name: "@mui/icons-material",
-            version: "7.3.6",
+          "react": {
+            name: "react",
+            version: "18.3.1",
             scope: ["default"],
             loaded: false,
             from: "vis2WeatherHeatingWidgets",
             async get () {
-              usedShared["@mui/icons-material"].loaded = true
-              const {"@mui/icons-material": pkgDynamicImport} = importMap 
+              usedShared["react"].loaded = true
+              const {"react": pkgDynamicImport} = importMap 
               const res = await pkgDynamicImport()
               const exportModule = {...res}
               // All npm packages pre-built by vite will be converted to esm

@@ -1,0 +1,10 @@
+{
+  "latestErrorEvent": {
+    "code": "TYPE-001",
+    "message": "Failed to generate type declaration. Execute the below cmd to reproduce and fix the error. #TYPE-001\nargs: {\"cmd\":\"npx tsc --project C:\\\\Users\\\\reneg\\\\Documents\\\\projects\\\\ioBroker\\\\ioBroker.vis-2-widgets-weather-and-heating\\\\src-widgets\\\\node_modules\\\\.federation\\\\tsconfig.a8227c33db33ec042a8e1344f333caf6.json\"}\nView the docs to see how to solve: https://module-federation.io/guide/troubleshooting/type#type-001",
+    "args": {
+      "cmd": "npx tsc --project C:\\Users\\reneg\\Documents\\projects\\ioBroker\\ioBroker.vis-2-widgets-weather-and-heating\\src-widgets\\node_modules\\.federation\\tsconfig.a8227c33db33ec042a8e1344f333caf6.json"
+    },
+    "timestamp": 1778422558384
+  }
+}

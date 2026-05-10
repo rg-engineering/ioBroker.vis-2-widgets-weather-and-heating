@@ -9,7 +9,7 @@ import type {
     VisRxWidgetState,
     RxWidgetInfoAttributesField
 } from '@iobroker/types-vis-2';
-import type { LegacyConnection } from '@iobroker/adapter-react-v5';
+//import type { LegacyConnection } from '@iobroker/adapter-react-v5';
 
 import moment from "moment";
 
@@ -41,10 +41,11 @@ type OptionDataValue = string | number | Date | null | undefined;
 
 const setDataStructures = async (
     field: RxWidgetInfoAttributesField,
-    data: WidgetData,
+    data: WidgetData,       
     changeData: (newData: WidgetData) => void,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    socket: LegacyConnection,
+    socket: any,
+    //index?: number,
     // eslint-disable-next-line @typescript-eslint/require-await
 ): Promise<void> => {
     console.log(`set new datastructure instance ${data["instance"]} ${data["datastructure"]}` );
@@ -371,6 +372,9 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
                             default: "location_1",
                             tooltip: "location part of OID to auto complete OID settings",
                             onChange: setDataStructures,
+
+
+
                             //only available with DasWetter
                             hidden: "!!data.instance.includes('weatherunderground')"
                         },

@@ -11,7 +11,7 @@ import type {
     RxWidgetInfoAttributesField
 } from '@iobroker/types-vis-2';
 
-import type { LegacyConnection } from '@iobroker/adapter-react-v5';
+//import type { LegacyConnection } from '@iobroker/adapter-react-v5';
 
 // For federation, it is important to import from one package "@mui/material" and not from "@mui/material/Box"
 import {
@@ -74,7 +74,7 @@ const setDataStructures = async (
     data: WidgetData,
     changeData: (newData: WidgetData) => void,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    socket: LegacyConnection
+    socket: any
     // eslint-disable-next-line @typescript-eslint/require-await
 ): Promise<void> => {
     console.log(`set new data structure instance ${data["instance"]}` );

@@ -70,6 +70,9 @@ const icons_wind_Beaufort = importAllImages(import.meta.glob('./assets/icons/vie
 // moon icons
 const icons_moon = importAllImages(import.meta.glob('./assets/icons/luna-moon/*.png', { eager: true }));
 
+
+
+
 const setDataStructures = async (
     field: RxWidgetInfoAttributesField,
     data: WidgetData,
@@ -191,7 +194,7 @@ interface StaticState extends VisRxWidgetState {
 }
 
 export default class WeatherDayWidget extends Generic<StaticRxData, StaticState> {
-    private readonly refCardContent: React.RefObject<HTMLDivElement | null> = React.createRef();
+    private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
     private lastRxData: string | undefined;
     private updateTimeout: ReturnType<typeof setTimeout> | undefined;
     constructor(props: VisRxWidgetProps) {
@@ -475,6 +478,12 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
         return WeatherDayWidget.getWidgetInfo();
     }
 
+    
+
+
+
+
+
     renderWidgetBody(props: RxRenderWidgetProps): React.JSX.Element | React.JSX.Element[] | null {
 
         //super.renderWidgetBody(props);
@@ -491,6 +500,12 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
         if (this.refCardContent.current) {
             size = this.refCardContent.current.offsetHeight;
         }
+
+        console.log("React identity:", React);
+        console.log("React version:", React.version);
+        console.log("React dispatcher exists:", !!(React as any).__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED?.ReactCurrentDispatcher);
+        console.log("window.React:", (window as any).React);
+        console.log("same instance:", React === (window as any).React);
 
         console.log(`wdw chart: size ${size}`);
 
@@ -670,25 +685,25 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                 alignItems="center"
                 justifyContent="center"
             >
-                <Grid size={12} >
+                <Grid xs={12} >
                     <div>
                         <p>{this.state.values[`${this.state.rxData["oid_dayname"]}.val`]}</p>
                         <p>{date}</p>
                     </div>
                 </Grid>
-                <Grid size={6} >
+                <Grid xs={6} >
                     <div>
                         <img src={src_icon_weather} alt={src_icon_weather_name} ></img>
                     </div>
                 </Grid>
-                <Grid size={6}>
+                <Grid xs={6}>
                     <div style={{ fontSize: "small" }}>
                         <p>{Generic.t("max")} {this.state.values[`${this.state.rxData["oid_temp_max"]}.val`]} °C</p>
                         <p>{Generic.t("min")} {this.state.values[`${this.state.rxData["oid_temp_min"]}.val`]} °C</p>
                     </div>
                 </Grid>
 
-                <Grid size={12}>
+                <Grid xs={12}>
                     <div>
                         <p>{this.state.values[`${this.state.rxData["oid_symbol_description"]}.val`]}</p>
                     </div>
@@ -698,12 +713,12 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                 {
                     src_icon_wind != null ? (
                         <div>
-                            <Grid size={6}>
+                            <Grid xs={6}>
                                 <div>
                                     <img src={src_icon_wind} alt={src_icon_wind_name}></img>
                                 </div>
                             </Grid>
-                            <Grid size={6}>
+                            <Grid xs={6}>
                                 <div style={{ fontSize: "small" }}>
                                     <p>{Generic.t("Wind")} {this.state.values[`${this.state.rxData["oid_wind_value"]}.val`]} km/h</p>
                                     <p>{Generic.t("WindGusts")} {this.state.values[`${this.state.rxData["oid_windgusts_value"]}.val`]} km/h</p>
@@ -712,7 +727,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                             </Grid>
                         </div>
                     ) : (
-                        <Grid size={12}>
+                        <Grid xs={12}>
                             <div style={{ fontSize: "small" }}>
                                 <p>{Generic.t("Wind")} {this.state.values[`${this.state.rxData["oid_wind_value"]}.val`]} km/h</p>
                                 <p>{Generic.t("WindGusts")} {this.state.values[`${this.state.rxData["oid_windgusts_value"]}.val`]} km/h</p>
@@ -721,7 +736,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                     )
                 }
 
-                <Grid size={12}>
+                <Grid xs={12}>
                     <div style={{ fontSize: "small" }}>
                         <p>{Generic.t("sun")} {sunduration} h</p>
                     </div>
@@ -733,7 +748,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                 {
                     (sun_in || sun_out || moon_in || moon_out || moon_illumination) ? (
 
-                        <Grid size={12} style={{ fontSize: "small" }}>
+                        <Grid xs={12} style={{ fontSize: "small" }}>
                             <div style={{ display: "flex", justifyContent: "center", gap: "1rem", flexWrap: "wrap" }}>
                                 {
                                     (sun_in || sun_out) ? (
@@ -761,7 +776,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                 {
                     src_icon_moon != null ? (
 
-                        <Grid size={12}>
+                        <Grid xs={12}>
                             <div>
                                 <img src={src_icon_moon} alt={src_icon_moon_name}></img>
                             </div>
@@ -781,6 +796,8 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
         }
 
         console.log("weatherday widget: wrap content");
+
+        console.log("weatherday widget: 11nur so so soo");
 
         return this.wrapContent(content, null, { textAlign: "center" });
     }

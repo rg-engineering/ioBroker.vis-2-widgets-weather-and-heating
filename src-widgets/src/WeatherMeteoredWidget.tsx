@@ -14,6 +14,8 @@ import type {
 
 import Generic from "./Generic";
 
+import Grid from "@mui/material/Grid";
+
 const styles: Record<string, CSSProperties> = {
     cardContent: {
         flex: 1,
@@ -57,7 +59,7 @@ interface StaticState extends VisRxWidgetState {
 }
 
 export default class WeatherMeteoredWidget extends Generic<StaticRxData, StaticState> {
-    private readonly refCardContent: React.RefObject<HTMLDivElement | null> = React.createRef();
+    private readonly refCardContent: React.RefObject<HTMLDivElement > = React.createRef();
 
     private reloadTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -227,6 +229,12 @@ export default class WeatherMeteoredWidget extends Generic<StaticRxData, StaticS
             ref={this.refCardContent}
             style={styles.cardContent}
         >
+            <Grid>  
+                <p> test only </p>
+            </Grid>
+
+
+
 
             <div id={id}>
 
@@ -236,10 +244,17 @@ export default class WeatherMeteoredWidget extends Generic<StaticRxData, StaticS
         </div>;
     }
 
+
+  
+
     renderWidgetBody(props: RxRenderWidgetProps): React.JSX.Element | React.JSX.Element[] | null {
         super.renderWidgetBody(props);
 
         console.log(`WeatherMeteoredWidget - renderWidgetBody `);
+
+        console.log("React instance:", React);
+
+
 
         let size;
         if (!this.refCardContent.current) {
@@ -258,7 +273,7 @@ export default class WeatherMeteoredWidget extends Generic<StaticRxData, StaticS
             return content;
         }
 
-
+        console.log("WeatherMeteoredWidget widget: 111 nur so so soo");
 
         return this.wrapContent(content, null, { textAlign: "center" });
     }

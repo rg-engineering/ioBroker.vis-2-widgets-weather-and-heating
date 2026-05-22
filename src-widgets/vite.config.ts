@@ -1,10 +1,43 @@
-import react from "@vitejs/plugin-react";
-import commonjs from "vite-plugin-commonjs";
-import vitetsConfigPaths from "vite-tsconfig-paths";
-import { federation } from "@module-federation/vite";
-import { moduleFederationShared } from "@iobroker/types-vis-2/modulefederation.vis.config";
-import { readFileSync } from "node:fs";
-const pack = JSON.parse(readFileSync("./package.json").toString());
+import react from '@vitejs/plugin-react';
+import commonjs from 'vite-plugin-commonjs';
+import vitetsConfigPaths from 'vite-tsconfig-paths';
+import { federation } from '@module-federation/vite';
+import topLevelAwait from 'vite-plugin-top-level-await';
+
+const singleton = (
+    extra: Record<string, unknown> = {},
+): {
+    singleton: true;
+    requiredVersion: '*';
+} & Record<string, unknown> => ({
+    singleton: true,
+    requiredVersion: '*',
+    ...extra,
+});
+
+
+const sharedModules: Record<string, ReturnType<typeof singleton>> = {
+    react: singleton(),
+    'react-dom': singleton(),
+    'react-dom/client': singleton(),
+    '@mui/material': singleton({ import: false }),
+    '@mui/icons-material': singleton({ import: false }),
+    '@mui/styles': singleton(),
+    '@mui/system': singleton({ import: false }),
+    'prop-types': singleton(),
+    '@iobroker/adapter-react-v5': singleton(),
+    '@iobroker/adapter-react-v5/i18n/de.json': singleton(),
+    '@iobroker/adapter-react-v5/i18n/en.json': singleton(),
+    '@iobroker/adapter-react-v5/i18n/es.json': singleton(),
+    '@iobroker/adapter-react-v5/i18n/ru.json': singleton(),
+    '@iobroker/adapter-react-v5/i18n/nl.json': singleton(),
+    '@iobroker/adapter-react-v5/i18n/it.json': singleton(),
+    '@iobroker/adapter-react-v5/i18n/pl.json': singleton(),
+    '@iobroker/adapter-react-v5/i18n/pt.json': singleton(),
+    '@iobroker/adapter-react-v5/i18n/fr.json': singleton(),
+    '@iobroker/adapter-react-v5/i18n/uk.json': singleton(),
+    '@iobroker/adapter-react-v5/i18n/zh-cn.json': singleton(),
+};
 
 const config = {
     plugins: [
@@ -12,53 +45,85 @@ const config = {
             manifest: true,
             name: "vis2WeatherHeatingWidgets",
             filename: "customWidgets.js",
+
             exposes: {
-                "./GeneralEChartWidget": "./src/GeneralEChartWidget",
+                //"./GeneralEChartWidget": "./src/GeneralEChartWidget",
 
-                "./WeatherWidget": "./src/WeatherWidget", // List of all widgets in this package
+                //"./WeatherWidget": "./src/WeatherWidget", // List of all widgets in this package
                 "./WeatherDayWidget": "./src/WeatherDayWidget",
-                "./WeatherMeteoredWidget": "./src/WeatherMeteoredWidget",
+                //"./WeatherMeteoredWidget": "./src/WeatherMeteoredWidget",
 
-                "./HeatingTimeScheduleWidget": "./src/HeatingTimeScheduleWidget",
-                "./HeatingGeneralParamsWidget": "./src/HeatingGeneralParamsWidget",
-                "./HeatingRoomWidget": "./src/HeatingRoomWidget",
-                "./HeatingRoomsOverviewWidget": "./src/HeatingRoomsOverviewWidget",
-                "./HeatingRomProfileParamsWidget": "./src/HeatingRoomProfileParamsWidget",
-                "./HeatingWindowStatusOverviewWidget": "./src/HeatingWindowStatusOverviewWidget",
+                //"./HeatingTimeScheduleWidget": "./src/HeatingTimeScheduleWidget",
+                //"./HeatingGeneralParamsWidget": "./src/HeatingGeneralParamsWidget",
+                //"./HeatingRoomWidget": "./src/HeatingRoomWidget",
+                //"./HeatingRoomsOverviewWidget": "./src/HeatingRoomsOverviewWidget",
+                //"./HeatingRomProfileParamsWidget": "./src/HeatingRoomProfileParamsWidget",
+                //"./HeatingWindowStatusOverviewWidget": "./src/HeatingWindowStatusOverviewWidget",
 
                 "./SourceAnalytics2WeeksBarGraphWidget": "./src/SourceAnalytics2WeeksBarGraphWidget",
 
                 "./translations": "./src/translations",
             },
+
             remotes: {},
-            shared: moduleFederationShared(pack),
+
+            shared: sharedModules,
+            dts: false,
+        }),
+        topLevelAwait({
+            // The export name of top-level awaits promise for each chunk module
+            promiseExportName: '__tla',
+            // The function to generate import names of top-level awaits promise in each chunk module
+            promiseImportName: (i: number): string => `__tla_${i}`,
         }),
         react(),
         vitetsConfigPaths(),
         commonjs(),
     ],
+
+    resolve: {
+        dedupe: [
+            "react",
+            "react-dom",
+
+            "@mui/material",
+            "@mui/system",
+            "@mui/icons-material",
+
+            //"@mui/private-theming",
+            //"@mui/styled-engine",
+            //"@mui/utils",
+
+
+            "prop-types",
+            "@iobroker/adapter-react-v5",
+        ],
+    },
+
     server: {
         port: 3000,
         proxy: {
-            "/_socket": "http://localhost:8082",
-            "/vis.0": "http://localhost:8082",
-            "/adapter": "http://localhost:8082",
-            "/habpanel": "http://localhost:8082",
-            "/vis": "http://localhost:8082",
-            "/widgets": "http://localhost:8082/vis",
-            "/widgets.html": "http://localhost:8082/vis",
-            "/web": "http://localhost:8082",
-            "/state": "http://localhost:8082",
+            '/_socket': 'http://localhost:8082',
+            '/vis.0': 'http://localhost:8082',
+            '/adapter': 'http://localhost:8082',
+            '/habpanel': 'http://localhost:8082',
+            '/vis': 'http://localhost:8082',
+            '/widgets': 'http://localhost:8082/vis',
+            '/widgets.html': 'http://localhost:8082/vis',
+            '/web': 'http://localhost:8082',
+            '/state': 'http://localhost:8082',
         },
     },
+
     base: "./",
+
     build: {
-        target: "chrome89",
+        target: "chrome81",
         outDir: "./build",
         rollupOptions: {
             onwarn(warning: { code: string }, warn: (warning: { code: string }) => void): void {
                 // Suppress "Module level directives cause errors when bundled" warnings
-                if (warning.code === "MODULE_LEVEL_DIRECTIVE") {
+                if (warning.code === 'MODULE_LEVEL_DIRECTIVE') {
                     return;
                 }
                 warn(warning);

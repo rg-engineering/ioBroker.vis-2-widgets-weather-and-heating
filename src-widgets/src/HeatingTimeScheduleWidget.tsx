@@ -410,7 +410,7 @@ type periods = PeriodEntry[];
 
 
 export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, StaticState> {
-    private readonly refCardContent: React.RefObject<HTMLDivElement | null> = React.createRef();
+    private readonly refCardContent: React.RefObject<HTMLDivElement > = React.createRef();
     private lastRxData: string | undefined;
     private updateTimeout: ReturnType<typeof setTimeout> | undefined;
     constructor(props: VisRxWidgetProps) {

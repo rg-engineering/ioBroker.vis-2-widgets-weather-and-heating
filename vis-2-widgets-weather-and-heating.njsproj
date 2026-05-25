@@ -43,6 +43,7 @@
     <Content Include=".github\ISSUE_TEMPLATE\BugReport.md" />
     <Content Include=".github\ISSUE_TEMPLATE\bug_report.md" />
     <Content Include=".github\ISSUE_TEMPLATE\Enhancement.md" />
+    <Content Include=".github\workflows\automerge-dependabot.yml" />
     <Content Include=".github\workflows\test-and-release.yml" />
     <Content Include=".gitignore" />
     <Content Include=".releaseconfig.json" />

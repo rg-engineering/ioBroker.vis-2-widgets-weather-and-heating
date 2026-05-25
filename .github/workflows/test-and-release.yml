@@ -19,10 +19,25 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Performs quick checks before the expensive test runs
+  check-and-lint:
+    if: contains(github.event.head_commit.message, '[skip ci]') == false
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: ioBroker/testing-action-check@v1
+        with:
+          node-version: '24.x'
+          install-command: 'npm ci && cd src-widgets && npm ci'
+          lint: true
+
   # Runs adapter tests on all supported node versions and OSes
   adapter-tests:
-        needs: [check-and-lint]
         if: contains(github.event.head_commit.message, '[skip ci]') == false
+
+        needs: [check-and-lint]
+        
 
         runs-on: ${{ matrix.os }}
         strategy:
@@ -63,7 +78,7 @@ jobs:
 
   # Deploys the final package to NPM
   deploy:
-    needs: [adapter-tests]
+    needs: [check-and-lint, adapter-tests]
 
     # Trigger this step only when a commit on master is tagged with a version number
     if: |

@@ -14,7 +14,7 @@ import type {
 
 import Generic from "./Generic";
 
-import Grid from "@mui/material/Grid";
+
 
 const styles: Record<string, CSSProperties> = {
     cardContent: {
@@ -229,12 +229,6 @@ export default class WeatherMeteoredWidget extends Generic<StaticRxData, StaticS
             ref={this.refCardContent}
             style={styles.cardContent}
         >
-            <Grid>  
-                <p> test only </p>
-            </Grid>
-
-
-
 
             <div id={id}>
 

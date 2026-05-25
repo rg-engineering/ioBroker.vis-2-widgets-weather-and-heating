@@ -1,3 +1,4 @@
+// @ts-expect-error no types
 import react from '@vitejs/plugin-react';
 import commonjs from 'vite-plugin-commonjs';
 import vitetsConfigPaths from 'vite-tsconfig-paths';
@@ -15,15 +16,15 @@ const singleton = (
     ...extra,
 });
 
-
 const sharedModules: Record<string, ReturnType<typeof singleton>> = {
     react: singleton(),
     'react-dom': singleton(),
     'react-dom/client': singleton(),
-    '@mui/material': singleton({ import: false }),
-    '@mui/icons-material': singleton({ import: false }),
+    '@mui/material': singleton(),
+    '@mui/icons-material': singleton(),
+    '@mui/x-date-pickers': singleton(),
     '@mui/styles': singleton(),
-    '@mui/system': singleton({ import: false }),
+    '@mui/system': singleton(),
     'prop-types': singleton(),
     '@iobroker/adapter-react-v5': singleton(),
     '@iobroker/adapter-react-v5/i18n/de.json': singleton(),
@@ -45,28 +46,28 @@ const config = {
             manifest: true,
             name: "vis2WeatherHeatingWidgets",
             filename: "customWidgets.js",
-
             exposes: {
-                //"./GeneralEChartWidget": "./src/GeneralEChartWidget",
 
-                //"./WeatherWidget": "./src/WeatherWidget", // List of all widgets in this package
+                
+
+                "./GeneralEChartWidget": "./src/GeneralEChartWidget",
+
+                "./WeatherWidget": "./src/WeatherWidget", // List of all widgets in this package
                 "./WeatherDayWidget": "./src/WeatherDayWidget",
-                //"./WeatherMeteoredWidget": "./src/WeatherMeteoredWidget",
+                "./WeatherMeteoredWidget": "./src/WeatherMeteoredWidget",
 
-                //"./HeatingTimeScheduleWidget": "./src/HeatingTimeScheduleWidget",
-                //"./HeatingGeneralParamsWidget": "./src/HeatingGeneralParamsWidget",
-                //"./HeatingRoomWidget": "./src/HeatingRoomWidget",
-                //"./HeatingRoomsOverviewWidget": "./src/HeatingRoomsOverviewWidget",
-                //"./HeatingRomProfileParamsWidget": "./src/HeatingRoomProfileParamsWidget",
-                //"./HeatingWindowStatusOverviewWidget": "./src/HeatingWindowStatusOverviewWidget",
+                "./HeatingTimeScheduleWidget": "./src/HeatingTimeScheduleWidget",
+                "./HeatingGeneralParamsWidget": "./src/HeatingGeneralParamsWidget",
+                "./HeatingRoomWidget": "./src/HeatingRoomWidget",
+                "./HeatingRoomsOverviewWidget": "./src/HeatingRoomsOverviewWidget",
+                "./HeatingRomProfileParamsWidget": "./src/HeatingRoomProfileParamsWidget",
+                "./HeatingWindowStatusOverviewWidget": "./src/HeatingWindowStatusOverviewWidget",
 
                 "./SourceAnalytics2WeeksBarGraphWidget": "./src/SourceAnalytics2WeeksBarGraphWidget",
 
-                "./translations": "./src/translations",
+                "./translations": "./src/translations.js",
             },
-
             remotes: {},
-
             shared: sharedModules,
             dts: false,
         }),
@@ -80,26 +81,6 @@ const config = {
         vitetsConfigPaths(),
         commonjs(),
     ],
-
-    resolve: {
-        dedupe: [
-            "react",
-            "react-dom",
-
-            "@mui/material",
-            "@mui/system",
-            "@mui/icons-material",
-
-            //"@mui/private-theming",
-            //"@mui/styled-engine",
-            //"@mui/utils",
-
-
-            "prop-types",
-            "@iobroker/adapter-react-v5",
-        ],
-    },
-
     server: {
         port: 3000,
         proxy: {
@@ -114,12 +95,23 @@ const config = {
             '/state': 'http://localhost:8082',
         },
     },
-
-    base: "./",
-
+    base: './',
+    resolve: {
+        dedupe: [
+            'react',
+            'react-dom',
+            'prop-types',
+            '@mui/material',
+            '@mui/system',
+            '@mui/styles',
+            '@mui/icons-material',
+            '@mui/x-date-pickers',
+            '@iobroker/adapter-react-v5',
+        ],
+    },
     build: {
-        target: "chrome81",
-        outDir: "./build",
+        target: 'chrome81',
+        outDir: './build',
         rollupOptions: {
             onwarn(warning: { code: string }, warn: (warning: { code: string }) => void): void {
                 // Suppress "Module level directives cause errors when bundled" warnings

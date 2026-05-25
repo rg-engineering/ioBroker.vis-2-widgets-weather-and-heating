@@ -15,10 +15,10 @@ import type {
 // https://github.com/Pittini/iobroker-heatingcontrol-vis
 // For federation, it is important to import from one package "@mui/material" and not from "@mui/material/Box"
 import {
-    Box,
-    FormControlLabel,
-    FormGroup,
-    Switch
+    Box ,
+    FormControlLabel ,
+    FormGroup ,
+    Switch 
 } from "@mui/material";
 
 import Generic from "./Generic";

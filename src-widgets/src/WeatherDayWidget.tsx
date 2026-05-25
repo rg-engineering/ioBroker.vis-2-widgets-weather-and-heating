@@ -13,7 +13,7 @@ import type {
 } from '@iobroker/types-vis-2';
 //import type { LegacyConnection } from '@iobroker/adapter-react-v5';
 
-import Grid from "@mui/material/Grid";
+import { Grid }  from "@mui/material";
 
 import Generic from "./Generic";
 

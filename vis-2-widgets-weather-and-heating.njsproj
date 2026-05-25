@@ -562,7 +562,6 @@
     <Content Include="src-widgets\src\assets\icons\viento-wind\galeria2-Beaufort\99.png" />
     <Content Include="src-widgets\src\i18n\ko.json" />
     <Content Include="src-widgets\src\i18n\uk.json" />
-    <Content Include="src-widgets\src\GeneralEChartWidget.tsx" />
     <Content Include="src-widgets\src\i18n\de.json" />
     <Content Include="src-widgets\src\i18n\en.json" />
     <Content Include="src-widgets\src\i18n\es.json" />
@@ -617,22 +616,10 @@
     <Folder Include="widgets\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="src-widgets\src\components\WindowCloseIcon.tsx" />
-    <TypeScriptCompile Include="src-widgets\src\components\WindowOpenIcon.tsx" />
-    <TypeScriptCompile Include="src-widgets\src\EchartContainer.tsx" />
     <TypeScriptCompile Include="src-widgets\src\Generic.tsx" />
-    <TypeScriptCompile Include="src-widgets\src\HeatingGeneralParamsWidget.tsx" />
-    <TypeScriptCompile Include="src-widgets\src\HeatingRoomProfileParamsWidget.tsx" />
-    <TypeScriptCompile Include="src-widgets\src\HeatingRoomsOverviewWidget.tsx" />
-    <TypeScriptCompile Include="src-widgets\src\HeatingRoomWidget.tsx" />
-    <TypeScriptCompile Include="src-widgets\src\HeatingTimeScheduleWidget.tsx" />
-    <TypeScriptCompile Include="src-widgets\src\HeatingWindowStatusOverviewWidget.tsx" />
     <TypeScriptCompile Include="src-widgets\src\index.tsx" />
-    <TypeScriptCompile Include="src-widgets\src\SourceAnalytics2WeeksBarGraphWidget.tsx" />
     <TypeScriptCompile Include="src-widgets\src\translations.ts" />
     <TypeScriptCompile Include="src-widgets\src\WeatherDayWidget.tsx" />
-    <TypeScriptCompile Include="src-widgets\src\WeatherMeteoredWidget.tsx" />
-    <TypeScriptCompile Include="src-widgets\src\WeatherWidget.tsx" />
     <TypeScriptCompile Include="src-widgets\vite.config.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />

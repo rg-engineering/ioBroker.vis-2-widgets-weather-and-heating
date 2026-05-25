@@ -47,6 +47,8 @@
     <Content Include=".github\workflows\test-and-release.yml" />
     <Content Include=".gitignore" />
     <Content Include=".releaseconfig.json" />
+    <Content Include=".vscode\extensions.json" />
+    <Content Include=".vscode\settings.json" />
     <Content Include="admin\vis-2-widgets-weather-and-heating.png" />
     <Content Include="doc\vis-widget-HeatingGeneralParams.png" />
     <Content Include="doc\vis-widget-HeatingRoom.png" />
@@ -582,6 +584,7 @@
     <Folder Include=".github\" />
     <Folder Include=".github\ISSUE_TEMPLATE\" />
     <Folder Include=".github\workflows\" />
+    <Folder Include=".vscode\" />
     <Folder Include="admin\" />
     <Folder Include="doc\" />
     <Folder Include="lib\" />
@@ -617,10 +620,23 @@
     <Folder Include="widgets\" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src-widgets\src\Components\WindowCloseIcon.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\Components\WindowOpenIcon.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\EchartContainer.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\GeneralEChartWidget.tsx" />
     <TypeScriptCompile Include="src-widgets\src\Generic.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\HeatingGeneralParamsWidget.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\HeatingRoomProfileParamsWidget.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\HeatingRoomsOverviewWidget.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\HeatingRoomWidget.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\HeatingTimeScheduleWidget.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\HeatingWindowStatusOverviewWidget.tsx" />
     <TypeScriptCompile Include="src-widgets\src\index.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\SourceAnalytics2WeeksBarGraphWidget.tsx" />
     <TypeScriptCompile Include="src-widgets\src\translations.ts" />
     <TypeScriptCompile Include="src-widgets\src\WeatherDayWidget.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\WeatherMeteoredWidget.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\WeatherWidget.tsx" />
     <TypeScriptCompile Include="src-widgets\vite.config.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />

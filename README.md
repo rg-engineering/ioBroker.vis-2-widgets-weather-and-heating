@@ -100,6 +100,10 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 -->
 
 ## Changelog
+
+### **WORK IN PROGRESS**
+* (René) see #174: unused empty space in weather widget removed
+
 ### 1.3.0 (2026-01-03)
 * (René) dependencies updated
 * (René) update echarts@6.0.

@@ -1657,18 +1657,23 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
         console.log(`values ${JSON.stringify(this.state.values)}`);
         console.log(`rxData ${JSON.stringify(this.state.rxData)}`);
 
-        let size;
-        if (!this.refCardContent.current) {
-            setTimeout(() => this.forceUpdate(), 50);
-        } else {
-            size = this.refCardContent.current.offsetHeight / 2;
-        }
 
-        let useSecondDiagram;
+        let useSecondDiagram = false;
         if ((this.state.rxData["rain_visible"] && this.state.rxData["rain_show_separate"])
             || (this.state.rxData["clouds_visible"] && this.state.rxData["clouds_show_separate"])
         ) {
             useSecondDiagram = true;
+        }
+
+        let size;
+        if (!this.refCardContent.current) {
+            setTimeout(() => this.forceUpdate(), 50);
+        } else {
+            if (useSecondDiagram) {
+                size = this.refCardContent.current.offsetHeight / 2;
+            } else {
+                size = this.refCardContent.current.offsetHeight;
+            }
         }
 
         console.log(`size ${size} ${useSecondDiagram}`);

@@ -114,7 +114,7 @@
       
           "@iobroker/adapter-react-v5": {
             name: "@iobroker/adapter-react-v5",
-            version: "8.2.2",
+            version: "8.2.4",
             scope: ["default"],
             loaded: false,
             from: "__mfe_internal__vis2WeatherHeatingWidgets",
@@ -146,7 +146,7 @@
         ,
           "@iobroker/adapter-react-v5/i18n/de.json": {
             name: "@iobroker/adapter-react-v5/i18n/de.json",
-            version: "8.2.2",
+            version: "8.2.4",
             scope: ["default"],
             loaded: false,
             from: "__mfe_internal__vis2WeatherHeatingWidgets",
@@ -178,7 +178,7 @@
         ,
           "@iobroker/adapter-react-v5/i18n/en.json": {
             name: "@iobroker/adapter-react-v5/i18n/en.json",
-            version: "8.2.2",
+            version: "8.2.4",
             scope: ["default"],
             loaded: false,
             from: "__mfe_internal__vis2WeatherHeatingWidgets",
@@ -210,7 +210,7 @@
         ,
           "@iobroker/adapter-react-v5/i18n/es.json": {
             name: "@iobroker/adapter-react-v5/i18n/es.json",
-            version: "8.2.2",
+            version: "8.2.4",
             scope: ["default"],
             loaded: false,
             from: "__mfe_internal__vis2WeatherHeatingWidgets",
@@ -242,7 +242,7 @@
         ,
           "@iobroker/adapter-react-v5/i18n/fr.json": {
             name: "@iobroker/adapter-react-v5/i18n/fr.json",
-            version: "8.2.2",
+            version: "8.2.4",
             scope: ["default"],
             loaded: false,
             from: "__mfe_internal__vis2WeatherHeatingWidgets",
@@ -274,7 +274,7 @@
         ,
           "@iobroker/adapter-react-v5/i18n/it.json": {
             name: "@iobroker/adapter-react-v5/i18n/it.json",
-            version: "8.2.2",
+            version: "8.2.4",
             scope: ["default"],
             loaded: false,
             from: "__mfe_internal__vis2WeatherHeatingWidgets",
@@ -306,7 +306,7 @@
         ,
           "@iobroker/adapter-react-v5/i18n/nl.json": {
             name: "@iobroker/adapter-react-v5/i18n/nl.json",
-            version: "8.2.2",
+            version: "8.2.4",
             scope: ["default"],
             loaded: false,
             from: "__mfe_internal__vis2WeatherHeatingWidgets",
@@ -338,7 +338,7 @@
         ,
           "@iobroker/adapter-react-v5/i18n/pl.json": {
             name: "@iobroker/adapter-react-v5/i18n/pl.json",
-            version: "8.2.2",
+            version: "8.2.4",
             scope: ["default"],
             loaded: false,
             from: "__mfe_internal__vis2WeatherHeatingWidgets",
@@ -370,7 +370,7 @@
         ,
           "@iobroker/adapter-react-v5/i18n/pt.json": {
             name: "@iobroker/adapter-react-v5/i18n/pt.json",
-            version: "8.2.2",
+            version: "8.2.4",
             scope: ["default"],
             loaded: false,
             from: "__mfe_internal__vis2WeatherHeatingWidgets",
@@ -402,7 +402,7 @@
         ,
           "@iobroker/adapter-react-v5/i18n/ru.json": {
             name: "@iobroker/adapter-react-v5/i18n/ru.json",
-            version: "8.2.2",
+            version: "8.2.4",
             scope: ["default"],
             loaded: false,
             from: "__mfe_internal__vis2WeatherHeatingWidgets",
@@ -434,7 +434,7 @@
         ,
           "@iobroker/adapter-react-v5/i18n/uk.json": {
             name: "@iobroker/adapter-react-v5/i18n/uk.json",
-            version: "8.2.2",
+            version: "8.2.4",
             scope: ["default"],
             loaded: false,
             from: "__mfe_internal__vis2WeatherHeatingWidgets",
@@ -466,7 +466,7 @@
         ,
           "@iobroker/adapter-react-v5/i18n/zh-cn.json": {
             name: "@iobroker/adapter-react-v5/i18n/zh-cn.json",
-            version: "8.2.2",
+            version: "8.2.4",
             scope: ["default"],
             loaded: false,
             from: "__mfe_internal__vis2WeatherHeatingWidgets",

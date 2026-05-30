@@ -80,6 +80,7 @@ interface StaticRxData {
     unit: string;
     axislablecolor: string;
     positionYAxis: string;
+    decimalplaces: number;
 }
 
 interface StaticState extends VisRxWidgetState {
@@ -224,7 +225,14 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
                             ],
                             default: "right",
                         },
-                       
+                        {
+                            name: "decimalplaces",    // name in data structure
+                            label: "decimalplaces", // translated field label
+                            type: "number",
+                            default: 2,
+                            min: 0,
+                            max: 5,
+                        },
                        
                         
                     ],
@@ -348,7 +356,13 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
         return SourceAnalytics2WeeksBarGraphWidget.getWidgetInfo();
     }
 
-    roundToNiceRange(min: number, max: number): { newmin: number; newmax: number; step: number } {
+    roundToNiceRange(min: number | undefined, max: number | undefined): { newmin: number; newmax: number; step: number } {
+
+        if (min === undefined || max === undefined) {
+            return { newmin: 0, newmax: 100, step: 10 };
+        }
+
+
         const range = this.niceNum(max - min, false);
         const step = this.niceNum(range / 10, true); // Schrittweite (z.B. für Ticks)
         const newmin = Math.floor(min / step) * step;
@@ -387,7 +401,7 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
         return niceFraction * Math.pow(10, exponent);
     }
 
-
+    
 
     getOption(): echarts.EChartsOption {
         console.log("getOption ");
@@ -402,24 +416,26 @@ export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticR
         let Min;
         let Max;
 
+        this.DecimalPlaces4Temps = this.state.rxData["decimalplaces"] !== undefined ? this.state.rxData["decimalplaces"] : 2;   
+
         const series1 = [
-             this.state.values[`${this.state.rxData["OID_PreviousWeek_Monday"]}.val`],
-             this.state.values[`${this.state.rxData["OID_PreviousWeek_Tuesday"]}.val`],
-             this.state.values[`${this.state.rxData["OID_PreviousWeek_Wednesday"]}.val`],
-             this.state.values[`${this.state.rxData["OID_PreviousWeek_Thursday"]}.val`],
-             this.state.values[`${this.state.rxData["OID_PreviousWeek_Friday"]}.val`],
-             this.state.values[`${this.state.rxData["OID_PreviousWeek_Saturday"]}.val`],
-             this.state.values[`${this.state.rxData["OID_PreviousWeek_Sunday"]}.val`],
+             this.format2Number(this.state.values[`${this.state.rxData["OID_PreviousWeek_Monday"]}.val`]),
+             this.format2Number(this.state.values[`${this.state.rxData["OID_PreviousWeek_Tuesday"]}.val`]),
+             this.format2Number(this.state.values[`${this.state.rxData["OID_PreviousWeek_Wednesday"]}.val`]),
+             this.format2Number(this.state.values[`${this.state.rxData["OID_PreviousWeek_Thursday"]}.val`]),
+             this.format2Number(this.state.values[`${this.state.rxData["OID_PreviousWeek_Friday"]}.val`]),
+             this.format2Number(this.state.values[`${this.state.rxData["OID_PreviousWeek_Saturday"]}.val`]),
+             this.format2Number(this.state.values[`${this.state.rxData["OID_PreviousWeek_Sunday"]}.val`]),
             ];
 
         const series2 = [
-             this.state.values[`${this.state.rxData["OID_CurrentWeek_Monday"]}.val`],
-             this.state.values[`${this.state.rxData["OID_CurrentWeek_Tuesday"]}.val`],
-             this.state.values[`${this.state.rxData["OID_CurrentWeek_Wednesday"]}.val`],
-             this.state.values[`${this.state.rxData["OID_CurrentWeek_Thursday"]}.val`],
-             this.state.values[`${this.state.rxData["OID_CurrentWeek_Friday"]}.val`],
-             this.state.values[`${this.state.rxData["OID_CurrentWeek_Saturday"]}.val`],
-             this.state.values[`${this.state.rxData["OID_CurrentWeek_Sunday"]}.val`]
+             this.format2Number(this.state.values[`${this.state.rxData["OID_CurrentWeek_Monday"]}.val`]),
+             this.format2Number(this.state.values[`${this.state.rxData["OID_CurrentWeek_Tuesday"]}.val`]),
+             this.format2Number(this.state.values[`${this.state.rxData["OID_CurrentWeek_Wednesday"]}.val`]),
+             this.format2Number(this.state.values[`${this.state.rxData["OID_CurrentWeek_Thursday"]}.val`]),
+             this.format2Number(this.state.values[`${this.state.rxData["OID_CurrentWeek_Friday"]}.val`]),
+             this.format2Number(this.state.values[`${this.state.rxData["OID_CurrentWeek_Saturday"]}.val`]),
+             this.format2Number(this.state.values[`${this.state.rxData["OID_CurrentWeek_Sunday"]}.val`])
         ];
 
 

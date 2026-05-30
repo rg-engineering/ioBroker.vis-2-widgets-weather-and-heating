@@ -15,6 +15,8 @@ export default class Generic<
     State extends Partial<VisRxWidgetState> = VisRxWidgetState,
     > extends (window.visRxWidget as typeof VisRxWidget)<RxData, State> {
 
+    DecimalPlaces4Temps: number = 2;  
+
     getPropertyValue = (stateName: string): any => this.state.values[`${(this.state.rxData as any)[stateName]}.val`];
 
     static getI18nPrefix(): string {
@@ -28,7 +30,13 @@ export default class Generic<
         return await this.props.context.socket.getObject(parentOID);
     }
 
-    
+    public format2Number(temp: number): number {
+        const decimalPlaces = typeof this.DecimalPlaces4Temps === "number" ? this.DecimalPlaces4Temps : 2;
+        if (typeof temp !== "number" || isNaN(temp)) {
+            return 0;
+        }
+        return Number(temp.toFixed(decimalPlaces));
+    }
 }
 
 

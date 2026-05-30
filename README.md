@@ -100,6 +100,11 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 -->
 
 ## Changelog
+
+### **WORK IN PROGRESS**
+* (René) see #264: decimal places for temperature values can now be configured in weather day widget 
+* (René) decimal places for Y axis can now be configured in SourceAnalytics bar graph widget 
+
 ### 1.4.0 (2026-05-26)
 * (René) see #174: unused empty space in weather widget removed
 * (René) dependencies updated

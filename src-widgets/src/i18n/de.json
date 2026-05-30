@@ -401,6 +401,9 @@
   "temperature_max": "max. Temperatur",
   "temperature_min": "min. Temperatur",
   "temperature_max_color": "Farbe max. Temperatur",
-  "temperature_min_color": "Farbe min. Temperatur"
+  "temperature_min_color": "Farbe min. Temperatur",
 
+
+  "decimalplaces4Temp": "Nachkommastellen für Temperatur",
+  "decimalplaces": "Nachkommastellen"
 }

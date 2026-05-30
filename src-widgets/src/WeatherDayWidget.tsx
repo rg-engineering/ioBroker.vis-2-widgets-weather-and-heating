@@ -186,6 +186,8 @@ interface StaticRxData {
     oid_moon_illumination: string;
     oid_sun_in: string;
     oid_sun_out: string;
+
+    decimalplaces4Temp:number
 }
 
 interface StaticState extends VisRxWidgetState {
@@ -360,6 +362,15 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                             ],
                             default: "galeria1",
                             onChange: setDataStructures,
+                        },
+
+                        {
+                            name: "decimalplaces4Temp",    // name in data structure
+                            label: "decimalplaces4Temp", // translated field label
+                            type: "number",
+                            default: 2,
+                            min: 0,
+                            max: 5,
                         },
 
                     ],
@@ -673,6 +684,10 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
         const sun_in = (this.state.values[`${this.state.rxData["oid_sun_in"]}.val`]);
         const sun_out = (this.state.values[`${this.state.rxData["oid_sun_out"]}.val`]);
 
+        this.DecimalPlaces4Temps = this.state.rxData["decimalplaces4Temp"] !== undefined ? this.state.rxData["decimalplaces4Temp"] : 2;   
+        const MaxTemp = this.format2Number(this.state.values[`${this.state.rxData["oid_temp_max"]}.val`]);
+        const MinTemp = this.format2Number(this.state.values[`${this.state.rxData["oid_temp_min"]}.val`]);
+
         const content = <div
             ref={this.refCardContent}
             style={styles.cardContent}
@@ -698,8 +713,8 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                 </Grid>
                 <Grid xs={6}>
                     <div style={{ fontSize: "small" }}>
-                        <p>{Generic.t("max")} {this.state.values[`${this.state.rxData["oid_temp_max"]}.val`]} °C</p>
-                        <p>{Generic.t("min")} {this.state.values[`${this.state.rxData["oid_temp_min"]}.val`]} °C</p>
+                        <p>{Generic.t("max")} {MaxTemp} °C</p>
+                        <p>{Generic.t("min")} {MinTemp} °C</p>
                     </div>
                 </Grid>
 

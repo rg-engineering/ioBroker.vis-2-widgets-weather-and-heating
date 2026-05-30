@@ -402,7 +402,9 @@
   "temperature_max": "max. temperature",
   "temperature_min": "min. temperature",
   "temperature_max_color": "max. temperature color",
-  "temperature_min_color": "min. temperature color"
+  "temperature_min_color": "min. temperature color",
 
+  "decimalplaces4Temp": "decimal places for temperature",
+  "decimalplaces": "decimal places"
 
 }

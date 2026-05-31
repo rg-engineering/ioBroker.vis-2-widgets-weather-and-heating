@@ -100,8 +100,7 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 -->
 
 ## Changelog
-
-### **WORK IN PROGRESS**
+### 1.4.1 (2026-05-31)
 * (René) see #264: decimal places for temperature values can now be configured in weather day widget 
 * (René) decimal places for Y axis can now be configured in SourceAnalytics bar graph widget 
 * (René) #263: bug fix to switch color for datepicker in dark mode
@@ -125,29 +124,3 @@ known issue: Icons are not updated yet.
 
 ### 1.1.5 (2025-10-26)
 * (René) dependencies updated and bug fix based on adapter checker and linter
-
-### 1.1.3 (2025-09-06)
-* (René) dependencies updated and bug fix based on adapter checker
-
-[Older changelogs can be found there](CHANGELOG_OLD.md)## License
-The MIT License (MIT)
-
-Copyright (c) 2024-2026 rg-engineering <info@rg-engineering.eu>
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.

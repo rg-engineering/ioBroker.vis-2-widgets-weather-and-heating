@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather-and-heating",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "news": {
+      "1.4.1": {
+        "en": "see #264: decimal places for temperature values can now be configured in weather day widget \ndecimal places for Y axis can now be configured in SourceAnalytics bar graph widget \n#263: bug fix to switch color for datepicker in dark mode",
+        "de": "siehe #264: dezimalstellen für temperaturwerte können nun im wettertag widget konfiguriert werden\ndezimalstellen für Y-Achse können jetzt in SourceAnalytics Bar Graph Widget konfiguriert werden\n#263: bugfix, um die farbe für datepicker im dunklen modus zu wechseln",
+        "ru": "#264: десятичные места для значений температуры теперь можно настроить в виджете погоды\nдесятичные места для оси Y теперь можно настроить в виджете диаграммы строк SourceAnalytics\n#263: исправление ошибок для переключения цвета для датчика в темном режиме",
+        "pt": "ver #264: as casas decimais para os valores de temperatura podem agora ser configuradas no widget do dia meteorológico\nas casas decimais para o eixo Y podem agora ser configuradas no widget de gráfico da barra SourceAnalytics\n#263: correção de erros para mudar de cor para datepicker no modo escuro",
+        "nl": "zie #264: decimale plaatsen voor temperatuurwaarden kunnen nu worden geconfigureerd in het weer widget\ndecimale plaatsen voor Y-as kunnen nu worden geconfigureerd in SourceAnalytics staafgrafiek widget\n#263: bugfix om van kleur te wisselen voor datepicker in donkere modus",
+        "fr": "voir n°264: les décimales pour les valeurs de température peuvent maintenant être configurées dans le widget météo day\nles décimales pour l'axe Y peuvent désormais être configurées dans le widget graphique de barre SourceAnalytics\n#263: correction de bug pour changer de couleur pour datepicker en mode sombre",
+        "it": "vedi #264: i luoghi decimali per i valori di temperatura possono ora essere configurati nel widget del giorno del tempo\npunti decimali per asse Y possono ora essere configurati in widget grafico grafico barra SourceAnalytics\n#263: bug fix to switch color for datepicker in modalità dark",
+        "es": "ver #264: los lugares decimales para los valores de temperatura ahora se pueden configurar en el widget del día del tiempo\nlugares decimales para el eje Y ahora se puede configurar en el widget de barras de SourceAnalytics\n#263: bug fix to switch color for datepicker in dark mode",
+        "pl": "zobacz # 264: miejsca dziesiętne dla wartości temperatury mogą być skonfigurowane w widgecie dnia pogodowego\nmiejsca dziesiętne dla osi Y mogą być teraz skonfigurowane w widżecie wykresu paska SourceAnalytics\n# 263: błąd ustawia kolor przełącznika dla datepicker w trybie ciemnym",
+        "uk": "див. #264: десяткові місця для значень температури тепер можна налаштувати в віджеті погоди\nдесяткові місця для осі Y тепер можна налаштувати у віджеті графа SourceAnalytics\n#263: виправлення помилок для перемикання кольору для дапакера в темному режимі",
+        "zh-cn": "见# 264: 温度值的小数位可以配置在天气日部件中\ny 轴的小数位数现在可以在 SourceAnatics 图表元件中配置\n# 263: 错误修复, 在暗模式下切换采集枣的颜色 "
+      },
       "1.4.0": {
         "en": "see #174: unused empty space in weather widget removed\ndependencies updated",
         "de": "siehe #174: ungenutzter leerraum im wetter-widget entfernt\naktualisierte abhängigkeiten",
@@ -80,19 +93,6 @@
         "pl": "Widget SourceAnalytics: optymalizacja obliczeniowa min / max",
         "uk": "SourceAnalytics віджет: min / макс оптимізації розрахунку",
         "zh-cn": "SourceAnatics 部件: min/ 最大计算优化"
-      },
-      "1.1.1": {
-        "en": "SourceAnalytics widget: bug fix min / max calculation",
-        "de": "SourceAnalytics Widget: Bug fix min / max Berechnung",
-        "ru": "Виджет SourceAnalytics: исправление ошибок min/max расчет",
-        "pt": "Widget de análise de origem: cálculo min / max de correção de erros",
-        "nl": "SourceAnalytics widget: bug fix min / max berekening",
-        "fr": "Widget SourceAnalytics: correction du bug min / max",
-        "it": "Widget: bug fix min / max calcolo",
-        "es": "FuenteAnalytics widget: bug fix min / max calculation",
-        "pl": "Widżet SourceAnalytics: obliczenie błędu min / max",
-        "uk": "SourceAnalytics віджет: Виправлення помилок",
-        "zh-cn": "SourceAnatics 部件: 错误修正 min/ 最大计算"
       }
     },
     "titleLang": {

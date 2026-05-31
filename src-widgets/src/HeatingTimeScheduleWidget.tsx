@@ -1349,7 +1349,18 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
                         time: e.target.value,
                         OID: oid_time
                     })}
-                    sx={{ input: { width: "100%" } }}
+                   
+                    sx={
+                        
+                        {
+                            "& .MuiOutlinedInput-input": {
+                                
+                                width: "100%"
+                            },
+
+                            
+                           
+                    }}
                 />
 
             </FormControl>
@@ -1390,11 +1401,33 @@ export default class HeatingTimeScheduleWidget extends Generic<StaticRxData, Sta
                                             color: this.props.context.themeType === 'dark' ? '#DDD' : '#222',
 
                                         },
-                                        "& .MuiIconButton-root": {
-                                            color: this.props.context.themeType === 'dark' ? '#DDD' : '#222',
+
+                                        "& .MuiPickersInputBase-root": {
+                                            color:
+                                                this.props.context.themeType === "dark"
+                                                    ? "#DDD"
+                                                    : "#222",
                                         },
+
+                                        "& .MuiPickersInputBase-input": {
+                                            color:
+                                                this.props.context.themeType === "dark"
+                                                    ? "#DDD"
+                                                    : "#222",
+                                        },
+
+                                        "& .MuiIconButton-root": {
+                                            color:
+                                                this.props.context.themeType === "dark"
+                                                    ? "#DDD"
+                                                    : "#222",
+                                        },
+
                                         "& .MuiOutlinedInput-notchedOutline": {
-                                            "border-color": this.props.context.themeType === 'dark' ? '#DDDD' : '#222',
+                                            borderColor:
+                                                this.props.context.themeType === "dark"
+                                                    ? "#DDD"
+                                                    : "#222",
                                         },
                                     },
                                 },

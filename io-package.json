@@ -3,7 +3,7 @@
     "name": "vis-2-widgets-weather-and-heating",
     "version": "1.4.1",
     "news": {
-      "1.4.1": {
+      "1.4.2": {
         "en": "see #264: decimal places for temperature values can now be configured in weather day widget \ndecimal places for Y axis can now be configured in SourceAnalytics bar graph widget \n#263: bug fix to switch color for datepicker in dark mode",
         "de": "siehe #264: dezimalstellen für temperaturwerte können nun im wettertag widget konfiguriert werden\ndezimalstellen für Y-Achse können jetzt in SourceAnalytics Bar Graph Widget konfiguriert werden\n#263: bugfix, um die farbe für datepicker im dunklen modus zu wechseln",
         "ru": "#264: десятичные места для значений температуры теперь можно настроить в виджете погоды\nдесятичные места для оси Y теперь можно настроить в виджете диаграммы строк SourceAnalytics\n#263: исправление ошибок для переключения цвета для датчика в темном режиме",

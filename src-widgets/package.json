@@ -19,7 +19,7 @@
         "colorthief": "^2.6.0",
         "date-fns": "^4.4.0",
         "echarts": "^6.1.0",
-        "echarts-for-react": "^3.0.7",
+        "echarts-for-react": "^3.0.6",
         "leaflet": "^1.9.4",
         "lottie-react": "^2.4.1",
         "moment": "^2.30.1",

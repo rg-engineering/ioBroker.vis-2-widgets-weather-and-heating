@@ -42,7 +42,7 @@
         "vite-plugin-commonjs": "^0.10.4",
         "vite-plugin-top-level-await": "^1.6.0",
         "vite-tsconfig-paths": "^5.1.4",
-        "@mui/x-date-pickers": "^8.23.0",
+        "@mui/x-date-pickers": "^9.3.0",
         "dayjs": "1.11.20"
     },
     "scripts": {

@@ -411,10 +411,10 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
 
             //const name_name =  "name" + d;
             //let name = this.state.rxData[name_name];
-            let name = this.getOid(this.state.rxData, `name${d}` as keyof StaticRxData);
+            let name = this.getOid(this.state.rxData, `name${d}` );
             //let OID_name = "oid_data" + d;
             //const oid = this.state.rxData[OID_name];
-            const oid = this.getOid(this.state.rxData, `oid_data${d}` as keyof StaticRxData);
+            const oid = this.getOid(this.state.rxData, `oid_data${d}`);
             const data_org = this.state.values[`${oid}.val`];
 
             console.log(`data${d} :  ${oid}  ${JSON.stringify(data_org)}`);
@@ -436,7 +436,7 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
                     const oDate = new Date(date);
 
                     //oid = `data_calcdiff${d}`;
-                    const calcDiff = this.getOid(this.state.rxData, `data_calcdiff${d}` as keyof StaticRxData);
+                    const calcDiff = this.getOid(this.state.rxData, `data_calcdiff${d}` );
 
                     if (calcDiff) {
                         if (i === 0) {
@@ -482,13 +482,13 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
 
                 //const type_id = "data_seriestype" + d;
                 //const type = this.state.rxData[type_id];
-                const type: GraphType = this.getOid(this.state.rxData, `data_seriestype${d}` as keyof StaticRxData) as GraphType;
+                const type: GraphType = this.getOid(this.state.rxData, `data_seriestype${d}` ) as GraphType;
                 //const color_id = `data_color${d}`;
                 //const color = this.state.rxData[color_id];
-                const color = this.getOid(this.state.rxData, `data_color${d}` as keyof StaticRxData);
+                const color = this.getOid(this.state.rxData, `data_color${d}` );
 
                 //const autounit_name = `data_autounit${d}`;
-                const autounit_name = this.getOid(this.state.rxData, `data_autounit${d}` as keyof StaticRxData);
+                const autounit_name = this.getOid(this.state.rxData, `data_autounit${d}` );
 
                 let factor = 1;
                 if (autounit_name) {
@@ -532,14 +532,14 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
 
             //const unit_id = `data_unit${d}`;
             //let unit = preUnit + this.state.rxData[unit_id];
-            let unit = this.getOid(this.state.rxData, `data_unit${d}` as keyof StaticRxData);
+            let unit = this.getOid(this.state.rxData, `data_unit${d}`);
             if (unit === null || unit === undefined) {
                 unit = "";
             }
 
             //const yaxispos_id = `data_yaxispos${d}`;
             //let yaxispos = this.state.rxData[yaxispos_id];
-            let yaxispos = this.getOid(this.state.rxData, `data_yaxispos${d}` as keyof StaticRxData);
+            let yaxispos = this.getOid(this.state.rxData, `data_yaxispos${d}`);
             if (yaxispos === null || yaxispos === undefined) {
                 yaxispos = "left";
             }
@@ -634,7 +634,7 @@ export default class GeneralEChartWidget extends Generic<StaticRxData, StaticSta
                 } 
             },
 
-            yAxis: yaxis.flat().filter(Boolean) as EChartsOption['yAxis'],
+            yAxis: yaxis.flat().filter(Boolean) ,
 
             series: series,
         };

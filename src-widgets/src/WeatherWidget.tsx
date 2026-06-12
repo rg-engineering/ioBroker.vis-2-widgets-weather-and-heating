@@ -721,7 +721,7 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
             if (this.state.rxData["rain_visible"] === true && this.state.rxData["rain_show_separate"] === false && weatherData.rain.length > 1) {
                 legend.push(Generic.t("rain"));
 
-                let rain_yaxispos = this.getOid(this.state.rxData, `rain_positionYAxis` as keyof StaticRxData);
+                let rain_yaxispos = this.getOid(this.state.rxData, `rain_positionYAxis`);
                 if (rain_yaxispos === null || rain_yaxispos === undefined) {
                     rain_yaxispos = "right";
                 }
@@ -756,7 +756,7 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
             if (this.state.rxData["temperature_visible"] === true && weatherData.tempmax.length > 1) {
                 legend.push(Generic.t("temperature_max"));
 
-                let temperature_yaxispos = this.getOid(this.state.rxData, `temperature_positionYAxis` as keyof StaticRxData);
+                let temperature_yaxispos = this.getOid(this.state.rxData, `temperature_positionYAxis`);
                 if (temperature_yaxispos === null || temperature_yaxispos === undefined) {
                     temperature_yaxispos = "left";
                 }
@@ -790,7 +790,7 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
             if (this.state.rxData["temperature_visible"] === true && weatherData.tempmin.length > 1) {
                 legend.push(Generic.t("temperature_min"));
 
-                let temperature_yaxispos = this.getOid(this.state.rxData, `temperature_positionYAxis` as keyof StaticRxData);
+                let temperature_yaxispos = this.getOid(this.state.rxData, `temperature_positionYAxis`);
                 if (temperature_yaxispos === null || temperature_yaxispos === undefined) {
                     temperature_yaxispos = "left";
                 }
@@ -834,7 +834,7 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
                     legend.push(Generic.t("cloud"));
                 }
 
-                let clouds_yaxispos = this.getOid(this.state.rxData, `clouds_positionYAxis` as keyof StaticRxData);
+                let clouds_yaxispos = this.getOid(this.state.rxData, `clouds_positionYAxis`);
                 if (clouds_yaxispos === null || clouds_yaxispos === undefined) {
                     clouds_yaxispos = "right";
                 }
@@ -1000,7 +1000,7 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
             if (this.state.rxData["rain_visible"] === true && this.state.rxData["rain_show_separate"] === true && weatherData.rain.length > 1) {
                 legend.push(Generic.t("rain"));
 
-                let rain_yaxispos = this.getOid(this.state.rxData, `rain_positionYAxis` as keyof StaticRxData);
+                let rain_yaxispos = this.getOid(this.state.rxData, `rain_positionYAxis`);
                 if (rain_yaxispos === null || rain_yaxispos === undefined) {
                     rain_yaxispos = "right";
                 }
@@ -1037,7 +1037,7 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
                     legend.push(Generic.t("cloud"));
                 }
 
-                let clouds_yaxispos = this.getOid(this.state.rxData, `clouds_positionYAxis` as keyof StaticRxData);
+                let clouds_yaxispos = this.getOid(this.state.rxData, `clouds_positionYAxis`);
                 if (clouds_yaxispos === null || clouds_yaxispos === undefined) {
                     clouds_yaxispos = "right";
                 }

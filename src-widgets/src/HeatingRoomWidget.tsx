@@ -264,7 +264,7 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
         //const oid_name = "oid_TargetTemperature" + d;
         //console.log(oid_name);
         //const oid = this.state.rxData[`${oid_name}`];
-        const oid = this.getOid(this.state.rxData, `oid_TargetTemperature${d}` as keyof StaticRxData);
+        const oid = this.getOid(this.state.rxData, `oid_TargetTemperature${d}`);
         console.log(oid);
 
         if (oid !== undefined && oid!=null && oid.length > 5) {
@@ -296,7 +296,7 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
         //const oid_name = "oid_ThermostatBatteryState" + d;
         //console.log(oid_name);
         //const oid = this.state.rxData[`${oid_name}`];
-        const oid = this.getOid(this.state.rxData, `oid_ThermostatBatteryState${d}` as keyof StaticRxData);
+        const oid = this.getOid(this.state.rxData, `oid_ThermostatBatteryState${d}`);
         console.log(oid);
 
         // nur true / false
@@ -335,7 +335,7 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
         //const oid_name = "oid_ThermostatRSSI" + d;
         //console.log(oid_name);
         //const oid = this.state.rxData[oid_name];
-        const oid = this.getOid(this.state.rxData, `oid_ThermostatRSSI${d}` as keyof StaticRxData);
+        const oid = this.getOid(this.state.rxData, `oid_ThermostatRSSI${d}`);
         console.log(oid);
 
         // RSSI in dBm
@@ -385,7 +385,7 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
         //const oid_name = "oid_CurrentActorState" + d;
         //console.log(oid_name);
         //const oid = this.state.rxData[oid_name];
-        const oid = this.getOid(this.state.rxData, `oid_CurrentActorState${d}` as keyof StaticRxData);
+        const oid = this.getOid(this.state.rxData, `oid_CurrentActorState${d}`);
         console.log(oid);
 
         if (oid !== undefined && oid != null && oid.length > 5) {
@@ -406,7 +406,7 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
         //const oid_name = "oid_CurrentValveValue" + d;
         //console.log(oid_name);
         //const oid = this.state.rxData[oid_name];
-        const oid = this.getOid(this.state.rxData, `oid_CurrentValveValue${d}` as keyof StaticRxData);
+        const oid = this.getOid(this.state.rxData, `oid_CurrentValveValue${d}`);
         console.log(oid);
 
         if (oid !== undefined && oid != null && oid.length > 5) {
@@ -439,7 +439,7 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
         //const oid_name = "oid_ThermostatBatteryVoltage" + d;
         //console.log(oid_name);
         //const oid = this.state.rxData[oid_name];
-        const oid = this.getOid(this.state.rxData, `oid_ThermostatBatteryVoltage${d}` as keyof StaticRxData);
+        const oid = this.getOid(this.state.rxData, `oid_ThermostatBatteryVoltage${d}`);
         console.log(oid);
 
         if (oid !== undefined && oid != null && oid.length > 5) {
@@ -471,7 +471,7 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
         //const oid_name = "oid_CurrentTemperature" + d;
         //console.log(oid_name);
         //const oid = this.state.rxData[oid_name];
-        const oid = this.getOid(this.state.rxData, `oid_CurrentTemperature${d}` as keyof StaticRxData);
+        const oid = this.getOid(this.state.rxData, `oid_CurrentTemperature${d}`);
         console.log(oid);
 
         if (oid !== undefined && oid != null && oid.length > 5) {
@@ -494,7 +494,7 @@ export default class HeatingRoomWidget extends Generic < StaticRxData, StaticSta
         //const oid_name = "oid_CurrentTemperatureExtSensor" + d;
         //console.log(oid_name);
         //const oid = this.state.rxData[oid_name];
-        const oid = this.getOid(this.state.rxData, `oid_CurrentTemperatureExtSensor${d}` as keyof StaticRxData);
+        const oid = this.getOid(this.state.rxData, `oid_CurrentTemperatureExtSensor${d}`);
         console.log(oid);
 
         if (oid !== undefined && oid != null && oid.length > 5) {

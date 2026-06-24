@@ -53,7 +53,8 @@
     "release-major": "release-script major --yes",
     "test": "npm run test:integration && npm run test:package",
     "update-packages": "npx -y npm-check-updates --upgrade && cd src-widgets && npx -y npm-check-updates --upgrade",
-    "npm": "npm i && cd src-widgets && npm i"
+    "npm": "npm i && cd src-widgets && npm i",
+    "translate": "translate-adapter --base src-widgets/src/i18n/en.json"
   },
   "bugs": {
     "url": "https://github.com/rg-enineering/ioBroker.vis-2-widgets-weather-and-heating/issues"

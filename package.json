@@ -29,7 +29,7 @@
     "@iobroker/vis-2-widgets-testing": "^1.0.6",
     "@tsconfig/node22": "^22.0.5",
     "typescript": "~6.0.3",
-    "@types/node": "^22.19.20",
+    "@types/node": "^22.19.21",
     "@iobroker/types": "^7.1.2"
   },
   "files": [

@@ -41,7 +41,7 @@
         
         "vite-plugin-commonjs": "^0.10.4",
         "vite-plugin-top-level-await": "^1.6.0",
-        "vite-tsconfig-paths": "^5.1.4",
+        "vite-tsconfig-paths": "^6.1.1",
         "@mui/x-date-pickers": "^8.23.0",
         "dayjs": "1.11.21"
     },

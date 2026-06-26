@@ -43,7 +43,7 @@
         "vite-plugin-top-level-await": "^1.6.0",
         "vite-tsconfig-paths": "^5.1.4",
         "@mui/x-date-pickers": "^8.23.0",
-        "dayjs": "1.11.20"
+        "dayjs": "1.11.21"
     },
     "scripts": {
         "start": "vite --port 4173",

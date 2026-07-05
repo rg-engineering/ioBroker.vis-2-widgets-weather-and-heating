@@ -18,3 +18,4 @@
 .commitinfo
 /.vscode/extensions.json
 /src-widgets/.mf/diagnostics/
+/.github/copilot-instructions.md

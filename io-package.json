@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather-and-heating",
-    "version": "1.4.2",
+    "version": "1.4.3",
     "news": {
+      "1.4.3": {
+        "en": "dependencies updated",
+        "de": "Abhängigkeiten aktualisiert",
+        "ru": "Зависимости обновлены",
+        "pt": "dependências atualizadas",
+        "nl": "afhankelijkheden bijgewerkt",
+        "fr": "dépendances mises à jour",
+        "it": "dipendenze aggiornate",
+        "es": "dependencias actualizadas",
+        "pl": "zależności zaktualizowane",
+        "uk": "залежності оновлено",
+        "zh-cn": "依赖项已更新"
+      },
       "1.4.2": {
         "en": "see #264: decimal places for temperature values can now be configured in weather day widget \ndecimal places for Y axis can now be configured in SourceAnalytics bar graph widget \n#263: bug fix to switch color for datepicker in dark mode",
         "de": "siehe #264: dezimalstellen für temperaturwerte können nun im wettertag widget konfiguriert werden\ndezimalstellen für Y-Achse können jetzt in SourceAnalytics Bar Graph Widget konfiguriert werden\n#263: bugfix, um die farbe für datepicker im dunklen modus zu wechseln",
@@ -80,19 +93,6 @@
         "pl": "aktualizacja zależności i naprawianie błędów w oparciu o sprawdzacz adaptera",
         "uk": "залежностей, оновлено і виправлення помилок на основі перевірки адаптера",
         "zh-cn": "基于适配器检查器更新的依赖性和错误修正"
-      },
-      "1.1.2": {
-        "en": "SourceAnalytics widget: min / max calculation optimisation",
-        "de": "SourceAnalytics Widget: min / max Berechnung Optimierung",
-        "ru": "Виджет SourceAnalytics: оптимизация вычислений min/max",
-        "pt": "Widget de análise de origem: otimização de cálculo min / max",
-        "nl": "BronAnalytics widget: min / max berekening optimalisatie",
-        "fr": "Widget SourceAnalytics: optimisation du calcul min / max",
-        "it": "Widget di SourceAnalytics: min / max calcolo ottimizzazione",
-        "es": "FuenteAnalytics widget: min / max calculation optimizaation",
-        "pl": "Widget SourceAnalytics: optymalizacja obliczeniowa min / max",
-        "uk": "SourceAnalytics віджет: min / макс оптимізації розрахунку",
-        "zh-cn": "SourceAnatics 部件: min/ 最大计算优化"
       }
     },
     "titleLang": {

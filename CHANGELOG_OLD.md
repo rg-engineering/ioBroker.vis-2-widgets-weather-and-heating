@@ -1,4 +1,8 @@
 # Older changes
+## 1.1.5 (2025-10-26)
+* (René) dependencies updated and bug fix based on adapter checker and linter
+
+
 ## 1.1.3 (2025-09-06)
 * (René) dependencies updated and bug fix based on adapter checker
 

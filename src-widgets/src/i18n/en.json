@@ -395,5 +395,21 @@
   "without_card": "without card",
   "x_axis": "X Axis",
   "xaxis_axisLabel_formatstring": "X axis Label formatstring",
-  "xaxis_color": "X axis color"
+  "xaxis_color": "X axis color",
+
+
+  "InformMyLandlordWidgetWidget": "Inform My Landlord Widget",
+  "vis_2_widgets-InformMyLandlord": "Inform My Landlord Widget",
+  "MessageType": "Message Type",
+  "email": "Email",
+  "whatsapp": "WhatsApp",
+  "signal": "Signal",
+  "pushbullet": "Pushbullet",
+  "jira": "Jira",
+  "information": "Information",
+  "important": "Important",
+  "urgent": "Urgent",
+  "Priority": "Priority",
+  "Message": "Message",
+  "send": "Send"
 }

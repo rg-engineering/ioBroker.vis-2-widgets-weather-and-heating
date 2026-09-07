@@ -563,7 +563,6 @@
     <Content Include="src-widgets\src\assets\icons\viento-wind\galeria2-Beaufort\97.png" />
     <Content Include="src-widgets\src\assets\icons\viento-wind\galeria2-Beaufort\98.png" />
     <Content Include="src-widgets\src\assets\icons\viento-wind\galeria2-Beaufort\99.png" />
-    <Content Include="src-widgets\src\i18n\ko.json" />
     <Content Include="src-widgets\src\i18n\uk.json" />
     <Content Include="src-widgets\src\i18n\de.json" />
     <Content Include="src-widgets\src\i18n\en.json" />
@@ -575,6 +574,7 @@
     <Content Include="src-widgets\src\i18n\pt.json" />
     <Content Include="src-widgets\src\i18n\ru.json" />
     <Content Include="src-widgets\src\i18n\zh-cn.json" />
+    <Content Include="src-widgets\src\InformMyLandlordWidget.tsx" />
     <Content Include="src-widgets\tsconfig.json" />
     <Content Include="src-widgets\tsconfig.node.json" />
     <Content Include="tasks.js" />

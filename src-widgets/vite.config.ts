@@ -65,6 +65,8 @@ const config = {
 
                 "./SourceAnalytics2WeeksBarGraphWidget": "./src/SourceAnalytics2WeeksBarGraphWidget",
 
+                "./InformMyLandlordWidget": "./src/InformMyLandlordWidget",
+
                 "./translations": "./src/translations.js",
             },
             remotes: {},

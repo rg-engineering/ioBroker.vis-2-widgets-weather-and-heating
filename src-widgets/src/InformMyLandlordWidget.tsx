@@ -5,9 +5,7 @@ import type {
     RxRenderWidgetProps,
     RxWidgetInfo,
     VisRxWidgetProps,
-    WidgetData,
     VisRxWidgetState,
-    RxWidgetInfoAttributesField
 } from '@iobroker/types-vis-2';
 //import type { LegacyConnection } from '@iobroker/adapter-react-v5';
 import Generic from "./Generic";
@@ -18,9 +16,6 @@ import Generic from "./Generic";
 
 
 import {
-    List,
-    ListItem,
-    ListItemText,
     TextField,
     Button,
     MenuItem
@@ -163,23 +158,18 @@ export default class InformMyLandlordWidget extends Generic<StaticRxData, Static
         if (this.state.rxData["MessageType"] == "email" && this.state.rxData["instance"].startsWith("email.")) {
             const result = await this.props.context.socket.sendTo(this.state.rxData["instance"], "send", message);
             console.log(`InformMyLandlordWidget: Email send result: ${JSON.stringify(result)}`);
-        }
-        else if (this.state.rxData["MessageType"] == "whatsapp") {
+        } else if (this.state.rxData["MessageType"] == "whatsapp") {
             console.log(`InformMyLandlordWidget: whatsapp not implemented yet`);
-        }
-        else if (this.state.rxData["MessageType"] == "signal") {
+        } else if (this.state.rxData["MessageType"] == "signal") {
             console.log(`InformMyLandlordWidget: signal not implemented yet`);
-        }
-        else if (this.state.rxData["MessageType"] == "pushbullet") {
+        } else if (this.state.rxData["MessageType"] == "pushbullet") {
             console.log(`InformMyLandlordWidget: pushbullet not implemented yet`);
-        }
-        else if (this.state.rxData["MessageType"] == "jira") {
+        } else if (this.state.rxData["MessageType"] == "jira") {
             console.log(`InformMyLandlordWidget: jira not implemented yet`);
-        }
-        else {
+        } else {
             console.log(`InformMyLandlordWidget: unknown MessageType: ${this.state.rxData["MessageType"]} or wrong instance: ${this.state.rxData["instance"]}`);
         }
-    };
+    }
 
 
 

@@ -5,7 +5,9 @@ describe('vis-2-widgets-weather-and-heating', () => {
     before(async function (){
         this.timeout(180000);
         // install js-controller, web and vis-2-beta
-        await helper.startIoBroker();
+        await helper.startIoBroker({
+            widgetsSetName: adapterName,
+        });
         await helper.startBrowser(process.env.CI === 'true' ? 'new' : false);
         await helper.createProject();
 

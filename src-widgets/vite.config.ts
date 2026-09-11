@@ -32,7 +32,7 @@ const config = {
                 "./HeatingGeneralParamsWidget": "./src/HeatingGeneralParamsWidget",
                 "./HeatingRoomWidget": "./src/HeatingRoomWidget",
                 "./HeatingRoomsOverviewWidget": "./src/HeatingRoomsOverviewWidget",
-                "./HeatingRomProfileParamsWidget": "./src/HeatingRoomProfileParamsWidget",
+                "./HeatingRoomProfileParamsWidget": "./src/HeatingRoomProfileParamsWidget",
                 "./HeatingWindowStatusOverviewWidget": "./src/HeatingWindowStatusOverviewWidget",
 
                 "./SourceAnalytics2WeeksBarGraphWidget": "./src/SourceAnalytics2WeeksBarGraphWidget",

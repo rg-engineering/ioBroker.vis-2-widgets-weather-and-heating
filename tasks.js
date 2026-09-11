@@ -5,7 +5,7 @@ const { deleteFoldersRecursive, buildReact, npmInstall, copyFiles } = require('@
 function copyAllFiles() {
     copyFiles(
         ['src-widgets/build/**/*', '!src-widgets/build/index.html'],
-        'widgets/vis-2-widgets-material/',
+        'widgets/vis-2-widgets-weather-and-heating/',
         {
             process: (fileData, fileName) => {
                 if (fileName.includes('installSVGRenderer')) {

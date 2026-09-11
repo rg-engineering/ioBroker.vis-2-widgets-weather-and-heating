@@ -162,7 +162,7 @@
           "HeatingGeneralParamsWidget",
           "HeatingRoomWidget",
           "HeatingRoomsOverviewWidget",
-          "HeatingRomProfileParamsWidget",
+          "HeatingRoomProfileParamsWidget",
           "HeatingWindowStatusOverviewWidget",
           "SourceAnalytics2WeeksBarGraphWidget",
           "InformMyLandlordWidget"

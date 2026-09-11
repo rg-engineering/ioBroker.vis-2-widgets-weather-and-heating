@@ -578,6 +578,7 @@
     <Content Include="src-widgets\tsconfig.json" />
     <Content Include="src-widgets\tsconfig.node.json" />
     <Content Include="tasks.js" />
+    <Content Include="test\package.test.js" />
     <Content Include="test\widgets.test.js" />
   </ItemGroup>
   <ItemGroup>

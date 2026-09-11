@@ -5,7 +5,6 @@ import { moduleFederationShared } from '@iobroker/types-vis-2/modulefederation.v
 import { readFileSync } from 'node:fs';
 import topLevelAwait from 'vite-plugin-top-level-await';
 
-
 // The shared modules come from @iobroker/types-vis-2, so they stay in sync with what the vis-2 host provides:
 // react, react-dom, the JSX runtime, @emotion/react, @mui/private-theming and @iobroker/gui-components (with
 // its i18n files) as singletons, @mui/material, @mui/system and @mui/icons-material versioned by the range in
@@ -52,7 +51,7 @@ const config = {
             // The function to generate import names of top-level awaits promise in each chunk module
             promiseImportName: (i: number): string => `__tla_${i}`,
         }),
-        react()
+        react(),
     ],
     server: {
         port: 3000,
@@ -71,17 +70,8 @@ const config = {
     base: './',
     resolve: {
         tsconfigPaths: true,
-        dedupe: [
-            'react',
-            'react-dom',
-            'prop-types',
-            '@mui/material',
-            '@mui/system',
-            '@mui/styles',
-            '@mui/icons-material',
-            '@mui/x-date-pickers',
-            '@iobroker/adapter-react-v5',
-        ],
+        // Same set as the shared modules above: the fallback copies inside the widget bundle must be unique too
+        dedupe: ['react', 'react-dom', '@emotion/react', '@mui/material', '@mui/system', '@mui/icons-material'],
     },
     build: {
         target: 'chrome81',

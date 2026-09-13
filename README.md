@@ -99,7 +99,13 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
     ### **WORK IN PROGRESS**
 -->
 
+
 ## Changelog
+
+### **WORK IN PROGRESS**
+* (René) new widget "inform landloard" added, to send messages to landlord
+* (René) dependencies updated
+
 ### 1.4.3 (2026-07-05)
 * (René) dependencies updated
 

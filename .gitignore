@@ -13,7 +13,7 @@
 /admin/WhatsApp*.jpeg
 /obj/Debug/
 
-/src-widgets/src/assets/*
+
 
 .commitinfo
 /.vscode/extensions.json

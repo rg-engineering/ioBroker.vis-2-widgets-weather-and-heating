@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-weather-and-heating",
-    "version": "1.4.3",
+    "version": "1.5.0",
     "news": {
+      "1.5.0": {
+        "en": "new widget \"inform landloard\" added, to send messages to landlord\ndependencies updated",
+        "de": "neues Widget „Vermieter informieren“ hinzugefügt, um ihn zu benachrichtigen\nAbhängigkeiten aktualisiert",
+        "ru": "добавлен новый виджет «информировать арендодателя» для отправки сообщений арендодателю\nзависимости обновлены",
+        "pt": "novo widget “informar locador” para enviar mensagens ao locador\ndependências atualizadas",
+        "nl": "nieuwe widget „huisbaas informeren” toegevoegd, om berichten naar de verhuurder te sturen\nafhankelijkheden bijgewerkt",
+        "fr": "ajout d'un widget « Informer le propriétaire » pour envoyer des messages\ndépendances mises à jour",
+        "it": "aggiunto il nuovo widget «informa il locatore»\ndipendenze aggiornate",
+        "es": "Se añadió el nuevo widget «informar al propietario» para enviar mensajes\ndependencias actualizadas",
+        "pl": "Dodano nowy widget „informuj landloard”, aby wysyłać wiadomości do właściciela\naktualizacja zależności",
+        "uk": "доданий новий віджет «інформувати орендодавцю», для відправки повідомлень орендодавцю\nзалежності оновлені",
+        "zh-cn": "添加了新的 “通知房东” 小工具，用于向房东发送消息\n依赖关系已更新"
+      },
       "1.4.3": {
         "en": "dependencies updated",
         "de": "Abhängigkeiten aktualisiert",
@@ -80,19 +93,6 @@
         "pl": "uaktualnione zależności i poprawianie błędów w oparciu o sprawdzacz adaptera i linter",
         "uk": "залежностей, оновлено і виправлення помилок на основі перевірки адаптера і linter",
         "zh-cn": "基于适配器检查器和linter 的依赖性更新和错误修复"
-      },
-      "1.1.3": {
-        "en": "dependencies updated and bug fix based on adapter checker",
-        "de": "abhängigkeiten aktualisiert und fehler beheben basierend auf adapter checker",
-        "ru": "обновленные зависимости и исправление ошибок на основе проверки адаптера",
-        "pt": "dependências atualizadas e correção de erros com base no verificador do adaptador",
-        "nl": "afhankelijkheden bijgewerkt en bug fix op basis van adaptercontrole",
-        "fr": "dépendances mises à jour et correction de bugs basée sur adaptateur checker",
-        "it": "dipendenze aggiornate e correzione bug in base all'adattatore checker",
-        "es": "dependencias actualizadas y corrección de errores basado en el control de adaptador",
-        "pl": "aktualizacja zależności i naprawianie błędów w oparciu o sprawdzacz adaptera",
-        "uk": "залежностей, оновлено і виправлення помилок на основі перевірки адаптера",
-        "zh-cn": "基于适配器检查器更新的依赖性和错误修正"
       }
     },
     "titleLang": {

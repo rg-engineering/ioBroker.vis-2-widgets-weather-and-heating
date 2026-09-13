@@ -101,8 +101,7 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 
 ## Changelog
-
-### **WORK IN PROGRESS**
+### 1.5.0 (2026-09-13)
 * (René) new widget "inform landloard" added, to send messages to landlord
 * (René) dependencies updated
 
@@ -124,12 +123,6 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 * (H5N1v2) 41 icons for DasWetter@4.x (galeria7)
 * (René) optimisations based on mui@7.x in WeatherDay-widget
 * (René) weather widget shows now min and max temperature (if values available)
-
-### 1.2.1 (2025-12-30)
-* (René) bug fix deployment and dependencies updated
-* (René) update to support DasWetter@4.x
-known issue: Icons are not updated yet.
-* (René, copilot) fixes based on Lint recommendation
 
 [Older changelogs can be found there](CHANGELOG_OLD.md)
 

@@ -1,7 +1,13 @@
 # Older changes
+## 1.2.1 (2025-12-30)
+* (René) bug fix deployment and dependencies updated
+* (René) update to support DasWetter@4.x
+known issue: Icons are not updated yet.
+* (René, copilot) fixes based on Lint recommendation
+
+
 ## 1.1.5 (2025-10-26)
 * (René) dependencies updated and bug fix based on adapter checker and linter
-
 
 ## 1.1.3 (2025-09-06)
 * (René) dependencies updated and bug fix based on adapter checker

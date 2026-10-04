@@ -101,6 +101,10 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 
 ## Changelog
+
+### **WORK IN PROGRESS**
+* (René) new widget Room Selector added
+
 ### 1.5.0 (2026-09-13)
 * (René) new widget "inform landloard" added, to send messages to landlord
 * (René) dependencies updated

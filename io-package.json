@@ -165,7 +165,8 @@
           "HeatingRoomProfileParamsWidget",
           "HeatingWindowStatusOverviewWidget",
           "SourceAnalytics2WeeksBarGraphWidget",
-          "InformMyLandlordWidget"
+          "InformMyLandlordWidget",
+          "RoomSelectorWidget"
         ]
       }
     },

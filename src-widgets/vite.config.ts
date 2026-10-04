@@ -39,6 +39,8 @@ const config = {
 
                 "./InformMyLandlordWidget": "./src/InformMyLandlordWidget",
 
+                "./RoomSelectorWidget": "./src/RoomSelectorWidget",
+
                 "./translations": "./src/translations.js",
             },
             remotes: {},

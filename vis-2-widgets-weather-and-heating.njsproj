@@ -633,6 +633,7 @@
     <TypeScriptCompile Include="src-widgets\src\HeatingTimeScheduleWidget.tsx" />
     <TypeScriptCompile Include="src-widgets\src\HeatingWindowStatusOverviewWidget.tsx" />
     <TypeScriptCompile Include="src-widgets\src\index.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\RoomSelectorWidget.tsx" />
     <TypeScriptCompile Include="src-widgets\src\SourceAnalytics2WeeksBarGraphWidget.tsx" />
     <TypeScriptCompile Include="src-widgets\src\translations.ts" />
     <TypeScriptCompile Include="src-widgets\src\WeatherDayWidget.tsx" />

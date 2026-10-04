@@ -86,20 +86,20 @@ export default class RoomSelectorWidget extends Generic<StaticRxData, StaticStat
                             label: "without_card",
                             type: "checkbox",
                         },
-                        
-
-                        
+                        {
+                            name: "oid_values",    // name in data structure
+                            label: "oidvalues", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.info.UsedRooms",
+                        },
+                        {
+                            name: "oid_selectedroom",    // name in data structure
+                            label: "oidselectedroom", // translated field label
+                            type: "id",
+                            default: "heatingcontrol.0.vis.ChoosenRoom",
+                        },
                     ],
                 },
-
-
-
-
-
-
-
-
-                
             ],
             visPrev: "widgets/vis-2-widgets-weather-and-heating/img/vis-widget-RoomSelector.png",
         };

@@ -52,11 +52,11 @@ interface StaticState extends VisRxWidgetState {
 }
 
 export default class InformMyLandlordWidget extends Generic<StaticRxData, StaticState> {
-    private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
+    private readonly refCardContent: React.RefObject<HTMLDivElement | null> = React.createRef();
     private lastRxData: string | undefined;
     private updateTimeout: ReturnType<typeof setTimeout> | undefined;
-    private messageInputRef: React.RefObject<HTMLInputElement | HTMLTextAreaElement> = React.createRef();
-    private priorityInputRef: React.RefObject<HTMLInputElement | HTMLTextAreaElement> = React.createRef();
+    private messageInputRef: React.RefObject<HTMLInputElement | HTMLTextAreaElement | null> = React.createRef();
+    private priorityInputRef: React.RefObject<HTMLInputElement | HTMLTextAreaElement | null> = React.createRef();
 
     constructor(props: VisRxWidgetProps) {
         super(props);

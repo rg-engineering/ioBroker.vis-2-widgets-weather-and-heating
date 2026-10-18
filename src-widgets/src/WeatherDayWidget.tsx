@@ -196,7 +196,7 @@ interface StaticState extends VisRxWidgetState {
 }
 
 export default class WeatherDayWidget extends Generic<StaticRxData, StaticState> {
-    private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
+    private readonly refCardContent: React.RefObject<HTMLDivElement | null> = React.createRef();
     private lastRxData: string | undefined;
     private updateTimeout: ReturnType<typeof setTimeout> | undefined;
     constructor(props: VisRxWidgetProps) {
@@ -697,28 +697,27 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
             <Grid
                 container
                 spacing={0.5}
-                alignItems="center"
-                justifyContent="center"
+                sx={{ alignItems: "center", justifyContent: "center" }}
             >
-                <Grid xs={12} >
+                <Grid size={12} >
                     <div>
                         <p>{this.state.values[`${this.state.rxData["oid_dayname"]}.val`]}</p>
                         <p>{date}</p>
                     </div>
                 </Grid>
-                <Grid xs={6} >
+                <Grid size={6} >
                     <div>
                         <img src={src_icon_weather} alt={src_icon_weather_name} ></img>
                     </div>
                 </Grid>
-                <Grid xs={6}>
+                <Grid size={6}>
                     <div style={{ fontSize: "small" }}>
                         <p>{Generic.t("max")} {MaxTemp} °C</p>
                         <p>{Generic.t("min")} {MinTemp} °C</p>
                     </div>
                 </Grid>
 
-                <Grid xs={12}>
+                <Grid size={12}>
                     <div>
                         <p>{this.state.values[`${this.state.rxData["oid_symbol_description"]}.val`]}</p>
                     </div>
@@ -728,12 +727,12 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                 {
                     src_icon_wind != null ? (
                         <div>
-                            <Grid xs={6}>
+                            <Grid size={6}>
                                 <div>
                                     <img src={src_icon_wind} alt={src_icon_wind_name}></img>
                                 </div>
                             </Grid>
-                            <Grid xs={6}>
+                            <Grid size={6}>
                                 <div style={{ fontSize: "small" }}>
                                     <p>{Generic.t("Wind")} {this.state.values[`${this.state.rxData["oid_wind_value"]}.val`]} km/h</p>
                                     <p>{Generic.t("WindGusts")} {this.state.values[`${this.state.rxData["oid_windgusts_value"]}.val`]} km/h</p>
@@ -742,7 +741,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                             </Grid>
                         </div>
                     ) : (
-                        <Grid xs={12}>
+                        <Grid size={12}>
                             <div style={{ fontSize: "small" }}>
                                 <p>{Generic.t("Wind")} {this.state.values[`${this.state.rxData["oid_wind_value"]}.val`]} km/h</p>
                                 <p>{Generic.t("WindGusts")} {this.state.values[`${this.state.rxData["oid_windgusts_value"]}.val`]} km/h</p>
@@ -751,7 +750,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                     )
                 }
 
-                <Grid xs={12}>
+                <Grid size={12}>
                     <div style={{ fontSize: "small" }}>
                         <p>{Generic.t("sun")} {sunduration} h</p>
                     </div>
@@ -763,7 +762,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                 {
                     (sun_in || sun_out || moon_in || moon_out || moon_illumination) ? (
 
-                        <Grid xs={12} style={{ fontSize: "small" }}>
+                        <Grid size={12} style={{ fontSize: "small" }}>
                             <div style={{ display: "flex", justifyContent: "center", gap: "1rem", flexWrap: "wrap" }}>
                                 {
                                     (sun_in || sun_out) ? (
@@ -791,7 +790,7 @@ export default class WeatherDayWidget extends Generic<StaticRxData, StaticState>
                 {
                     src_icon_moon != null ? (
 
-                        <Grid xs={12}>
+                        <Grid size={12}>
                             <div>
                                 <img src={src_icon_moon} alt={src_icon_moon_name}></img>
                             </div>

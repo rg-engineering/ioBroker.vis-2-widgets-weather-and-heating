@@ -16,6 +16,7 @@ import moment from "moment";
 import EchartContainer from "./EchartContainer";
 
 import Generic from "./Generic";
+import type * as echarts from "echarts";
 
 const styles: Record<string, CSSProperties> =  {
     cardContent: {
@@ -201,7 +202,7 @@ export default class WeatherWidget extends Generic<StaticRxData, StaticState> {
 
 
 
-    private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
+    private readonly refCardContent: React.RefObject<HTMLDivElement | null> = React.createRef();
     private lastRxData: string | undefined;
     private updateTimeout: ReturnType<typeof setTimeout> | undefined;
     constructor(props: VisRxWidgetProps) {

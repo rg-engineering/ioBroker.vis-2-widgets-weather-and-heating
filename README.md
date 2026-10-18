@@ -101,8 +101,9 @@ Based on [Pittini's](https://github.com/Pittini/iobroker-heatingcontrol-vis) pro
 
 
 ## Changelog
-
 ### **WORK IN PROGRESS**
+* (@GermanBluefox) Migrated to React 19 and vis-2@2.20.x (vis-2 >= 2.20.0 is required now)
+* (@GermanBluefox) Adapted MUI Grid of WeatherDay and HeatingTimeSchedule widgets to MUI v9 (`size`, `sx`)
 * (René) new widget Room Selector added
 
 ### 1.5.0 (2026-09-13)

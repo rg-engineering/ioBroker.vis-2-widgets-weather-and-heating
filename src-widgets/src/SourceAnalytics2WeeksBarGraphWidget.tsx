@@ -15,6 +15,7 @@ import type {
 import EchartContainer from "./EchartContainer";
 
 import Generic from "./Generic";
+import type * as echarts from "echarts";
 
 const styles: Record<string, CSSProperties> = {
     cardContent: {
@@ -90,7 +91,7 @@ interface StaticState extends VisRxWidgetState {
 }
 
 export default class SourceAnalytics2WeeksBarGraphWidget extends Generic<StaticRxData, StaticState> {
-    private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
+    private readonly refCardContent: React.RefObject<HTMLDivElement | null> = React.createRef();
 
    
 

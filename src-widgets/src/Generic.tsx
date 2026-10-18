@@ -27,7 +27,7 @@ export default class Generic<
         const parts = id.split('.');
         parts.pop();
         const parentOID = parts.join('.');
-        return await this.props.context.socket.getObject(parentOID);
+        return (await this.props.context.socket.getObject(parentOID)) ?? null;
     }
 
     public format2Number(temp: number): number {

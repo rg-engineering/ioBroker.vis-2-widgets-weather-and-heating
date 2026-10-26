@@ -5,7 +5,7 @@
     "type": "module",
     "dependencies": {
         "@hello-pangea/dnd": "^18.0.1",
-        "@iobroker/types-vis-2": "~2.20.1",
+        "@iobroker/types-vis-2": "~2.20.2",
         "@module-federation/vite": "^1.22.1",
         "@uiw/react-color": "^2.10.3",
         "@vitejs/plugin-react": "^6.1.2",
@@ -22,7 +22,7 @@
     "devDependencies": {
         "@emotion/react": "^11.14.0",
         "@emotion/styled": "^11.14.1",
-        "@iobroker/gui-components": "^10.3.11",
+        "@iobroker/gui-components": "^10.3.12",
         "@mui/icons-material": "^9.5.0",
         "@mui/material": "^9.5.0",
         "@mui/system": "^9.5.0",
@@ -32,7 +32,7 @@
         "@types/react-dom": "^19.3.0",
         "react": "^19.3.1",
         "react-dom": "^19.3.1",
-        "rollup": "^4.64.7",
+        "rollup": "^4.64.10",
         "typescript": "^7.0.2",
         "vite": "^8.3.4",
         "vite-plugin-top-level-await": "^1.6.0",

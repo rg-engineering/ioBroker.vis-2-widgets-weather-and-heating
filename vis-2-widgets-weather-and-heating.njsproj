@@ -50,12 +50,14 @@
     <Content Include=".vscode\extensions.json" />
     <Content Include=".vscode\settings.json" />
     <Content Include="admin\vis-2-widgets-weather-and-heating.png" />
+    <Content Include="docs\RoomSelectorWidget.md" />
     <Content Include="doc\vis-widget-HeatingGeneralParams.png" />
     <Content Include="doc\vis-widget-HeatingRoom.png" />
     <Content Include="doc\vis-widget-HeatingRoomProfileParams.png" />
     <Content Include="doc\vis-widget-HeatingRoomsOverview.png" />
     <Content Include="doc\vis-widget-heatingtimeschedule.png" />
     <Content Include="doc\vis-widget-HeatingWindowStatusOverview.png" />
+    <Content Include="doc\vis-widget-Meteored.png" />
     <Content Include="doc\widget_general_chart.png" />
     <Content Include="doc\widget_weather.png" />
     <Content Include="doc\widget_weather_day.png" />
@@ -575,6 +577,7 @@
     <Content Include="src-widgets\src\i18n\ru.json" />
     <Content Include="src-widgets\src\i18n\zh-cn.json" />
     <Content Include="src-widgets\src\InformMyLandlordWidget.tsx" />
+    <Content Include="src-widgets\src\RoomSelectorLogic.test.mjs" />
     <Content Include="src-widgets\tsconfig.json" />
     <Content Include="src-widgets\tsconfig.node.json" />
     <Content Include="tasks.js" />
@@ -587,6 +590,7 @@
     <Folder Include=".github\workflows\" />
     <Folder Include=".vscode\" />
     <Folder Include="admin\" />
+    <Folder Include="docs\" />
     <Folder Include="doc\" />
     <Folder Include="lib\" />
     <Folder Include="src-widgets\" />
@@ -633,6 +637,7 @@
     <TypeScriptCompile Include="src-widgets\src\HeatingTimeScheduleWidget.tsx" />
     <TypeScriptCompile Include="src-widgets\src\HeatingWindowStatusOverviewWidget.tsx" />
     <TypeScriptCompile Include="src-widgets\src\index.tsx" />
+    <TypeScriptCompile Include="src-widgets\src\RoomSelectorLogic.ts" />
     <TypeScriptCompile Include="src-widgets\src\RoomSelectorWidget.tsx" />
     <TypeScriptCompile Include="src-widgets\src\SourceAnalytics2WeeksBarGraphWidget.tsx" />
     <TypeScriptCompile Include="src-widgets\src\translations.ts" />

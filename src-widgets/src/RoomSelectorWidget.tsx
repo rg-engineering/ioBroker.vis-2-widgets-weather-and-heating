@@ -1,25 +1,12 @@
-/* eslint-disable prefer-template */
-/* eslint-disable @typescript-eslint/dot-notation */
 import React, { type CSSProperties } from 'react';
 import type {
     RxRenderWidgetProps,
     RxWidgetInfo,
-    VisRxWidgetProps,
     VisRxWidgetState,
 } from '@iobroker/types-vis-2';
-//import type { LegacyConnection } from '@iobroker/adapter-react-v5';
 import Generic from "./Generic";
-
-
-
-
-
-
-import {
-    TextField,
-    Button,
-    MenuItem
-} from "@mui/material";
+import { MenuItem, TextField } from "@mui/material";
+import { getSelectedRoom, parseRooms, writeSelectedRoom } from "./RoomSelectorLogic";
 
 const styles: Record<string, CSSProperties> = {
     cardContent: {
@@ -40,27 +27,12 @@ const styles: Record<string, CSSProperties> = {
 };
 
 interface StaticRxData {
-    noCard: boolean;
-    
+    noCard?: boolean;
+    oid_values?: string;
+    oid_selectedroom?: string;
 }
 
-interface StaticState extends VisRxWidgetState {
-    showDialog: number | null;
-    objects: { common: ioBroker.StateCommon; _id: string; isChart: boolean }[];
-}
-
-export default class RoomSelectorWidget extends Generic<StaticRxData, StaticState> {
-    private readonly refCardContent: React.RefObject<HTMLDivElement> = React.createRef();
-    private lastRxData: string | undefined;
-    private updateTimeout: ReturnType<typeof setTimeout> | undefined;
-    
-
-    constructor(props: VisRxWidgetProps) {
-        super(props);
-        this.refCardContent = React.createRef();
-        
-    }
-
+export default class RoomSelectorWidget extends Generic<StaticRxData, VisRxWidgetState> {
     static getWidgetInfo(): RxWidgetInfo {
         return {
             id: "tplRoomSelectorWidget",                 // Unique widget type ID. Should start with `tpl` followed
@@ -112,44 +84,60 @@ export default class RoomSelectorWidget extends Generic<StaticRxData, StaticStat
     }
 
 
-    createView(): React.JSX.Element {
+    private getRooms(): string[] {
+        const valuesOid = this.state.rxData.oid_values;
+        if (!valuesOid) {
+            return [];
+        }
 
-        return <div
-            ref={this.refCardContent}
-            style={styles.cardContent}
-        >
+        return parseRooms(this.state.values[`${valuesOid}.val`]);
+    }
+
+    private onRoomChange(room: string): void {
+        writeSelectedRoom(
+            room,
+            this.getRooms(),
+            this.state.rxData.oid_selectedroom,
+            this.props.editMode,
+            (oid, value) => this.props.context.setValue(oid, value),
+        );
+    }
+
+    createView(): React.JSX.Element {
+        const rooms = this.getRooms();
+        const selectedRoomOid = this.state.rxData.oid_selectedroom;
+        const selectedRoomValue = selectedRoomOid
+            ? this.state.values[`${selectedRoomOid}.val`]
+            : undefined;
+        const selectedRoom = getSelectedRoom(rooms, selectedRoomValue);
+
+        return <div style={styles.cardContent}>
             <div style={styles.inlineRow}>
-                
+                <TextField
+                    select
+                    fullWidth
+                    size="small"
+                    label="Room"
+                    value={selectedRoom}
+                    disabled={this.props.editMode || rooms.length === 0 || !selectedRoomOid}
+                    onChange={event => this.onRoomChange(event.target.value)}
+                >
+                    <MenuItem value="" disabled>
+                        {rooms.length > 0 ? "Select a room" : "No rooms available"}
+                    </MenuItem>
+                    {rooms.map(room => <MenuItem key={room} value={room}>{room}</MenuItem>)}
+                </TextField>
             </div>
         </div>;
     }
 
-    
-
     renderWidgetBody(props: RxRenderWidgetProps): React.JSX.Element | React.JSX.Element[] | null {
         super.renderWidgetBody(props);
 
-    console.log(`RoomSelectorWidget values ${JSON.stringify(this.state.values)}`);
-    console.log(`RoomSelectorWidget rxData ${JSON.stringify(this.state.rxData)}`);
-
-        let size;
-        if (!this.refCardContent.current) {
-            setTimeout(() => this.forceUpdate(), 50);
-        } else {
-            size = this.refCardContent.current.offsetHeight;
-        }
-
-        console.log(`RoomSelectorWidget: size ${size}`);
-
         const content = this.createView();
-
-
         if (this.state.rxData.noCard || props.widget.usedInWidget) {
-            console.log("nur content");
             return content;
         }
-
-    console.log("RoomSelectorWidget: wrap content");
 
         return this.wrapContent(content, null, { textAlign: "center" });
     }

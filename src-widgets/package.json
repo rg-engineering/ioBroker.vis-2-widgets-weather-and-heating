@@ -12,7 +12,7 @@
         "color": "^5.0.3",
         "colorthief": "^3.5.0",
         "echarts": "^6.1.0",
-        "echarts-for-react": "^3.0.6",
+        "echarts-for-react": "^3.1.0",
         "leaflet": "^1.9.4",
         "lottie-react": "^3.1.2",
         "moment": "^2.31.0",

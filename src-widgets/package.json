@@ -36,7 +36,7 @@
         "typescript": "^7.0.2",
         "vite": "^8.3.4",
         "vite-plugin-top-level-await": "^1.6.0",
-        "@mui/x-date-pickers": "^9.15.0",
+        "@mui/x-date-pickers": "^9.18.0",
         "dayjs": "^1.11.23",
         "esbuild": "^0.28.2"
     },
